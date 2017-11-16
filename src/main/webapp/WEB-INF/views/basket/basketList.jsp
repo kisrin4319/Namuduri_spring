@@ -75,7 +75,7 @@
 											<tbody>
 												<c:forEach var="row" items="${basketList }" varStatus="i">
 													<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
-													<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}"/>
+													<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
 													<tr>
 														<td>
 															<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
@@ -131,25 +131,28 @@
 							<a class="btn-move-home" onclick="javascript:location.href='<%=cp%>/books/booksList.do'">도서 목록으로</a>
 						</div>
 						<div class="price-box">
-							
 							<div>
 								<div>
 									<p>
 										<span class="detail">
 											총
-											<em id="totalGoodsCnt"><input type="text" id="CheckCount" value="0"/></em>
+											<em id="totalGoodsCnt">
+												<input type="text" id="CheckCount" value="0" size="1" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" />
+											</em>
 											개의 상품금액
 											<strong id="totalGoodsPrice"></strong>
 										</span>
 										<span id="deliveryCalculateNone">
 											<img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" />
 											배송비
-											<strong id="totalDeliveryCharge">${fee}</strong>
+											<strong id="totalDeliveryCharge"><input type="text" id="fee" value="0" size="4" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" /></strong>
 											원
 										</span>
 										<span class="total">
 											<img src="<%=cp%>/img/basket/icon/total.png" alt="합계" />
-											<strong id="totalSettlePrice"><input type="text" id="sum" value="0" style="border :0;font-size: x-large;text-align: center;vertical-align: baseline;font-weight: unset;" size = "10" /></strong>
+											<strong id="totalSettlePrice">
+												<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" />
+											</strong>
 											원
 										</span>
 									</p>
@@ -209,6 +212,7 @@
 	
 	function fn_basketModify(basket_num) { 
 	  // basket_num과 basket_book_price를 넘겨준다.
+	  var comSubmit = new ComSubmit();
 	  var num = basket_num;
 	  var count = document.getElementById(basket_num).value;
 
@@ -261,13 +265,18 @@
   }
 	function fn_checkSum() {
     	var sumValue =0;
+    	var feeValue =0;
     	var RowCheck = document.getElementsByName('RowCheck');
     	for(var i =0 ; i<RowCheck.length;i++){
     	  if(RowCheck[i].checked){
     	    sumValue += parseInt(RowCheck[i].id);
     	  }
     	}
-    sum.value=sumValue;
+    	if(sumValue <100000 && sumValue!=0){
+    	  feeValue = 5000;
+    	} 
+    fee.value = feeValue;
+    sum.value=sumValue+feeValue;
     fn_checkCount();
   }
 
