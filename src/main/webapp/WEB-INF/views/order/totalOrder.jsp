@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%@page import="javax.swing.Spring"%>
+<% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<% String cp = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,7 +50,7 @@
          return false;
       } 
       else{
-      orderForm2.do = "basketOrderComplete.do";
+      orderForm2.action = "basketOrderComplete.do";
       orderForm2.submit();
       }
 
@@ -126,17 +126,17 @@
                         </thead>
                         <tbody>
                         <!--s:iterator 시작  -->
-                        <s:iterator value="basketList" status="stat">
-                        	<c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach>
+                        <c:forEach var="bas" items="basketList">
+                        	<%-- <c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach> --%>
                         <tr>
                            <td class="gi this-product" style="padding-left: 80px;">
                               <div>
-                                 <a href ="textbookDetail.do?goods_num=<s:property value ="basket_goods_num" />">
-                                    <img src="/namuduri/admin/upload/<s:property value ="goods_image" />"
-                                          width="40" alt="<s:property value="basket_goods_name" />" title="<s:property value="basket_goods_name" />"
+                                 <a href ="<%=cp%>/books/bookDetail.do?goods_num=">
+                                    <img src="<%=cp%>/upload/${bas.book_image}"
+                                          width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}"
                                           class="middle" class="imgsize-s" />
                                  </a>
-                                    <s:property value ="basket_goods_name" />
+                                    ${bas.basket_book_name}
                                  </a>
                               </div>
                            </td>
@@ -157,7 +157,7 @@
                         
                         </td>
                      </tr>
-                     </s:iterator>
+                       </c:forEach>
                   </tbody>
                </table>
                </div>
