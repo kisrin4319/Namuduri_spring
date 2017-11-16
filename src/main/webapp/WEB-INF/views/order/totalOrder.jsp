@@ -126,13 +126,13 @@
                         </thead>
                         <tbody>
                         <!--s:iterator 시작  -->
-                        <c:forEach var="bas" items="basketList">
+                        <c:forEach var="bas" items="${basketList}">
                         	<%-- <c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach> --%>
                         <tr>
                            <td class="gi this-product" style="padding-left: 80px;">
                               <div>
-                                 <a href ="<%=cp%>/books/bookDetail.do?goods_num=">
-                                    <img src="<%=cp%>/upload/${bas.book_image}"
+                                 <a href ="<%=cp%>/books/bookDetail.do?book_num=${bas.basket_book_num}">
+                                    <img src="<%=cp%>/upload/${bas.basket_book_image}"
                                           width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}"
                                           class="middle" class="imgsize-s" />
                                  </a>
@@ -142,16 +142,16 @@
                            </td>
                         
                         <td class="ta-c count this-product">
-                           <s:property value ="basket_goods_count" />개
+                           ${bas.basket_book_count}개
                         </td>
                         <td class="ta-c this-product">
-                           <strong class="price"><s:property value="basket_goods_price" />원</strong>
+                           <strong class="price">${bas.basket_book_price}원</strong>
                         </td>
                         
                         <td class ="ta-c">
                            <strong class="price">
                               <b>
-                                 <s:property value="basket_goods_price * basket_goods_count" />원
+                                 ${bas.basket_book_count * bas.basket_book_price}원
                               </b>
                            </strong>
                         

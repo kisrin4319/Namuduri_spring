@@ -56,7 +56,6 @@ public class OrderController {
 		
 		session_id = "test3";
 		basketModel.setMember_id(session_id);
-		
 		List<BasketModel> basketList = basketService.basketList(basketModel);
 		
 		mv.addObject("basketList", basketList);
