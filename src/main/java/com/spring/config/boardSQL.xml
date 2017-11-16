@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="board"> 
+
+	<sql id="select-board">
+		SELECT * FROM BOARD
+	</sql>
+	
+	<!-- 게시판 목록 -->
+	<select id="boardList" resultType="BoardModel"> 
+  		<include refid="select-board" /> ORDER BY DESC;
+	</select>
+	
+	<!-- 게시글 내용 보기 -->
+	<select id="selectBoardOne" resultType="BoardModel">
+		
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert id="boardWrite" parameterType="BoardModel"> 
+		INSERT INTO BOARD(BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE, BORAD_TYPE)
+		VALUES(BORAD_NUM_SEQ.nextVal, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate, #{board_type})
+    </insert>
+  
+ 	<!-- 게시글 수정 -->
+ 	<update id="update">
+
+	</update>
+ 
+ 	<!-- 게시글 삭제 -->
+ 	<delete id="delete">
+  		DELETE FROM BOARD WHERE BOARD_NUM = #{board_num}
+ 	</delete>
+ </mapper>
+ 
+ 

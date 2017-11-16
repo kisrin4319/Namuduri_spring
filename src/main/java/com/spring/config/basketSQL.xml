@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="basket">
+
+	<!-- 1. 장바구니 리스트 -->
+	<select id="basketList" resultType="BasketModel">
+		select * from basket where member_id = #{member_id} ORDER BY basket_num DESC
+	</select>
+	
+	<!-- 2. 장바구니에 기존의 상품이 존재하는 지 확인 -->
+	<select id="basketSelectOne" resultType="int">
+		select count(*) from basket where member_id= #{member_id} and basket_book_num = #{basket_book_num}
+	</select>
+	
+	<!-- 3. 장바구니 추가 -->
+
+	<insert id="basketInsert" parameterType="BasketModel">
+		<selectKey keyProperty="basket_num" resultType="int" order="BEFORE">
+			SELECT BASKET_NUM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into basket(member_id,
+							basket_book_name,
+							basket_book_price,
+							basket_book_image,
+							book_category,
+							basket_date,
+							basket_book_count,
+							basket_num,
+							basket_book_num)
+					values (
+							#{member_id},
+							#{basket_book_name},
+							#{basket_book_price},
+							#{basket_book_image},
+							#{book_category},
+							SYSDATE,
+							#{basket_book_count},
+							#{basket_num},
+							#{basket_book_num})
+	</insert>
+	<!-- 4. 장바구니 전체 금액 -->
+	<select id="sumMoney" resultType="int">
+		SELECT NVL(SUM(basket_book_price*basket_book_count),0) money
+		FROM
+			basket ba, book bo
+		WHERE
+			ba.basket_book_num = bo.book_num AND ba.member_id = #{member_id}	
+	</select>
+	
+	<!-- 5. 장바구니 수정 -->
+	<update id="basketModify">
+		UPDATE BASKET SET basket_book_count = #{basket_book_count}
+		WHERE member_id = #{member_id} AND basket_num = #{basket_num}
+	</update>
+	<!-- 6. 장바구니에 기존의 상품이 존재 하면 수정 -->
+	<update id="basketUpdate">
+		UPDATE BASKET
+		SET BASKET_BOOK_COUNT = basket_book_count+ #{basket_book_count} WHERE BASKET_BOOK_NUM = #{basket_book_num} AND member_id = #{member_id}
+	</update>
+	
+	<!--7. 장바구니 한개 삭제 -->
+	<delete id="basketDelete">
+		DELETE FROM BASKET WHERE BASKET_NUM = #{basket_num}
+	</delete>
+	
+	<!-- 8. 장바구니 전체 삭제 -->	
+	<delete id="basketDeleteAll">
+		DELETE FROM BASKET WHERE MEMBER_ID = #{member_id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,146 @@
+@charset "euc-kr";
+/* CSS Document */
+
+a:hover{
+	color:#C3C;
+	text-decoration:none;
+}
+a:visited{
+	color:#666;
+	text-decoration:none;
+}
+a:active{
+	color:#666;
+	text-decoration:none;
+}
+a:link {
+	color: #666;
+	text-decoration: none; 
+	}
+
+*{border:0; padding:0; margin:0;}
+li{list-style-type:none;}
+
+body{width:100%; height:auto; }
+
+
+#wrap{
+	width:909px; height:300px;	
+	margin:0 auto;
+}
+/*
+header ∫Œ∫–¿”
+*/
+#header {
+	width:909px; height:113px; border-bottom:1px solid #bbbbbb;
+}
+#header .logo{
+	width:154px; height:113px; background-image:url(../images/header/logo.png); background-repeat:no-repeat; float:left;
+}
+
+#header .searchKeyword{
+	margin:70px 0 0 170px; width:250px; height:26px; background-color:#ebebeb; float:left;
+}
+#header .searchKeyword .serchText{
+	width:220px; height:22px; float:left; border:2px solid #ebebeb ; color:#504f4f; font-family:Adobe Gothic Std;
+}
+#header .searchKeyword .serchButton{
+	width:26px; height:26px; float:left; background-image:url(../images/header/serchBotton.png); cursor:pointer;
+}
+#header .memberArea{
+	 margin:78px 0 0 57px;float:left; width:278px; height:16px;
+}
+
+#header .memberArea .mem_in{
+	float:left; width:62px; height:16px; background-image:url(../images/header/login.png); background-repeat:no-repeat; cursor:pointer;
+}
+#header .memberArea .mem_out{
+	float:left; width:62px; height:16px; background-image:url(../images/header/logout.png); background-repeat:no-repeat; cursor:pointer;
+}	
+#header .memberArea .mem_join{
+	float:left; width:72px; height:16px; background-image:url(../images/header/mem_join.png); background-repeat:no-repeat; cursor:pointer;
+}	
+#header .memberArea .basket{
+	float:left; width:74px; height:16px; background-image:url(../images/header/basket.png); background-repeat:no-repeat; cursor:pointer;
+}	
+#header .memberArea .mypage{
+	float:left; width:70px; height:16px; background-image:url(../images/header/mypage.png); background-repeat:no-repeat; cursor:pointer;
+}
+#header .memberArea .adminorder{
+	float:left; width:70px; height:16px; background-image:url(../images/header/order_management.png); background-repeat:no-repeat; cursor:pointer;
+}
+#header .memberArea .admingoods{
+	float:left; width:70px; height:16px; background-image:url(../images/header/admingoods.png); background-repeat:no-repeat; cursor:pointer;
+}
+#header .memberArea .memberlist{
+	float:left; width:70px; height:16px; background-image:url(../images/header/member_management.png); background-repeat:no-repeat; cursor:pointer;
+}
+#header .memberArea .order{
+	float:left; width:70px; height:16px; background-image:url(../images/header/buy_list.png); background-repeat:no-repeat; cursor:pointer;
+}
+
+/*
+	navi
+*/	
+
+#navi{					
+	float:left; width:154px; height:492px; background-image:url(../images/navi/navi_bg.png); background-repeat:no-repeat; 	
+}
+
+#navi ul{
+	width:110px; height:380px; margin:61px 0 0 22px; 
+	padding:16px 0 0 10px; border-top:1px dotted #bfbfbf;
+	overflow:hidden;
+	}
+	
+#navi ul li{
+	width:220px; height:12px; float:left;
+	position:relative; cursor:pointer; margin-bottom:10px;
+}
+#navi .community{
+	border-top:1px solid #bfbfbf; margin-top:10px; width:220px; height:15px; padding:10px 0 10px 0;
+}
+#navi ul li:hover{
+	margin-left:-110px;
+}
+
+/*
+main_content
+*/
+#main_content{
+	float:left;
+	width:755px; height:auto; margin-bottom:10px;
+}
+
+/*
+sub_content
+*/
+#sub_content{
+	float:left;
+	width:909px; height:auto; margin-bottom:10px;
+}
+/*
+footer
+*/
+#footer{
+	float:left;
+	width:909px; height:113px; background-image:url(../images/header/logo.png); background-repeat:no-repeat;
+	padding:20px 0 20px 0; border-top:2px dotted #bfbfbf;
+}
+#footer .story_board{
+	float:left;
+	width:555px; height:113px; margin-left:154px; background-image:url(../images/footer/story_board.png); background-repeat:no-repeat;
+}
+
+#footer .story_board .owner_check{
+	margin:53px 0 0 340px;
+	width:63px; height:14px; background-image:url(../images/footer/owner_check.png); background-repeat:no-repeat; display:block;
+	cursor:pointer;
+}
+
+#footer .safety_trade_info{
+	float:left;
+	width:200px; height:113px; background-image:url(../images/footer/footer_safe_info_03.png); background-repeat:no-repeat;
+	
+}
+	

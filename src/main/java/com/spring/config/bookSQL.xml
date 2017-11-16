@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book">
+
+	<sql id="select-bookall">
+		SELECT * FROM BOOK
+	</sql>
+
+	<sql id="where-goodsnum">
+		WHERE BOOK_NUM = #{BOOK_NUM} AND BOOK_USE_YN = '1'
+	</sql>
+
+	<!-- 도서 목록 -->
+	<select id="selectBookList" resultType="BooksModel" parameterType="String">
+		<include refid="select-bookall" />
+		WHERE BOOK_USE_YN = '1'
+		<if test="value!=null">
+			AND BOOK_CATEGORY = #{value}
+		</if>
+		ORDER BY BOOK_DATE DESC
+	</select>
+
+	<!-- 도서 검색 목록 -->
+<select id="selectSearchList" parameterType="map" resultType="BooksModel">
+	<include refid="select-bookall" />
+	WHERE BOOK_USE_YN = '1'
+	<choose>
+		<when test="searchNum == 0">
+			AND( BOOK_NAME like '%'||#{searchKeyword}||'%' 
+			OR BOOK_AUTH like '%'||#{searchKeyword}||'%' 
+			OR COMPANY_ID like '%'||#{searchKeyword}||'%' )
+		</when>
+		<when test="searchNum == 1">
+			AND BOOK_NAME like '%'||#{searchKeyword}||'%' 
+		</when>
+		<when test="searchNum == 2">
+			AND BOOK_AUTH like '%'||#{searchKeyword}||'%' 
+		</when>
+		<otherwise>
+			AND COMPANY_ID like '%'||#{searchKeyword}||'%'
+		</otherwise>
+	</choose>
+	ORDER BY BOOK_DATE DESC
+</select>
+
+	<!-- 도서 상세보기 -->
+	<select id="selectBookOne" resultType="BooksModel">
+		<include refid="select-bookall" />
+		<include refid="where-goodsnum" />
+	</select>
+
+	<!-- 리뷰 리스트 -->
+	<select id="selectReviewList" resultType="ReviewModel">
+		SELECT * FROM REVIEW
+		WHERE BOOK_NUM = #{BOOK_NUM} ORDER BY REVIEW_REGDATE DESC
+	</select>
+
+	<!-- 리뷰 작성 -->
+	<insert id="reviewWrite" parameterType="ReviewModel">
+		INSERT INTO
+		REVIEW(REVIEW_NUM, BOOK_NUM, MEMBER_ID, REVIEW_PW, REVIEW_CONTENT,
+		REVIEW_REGDATE, STAR_POINT)
+		VALUES(REVIEW_NUM_SEQ.nextVal, #{book_num},
+		#{member_id}, #{review_pw}, #{review_content}, sysdate,
+		#{star_point})
+	</insert>
+
+</mapper>

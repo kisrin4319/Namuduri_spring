@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+/* 검색창 */
+.searcharea{
+	margin-top:3%;
+	width:500px;z-index:3000;
+}
+
+.searcharea .searchNum {
+	width:100px;font-family:inherit;padding:.2em;
+	border:1px solid #999;  border-radius: 0px;
+}
+
+.searcharea .search_input .searchKeyword{
+	width:200px;border:1 solid #999;color:#555;font-size:12px;height:20px
+}
+.searchbutton {
+    background-color:#5e6b9e;
+    border: none;
+    color: white;
+	padding: 3px 9px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+/* 리스트 */
+.list{
+	position:relative;
+	display:inline-block;
+	z-index: 3000;
+	margin-left:5%;margin-right:5%;
+}
+
+table.table_list {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+ 	margin : 20px 10px;
+}
+table.table_list th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+table.table_list td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+.table_list .adminbutton {
+    background-color:#5e6b9e;
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+.table_list .adminbutton2 {
+    background-color:#5e6b9e;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+.list .paging{
+	position:relative;
+}
+
+/* 상세보기 */
+.detail_h2{
+	margin-top: 5%;
+    margin-left: 1%;
+    margin-bottom: 15px;
+    padding: 12px 5px 12px;
+    border-bottom: 2px solid #565656;
+    font-size: 30px;
+    overflow: hidden;
+    color: #333333;
+    font-weight: bold;
+    text-align: left;
+}
+
+.detail{
+	margin-top:2%;
+	position:relative;
+	display:inline-block;
+	z-index: 3000;
+	margin-left:5%;margin-right:5%;
+}
+
+ table.table_detail {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+	margin : 20px 10px;
+}
+table.table_detail th {
+    width: 147px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+}
+table.table_detail td {
+    width: 349px;
+    padding: 5px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.list .detail_button .button{
+    background-color: #5e6b9e;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+	width: 200px;
+}
+.detail .detail_button .button{
+    background-color: #5e6b9e;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+	width: 200px;
+}
+
+.detail input{
+	border: 1px solid #ccc;
+	padding: 5px;
+	text-align:center;
+	width:200px;
+}
+select{
+	width:100px;font-family:inherit;
+	font-size:12px;padding:.2em;
+	border:1px solid #999;  border-radius: 0px;
+}
+
+.detail .short input{width:100px;}
+.detail .long input{width:300px;}
+.detail .getyn input{width:50px;}
+
+table.review {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+	margin : 20px 10px;
+}
+table.review th {
+    width: 147px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+table.review td {
+	width:0;
+    padding: 5px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+table.review input{border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    width: 50px;}
+
+/* 메인페이지 */
+.main .admin_main {margin-top: 5%;}
+.main .admin_main .main_title{padding-bottom: 20px;}
+.main .admin_main .menu{padding-top: 10%;}

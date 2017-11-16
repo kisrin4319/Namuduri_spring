@@ -1,0 +1,650 @@
+@charset "EUC-KR";
+/* 전역 스타일 변경 (style.css, style2.css, layout.css 이동예정) */
+em.font_blue,
+em.font_red,
+em.font_orange {font-style:normal;}
+
+.path_bar {margin-bottom:40px;border-bottom:1px solid #ddd;}
+.path_bar .location_search {display:none; /*bottom:auto;top:0;*/}
+
+.path {margin-bottom:40px;}
+
+/* 공통스타일을 상세페이지에 맞게 변경 */
+.box_detail_info .table_simple3 th,
+.box_detail_info .table_simple3 td,
+.box_detail_order .table_simple3 th,
+.box_detail_order .table_simple3 td,
+.box_detail_point .layer_popup .new_c .new_d,
+.box_detail_info .layer_popup .new_c .new_d,
+.box_detail_order .layer_popup .new_c .new_d,
+.box_detail_aside .layer_popup .new_c .new_d {font-size:12px;line-height:20px;}
+.box_detail_order .layer_popup {line-height:1.2em;}
+
+.table_simple3 {border-color:#dadada;}
+.table_simple3 th {border-color:#dadada;background-color:#eee;}
+.table_simple3 td {border-color:#dadada;border-bottom:1px solid #dadada;}
+.table_simple3 tr.odd td {background-color:#fff;}
+
+.font_red {color:#f54653 !important;}
+
+/* 상세페이지 레이아웃 */
+.box_detail_point {float:right;width:705px;}
+.box_detail_info {float:left;width:200px;}
+.box_detail_order {float:right;width:705px;}
+.content_left {float:left;width:750px;margin-bottom:-60px;/*overflow:hidden;*/}
+.content_right {float:right;width:200px;}
+
+/* 공통요소 */
+.title_detail_basic {font-size:16px;line-height:18px;height:26px;padding-top:4px;color:#000;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';}
+.title_detail_basic small {margin-left:4px;font-size:12px;font-weight:normal;color:#444;font-family:dotum;}
+.title_detail_basic small em {color:#3c5fdf;font-style:normal;}
+.title_detail_basic a {color:#000;}
+.title_detail_basic a:hover,
+.title_detail_basic a:active {color:#3c5fdf;text-decoration:underline;}
+.title_detail_basic img {vertical-align:baseline;}
+.title_detail_basic .total {font-size:14px;color:#3c5fdf;font-weight:normal;font-style:normal;}
+
+.title_detail_basic2 {margin:40px 0 7px;font-size:12px;color:#555;}
+
+.popup_load {position:relative;}
+span.popup_load {display:inline-block;}
+.overflow {display:none;}
+
+/* 링크 텍스트 */
+.box_detail_point a:hover,
+.box_detail_info a:hover,
+.box_detail_order a:hover,
+.box_detail_relation a:hover,
+.box_detail_package a:hover,
+.box_detail_content a:hover,
+.box_detail_result a:hover,
+.box_detail_aside a:hover {text-decoration:underline;color:#3c5fdf;}
+
+
+
+/* 상품 주요정보 */
+.box_detail_point {position:relative;*z-index:102;padding-bottom:30px;border-bottom:1px solid #ddd;}
+.box_detail_point h1.title {display:inline;margin-right:10px;font-size:24px;line-height:27px;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';color:#3a60df;}
+.box_detail_point h1.title em.front {font-size:18px;font-style:normal;color:#f84450;}
+.box_detail_point h1.title span.front {font-size:14px;font-weight:normal;color:#555;}
+.box_detail_point h1.title span.back {font-size:14px;font-weight:normal;color:#555;}
+.box_detail_point h1.title img {vertical-align:-3px;}
+.box_detail_point .icon {font-size:6px;margin-bottom:5px;}
+.box_detail_point .info {display:inline;color:#777;line-height:21px;}
+.box_detail_point .info .line {color:#aaa;}
+.box_detail_point .author {margin-top:10px;color:#777;line-height:18px;}
+.box_detail_point .author .line {color:#aaa;}
+.box_detail_point .author .tooltip {border:1px solid #b8b8b8;padding:7px 7px 4px 7px;color:#444546;position:absolute;left:-30px;top:16px;z-index:300;background-color:#fff;line-height:16px;white-space:nowrap;}
+.box_detail_point .author .tooltip .arrow {position:absolute;top:-5px;left:42px;display:block;width:9px;height:5px;background:url('http://image.kyobobook.co.kr/ink/images/common/tooltip_arrow.gif') no-repeat 0 0;}
+.box_detail_point .review {margin-top:10px;}
+.box_detail_point .review img {vertical-align:baseline;}
+.box_detail_point .rank {margin-top:5px;}
+.box_detail_point .rank em {font-style:normal;color:#f84450;}
+.box_detail_point .rank .line {color:#aaa;}
+.box_detail_point .rank .popup_load {margin-left:10px;}
+.box_detail_point .rank .popup_load:first-child {margin-left:0;}
+.box_detail_point .rank .btn_open {font-weight:normal;padding-right:25px;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_open_r.gif') no-repeat right center;}
+
+/* SNS 공유 버튼 (라이브리) */
+.box_detail_point .box_sns_share {position:absolute;z-index:1000;height:47px;right:0;top:-87px;}
+.box_detail_point .box_sns_share #livereActionPostingContainer {right:0;}
+.box_detail_point .box_sns_share #livereActionSNSButtonContainer {z-index:149;}
+
+/* 상품 사진 */
+.box_detail_cover {text-align:center;}
+.box_detail_cover .cover {}
+.box_detail_cover .cover img {max-width:198px;_width:198px;border:1px solid #dadada;}
+.box_detail_cover .cover a {display:inline-block;max-width:200px;_width:200px;position:relative;text-decoration:none;}
+.box_detail_cover .cover a:hover img {border-color:#999;}
+.box_detail_cover .cover span {display:none;position:absolute;top:50%;left:10px;right:10px;padding:12px 0 10px;background:url('http://image.kyobobook.co.kr/ink/images/welcome/bg_black70.png');color:#fff;line-height:18px;margin-top:-20px;*cursor:pointer;}
+.box_detail_cover .cover a:hover span,
+.box_detail_cover .cover a:focus span {display:block;}
+.box_detail_cover ul {margin:10px 0 8px;background:url('http://image.kyobobook.co.kr/ink/images/common/line_btnbox.gif') no-repeat center 4px;}
+.box_detail_cover li {display:inline-block;width:96px;text-align:center;font-size:11px;line-height:15px;*display:inline;*zoom:1;}
+.box_detail_cover li a {display:inline-block;padding:4px 5px 2px;}
+
+/* 본문검색 */
+.box_detail_search {*zoom:1;}
+.box_detail_search:after {content:'';display:block;clear:both;}
+.box_detail_search .input_style {float:left;height:23px;width:148px;padding-left:4px;border-color:#c6c6c6;color:#999;*color:#666;}
+.box_detail_search .input_style:focus {color:#666;}
+.box_detail_search .btn_medium {float:right;height:25px;width:45px;}
+
+/* 영업점 재고 위치 */
+.box_detail_position {position:relative;margin-top:10px;}
+.box_detail_position .btn_open {display:block;text-align:center;padding:7px 0 5px;border:1px solid #aaa;color:#f84450;font-weight:bold;background:url('http://image.kyobobook.co.kr/ink/images/welcome/icon_more.gif') no-repeat 165px center;}
+.box_detail_position .btn_open:hover {border-color:#888;color:#f84450;text-decoration:none;}
+
+/* EBS 강좌보기 */
+.box_detail_ebs {position:relative;margin-top:10px;}
+.box_detail_ebs .btn_open {display:block;text-align:center;padding:7px 0 5px;border:1px solid #aaa;color:#555;font-weight:bold;background:url('http://image.kyobobook.co.kr/ink/images/welcome/icon_more.gif') no-repeat 165px center;}
+.box_detail_ebs .btn_open:hover {border-color:#888;color:#555;text-decoration:none;}
+.box_detail_ebs .btn_open em {color:#3a60df;font-style:normal;}
+
+/* 이 책의 다른 상품 */
+.box_detail_version {margin-top:20px;}
+.box_detail_version h2 {font-size:12px;text-align:center;padding:12px 0 8px;color:#555;}
+.box_detail_version {border:1px solid #ddd;}
+.box_detail_version li {border-top:1px solid #eee;line-height:14px;color:#555;}
+.box_detail_version li.null {padding:7px 10px 5px;text-align:center;}
+.box_detail_version a {display:block;padding:7px 20px 5px 10px;color:#555;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_arrow4.gif') no-repeat 184px center;}
+.box_detail_version a:hover,
+.box_detail_version a:focus {background-color:#f8f8f8;color:#444;text-decoration:none;}
+.box_detail_version .title {display:block;margin-top:2px;font-size:11px;color:#777;}
+.box_detail_version .title strong {font-weight:normal;}
+
+/* 상품 가격정보 */
+.box_detail_price {position:relative;*z-index:101;width:490px;min-height:100px;padding:30px 0;margin-right:-1px;}
+.list_detail_price>li {margin-top:5px;line-height:21px;}
+.list_detail_price>li:first-child {margin-top:0;}
+.list_detail_price img {vertical-align:middle}
+.list_detail_price .indent {display:inline-block;vertical-align:top;max-width:630px;}
+.list_detail_price .org_price {}
+.list_detail_price .sell_price {line-height:30px;font-size:18px;color:#f84450;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';}
+.list_detail_price .sell_price strong {display:inline-block;vertical-align:-3px;*vertical-align:3px;font-size:27px;font-family:'Segoe UI','Arial','Helvetica';font-weight:600;}
+.list_detail_price .sell_price2 {line-height:24px;font-size:15px;color:#444;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';}
+.list_detail_price .sell_price2 strong {display:inline-block;vertical-align:-2px;*vertical-align:2px;font-size:21px;font-family:'Segoe UI','Arial','Helvetica';font-weight:600;}
+.list_detail_price .dc_rate {color:#5e6b9f;}
+.list_detail_price .charge_price {font-size:14px;color:#3a60df;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';}
+.list_detail_price .charge_price strong {display:inline-block;vertical-align:-2px;*vertical-align:2px;font-size:18px;font-family:'Segoe UI','Arial','Helvetica';font-weight:600;}
+.list_detail_price .earn_point {}
+.list_detail_price .save_rate {color:#5e6b9f;}
+
+/* 이 상품의 이벤트 */
+.box_detail_event {position:absolute;left:490px;top:0;width:194px;height:100%;padding-left:20px;border-left:1px solid #ddd;}
+.box_detail_event h2 {font-size:12px;color:#5e6b9f;margin-top:20px;}
+.box_detail_event h2 a {color:#5e6b9f;}
+.box_detail_event h2 strong {color:#f84450;}
+.box_detail_event ul {margin-top:18px;}
+.box_detail_event li {padding-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.05em;}
+.box_detail_event .btn_more {position:absolute;top:20px;right:0;}
+.box_detail_event .btn_more a {font-size:11px;color:#868686;}
+.box_detail_event .btn_more a:hover {color:#3c5fdf;}
+
+/* 상품 배송정보 */
+.box_detail_delivery {*position:relative;*z-index:100;padding:30px 0;border-top:1px solid #ddd;*zoom:1;}
+.list_detail_delivery>li {margin-top:5px;line-height:24px;}
+.list_detail_delivery>li:first-child {margin-top:0;}
+.list_detail_delivery img {vertical-align:middle;}
+.list_detail_delivery img.icon {vertical-align:-2px;}
+.list_detail_delivery .indent {display:inline-block;vertical-align:top;max-width:630px;}
+.list_detail_delivery em {font-style:normal;color:#3a60df;}
+.list_detail_delivery .comment {font-size:11px;line-height:16px;}
+
+.box_detail_delivery .delivery_process {text-align:center;font-size:12px;}
+.box_detail_delivery .delivery_process li {display:inline-block;min-width:60px;color:#444;text-align:center;padding:0 5px 0 10px;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_arrow2.gif') no-repeat 0 2px;*zoom:1;*display:inline;padding-bottom:0 !important;}
+.box_detail_delivery .delivery_process li.first {padding:0 5px;background-image:none;}
+.box_detail_delivery .delivery_process li em {font-style:normal;color:#3863e5;}
+
+/* 알립니다 */
+.box_detail_notice {padding:20px 0;border-top:1px solid #ddd;}
+.box_detail_notice h2 {font-size:11px;line-height:15px; color:#f84450;}
+.box_detail_notice ul {margin-top:5px;}
+.box_detail_notice li {padding-left:8px;padding-bottom:6px;font-size:11px;line-height:15px;}
+.box_detail_notice strong {color:#3a60df;}
+.box_detail_notice em {font-style:normal;color:#5e6b9f;}
+
+/* 장바구니담기, 구매하기 버튼 */
+.box_detail_button {padding:20px 0 30px;border-top:1px solid #ddd;}
+.box_detail_button .amount {}
+.box_detail_button .amount .input_style {height:26px;width:40px;text-align:right;padding-right:5px;font-weight:bold;}
+.box_detail_button .amount label {vertical-align:baseline;margin-right:3px;}
+.box_detail_button .amount .btn_count {display:inline-block;vertical-align:middle;height:20px;}
+.box_detail_button .amount button {float:left;margin-right:1px;border:1px solid #aaa;color:#3a60df;width:20px;height:20px;padding:3px;background-color:#fff;}
+.box_detail_button .button_set {margin-top:20px;}
+.box_detail_button .button_set .btn_xlarge {margin-bottom:4px;padding-left:15px;padding-right:15px;min-width:116px;}
+
+/* 출간알림신청 레이어팝업 */
+.layer_subscribe02 {position:absolute;left:-60px;top:45px;z-index:300;width:275px;border:2px solid #cfcfcf;background:#fff;}
+.layer_subscribe02 .title {background-color:#f6f6f6;color:#333;padding:10px 10px 0;height:21px;}
+.layer_subscribe02 .contents {padding:10px;color:#666;}
+.layer_subscribe02 .input_phone {margin-top:10px;padding:5px;background-color:#f8f8f8;text-align:center;}
+.layer_subscribe02 .input_phone label {font-weight:bold;}
+.layer_subscribe02 .btn_submit {text-align:center;margin:13px 0 5px;}
+.layer_subscribe02 .btn_close {position:absolute;top:10px;right:10px;}
+.layer_subscribe02 .img_arrow {position:absolute;left:125px;top:-8px;}
+
+/* 기획전 띠배너 */
+.box_detail_exhibition {padding-bottom:30px;position:relative;background-color:#fff;z-index:10;}
+.box_detail_exhibition ul {border-top:1px solid #ccc;border-bottom:2px solid #e0e0e0;}
+.box_detail_exhibition li {border-bottom:1px solid #e0e0e0;}
+.box_detail_exhibition .btn_open {position:absolute;left:454px;bottom:19px; width:43px;height:11px;border:none;padding:0;background:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_more.gif') no-repeat;overflow:hidden;line-height:0;font-size:0;color:transparent;cursor:pointer;}
+.box_detail_exhibition .btn_close {position:absolute;left:454px;bottom:19px; width:43px;height:11px;border:none;padding:0;background:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_less.gif') no-repeat;overflow:hidden;line-height:0;font-size:0;color:transparent;cursor:pointer;}
+
+/* 함께 구매한 상품, 책 속에서 추천하는 책, 이 책의 연관상품 */
+.box_detail_relation {position:relative;padding:30px 0;border-top:1px solid #ddd;margin-top:-1px;}
+.box_detail_relation h2 {display:inline;}
+.box_detail_relation .button_set {margin-left:20px;display:inline;}
+.box_detail_relation .btn_prev,
+.box_detail_relation .btn_next {position:absolute;left:0px;top:138px;width:21px;height:28px;padding:1px;margin:0;border:0;background-color:transparent;cursor:pointer;}
+.box_detail_relation .btn_next {left:auto;right:0px;}
+.box_detail_relation .lexile_level {position:absolute;right:0;top:30px;color:#193b78;*z-index:300;}
+.box_detail_relation .lexile_level em {font-style:normal;color:#f84450;}
+.list_detail_relation {margin-top:20px;*zoom:1;padding:0 25px;}
+.list_detail_relation:after {content:'';display:block;clear:both;}
+.list_detail_relation li {position:relative;float:left;width:130px;padding:0 10px;text-align:center;}
+.list_detail_relation li .type {margin-bottom:3px;}
+.list_detail_relation li .type a {color:#555;}
+.list_detail_relation li .date {margin-bottom:5px;}
+.list_detail_relation li .cover {margin-bottom:15px;}
+.list_detail_relation li .cover img {width:98px;height:143px;border:1px solid #a7a7a7;}
+.list_detail_relation li .cover a:hover img {border-color:#777;}
+.list_detail_relation li .title {line-height:16px;height:32px;overflow:hidden;}
+.list_detail_relation li .title a {color:#555;}
+.list_detail_relation li .title strong {font-weight:normal;}
+.list_detail_relation li .title2 {line-height:16px;height:32px;overflow:hidden;}
+.list_detail_relation li .title2 a {color:#555;}
+.list_detail_relation li .price {margin-top:7px;color:#f04653;}
+.list_detail_relation li .price2 {margin-top:7px;font-size:11px;line-height:16px;}
+.list_detail_relation li .price2 strong {font-weight:normal;color:#f04653;}
+.list_detail_relation li .price2 span {font-size:11px;color:#5e6c9b;}
+.list_detail_relation li .price2 img {vertical-align:baseline;}
+.list_detail_relation li .check {position:absolute;left:25px;top:0;}
+.list_detail_relation li .check input {width:20px;height:20px;*width:16px;*height:16px;}
+.list_detail_relation li .active {width:20px;height:20px;overflow:hidden;background-color:#fff;}
+.list_detail_relation li .active span {display:inline-block;width:18px;height:18px;background:url('http://image.kyobobook.co.kr/ink/images/common/btn_checkbox.gif') no-repeat 0 0;border:1px solid #a7a7a7;cursor:pointer;}
+.list_detail_relation li .active:hover span {border:1px solid #777;}
+.list_detail_relation li .checked span {background-position:0 -25px;border:1px solid #3673df;}
+.list_detail_relation li .checked:hover span {border:1px solid #0033d0;}
+.list_detail_relation li .focus span {border:1px dotted #000;}
+.list_detail_relation li .active input {position:absolute;left:-100px;top:0;}
+
+/* 이 상품의 꾸러미 */
+.box_detail_package {position:relative;padding:30px 0;border-top:1px solid #ddd;*zoom:1;margin-top:-1px;}
+.box_detail_package:after {content:'';display:block;clear:both;}
+.box_detail_package .btn_prev,
+.box_detail_package .btn_next {position:absolute;left:0px;top:138px;width:21px;height:28px;padding:1px;margin:0;border:0;background-color:transparent;cursor:pointer;}
+.box_detail_package .btn_next {left:630px;}
+.header_detail_package {float:right;width:265px;margin-top:20px;}
+.header_detail_package .title {font-size:14px;line-height:20px;font-family:'Malgun Gothic','Apple SD Gothic Neo','Dotum','Sans-Serif';color:#333;}
+.header_detail_package .title a {color:#333;}
+.header_detail_package .price {margin-top:20px;}
+.header_detail_package .org_price {display:block;margin-bottom:5px;}
+.header_detail_package .sell_price {color:#f64450;}
+.header_detail_package .sell_price strong {font-size:14px;}
+.header_detail_package .dc_rate {color:#5f6b9f;}
+.header_detail_package .earn_point {color:#3a60df;}
+.header_detail_package .save_rate {color:#5f6b9f;}
+.header_detail_package .line {color:#ddd;}
+.header_detail_package .button_set {margin-top:20px;}
+.list_detail_package {float:left;width:600px;margin-top:20px;padding-left:15px;}
+.list_detail_package li {float:left;width:130px;padding-left:20px;text-align:center;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_plus2.gif') no-repeat 4px 65px;}
+.list_detail_package li:first-child,
+.list_detail_package li.first {background-image:none;}
+.list_detail_package li .cover {margin-bottom:15px;}
+.list_detail_package li .cover img {width:98px;height:143px;border:1px solid #a7a7a7;}
+.list_detail_package li .cover a:hover img {border-color:#777;}
+.list_detail_package li .title {line-height:16px;height:32px;overflow:hidden;}
+.list_detail_package li .title a {color:#555;}
+.list_detail_package li .title strong {font-weight:normal;}
+
+/* 꾸러미 상품 구성 */
+.list_detail_composition {}
+.list_detail_composition li {*zoom:1;padding:30px 0;border-bottom:1px solid #dadada;}
+.list_detail_composition li:after {content:'';display:block;clear:both;}
+.list_detail_composition .cover {float:left;margin-right:20px;}
+.list_detail_composition .cover img {width:98px;height:143px;border:1px solid #a7a7a7;}
+.list_detail_composition .cover a:hover img {border-color:#777;}
+.list_detail_composition .title {padding-top:24px;}
+.list_detail_composition .title a {color:#444;}
+.list_detail_composition .info {margin:7px 0 25px;font-size:11px;}
+.list_detail_composition .info .line {margin:0 4px;color:#aaa;}
+.list_detail_composition .price {margin-bottom:10px;}
+.list_detail_composition .price .label {padding-left:6px;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_squ.gif') 0 3px no-repeat;}
+.list_detail_composition .price .label span {display:inline-block;min-width:36px;}
+.list_detail_composition .price strong {font-weight:normal;color:#f84450;}
+.list_detail_composition .price em {font-style:normal;color:#5e6c9b;}
+.list_detail_composition .price .line {color:transparent;}
+
+/* 상세페이지 내용 탭 */
+.tab_detail_content {width:750px;height:36px;background-color:#fff;border:1px solid #d7d7d7;border-left-width:0;}
+.tab_detail_content li {float:left;width:20%;text-align:center;}
+.tab_detail_content li a {display:block;padding-top:13px;height:23px;border:1px solid #d7d7d7;border-width:0 1px;margin-right:-1px;background-color:#fff;font-weight:bold;}
+.tab_detail_content li a:hover {background-color:#f8f8f8;color:#222;}
+.tab_detail_content li.on a {height:24px;border-bottom-width:0;color:#3c5fdf;}
+.tab_detail_content li.on a:hover {background-color:#fff;color:#3c5fdf;}
+.tab_detail_content li span {color:#3c5fdf;font-weight:normal;}
+
+/* 상세페이지 고정 탭 */
+.tab_detail_fixed {display:none;position:fixed;top:0;left:0;width:100%;z-index:1000;background-color:#eee;border-bottom:1px solid #aaa;}
+.tab_detail_fixed .inner {width:950px;padding:5px 30px;margin:auto;*zoom:1;}
+.tab_detail_fixed .inner:after {content:'';display:block;clear:both;}
+.tab_detail_fixed .nav_page {float:left;width:750px;}
+.tab_detail_fixed .nav_page .tab_detail_content {height:40px;}
+.tab_detail_fixed .nav_page .tab_detail_content li a {padding-top:15px;height:25px;}
+.tab_detail_fixed .nav_page .tab_detail_content li.on a {margin-top:-1px;padding-top:16px;height:26px;border-width:0;background-color:#365fdd;}
+.tab_detail_fixed .nav_page .tab_detail_content li.on a,
+.tab_detail_fixed .nav_page .tab_detail_content li.on span {color:#fff;}
+.tab_detail_fixed .nav_page .tab_detail_content li.on a:hover {background-color:#365fdd;color:#fff;}
+.tab_detail_fixed .btn_order {float:right;width:190px;padding:7px 0;}
+
+/* 상세페이지 내용 박스 */
+.box_detail_content {padding:30px 40px 60px 20px;word-wrap:break-word;}
+.box_detail_content .title_detail_basic {margin-top:40px;height:auto;}
+.box_detail_content .title_detail_basic:first-child {margin-top:0;}
+.box_detail_content .title_detail_first {margin-top:0;} /* IE7 패치 */
+
+/* 광고 */
+.ad_detail01 {border:1px solid #dadada;}
+.ad_detail01 img{width:198px;height:270px;}
+
+/* 상품정보 준비중 */
+.box_detail_prepare {text-align:center;margin-top:10px;padding:20px;text-align:center;font-size:14px;}
+
+/* 저자소개 */
+.title_detail_author {margin-top:40px;padding:10px;border:1px solid #dadada;*zoom:1;}
+.title_detail_author:after {content:'';display:block;clear:both;}
+.title_detail_author h3 {float:left;font-size:12px;line-height:18px;color:#555;padding:3px 0 0 10px;white-space:nowrap;}
+.title_detail_author .button_set {float:right;}
+
+/* 이 책의 시리즈, 이 책의 총서, 작가의 최근작 */
+.box_detail_series {border:1px solid #dadada;position:relative;padding:10px 20px;margin-top:20px;}
+.title_detail_series {font-size:12px;line-height:20px;display:inline;margin-right:10px;}
+.list_detail_series {margin:8px -20px -10px;padding:18px 20px;*zoom:1;border-top:1px solid #dadada;}
+.list_detail_series:after {content:'';display:block;clear:both;}
+.list_detail_series li {float:left;width:32%;padding:5px 1% 3px 0;line-height:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.list_detail_series label {vertical-align:baseline;}
+.box_detail_series .button_set {position:absolute;right:10px;top:6px;}
+
+/* 이 책이 속한 분야, 저자가 속한 분야 */
+.title_detail_category {margin:25px 0 7px;font-size:12px;color:#777;}
+.list_detail_category {color:#777;}
+.list_detail_category li {line-height:20px;margin-bottom:2px;}
+
+/* 책소개 본문, 목차, 책속으로, 출판사 서평, 저자소개 */
+.box_detail_article {margin-top:10px;line-height:22px;*zoom:1;}
+.box_detail_article:after {content:'';display:block;clear:both;}
+.box_detail_article .photo {float:left;margin:2px 10px 8px 0;}
+.box_detail_article .photo img {border:1px solid #ddd;}
+.box_detail_article img {max-width:690px;}
+.box_detail_author {margin-top:-20px;min-height:20px;}
+.box_detail_author .box_detail_article {margin-top:20px;}
+
+/* 북소믈리에 한마디 */
+.box_detail_comment {margin-bottom:40px;}
+.box_detail_comment .title_detail_basic2 {color:#193b78;}
+.box_detail_comment .content {line-height:20px;}
+
+/* 이 책의 이벤트 */
+.list_detail_event {}
+.list_detail_event li {margin-top:20px;color:#555;*zoom:1;}
+.list_detail_event li:after {content:'';display:block;clear:both;}
+.list_detail_event .banner {width:165px;height:98px;float:left;margin-right:20px;}
+.list_detail_event .banner img {width:163px;max-height:98px;border:1px solid #dadada;}
+.list_detail_event .banner a:hover img {border-color:#aaa;}
+.list_detail_event .title {padding-top:10px;}
+.list_detail_event .title a {color:#555;}
+.list_detail_event .summary {margin-top:5px;height:40px;line-height:20px;overflow:hidden;}
+.list_detail_event .date {margin-top:10px;}
+
+/* 북로그 리뷰 */
+.list_detail_booklog {}
+.list_detail_booklog li {margin-top:20px;}
+.list_detail_booklog li .info {margin-left:10px;}
+.list_detail_booklog li .content {margin-top:10px;line-height:22px;}
+
+/* 책속의 한문장 */
+.list_detail_sentence {}
+.list_detail_sentence li {margin-top:25px;padding-bottom:20px;border-bottom:1px dashed #c3c3c3;}
+.list_detail_sentence li .title strong {color:#333;}
+.list_detail_sentence li .info {margin-left:10px;color:#5e6ba0;}
+.list_detail_sentence li .content {margin-top:10px;line-height:22px;color:#555;}
+
+/* 북뉴스 */
+.list_detail_booknews {}
+.list_detail_booknews li {margin-top:20px;color:#555;*zoom:1;}
+.list_detail_booknews li:after {content:'';display:block;clear:both;}
+.list_detail_booknews .thumb {float:left;margin-right:20px;}
+.list_detail_booknews .thumb img {width:137px;height:85px;border:1px solid #dadada;}
+.list_detail_booknews .thumb a:hover img {border-color:#aaa;}
+.list_detail_booknews .title {padding-top:2px;}
+.list_detail_booknews .title a {color:#555;}
+.list_detail_booknews .info {margin-top:7px;font-size:11px;}
+.list_detail_booknews .info em {font-style:normal;color:#3c5fdf;}
+.list_detail_booknews .summary {margin-top:12px;height:40px;line-height:20px;overflow:hidden;}
+
+.box_detail_content .btn_list_more {border-top:1px solid #dadada;text-align:center;margin-top:20px;}
+.box_detail_content .btn_list_more .btn_open {width:43px;height:11px;border:none;padding:0;background:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_more.gif') no-repeat;overflow:hidden;line-height:0;font-size:0;color:transparent;cursor:pointer;}
+.box_detail_content .btn_list_more .btn_close {background-image:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_less.gif');}
+
+/* 교환/반품/품절안내 */
+.table_detail_guide th {background-color:#eee;}
+
+/* 이 책의 시리즈, 총서 자세히보기, 본문검색 결과 (팝업) */
+.title_detail_result {padding-top:4px;height:30px;border-bottom:1px solid #dadada;}
+.title_detail_result h2 {display:inline;padding-top:0;margin-right:20px;height:auto;}
+.title_detail_result form {display:inline-block;}
+.title_detail_result .contents_search {display:inline-block;vertical-align:top;}
+.title_detail_result .input_style {float:left;height:23px;width:148px;padding-left:4px;margin-right:1px;}
+.title_detail_result .btn_medium {float:left;height:25px;width:45px;}
+
+.box_detail_result {width:705px;/*min-width:700px;*/border-top:1px solid #dadada;padding:20px;}
+.box_detail_result .list_book01 {}
+.box_detail_result .table_style12 .book_image {margin-left:0;}
+.box_detail_result .table_style12 .book_add {padding-left:10px;}
+.box_detail_result .table_style12 .book_info_text01 {width:489px;}
+.box_detail_result .table_style12 .book_info_text01 .text10 {width:100%;}
+
+/* 북로그 리뷰 (팝업) */
+.box_detail_result .list_detail_booklog li {margin-top:25px;padding-bottom:20px;border-bottom:1px solid #dadada;}
+
+
+/* 우측 내용 */
+.box_detail_aside {position:relative;padding:20px 10px;border:1px solid #dadada;border-top:none;}
+.box_detail_aside h2 {display:inline;margin-right:5px;}
+.box_detail_aside .btn_small {margin:-3px 0;}
+.box_detail_aside .btn_more {position:absolute;right:5px;top:21px;font-size:11px;}
+.title_detail_aside {font-size:12px;}
+.list_detail_aside {}
+.list_detail_aside li {margin-top:15px;font-size:11px;line-height:14px;*zoom:1;}
+.list_detail_aside li:after {content:'';display:block;clear:both;}
+.list_detail_aside li .cover {float:left;margin:0 9px 5px 0;position:relative;}
+.list_detail_aside li .cover img {width:55px;height:77px;border:1px solid #ddd;}
+.list_detail_aside li .cover a:hover img {border-color:#aaa;}
+.list_detail_aside li .cover .rank {position:absolute;left:0;top:0;width:20px;height:16px;padding-top:4px;background-color:#f04653;color:#fff;text-align:center;font-size:11px;line-height:13px;font-family:'Tahoma', 'Arial';}
+.list_detail_aside li .title {padding-top:4px;height:28px;color:#444;overflow:hidden;}
+.list_detail_aside li .title.eng {padding-top:0;height:auto;overflow:visible;}
+.list_detail_aside li .title span {color:#3a60df;}
+.list_detail_aside li .title a {color:#444;}
+.list_detail_aside li .title a:hover {text-decoration:underline;}
+.list_detail_aside li .author {margin-top:6px;color:#777;}
+.list_detail_aside li .price {margin-top:8px;color:#f84450;font-size:12px;line-height:15px;font-weight:bold;}
+
+/* 15-03-31 추가 개정정보 안내 레이어 */
+.box_detail_point .author .popup_load {margin-left:10px;}
+.box_detail_point .author .popup_load:first-child {margin-left:0;}
+.box_detail_point .author .btn_open {font-weight:normal;padding-right:25px;background:url('http://image.kyobobook.co.kr/ink/images/common/icon_open_r.gif') no-repeat right center;}
+
+/* 미확인 */
+.layer_popup .outTable th {text-align:center;}
+
+#container{_position:relative;}
+.content_middle {z-index:auto;_position:relative;}
+
+/* 20150623 추천사 */
+.box_detail_recommend {}
+.box_detail_recommend .title_detail_basic2 {padding-bottom:0;margin-bottom:0;}
+.box_detail_recommend .title_detail_basic2:first-child {margin-top:20px;}
+.box_detail_recommend .title_detail_basic2 .name {display:inline-block;padding-bottom:7px;position:relative;vertical-align:top;}
+.box_detail_recommend .box_detail_article {margin-top:1px;}
+.box_detail_recommend .layer_detail {display:none;position:absolute;left:0;top:15px;background-color:#fff;padding:10px 10px 6px;border:1px solid #b8b8b8; font-weight:normal;color:#ccc;white-space:nowrap;}
+.box_detail_recommend .layer_detail a {color:#555;}
+.box_detail_recommend .layer_detail .arrow {position:absolute;top:-5px;left:38px;display:block;width:9px;height:5px;background:url('http://image.kyobobook.co.kr/ink/images/common/tooltip_arrow.gif') no-repeat 0 0;}
+
+/* 15-09-08 미디어셀러 추가 */
+.box_detail_aside_et {position:relative;border:1px solid #dadada;border-top:none;}
+.box_detail_aside_et h2 {display: block;width: 180px; padding:8px 0 7px 0; margin:0 10px; background: url("http://image.kyobobook.co.kr/ink/images/common/bg_line_dot4.gif") repeat-x left bottom;}
+.box_detail_aside_et h2 span{display:block;}
+.box_detail_aside_et .btn_more {position:absolute;right:5px;top:21px;font-size:11px;}
+.side_et_list {clear: both; display: block; width: 180px; margin:0 10px 5px 10px;}
+.side_et_list li {display: block; background: url("http://image.kyobobook.co.kr/ink/images/common/bg_line_dot4.gif") repeat-x left bottom; padding-top: 10px; padding-bottom: 9px; overflow:hidden; }
+.side_et_list li.end { background: url(../none); }
+.side_et_list div {float: left; font-size:11px; line-height: 1.3em;}
+.side_et_list .info {display: block; width:100%; margin-bottom:5px;}
+.side_et_list .cover {width:55px;margin:0 15px 5px 0;}
+.side_et_list .cover img {width:55px; border:1px solid #ddd;}
+.side_et_list .cover a:hover img {border-color:#aaa;}
+.side_et_list .title {width:95px; height:55px; overflow:hidden;}
+.side_et_list .title a {color:#444;font-size:11px; line-height: 1.3em;}
+.side_et_list .title a span {display:block; color: #6e6e6e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; font-weight:bold;}
+.box_detail_result_et {width:705px; border-top:1px solid #dadada;padding:20px; position:relative;}
+.box_detail_result_et .list_button_wrap {position:absolute; right:18px; top:0;}
+.box_detail_result_et .table_style12 .book_image {margin-left:0;}
+.box_detail_result_et .table_style12 .book_image span.category {display:block; width:72px; padding-bottom:4px; text-align:center; font-size:11px; font-weight:bold; color:#747474;}
+.box_detail_result_et .table_style12 .book_title {margin:27px 0 0 0;}
+.box_detail_result_et .table_style12 .book_title span.category02 {font-weight:bold; color:#9caabf;}
+.box_detail_result_et .table_style12 .book_title dd .seperation {color:#a2a2a2;}
+
+/* 이 책의 이벤트 15-09-25 */
+.list_detail_event02 {*zoom:1;}
+.list_detail_event02:after {content:'';display:block;clear:both;}
+.list_detail_event02 li {margin-top:20px;color:#555; width:46%; height:100px; float:left; margin-right:2%;}
+.list_detail_event02 .banner {width:165px;height:100px;float:left;margin-right:20px;}
+.list_detail_event02 .banner img {width:163px;max-height:98px;border:1px solid #dadada;}
+.list_detail_event02 .banner a:hover img {border-color:#aaa;}
+.list_detail_event02 .title {padding-top:5px; max-height:55px;line-height:18px;overflow:hidden;}
+.list_detail_event02 .title a {color:#555;}
+/*.list_detail_event02 .summary {margin-top:5px;height:40px;line-height:20px;overflow:hidden;}*/
+.list_detail_event02 .date {margin-top:15px;}
+
+/* 이 상품의 꾸러미 15-10-01 */
+.box_detail_package .block_detail_package {position:relative; width:890px; min-height:212px; margin-left:10px; padding:0 0 10px 30px;}
+.box_detail_package .block_detail_package.overflow {border-top:1px solid #eee;}
+.box_detail_package .block_detail_package .btn_prev,
+.box_detail_package .block_detail_package .btn_next {top:84px;}
+.box_detail_package .block_detail_package .btn_prev {left:10px;}
+.box_detail_package .block_detail_package .btn_next {left:608px;}
+.box_detail_package .block_detail_package ul.list_detail_package,
+.box_detail_package .block_detail_package ul.list_detail_package li:first-child {padding-left:0;}
+.box_detail_package .btn_list_more {border-top:1px solid #dadada;text-align:center;margin-top:20px;}
+.box_detail_package .btn_list_more .btn_open {width:43px;height:11px;border:none;padding:0;background:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_more.gif') no-repeat;overflow:hidden;line-height:0;font-size:0;color:transparent;cursor:pointer;}
+.box_detail_package .btn_list_more .btn_close {background-image:url('http://image.kyobobook.co.kr/ink/images/common/btn_list_less.gif');}
+
+/* 바로드림 레이어 추가 15-10-14 */
+.popup_load2 {position:relative;}
+span.popup_load2 {display:inline-block; *margin-right:4px;}
+
+/* 구매리뷰 15-11-11 */
+.box_detail_guide {padding:15px 20px;background-color:#f5f5f5;margin-top:20px;}
+
+/* 16-09-07 제본형태 값 볼드처리 */
+.box_detail_point .info .book_bind {font-weight:bold;}
+
+/* 16-10-10 기프트 상품 */
+.gift_list_best {position:relative;width:690px;height:260px;}
+.gift_list_best .event_list {position:absolute;top:0;left:43px;width:690px;height:260px;overflow:hidden;}
+.gift_list_best .event_list ul li {float:left;width:176px;height:260px;margin-right:39px;text-align:center;}
+.gift_list_best .event_list ul li .gift_item {position:relative;}
+.gift_item a {display:block; cursor:pointer;}
+.gift_item a:hover {text-decoration:none;}
+.gift_item a .item_img img {width:174px;height:174px;border:1px solid #d1ccce;}
+.gift_item a .item_tit {display:block;width:174px;height:32px;line-height:16px;text-align:center;margin:15px 0 20px 0;overflow:hidden;}
+.gift_item a .item_price, .gift_item a .item_sale_price, .gift_item a .item_per {font-family:Verdana, Arial, sans-serif; font-size:11px; padding:0 3px;}
+.gift_item a .item_price {color:#a3a3a3; text-decoration:line-through;}
+.gift_item a .item_sale_price {color:#676767; font-weight:bold;}
+.gift_item a .item_per {color:#d1a05d; font-weight:bold; /*font-style:italic;*/}/* 16-10-27 수정 */
+.gift_item .buttons {display:none; position:absolute; left:0; top:135px; background-image:url(http://image.kyobobook.co.kr/ink/images/common/bg_btns.png); background-repeat:no-repeat; background-position:0 0;}
+.gift_item:hover .buttons{display:block;}
+.gift_item .buttons a {float:left;}
+.gift_list_best .btn_prev {position:absolute;top:76px;left:0;background-color:transparent;cursor:pointer;border:0; *margin-right:655px;}
+.gift_list_best .btn_next {position:absolute;top:76px;right:0;background-color:transparent;cursor:pointer;border:0; *margin-left:658px;}
+.btn_more_conts {position:absolute;top:5px;right:0;}
+
+/* 오늘의 책 카드뉴스 */
+.box_detail_card {height:318px;margin-top:20px;}
+.box_detail_card .card_news {float:left;}
+.box_detail_card .tab_detail_card {float:right;width:324px;}
+
+.tab_detail_card {position:relative;height:318px;}
+.tab_detail_card .btn_prev,
+.tab_detail_card .btn_next {position:absolute;left:6px;top:50%;width:40px;height:44px;margin-top:-22px;overflow:hidden;text-indent:-300px;cursor:pointer;background:transparent url('http://image.kyobobook.co.kr/ink/images/welcome/btn_event_nav3.png') no-repeat;border:none;padding:0;display:none;}
+.tab_detail_card .btn_next {left:auto;right:0;background-position:-40px 0;}
+.tab_detail_card .btn_prev:hover {background-position:0 -44px;}
+.tab_detail_card .btn_next:hover {background-position:-40px -44px;}
+.tab_detail_card:hover .btn_prev,
+.tab_detail_card:hover .btn_next {display:block;}
+
+.tab_detail_card li {float:left;width:154px;height:135px;border:1px solid #dadada;border-width:1px 1px 14px;margin:0 0 18px 6px;overflow:hidden;}
+.tab_detail_card li:nth-child(4n-1) {clear:both;}
+.tab_detail_card li.on {border-color:#5e6b9f;width:150px;height:131px;border-width:3px 3px 16px;}
+.tab_detail_card li.on table {margin:-2px;}
+.tab_detail_card li table {width:362px;height:318px;border-collapse:collapse;background-color:#f2efde;-ms-transform:scale(0.425,0.425);-ms-transform-origin:0 0;transform:scale(0.426,0.426);transform-origin:0 0;}
+.tab_detail_card table td {padding:20px;text-align:center;font-size:16px;line-height:1.4;font-family:'Malgun Gothic','Apple SD Neo Gothic','Dotum','Sans-Serif';color:#333;/*text-shadow:1px 1px 4px rgba(0,0,0,0.7);*/}
+.tab_detail_card table img {width:362px;height:318px;}
+
+/* IE6, IE7, IE8 */
+@media \0screen\,screen\9 {
+	.tab_detail_card li table td {zoom:0.426;} /* zoom:0.653; */
+}
+
+/* 이럴 땐 이런 책 */
+.box_detail_aside.thisbook {padding:20px 6px 10px;}
+.box_detail_aside.thisbook .title_detail_aside {padding-left:4px;}
+.box_detail_aside.thisbook h3 {font-size:11px;text-align:center;color:#444;}
+.box_detail_aside.thisbook .thisbook_info {text-align:center;color:#777;margin-top:15px;padding-top:15px;border-top:1px solid #ddd;font-size:11px;line-height:1.3;}
+.box_detail_aside.thisbook .thisbook_info h3 {margin-bottom:5px;}
+.box_detail_aside.thisbook .thisbook_list {margin-top:10px;padding-top:15px;border-top:1px solid #ddd;font-size:11px;}
+.box_detail_aside.thisbook .thisbook_list h3 {margin-bottom:7px;}
+.box_detail_aside.thisbook .thisbook_list ul {}
+.box_detail_aside.thisbook .thisbook_list ul li {border:1px solid #dadada;margin-top:10px;}
+.box_detail_aside.thisbook .thisbook_list ul li:first-child {margin-top:0;}
+.box_detail_aside.thisbook .thisbook_list ul li a {display:block;}
+.box_detail_aside.thisbook .thisbook_list ul li a:hover {color:#777;text-decoration:none;}
+.box_detail_aside.thisbook .thisbook_list ul li a:hover p {text-decoration:underline;}
+.box_detail_aside.thisbook .thisbook_list ul li .item_title {display:block;background:#666 url('http://image.kyobobook.co.kr/ink/images/common/icon_arrow5.gif') no-repeat 174px 
+center;color:#fff;padding:8px 9px 3px;font-weight:normal;}
+.box_detail_aside.thisbook .thisbook_list ul li p {padding:9px 9px 7px;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_1 .item_title {background-color:#5e6b9e;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_2 .item_title {background-color:#dfaa1d;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_3 .item_title {background-color:#5f9943;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_4 .item_title {background-color:#59a1c2;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_5 .item_title {background-color:#96649f;}
+.box_detail_aside.thisbook .thisbook_list ul li.item_6 .item_title {background-color:#cb6b58;}
+
+/* 스토리K */
+.list_detail_story {margin-left:-24px;*zoom:1;}
+.list_detail_story:after {content:'';display:block;clear:both;}
+.list_detail_story li {margin:20px 0;float:left;width:154px;margin-left:24px;;color:#555;*zoom:1;}
+.list_detail_story .thumb {margin-bottom:10px;}
+.list_detail_story .thumb img {width:152px;height:152px;border:1px solid #dadada;}
+.list_detail_story .thumb a:hover img {border-color:#aaa;}
+.list_detail_story .category {font-weight:bold;color:#555;}
+.list_detail_story .category a {color:#555;}
+.list_detail_story .title {padding-top:5px;line-height:16px;height:32px;overflow:hidden;}
+.list_detail_story .title a {color:#555;}
+.list_detail_story .title a strong {font-weight:normal}
+.list_detail_story .info {margin-top:7px;font-size:11px;color:#767676;}
+.list_detail_story .info em {font-style:normal;}
+
+/* 분철서비스 */
+.box_detail_button .file_service {padding:25px 0 5px 0; margin-top:20px; border-top:1px solid #ddd;}
+.box_detail_button .file_service select {padding:2px;background-color:#dde5ff;}/* 17-02-20 background-color add */
+.box_detail_button .file_service label {font-weight:bold;}/* 17-02-20 add */
+
+/* 17-02-02 중고 */
+.used_version {padding: 7px 20px 5px 10px; background-color: #f7f8fa;}
+.used_version span {display:block; line-height:16px;}
+.used_version a.btn_small {display:inline-block;padding:3px 2px 2px; background-color:#fff;}
+
+/* 17-03-28 배너영역 */
+.banner_promo {margin-bottom:35px;}
+
+/* 17-03-29 이책의다른상품 중고 */
+.box_detail_version .used_version a.search_used {display:block;padding:0;background:none;}
+
+/* 17-06-16 이 책의 주제어 */
+.box_detail_content .tag_list{ overflow: hidden; margin-bottom: -10px;}
+.box_detail_content .tag_list a{display:inline-block; height:30px; padding:0 0 0 12px;margin:0 3px 5px 0; background:url('http://image.kyobobook.co.kr/ink/images/thisbook/bg_tags_bg01.gif') no-repeat left top;}
+.box_detail_content .tag_list a:hover {color: #666;}
+.box_detail_content .tag_list a span{display:inline-block;height:30px;padding:0 12px 8px 0;background:url('http://image.kyobobook.co.kr/ink/images/thisbook/bg_tags_bg02.gif') no-repeat right top;}
+.box_detail_content .tag_list a em{display:inline-block;padding:6px 0; font-style:normal;}
+
+/* 17-08-29 선물하기 버튼 추가로 수정 */
+.box_detail_button .button_set .btn_xlarge {padding-left:9px;padding-right:9px;}
+
+/* 17-08-29 통합포인트 */
+.list_detail_price .inkPoint{*zoom:1;}
+.list_detail_price .inkPoint:after {content:'';display:block;clear:both;}
+.list_detail_price .inkPoint .tit_inkPoint {float:left;display:table-cell; vertical-align:top;}
+.list_detail_price .inkPoint .info_inkPoint {float:left; margin-left:3px;}
+.list_detail_price .inkPoint .info_inkPoint .earn_point {display:block; height:21px; margin:0 0 3px 0;}

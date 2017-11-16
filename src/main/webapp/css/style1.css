@@ -1,0 +1,734 @@
+@CHARSET "EUC-KR";
+
+/* ¾ÆÀÌµð Áßº¹È®ÀÎ */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,th,td,p{
+	margin:0 auto;padding:0px;
+}
+body {background:none;}
+iframe {vertical-align:top;}
+.popup_shadow{position:relative;margin:0 0 0 3px;padding:3px 0px 0px 0;width:100%;background:#b2b2b2 url('https://simage.kyobobook.co.kr/ink/images/common/bg_dot_whtie.gif') 0 0 repeat-x;}
+.popup_wrap{position:relative;top:-3px;left:-3px;width:100%;background-color:#fff;}
+.popup_wrap .tit{width:100%; padding-top:10px;background:url('https://simage.kyobobook.co.kr/ink/images/common/bg_tit_pop.gif') repeat-x 0 0;height:23px;}
+.popup_container{position:relative;padding:20px;border:7px solid #545454;border-top:none;}
+form {
+    line-height: 1.2em!important;
+}
+.popup_graybox {
+    background-color: #f7f7f7;
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+}
+.popup_message2 {
+    line-height: 18px;
+    color: #555;
+    text-align: center;
+}
+.padding_top10 {
+    padding-top: 10px !important;
+}
+.btn_clear {
+    clear: both;
+    height: 21px;
+    padding-top: 20px;
+    text-align: center;
+}
+img {
+    border: none;
+}
+img {
+    vertical-align: top;
+}
+a:visited {
+    color: #4d4d4d;
+    text-decoration: none;
+}
+a:link {
+    color: #4d4d4d;
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: #666666;
+}
+.close_btn {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+}
+
+
+/* È¸¿ø°¡ÀÔ Æû */
+
+#container {
+    width: 950px;
+    min-height: 500px;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+    line-height: 1.2em;
+}
+form {
+    line-height: 1.2em!important;
+}
+
+select, input {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+}
+label, input, select {
+    vertical-align: middle;
+}
+select, input {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+}
+.path {
+    height: 29px;
+    margin-bottom: 15px;
+    padding: 2px 0 0px;
+    font-size: 12px;
+    line-height: 15px;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    white-space: pre;
+    overflow: hidden;
+}
+element.style {
+    background-color: white;
+}
+.h2_member {
+    height: 21px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #565656;
+    line-height: 0;
+    font-size: 0;
+}
+.h2_member img {
+    margin-left: 4px;
+}
+#container .member_content {
+    width: 100%;
+    margin-top: 40px;
+}
+.member_content .member_box {
+    margin-top: 2px;
+    padding: 15px 29px 50px 29px;
+    border: 1px solid #dbdbdb;
+}
+.member_content .member_box:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.bul_green02 {
+    height: 16px;
+    line-height: 16px;
+    margin-bottom: 15px;
+    padding-left: 16px;
+    background: url(https://simage.kyobobook.co.kr/ink/images/common/bul_green.gif) 0 2px no-repeat;
+    font-size: 14px;
+    color: #222;
+    vertical-align: middle;
+}
+.font_11 {
+    font-size: 11px !important;
+}
+.margin_top5 {
+    margin-top: 5px !important;
+}
+.margin_top15 {
+    margin-top: 15px !important;
+}
+.h4_member {
+    line-height: 16px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    overflow: hidden;
+    vertical-align: middle;
+    color: #555;
+}
+.table_style01 {
+    width: 100%;
+    border-top: 1px solid #99bddd;
+    border-bottom: 1px solid #99bddd;
+    font-size: 11px;
+    table-layout: fixed;
+}
+
+address, caption, cite, code, dfn, var {
+    font-style: normal;
+    font-weight: normal;
+}
+.table_style01 {
+    width: 100%;
+    border-top: 1px solid #99bddd;
+    border-bottom: 1px solid #99bddd;
+    font-size: 11px;
+    table-layout: fixed;
+}
+.border_none {
+    border: none !important;
+}
+.table_style01 .border_none th, .table_style01 .border_none td {
+    border-top: none;
+}
+.table_style01 th {
+    padding: 10px 0 10px;
+    background: #f8f8f8;
+    color: #1770b5;
+    text-align: left;
+    border-top: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    vertical-align: middle;
+    text-indent: 20px;
+}
+.table_style01 .font12 {
+    font-size: 12px;
+}
+.table_style01 td {
+    padding: 4px 0 4px 10px;
+    border-top: 1px solid #e4e4e4;
+    color: #666;
+}
+.table_style01 td {
+    line-height: 16px;
+}
+select, input {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+}
+.table_style01 .line_height22 {
+    line-height: 22px;
+}
+.input_style10 {
+    height: 19px;
+    border: 1px solid #c6c6c6;
+    width: 124px;
+    line-height: 19px;
+}
+.btn_small3 {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #555;
+    border-radius: 2px;
+    padding: 4px 6px 0;
+    height: 13px;
+    background-color: #717171;
+    font: 11px/13px dotum,sans-serif !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-indent: 0;
+}
+.btn_small3 {
+    padding: 2px 6px 2px;
+}
+.table_style01 th {
+    padding: 10px 0 10px;
+    background: #f8f8f8;
+    color: #1770b5;
+    text-align: left;
+    border-top: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    vertical-align: middle;
+    text-indent: 20px;
+}
+.table_style01 th {
+    padding: 10px 0 10px;
+    background: #f8f8f8;
+    color: #1770b5;
+    text-align: left;
+    border-top: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    vertical-align: middle;
+    text-indent: 20px;
+}
+.input_style {
+    height: 19px;
+    border: 1px solid #c6c6c6;
+    line-height: 19px;
+}
+label, input, select {
+    vertical-align: middle;
+}
+select {
+    margin: 0;
+}
+table.table_simple5 {
+    border-collapse: collapse;
+}
+ol, ul {
+    list-style: none;
+}
+.margin_top10 {
+    margin-top: 10px !important;
+}
+.margin_top20 {
+    margin-top: 20px !important;
+}
+.h4_member02 {
+    line-height: 16px;
+    margin: 20px 0 6px;
+    font-size: 12px;
+    overflow: hidden;
+    vertical-align: middle;
+    color: #555;
+}
+.btn_area {
+    margin-top: 10px;
+    text-align: right;
+}
+.member_content .member_box:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+ 
+html{background:none !important;}
+#footer{margin-top:70px;background:#f5f5f5 url('http://image.kyobobook.co.kr/ink/images/common/bg_footer3.gif') 0 0 repeat-x;*position:relative;}
+#footer .footer_con:after{content:'';display:block;clear:both;}
+#footer .footer_con .logo_area{clear:both;padding-top:21px;}
+#footer .footer_con .shortcut_list {float:right;width:150px;height:44px;}
+#footer .footer_con .shortcut_list .btn_open {padding-top:15px;padding-bottom:13px;border:1px solid #6d6d6d;background:#6d6d6d url('https://simage.kyobobook.co.kr/ink/images/common/arr_shortcut2.png') no-repeat right 0;color:#fff;font-weight:bold;padding-right:27px;text-align:center;text-transform:uppercase;}
+#footer .footer_con .shortcut_list ul {bottom:43px;}
+#footer .footer_con .shortcut_open .btn_open {background-position:right -44px;}
+#footer .footer_con .member_area{float:left;height:44px;width:800px;background-color:#8b8b8b;line-height:15px;}
+#footer .footer_con .member_area li{float:left;padding:16px 14px 0 15px;height:28px;text-align:center;background:url('https://simage.kyobobook.co.kr/ink/images/common/line_footer.gif') no-repeat left center;}
+#footer .footer_con .member_area li:first-child {background-image:none;padding-left:14px;}
+#footer .footer_con .member_area a {text-decoration:none;color:#f1f0f0;}
+#footer .footer_con .member_area a:hover {text-decoration:underline;color:#fff;}
+#footer .footer_con .click_footer{float:left;width:460px;margin:18px 0 0 0;}
+#footer .footer_con .click_footer address{font-size:11px;line-height:18px;}
+#footer .footer_con .click_footer address a{text-decoration:underline;color:#666;}
+#footer .footer_con .click_footer address a:hover {text-decoration:underline;color:#3c5fe1;}
+#footer .footer_con .click_footer address .copy {margin-top:10px;}
+#footer .footer_con .lg_area{float:right;width:460px;font-size:11px;line-height:18px;margin:18px 0 0 20px;}
+#footer .footer_con .lg_area p {font-size:11px;line-height:18px;color:#666;}
+#footer .footer_con .lg_area a:link {text-decoration:underline;color:#666;}
+#footer .footer_con .lg_area a:hover {text-decoration:underline;color:#3c5fe1;}
+#footer .footer_con .mark_isms{float:right;width:460px;margin-top:10px;}
+#footer .footer_con .mark_isms a{display:inline-block;padding:10px 0 0 52px;height:38px;font-size:11px;line-height:15px;color:#666;background:url('https://simage.kyobobook.co.kr/ink/images/common/mark_isms.png') no-repeat 0 0;}
+
+/* ±âÇÁÆ® */
+#footer .footer_con .click_footer address {float:none;padding-left:0;}
+/* PubPle */
+#footer {height:auto;}
+
+iframe {
+    vertical-align: top;
+}
+.popup_shadow {
+    position: relative;
+    margin: 0 0 0 3px;
+    padding: 3px 0px 0px 0;
+    width: 100%;
+    background: #b2b2b2 url(https://simage.kyobobook.co.kr/ink/images/common/bg_dot_whtie.gif) 0 0 repeat-x;
+}
+
+.popup_wrap {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    background-color: #fff;
+}
+.popup_wrap .tit {
+    width: 100%;
+    padding-top: 10px;
+    background: url(https://simage.kyobobook.co.kr/ink/images/common/bg_tit_pop.gif) repeat-x 0 0;
+    height: 23px;
+}
+.popup_container {
+    position: relative;
+    padding: 20px;
+    border: 7px solid #545454;
+    border-top: none;
+}
+.popup_message2 {
+    line-height: 18px;
+    color: #555;
+    text-align: center;
+}
+.padding_top10 {
+    padding-top: 10px !important;
+}
+.btn_clear {
+    clear: both;
+    height: 21px;
+    padding-top: 20px;
+    text-align: center;
+}
+.close_btn {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+}
+.title_h_cartlist {
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 15px;
+}
+.font_bule, .font_blue {
+    color: #3366cc !important;
+}
+
+.font_11 {
+    font-size: 11px !important;
+}
+.font_bule, .font_blue {
+    color: #3366cc !important;
+}
+body {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+    line-height: 1.2em;
+}
+body {
+    background: none;
+}
+.popup_shadow {
+    position: relative;
+    margin: 0 0 0 3px;
+    padding: 3px 0px 0px 0;
+    width: 100%;
+    background: #b2b2b2 url(https://simage.kyobobook.co.kr/ink/images/common/bg_dot_whtie.gif) 0 0 repeat-x;
+}
+
+.popup_wrap {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    background-color: #fff;
+}
+.popup_wrap .tit {
+    width: 100%;
+    padding-top: 10px;
+    background: url(https://simage.kyobobook.co.kr/ink/images/common/bg_tit_pop.gif) repeat-x 0 0;
+    height: 23px;
+}
+
+.popup_container {
+    position: relative;
+    padding: 20px;
+    border: 7px solid #545454;
+    border-top: none;
+}
+.popup_wrap {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    background-color: #fff;
+}
+a {
+    text-decoration: none;
+    color: #666;
+}
+.close_btn {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+}
+.member_content {
+
+    text-align: left;
+    padding: 0 auto;
+    margin: 0 10%;
+    width: 1000px;
+
+}
+
+body {
+	width: 1000px;
+    	margin: 0 auto;
+    	padding: 0;
+   	 height: auto;
+}
+.junho2 {
+	    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+}
+.junho3{
+	resize: none;
+}
+.box_login_d3 .input-login1 {
+}	
+.box_login_d3 .input-login1 {
+    min-height: 172px;
+}
+
+box_login_inner .on2 {
+    /* padding-top: 10px; */
+    padding: 13px 19px 8px;
+    border: 2px solid #8fc8f1;
+    background-color: #FBFBFB;
+}
+.input-login1 {
+    position: relative;
+    width: 290px;   
+}
+.box_login_inner {
+    height: 300px;
+    font-size: 11px;
+}
+label, input, select {
+    vertical-align: middle;
+}
+select, input {
+    font-size: 12px;
+    font-family: dotum, sans-serif;
+    color: #666;
+}
+.input-login1 .title {
+    border-bottom: 1px solid #99bddd;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -1px;
+}
+.box_login_d3 a {
+    transition: border-color 0.2s linear;
+}
+a {
+    text-decoration: none;
+    color: #666;
+}
+.input-login1 .title {
+    border-bottom: 1px solid #99bddd;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -1px;
+}
+img {
+    vertical-align: top;
+}
+.input-login1 .title img {
+    margin-right: 5px;
+}
+fieldset, img, abbr, acronym {
+    border: none;
+}
+
+.input-login_sns1 {
+    border: 2px solid #319bef;
+    background-color: #fff;
+    position: absolute;
+    left: 205px;
+    top: 33px;
+    z-index: 100;
+    width: 240px;
+    font-size: 12px;
+    padding: 18px 8px 8px 17px;
+    line-height: 16px;
+    letter-spacing: -1px;
+}
+.box_login_d3 .login_zone {
+    min-height: 99px;
+}
+.box_login_d3 .input-login1 .login_bottom .btn_join {
+    float: right;
+    display: inline-block;
+    min-height: 25px;
+    padding: 9px 9px 0;
+    min-width: 149px;
+    text-align: center;
+    border: 1px solid #4f4e4e;
+    background-color: #666;
+    color: #fff;
+    font-size: 13px;
+    font-family: '¸¼Àº °íµñ','Malgun Gothic',Sans-serif;
+}
+.box_login_d3 a {
+    transition: border-color 0.2s linear;
+}
+.box_login_d3 .input-login1 .login_bottom:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.box_login_d3 .input-login1 .placeholder {
+    float: left;
+    position: relative;
+    background-color: #fff;
+    margin-right: 6px;
+    margin-bottom: 3px;
+}
+.input-login1 p {
+    padding-bottom: 3px;
+    _width: 290px;
+    min-height: 20px;
+    _height: 20px;
+}
+.box_login_d3 .input-login1 #login_zone1 .label_login {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+}
+.input-login1 .label_login {
+    float: left;
+    width: 67px;
+    _width: 64px;
+    margin-top: 3px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #1c74bc;
+}
+.box_login_d3 .input-login1 .placeholder .input_login {
+    transition: border-color 0.2s linear, box-shadow 0.2s linear;
+}
+.box_login_d3 .input-login1 .placeholder .input_login {
+    position: relative;
+    z-index: 10;
+    background: transparent url(https://simage.kyobobook.co.kr/ink/images/welcome/blank.gif);
+    margin-right: 0;
+    height: 19px;
+    line-height: 19px;
+}
+.box_login_d3 input.text {
+    font-size: 1em;
+    height: 1em;
+    line-height: 1;
+    padding: 4px 4px 3px;
+    color: #666;
+    border: 1px solid #c2c2c2;
+}
+.input-login1 .input_login {
+    float: left;
+    margin-right: 10px;
+}
+.box_login_d3 .input-login1 .placeholder em {
+    position: absolute;
+    z-index: 9;
+    left: 8px;
+    top: 10px;
+    font-style: normal;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: -0.05em;
+    color: #b7b7b7;
+    pointer-events: none;
+}
+.input-login1 p:after {
+    content: ".";
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+.box_login_d3 .input-login1 #login_zone1 .label_login {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+}
+.input-login1 .label_login {
+    float: left;
+    width: 67px;
+    _width: 64px;
+    margin-top: 3px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #1c74bc;
+}
+.box_login_d3 .input-login1 .placeholder .input_login {
+    transition: border-color 0.2s linear, box-shadow 0.2s linear;
+}
+.box_login_d3 input.text {
+    font-size: 1em;
+    height: 1em;
+    line-height: 1;
+    padding: 4px 4px 3px;
+    color: #666;
+    border: 1px solid #c2c2c2;
+}
+.box_login_d3 .input-login1 .btn_submit {
+    float: left;
+    margin-top: -34px;
+    width: 66px;
+    height: 62px;
+    border: 1px solid #0362ad;
+    background-color: #0277d3;
+    color: #fff;
+    font-size: 14px;
+    font-family: '¸¼Àº °íµñ','Malgun Gothic',Sans-serif;
+}
+.btn_blue5:hover {
+    border-color: #052a50;
+}
+.btn_blue5:hover {
+    border-color: #052a50;
+}
+.btn_blue5 {
+    background-image: none;
+    background-color: #1776c8 !important;
+    border: 1px solid #0c60a8;
+    color: #fff !important;
+    box-shadow: none;
+}
+.btn_medium:hover {
+    border-color: #777;
+    text-decoration: none;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.15);
+}
+
+.btn_medium {
+    padding: 6px 8px 1px;
+}
+.btn_blue5 {
+    background-image: none;
+    background-color: #1776c8 !important;
+    border: 1px solid #0c60a8;
+    color: #fff !important;
+    box-shadow: none;
+}
+.btn_medium {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid #aaa;
+    padding: 7px 8px 0;
+    height: 18px;
+    font-size: 12px !important;
+    line-height: 15px;
+    font-weight: bold;
+    font-family: 'dotum',sans-serif;
+    color: #000000 !important;
+    text-decoration: none !important;
+    background-color: #fff;
+    text-align: center;
+    transition: all .2s;
+}
+.btn_clear {
+    clear: both;
+    height: 21px;
+    padding-top: 20px;
+    text-align: center;
+}
+.btn_medium {
+    padding: 6px 8px 1px;
+}

@@ -1,0 +1,142 @@
+body {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+	line-height: 1.2em;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form,
+	fieldset, input, textarea, blockquote, th, td, p {
+	margin: 0px;
+	padding: 0px;
+}
+
+fieldset, img, abbr, acronym {
+	border: none;
+}
+
+address, caption, cite, code, dfn, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+caption {
+	visibility: hidden;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	text-indent: -9999px;
+}
+
+legend {
+	visibility: hidden;
+	position: absolute;
+	top: -9999em;
+	left: -9999em;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	color: #666;
+	text-decoration: none;
+}
+
+hr {
+	display: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+label, input, select {
+	vertical-align: middle;
+}
+
+select, input {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+}
+
+textarea {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+}
+
+select {
+	margin: 0;
+}
+
+form {
+	line-height: 1.2em !important;
+}
+
+/* 공통값 */
+/* .png24 {tmp:expression(setPng24(this))} 20140616 IE6 대응함수 지원 중단 */
+.clear {
+	*zoom: 1;
+}
+
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.checkbox {
+	vertical-align: -3px;
+}
+
+* html .checkbox {
+	margin: -4px -4px 0 -4px;
+}
+
+*+html .checkbox {
+	margin: -4px -4px 0 -4px;
+}
+
+.checkbox02 {
+	margin-top: 3px;
+}
+
+.list_book03 .book_list li .checkbox03 {
+	position: absolute;
+	left: -25px;
+	bottom: 10px;
+}
+
+* html .checkbox02 {
+	margin-top: -2px;
+}
+
+*+html .checkbox02 {
+	margin-top: -1px;
+}
+
+.radio {
+	vertical-align: -2px;
+}
+
+* html .radio {
+	margin: -4px -4px 0 -4px;
+}
+
+*+html .radio {
+	margin: -4px -4px 0 -4px;
+}

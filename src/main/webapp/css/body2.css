@@ -1,0 +1,88 @@
+body {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+	line-height: 1.2em;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form,
+	fieldset, input, textarea, blockquote, th, td, p {
+	margin: 0px;
+	padding: 0px;
+}
+
+fieldset, img, abbr, acronym {
+	border: none;
+}
+
+address, caption, cite, code, dfn, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+caption {
+	visibility: hidden;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	text-indent: -9999px;
+}
+
+legend {
+	visibility: hidden;
+	position: absolute;
+	top: -9999em;
+	left: -9999em;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	color: #666;
+	text-decoration: none;
+}
+
+hr {
+	display: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+label, input, select {
+	vertical-align: middle;
+}
+
+select, input {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+}
+
+textarea {
+	font-size: 12px;
+	font-family: dotum;
+	color: #666;
+}
+
+select {
+	margin: 0;
+}
+
+form {
+	line-height: 1.2em !important;
+}

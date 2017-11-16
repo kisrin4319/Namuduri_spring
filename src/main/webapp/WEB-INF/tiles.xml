@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="main" template = "/WEB-INF/views/tiles/layout1.jsp">
+		<put-attribute name="title" value = "Namuduri" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/mainheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body2.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+
+	<definition name="main2" template="/WEB-INF/views/tiles/layout2.jsp">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body3.jsp" />
+		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+
+	<definition name="member" template="/WEB-INF/views/tiles/layout1.jsp">
+		<put-attribute name="title" value="회원" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body2.jsp" />
+		<put-attribute name="lefter" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+
+	<definition name="mypage1" template="/WEB-INF/views/tiles/layout2.jsp">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/mainheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp" />
+		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- ========================ORDER======================== -->
+
+	<!-- 도서 바로구매 상세 -->
+	<definition name="multipleOrder" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/order/multipleOrder.jsp" />
+	</definition> 
+	<!-- 개인 바로구매 상세 -->
+	<definition name="singleOrder" extends="main">
+		<put-attribute name="body" value ="/WEB-INF/views/order/singleOrder.jsp" />
+	</definition>
+	<!-- 주문완료 -->
+	<definition name="basketorderComplete" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderComplete.jsp" />
+	</definition>
+	
+	<definition name="listOrderComplete" extends="main">
+		<put-attribute name="body" value ="/WEB-INF/views/order/orderComplete2.jsp"/>
+	</definition>
+
+	<!-- 주문 취소 -->
+	<definition name="orderCancel1" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderCancel.jsp" />
+	</definition>
+	
+	<!-- 주문/배송조회 -->
+	<definition name="orderListCheck1" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderListCheck.jsp" />
+	</definition>
+	
+	<definition name="orderDetail" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderDetail.jsp"/>
+	</definition>
+	
+	<!-- ========================QnA======================== -->
+	
+	<!-- qna게시판 리스트 -->
+	<definition name="qnaList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/qnaList.jsp" />
+	</definition>
+
+	<!-- ========================MEMBER======================== -->
+
+	<!-- 로그인 -->
+	<definition name="loginForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+	</definition>
+
+	<!-- 회원가입 -->
+	<definition name="memberInfo" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberInfo.jsp" />
+	</definition>
+	
+	<!-- 정보수정 -->
+	<definition name="memberModify" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp" />
+	</definition>
+	
+	<definition name="ModifySuccess" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberModifySuccess.jsp" />
+	</definition>	
+
+	<!-- 회원 탈퇴1 -->
+	 <definition name="memberDelete1" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp" />
+	 </definition>
+	 
+	 <definition name="deleteMember" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberDeleteSuccess.jsp" />
+	 </definition>
+	 
+	 <!-- 아이디 찾기 -->
+	<definition name="memberIdFind" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/memberfind/findIdForm.jsp" />
+	</definition>
+	
+	<definition name="findId" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/memberfind/findIdForm.jsp" />
+	</definition>
+
+	<!-- 비밀번호 찾기 -->
+	<definition name="memberPwFind" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
+	</definition>
+	
+	<definition name="findPw" extends="mypage1">
+		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
+	</definition>
+		
+	<!-- 관리자 회원관리 리스트 -->
+	<definition name="adminMemberList" extends="adminmain">
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/memberList.jsp" />
+	</definition>
+
+	<!-- 관리자 회원관리 자세히보기 -->
+	<definition name="adminMemberviews" extends="adminmain">
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/memberviews.jsp" />
+	</definition>
+	
+	<!-- 관리자 회원 수정 -->
+	<definition name="adminMemberModify" extends="adminmain">
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/modifyMember.jsp" />
+	</definition>
+
+	<!-- ========================BOARD======================== -->
+	<!-- 질문답변 게시판 -->
+	<!-- 질문답변 게시판 리스트 -->
+	<definition name="boardList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
+	</definition> 
+
+	<!-- 질문답변 게시판 글쓰기 -->
+	<definition name="boardWrite" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardWrite.jsp" />
+	</definition>
+
+	<!-- 게시판 글 읽기 -->
+	<definition name="boardviews" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardviews.jsp" />
+	</definition>
+	
+	<!-- 게시판 비밀번호 체크 -->
+	<definition name="PasswdCheckForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/passwordCheck.jsp" />
+	</definition>
+
+	<!-- 질문답변 게시판 답변글쓰기 -->
+	<definition name="replyForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardWrite.jsp" />
+	</definition>
+
+	<!-- 질문답변 게시판 수정 -->
+	<definition name="modifyForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardWrite.jsp" />
+	</definition>
+
+	<!-- 질문답변 게시판 삭제 -->
+	<definition name="deleteAction" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
+	</definition>
+	
+	<definition name="boardType" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardvviews.jsp" />
+	</definition>
+
+	<!-- ========================BASKET======================== -->
+	 <definition name="basketList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/basket/basketList.jsp" />
+	</definition>
+
+	<!-- ========================BOOK======================== -->
+	
+	<!-- 상품(책)리스트 -->
+	<definition name="booksList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/book/booksList.jsp" />
+	</definition>
+
+	<!-- 상품(책) 상세 페이지 -->
+	<definition name="bookDetail" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/book/bookDetail.jsp" />
+	</definition>
+	
+	<!-- ================================================== -->
+
+	<!-- Admin 페이지 -->
+	<definition name="admin" template="/WEB-INF/views/tiles/layout3.jsp">
+		<put-attribute name="title" value="관리자페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader2.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminviews.jsp" />
+	</definition>
+	
+	<definition name="adminmain" extends="admin">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader.jsp" />
+	</definition>
+	
+	<!-- ========================관리자 회원관리 페이지======================== -->
+	
+	<!-- 관리자 회원관리 리스트 -->
+	<definition name="adminMemberList" extends="admin">
+		<put-attribute name="title" value="관리자 : 회원 정보 관리" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
+	</definition>
+
+	<!-- 관리자 회원관리 자세히보기 -->
+	<definition name="adminMemberviews" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberviews.jsp" />
+	</definition>
+	
+	<!-- 관리자 회원 수정 -->
+	<definition name="adminMemberModify" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminModifyMember.jsp" />
+	</definition>
+	
+	<!-- ========================관리자 상품관리 페이지======================== -->
+	
+	<!-- 관리자 상품 리스트 -->
+	<definition name="adminTextbookList" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookList.jsp" />
+	</definition>
+	<!-- 관리자 상품(책)상세 페이지 -->
+	<definition name="adminTextbookDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookDetail.jsp" />
+	</definition>
+	<!-- 관리자 상품 등록 페이지 -->
+	<definition name="adminTextbookWrite" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookWrite.jsp" />
+	</definition>
+
+
+	<!-- =======================관리자 주문관리 페이지====================== -->
+	
+	<!-- 관리자 상품 주문 리스트 -->
+	<definition name="adminOrderList" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderList.jsp" />
+	</definition>
+
+	<!-- 관리자 상품 정보 조회 -->
+	<definition name="adminOrderDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderDetail.jsp" />
+	</definition>
+</tiles-definitions>

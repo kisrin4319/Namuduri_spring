@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC " - //mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	
+	<!-- Member -->
+	<typeAlias type="com.spring.member.MemberModel" alias="MemberModel" />
+	<typeAlias type="com.spring.member.ZipcodeModel" alias="ZipcodeModel"/>
+	
+	<!-- Admin -->
+	
+	
+	
+	<!-- Basket -->	
+	<typeAlias type="com.spring.basket.BasketModel" alias="BasketModel" />
+	
+	<!-- Book -->	
+	<typeAlias type="com.spring.book.BooksModel" alias="BooksModel" />
+	<typeAlias type="com.spring.book.ReviewModel" alias="ReviewModel" />
+	
+	<!-- Order -->
+	<typeAlias type="com.spring.order.OrderModel" alias="OrderModel" />
+	<typeAlias type="com.spring.order.OrderDetailModel" alias="OrderDetailModel" />
+	
+	<!-- Board -->
+	<typeAlias type="com.spring.board.BoardModel" alias="BoardModel"/>
+	
+	
+	</typeAliases>
+	
+	<mappers>	
+		<mapper resource="com/spring/config/memberSQL.xml" />
+		<mapper resource="com/spring/config/mypageSQL.xml"/>
+		<mapper resource="com/spring/config/basketSQL.xml" />
+		<mapper resource="com/spring/config/bookSQL.xml" />
+ 		<mapper resource="com/spring/config/orderSQL.xml" />
+ 		<mapper resource="com/spring/config/boardSQL.xml" />
+	</mappers>
+</configuration>
