@@ -16,7 +16,7 @@ public class MemberService implements MemberDao{
 	//로그인 처리
 	@Override
 	public MemberModel loginCheck(MemberModel memberModel) {
-		return sqlSessionTemplate.selectOne("member.loginForm", memberModel);
+		return sqlSessionTemplate.selectOne("member.loginCheck", memberModel);
 	}
 	
 	//우편번호 검색
@@ -29,6 +29,12 @@ public class MemberService implements MemberDao{
 	@Override
 	public Object insertMember(MemberModel memberModel) {
 		return sqlSessionTemplate.insert("member.memberInfo", memberModel);
+	}
+	
+	//아이디 중복확인
+	@Override
+	public MemberModel idCheck(String idChk) {
+		return sqlSessionTemplate.selectOne("member.idCheck", idChk);
 	}
 	
 	

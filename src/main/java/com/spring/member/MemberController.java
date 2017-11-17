@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,6 +26,7 @@ public class MemberController {
 	
 	ModelAndView mv;
 	String session_id;
+	String member_id;
 	
 	//로그인 폼
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.GET)
@@ -34,10 +36,13 @@ public class MemberController {
 	
 	//로그인 처리
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.POST)
-	public ModelAndView loginCheck(HttpServletRequest request, MemberModel membermodel) {
+	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request, MemberModel membermodel) {
 		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
+		
+		memberModel.setMember_id(member_id);
+		memberModel.setMember_pw(member_pw);
 		
 		MemberModel result = memberService.loginCheck(memberModel);
 		
@@ -51,14 +56,14 @@ public class MemberController {
 			session.setAttribute("session_member_pw", result.getMember_pw());
 			
 			mv.setViewName("main");
+			return mv;
 		} else {
 			//로그인 실패
-			mv.setViewName("member/loginForm");
+			mv.setViewName("loginForm");
 			return mv;
 			
 		}
 		
-		return mv;
 	}
 	
 	//로그아웃
@@ -85,17 +90,32 @@ public class MemberController {
 	}
 	
 	//우편번호 검색
-	@RequestMapping(value="/member/zipCheck.do", method=RequestMethod.POST)
-	public ModelAndView zipCheck(HttpServletRequest request) {
+	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.POST)
+	public ModelAndView zipCheck(@ModelAttribute ZipcodeModel zipcodeModel, HttpServletRequest request) throws Exception{
 		
 		mv = new ModelAndView();
-		String zip;
-		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
-		zip = request.getParameter("zip");
 		
-		if(zip != null) {
-			zipcodeList = memberService.zipCheck(zip);
-			mv.addObject("zip", zip);
+		String area3;
+		/*int zipChk=100;*/
+		
+		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
+		area3 = request.getParameter("area3");
+		
+		mv.addObject("zipcodeList", zipcodeList);
+		
+		/*zipcodeList = memberService.zipCheck(zip);
+		if(zipcodeList.size() == 0) {
+			zipChk = 0;
+		} else {
+			zipChk = 1;
+		}
+		mv.addObject("zipChk",zipChk);
+		mv.setViewName("member/zipCheck");
+		return mv;*/
+		
+		if(area3 != null) {
+			zipcodeList = memberService.zipCheck(area3);
+			mv.addObject("area3", area3);
 			mv.addObject("zipcodeList", zipcodeList);
 		}
 		
@@ -103,16 +123,21 @@ public class MemberController {
 		return mv;
 	}
 	
+	// MemberModel초기화
+	@ModelAttribute("member")
+	public MemberModel formBack() {
+		return new MemberModel();
+	}
 	//회원가입 폼
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.GET)
 	public ModelAndView memberJoin() {
 		
 		mv = new ModelAndView();
 		
-		mv.setViewName("member/memberInfo");
+		mv.setViewName("memberInfo");
 		return mv;
 	}
-	
+	//회원가입
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.POST)
 	public ModelAndView memberJoin2(@ModelAttribute("member") MemberModel memberModel, BindingResult result) {
 		
@@ -130,10 +155,26 @@ public class MemberController {
 			memberService.insertMember(memberModel);
 			
 			mv.addObject("memberModel", memberModel);
-			mv.setViewName("member/loginForm");
+			mv.setViewName("loginForm");
 			return mv;	
 		}
 		
+	}
+	//아이디 중복확인
+	@RequestMapping("/member/idCheck.do")
+	public ModelAndView idCheck(HttpServletRequest request) {
+		
+		mv= new ModelAndView();
+		
+		String member_id = request.getParameter("member_id");
+		MemberModel memberModel = new MemberModel();
+		memberModel = memberService.idCheck(member_id);
+		
+		mv.addObject("member_id", member_id);
+		mv.addObject("memberModel", memberModel);
+		mv.setViewName("member/idCheck");
+		
+		return mv;
 	}
 	
 }

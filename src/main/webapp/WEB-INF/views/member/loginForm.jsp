@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<% String cp = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ page session="true" %>
@@ -11,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>로그인폼</title>
-<link rel = "stylesheet" href ="css/style1.css?ver=1" type="text/css" />
+<link href="<%=cp %>/css/style1.css"  rel="stylesheet" type="text/css" />
 <script>
 
 function check(){
@@ -62,7 +63,7 @@ function openConfirmPw(loginform){
 			<table border="0" cellpadding="0" cellspacing="0" width="500" align="center" style="margin-left: 160px;">
 				
 				<tr>
-					<form action="Login.do" method="post" name="login" onsubmit="return check()">
+					<form action="loginForm.do" method="post" name="login" onsubmit="return check()">
 						<td>
 							<br>
 							<br>
