@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String cp = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입 폼</title>
-<link rel = "stylesheet" href ="css/style1.css?ver=1" type="text/css" />
+<link href="<%=cp %>/css/style1.css"  rel="stylesheet" type="text/css" />
 <script language="javascript">
 function check() {
    var f = document.memberInfo;
@@ -77,14 +79,14 @@ function openIdCheck(){
       member_id.focus();
       return false;
    }
-   var idUrl = 'http://localhost:8080/namuduri/idCheck.do?member_id='+ id;
+   var idUrl = 'http://localhost:8080/namuduri/member/idCheck.do?member_id='+ id;
    window.open(idUrl,"confirm", "toolbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=353, height=186");
    
 }
 
 function openZipCheck() {   
    
-   var zipUrl = 'http://localhost:8080/namuduri/zipCheck.do';
+   var zipUrl = 'http://localhost:8080/namuduri/member/zipCheckForm.do';
    window.open(
          zipUrl,
          "confirm",
@@ -607,9 +609,9 @@ KH는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 �
             
                   <tr>
                      <td colspan="2" align="center"><br><br>
-                        <a href ="javascript: check();"><img src="member/images/btn_ok.gif" value="회원가입" class="button"/></a>
+                        <a href ="javascript: check();"><img src="<%=cp %>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
                            &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href = "javascript:window.location='loginForm.do';"><img src="member/images/btn_cancel.gif" value="가입취소" class="button" /></a>
+                        <a href = "javascript:window.location='loginForm.do';"><img src="<%=cp %>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
                         <br>
                      </td>
                   </tr>

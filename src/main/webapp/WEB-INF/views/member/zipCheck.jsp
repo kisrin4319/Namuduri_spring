@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<% String cp = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우편번호검색</title>
-<link rel = "stylesheet" href ="css/style1.css" type="text/css" />
+<link href="<%=cp %>/css/style1.css"  rel="stylesheet" type="text/css" />
 <script language="JavaScript">
 
 
@@ -46,7 +47,7 @@
 			<!-- popup_container -->
 			<div class="popup_container">
 
-<form name="zipForm" method="post" action="zipCheck.do">
+<form name="zipForm" method="post" action="zipCheckForm.do">
 
 	<table width="500" border="0" cellpadding="0" cellspacing="0" class="zip">
 		<br>
@@ -72,11 +73,32 @@
 				
 			</td>
 		</tr>
-	</table>
-	
-</form>
 
-<s:if test="%{area3} == null">
+	<c:if test="${zipcodeList == null}" >
+		<tr>
+			<td align="center">
+				<br>검색된 결과가 없습니다.
+			</td>
+		</tr>
+	</c:if>
+	<c:if test="${zipcodeList != null }">
+	
+	<c:forEach var="zip" items="${zipcodeList }">
+			<tr>
+				<td>	
+					<a href="javascript:sendAddress('${zip.zipcode }', '${zip.area1 }', '${zip.area2 }', '${zip.area3 }', '${zip.area4 }')">
+					${zip.zipcode }&nbsp;
+					${zip.area1 }&nbsp;
+					${zip.area2 }&nbsp;
+					${zip.area3 }&nbsp;
+					${zip.area4 }
+					</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+
+<%-- <s:if test="%{area3} == null">
 	
 	<tr>
 		<td align="center">
@@ -106,7 +128,7 @@
 												<s:property value="area1"/>
 												<s:property value="area2"/>
 												<s:property value="area3"/>
-												<s:property value="area4"/>
+												<s:property value="area4"/>${zipcodeList.area4 }
 					</a>
 				<br>
 			</td>
@@ -114,16 +136,18 @@
 	</div>
 			
 	</s:iterator>
-</s:else>
+</s:else> --%>
 
 			<tr>
 				<td align="center"> <br>
-					<a href="javascript:this.close();" ><img src="member/images/zipCheck.PNG" value="주소입력" class="zipCheckbtn" style="align:center;"/>
-					
+					<!-- <a href="javascript:this.close();" ><img src="member/images/zipCheck.PNG" value="주소입력" class="zipCheckbtn" style="align:center;"/> -->
+					<a href="javascript:this.close();"><input type="button" value="주소입력"/></a>
 					</a>
 				</td>
 			</tr>
-
+	</table>
+	
+</form>
 </div>
 </div>
 </div>

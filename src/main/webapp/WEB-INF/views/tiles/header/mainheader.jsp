@@ -20,10 +20,10 @@ function goCart(){
 	location.href = 'basketList.do';
 }
 function openLoginTop(){
-	location.href = 'loginForm.do';
+	location.href = 'member/loginForm.do';
 }
 function goMemberJoin() {
-	location.href= 'memberInfo.do';
+	location.href= 'member/memberInfo.do';
 }
 function logout() {
 	location.href= 'logOut.do';
