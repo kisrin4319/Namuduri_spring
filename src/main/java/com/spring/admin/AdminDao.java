@@ -18,9 +18,9 @@ public interface AdminDao {
 	
 	/*List<BooksModel> booksUseNList();*/
 	
-	public void insertBook(BooksModel book, HttpServletRequest request);
+	public void insertBook(BooksModel book);
 	
-	public void modifyBook(BooksModel book, HttpServletRequest request);
+	public void modifyBook(BooksModel book);
 	
 	public void deleteBook(int book_num);
 	

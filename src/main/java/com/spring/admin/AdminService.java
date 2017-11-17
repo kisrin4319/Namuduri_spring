@@ -26,7 +26,7 @@ public class AdminService implements AdminDao {
 	}
 
 	@Override //도서 정보 등록
-	public void insertBook(BooksModel book, HttpServletRequest request) {
+	public void insertBook(BooksModel book) {
 		// TODO Auto-generated method stub
 		
 		/*MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -41,7 +41,7 @@ public class AdminService implements AdminDao {
 	}
 
 	@Override //도서 정보 수정
-	public void modifyBook(BooksModel book, HttpServletRequest request) {
+	public void modifyBook(BooksModel book) {
 		// TODO Auto-generated method stub
 		
 		sqlSessionTemplate.update("book.modifyBook", book);

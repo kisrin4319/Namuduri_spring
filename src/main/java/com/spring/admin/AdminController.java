@@ -87,7 +87,7 @@ public class AdminController {
 				
 		totalCount = booksList.size();
 				
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "adminBbookList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookList");
 		pagingHtml = paging.getPagingHtml().toString();
 				
 		int lastCount = totalCount;
@@ -147,25 +147,28 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.GET) //도서 등록 폼 띄우기
-	public ModelAndView bookWrite() throws Exception {
+	@RequestMapping(value="/admin/bookWrite.do") //도서 등록 폼 띄우기
+	public ModelAndView bookWriteForm(HttpServletRequest request) throws Exception {
 		
-		BooksModel view = new BooksModel();
+		BooksModel booksModel = new BooksModel();
+		/*request.setAttribute("booksModel", booksModel);*/
 		
-		mv.addObject("view", view);
+		mv.addObject("booksModel", booksModel);
 		mv.setViewName("adminBookWrite");
 		
 		return mv;
 	}
 	
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.POST) //도서 등록하기
-	public ModelAndView bookWrite(BooksModel booksModel, HttpServletRequest request) throws Exception {
+	public ModelAndView bookWrite(@ModelAttribute BooksModel booksModel) throws Exception {
 		
-		adminService.insertBook(booksModel, request);
+		adminService.insertBook(booksModel);
+		BooksModel view = booksService.bookOne(booksModel.getBook_num());
 		
 		mv.addObject("currentPage", 1);
-		mv.addObject("view", booksModel);
+		mv.addObject("view", view);
 		mv.setViewName("adminBookDetail");
+		
 		return mv;
 	}
 	
@@ -182,9 +185,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/bookModify.do", method=RequestMethod.POST) //도서 수정하기
-	public ModelAndView bookModify(BooksModel booksModel, @RequestParam int currentPage, HttpServletRequest request) throws Exception {
+	public ModelAndView bookModify(BooksModel booksModel, @RequestParam int currentPage) throws Exception {
 		
-		adminService.modifyBook(booksModel, request);
+		adminService.modifyBook(booksModel);
 		
 		BooksModel view = booksService.bookOne(booksModel.getBook_num());
 		

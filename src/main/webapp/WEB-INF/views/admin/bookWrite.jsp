@@ -12,11 +12,10 @@
 <body>
 <div class="detail">
 <h2 class="detail_h2">도서 정보 입력</h2>
-<form:form commandName="view" method="post" enctype="multipart/form-data">
+<form:form commandName="booksModel" method="post" enctype="multipart/form-data">
 <table border=1 cellspacing=0 cellpadding=0 class="table_detail">
-	<c:if test="${booksModel!=null}">
+	<c:if test="${view!=null}">
 		<form:hidden path="book_num"/>
-		<form:hidden path="currentPage"/>
 	<tr>
 		<th width=15%>도서 번호</th>
 		<td width=35%>${view.book_num}</td>
