@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,61 +16,62 @@
 <link href="<%=cp%>/css/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
    function checkIt() {
-      var orderForm = document.getElementById("orderform");
+      var orderForm2 = document.getElementById("orderform");
 
-      if (!orderForm.order_name.value) {
+      if (!orderForm2.order_name.value) {
          alert("신청인 이름을 입력하세요");
-         orderForm.order_name.focus();
+         orderForm2.order_name.focus();
          return false;
       }
-      else if (!orderForm.order_receive_name.value) {
+      else if (!orderForm2.order_receive_name.value) {
          alert("수취인 이름을 입력하세요");
-         orderForm.order_receive_name.focus();
+         orderForm2.order_receive_name.focus();
          return false;
       }
-      else if (!orderForm.order_receive_phone.value) {
+      else if (!orderForm2.order_receive_phone.value) {
          alert("수취인 전화번호를 입력하세요");
-         orderForm.order_receive_phone.focus();
+         orderForm2.order_receive_phone.focus();
          return false;
        }
-      else if (!orderForm.order_receive_zipcode.value) {
+      else if (!orderForm2.order_receive_zipcode.value) {
          alert("수취인 우편번호를 입력하세요");
-         orderForm.order_receive_zipcode.focus();
+         orderForm2.zipcode.focus();
          return false;
       } 
-      else if (!orderForm.order_receive_addr1.value) {
+      else if (!orderForm2.order_receive_addr1.value) {
          alert("수취인 주소를 입력하세요");
-         orderForm.order_receive_addr1.focus();
+         orderForm2.order_receive_addr1.focus();
          return false;
       }
-      else if (!orderForm.order_receive_addr2.value) {
+      else if (!orderForm2.order_receive_addr2.value) {
          alert("수취인 상세주소를 입력하세요");
-         orderForm.order_receive_addr2.focus();
+         orderForm2.order_receive_addr2.focus();
          return false;
       } 
       else{
-      orderForm.action = "listOrderComplete.do";
-      orderForm.submit();
+      orderForm2.action = "basketOrderComplete.do";
+      orderForm2.submit();
       }
+
    }
    function senddata() {
-      var orderForm = document.getElementById("orderform");
-      orderForm.order_receive_name.value = orderform.order_name.value;
-      orderForm.order_receive_zipcode.value = orderform.order_zipcode.value;      
-      orderForm.order_receive_addr1.value = orderform.order_addr1.value;
-      orderForm.order_receive_addr2.value = orderform.order_addr2.value;
-      orderForm.order_receive_phone.value = orderform.order_phone.value;
-      orderForm.order_receive_mobile.value = orderform.order_mobile.value;
+      var orderForm2 = document.getElementById("orderform");
+      orderForm2.order_receive_name.value = orderform.order_name.value;
+      orderForm2.order_receive_zipcode.value = orderform.order_zipcode.value;      
+      orderForm2.order_receive_addr1.value = orderform.order_addr1.value;
+      orderForm2.order_receive_addr2.value = orderform.order_addr2.value;
+      orderForm2.order_receive_phone.value = orderform.order_phone.value;
+      orderForm2.order_receive_mobile.value = orderform.order_mobile.value;
    }
 
    function deldata() {
-      var orderForm = document.getElementById("orderform");
-      orderForm.order_receive_name.value = "";      
-      orderForm.order_receive_zipcode.value = "";
-      orderForm.order_receive_addr1.value = "";
-      orderForm.order_receive_addr2.value = "";
-      orderForm.order_receive_phone.value = "";
-      orderForm.order_receive_mobile.value = "";
+      var orderForm2 = document.getElementById("orderform");
+      orderForm2.order_receive_name.value = "";      
+      orderForm2.order_receive_zipcode.value = "";
+      orderForm2.order_receive_addr1.value = "";
+      orderForm2.order_receive_addr2.value = "";
+      orderForm2.order_receive_phone.value = "";
+      orderForm2.order_receive_mobile.value = "";
    }
 
    function orderzipCheck() {
@@ -91,22 +93,15 @@
 			<div id="content">
 				<div class="contents">
 					<form name="orderform" id="orderform" method="post">
-						<s:hidden name="member_id" value="${session_id}" />
+						<s:hidden name="member_id" value="%{mresultClass.getId()}" />
+						<s:hidden name="order_goods_price" value="%{bresultClass.basket_goods_price}" />
 						<s:hidden name="order_receive_moneysum" value="%{order_receive_moneysum}" />
+						<s:hidden name="order_goods_name" value="%{bresultClass.basket_goods_name}" />
+						<s:hidden name="order_goods_count" value="%{bresultClass.basket_goods_count}" />
 						<s:hidden name="order_zipcode" value="%{mresultClass.member_zipcode}" />
 						<s:hidden name="order_addr1" value="%{mresultClass.member_addr1}" />
 						<s:hidden name="order_addr2" value="%{mresultClass.member_addr2}" />
-						<s:hidden name="order_goods_count" value="%{oparamClass.order_goods_count}" />
-						<s:if test="bresultClass == null">
-							<s:hidden name="goods_num" value="%{tresultClass.goods_num}" />
-							<s:hidden name="goods_name" value="%{tresultClass.goods_name}" />
-							<s:hidden name="order_goods_price" value="%{tresultClass.goods_price}" />
-						</s:if>
-						<s:else>
-							<s:hidden name="goods_num" value="%{bresultClass.basket_goods_num}" />
-							<s:hidden name="goods_name" value="%{bresultClass.basket_goods_name}" />
-							<s:hidden name="order_goods_price" value="%{bresultClass.basket_goods_price}" />
-						</s:else>
+						<s:property value="bresultClass.basket_goods_name" />
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>
@@ -116,7 +111,7 @@
 							</div>
 							<h3 class="fir">주문상세내역</h3>
 							<div class="table1 type1">
-								<!-- 상품리스트 시작 -->
+								<!-- 장바구니 상품리스트 시작 -->
 								<table>
 									<thead>
 										<tr>
@@ -127,28 +122,34 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="gi this-product"><span style="align: center;"> <a href="<%=cp%>/books/bookDetail.do?book_num=${book.book_num}"> <img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" class="middle" class="imgsize-s" />
-												</a>
-											</span>
-												<div>
-													<a href="<%=cp%>/books/bookDetail.do?book_num=${book.book_num}"> ${book.book_name} </a>
-												</div></td>
-											<td class="ta-c count this-product">${order_book_count}</td>
-											<td class="ta-c this-product"><strong class="price"><fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원</strong></td>
-											<td class="ta-c"><strong class="price"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" />원</font>
-											</strong></td>
-										</tr>
+										<!--s:iterator 시작  -->
+										<c:forEach var="bas" items="${basketList}">
+											<%-- <c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach> --%>
+											<tr>
+												<td class="gi this-product" style="padding-left: 80px;">
+													<div>
+														<a href="<%=cp%>/books/bookDetail.do?book_num=${bas.basket_book_num}"> <img src="<%=cp%>/upload/${bas.basket_book_image}" width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}" class="middle" class="imgsize-s" />
+														</a> ${bas.basket_book_name} </a>
+													</div>
+												</td>
+												<td class="ta-c count this-product">${bas.basket_book_count}개</td>
+												<td class="ta-c this-product"><strong class="price"><fmt:formatNumber value="${bas.basket_book_price}" pattern="###,###,###" />원</strong></td>
+												<td class="ta-c"><strong class="price"> <b> <fmt:formatNumber value="${bas.basket_book_price * bas.basket_book_count}" pattern="###,###,###" />원
+													</b>
+												</strong></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
-							<!--   <div style="text-align : left"><a class="btn-move-home" href="basketList.do" style="text-align: left;">장바구니 가기</a></div> -->
+							<!-- 장바구니 상품리스트 -->
+							<div style="text-align: left">
+								<a class="btn-move-home" href="<%=cp%>/basket/basketList.do" style="text-align: left;">장바구니 가기</a>
+							</div>
 							<div class="price-box">
 								<div>
 									<p>
-										<span class="detail">총 상품금액 <strong> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" />원</font>
-										</strong>
-										</span>
+										<span class="detail">총 상품 금액<strong> <font size="3" color="#000000"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###" /> 원</font>
 									</p>
 								</div>
 							</div>
@@ -278,12 +279,13 @@
 											</colgroup>
 											<tbody>
 												<tr>
-													<th class="ta-l">상품 금액</th>
-													<td><strong class="total" id="totalGoodsPrice"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원</font></strong></td>
+													<th class="ta-l">상품 합계 금액</th>
+													<td><strong class="total" id="totalGoodsPrice"> <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
+													</strong></td>
 												</tr>
 												<tr>
 													<th class="ta-l c-red">최종 결제 금액</th>
-													<td class="final"><span class="c-red"> <strong id="totalSettlePrice"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" /> 원</font>
+													<td class="final"><span class="c-red"> <strong id="totalSettlePrice"> <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
 														</strong></span></td>
 												</tr>
 											</tbody>
@@ -312,7 +314,7 @@
 																</div></li>
 															<li><strong>입금은행</strong>
 																<div>
-																	<span class="st-hs"> <select name="order_bank_num" class="tune" style="width: 354px;">
+																	<span class="st-hs"> <select name="order_select_num" class="tune" style="width: 354px;">
 																			<option value="">선택하세요</option>
 																			<option value="1">국민은행 444401-12-10494 나무두리(주)</option>
 																	</select>
@@ -329,23 +331,17 @@
 									<div class="buy">
 										<div class="required-check termAgree-check">
 											<h4 class="dn">청약의사 재확인</h4>
-											<br /> <input type="checkbox" id="termAgree_orderCheck" class="checkbox require" /> <strong>(필수)</strong><em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em>
+											<br /> <input type="checkbox" id="termAgree_orderCheck" class="checkbox require" /> <label for="termAgree_orderCheck"><strong>(필수)</strong> <em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
 										</div>
 										<div class="btn">
-											<button class="skinbtn point2 order-buy" onclick="javascript:return checkIt()">
+											<button class="skinbtn point2 order-buy" onclick="return checkIt();">
 												<em>결제하기</em>
 											</button>
 										</div>
 									</div>
 								</fieldset>
 							</div>
-						</div>
 					</form>
 				</div>
-				<hr />
-			</div>
-		</div>
-		<!-- 본문 끝 : end -->
-	</div>
 </body>
 </html>

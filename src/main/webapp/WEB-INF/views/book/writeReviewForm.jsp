@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String cp = request.getContextPath();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,8 +15,7 @@
       var con = confirm("등록하시겠습니까?");
       var product = eval("document.reviewForm");
       if (con == true) {
-         document.reviewForm.action = 'review.do';
-         <%-- document.writeReview.action = '<%=cp%>/books/review.do'; --%>
+         document.reviewForm.action = '<%=cp%>/books/review.do';
          product.submit();
       } else {
          return false;

@@ -20,10 +20,8 @@
 	<div id="wrap">
 		<div id="route">
 			<div>
-				<span>
-					<a href="#">Home</a>
-				</span>
-				<span>장바구니</span>
+				<span> <a href="#">Home</a>
+				</span> <span>장바구니</span>
 			</div>
 		</div>
 		<div id="container">
@@ -34,17 +32,9 @@
 						<div class="step-top none-btm-bd">
 							<h2>장바구니</h2>
 							<div>
-								<span class="this" title="현재페이지">
-									<strong>01</strong>
-									장바구니
-								</span>
-								<span>
-									<strong>02</strong>
-									주문서작성/결제
-								</span>
-								<span class="end">
-									<strong>03</strong>
-									주문완료
+								<span class="this" title="현재페이지"> <strong>01</strong> 장바구니
+								</span> <span> <strong>02</strong> 주문서작성/결제
+								</span> <span class="end"> <strong>03</strong> 주문완료
 								</span>
 							</div>
 						</div>
@@ -54,10 +44,7 @@
 								<table>
 									<thead>
 										<tr>
-											<th align="center" scope="col" width="12%">
-												<input type="checkbox" id="checkAll" onchange="fn_checkSum()" />
-												전체 선택 /해제
-											</th>
+											<th align="center" scope="col" width="12%"><input type="checkbox" id="checkAll" onchange="fn_checkSum()" /> 전체 선택 /해제</th>
 											<th align="center" scope="col">상품/옵션 정보</th>
 											<th align="center" scope="col">수량</th>
 											<th align="center" scope="col">카테고리</th>
@@ -67,8 +54,7 @@
 									</thead>
 									<c:choose>
 										<c:when test="${basketList.size() == 0 }">
-											<strong>
-												<font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
+											<strong> <font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
 											</strong>
 										</c:when>
 										<c:otherwise>
@@ -77,41 +63,20 @@
 													<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
 													<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
 													<tr>
-														<td>
-															<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
-														</td>
-														<td class="gi this-product">
-															<span>
-																<a href="#this" id="bookDetail">
-																	<img src="<%=cp %>/upload/${row.basket_book_image }" width="40" alt="${row.basket_book_name }" title="${row.basket_book_name }" class="middle" class="imgsize-s" />
-																	&nbsp;${row.basket_book_name }
-																	<br />
-																</a>
-															</span>
-														</td>
-														<td class="ta-c count this-product">
-															<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" align="bottom" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
+														<td><input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" /></td>
+														<td class="gi this-product"><span> <a href="#this" id="bookDetail"> <img src="<%=cp %>/upload/${row.basket_book_image }" width="40" alt="${row.basket_book_name }" title="${row.basket_book_name }" class="middle" class="imgsize-s" /> &nbsp;${row.basket_book_name } <br />
+															</a>
+														</span></td>
+														<td class="ta-c count this-product"><input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" align="bottom" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
 															<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
 																<em>수정</em>
-															</button>
-														</td>
-														<td align="center">
-															<strong>${row.book_category }</strong>
-														</td>
-														<td class="ta-c this-product">
-															<strong class="price">
-																<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />
-																원
-															</strong>
-															<p class="add_currency"></p>
-														</td>
-														<td align="center">
-															<a href="#this" onclick="goOrder(${row.basket_book_num}, ${row.basket_book_count})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px; background-color: #5e6b9f; color: #ffffff">바로구매</a>
-															<a href="#this" id="delete" onclick="fn_basketDelete(${basket_num})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px;">
-																삭&nbsp;제
-																<input type="hidden" value="${row.basket_num}" />
-															</a>
-														</td>
+															</button></td>
+														<td align="center"><strong>${row.book_category }</strong></td>
+														<td class="ta-c this-product"><strong class="price"> <fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" /> 원
+														</strong>
+															<p class="add_currency"></p></td>
+														<td align="center"><a href="#this" onclick="goOrder(${row.basket_book_num}, ${row.basket_book_count})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px; background-color: #5e6b9f; color: #ffffff">바로구매</a> <a href="#this" id="delete" onclick="fn_basketDelete(${basket_num})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px;"> 삭&nbsp;제 <input type="hidden" value="${row.basket_num}" />
+														</a></td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -134,26 +99,11 @@
 							<div>
 								<div>
 									<p>
-										<span class="detail">
-											총
-											<em id="totalGoodsCnt">
-												<input type="text" id="CheckCount" value="0" size="1" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" />
-											</em>
-											개의 상품금액
-											<strong id="totalGoodsPrice"></strong>
-										</span>
-										<span id="deliveryCalculateNone">
-											<img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" />
-											배송비
-											<strong id="totalDeliveryCharge"><input type="text" id="fee" value="0" size="4" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" /></strong>
-											원
-										</span>
-										<span class="total">
-											<img src="<%=cp%>/img/basket/icon/total.png" alt="합계" />
-											<strong id="totalSettlePrice">
-												<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" />
-											</strong>
-											원
+										<span class="detail"> 총 <em id="totalGoodsCnt"> <input type="text" id="CheckCount" value="0" size="1" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" />
+										</em> 개의 상품금액 <strong id="totalGoodsPrice"></strong>
+										</span> <span id="deliveryCalculateNone"> <img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" /> 배송비 <strong id="totalDeliveryCharge"><input type="text" id="fee" value="0" size="4" style="text-align: right; border: 0; vertical-align: baseline; font-size: medium;" /></strong> 원
+										</span> <span class="total"> <img src="<%=cp%>/img/basket/icon/total.png" alt="합계" /> <strong id="totalSettlePrice"> <input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" />
+										</strong> 원
 										</span>
 									</p>
 									<div class="add_currency">
@@ -172,10 +122,10 @@
 								<a href="#this" id="deleteAll" class="skinbtn default cart-cartdelete">전체 삭제</a>
 							</div>
 							<div>
-								<button type="button" class="skinbtn point2 cart-orderall" onclick="javascript:location.href='basketOrderForm.do'">
+								<button type="button" class="skinbtn point2 cart-orderall" onclick="fn_selectOrder();">
 									<em>선택 상품 주문</em>
 								</button>
-								<button type="button" class="skinbtn point2 cart-orderall" onclick="javascript:location.href='basketOrderForm.do'">
+								<button type="button" class="skinbtn point2 cart-orderall" onclick="javascript:location.href='<%=cp%>/order/totalOrder.do'">
 									<em>전체 상품 주문</em>
 								</button>
 							</div>
@@ -309,9 +259,15 @@ function removeChar(event) {
    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
       return;
    else
-      event.target.value = event.target.value.replace(/[^0-9]/g, "");
-   
+      event.target.value = event.target.value.replace(/[^0-9]/g, ""); 
 }
+
+function fn_selectOrder() {
+	   var comSubmit = new ComSubmit();
+	   comSubmit.setUrl("<c:url value = '/order/selectOrder.do' />");
+	   comSubmit.submit();
+}
+
 </script>
 </body>
 </html>

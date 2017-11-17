@@ -59,5 +59,7 @@ public class BasketService implements BasketDao {
 	@Override
 	public void BasketDeleteAll(String member_id) {
 		sqlSessionTemplate.delete("basket.basketDeleteAll",member_id);
-	}		
+	}
+
+	
 }
