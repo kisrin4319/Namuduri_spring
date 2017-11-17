@@ -122,7 +122,7 @@ public class BasketController {
 
 	// 3. 장바구니 수정(BasketModify)
 	@RequestMapping("/basket/basketModify.do")
-	public ModelAndView update(@RequestParam int basket_num, @RequestParam int basket_book_count, HttpSession session) {
+	public ModelAndView basketUpdate(@RequestParam int basket_num, @RequestParam int basket_book_count, HttpSession session) {
 
 		mv = new ModelAndView();
 		// Session의 ID
@@ -142,7 +142,7 @@ public class BasketController {
 
 	// 4. 장바구니 삭제
 	@RequestMapping("/basket/basketDelete.do")
-	public ModelAndView delete(@RequestParam int basket_num) {
+	public ModelAndView basketDelete(@RequestParam int basket_num) {
 
 		mv = new ModelAndView();
 		basketService.BasketDelete(basket_num);
@@ -153,7 +153,7 @@ public class BasketController {
 
 	// 5 장바구니 전체 삭제
 	@RequestMapping("/basket/basketDeleteAll.do")
-	public ModelAndView deleteAll(HttpSession session) {
+	public ModelAndView basketDeleteAll(HttpSession session) {
 
 		mv = new ModelAndView();
 
@@ -168,7 +168,7 @@ public class BasketController {
 	
 	// 6. 장바구니 선택 삭제
 	@RequestMapping("/basket/basketCheckDelete.do")
-	public ModelAndView checkDelete(HttpServletRequest request) throws Exception {
+	public ModelAndView basketCheckDelete(HttpServletRequest request) throws Exception {
 		String[] basket_num = request.getParameterValues("RowCheck");
 		mv = new ModelAndView();
 		for(int i=0;i<basket_num.length;i++) {			
