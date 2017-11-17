@@ -10,4 +10,6 @@ public interface MemberDao {
 	public List<ZipcodeModel> zipCheck(String zip);
 	//회원가입
 	public Object insertMember(MemberModel memberModel);
+	//아이디 중복확인
+	public MemberModel idCheck(String member_id);
 }
