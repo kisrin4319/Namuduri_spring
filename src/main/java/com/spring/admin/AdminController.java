@@ -121,7 +121,7 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		BooksModel view = booksService.bookOne(num);
+		BooksModel view = adminService.selectOne(num);
 		List<ReviewModel> review = booksService.reviewList(num);
 		
 		totalCount = review.size();
@@ -147,23 +147,24 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/bookWrite.do") //도서 등록 폼 띄우기
+	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.GET) //도서 등록 폼 띄우기
 	public ModelAndView bookWriteForm(HttpServletRequest request) throws Exception {
 		
-		BooksModel booksModel = new BooksModel();
+		BooksModel booksModel = null;
+		booksModel = new BooksModel();
 		/*request.setAttribute("booksModel", booksModel);*/
 		
-		mv.addObject("booksModel", booksModel);
+		mv.addObject("view", booksModel);
 		mv.setViewName("adminBookWrite");
 		
 		return mv;
 	}
 	
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.POST) //도서 등록하기
-	public ModelAndView bookWrite(@ModelAttribute BooksModel booksModel) throws Exception {
+	public ModelAndView bookWrite(@ModelAttribute("view") BooksModel booksModel) throws Exception {
 		
 		adminService.insertBook(booksModel);
-		BooksModel view = booksService.bookOne(booksModel.getBook_num());
+		BooksModel view = adminService.selectNewest();
 		
 		mv.addObject("currentPage", 1);
 		mv.addObject("view", view);
@@ -175,7 +176,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/bookModify.do", method=RequestMethod.GET)
 	public ModelAndView bookModifyForm(@RequestParam int book_num, @RequestParam int currentPage) throws Exception {
 		
-		BooksModel view = booksService.bookOne(book_num);
+		BooksModel view = new BooksModel();
+		
+		view = booksService.bookOne(book_num);
 		
 		mv.addObject("view",view);
 		mv.addObject("currentPage", currentPage);
@@ -185,7 +188,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/bookModify.do", method=RequestMethod.POST) //도서 수정하기
-	public ModelAndView bookModify(BooksModel booksModel, @RequestParam int currentPage) throws Exception {
+	public ModelAndView bookModify(@ModelAttribute("view") BooksModel booksModel, @RequestParam int currentPage) throws Exception {
 		
 		adminService.modifyBook(booksModel);
 		

@@ -59,9 +59,11 @@
 				<td>${list.book_price}</td>
 				<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
 				<td align=center>
-				<input class="adminbutton2" type=button value="수정" onclick="javascript:location.href='adminTextbookModifyForm.do?book_num=${list.book_num}&currentPage=${currentPage}'"/>
+				<input class="adminbutton2" type=button value="수정" 
+					onclick="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${list.book_num}&currentPage=${currentPage}'"/>
 				<br><br>
-				<input class="adminbutton2" type=button value="삭제" onclick="javascript:location.href='adminDeleteTextbook.do?book_num=${list.book_num}&currentPage=${currentPage}'"/></td>
+				<input class="adminbutton2" type=button value="삭제" 
+					onclick="javascript:location.href='<%=cp%>/admin/bookDelete.do?book_num=${list.book_num}&currentPage=${currentPage}'"/></td>
 			</tr>
 		</c:forEach>	
 	</c:otherwise>

@@ -18,6 +18,10 @@ public interface AdminDao {
 	
 	/*List<BooksModel> booksUseNList();*/
 	
+	public BooksModel selectNewest();
+	
+	public BooksModel selectOne();
+	
 	public void insertBook(BooksModel book);
 	
 	public void modifyBook(BooksModel book);

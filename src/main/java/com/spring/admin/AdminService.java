@@ -24,7 +24,16 @@ public class AdminService implements AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("book.selectBooksAll");
 	}
+	
+	public BooksModel selectOne(int book_num) {
+		return sqlSessionTemplate.selectOne("book.adminSelectOne", book_num);
+	}
 
+	@Override
+	public BooksModel selectNewest() {
+		return sqlSessionTemplate.selectOne("book.selectNewest");
+	}
+	
 	@Override //도서 정보 등록
 	public void insertBook(BooksModel book) {
 		// TODO Auto-generated method stub
