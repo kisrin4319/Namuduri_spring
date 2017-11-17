@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%
-	String cp = request.getContextPath();
-%>
+<% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -126,7 +125,8 @@
 						<div class="box_detail_price" style="text-align: left;">
 							<h2>가격정보</h2>
 							<ul class="list_detail_price" style="padding-bottom: 0px; padding-top: 20px;">
-								<li>판매가 : <span class="sell_price" title="판매가"> <strong>${view.book_price}</strong>원
+								<li>판매가 : <span class="sell_price" title="판매가"> <strong><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />원</strong>
+								
 								</span>
 								</li>
 								<li>배송비 : 무료</li>
