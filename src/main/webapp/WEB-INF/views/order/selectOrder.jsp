@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%@page import="javax.swing.Spring"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <% String cp = request.getContextPath(); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,9 +49,8 @@
          alert("수취인 상세주소를 입력하세요");
          orderForm2.order_receive_addr2.focus();
          return false;
-      } 
-      else{
-      orderForm2.do = "basketOrderComplete.do";
+      } else{
+      orderForm2.action = "basketOrderComplete.do";
       orderForm2.submit();
       }
 
@@ -80,6 +80,7 @@
       var url = "orderZipCheck.do";
       window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
    }
+   
 </script>
 </head>
 <body class="body-order body-order pc">
@@ -126,38 +127,38 @@
                         </thead>
                         <tbody>
                         <!--s:iterator 시작  -->
-                        <s:iterator value="basketList" status="stat">
-                        	<c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach>
+                        <c:forEach var="check" items="${selectList}">
+                        	<%-- <c:forEach items ="${imageList }" var ="b" varStatus = "status"></c:forEach> --%>
                         <tr>
                            <td class="gi this-product" style="padding-left: 80px;">
                               <div>
-                                 <a href ="textbookDetail.do?goods_num=<s:property value ="basket_goods_num" />">
-                                    <img src="/namuduri/admin/upload/<s:property value ="goods_image" />"
-                                          width="40" alt="<s:property value="basket_goods_name" />" title="<s:property value="basket_goods_name" />"
+                                 <a href ="<%=cp%>/books/bookDetail.do?goods_num=${check.basket_book_num}">
+                                    <img src="<%=cp%>/upload/${check.basket_book_image}"
+                                          width="40" alt="${check.basket_book_name}" title="${check.basket_book_name}"
                                           class="middle" class="imgsize-s" />
                                  </a>
-                                    <s:property value ="basket_goods_name" />
+                                    ${check.basket_book_name}
                                  </a>
                               </div>
                            </td>
                         
                         <td class="ta-c count this-product">
-                           <s:property value ="basket_goods_count" />개
+                           ${check.basket_book_count}개
                         </td>
                         <td class="ta-c this-product">
-                           <strong class="price"><s:property value="basket_goods_price" />원</strong>
+                           <strong class="price"><fmt:formatNumber value="${check.basket_book_price}" pattern="###,###,###"/>원</strong>
                         </td>
                         
                         <td class ="ta-c">
                            <strong class="price">
                               <b>
-                                 <s:property value="basket_goods_price * basket_goods_count" />원
+                                 <fmt:formatNumber value="${check.basket_book_count * check.basket_book_price}" pattern="###,###,###" />원
                               </b>
                            </strong>
                         
                         </td>
                      </tr>
-                     </s:iterator>
+                     </c:forEach>
                   </tbody>
                </table>
                </div>
@@ -167,7 +168,7 @@
                      <div>
                         <p>
                            <span class ="detail">총 상품 금액<strong>
-                           <font size="3" color="#000000"><s:property value="order_receive_moneysum" />원</font>
+                           <font size="3" color="#000000"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원</strong></font>
                         </p>
                      </div>
                   </div>
@@ -497,7 +498,7 @@
                                     <tr>
                                        <th class="ta-l">상품 합계 금액</th>
                                        <td><strong class="total" id="totalGoodsPrice">
-                                          <s:property value="order_receive_moneysum" />원</strong>
+                                          <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원</strong>
                                        </td>
                                     </tr>
                                     
@@ -506,7 +507,7 @@
                                        <td class="final">
                                        <span class="c-red">
                                           <strong id="totalSettlePrice">
-                                             <s:property value="order_receive_moneysum" />원
+                                           <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
                                              </strong></span></td>
                                     </tr>
                                  </tbody>

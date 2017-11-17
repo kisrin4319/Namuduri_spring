@@ -125,7 +125,8 @@
 						<div class="box_detail_price" style="text-align: left;">
 							<h2>가격정보</h2>
 							<ul class="list_detail_price" style="padding-bottom: 0px; padding-top: 20px;">
-								<li>판매가 : <span class="sell_price" title="판매가"> <strong>${view.book_price}</strong>원
+								<li>판매가 : <span class="sell_price" title="판매가"> <strong><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />원</strong>
+								
 								</span>
 								</li>
 								<li>배송비 : 무료</li>

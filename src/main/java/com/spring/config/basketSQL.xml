@@ -70,4 +70,6 @@
 		DELETE FROM BASKET WHERE MEMBER_ID = #{member_id}
 	</delete>
 	
+
+	
 </mapper>

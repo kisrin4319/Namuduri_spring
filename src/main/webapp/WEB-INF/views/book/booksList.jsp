@@ -73,7 +73,7 @@
 														</span>
 													</div>
 													<div class="price">
-														<strong class="sell_price">${list.book_price}원</strong>
+														<strong class="sell_price"><fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원</strong>
 													</div>
 													<div class="info" style="height: 90px;">
 														<font size="2">

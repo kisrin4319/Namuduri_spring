@@ -1,5 +1,6 @@
 package com.spring.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,6 +59,9 @@ public class OrderController {
 		basketModel.setMember_id(session_id);
 		List<BasketModel> basketList = basketService.basketList(basketModel);
 		
+		int sumMoney = orderService.totalSum(session_id);
+		
+		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("basketList", basketList);
 		mv.setViewName("totalOrder");
 		
@@ -65,11 +69,21 @@ public class OrderController {
 	}
 	
 	// 선택 주문
-	@RequestMapping(value = "/order/selectOrder.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/selectOrder.do")
 	public ModelAndView selectOrderForm(HttpServletRequest request, HttpSession session) {
+				
+		String[] basket_num = request.getParameterValues("RowCheck");
 		
-		session_id = "test3";
-		
+		List<BasketModel> selectList = new ArrayList<BasketModel>();
+		int sumMoney=0;
+		for(int i=0;i<basket_num.length;i++) {
+			int num = Integer.parseInt(basket_num[i]);
+		selectList.add(orderService.BasketSelect(num));
+		sumMoney += orderService.selectSum(num);
+		}
+
+		mv.addObject("sumMoney", sumMoney);
+		mv.addObject("selectList", selectList);
 		mv.setViewName("selectOrder");
 		
 		return mv;
