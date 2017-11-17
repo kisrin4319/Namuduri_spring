@@ -104,7 +104,7 @@ public class AdminController {
 		mv.addObject("totalCount", totalCount);
 		mv.addObject("listCount", booksList.size());
 				
-		mv.setViewName("adminBbookList");
+		mv.setViewName("adminBookList");
 				
 		return mv;
 	}
