@@ -9,7 +9,7 @@ public interface MemberDao {
 	//우편번호 검색
 	public List<ZipcodeModel> zipCheck(String zip);
 	//회원가입
-	public Object insertMember(MemberModel memberModel);
+	public void insertMember(MemberModel memberModel);
 	//아이디 중복확인
-	public MemberModel idCheck(String member_id);
+	public int idCheck(String member_id);
 }
