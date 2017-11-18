@@ -41,8 +41,7 @@ public class BasketController {
 		mv = new ModelAndView();
 		BasketModel basketModel = new BasketModel();
 
-		session_id = "test3";
-		// (String) session.getAttribute("member_id");
+		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);
 
 		if (basketModel.getMember_id() != null) {
@@ -95,8 +94,7 @@ public class BasketController {
 		BasketModel basketModel = new BasketModel();
 		mv = new ModelAndView();
 		
-		session_id = "test3"; 
-				//(String) session.getAttribute("member_id");
+		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);
 		basketModel.setBasket_book_num(book_num);
 		basketModel.setBasket_book_count(basket_book_count);
@@ -126,8 +124,7 @@ public class BasketController {
 
 		mv = new ModelAndView();
 		// Session의 ID
-		session_id = "test3";
-		// (String) session.getAttribute("member_id");
+		session_id = (String) session.getAttribute("member_id");
 
 		BasketModel basketModel = new BasketModel();
 		basketModel.setMember_id(session_id);
@@ -157,8 +154,7 @@ public class BasketController {
 
 		mv = new ModelAndView();
 
-		session_id = "test3";
-		// (String) session.getAttribute("member_id");
+		session_id = (String) session.getAttribute("member_id");
 		basketService.BasketDeleteAll(session_id);
 
 		mv.setViewName("redirect:/basket/basketList.do");

@@ -27,14 +27,26 @@ public class MemberService implements MemberDao{
 	
 	//회원가입
 	@Override
-	public Object insertMember(MemberModel memberModel) {
-		return sqlSessionTemplate.insert("member.memberInfo", memberModel);
+	public void insertMember(MemberModel memberModel) {
+		sqlSessionTemplate.insert("member.memberInfo", memberModel);
 	}
 	
 	//아이디 중복확인
 	@Override
-	public MemberModel idCheck(String idChk) {
-		return sqlSessionTemplate.selectOne("member.idCheck", idChk);
+	public int idCheck(String member_id) {
+		return sqlSessionTemplate.selectOne("member.idCheck", member_id);
+	}
+
+	//회원 정보 가져오기
+	@Override
+	public MemberModel SelectOne(String member_id) {
+		return sqlSessionTemplate.selectOne("member.memberSelectOne",member_id);
+	}
+
+	//회원 리스트 가져오기
+	@Override
+	public List<MemberModel> memberList() {
+		return sqlSessionTemplate.selectList("member.memberList");
 	}
 	
 	

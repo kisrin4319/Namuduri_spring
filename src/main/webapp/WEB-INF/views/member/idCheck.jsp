@@ -30,14 +30,14 @@ function checkId(){
 	<table width="285" border="0" cellspacing="0" cellpadding="0" class="idChk">
 		<tr align="center">
 			<td height="30">
-				<c:if test="${memberModel != null }">
+				<c:if test="${count != 0 }">
 					<div class="popup_message2 popup_graybox">
 						<strong class="font_blue">${member_id }</strong><br />
 						<strong>이미 사용중인 아이디입니다.</strong><br />
 						<span class="font_11">다른 아이디를 입력해 주세요.</span><br />
 					</div>
 				</c:if>
-				<c:if test="${memberModel == null }">
+				<c:if test="${count == 0 }">
 					<div class="popup_message2 popup_graybox">
 						<strong class="font_blue">${member_id }</strong><br />
 						<strong>사용할 수 있는 아이디입니다.</strong><br />
