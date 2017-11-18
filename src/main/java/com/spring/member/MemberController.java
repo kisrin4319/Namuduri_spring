@@ -36,7 +36,7 @@ public class MemberController {
 	
 	//로그인 처리
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request, MemberModel membermodel) {
+	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request) {
 		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
@@ -50,10 +50,7 @@ public class MemberController {
 		if (result != null){
 			
 			HttpSession session = request.getSession();
-			
-			session.setAttribute("memberModel", result);
-			session.setAttribute("session_member_id", result.getMember_id());
-			session.setAttribute("session_member_pw", result.getMember_pw());
+			session.setAttribute("member_id", result.getMember_id());
 			
 			mv.setViewName("main");
 			return mv;
@@ -68,14 +65,12 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/member/logOut.do")
-	public ModelAndView logOut(HttpServletRequest request, MemberModel memberModel) {
-		
-		HttpSession session = request.getSession(false);
-		
+	public ModelAndView logOut(HttpSession session) {
+				
 		if(session != null) {
 			session.invalidate();
 		}
-		mv.setViewName("member/loginForm");
+		mv.setViewName("main");
 		return mv;
 	}
 	

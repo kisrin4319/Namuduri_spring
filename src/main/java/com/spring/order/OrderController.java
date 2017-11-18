@@ -37,7 +37,7 @@ public class OrderController {
 	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.GET)
 	public ModelAndView singleOrderForm(HttpServletRequest request, HttpSession session) {
 
-		session_id = "test3";
+		session_id = (String) session.getAttribute("member_id");
 		
 		int book_num = Integer.parseInt(request.getParameter("book_num"));
 		int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
@@ -55,7 +55,7 @@ public class OrderController {
 	@RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.GET)
 	public ModelAndView totalOrderForm(HttpServletRequest request, HttpSession session) {
 		
-		session_id = "test3";
+		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);
 		List<BasketModel> basketList = basketService.basketList(basketModel);
 		
@@ -72,6 +72,7 @@ public class OrderController {
 	@RequestMapping(value = "/order/selectOrder.do")
 	public ModelAndView selectOrderForm(HttpServletRequest request, HttpSession session) {
 				
+		session_id = (String) session.getAttribute("member_id");
 		String[] basket_num = request.getParameterValues("RowCheck");
 		
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
