@@ -16,6 +16,8 @@ import com.spring.basket.BasketModel;
 import com.spring.basket.BasketService;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
+import com.spring.member.MemberModel;
+import com.spring.member.MemberService;
 
 @Controller
 public class OrderController {
@@ -29,6 +31,9 @@ public class OrderController {
 	@Resource
 	private BasketService basketService;
 
+	@Resource
+	private MemberService memberService;
+	
 	ModelAndView mv = new ModelAndView();
 	BasketModel basketModel = new BasketModel();
 	String session_id;
@@ -42,6 +47,7 @@ public class OrderController {
 		int book_num = Integer.parseInt(request.getParameter("book_num"));
 		int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
 		BooksModel booksModel = booksService.bookOne(book_num);
+		MemberModel memberModel = memberService.SelectOne(session_id);
 		
 		int bookMoney = booksModel.getBook_price() * order_book_count;
 		int deliveryFee;
@@ -61,6 +67,7 @@ public class OrderController {
 		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("session_id", session_id);
+		mv.addObject("memberModel",memberModel);
 		mv.setViewName("singleOrder");
 
 		return mv;
@@ -73,6 +80,7 @@ public class OrderController {
 		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);
 		List<BasketModel> basketList = basketService.basketList(basketModel);
+		MemberModel memberModel = memberService.SelectOne(session_id);
 		
 		int bookMoney = orderService.totalSum(session_id);
 		int deliveryFee;
@@ -90,6 +98,7 @@ public class OrderController {
 		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("basketList", basketList);
+		mv.addObject("memberModel",memberModel);
 		mv.setViewName("totalOrder");
 		
 		return mv;
@@ -101,6 +110,8 @@ public class OrderController {
 				
 		session_id = (String) session.getAttribute("member_id");
 		String[] basket_num = request.getParameterValues("RowCheck");
+		
+		MemberModel memberModel = memberService.SelectOne(session_id);
 		
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
 		
@@ -125,6 +136,7 @@ public class OrderController {
 		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("selectList", selectList);
+		mv.addObject("memberModel",memberModel);
 		mv.setViewName("selectOrder");
 		
 		return mv;
