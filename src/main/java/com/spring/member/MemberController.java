@@ -70,7 +70,7 @@ public class MemberController {
 		if(session != null) {
 			session.invalidate();
 		}
-		mv.setViewName("main");
+		mv.setViewName("redirect:/main.do");
 		return mv;
 	}
 	
