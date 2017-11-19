@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -149,7 +149,10 @@
 							<div class="price-box">
 								<div>
 									<p>
-										<span class="detail">총 상품 금액<strong> <font size="3" color="#000000"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###" /> 원</font>
+										<span class="detail"> 총 <em id="totalGoodsCnt">${fn:length(basketList)}</em> 개의 상품금액
+										</span> <span id="deliveryCalculateNone"> <img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" /> 배송비 <strong id="totalDeliveryCharge"><fmt:formatNumber value="${deliveryFee}" pattern="#,###" /> </strong> 원
+										</span> <span class="total"> <img src="<%=cp%>/img/basket/icon/total.png" alt="합계" /> <strong id="totalSettlePrice"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###"></fmt:formatNumber> </strong> 원
+										</span>
 									</p>
 								</div>
 							</div>
@@ -280,8 +283,12 @@
 											<tbody>
 												<tr>
 													<th class="ta-l">상품 합계 금액</th>
-													<td><strong class="total" id="totalGoodsPrice"> <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
+													<td><strong class="total" id="totalGoodsPrice"> <fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원
 													</strong></td>
+												</tr>
+												<tr>
+													<th class="ta-l">배송 금액</th>
+													<td><strong class="total" id="transPrice"> <font size="3" color="#000000"><fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />원</font></strong></td>
 												</tr>
 												<tr>
 													<th class="ta-l c-red">최종 결제 금액</th>

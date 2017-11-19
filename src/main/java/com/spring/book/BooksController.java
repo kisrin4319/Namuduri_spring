@@ -49,7 +49,7 @@ public class BooksController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (searchKeyword == null || searchNum == 0) {
+		if (searchKeyword == null) {
 			booksList = booksService.booksList(book_category);
 		} else {
 			map.put("searchNum", searchNum);
