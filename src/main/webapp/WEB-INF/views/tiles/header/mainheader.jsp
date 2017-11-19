@@ -174,9 +174,7 @@ function goAdmin() {
 								});
 							})(jQuery);
 						</script>
-						<input type="text" class="main_input" name="searchKeyword"
-							id="searchKeyword" value="" onblur="setOutFocus();"
-							title="검색어 입력" />
+						<input type="text" class="main_input" name="searchKeyword" id="searchKeyword" value="" onblur="setOutFocus();" title="검색어 입력" />
 					</div>
 					<input type="submit" class="btn_search" value="검색" />
 				</div>

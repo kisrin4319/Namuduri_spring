@@ -136,7 +136,7 @@
 												</div></td>
 											<td class="ta-c count this-product">${order_book_count}</td>
 											<td class="ta-c this-product"><strong class="price"><fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원</strong></td>
-											<td class="ta-c"><strong class="price"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" />원</font>
+											<td class="ta-c"><strong class="price"> <font size="3" color="#000000"><fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원</font>
 											</strong></td>
 										</tr>
 									</tbody>
@@ -146,8 +146,10 @@
 							<div class="price-box">
 								<div>
 									<p>
-										<span class="detail">총 상품금액 <strong> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" />원</font>
-										</strong>
+										<span class="detail"> 총 <em id="totalGoodsCnt">1
+										</em> 개의 상품금액 
+										</span> <span id="deliveryCalculateNone"> <img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" /> 배송비 <strong id="totalDeliveryCharge"><fmt:formatNumber value="${deliveryFee}" pattern="#,###"/> </strong> 원
+										</span> <span class="total"> <img src="<%=cp%>/img/basket/icon/total.png" alt="합계" /> <strong id="totalSettlePrice"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###"></fmt:formatNumber> </strong> 원
 										</span>
 									</p>
 								</div>
@@ -279,11 +281,15 @@
 											<tbody>
 												<tr>
 													<th class="ta-l">상품 금액</th>
-													<td><strong class="total" id="totalGoodsPrice"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원</font></strong></td>
+													<td><strong class="total" id="totalGoodsPrice"> <font size="3" color="#000000"><fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원</font></strong></td>
+												</tr>
+												<tr>
+													<th class="ta-l">배송 금액</th>
+													<td><strong class="total" id="transPrice"> <font size="3" color="#000000"><fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />원</font></strong></td>
 												</tr>
 												<tr>
 													<th class="ta-l c-red">최종 결제 금액</th>
-													<td class="final"><span class="c-red"> <strong id="totalSettlePrice"> <font size="3" color="#000000"><fmt:formatNumber value="${book.book_price*order_book_count}" pattern="###,###,###" /> 원</font>
+													<td class="final"><span class="c-red"> <strong id="totalSettlePrice"> <font size="3" color="#000000"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원</font>
 														</strong></span></td>
 												</tr>
 											</tbody>

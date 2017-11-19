@@ -43,8 +43,23 @@ public class OrderController {
 		int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
 		BooksModel booksModel = booksService.bookOne(book_num);
 		
+		int bookMoney = booksModel.getBook_price() * order_book_count;
+		int deliveryFee;
+		int sumMoney;
+		
+		if(bookMoney <100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+			} else {
+				deliveryFee = 0;
+				sumMoney = bookMoney;
+			}
+		
 		mv.addObject("book", booksModel);
 		mv.addObject("order_book_count", order_book_count);
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
+		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("session_id", session_id);
 		mv.setViewName("singleOrder");
 
@@ -59,8 +74,20 @@ public class OrderController {
 		basketModel.setMember_id(session_id);
 		List<BasketModel> basketList = basketService.basketList(basketModel);
 		
-		int sumMoney = orderService.totalSum(session_id);
+		int bookMoney = orderService.totalSum(session_id);
+		int deliveryFee;
+		int sumMoney;
 		
+		if(bookMoney < 100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+			} else {
+				deliveryFee = 0;
+				sumMoney = bookMoney;
+			}
+		
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("basketList", basketList);
 		mv.setViewName("totalOrder");
@@ -76,13 +103,26 @@ public class OrderController {
 		String[] basket_num = request.getParameterValues("RowCheck");
 		
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
-		int sumMoney=0;
+		
+		int bookMoney=0;
+		int deliveryFee;
+		int sumMoney;
 		for(int i=0;i<basket_num.length;i++) {
 			int num = Integer.parseInt(basket_num[i]);
 		selectList.add(orderService.BasketSelect(num));
-		sumMoney += orderService.selectSum(num);
+		bookMoney += orderService.selectSum(num);
 		}
-
+		
+		if(bookMoney < 100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+			} else {
+				deliveryFee = 0;
+				sumMoney = bookMoney;
+			}
+		
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("selectList", selectList);
 		mv.setViewName("selectOrder");
