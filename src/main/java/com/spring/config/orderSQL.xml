@@ -5,23 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="order">
 
-	<!-- 전체 주문 합계금액 -->
+	<!-- 1. 전체 주문 합계금액 -->
 	<select id="totalSum" resultType="int">
 		SELECT NVL(SUM(basket_book_price*basket_book_count),0)
 		FROM BASKET
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 
-	<!-- 선택 주문 합계금액 -->
-	<select id="selectSum" resultType="int">
-		SELECT NVL(SUM(basket_book_price*basket_book_count),0) 
-		FROM BASKET 
-		WHERE BASKET_NUM = #{BASKET_NUM}
-	</select>
-	
-	<!-- 선택 주문 -->
+	<!-- 2. 선택 주문 -->
 	<select id="basketSelect" resultType="BasketModel">
-		SELECT * FROM BASKET WHERE BASKET_NUM = #{BASKET_NUM}
+		SELECT * FROM BASKET WHERE	BASKET_NUM = #{BASKET_NUM}
+	</select>
+
+	<!-- 3. 선택 주문 합계금액 -->
+	<select id="selectSum" resultType="int">
+		SELECT NVL(SUM(basket_book_price*basket_book_count),0)
+		FROM BASKET
+		WHERE BASKET_NUM = #{BASKET_NUM}
 	</select>
 
 </mapper>
