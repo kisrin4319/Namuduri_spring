@@ -52,7 +52,7 @@ function check() {
    }
    else {
    alert("회원가입 되었습니다.")
-   f.do="Info.do";
+   f.action="Info.do";
    f.submit();
    }   
 }

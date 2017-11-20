@@ -48,7 +48,7 @@ function submit() {
 		<div class ="popup_shadow">
 			<div class ="popup_wrap">
 				<div class ="tit">
-					<h1 class ="title_h_cartlist">주소 찾기</h1>
+					<h1 class ="title_h_cartlist">아이디 찾기</h1>
 				</div>
 				
 				<div class ="popup_container">
@@ -69,7 +69,7 @@ function submit() {
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<a href ="javascript: submit();"><img src="<%=cp%>/views/member/images/btn_ok.gif" value="회원가입" class="button"/></a>
+					<a href ="javascript: submit();"><img src="<%=cp%>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href = "javascript:window.close();"><img src="<%=cp%>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
 				<br>

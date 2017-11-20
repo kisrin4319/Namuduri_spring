@@ -18,7 +18,7 @@
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="findPw" resultType="MemberModel">
-		SELECT MEMBER_PW FROM MEMBER
+		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
 		AND MEMBER_EMAIL = #{member_email}
 	</select>

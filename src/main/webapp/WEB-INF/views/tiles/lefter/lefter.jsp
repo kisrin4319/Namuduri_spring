@@ -8,15 +8,15 @@
 <title>Namuduri</title>
 </head>
 <body>
-<h2 class="mypage_font"><a href="mypage.do">마이페이지</a></h2>
+<h2 class="mypage_font"><a href="http://localhost:8080/namuduri/mypage.do">마이페이지</a></h2>
 
 <table id="mypage_menu">
 	<tr><th colspan="2" align="left">주문관리</th></tr>
 		<tr><td align="left"><a href="orderListCheck.do">▶주문/배송조회</a></td></tr>
 		
 	<tr><th colspan="2" align="left">회원정보관리</th></tr>
-		<tr><td align="left"><a href="memberModifyForm.do">▶회원정보수정</a></td></tr>
-		<tr><td align="left"><a href="memberDeleteForm.do">▶회원 탈퇴</a></td></tr>
+		<tr><td align="left"><a href="http://localhost:8080/namuduri/member/memberModifyView.do">▶회원정보수정</a></td></tr>
+		<tr><td align="left"><a href="http://localhost:8080/namuduri/member/memberDeleteView.do">▶회원 탈퇴</a></td></tr>
 </table>
 
 </body>

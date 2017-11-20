@@ -12,11 +12,14 @@ public interface MypageDao {
 	public MemberModel memberPwFind(MemberModel memberModel);
 		
 	//3. 회원 탈퇴
-	public void memberDelete(MemberModel memberModel);
+	public Object memberDelete(MemberModel memberModel);
 			
 	//4. 회원정보 수정
-	public void memberModify(MemberModel memberModel);
+	public Object memberModify(MemberModel memberModel);
 			
 	//5. 주문상세내역 보기
 	public void memberOrderDetail(OrderDetailModel orderDetailModel);
+	
+	//6. 주문내역 취소
+	public Object memberOrderCancel(OrderDetailModel orderDetailModel);
 }

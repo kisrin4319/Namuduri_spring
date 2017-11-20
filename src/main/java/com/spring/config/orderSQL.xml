@@ -31,6 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		go.member_id = me.member_id JOIN order_detail od ON 
 		od.order_trade_num = go.order_trade_num JOIN textbook tb ON
 		tb.goods_num = od.goods_num WHERE go.order_trade_num = #{order_trade_num}
-		</select>
+	</select>
+	
+	<!-- 주문내역 취소 -->
+	<delete id="orderCancel">
+		DELETE FROM GOODS_ORDER
+		WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</delete>
+	
 
 </mapper>
