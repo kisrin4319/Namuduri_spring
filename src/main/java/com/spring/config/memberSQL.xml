@@ -8,6 +8,40 @@
 		select * from member where member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="MemberModel">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_NAME = #{member_name}
+		AND MEMBER_JUMIN1 = #{member_jumin1}
+		AND MEMBER_JUMIN2 = #{member_jumin2}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" resultType="MemberModel">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+		AND MEMBER_EMAIL = #{member_email}
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete">
+		DELETE FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</delete>
+	
+	<!-- 회원정보 수정 -->
+	<update id="memberModify">
+		UPDATE MEMBER
+		SET MEMBER_PW = #{member_pw}, MEMBER_NAME = #{member_name},
+		    MEMBER_JUMIN1 = #{member_jumin1}, MEMBER_JUMIN2 = #{member_jumin2},
+		    MEMBER_ZIPCODE = #{member_zipcode}, MEMBER_ADDR1 = #{member_addr1},
+		    MEMBER_ADDR2 = #{member_addr2}, MEMBER_MOBILE = #{member_mobile},
+		    MEMBER_PHONE = #{member_phone}, MEMBER_EMAIL = #{member_email},
+		    MEMBER_EMAIL_GET = #{member_email_get}
+		    <!-- <isNotNull property="member_email_get">MEMBER_EMAIL_GET = #{member_email_get}</isNotNull>
+		    <isNull property="member_email_get">MEMBER_EMAIL_GET = 'NO'</isNull> -->
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 	<!-- 2. 우편번호검색 -->
 	<select id="zipCheck"  resultType="ZipcodeModel">
 		select * from zipcode where area3 like '%'||#{area3}|| '%'
@@ -20,7 +54,7 @@
 							member_addr2, member_phone, member_mobile, member_join_date,
 							member_admin, member_bankname, member_refund_account, member_account_holder)
 					values(member_num_seq.NEXTVAL, #{member_id}, #{member_pw}, #{member_name},
-							#{member_jumin1}, #{member_jumin2}, #{member_email}, #{member_email_get},
+							#{member_jumin1}, #{member_jumin2}, #{member_email}, #{member_email_get, jdbcType=VARCHAR},
 							#{member_zipcode}, #{member_addr1}, #{member_addr2}, #{member_phone},
 							#{member_mobile}, sysdate, #{member_admin}, #{member_bankname},
 							#{member_refund_account}, #{member_account_holder})
@@ -35,10 +69,10 @@
 	<select id="memberSelectOne" resultType="MemberModel">
 		select * from member where member_id = #{member_id}
 	</select>
-	
+
 	<!-- 6. 회원 정보 가져오기(리스트) -->
 	<select id="memberList" resultType="MemberModel">
 		select * from member ORDER BY member_join_date DESC
 	</select>
-	
+
 </mapper>

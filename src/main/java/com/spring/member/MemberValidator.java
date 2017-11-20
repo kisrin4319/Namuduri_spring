@@ -16,9 +16,7 @@ public class MemberValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		MemberModel member = (MemberModel) target;
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_num", "member_num");
-		
+			
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_id", "member_id");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_pw", "member_pw");
@@ -30,9 +28,7 @@ public class MemberValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_jumin2", "member_jumin2");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_email", "member_email");
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_phone", "member_phone");
-		
+				
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member_mobile", "member_mobile");
 		
 		if(member.getMember_zipcode() == null || member.getMember_zipcode().trim().isEmpty()) {

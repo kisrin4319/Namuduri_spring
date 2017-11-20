@@ -74,39 +74,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	//우편번호 검색 폼
-	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.GET)
-	public ModelAndView zipCheckForm(HttpServletRequest request) throws Exception {
-		
-		mv = new ModelAndView();
-		
-		mv.setViewName("member/zipCheck");
-		return mv;
-	}
-	
-	//우편번호 검색
-	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.POST)
-	public ModelAndView zipCheck(@ModelAttribute ZipcodeModel zipcodeModel, HttpServletRequest request) throws Exception{
-		
-		mv = new ModelAndView();
-		
-		String area3;
-		
-		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
-		area3 = request.getParameter("area3");
-		
-		mv.addObject("zipcodeList", zipcodeList);
-		
-		if(area3 != null) {
-			zipcodeList = memberService.zipCheck(area3);
-			mv.addObject("area3", area3);
-			mv.addObject("zipcodeList", zipcodeList);
-		}
-		
-		mv.setViewName("member/zipCheck");
-		return mv;
-	}
-	
 	// MemberModel초기화
 	@ModelAttribute("member")
 	public MemberModel formBack() {
@@ -133,7 +100,7 @@ public class MemberController {
 			
 			mv = new ModelAndView();
 			
-			mv.setViewName("member/memberInfo");
+			mv.setViewName("memberInfo");
 			return mv;
 		} else { 
 			memberService.insertMember(memberModel);
@@ -159,5 +126,39 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	//우편번호 검색 폼
+	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.GET)
+	public ModelAndView zipCheckForm(HttpServletRequest request) throws Exception {
+			
+		mv = new ModelAndView();
+			
+		mv.setViewName("member/zipCheck");
+		return mv;
+	}
+		
+	//우편번호 검색
+	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.POST)
+	public ModelAndView zipCheck(@ModelAttribute ZipcodeModel zipcodeModel, HttpServletRequest request) throws Exception{
+			
+		mv = new ModelAndView();
+			
+		String area3;
+			
+		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
+		area3 = request.getParameter("area3");
+			
+		mv.addObject("zipcodeList", zipcodeList);
+			
+		if(area3 != null) {
+			zipcodeList = memberService.zipCheck(area3);
+			mv.addObject("area3", area3);
+			mv.addObject("zipcodeList", zipcodeList);
+		}
+			
+		mv.setViewName("member/zipCheck");
+		return mv;
+	}
+
 	
 }
