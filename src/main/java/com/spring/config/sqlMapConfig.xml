@@ -30,7 +30,6 @@
 	
 	<mappers>	
 		<mapper resource="com/spring/config/memberSQL.xml" />
-		<mapper resource="com/spring/config/mypageSQL.xml"/>
 		<mapper resource="com/spring/config/basketSQL.xml" />
 		<mapper resource="com/spring/config/bookSQL.xml" />
  		<mapper resource="com/spring/config/orderSQL.xml" />

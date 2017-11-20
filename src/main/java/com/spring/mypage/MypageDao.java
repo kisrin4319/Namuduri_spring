@@ -6,13 +6,13 @@ import com.spring.order.OrderDetailModel;
 public interface MypageDao {
 
 	//1. 아이디 찾기
-	public void findId(MemberModel memberModel);
+	public MemberModel memberIdFind(MemberModel memberModel);
 			
 	//2. 비밀번호 찾기
-	public void findPw(MemberModel memberModel);
+	public MemberModel memberPwFind(MemberModel memberModel);
 		
 	//3. 회원 탈퇴
-	public void memberOut(MemberModel memberModel);
+	public void memberDelete(MemberModel memberModel);
 			
 	//4. 회원정보 수정
 	public void memberModify(MemberModel memberModel);

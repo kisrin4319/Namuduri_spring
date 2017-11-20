@@ -1,5 +1,8 @@
 package com.spring.mypage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.member.MemberModel;
@@ -24,49 +28,77 @@ public class MypageController {
 	String session_id;
 	
 	//1. 아이디 찾기
-	@RequestMapping(value = "/memberfind/findId.do", method = RequestMethod.GET)
-	public ModelAndView memberfindIdForm() {
-		mv.setViewName("member/findIdForm");
+	@RequestMapping(value = "/member/memberIdFindView.do")
+	public ModelAndView memberIdFind() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("findId");
 		return mv;
 	}
 	
-	@RequestMapping(value = "/memberfind/findId.do", method = RequestMethod.POST)
-	public ModelAndView findId(HttpServletRequest request, HttpSession session) throws Exception {
+	@RequestMapping(value = "/member/memberIdFind.do")
+	@ResponseBody
+	public Map<String, Object> memberIdFind(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		Map<String, Object> object = new HashMap<String, Object>();
+		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
 		
-		memberModel.setMember_name(memberModel.getMember_name());
-		memberModel.setMember_jumin1(memberModel.getMember_jumin1());
-		memberModel.setMember_jumin2(memberModel.getMember_jumin2());
+		memberModel.setMember_name(request.getParameter("member_name"));
+		memberModel.setMember_jumin1(Integer.parseInt(request.getParameter("member_jumin1")));
+		memberModel.setMember_jumin2(Integer.parseInt(request.getParameter("member_jumin2")));
 		
-		if(memberModel.getMember_name().equals(session_id)) {
-			mypageService.findId(memberModel);
-			mv.setViewName("memberfind/findIdSucces");
-		
-		} else {
-			mv.setViewName("memberfind/findIdError");
+		MemberModel member = mypageService.memberIdFind(memberModel);
+		if(member != null) {
+			if(memberModel.getMember_name().equals(member.getMember_name()) && memberModel.getMember_jumin1() == member.getMember_jumin1() && memberModel.getMember_jumin2() == member.getMember_jumin2()) {
+				object.put("returnVal", "1");
+				object.put("member_id", member.getMember_id());
+			}else {
+				object.put("returnVal", "0");
+			}
+		}else {
+			object.put("returnVal", "0");
 		}
-		return mv;
+		return object;
 	}
 	
 	//비밀번호 찾기
-	@RequestMapping("/memberfind/findPwForm.do")
-	public ModelAndView findPw(HttpServletRequest request, HttpSession session) throws Exception {
+	@RequestMapping(value = "/member/memberPwFind.do", method = RequestMethod.GET)
+	public ModelAndView memberPwFind() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("findPw");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/member/memberPwFind.do", method = RequestMethod.POST)
+	public ModelAndView memberPwFind(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		session_id = "test3";
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
 		
-		memberModel.setMember_id(memberModel.getMember_id());
-		memberModel.setMember_email(memberModel.getMember_email());
+		/*String id = request.getParameter("member_id");
+		String email = request.getParameter("member_email");
+		
+		System.out.println(id + email);*/
+		
+		memberModel.setMember_id(request.getParameter("member_id"));
+		memberModel.setMember_email(request.getParameter("member_email"));
+		
+		/*memberModel.setMember_id(memberModel.getMember_id());
+		memberModel.setMember_email(memberModel.getMember_email());*/
 		
 		if(memberModel.getMember_id().equals(session_id)) {
-			mypageService.findPw(memberModel);
-			
+			mypageService.memberPwFind(memberModel);
+			mv.setViewName("findPw");
 		} else {
-			mv.setViewName("redirect:/findPwForm.do");
+			mv.setViewName("findPw");
 		}
 		return mv;
 	}

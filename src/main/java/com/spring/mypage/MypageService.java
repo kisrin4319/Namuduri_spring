@@ -16,19 +16,19 @@ public class MypageService implements MypageDao {
 	
 	//1. 아이디 찾기
 	@Override
-	public void findId(MemberModel memberModel) {
-		sqlSessionTemplate.selectOne("member.findId", memberModel);
+	public MemberModel memberIdFind(MemberModel memberModel) {
+		return sqlSessionTemplate.selectOne("member.findId", memberModel);
 	}
 	
 	//2. 비밀번호 찾기
 	@Override
-	public void findPw(MemberModel memberModel) {
-		sqlSessionTemplate.selectOne("member.findPw", memberModel);
+	public MemberModel memberPwFind(MemberModel memberModel) {
+		return sqlSessionTemplate.selectOne("member.findPw", memberModel);
 	}
 	
 	//3. 회원 탈퇴
 	@Override
-	public void memberOut(MemberModel memberModel) {
+	public void memberDelete(MemberModel memberModel) {
 		sqlSessionTemplate.delete("member.memberOut", memberModel);
 	}
 	
