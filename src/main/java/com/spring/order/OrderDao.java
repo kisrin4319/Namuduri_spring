@@ -30,5 +30,8 @@ public interface OrderDao {
 
 	// 8. 주문 후 장바구니 삭제
 	public void delBasket(int basket_num);
+	
+	// 9. 주문 후 재고 관리
+	public void updateStock(BooksModel book);
 
 }

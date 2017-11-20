@@ -93,6 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM BASKET WHERE BASKET_NUM = #{basket_num}
 	</delete>
 	
+	<!-- 주문완료 후 재고 정리 -->
+	<update id="stock">
+		UPDATE BOOK SET BOOK_CURRENT_COUNT = #{book_current_count}, BOOK_SELL_COUNT = #{book_sell_count} 
+		WHERE BOOK_NUM = #{book_num} 
+	</update>
+	
 	<select id="selectAll" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK
 	</select>

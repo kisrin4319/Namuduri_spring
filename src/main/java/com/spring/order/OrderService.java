@@ -64,4 +64,9 @@ public class OrderService implements OrderDao {
 		sqlSessionTemplate.delete("order.delBasket", basket_num);
 	}
 
+	// 9. 주문 후 재고 관리
+	@Override
+	public void updateStock(BooksModel book) {
+		sqlSessionTemplate.update("order.stock", book);
+	}
 }

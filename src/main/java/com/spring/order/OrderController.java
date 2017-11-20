@@ -117,6 +117,14 @@ public class OrderController {
 		if (basket_num != 0) {
 			orderService.delBasket(basket_num);
 		}
+		
+		// 도서 재고 관리
+		BooksModel book = booksService.bookOne(book_num);
+		int current_count = book.getBook_current_count() - getOrderDetail.getOrder_book_count();
+		int sell_count = book.getBook_sell_count() + getOrderDetail.getOrder_book_count();
+		book.setBook_current_count(current_count);
+		book.setBook_sell_count(sell_count);
+		orderService.updateStock(book);
 
 		mv.addObject("order", getOrder);
 		mv.addObject("orderDetail", getOrderDetail);
