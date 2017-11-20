@@ -12,7 +12,7 @@
 <body>
 <div class="detail">
 <h2 class="detail_h2">도서 정보 입력</h2>
-<form:form commandName="view" method="post" >
+<form:form commandName="view" method="post" enctype="multipart/form-data">
 <table border=1 cellspacing=0 cellpadding=0 class="table_detail">
 	<c:if test="${view.book_num!=0&&view.book_num!=null}">
 		<form:hidden path="book_num" value="${view.book_num}"/>

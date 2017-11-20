@@ -203,7 +203,7 @@
 	</definition>
 
 	<!-- 관리자 회원관리 자세히보기 -->
-	<definition name="adminMemberView" extends="admin">
+	<definition name="adminMemberDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/memberDetail.jsp" />
 	</definition>
 	

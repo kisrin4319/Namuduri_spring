@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.book.BooksModel;
+import com.spring.order.OrderModel;
 
 @Service
 public class AdminService implements AdminDao {
@@ -69,5 +70,15 @@ public class AdminService implements AdminDao {
 		sqlSessionTemplate.delete("book.deleteReview", review_num);
 	}
 
+	@Override
+	public List<OrderModel> selectOrderAll() {
+		return sqlSessionTemplate.selectList("order.selectAll");
+	}
+
+	@Override
+	public void modifyOrder(OrderModel book) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("order.modifyOrder", book);
+	}
 
 }
