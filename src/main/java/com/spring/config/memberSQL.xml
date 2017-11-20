@@ -3,11 +3,10 @@
 
 <mapper namespace="member">
 
+	<!-- 1. 로그인처리 -->
 	<select id="loginCheck" resultType="MemberModel">
 		select * from member where member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
-	
-	<select id=""></select>
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="MemberModel">
@@ -43,4 +42,36 @@
 		    <isNull property="member_email_get">MEMBER_EMAIL_GET = 'NO'</isNull> -->
 		WHERE MEMBER_ID = #{member_id}
 	</update>
+	<!-- 2. 우편번호검색 -->
+	<select id="zipCheck"  resultType="ZipcodeModel">
+		select * from zipcode where area3 like '%'||#{area3}|| '%'
+	</select>
+	
+	<!-- 3. 회원가입 -->
+	<insert id="memberInfo" parameterType="MemberModel">
+		insert into member (member_num, member_id, member_pw, member_name, member_jumin1,
+							member_jumin2, member_email, member_email_get, member_zipcode, member_addr1,
+							member_addr2, member_phone, member_mobile, member_join_date,
+							member_admin, member_bankname, member_refund_account, member_account_holder)
+					values(member_num_seq.NEXTVAL, #{member_id}, #{member_pw}, #{member_name},
+							#{member_jumin1}, #{member_jumin2}, #{member_email}, #{member_email_get},
+							#{member_zipcode}, #{member_addr1}, #{member_addr2}, #{member_phone},
+							#{member_mobile}, sysdate, #{member_admin}, #{member_bankname},
+							#{member_refund_account}, #{member_account_holder})
+	</insert>
+	
+	<!-- 4. 아이디 중복확인 -->
+	<select id="idCheck" resultType="int">
+		select count(*) from member where member_id= #{member_id}
+	</select>
+	
+	<!-- 5. 회원 정보 가져오기 (단일)  -->
+	<select id="memberSelectOne" resultType="MemberModel">
+		select * from member where member_id = #{member_id}
+	</select>
+	
+	<!-- 6. 회원 정보 가져오기(리스트) -->
+	<select id="memberList" resultType="MemberModel">
+		select * from member where ORDER BY member_join_date DESC
+	</select>
 </mapper>

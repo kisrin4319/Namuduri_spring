@@ -3,6 +3,7 @@
 	String cp = request.getContextPath();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -16,67 +17,74 @@
 <link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=cp%>/css/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-
-var name = "${memberModel.member_name}";
-var zipcode ="${memberModel.member_zipcode }"
-var addr1 = "${memberModel.member_addr1 }"
-var addr2 = "${memberModel.member_addr2 }"
-var phone = "${memberModel.member_phone }"
-var mobile = "${memberModel.member_mobile }"
+	var name = "${memberModel.member_name}";
+	var zipcode = "${memberModel.member_zipcode }"
+	var addr1 = "${memberModel.member_addr1 }"
+	var addr2 = "${memberModel.member_addr2 }"
+	var phone = "${memberModel.member_phone }"
+	var mobile = "${memberModel.member_mobile }"
 
 	function checkIt() {
-	var singleOrderform = document.getElementById("singleOrderform");
-		if (!singleOrderform.order_receive_name.value) {
+		var totalOrderform = document.getElementById("totalOrderform");
+
+		if (!totalOrderform.order_name.value) {
+			alert("신청인 이름을 입력하세요");
+			totalOrderform.order_name.focus();
+			return false;
+		} else if (!totalOrderform.order_receive_name.value) {
 			alert("수취인 이름을 입력하세요");
-			singleOrderform.order_receive_name.focus();
+			totalOrderform.order_receive_name.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_phone.value) {
+		} else if (!totalOrderform.order_receive_phone.value) {
 			alert("수취인 전화번호를 입력하세요");
-			singleOrderform.order_receive_phone.focus();
+			totalOrderform.order_receive_phone.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_zipcode.value) {
+		} else if (!totalOrderform.order_receive_zipcode.value) {
 			alert("수취인 우편번호를 입력하세요");
-			singleOrderform.order_receive_zipcode.focus();
+			totalOrderform.zipcode.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_addr1.value) {
+		} else if (!totalOrderform.order_receive_addr1.value) {
 			alert("수취인 주소를 입력하세요");
-			singleOrderform.order_receive_addr1.focus();
+			totalOrderform.order_receive_addr1.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_addr2.value) {
+		} else if (!totalOrderform.order_receive_addr2.value) {
 			alert("수취인 상세주소를 입력하세요");
-			singleOrderform.order_receive_addr2.focus();
+			totalOrderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			singleOrderform.action = "listOrderComplete.do";
-			singleOrderform.submit();
+			totalOrderform.action = "basketOrderComplete.do";
+			totalOrderform.submit();
 		}
+
 	}
 	function senddata() {
-		var singleOrderform = document.getElementById("singleOrderform");
-		
-		singleOrderform.order_receive_name.value = name;
-		singleOrderform.order_receive_zipcode.value =zipcode;
-		singleOrderform.order_receive_addr1.value = addr1;
-		singleOrderform.order_receive_addr2.value =addr2;
-		singleOrderform.order_receive_phone.value = phone;
-		singleOrderform.order_receive_mobile.value = mobile;
+		var totalOrderform = document.getElementById("totalOrderform");
+		totalOrderform.order_receive_name.value = name;
+		totalOrderform.order_receive_zipcode.value = zipcode;
+		totalOrderform.order_receive_addr1.value = addr1;
+		totalOrderform.order_receive_addr2.value = addr2;
+		totalOrderform.order_receive_phone.value = phone;
+		totalOrderform.order_receive_mobile.value = mobile;
 	}
 
 	function deldata() {
-		var singleOrderform = document.getElementById("singleOrderform");
-		
-		singleOrderform.order_receive_name.value = "";
-		singleOrderform.order_receive_zipcode.value = "";
-		singleOrderform.order_receive_addr1.value = "";
-		singleOrderform.order_receive_addr2.value = "";
-		singleOrderform.order_receive_phone.value = "";
-		singleOrderform.order_receive_mobile.value = "";
+		var totalOrderform = document.getElementById("totalOrderform");
+		totalOrderform.order_receive_name.value = "";
+		totalOrderform.order_receive_zipcode.value = "";
+		totalOrderform.order_receive_addr1.value = "";
+		totalOrderform.order_receive_addr2.value = "";
+		totalOrderform.order_receive_phone.value = "";
+		totalOrderform.order_receive_mobile.value = "";
 	}
 
 	function orderzipCheck() {
 
 		var url = "orderZipCheck.do";
-		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+		window
+				.open(
+						url,
+						"post",
+						"toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 	}
 </script>
 </head>
@@ -94,7 +102,7 @@ var mobile = "${memberModel.member_mobile }"
 			<!-- 본문 시작 : start -->
 			<div id="content">
 				<div class="contents">
-					<form name="singleOrderform" id="singleOrderform" method="post">
+					<form name="totalOrderform" id="totalOrderform" method="post">
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>
@@ -115,7 +123,7 @@ var mobile = "${memberModel.member_mobile }"
 							</div>
 							<h3 class="fir">주문상세내역</h3>
 							<div class="table1 type1">
-								<!-- 상품리스트 시작 -->
+								<!-- 장바구니 상품리스트 시작 -->
 								<table>
 									<thead>
 										<tr>
@@ -126,40 +134,47 @@ var mobile = "${memberModel.member_mobile }"
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="gi this-product">
-												<span style="align: center;">
-													<a href="<%=cp%>/books/bookDetail.do?book_num=${book.book_num}">
-														<img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" class="middle" class="imgsize-s" />
-													</a>
-												</span>
-												<div>
-													<a href="<%=cp%>/books/bookDetail.do?book_num=${book.book_num}"> ${book.book_name} </a>
-												</div>
-											</td>
-											<td class="ta-c count this-product">${order_book_count}</td>
-											<td class="ta-c this-product">
-												<strong class="price">
-													<fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원
-												</strong>
-											</td>
-											<td class="ta-c">
-												<strong class="price">
-													<font size="3" color="#000000">
-														<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원
-													</font>
-												</strong>
-											</td>
-										</tr>
+										<!--s:iterator 시작  -->
+										<c:forEach var="bas" items="${basketList}">
+											<tr>
+												<td class="gi this-product" style="padding-left: 80px;">
+													<div>
+														<a href="<%=cp%>/books/bookDetail.do?book_num=${bas.basket_book_num}">
+															<img src="<%=cp%>/upload/${bas.basket_book_image}" width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}" class="middle" class="imgsize-s" />${bas.basket_book_name}
+														</a>
+													</div>
+												</td>
+												<td class="ta-c count this-product">${bas.basket_book_count}개</td>
+												<td class="ta-c this-product">
+													<strong class="price">
+														<fmt:formatNumber value="${bas.basket_book_price}" pattern="###,###,###" />
+														원
+													</strong>
+												</td>
+												<td class="ta-c">
+													<strong class="price">
+														<b>
+															<fmt:formatNumber value="${bas.basket_book_price * bas.basket_book_count}" pattern="###,###,###" />
+															원
+														</b>
+													</strong>
+												</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
-							<!--   <div style="text-align : left"><a class="btn-move-home" href="basketList.do" style="text-align: left;">장바구니 가기</a></div> -->
+							<!-- 장바구니 상품리스트 -->
+							<div style="text-align: left">
+								<a class="btn-move-home" href="<%=cp%>/basket/basketList.do" style="text-align: left;">장바구니 가기</a>
+							</div>
 							<div class="price-box">
 								<div>
 									<p>
 										<span class="detail">
-											총<em id="totalGoodsCnt">1 </em>	개의 상품금액
+											총
+											<em id="totalGoodsCnt">${fn:length(basketList)}</em>
+											개의 상품금액
 										</span>
 										<span id="deliveryCalculateNone">
 											<img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" />
@@ -680,12 +695,11 @@ var mobile = "${memberModel.member_mobile }"
 											</colgroup>
 											<tbody>
 												<tr>
-													<th class="ta-l">상품 금액</th>
+													<th class="ta-l">상품 합계 금액</th>
 													<td>
 														<strong class="total" id="totalGoodsPrice">
-															<font size="3" color="#000000">
-																<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원
-															</font>
+															<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+															원
 														</strong>
 													</td>
 												</tr>
@@ -694,7 +708,8 @@ var mobile = "${memberModel.member_mobile }"
 													<td>
 														<strong class="total" id="transPrice">
 															<font size="3" color="#000000">
-																<fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />원
+																<fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />
+																원
 															</font>
 														</strong>
 													</td>
@@ -704,9 +719,8 @@ var mobile = "${memberModel.member_mobile }"
 													<td class="final">
 														<span class="c-red">
 															<strong id="totalSettlePrice">
-																<font size="3" color="#000000">
-																	<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
-																</font>
+																<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
+																원
 															</strong>
 														</span>
 													</td>
@@ -743,7 +757,7 @@ var mobile = "${memberModel.member_mobile }"
 																<strong>입금은행</strong>
 																<div>
 																	<span class="st-hs">
-																		<select name="order_bank_num" class="tune" style="width: 354px;">
+																		<select name="order_select_num" class="tune" style="width: 354px;">
 																			<option value="">선택하세요</option>
 																			<option value="1">국민은행 444401-12-10494 나무두리(주)</option>
 																		</select>
@@ -763,11 +777,13 @@ var mobile = "${memberModel.member_mobile }"
 											<h4 class="dn">청약의사 재확인</h4>
 											<br />
 											<input type="checkbox" id="termAgree_orderCheck" class="checkbox require" />
-											<strong>(필수)</strong>
-											<em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em>
+											<label for="termAgree_orderCheck">
+												<strong>(필수)</strong>
+												<em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em>
+											</label>
 										</div>
 										<div class="btn">
-											<button class="skinbtn point2 order-buy" onclick="javascript:return checkIt()">
+											<button class="skinbtn point2 order-buy" onclick="return checkIt();">
 												<em>결제하기</em>
 											</button>
 										</div>
@@ -777,10 +793,8 @@ var mobile = "${memberModel.member_mobile }"
 						</div>
 					</form>
 				</div>
-				<hr />
 			</div>
 		</div>
-		<!-- 본문 끝 : end -->
 	</div>
 </body>
 </html>

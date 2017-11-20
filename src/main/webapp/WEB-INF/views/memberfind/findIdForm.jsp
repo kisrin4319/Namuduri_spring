@@ -69,7 +69,7 @@ function submit() {
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<a href ="javascript: submit();"><img src="<%=cp%>/views/images/btn_ok.gif" value="회원가입" class="button"/></a>
+					<a href ="javascript: submit();"><img src="<%=cp%>/views/member/images/btn_ok.gif" value="회원가입" class="button"/></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href = "javascript:window.close();"><img src="<%=cp%>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
 				<br>
