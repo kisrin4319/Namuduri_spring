@@ -148,11 +148,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.GET) //도서 등록 폼 띄우기
-	public ModelAndView bookWriteForm(HttpServletRequest request) throws Exception {
+	public ModelAndView bookWriteForm() throws Exception {
 		
 		BooksModel booksModel = null;
 		booksModel = new BooksModel();
-		/*request.setAttribute("booksModel", booksModel);*/
 		
 		mv.addObject("view", booksModel);
 		mv.setViewName("adminBookWrite");
@@ -178,7 +177,7 @@ public class AdminController {
 		
 		BooksModel view = new BooksModel();
 		
-		view = booksService.bookOne(book_num);
+		view = adminService.selectOne(book_num);
 		
 		mv.addObject("view",view);
 		mv.addObject("currentPage", currentPage);

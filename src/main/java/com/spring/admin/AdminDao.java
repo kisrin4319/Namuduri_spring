@@ -20,7 +20,7 @@ public interface AdminDao {
 	
 	public BooksModel selectNewest();
 	
-	public BooksModel selectOne();
+	public BooksModel selectOne(int book_num);
 	
 	public void insertBook(BooksModel book);
 	

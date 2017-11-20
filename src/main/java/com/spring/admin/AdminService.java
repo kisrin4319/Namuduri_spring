@@ -25,6 +25,7 @@ public class AdminService implements AdminDao {
 		return sqlSessionTemplate.selectList("book.selectBooksAll");
 	}
 	
+	@Override
 	public BooksModel selectOne(int book_num) {
 		return sqlSessionTemplate.selectOne("book.adminSelectOne", book_num);
 	}
@@ -67,5 +68,6 @@ public class AdminService implements AdminDao {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("book.deleteReview", review_num);
 	}
+
 
 }
