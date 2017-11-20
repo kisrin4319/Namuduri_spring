@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -38,6 +38,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM GOODS_ORDER
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</delete>
-	
 
+	<select id="selectAll" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK
+	</select>
+	
+	<update id="modifyOrder" parameterType="OrderModel">
+		 UPDATE ORDER_BOOK SET PAYMENT_STATUS = #{payment_status}, 
+		 					ORDER_TRANS_STATUS = #{order_trans_status}, 
+		 					ORDER_USE_YN = #{order_use_yn} 
+		 			WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</update>
+	
 </mapper>
