@@ -16,31 +16,37 @@ public class MypageService implements MypageDao {
 	
 	//1. 아이디 찾기
 	@Override
-	public void findId(MemberModel memberModel) {
-		sqlSessionTemplate.selectOne("member.findId", memberModel);
+	public MemberModel memberIdFind(MemberModel memberModel) {
+		return sqlSessionTemplate.selectOne("member.findId", memberModel);
 	}
 	
 	//2. 비밀번호 찾기
 	@Override
-	public void findPw(MemberModel memberModel) {
-		sqlSessionTemplate.selectOne("member.findPw", memberModel);
+	public MemberModel memberPwFind(MemberModel memberModel) {
+		return sqlSessionTemplate.selectOne("member.findPw", memberModel);
 	}
 	
 	//3. 회원 탈퇴
 	@Override
-	public void memberOut(MemberModel memberModel) {
-		sqlSessionTemplate.delete("member.memberOut", memberModel);
+	public int memberDelete(MemberModel memberModel) {
+		return sqlSessionTemplate.delete("member.memberDelete", memberModel);
 	}
 	
 	//4. 회원정보 수정
 	@Override
-	public void memberModify(MemberModel memberModel) {
-		sqlSessionTemplate.update("member.memberModify", memberModel);
+	public int memberModify(MemberModel memberModel) {
+		return sqlSessionTemplate.update("member.memberModify", memberModel);
 	}
 	
 	//5. 주문상세내역 보기
 	@Override
 	public void memberOrderDetail(OrderDetailModel orderDetailModel) {
 		sqlSessionTemplate.selectOne("order.memberOrderDetail", orderDetailModel);
+	}
+	
+	//6. 주문내역 취소
+	@Override
+	public Object memberOrderCancel(OrderDetailModel orderDetailModel) {
+		return sqlSessionTemplate.delete("order.memberOrderCancel", orderDetailModel);
 	}
 }

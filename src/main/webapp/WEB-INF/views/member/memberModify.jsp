@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원정보 수정</title>
-<link rel = "stylesheet" href ="css/style1.css" type="text/css" />
+<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
 <script language="javascript">
 		
 	function passWorkCheck(){
@@ -19,7 +20,30 @@
 		} else {
 			document.getElementById("passwordCheckText").innerHTML = "<b><font color=blue size=3pt> 비밀번호가 일치합니다. </font></b>"
 		}
+	} 
+	/* else {
+		$.ajax({
+            url:'/namuduri/member/memberModify.do',
+            type:'post',
+            data:$('form').serialize(),
+            success:function(result){
+            	if(result.returnVal == '1'){
+            		alert('회원정보 수정이 완료되었습니다.');
+            		return false;
+            	}else {
+            		alert('비밀번호가 같지 않습니다.');
+            		return false;
+            	}
+            }
+        })
 	}
+	if(password == ''){
+		alert('비밀번호를 입력해 주세요.');
+		return false;
+	}else if(passwordCheck == ''){
+		alert('비밀번호를 확인해 주세요.');
+		return false;
+	} */
 
 	function check() {
 		var password = document.getElementById("password").value;
@@ -48,6 +72,7 @@
 				"confirm",
 				"toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=610, height=250");
 	}
+	
 </script>
 </head>
 <body>
@@ -201,9 +226,9 @@
 						
 						<tr>
 							<td colspan="2" align="center">
-							<a href ="javascript: check();"><img src="member/images/btn_ok.gif" value="수정" class="button"/></a>
+							<a href ="javascript: check();"><img src="<%=cp%>/img/member/btn_ok.gif" value="수정" class="button"/></a>
 														&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href = "javascript:history.back(-1);"><img src="member/images/btn_cancel.gif" value="수정취소" class="button" /></a>
+								<a href = "javascript:history.back(-1);"><img src="<%=cp%>/img/member/btn_cancel.gif" value="수정취소" class="button" /></a>
 								<br>
 							</td>
 						</tr>
