@@ -126,7 +126,7 @@ function isBasket(book_num) {
 	 var isbuy=confirm("장바구니에 담으시겠습니까?");
 	 var product=eval("document.frmList");
 	 if(isbuy==true) {
-	   location.href='<%=cp%>/basket/basketInsert.do?book_num='+book_num+'&basket_book_count='+1;
+	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+1;
 	 } else {
 	  return false;
 	 }
