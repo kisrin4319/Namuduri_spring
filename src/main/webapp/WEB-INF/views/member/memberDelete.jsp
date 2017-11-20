@@ -8,15 +8,14 @@
 <title>회원 탈퇴</title>
 <script type="text/javascript">
 	function checkIn() {
-		var ch = document.memberDelete;
 		
-		if(ch.member_id == ""){
+		if($('#member_id').val() == ""){
 			alert("아이디를 입력해주십시오.");
-			ch.member_id.focus();
+			return false;
 		}
-		if(ch.member_pw == ""){
+		if($('#member_pw').val() == ""){
 			alert("비밀번호를 입력해주십시오.");
-			ch.member_pw.focus();
+			return false;
 		}
 		else {
 			$.ajax({

@@ -135,14 +135,11 @@ public class MypageController {
 		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_pw(request.getParameter("member_pw"));
 		
-		Object member = mypageService.memberDelete(memberModel);
-		if(member != null) {
-			if(memberModel.getMember_id().equals("member_id") && memberModel.getMember_pw().equals("member_pw")) {
-				object.put("returnVal", "1");
-			} else {
-				object.put("returnVal", "0");
-			}
-		} else {
+		int member = mypageService.memberDelete(memberModel);
+		
+		if(member > 0) {
+			object.put("returnVal", "1");
+		}else {
 			object.put("returnVal", "0");
 		}
 		return object;
@@ -180,8 +177,8 @@ public class MypageController {
 		memberModel.setMember_email(request.getParameter("member_email"));
 		memberModel.setMember_email_get(request.getParameter("member_email_get"));
 		
-		Object member = mypageService.memberModify(memberModel);
-		if(member != null) {
+		int member = mypageService.memberModify(memberModel);
+		/*if(member != null) {
 			if(memberModel.getMember_pw().equals("member_pw")) {
 				object.put("returnVal", "1");
 			} else {
@@ -189,7 +186,7 @@ public class MypageController {
 			}
 		} else {
 			object.put("returnVal", "0");
-		}
+		}*/
 		return object;
 	}
 	

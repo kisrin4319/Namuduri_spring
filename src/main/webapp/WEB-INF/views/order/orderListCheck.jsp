@@ -3,22 +3,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/layout_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/myroom.css" rel="stylesheet" type="text/css" />
-<link href="css/order_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style2_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/layout_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/myroom.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/order_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	function check(type, num){
 		document.getElementById('order_trade_num').value = num;
 		if(type == 'cancel'){
-			document.getElementById('orderListCheckForm').do = 'orderCancel.do';
+			document.getElementById('orderListCheckForm').action = 'orderCancel.do';
 			document.getElementById('orderListCheckForm').submit();
 		}
 	}

@@ -28,13 +28,13 @@ public class MypageService implements MypageDao {
 	
 	//3. 회원 탈퇴
 	@Override
-	public Object memberDelete(MemberModel memberModel) {
+	public int memberDelete(MemberModel memberModel) {
 		return sqlSessionTemplate.delete("member.memberDelete", memberModel);
 	}
 	
 	//4. 회원정보 수정
 	@Override
-	public Object memberModify(MemberModel memberModel) {
+	public int memberModify(MemberModel memberModel) {
 		return sqlSessionTemplate.update("member.memberModify", memberModel);
 	}
 	
