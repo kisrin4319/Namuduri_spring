@@ -24,6 +24,7 @@ import com.spring.common.Paging;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
 import com.spring.mypage.MypageService;
+import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
 
 @Controller
@@ -370,7 +371,7 @@ public class AdminController {
 						
 		orderList = orderList.subList(paging.getStartCount(), lastCount);
 						
-		mv.addObject("booksList", orderList);
+		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
@@ -386,7 +387,10 @@ public class AdminController {
 		
 		OrderModel view = null; /*= mypageService.memberOrderDetail();*/
 		
+		List<OrderDetailModel> orderDetail = null; //마이페이지?
+		
 		mv.addObject("view", view);
+		mv.addObject("orderDetailList", orderDetail);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminOrderDetail");
 		
