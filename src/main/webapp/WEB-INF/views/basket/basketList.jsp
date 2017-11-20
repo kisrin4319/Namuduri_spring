@@ -267,7 +267,6 @@ function fn_selectOrder() {
 	   comSubmit.setUrl("<c:url value = '/order/selectOrder.do' />");
 	   comSubmit.submit();
 }
-
 </script>
 </body>
 </html>
