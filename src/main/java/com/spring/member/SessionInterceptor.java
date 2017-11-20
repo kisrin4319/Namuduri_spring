@@ -14,7 +14,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		
 		Object member_id = request.getSession().getAttribute("member_id");
 		
-		if(request.getRequestURI().equals("/member/loginForm.do") || request.getRequestURI().equals("/member/memberInfo.do")) {
+		if(request.getRequestURI().equals("/namuduri/member/loginForm.do") || request.getRequestURI().equals("/namuduri/member/memberInfo.do")) {
 			if(member_id != null) {
 				response.sendRedirect(request.getContextPath() + "/main.do");
 				return true;
@@ -24,8 +24,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 
 		}
 		
-		if(member_id == null) {
-			response.sendRedirect(request.getContextPath() + "/loginForm.do");
+		if(member_id == null && !(request.getRequestURI().equals("/namuduri/main.do"))) {
+			response.sendRedirect(request.getContextPath() + "/member/loginForm.do");
 			return false;
 		} else {
 			return true;

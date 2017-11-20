@@ -294,7 +294,6 @@ function fn_selectOrder() {
 	   comSubmit.submit();
  	  }
 }
-
 </script>
 </body>
 </html>
