@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/adminPage.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/adminPage.css" rel="stylesheet" type="text/css" />
 <title>도서 정보 등록</title>
 </head>
 <body>
@@ -14,9 +14,8 @@
 <h2 class="detail_h2">도서 정보 입력</h2>
 <form:form commandName="view" method="post" enctype="multipart/form-data">
 <table border=1 cellspacing=0 cellpadding=0 class="table_detail">
-	<c:if test="${booksModel!=null}">
-		<form:hidden path="book_num"/>
-		<form:hidden path="currentPage"/>
+	<c:if test="${view.book_num!=0&&view.book_num!=null}">
+		<form:hidden path="book_num" value="${view.book_num}"/>
 	<tr>
 		<th width=15%>도서 번호</th>
 		<td width=35%>${view.book_num}</td>
@@ -42,7 +41,8 @@
 	</tr>
 	<c:if test="${view.book_image!=null}">
 	<tr>
-		<td><img src="<%=cp%>/upload/${view.book_image}" width="100" height="150" border="0"/></td>
+		<td><img src="<%=cp%>/upload/${view.book_image}" width="100" height="150" border="0"/>
+			<form:hidden path="book_image" value="${view.book_image}"/></td>
 	</tr>
 	</c:if>
 	<tr>
