@@ -609,7 +609,7 @@ KH는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 �
             
                   <tr>
                      <td colspan="2" align="center"><br><br>
-                        <a href ="javascript: check();"><img src="<%=cp %>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
+                        <a href ="javascript:check();"><img src="<%=cp %>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
                            &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href = "javascript:window.location='loginForm.do';"><img src="<%=cp %>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
                         <br>

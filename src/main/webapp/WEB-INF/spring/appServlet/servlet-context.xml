@@ -26,6 +26,10 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<beans:bean id="SessionInterceptor" class="com.spring.member.SessionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
 			<beans:bean id="LoggerInterceptor" class="com.spring.logger.LoggerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

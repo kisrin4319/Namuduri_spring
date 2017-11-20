@@ -20,7 +20,7 @@
 							member_addr2, member_phone, member_mobile, member_join_date,
 							member_admin, member_bankname, member_refund_account, member_account_holder)
 					values(member_num_seq.NEXTVAL, #{member_id}, #{member_pw}, #{member_name},
-							#{member_jumin1}, #{member_jumin2}, #{member_email}, #{member_email_get},
+							#{member_jumin1}, #{member_jumin2}, #{member_email}, #{member_email_get, jdbcType=VARCHAR},
 							#{member_zipcode}, #{member_addr1}, #{member_addr2}, #{member_phone},
 							#{member_mobile}, sysdate, #{member_admin}, #{member_bankname},
 							#{member_refund_account}, #{member_account_holder})
