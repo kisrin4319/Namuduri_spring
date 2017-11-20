@@ -18,11 +18,11 @@
 <script type="text/javascript">
 
 var name = "${memberModel.member_name}";
-var zipcode ="${memberModel.member_zipcode }"
-var addr1 = "${memberModel.member_addr1 }"
-var addr2 = "${memberModel.member_addr2 }"
-var phone = "${memberModel.member_phone }"
-var mobile = "${memberModel.member_mobile }"
+var zipcode ="${memberModel.member_zipcode}";
+var addr1 = "${memberModel.member_addr1}";
+var addr2 = "${memberModel.member_addr2}";
+var phone = "${memberModel.member_phone}";
+var mobile = "${memberModel.member_mobile}";
 
 	function checkIt() {
 	var singleOrderform = document.getElementById("singleOrderform");
@@ -47,7 +47,7 @@ var mobile = "${memberModel.member_mobile }"
 			singleOrderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			singleOrderform.action = "listOrderComplete.do";
+			singleOrderform.action = "<%=cp%>/order/singleOrder.do";
 			singleOrderform.submit();
 		}
 	}
@@ -55,9 +55,9 @@ var mobile = "${memberModel.member_mobile }"
 		var singleOrderform = document.getElementById("singleOrderform");
 		
 		singleOrderform.order_receive_name.value = name;
-		singleOrderform.order_receive_zipcode.value =zipcode;
+		singleOrderform.order_receive_zipcode.value = zipcode;
 		singleOrderform.order_receive_addr1.value = addr1;
-		singleOrderform.order_receive_addr2.value =addr2;
+		singleOrderform.order_receive_addr2.value = addr2;
 		singleOrderform.order_receive_phone.value = phone;
 		singleOrderform.order_receive_mobile.value = mobile;
 	}
@@ -74,10 +74,10 @@ var mobile = "${memberModel.member_mobile }"
 	}
 
 	function orderzipCheck() {
-
-		var url = "orderZipCheck.do";
+		var url = "<%=cp%>/order/zipCheck.do";
 		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 	}
+
 </script>
 </head>
 <body class="body-order body-order pc">
@@ -95,6 +95,13 @@ var mobile = "${memberModel.member_mobile }"
 			<div id="content">
 				<div class="contents">
 					<form name="singleOrderform" id="singleOrderform" method="post">
+						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}"/>
+						<input type="hidden" name="order_book_count" value="${order_book_count}"/>
+						<input type="hidden" name="book_num" value="${book.book_num}" />
+						<input type="hidden" name="order_book_name" value="${book.book_name}" />
+						<input type="hidden" name="order_book_price" value="${book.book_price}" />
+						<input type="hidden" name="order_book_count" value="${order_book_count}" />
+						<input type="hidden" name="basket_num" value="${basket_num}" />				
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>

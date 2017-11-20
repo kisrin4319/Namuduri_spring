@@ -49,15 +49,16 @@
 	<put-attribute name="body" value="/WEB-INF/views/order/selectOrder.jsp" />
 	</definition> 
 	
-	<!-- 주문완료 -->
-	<definition name="basketorderComplete" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/order/orderComplete.jsp" />
+	<!-- 단일 주문완료 -->
+	<definition name="singleOrderComplete" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/order/singleOrderComplete.jsp" />
 	</definition>
 	
-	<definition name="listOrderComplete" extends="main">
-		<put-attribute name="body" value ="/WEB-INF/views/order/orderComplete2.jsp"/>
+	<!-- 여러개 주문 완료 -->
+	<definition name="multiOrderComplete" extends="main">
+		<put-attribute name="body" value ="/WEB-INF/views/order/multiOrderComplete.jsp"/>
 	</definition>
-
+	
 	<!-- 주문 취소 -->
 	<definition name="orderCancel1" extends="mypage1">
 		<put-attribute name="body" value="/WEB-INF/views/order/orderCancel.jsp" />

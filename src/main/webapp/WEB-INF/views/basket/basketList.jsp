@@ -75,7 +75,7 @@
 														<td class="ta-c this-product"><strong class="price"> <fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" /> 원
 														</strong>
 															<p class="add_currency"></p></td>
-														<td align="center"><a href="#this" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px; background-color: #5e6b9f; color: #ffffff">바로구매</a> <a href="#this" id="delete" onclick="fn_basketDelete(${basket_num})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px;"> 삭&nbsp;제 <input type="hidden" value="${row.basket_num}" />
+														<td align="center"><a href="#this" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px; background-color: #5e6b9f; color: #ffffff">바로구매</a> <a href="#this" id="delete" onclick="fn_basketDelete(${basket_num})" class="skinbtn point1 cart-orderselect" style="width: 85px; height: 45px; line-height: 50px;"> 삭&nbsp;제 <input type="hidden" value="${row.basket_num}" />
 														</a></td>
 													</tr>
 												</c:forEach>
@@ -247,12 +247,13 @@ function removeChar(event) {
       event.target.value = event.target.value.replace(/[^0-9]/g, ""); 
 }
 
-function singleOrder(basket_book_num, basket_book_count) {
+function singleOrder(basket_book_num, basket_book_count, basket_num) {
 	  var num = basket_book_num;
 	  var amount = basket_book_count;
-
+	  var basket_num = basket_num;
+	  
 	  if (confirm("주문 하시겠습니까?")) {
-	   location.href = '<%=cp%>/order/singleOrder.do?book_num='+num+'&order_book_count='+amount;
+	   location.href = '<%=cp%>/order/singleOrder.do?book_num='+num+'&order_book_count='+amount+'&basket_num='+basket_num;
 	  } else {
 	     alert("취소되었습니다");
 	     return false;
