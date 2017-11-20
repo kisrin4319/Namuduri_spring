@@ -34,14 +34,21 @@
 	
 	<!-- ========================ORDER======================== -->
 
-	<!-- 도서 바로구매 상세 -->
-	<definition name="multipleOrder" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/order/multipleOrder.jsp" />
-	</definition> 
-	<!-- 개인 바로구매 상세 -->
+	<!-- 단일 주문 폼 -->
 	<definition name="singleOrder" extends="main">
 		<put-attribute name="body" value ="/WEB-INF/views/order/singleOrder.jsp" />
 	</definition>
+	
+	<!-- 전체 주문 -->
+	<definition name="totalOrder" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/order/totalOrder.jsp" />
+	</definition> 
+	
+	<!-- 선택주문 -->
+	<definition name="selectOrder" extends="main">
+	<put-attribute name="body" value="/WEB-INF/views/order/selectOrder.jsp" />
+	</definition> 
+	
 	<!-- 주문완료 -->
 	<definition name="basketorderComplete" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/order/orderComplete.jsp" />

@@ -27,4 +27,5 @@ public interface BasketDao {
 	
 	//8. 장바구니 전체 삭제
 	public void BasketDeleteAll(String member_id);
+
 }

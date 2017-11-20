@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%
-	String cp = request.getContextPath();
-%>
+<% String cp = request.getContextPath(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -103,8 +102,8 @@
 						<!-- *** s:상품 리뷰정보 *** -->
 						<!-- ***orderClick*** -->
 						<div class="review">
-							<a href="#review">리뷰 <c:out value="${totalCount}"/>개</a>
-							${reviewCount}
+							<a href="#review">리뷰 <c:out value="${totalCount}" />개
+							</a> ${reviewCount}
 						</div>
 						<!-- *** //e:상품 리뷰정보 *** -->
 					</div>
@@ -126,7 +125,7 @@
 						<div class="box_detail_price" style="text-align: left;">
 							<h2>가격정보</h2>
 							<ul class="list_detail_price" style="padding-bottom: 0px; padding-top: 20px;">
-								<li>판매가 : <span class="sell_price" title="판매가"> <strong>${view.book_price}</strong>원
+								<li>판매가 : <span class="sell_price" title="판매가"> <strong><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />원</strong>
 								</span>
 								</li>
 								<li>배송비 : 무료</li>
@@ -148,11 +147,16 @@
 							</div>
 							<div class="button_set">
 								<!-- s:정상구매 -->
-								<!-- ***orderClick*** -->
-								<a href="javascript:isBasket(goods_num,goods_price);" class="btn_xlarge btn_blue">장바구니 담기</a>
-								<!-- ***orderClick*** -->
-								<a href="javascript:isBuy(${view.book_num});" class="btn_xlarge btn_blue2">바로구매</a>
-								<!-- //e:정상구매 -->
+								<c:choose>
+									<c:when test="${view.book_current_count == 0}">
+										<img src="<%=cp%>/img/6-2-sold-out-png-hd.png" width="100" style="padding-top: 40px;" />
+									</c:when>
+									<c:otherwise>
+										<a href="javascript:isBasket(goods_num,goods_price);" class="btn_xlarge btn_blue">장바구니 담기</a>
+										<!-- ***orderClick*** -->
+										<a href="javascript:isBuy(${view.book_num});" class="btn_xlarge btn_blue2">바로구매</a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -162,7 +166,7 @@
 				<div class="content_left">
 					<ul class="tab_detail_content" id="book_info">
 						<li class="on"><a href="#book_info">상품정보</a></li>
-						<li><a href="#review">회원리뷰 <span><c:out value="(${totalCount})"/></span></a></li>
+						<li><a href="#review">회원리뷰 <span><c:out value="(${totalCount})" /></span></a></li>
 						<li><a href="#guide">교환/반품/품절</a></li>
 					</ul>
 					<div class="box_detail_content">
@@ -171,7 +175,7 @@
 					</div>
 					<ul class="tab_detail_content" id="review">
 						<li><a href="#book_info">상품정보</a></li>
-						<li class="on"><a href="#review">회원리뷰 <span><c:out value="(${totalCount})"/></span></a></li>
+						<li class="on"><a href="#review">회원리뷰 <span><c:out value="(${totalCount})" /></span></a></li>
 						<li><a href="#guide">교환/반품/품절</a></li>
 					</ul>
 					<div class="box_detail_content">
@@ -187,77 +191,62 @@
 						</div>
 						<div id="ajax-goods-goodsreview-list">
 							<table id="js-review-board-table" class="review-board" cellspacing="0" border="1" style="margin-bottom: 18px;">
-									<colgroup>
-										<col width="13%" />
-										<col width=""/>
-										<col width="10%" />
-										<col width="10%" />
-									</colgroup>
-									<thead>
-										<tr>
-											<th>평점</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>작성일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${totalCount == 0}">
-												<tr class="not-record">
-													<td colspan="4" class="no-data">등록된 상품후기가 없습니다.</td>
+								<colgroup>
+									<col width="13%" />
+									<col width="" />
+									<col width="10%" />
+									<col width="10%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th>평점</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>작성일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${totalCount == 0}">
+											<tr class="not-record">
+												<td colspan="4" class="no-data">등록된 상품후기가 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="review" items="${review}" varStatus="stat">
+												<tr class="preview js-data-row">
+													<td><c:if test="${review.star_point == 5}">
+															<img src="<%=cp%>/img/star5-88x15.png" border="0" />
+														</c:if> <c:if test="${review.star_point == 4}">
+															<img src="<%=cp%>/img/star4-88x15.png" border="0" />
+														</c:if> <c:if test="${review.star_point == 3}">
+															<img src="<%=cp%>/img/star3-88x15.png" border="0" />
+														</c:if> <c:if test="${review.star_point == 2}">
+															<img src="<%=cp%>/img/star2-88x15.png" border="0" />
+														</c:if> <c:if test="${review.star_point == 1}">
+															<img src="<%=cp%>/img/star1b.jpg" border="0" />
+														</c:if> <c:if test="${review.star_point == 0}">
+															<img src="<%=cp%>/img/star0-88x15.png" border="0" />
+														</c:if></td>
+													<td class="txt-la"><span> <a href="javascript:void(0)" class="js-btn-view">${review.review_content}</a> <img src="images/common/icon_board_new.png" />
+													</span></td>
+													<td class="txt-la" style="padding-left: 0px;">${review.member_id}</td>
+													<td><fmt:formatDate value="${review.review_regdate }" pattern="yy.MM.dd" /></td>
 												</tr>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="review" items="${review}" varStatus="stat">
-													<tr class="preview js-data-row">
-														
-														<td>
-															<c:if test="${review.star_point == 5}">
-																<img src="<%=cp%>/img/star5-88x15.png" border="0" />
-															</c:if> 
-															<c:if test="${review.star_point == 4}">
-																<img src="<%=cp%>/img/star4-88x15.png" border="0" />
-															</c:if> 
-															<c:if test="${review.star_point == 3}">
-																<img src="<%=cp%>/img/star3-88x15.png" border="0" />
-															</c:if> 
-															<c:if test="${review.star_point == 2}">
-																<img src="<%=cp%>/img/star2-88x15.png" border="0" />
-															</c:if> 
-															<c:if test="${review.star_point == 1}">
-																<img src="<%=cp%>/img/star1b.jpg" border="0" />
-															</c:if>
-															<c:if test="${review.star_point == 0}">
-																<img src="<%=cp%>/img/star0-88x15.png" border="0" />
-															</c:if>
-															</td>
-															
-														<td class="txt-la">
-														<span> 
-														<a href="javascript:void(0)" class="js-btn-view">${review.review_content}</a> 
-														<img src="images/common/icon_board_new.png" />
-														</span></td>
-														<td class="txt-la" style="padding-left: 0px;">${review.member_id}</td>
-														<td>
-														<fmt:formatDate value="${review.review_regdate }" pattern="yy.MM.dd" />
-														</td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
-							 <nav>
-							<ul class="pagination pagination-sm">
-							${pagingHtml}
+							<nav>
+							<ul class="pagination pagination-sm">${pagingHtml}
 							</ul>
 							</nav>
 						</div>
 					</div>
 					<ul class="tab_detail_content" id="guide">
 						<li><a href="#book_info">상품정보</a></li>
-						<li><a href="#review">회원리뷰 <span><c:out value="(${totalCount})"/></span></a></li>
+						<li><a href="#review">회원리뷰 <span><c:out value="(${totalCount})" /></span></a></li>
 						<li class="on"><a href="#guide">교환/반품/품절</a></li>
 					</ul>
 					<div class="box_detail_content">
