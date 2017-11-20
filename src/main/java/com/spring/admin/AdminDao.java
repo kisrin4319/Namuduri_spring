@@ -2,9 +2,8 @@ package com.spring.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.spring.book.BooksModel;
+import com.spring.order.OrderModel;
 
 public interface AdminDao {
 	
@@ -18,12 +17,19 @@ public interface AdminDao {
 	
 	/*List<BooksModel> booksUseNList();*/
 	
-	public void insertBook(BooksModel book, HttpServletRequest request);
+	public BooksModel selectNewest();
 	
-	public void modifyBook(BooksModel book, HttpServletRequest request);
+	public BooksModel selectOne(int book_num);
+	
+	public void insertBook(BooksModel book);
+	
+	public void modifyBook(BooksModel book);
 	
 	public void deleteBook(int book_num);
 	
 	public void deleteReview(int review_num);
 	
+	public List<OrderModel> selectOrderAll();
+	
+	public void modifyOrder(OrderModel book);
 }

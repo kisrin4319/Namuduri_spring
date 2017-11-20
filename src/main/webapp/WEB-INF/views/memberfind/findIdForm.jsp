@@ -48,7 +48,7 @@ function submit() {
 		<div class ="popup_shadow">
 			<div class ="popup_wrap">
 				<div class ="tit">
-					<h1 class ="title_h_cartlist">주소 찾기</h1>
+					<h1 class ="title_h_cartlist">아이디 찾기</h1>
 				</div>
 				
 				<div class ="popup_container">

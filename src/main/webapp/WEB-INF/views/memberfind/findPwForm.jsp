@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>비밀번호 찾기</title>
-<link rel = "stylesheet" href ="<%= cp %>/css/style1.css" type="text/css" />
+<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
+>>>>>>> e9cc1ccc9c1bd2461238f630d4cfc2bffe8c1a32
 <script language="javascript">
 function submit() {
 	var fw = document.findpwform;
@@ -19,8 +20,20 @@ function submit() {
 		fw.member_email.focus();
 	}
 	else {
-		fw.action ="memberPwFind.do";
-		fw.submit();
+		$.ajax({
+			url:'/namuduri/member/memberPwFind.do',
+            type:'post',
+            data:$('form').serialize(),
+            success:function(result){
+            	if(result.returnVal == '1'){
+            		alert('당신의 비밀번호는' + result.member_pw + '입니다.');
+            		return false;
+            	}else {
+            		alert('아이디 또는 이메일이 바르지 않습니다.');
+            		return false;
+            	}
+            }
+		})
 	}
 }
 </script>
@@ -48,9 +61,9 @@ function submit() {
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<a href ="javascript: submit();"><img src="member/images/btn_ok.gif" value="회원가입" class="button"/></a>
+						<a href ="javascript: submit();"><img src="<%=cp%>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href = "javascript:window.close();"><img src="member/images/btn_cancel.gif" value="가입취소" class="button" /></a>
+						<a href = "javascript:window.close();"><img src="<%=cp%>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
 					<br>
 					</td>
 				</tr>

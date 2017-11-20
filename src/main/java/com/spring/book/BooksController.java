@@ -49,7 +49,7 @@ public class BooksController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (searchKeyword == null || searchNum == 0) {
+		if (searchKeyword == null) {
 			booksList = booksService.booksList(book_category);
 		} else {
 			map.put("searchNum", searchNum);
@@ -135,8 +135,7 @@ public class BooksController {
 	@RequestMapping(value = "/books/review.do", method = RequestMethod.GET)
 	public ModelAndView reviewForm(HttpServletRequest request, HttpSession session) {
 
-		session_id = "test3";
-		// (String) session.getAttribute("member_id");
+		session_id = (String) session.getAttribute("member_id");
 
 		int book_num = Integer.parseInt(request.getParameter("book_num"));
 		String book_name = request.getParameter("book_name");
@@ -155,7 +154,7 @@ public class BooksController {
 
 		ReviewModel writeReview = new ReviewModel();
 
-		session_id = "test3";
+		session_id = (String) session.getAttribute("member_id");
 
 		writeReview.setBook_num(book_num);
 		writeReview.setMember_id(session_id);

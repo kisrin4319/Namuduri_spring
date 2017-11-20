@@ -28,19 +28,25 @@ public class MypageService implements MypageDao {
 	
 	//3. 회원 탈퇴
 	@Override
-	public void memberDelete(MemberModel memberModel) {
-		sqlSessionTemplate.delete("member.memberOut", memberModel);
+	public Object memberDelete(MemberModel memberModel) {
+		return sqlSessionTemplate.delete("member.memberDelete", memberModel);
 	}
 	
 	//4. 회원정보 수정
 	@Override
-	public void memberModify(MemberModel memberModel) {
-		sqlSessionTemplate.update("member.memberModify", memberModel);
+	public Object memberModify(MemberModel memberModel) {
+		return sqlSessionTemplate.update("member.memberModify", memberModel);
 	}
 	
 	//5. 주문상세내역 보기
 	@Override
 	public void memberOrderDetail(OrderDetailModel orderDetailModel) {
 		sqlSessionTemplate.selectOne("order.memberOrderDetail", orderDetailModel);
+	}
+	
+	//6. 주문내역 취소
+	@Override
+	public Object memberOrderCancel(OrderDetailModel orderDetailModel) {
+		return sqlSessionTemplate.delete("order.memberOrderCancel", orderDetailModel);
 	}
 }

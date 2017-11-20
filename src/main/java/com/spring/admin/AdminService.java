@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.book.BooksModel;
+import com.spring.order.OrderModel;
 
 @Service
 public class AdminService implements AdminDao {
@@ -24,9 +25,19 @@ public class AdminService implements AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("book.selectBooksAll");
 	}
+	
+	@Override
+	public BooksModel selectOne(int book_num) {
+		return sqlSessionTemplate.selectOne("book.adminSelectOne", book_num);
+	}
 
+	@Override
+	public BooksModel selectNewest() {
+		return sqlSessionTemplate.selectOne("book.selectNewest");
+	}
+	
 	@Override //도서 정보 등록
-	public void insertBook(BooksModel book, HttpServletRequest request) {
+	public void insertBook(BooksModel book) {
 		// TODO Auto-generated method stub
 		
 		/*MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -41,7 +52,7 @@ public class AdminService implements AdminDao {
 	}
 
 	@Override //도서 정보 수정
-	public void modifyBook(BooksModel book, HttpServletRequest request) {
+	public void modifyBook(BooksModel book) {
 		// TODO Auto-generated method stub
 		
 		sqlSessionTemplate.update("book.modifyBook", book);
@@ -57,6 +68,17 @@ public class AdminService implements AdminDao {
 	public void deleteReview(int review_num) {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("book.deleteReview", review_num);
+	}
+
+	@Override
+	public List<OrderModel> selectOrderAll() {
+		return sqlSessionTemplate.selectList("order.selectAll");
+	}
+
+	@Override
+	public void modifyOrder(OrderModel book) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("order.modifyOrder", book);
 	}
 
 }

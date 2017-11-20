@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -23,8 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="basketSelect" resultType="BasketModel">
 		SELECT * FROM BASKET WHERE BASKET_NUM = #{BASKET_NUM}
 	</select>
-	
-	<!-- 5. 주문상세내역 보기 -->
+
+	<!-- 주문상세내역 보기 -->
 	<select id="memberOrderDetail" resultType="OrderDetailModel">
 		SELECT go.*, me.member_phone, me.member_email, tb.goods_image, tb.goods_num, od.*
 		FROM GOODS_ORDER go JOIN MEMBER me ON
@@ -32,5 +32,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		od.order_trade_num = go.order_trade_num JOIN textbook tb ON
 		tb.goods_num = od.goods_num WHERE go.order_trade_num = #{order_trade_num}
 	</select>
+	
+	<!-- 주문내역 취소 -->
+	<delete id="orderCancel">
+		DELETE FROM GOODS_ORDER
+		WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</delete>
 
+	<select id="selectAll" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK
+	</select>
+	
+	<update id="modifyOrder" parameterType="OrderModel">
+		 UPDATE ORDER_BOOK SET PAYMENT_STATUS = #{payment_status}, 
+		 					ORDER_TRANS_STATUS = #{order_trans_status}, 
+		 					ORDER_USE_YN = #{order_use_yn} 
+		 			WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</update>
+	
 </mapper>

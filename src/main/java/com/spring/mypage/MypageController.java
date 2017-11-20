@@ -27,6 +27,15 @@ public class MypageController {
 	ModelAndView mv;
 	String session_id;
 	
+	//mypage
+	@RequestMapping(value = "/mypage.do")
+	public ModelAndView mypage() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("mypage1");
+		return mv;
+	}
+	
 	//1. 아이디 찾기
 	@RequestMapping(value = "/member/memberIdFindView.do")
 	public ModelAndView memberIdFind() {
@@ -66,56 +75,125 @@ public class MypageController {
 	}
 	
 	//비밀번호 찾기
-	@RequestMapping(value = "/member/memberPwFind.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/memberPwFindView.do")
 	public ModelAndView memberPwFind() {
 		mv = new ModelAndView();
 		
 		mv.setViewName("findPw");
 		return mv;
 	}
-	
-	@RequestMapping(value = "/member/memberPwFind.do", method = RequestMethod.POST)
-	public ModelAndView memberPwFind(HttpServletRequest request, HttpSession session) throws Exception {
+
+	@RequestMapping(value = "/member/memberPwFind.do")
+	@ResponseBody
+	public Map<String, Object> memberPwFind(HttpServletRequest request, HttpSession session) throws Exception {
 		
-		session_id = "test3";
+		Map<String, Object> object = new HashMap<String, Object>();
+		
+		mv = new ModelAndView();
+		MemberModel memberModel = new MemberModel();
+		
+		memberModel.setMember_id(session_id);
+
+		memberModel.setMember_id(request.getParameter("member_id"));
+		memberModel.setMember_email(request.getParameter("member_email"));
+		
+		MemberModel member = mypageService.memberPwFind(memberModel);
+		if(member != null) {
+			if(memberModel.getMember_id().equals(member.getMember_id()) && memberModel.getMember_email().equals(member.getMember_email())) {
+				object.put("returnVal", "1");
+				object.put("member_pw", member.getMember_pw());
+			} else {
+				object.put("returnVal", "0");
+			}
+		} else {
+			object.put("returnVal", "0");
+
+		}
+		return object;
+	}
+	
+	//3. 회원 탈퇴
+	@RequestMapping(value = "/member/memberDeleteView.do")
+	public ModelAndView memberDelete() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("memberDelete1");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/member/memberDelete.do")
+	@ResponseBody
+	public Map<String, Object> memberDelete(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		Map<String, Object> object = new HashMap<String, Object>();
+		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
 		
-		/*String id = request.getParameter("member_id");
-		String email = request.getParameter("member_email");
-		
-		System.out.println(id + email);*/
-		
 		memberModel.setMember_id(request.getParameter("member_id"));
-		memberModel.setMember_email(request.getParameter("member_email"));
+		memberModel.setMember_pw(request.getParameter("member_pw"));
 		
-		/*memberModel.setMember_id(memberModel.getMember_id());
-		memberModel.setMember_email(memberModel.getMember_email());*/
-		
-		if(memberModel.getMember_id().equals(session_id)) {
-			mypageService.memberPwFind(memberModel);
-			mv.setViewName("findPw");
+		Object member = mypageService.memberDelete(memberModel);
+		if(member != null) {
+			if(memberModel.getMember_id().equals("member_id") && memberModel.getMember_pw().equals("member_pw")) {
+				object.put("returnVal", "1");
+			} else {
+				object.put("returnVal", "0");
+			}
 		} else {
-			mv.setViewName("findPw");
+			object.put("returnVal", "0");
 		}
-		return mv;
-	}
-	
-	/*//3. 회원 탈퇴
-	@RequestMapping("/mypage/memberOut.do")
-	public ModelAndView memberOut(HttpServletRequest request, HttpSession session) throws Exception {
-		
+		return object;
 	}
 	
 	//4. 회원정보 수정
-	@RequestMapping("/mypage/memberModify.do")
-	public ModelAndView memberModify(HttpServletRequest request, HttpSession session) throws Exception {
+	@RequestMapping(value = "/member/memberModifyView.do")
+	public ModelAndView memberModify() {
+		mv = new ModelAndView();
 		
+		mv.setViewName("memberModify");
+		return mv;
 	}
 	
-	//5. 주문상세내역 보기
+	@RequestMapping(value = "/member/memberModify.do")
+	@ResponseBody
+	public Map<String, Object> memberModify(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		Map<String, Object> object = new HashMap<String, Object>();
+		
+		mv = new ModelAndView();
+		MemberModel memberModel = new MemberModel();
+		
+		memberModel.setMember_id(session_id);
+		
+		memberModel.setMember_pw(request.getParameter("member_pw"));
+		memberModel.setMember_name(request.getParameter("member_name"));
+		memberModel.setMember_jumin1(Integer.parseInt(request.getParameter("member_jumin1")));
+		memberModel.setMember_jumin2(Integer.parseInt(request.getParameter("member_jumin2")));
+		memberModel.setMember_zipcode(request.getParameter("member_zipcode"));
+		memberModel.setMember_addr1(request.getParameter("member_addr1"));
+		memberModel.setMember_addr2(request.getParameter("member_addr2"));
+		memberModel.setMember_mobile(request.getParameter("member_mobile"));
+		memberModel.setMember_phone(request.getParameter("member_phone"));
+		memberModel.setMember_email(request.getParameter("member_email"));
+		memberModel.setMember_email_get(request.getParameter("member_email_get"));
+		
+		Object member = mypageService.memberModify(memberModel);
+		if(member != null) {
+			if(memberModel.getMember_pw().equals("member_pw")) {
+				object.put("returnVal", "1");
+			} else {
+				object.put("returnVal", "0");
+			}
+		} else {
+			object.put("returnVal", "0");
+		}
+		return object;
+	}
+	
+	/*//5. 주문상세내역 보기
 	@RequestMapping("/mypage/memberOrderDetail.do")
 	public ModelAndView memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
 		

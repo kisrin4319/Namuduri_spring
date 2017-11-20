@@ -36,7 +36,7 @@ public class MemberController {
 	
 	//로그인 처리
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request, MemberModel membermodel) {
+	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request) {
 		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
@@ -50,10 +50,7 @@ public class MemberController {
 		if (result != null){
 			
 			HttpSession session = request.getSession();
-			
-			session.setAttribute("memberModel", result);
-			session.setAttribute("session_member_id", result.getMember_id());
-			session.setAttribute("session_member_pw", result.getMember_pw());
+			session.setAttribute("member_id", result.getMember_id());
 			
 			mv.setViewName("main");
 			return mv;
@@ -68,14 +65,12 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/member/logOut.do")
-	public ModelAndView logOut(HttpServletRequest request, MemberModel memberModel) {
-		
-		HttpSession session = request.getSession(false);
-		
+	public ModelAndView logOut(HttpSession session) {
+				
 		if(session != null) {
 			session.invalidate();
 		}
-		mv.setViewName("member/loginForm");
+		mv.setViewName("redirect:/main.do");
 		return mv;
 	}
 	
@@ -96,22 +91,11 @@ public class MemberController {
 		mv = new ModelAndView();
 		
 		String area3;
-		/*int zipChk=100;*/
 		
 		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
 		area3 = request.getParameter("area3");
 		
 		mv.addObject("zipcodeList", zipcodeList);
-		
-		/*zipcodeList = memberService.zipCheck(zip);
-		if(zipcodeList.size() == 0) {
-			zipChk = 0;
-		} else {
-			zipChk = 1;
-		}
-		mv.addObject("zipChk",zipChk);
-		mv.setViewName("member/zipCheck");
-		return mv;*/
 		
 		if(area3 != null) {
 			zipcodeList = memberService.zipCheck(area3);
@@ -167,11 +151,10 @@ public class MemberController {
 		mv= new ModelAndView();
 		
 		String member_id = request.getParameter("member_id");
-		MemberModel memberModel = new MemberModel();
-		memberModel = memberService.idCheck(member_id);
+		int count = memberService.idCheck(member_id);
 		
+		mv.addObject("count", count);
 		mv.addObject("member_id", member_id);
-		mv.addObject("memberModel", memberModel);
 		mv.setViewName("member/idCheck");
 		
 		return mv;

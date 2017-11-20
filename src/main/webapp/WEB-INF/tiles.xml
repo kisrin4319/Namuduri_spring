@@ -126,21 +126,6 @@
 	<definition name="findPw" extends="mypage1">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
 	</definition>
-		
-	<!-- 관리자 회원관리 리스트 -->
-	<definition name="adminMemberList" extends="adminmain">
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/memberList.jsp" />
-	</definition>
-
-	<!-- 관리자 회원관리 자세히보기 -->
-	<definition name="adminMemberviews" extends="adminmain">
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/memberviews.jsp" />
-	</definition>
-	
-	<!-- 관리자 회원 수정 -->
-	<definition name="adminMemberModify" extends="adminmain">
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/modifyMember.jsp" />
-	</definition>
 
 	<!-- ========================BOARD======================== -->
 	<!-- 질문답변 게시판 -->
@@ -205,12 +190,8 @@
 	<!-- Admin 페이지 -->
 	<definition name="admin" template="/WEB-INF/views/tiles/layout3.jsp">
 		<put-attribute name="title" value="관리자페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader2.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/admin/adminviews.jsp" />
-	</definition>
-	
-	<definition name="adminmain" extends="admin">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminMain.jsp" />
 	</definition>
 	
 	<!-- ========================관리자 회원관리 페이지======================== -->
@@ -218,32 +199,32 @@
 	<!-- 관리자 회원관리 리스트 -->
 	<definition name="adminMemberList" extends="admin">
 		<put-attribute name="title" value="관리자 : 회원 정보 관리" />
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/memberList.jsp" />
 	</definition>
 
 	<!-- 관리자 회원관리 자세히보기 -->
-	<definition name="adminMemberviews" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberviews.jsp" />
+	<definition name="adminMemberDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/memberDetail.jsp" />
 	</definition>
 	
 	<!-- 관리자 회원 수정 -->
 	<definition name="adminMemberModify" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/member/adminModifyMember.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/memberModify.jsp" />
 	</definition>
 	
 	<!-- ========================관리자 상품관리 페이지======================== -->
 	
 	<!-- 관리자 상품 리스트 -->
-	<definition name="adminTextbookList" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookList.jsp" />
+	<definition name="adminBookList" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/bookList.jsp" />
 	</definition>
 	<!-- 관리자 상품(책)상세 페이지 -->
-	<definition name="adminTextbookDetail" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookDetail.jsp" />
+	<definition name="adminBookDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/bookDetail.jsp" />
 	</definition>
 	<!-- 관리자 상품 등록 페이지 -->
-	<definition name="adminTextbookWrite" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/textbook/adminTextbookWrite.jsp" />
+	<definition name="adminBookWrite" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/bookWrite.jsp" />
 	</definition>
 
 
@@ -251,11 +232,11 @@
 	
 	<!-- 관리자 상품 주문 리스트 -->
 	<definition name="adminOrderList" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/orderList.jsp" />
 	</definition>
 
 	<!-- 관리자 상품 정보 조회 -->
 	<definition name="adminOrderDetail" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderDetail.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/orderDetail.jsp" />
 	</definition>
 </tiles-definitions>
