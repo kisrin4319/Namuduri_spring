@@ -100,7 +100,7 @@ public class MemberController {
 			
 			mv = new ModelAndView();
 			
-			mv.setViewName("member/memberInfo");
+			mv.setViewName("memberInfo");
 			return mv;
 		} else { 
 			memberService.insertMember(memberModel);
@@ -127,7 +127,7 @@ public class MemberController {
 		return mv;
 	}
 	
-		//우편번호 검색 폼
+	//우편번호 검색 폼
 	@RequestMapping(value="/member/zipCheckForm.do", method=RequestMethod.GET)
 	public ModelAndView zipCheckForm(HttpServletRequest request) throws Exception {
 			
@@ -159,4 +159,6 @@ public class MemberController {
 		mv.setViewName("member/zipCheck");
 		return mv;
 	}
+
+	
 }
