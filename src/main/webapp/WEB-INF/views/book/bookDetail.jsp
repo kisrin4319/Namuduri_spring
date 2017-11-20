@@ -128,7 +128,7 @@
 								<li>판매가 : <span class="sell_price" title="판매가"> <strong><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />원</strong>
 								</span>
 								</li>
-								<li>배송비 : 무료</li>
+								<li>배송비 : 5,000원 (10만원 이상 구매 시 무료배송)</li>
 							</ul>
 						</div>
 						<!-- *** //e:상품 가격정보 *** -->

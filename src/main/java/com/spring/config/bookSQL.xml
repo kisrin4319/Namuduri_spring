@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY BOOK_DATE DESC
 	</select>
 	
+	<!-- 카테고리 도서 목록  -->
 	<select id="selectBookList" resultType="BooksModel" parameterType="String">
 		<include refid="select-bookall" />
 		WHERE BOOK_USE_YN = '1'
@@ -27,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		ORDER BY BOOK_DATE DESC
 	</select>
-	
+
 	<!-- 도서 검색 목록 -->
 	<select id="selectSearchList" parameterType="map" resultType="BooksModel">
 		<include refid="select-bookall" />
@@ -56,7 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="select-bookall" />
 		<include refid="where-goodsnum" />
 	</select>
-	
+
+	<!-- 리뷰 리스트 -->
 	<select id="adminSelectOne" resultType="BooksModel">
 		<include refid="select-bookall" />
 		WHERE BOOK_NUM = #{BOOK_NUM}
@@ -71,18 +73,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 리뷰 리스트 -->
 	<select id="selectReviewList" resultType="ReviewModel">
-		SELECT * FROM REVIEW
+		SELECT * 
+		FROM REVIEW
 		WHERE BOOK_NUM = #{BOOK_NUM} ORDER BY REVIEW_REGDATE DESC
 	</select>
 
-	<!-- 리뷰 작성 -->
+	<!-- 회원 리뷰 작성 -->
 	<insert id="reviewWrite" parameterType="ReviewModel">
 		INSERT INTO
-		REVIEW(REVIEW_NUM, BOOK_NUM, MEMBER_ID, REVIEW_PW, REVIEW_CONTENT,
-		REVIEW_REGDATE, STAR_POINT)
-		VALUES(REVIEW_NUM_SEQ.nextVal, #{book_num},
-		#{member_id}, #{review_pw}, #{review_content}, sysdate,
-		#{star_point})
+		REVIEW(REVIEW_NUM, BOOK_NUM, MEMBER_ID, REVIEW_PW, REVIEW_CONTENT, REVIEW_REGDATE, STAR_POINT)
+		VALUES(REVIEW_NUM_SEQ.nextVal, #{book_num}, #{member_id}, #{review_pw}, #{review_content}, sysdate, #{star_point})
 	</insert>
 	
 	<!-- 도서 작성 -->

@@ -78,13 +78,8 @@
 	}
 
 	function orderzipCheck() {
-
-		var url = "orderZipCheck.do";
-		window
-				.open(
-						url,
-						"post",
-						"toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+		var url = "<%=cp%>/order/zipCheck.do";
+		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 	}
 </script>
 </head>
