@@ -5,23 +5,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="order">
 
-	<!-- 전체 주문 합계금액 -->
+	<!-- 1. 전체 주문 합계금액 -->
 	<select id="totalSum" resultType="int">
 		SELECT NVL(SUM(basket_book_price*basket_book_count),0)
 		FROM BASKET
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 
-	<!-- 선택 주문 합계금액 -->
+	<!-- 2. 선택 정보 꺼내오기 -->
+	<select id="basketSelect" resultType="BasketModel">
+		SELECT * FROM BASKET WHERE	BASKET_NUM = #{BASKET_NUM}
+	</select>
+
+	<!-- 3. 선택 주문 합계금액 -->
 	<select id="selectSum" resultType="int">
-		SELECT NVL(SUM(basket_book_price*basket_book_count),0) 
-		FROM BASKET 
+		SELECT NVL(SUM(basket_book_price*basket_book_count),0)
+		FROM BASKET
 		WHERE BASKET_NUM = #{BASKET_NUM}
 	</select>
 	
-	<!-- 선택 주문 -->
-	<select id="basketSelect" resultType="BasketModel">
-		SELECT * FROM BASKET WHERE BASKET_NUM = #{BASKET_NUM}
+	<!-- 4. 주문완료 OrderModel -->
+	<insert id="orderBook" parameterType="OrderModel">
+		INSERT INTO ORDER_BOOK (
+		ORDER_TRADE_NUM, 
+		ORDER_TRANS_NUM, 
+		ORDER_RECEIVE_NAME,
+		ORDER_RECEIVE_ZIPCODE,
+		ORDER_RECEIVE_ADDR1, 
+		ORDER_RECEIVE_ADDR2, 
+		ORDER_RECEIVE_MOBILE, 
+		ORDER_RECEIVE_PHONE, 
+		ORDER_RECEIVE_MEMO, 
+		ORDER_RECEIVE_MONEYSUM,  
+		ORDER_TRADE_PAYER, 
+		ORDER_REGDATE, 
+		MEMBER_ID, 
+		ORDER_BANK_NAME, 
+		ORDER_BANK_NUM
+		) VALUES (
+		#{order_trade_num},
+		#{order_trans_num}, 
+		#{order_receive_name}, 
+		#{order_receive_zipcode}, 
+		#{order_receive_addr1}, 
+		#{order_receive_addr2},
+		#{order_receive_mobile},
+		#{order_receive_phone},
+		#{order_receive_memo},
+		#{order_receive_moneysum},
+		#{order_trade_payer},
+		sysdate,
+		#{member_id},
+		#{order_bank_name},
+		#{order_bank_num}
+		)
+	</insert>
+	
+	<!-- 5. 주문완료 OrderDetailModel -->
+ 	<insert id="orderDetail" parameterType="OrderDetailModel">
+ 	INSERT INTO ORDER_DETAIL(
+ 	ORDER_TRADE_NUM,
+ 	BOOK_NUM,
+ 	ORDER_BOOK_NAME,
+ 	ORDER_BOOK_PRICE,
+ 	ORDER_BOOK_COUNT
+ 	) VALUES (
+ 	#{order_trade_num},
+ 	#{book_num},
+ 	#{order_book_name},
+ 	#{order_book_price},
+ 	#{order_book_count}
+ 	)
+ 	</insert>
+ 
+	<!-- 6. 주문정보 가져오기 -->
+	<select id="getOrder" resultType="OrderModel">
+	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = ${order_trade_num}
 	</select>
 
 	<!-- 주문상세내역 보기 -->
@@ -33,12 +92,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		tb.goods_num = od.goods_num WHERE go.order_trade_num = #{order_trade_num}
 	</select>
 	
+	<!-- 7. 주문 도서정보 가져오기 -->
+	<select id="getOrderDetail" resultType="OrderDetailModel">
+	SELECT * FROM ORDER_DETAIL WHERE ORDER_TRADE_NUM = ${order_trade_num}
+	</select>
+	
+	<!-- 8. 주문 후 장바구니 삭제하기 -->
+	<delete id="delBasket">
+		DELETE FROM BASKET WHERE BASKET_NUM = #{basket_num}
+	</delete>
+	
+	<!-- 주문완료 후 재고 정리 -->
+	<update id="stock">
+		UPDATE BOOK SET BOOK_CURRENT_COUNT = #{book_current_count}, BOOK_SELL_COUNT = #{book_sell_count} 
+		WHERE BOOK_NUM = #{book_num} 
+	</update>
+
 	<!-- 주문내역 취소 -->
 	<delete id="orderCancel">
 		DELETE FROM GOODS_ORDER
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</delete>
-
+	
 	<select id="selectAll" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK
 	</select>
@@ -49,5 +124,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 					ORDER_USE_YN = #{order_use_yn} 
 		 			WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
-	
 </mapper>
