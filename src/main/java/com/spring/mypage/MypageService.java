@@ -40,8 +40,8 @@ public class MypageService implements MypageDao {
 	
 	//5. 주문상세내역 보기
 	@Override
-	public void memberOrderDetail(OrderDetailModel orderDetailModel) {
-		sqlSessionTemplate.selectOne("order.memberOrderDetail", orderDetailModel);
+	public OrderDetailModel memberOrderDetail(OrderDetailModel orderDetailModel) {
+		return sqlSessionTemplate.selectOne("order.memberOrderDetail", orderDetailModel);
 	}
 	
 	//6. 주문내역 취소

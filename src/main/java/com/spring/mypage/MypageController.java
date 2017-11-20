@@ -155,7 +155,6 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "/member/memberModify.do")
-	@ResponseBody
 	public Map<String, Object> memberModify(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		Map<String, Object> object = new HashMap<String, Object>();
@@ -178,21 +177,26 @@ public class MypageController {
 		memberModel.setMember_email_get(request.getParameter("member_email_get"));
 		
 		int member = mypageService.memberModify(memberModel);
-		/*if(member != null) {
-			if(memberModel.getMember_pw().equals("member_pw")) {
-				object.put("returnVal", "1");
-			} else {
-				object.put("returnVal", "0");
-			}
-		} else {
+		
+		/*if(member > 0) {
+			object.put("returnVal", "1");
+		}else {
 			object.put("returnVal", "0");
 		}*/
 		return object;
 	}
 	
-	/*//5. 주문상세내역 보기
-	@RequestMapping("/mypage/memberOrderDetail.do")
-	public ModelAndView memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
+	//5. 주문상세내역 보기
+	/*@RequestMapping("/order/memberOrderDetailView.do")
+	public Map<String, Object> memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		Map<String, Object> object = new HashMap<String, Object>();
+		
+		mv = new ModelAndView();
+		MemberModel memberModel = new MemberModel();
+		
+		memberModel.setMember_id(session_id);
+		
 		
 	}*/
 	
