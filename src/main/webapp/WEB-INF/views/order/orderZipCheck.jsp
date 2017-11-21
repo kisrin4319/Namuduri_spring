@@ -11,8 +11,8 @@
 <title>우편번호검색</title>
 <link rel="stylesheet" href="<%=cp%>/css/style1.css" type="text/css" />
 <script language="JavaScript">
-
-   function dongCheck() {
+	
+function dongCheck() {
       
       if(document.zipform.area3.value=="") {
          alert("동이름을 입력하세요.");
@@ -22,13 +22,21 @@
       
    }
    
-   function sendAddress(zipcode, area1, area2, area3, area4) {
+   function sendAddress(zipcode, area1, area2, area3, area4, form) {
       var address = area1+" "+area2+" "+area3+" "+area4;
+      var num = form;
       
+      if(num == 1) {
       opener.document.singleOrderform.order_receive_zipcode.value = zipcode;
       opener.document.singleOrderform.order_receive_addr1.value = address;
       opener.document.singleOrderform.order_receive_addr2.focus();
+      }
       
+      else if(num == 2) {
+    	  opener.document.totalOrderform.order_receive_zipcode.value = zipcode;
+    	  opener.document.totalOrderform.order_receive_addr1.value = address;
+          opener.document.totalOrderform.order_receive_addr2.focus();  
+      }
       self.close();
    }
 
@@ -51,10 +59,7 @@
 						<table width="500" border="0" cellpadding="0" cellspacing="0" class="zip">
 							<br>
 							<tr>
-								<td align="center">동이름 입력 : 
-								<input type="text" name="area3" size="20" maxlength="50"><input type="button" value="검  색" onclick="dongCheck();">
-								<input type="hidden" name="check" value="n">
-								</td>
+								<td align="center">동이름 입력 : <input type="text" name="area3" size="20" maxlength="50"><input type="button" value="검  색" onclick="dongCheck();"><input type="hidden" name="check" value="n"></td>
 							</tr>
 							<tr>
 								<td height="30"></td>
@@ -71,26 +76,27 @@
 					</form>
 					<c:choose>
 						<c:when test="${zipcodeList == null}">
-						<tr>
-							<td align="center"><br>검색된 결과가 없습니다. </td>
-						</tr>
+							<tr>
+								<td align="center"><br>검색된 결과가 없습니다. </td>
+							</tr>
 						</c:when>
 						<c:otherwise>
-						<tr>
-							<td align="center"></td>
-							<c:forEach var="zip" items="${zipcodeList}">
-								<div class="box_detail_address2 bg_blue margin_top10">
-									<tr>
-										<td><a href="javascript:sendAddress('${zip.zipcode}'
+							<tr>
+								<td align="center"></td>
+								<c:forEach var="zip" items="${zipcodeList}">
+									<div class="box_detail_address2 bg_blue margin_top10">
+										<tr>
+											<td><a href="javascript:sendAddress('${zip.zipcode}'
                                        , '${zip.area1}'
                                        , '${zip.area2}'
                                        , '${zip.area3}'
-                                       , '${zip.area4}')"> ${zip.zipcode} ${zip.area1} ${zip.area2} ${zip.area3} ${zip.area4}
-										</a> <br></td>
-									</tr>
-								</div>
-							</c:forEach>
-					</c:otherwise>
+                                       , '${zip.area4}'
+                                       , '${form}'
+                                       )"> ${zip.zipcode} ${zip.area1} ${zip.area2} ${zip.area3} ${zip.area4} </a> <br></td>
+										</tr>
+									</div>
+								</c:forEach>
+						</c:otherwise>
 					</c:choose>
 					<tr>
 						<td align="center"><br>

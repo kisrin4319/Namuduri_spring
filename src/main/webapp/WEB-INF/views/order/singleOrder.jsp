@@ -74,7 +74,7 @@ var mobile = "${memberModel.member_mobile}";
 	}
 
 	function orderzipCheck() {
-		var url = "<%=cp%>/order/zipCheck.do";
+		var url = "<%=cp%>/order/zipCheck.do?form=1";
 		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 	}
 

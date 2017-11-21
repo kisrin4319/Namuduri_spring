@@ -52,7 +52,7 @@
 			totalOrderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			totalOrderform.action = "basketOrderComplete.do";
+			totalOrderform.action = "<%=cp%>/order/totalOrder.do";
 			totalOrderform.submit();
 		}
 
@@ -78,7 +78,7 @@
 	}
 
 	function orderzipCheck() {
-		var url = "<%=cp%>/order/zipCheck.do";
+		var url = "<%=cp%>/order/zipCheck.do?form=2";
 		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 	}
 </script>
@@ -98,6 +98,7 @@
 			<div id="content">
 				<div class="contents">
 					<form name="totalOrderform" id="totalOrderform" method="post">
+						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}"/>
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>

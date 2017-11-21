@@ -52,7 +52,7 @@
 			selectOrderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			selectOrderform.action = "basketOrderComplete.do";
+			selectOrderform.action = "<%=cp%>/order/selectOrder.do";
 			selectOrderform.submit();
 		}
 
@@ -98,6 +98,7 @@
 			<div id="content">
 				<div class="contents">
 					<form name="selectOrderform" id="selectOrderform" method="post">
+						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}"/>
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>
@@ -131,6 +132,7 @@
 									<tbody>
 										<!--s:iterator 시작  -->
 										<c:forEach var="check" items="${selectList}">
+										<input type="hidden" name="basket_num" value="${check.basket_num}" />
 											<tr>
 												<td class="gi this-product" style="padding-left: 80px;">
 													<div>

@@ -17,10 +17,10 @@ public interface OrderDao {
 	public BasketModel BasketSelect(int basket_num);
 
 	// 4. 단일 구매 정보 DB 입력
-	public void singleOrder(OrderModel orderModel);
+	public void orderIn(OrderModel orderModel);
 
 	// 5. 단일 구매 도서 DB 입력
-	public void singleOrderDetail(OrderDetailModel orderDetailModel);
+	public void orderDetailIn(OrderDetailModel orderDetailModel);
 
 	// 6. 단일 구매 정보 꺼내오기
 	public OrderModel getOrder(OrderModel orderModel);
