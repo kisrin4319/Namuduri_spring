@@ -25,56 +25,56 @@
 	var mobile = "${memberModel.member_mobile }"
 
 	function checkIt() {
-		var selectOrderform = document.getElementById("selectOrderform");
+		var orderform = document.getElementById("orderform");
 
-		if (!selectOrderform.order_name.value) {
+		if (!orderform.order_name.value) {
 			alert("신청인 이름을 입력하세요");
-			selectOrderform.order_name.focus();
+			orderform.order_name.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_name.value) {
+		} else if (!orderform.order_receive_name.value) {
 			alert("수취인 이름을 입력하세요");
-			selectOrderform.order_receive_name.focus();
+			orderform.order_receive_name.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_phone.value) {
+		} else if (!orderform.order_receive_phone.value) {
 			alert("수취인 전화번호를 입력하세요");
-			selectOrderform.order_receive_phone.focus();
+			orderform.order_receive_phone.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_zipcode.value) {
+		} else if (!orderform.order_receive_zipcode.value) {
 			alert("수취인 우편번호를 입력하세요");
-			selectOrderform.zipcode.focus();
+			orderform.zipcode.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_addr1.value) {
+		} else if (!orderform.order_receive_addr1.value) {
 			alert("수취인 주소를 입력하세요");
-			selectOrderform.order_receive_addr1.focus();
+			orderform.order_receive_addr1.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_addr2.value) {
+		} else if (!orderform.order_receive_addr2.value) {
 			alert("수취인 상세주소를 입력하세요");
-			selectOrderform.order_receive_addr2.focus();
+			orderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			selectOrderform.action = "basketOrderComplete.do";
-			selectOrderform.submit();
+			orderform.action = "basketOrderComplete.do";
+			orderform.submit();
 		}
 
 	}
 	function senddata() {
-		var selectOrderform = document.getElementById("selectOrderform");
-		selectOrderform.order_receive_name.value = name;
-		selectOrderform.order_receive_zipcode.value = zipcode;
-		selectOrderform.order_receive_addr1.value = addr1;
-		selectOrderform.order_receive_addr2.value = addr2;
-		selectOrderform.order_receive_phone.value = phone;
-		selectOrderform.order_receive_mobile.value = mobile;
+		var orderform = document.getElementById("orderform");
+		orderform.order_receive_name.value = name;
+		orderform.order_receive_zipcode.value = zipcode;
+		orderform.order_receive_addr1.value = addr1;
+		orderform.order_receive_addr2.value = addr2;
+		orderform.order_receive_phone.value = phone;
+		orderform.order_receive_mobile.value = mobile;
 	}
 
 	function deldata() {
-		var selectOrderform = document.getElementById("selectOrderform");
-		selectOrderform.order_receive_name.value = "";
-		selectOrderform.order_receive_zipcode.value = "";
-		selectOrderform.order_receive_addr1.value = "";
-		selectOrderform.order_receive_addr2.value = "";
-		selectOrderform.order_receive_phone.value = "";
-		selectOrderform.order_receive_mobile.value = "";
+		var orderform = document.getElementById("orderform");
+		orderform.order_receive_name.value = "";
+		orderform.order_receive_zipcode.value = "";
+		orderform.order_receive_addr1.value = "";
+		orderform.order_receive_addr2.value = "";
+		orderform.order_receive_phone.value = "";
+		orderform.order_receive_mobile.value = "";
 	}
 
 	function orderzipCheck() {
@@ -98,7 +98,7 @@
 			<!-- 본문 시작 : start -->
 			<div id="content">
 				<div class="contents">
-					<form name="selectOrderform" id="selectOrderform" method="post">
+					<form name="orderform" id="orderform" method="post">
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>

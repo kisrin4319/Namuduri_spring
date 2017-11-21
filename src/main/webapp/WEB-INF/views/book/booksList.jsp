@@ -18,8 +18,7 @@
 				<!-- start 페이징 -->
 				<div class="list_paging align_center" id="eventPaging">
 					<div class="list_paging">
-						<ul>${pagingHtml}
-						</ul>
+						${pagingHtml}
 						<a class="btn_next" href="booksList.do?currentPage=${currentPage+1 }">
 							<img src="http://image.kyobobook.co.kr/ink/images/common/btn_next03_on.gif" alt="다음" />
 						</a>

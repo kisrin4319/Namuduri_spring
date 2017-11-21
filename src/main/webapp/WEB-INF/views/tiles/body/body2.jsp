@@ -116,11 +116,12 @@
 									</div>
 									<div class="cover">
 										<a href="textbookDetail.do?goods_num=11">
-											<img src="/namuduri/admin/upload/textbook_1507382413535.jpg" alt="82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)" />
 											<div>
+											<img src="/namuduri/admin/upload/textbook_1507382413535.jpg" alt="82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)" />
+										
 												<em> 문학성과 다양성, 참신성을 기치로 한국문학의 미래를 이끌어 갈 신예들의 작품을 엄선한 「오늘의 젊은... </em>
 												<span></span>
-											</div>
+											
 										</a>
 									</div>
 									<div class="title">

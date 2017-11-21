@@ -25,59 +25,59 @@ var phone = "${memberModel.member_phone}";
 var mobile = "${memberModel.member_mobile}";
 
 	function checkIt() {
-	var singleOrderform = document.getElementById("singleOrderform");
-		if (!singleOrderform.order_receive_name.value) {
+	var orderform = document.getElementById("orderform");
+		if (!orderform.order_receive_name.value) {
 			alert("수취인 이름을 입력하세요");
-			singleOrderform.order_receive_name.focus();
+			orderform.order_receive_name.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_phone.value) {
+		} else if (!orderform.order_receive_phone.value) {
 			alert("수취인 전화번호를 입력하세요");
-			singleOrderform.order_receive_phone.focus();
+			orderform.order_receive_phone.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_zipcode.value) {
+		} else if (!orderform.order_receive_zipcode.value) {
 			alert("수취인 우편번호를 입력하세요");
-			singleOrderform.order_receive_zipcode.focus();
+			orderform.order_receive_zipcode.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_addr1.value) {
+		} else if (!orderform.order_receive_addr1.value) {
 			alert("수취인 주소를 입력하세요");
-			singleOrderform.order_receive_addr1.focus();
+			orderform.order_receive_addr1.focus();
 			return false;
-		} else if (!singleOrderform.order_receive_addr2.value) {
+		} else if (!orderform.order_receive_addr2.value) {
 			alert("수취인 상세주소를 입력하세요");
-			singleOrderform.order_receive_addr2.focus();
+			orderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			singleOrderform.action = "<%=cp%>/order/singleOrder.do";
-			singleOrderform.submit();
+			orderform.action = "<%=cp%>/order/singleOrder.do";
+			orderform.submit();
 		}
 	}
 	function senddata() {
-		var singleOrderform = document.getElementById("singleOrderform");
+		var orderform = document.getElementById("orderform");
 		
-		singleOrderform.order_receive_name.value = name;
-		singleOrderform.order_receive_zipcode.value = zipcode;
-		singleOrderform.order_receive_addr1.value = addr1;
-		singleOrderform.order_receive_addr2.value = addr2;
-		singleOrderform.order_receive_phone.value = phone;
-		singleOrderform.order_receive_mobile.value = mobile;
+		orderform.order_receive_name.value = name;
+		orderform.order_receive_zipcode.value = zipcode;
+		orderform.order_receive_addr1.value = addr1;
+		orderform.order_receive_addr2.value = addr2;
+		orderform.order_receive_phone.value = phone;
+		orderform.order_receive_mobile.value = mobile;
 	}
 
 	function deldata() {
-		var singleOrderform = document.getElementById("singleOrderform");
+		var orderform = document.getElementById("orderform");
 		
-		singleOrderform.order_receive_name.value = "";
-		singleOrderform.order_receive_zipcode.value = "";
-		singleOrderform.order_receive_addr1.value = "";
-		singleOrderform.order_receive_addr2.value = "";
-		singleOrderform.order_receive_phone.value = "";
-		singleOrderform.order_receive_mobile.value = "";
+		orderform.order_receive_name.value = "";
+		orderform.order_receive_zipcode.value = "";
+		orderform.order_receive_addr1.value = "";
+		orderform.order_receive_addr2.value = "";
+		orderform.order_receive_phone.value = "";
+		orderform.order_receive_mobile.value = "";
 	}
 
 	function orderzipCheck() {
-		var url = "<%=cp%>/order/zipCheck.do";
-		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
-	}
-
+		var url = "<%=cp%>
+  /order/zipCheck.do";
+    window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+  }
 </script>
 </head>
 <body class="body-order body-order pc">
@@ -94,14 +94,14 @@ var mobile = "${memberModel.member_mobile}";
 			<!-- 본문 시작 : start -->
 			<div id="content">
 				<div class="contents">
-					<form name="singleOrderform" id="singleOrderform" method="post">
-						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}"/>
-						<input type="hidden" name="order_book_count" value="${order_book_count}"/>
+					<form name="orderform" id="orderform" method="post">
+						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
+						<input type="hidden" name="order_book_count" value="${order_book_count}" />
 						<input type="hidden" name="book_num" value="${book.book_num}" />
 						<input type="hidden" name="order_book_name" value="${book.book_name}" />
 						<input type="hidden" name="order_book_price" value="${book.book_price}" />
 						<input type="hidden" name="order_book_count" value="${order_book_count}" />
-						<input type="hidden" name="basket_num" value="${basket_num}" />				
+						<input type="hidden" name="basket_num" value="${basket_num}" />
 						<div class="order-page">
 							<div class="step-top">
 								<h2>주문서작성/결제</h2>
@@ -147,13 +147,15 @@ var mobile = "${memberModel.member_mobile}";
 											<td class="ta-c count this-product">${order_book_count}</td>
 											<td class="ta-c this-product">
 												<strong class="price">
-													<fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />원
+													<fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />
+													원
 												</strong>
 											</td>
 											<td class="ta-c">
 												<strong class="price">
 													<font size="3" color="#000000">
-														<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원
+														<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+														원
 													</font>
 												</strong>
 											</td>
@@ -166,7 +168,9 @@ var mobile = "${memberModel.member_mobile}";
 								<div>
 									<p>
 										<span class="detail">
-											총<em id="totalGoodsCnt">1 </em>	개의 상품금액
+											총
+											<em id="totalGoodsCnt">1 </em>
+											개의 상품금액
 										</span>
 										<span id="deliveryCalculateNone">
 											<img src="<%=cp%>/img/basket/icon/plus.png" alt="더하기" />
@@ -690,7 +694,8 @@ var mobile = "${memberModel.member_mobile}";
 													<td>
 														<strong class="total" id="totalGoodsPrice">
 															<font size="3" color="#000000">
-																<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />원
+																<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+																원
 															</font>
 														</strong>
 													</td>
@@ -700,7 +705,8 @@ var mobile = "${memberModel.member_mobile}";
 													<td>
 														<strong class="total" id="transPrice">
 															<font size="3" color="#000000">
-																<fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />원
+																<fmt:formatNumber value="${deliveryFee}" pattern="###,###,###" />
+																원
 															</font>
 														</strong>
 													</td>
@@ -711,7 +717,8 @@ var mobile = "${memberModel.member_mobile}";
 														<span class="c-red">
 															<strong id="totalSettlePrice">
 																<font size="3" color="#000000">
-																	<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
+																	<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
+																	원
 																</font>
 															</strong>
 														</span>
