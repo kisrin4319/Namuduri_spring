@@ -85,26 +85,24 @@
 	<c:otherwise>
 		<c:forEach var="list" items="${review}" varStatus="stat">
 			<c:url var="viewURL" value="/admin/memberDetail.do">
-				<c:param name="member_id" value="${review.member_id}"/>
+				<c:param name="member_id" value="${list.member_id}"/>
 			</c:url>
-			
 			<tr>
-				<td>${review.review_num}</td>
-				<td><!-- ${review.member_name} review에서 조인하기.. -->
-					(<a href="${viewURL}">${review.member_id}</a>)</td>
-				<td>${review.review_pw}</td>
-				<td>${review.review_regdate}</td>
+				<td>${list.review_num}</td>
+				<td><!-- member_name review에서 조인하기.. -->
+					(<a href="${viewURL}">${list.member_id}</a>)</td>
+				<td>${list.review_pw}</td>
+				<td>${list.review_regdate}</td>
 				<td rowspan="2"><input class="adminbutton" type="button" value="삭제" onclick="javascript:location.href='adminDeleteReview.do?review_num=${review.review_num}&book_num=${view.book_num}'"/></td>
 			</tr>
 			<tr>
-				<td colspan=3 style="width: 400px;">${review.review_content}</td>
-				<td>${review.star_point}</td>
+				<td colspan=3 style="width: 400px;">${list.review_content}</td>
+				<td>${list.star_point}</td>
 			</tr>
 			<br>
 		</c:forEach>
 	</c:otherwise>	
 </c:choose>
-
 </table>
 <table class="paging">
 <tr>

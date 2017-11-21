@@ -49,7 +49,4 @@ public class BooksService implements BooksDao {
 		return true;
 	}
 
-
-
-
 }
