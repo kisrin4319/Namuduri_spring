@@ -21,29 +21,6 @@
 			document.getElementById("passwordCheckText").innerHTML = "<b><font color=blue size=3pt> 비밀번호가 일치합니다. </font></b>"
 		}
 	} 
-	/* else {
-		$.ajax({
-            url:'/namuduri/member/memberModify.do',
-            type:'post',
-            data:$('form').serialize(),
-            success:function(result){
-            	if(result.returnVal == '1'){
-            		alert('회원정보 수정이 완료되었습니다.');
-            		return false;
-            	}else {
-            		alert('비밀번호가 같지 않습니다.');
-            		return false;
-            	}
-            }
-        })
-	}
-	if(password == ''){
-		alert('비밀번호를 입력해 주세요.');
-		return false;
-	}else if(passwordCheck == ''){
-		alert('비밀번호를 확인해 주세요.');
-		return false;
-	} */
 
 	function check() {
 		var password = document.getElementById("password").value;
@@ -51,20 +28,41 @@
 		
 		if(password != '' && passwordCheck != ''){
 			if(password == passwordCheck){
-				document.getElementById("memberInfo").submit();			
-			}else {
-				alert('비밀번호가 같지 않습니다.');
-				return false;
+
 			}
 		}
-		if(password == ''){
-			alert('비밀번호를 입력해 주세요.');
-			return false;
-		}else if(passwordCheck == ''){
-			alert('비밀번호를 확인해 주세요.');
-			return false;
-		}
+		
+		/* //체크박스를 선택하지 않았을때
+		if(checkbox == ''){
+			//var checkbox = 'No';
+			//member_email_get value = 'NO'
+			}  */
+			if(password == ''){
+				alert('비밀번호를 입력해 주세요.');
+				return false;
+			}if(passwordCheck == ''){
+				alert('비밀번호를 확인해 주세요.');
+				return false;
+			}
+			if(password == passwordCheck){	
+				$.ajax({
+		            url:'/namuduri/member/memberModify.do',
+		            type:'post',
+		            data:$('form').serialize(),
+		            success:function(result){
+		            	if(result.returnVal == '1'){
+		            		alert('회원정보 수정이 완료되었습니다.');
+		            		return false;
+		            	}else {
+		            		alert('비밀번호가 같지 않습니다.');
+		            		return false;
+		            	}
+		            }
+		        })
+			} 
+		
 	}
+	
 	function openZipCheck() {
 		var zipUrl = 'http://localhost:8080/namuduri/zipCheck.do'
 		window.open(
@@ -95,7 +93,7 @@
 						</td>
 						<td>
 							&nbsp;&nbsp;&nbsp;
-							<input type="text" name="member_id" id="member_id" size="20" maxlength="16" value="${mresultClass.member_id }"/>
+							<input type="text" name="member_id" id="member_id" size="20" maxlength="16" value="${memberInfo.member_id }"/>
 							<font size="2" color="#ff3f3f">(영문소문자/숫자, 4~16자)</font>
 						</td>
 					</tr>
@@ -132,7 +130,7 @@
 						</td>
 						<td>
 							&nbsp;&nbsp;&nbsp;
-							<input type="text" name="member_name" size="20" value="${mresultClass.member_name }"/>
+							<input type="text" name="member_name" size="20" value="${memberInfo.member_name }"/>
 						</td>
 					</tr>
 					<tr>
@@ -144,8 +142,8 @@
 						</td>
 						<td>
 							&nbsp;&nbsp;&nbsp;
-							<input type="text" name="member_jumin1" size="12" maxlength="6" value="${mresultClass.member_jumin1 }"/> -
-							<input type="text" name="member_jumin2" size="12" maxlength="7" value="${mresultClass.member_jumin2 }"/>
+							<input type="text" name="member_jumin1" size="12" maxlength="6" value="${memberInfo.member_jumin1 }"/> -
+							<input type="text" name="member_jumin2" size="12" maxlength="7" value="${memberInfo.member_jumin2 }"/>
 						</td>
 					</tr>
 					<tr>
@@ -159,8 +157,8 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<input type="text" name="member_zipcode" size="7"  value="${mresultClass.member_zipcode }"/>
-								<input type="text" name="member_addr1" size="50"  value="${mresultClass.member_addr1 }"/> <input type="button" class="btn_small3" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" style="height: 20px;"/>
+								<input type="text" name="member_zipcode" size="7"  value="${memberInfo.member_zipcode }"/>
+								<input type="text" name="member_addr1" size="50"  value="${memberInfo.member_addr1 }"/> <input type="button" class="btn_small3" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" style="height: 20px;"/>
 							</td>
 						</tr>
 						
@@ -172,7 +170,7 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<input type="text" name="member_addr2" size="50" value="${mresultClass.member_addr2 }"/>
+								<input type="text" name="member_addr2" size="50" value="${memberInfo.member_addr2 }"/>
 							</td>
 						</tr>
 						
@@ -184,7 +182,7 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<input type="text" name="member_phone" size="20" value="${mresultClass.member_phone }"/>
+								<input type="text" name="member_phone" size="20" value="${memberInfo.member_phone }"/>
 									<font size="2" color="#ff3f3f">
 											(일반전화가 없을 경우 휴대전화를 기재해주세요.)
 									</font>
@@ -202,7 +200,7 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<input type="text" name="member_mobile" size="20" value="${mresultClass.member_mobile }"/>
+								<input type="text" name="member_mobile" size="20" value="${memberInfo.member_mobile }"/>
 									
 							</td>
 						</tr>
@@ -218,7 +216,7 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<input type="text" name="member_email" size="30" value="${mresultClass.member_email }"/>
+								<input type="text" name="member_email" size="30" value="${memberInfo.member_email }"/>
 								<input type="checkbox" name="member_email_get" value="YES"/> 동의함
 								<font size="1">배송현황 및 쇼핑정보를 받으시겠습니까?</font>
 							</td>

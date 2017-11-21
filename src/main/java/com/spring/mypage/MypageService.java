@@ -34,6 +34,11 @@ public class MypageService implements MypageDao {
 	
 	//4. 회원정보 수정
 	@Override
+	public MemberModel getMemberInfo(String member_id) {
+		return sqlSessionTemplate.selectOne("member.memberSelectOne", member_id);
+	}
+	
+	@Override
 	public int memberModify(MemberModel memberModel) {
 		return sqlSessionTemplate.update("member.memberModify", memberModel);
 	}

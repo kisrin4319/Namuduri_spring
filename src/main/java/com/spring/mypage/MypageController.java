@@ -157,14 +157,16 @@ public class MypageController {
 	public ModelAndView memberModify(MemberModel member, HttpServletRequest request , HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
-		MemberModel memberModel = new MemberModel();
 		
-		session_id = (String) session.getAttribute("member_id");
+		String member_id = (String) session.getAttribute("member_id");
 		
-		memberModel.setMember_id(session_id);
-		memberModel.getMember_id();
-		
-		mv.addObject("memberModel", memberModel);
+		MemberModel memberInfo = mypageService.getMemberInfo(member_id);
+		/**
+		 * void = 반환되는 값 없음(ex. mypageService.getMemberInfo(member_id);)
+		 * int = 정수형 반환(ex. int memberInfo = mypageService.getMemberInfo(member_id);)
+		 * vo = vo 반환(ex. MemberModel memberInfo = mypageService.getMemberInfo(member_id);)
+		 */
+		mv.addObject("memberInfo", memberInfo);
 		mv.setViewName("memberModify");
 
 		return mv;
@@ -178,8 +180,8 @@ public class MypageController {
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
-		memberModel.setMember_id(session_id);
-		
+		/*String member_id = (String) session.getAttribute("member_id");*/
+		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_pw(request.getParameter("member_pw"));
 		memberModel.setMember_name(request.getParameter("member_name"));
 		memberModel.setMember_jumin1(Integer.parseInt(request.getParameter("member_jumin1")));
@@ -212,7 +214,5 @@ public class MypageController {
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
-		
-		
 	}*/
 }
