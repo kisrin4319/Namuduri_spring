@@ -20,8 +20,8 @@ public interface MypageDao {
 	public int memberModify(MemberModel memberModel);
 			
 	//5. 주문상세내역 보기
-	public OrderDetailModel memberOrderDetail(OrderDetailModel orderDetailModel);
+	public OrderDetailModel memberOrderDetail(String order_trade_num);
 	
 	//6. 주문내역 취소
-	public Object memberOrderCancel(OrderDetailModel orderDetailModel);
+	public void memberOrderCancel(String order_trade_num);
 }
