@@ -265,8 +265,9 @@ public class AdminController {
 		List<ReviewModel> review = booksService.reviewList(num);
 		
 		totalCount = review.size();
+		int reviewPage = 1;
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookDetail", num);
+		paging = new Paging(reviewPage, totalCount, blockCount, blockPage, "bookDetail", num);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -277,6 +278,7 @@ public class AdminController {
 
 		review = review.subList(paging.getStartCount(), lastCount);
 		
+		mv.addObject("reviewPage", reviewPage);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("view", view);
 		mv.addObject("review", review);
