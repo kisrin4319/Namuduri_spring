@@ -43,7 +43,7 @@ function goQnA() {
 	location.href = '<%=cp%>/qnaList.do';
 }
 function goAdmin() {
-	location.href = '<%=cp%>/adminMain.do';
+	location.href = '<%=cp%>/admin/main.do';
 			}
 		</script>
 		<!-- s:.top_header -->
