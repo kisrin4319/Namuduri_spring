@@ -1,6 +1,8 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,12 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.member.MemberModel;
+import com.spring.member.MemberService;
+import com.spring.member.ZipcodeModel;
 
 @Controller
 public class MypageController {
@@ -23,6 +28,8 @@ public class MypageController {
 	
 	@Resource
 	private MypageService mypageService;
+	@Resource
+	private MemberService memberService;
 	
 	ModelAndView mv;
 	String session_id;
@@ -147,10 +154,19 @@ public class MypageController {
 	
 	//4. 회원정보 수정
 	@RequestMapping(value = "/member/memberModifyView.do")
-	public ModelAndView memberModify() {
-		mv = new ModelAndView();
+	public ModelAndView memberModify(MemberModel member, HttpServletRequest request , HttpSession session) throws Exception {
 		
+		mv = new ModelAndView();
+		MemberModel memberModel = new MemberModel();
+		
+		session_id = (String) session.getAttribute("member_id");
+		
+		memberModel.setMember_id(session_id);
+		memberModel.getMember_id();
+		
+		mv.addObject("memberModel", memberModel);
 		mv.setViewName("memberModify");
+
 		return mv;
 	}
 	
@@ -178,11 +194,11 @@ public class MypageController {
 		
 		int member = mypageService.memberModify(memberModel);
 		
-		/*if(member > 0) {
+		if(member > 0) {
 			object.put("returnVal", "1");
 		}else {
 			object.put("returnVal", "0");
-		}*/
+		}
 		return object;
 	}
 	
@@ -199,5 +215,4 @@ public class MypageController {
 		
 		
 	}*/
-	
 }
