@@ -34,15 +34,15 @@ public class OrderService implements OrderDao {
 		return sqlSessionTemplate.selectOne("order.basketSelect", basket_num);
 	}
 
-	// 4. 단일 구매 정보 DB 입력
+	// 4. 구매 정보 DB 입력
 	@Override
-	public void singleOrder(OrderModel orderModel) {
+	public void orderIn(OrderModel orderModel) {
 		sqlSessionTemplate.insert("order.orderBook", orderModel);
 	}
 
-	// 5. 단일 구매 도서 DB 입력
+	// 5. 구매 도서 DB 입력
 	@Override
-	public void singleOrderDetail(OrderDetailModel orderDetailModel) {
+	public void orderDetailIn(OrderDetailModel orderDetailModel) {
 		sqlSessionTemplate.insert("order.orderDetail", orderDetailModel);
 	}
 
