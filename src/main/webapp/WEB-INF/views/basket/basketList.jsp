@@ -263,7 +263,7 @@ function singleOrder(basket_book_num, basket_book_count, basket_num) {
 
 function fn_selectOrder() {
 	   var comSubmit = new ComSubmit();
-	   comSubmit.setUrl("<c:url value = '/order/selectOrder.do' />");
+	   comSubmit.setUrl("<c:url value = '/order/selectOrderForm.do' />");
 	   comSubmit.submit();
 }
 </script>
