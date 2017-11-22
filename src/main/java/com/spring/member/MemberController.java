@@ -66,10 +66,16 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/member/logOut.do")
 	public ModelAndView logOut(HttpSession session) {
-				
+		
+		MemberModel memberModel = new MemberModel();
+		
+		session_id = (String)session.getAttribute("member_id");
+		memberModel.setMember_id(session_id);
+		
 		if(session != null) {
 			session.invalidate();
 		}
+		
 		mv.setViewName("redirect:/main.do");
 		return mv;
 	}

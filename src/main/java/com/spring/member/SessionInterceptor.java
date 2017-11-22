@@ -58,7 +58,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		if(member_id != null) { //아이디가 있을 때
 			if((request.getRequestURI().indexOf("admin")>0) && !member_id.equals("admin")) {
 				
-				response.sendRedirect(request.getContextPath() + "/namuduri/main.do");
+				response.sendRedirect(request.getContextPath() + "/main.do");
 				
 			} else {
 				return true;
@@ -67,7 +67,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		} else { //아이디가 없을 떄 
 			if(request.getRequestURI().indexOf("basket")>0 || request.getRequestURI().indexOf("order")>0 || request.getRequestURI().indexOf("mypage")>0) {
 				
-				response.sendRedirect(request.getContextPath() + "/namuduri/member/loginForm.do");
+				response.sendRedirect(request.getContextPath() + "/member/loginForm.do");
 				
 			} else {
 				return true;
