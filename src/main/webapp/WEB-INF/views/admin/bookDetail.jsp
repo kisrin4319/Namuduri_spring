@@ -101,7 +101,7 @@
 					(<a href="${viewURL}">${list.member_id}</a>)</td>
 				<td>${list.review_pw}</td>
 				<td>${list.review_regdate}</td>
-				<td rowspan="2"><input class="adminbutton" type="button" value="삭제" onclick="javascript:location.href='<%=cp%>/admin/reviewDelete.do?review_num=${review.review_num}&book_num=${view.book_num}&currentPage=${reviewPage}'"/></td>
+				<td rowspan="2"><input class="adminbutton" type="button" value="삭제" onclick="javascript:location.href='<%=cp%>/admin/reviewDelete.do?review_num=${list.review_num}&book_num=${view.book_num}&currentPage=${reviewPage}'"/></td>
 			</tr>
 			<tr>
 				<td colspan=3 style="width: 400px;">${list.review_content}</td>
