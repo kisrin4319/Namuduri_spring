@@ -1,13 +1,18 @@
 package com.spring.order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +23,13 @@ import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
+import com.spring.member.ZipcodeModel;
 
 @Controller
 public class OrderController {
 
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource
 	private OrderService orderService;
 
@@ -37,12 +45,17 @@ public class OrderController {
 	ModelAndView mv = new ModelAndView();
 	BasketModel basketModel = new BasketModel();
 	String session_id;
-
+	
 	// 단일 주문
 	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.GET)
 	public ModelAndView singleOrderForm(HttpServletRequest request, HttpSession session) {
 
 		session_id = (String) session.getAttribute("member_id");
+		
+		int basket_num = 0;
+		if(request.getParameter("basket_num") != null) {
+		basket_num = Integer.parseInt(request.getParameter("basket_num"));
+		}
 		
 		int book_num = Integer.parseInt(request.getParameter("book_num"));
 		int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
@@ -68,7 +81,54 @@ public class OrderController {
 		mv.addObject("sumMoney", sumMoney);
 		mv.addObject("session_id", session_id);
 		mv.addObject("memberModel",memberModel);
+		mv.addObject("basket_num", basket_num);
 		mv.setViewName("singleOrder");
+
+		return mv;
+	}
+	
+	// 단일 주문 완료
+	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.POST)
+	ModelAndView singleOrder(@ModelAttribute OrderModel orderModel, @ModelAttribute OrderDetailModel orderDetailModel, int book_num, int basket_num, HttpSession session) {
+		
+		session_id = (String) session.getAttribute("member_id");
+		Calendar today = Calendar.getInstance();
+		Date day = today.getTime();
+		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
+		
+		// 데이터베이스에 주문 정보 넣기
+		orderModel.setOrder_trade_num(book_num+simple.format(day));
+		int random = (int)Math.random()*99+1;
+		orderModel.setOrder_trans_num(orderModel.getOrder_trade_num()+String.valueOf(random));
+		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
+		orderModel.setOrder_bank_num("147963-01-794613");
+		orderModel.setMember_id(session_id);
+		orderService.singleOrder(orderModel);
+		
+		// 데이터베이스에 도서 정보 넣기
+		orderDetailModel.setOrder_trade_num(book_num+simple.format(day));
+		orderService.singleOrderDetail(orderDetailModel);
+		
+		// 데이터베이스에 넣은 정보 꺼내오기
+		OrderModel getOrder = orderService.getOrder(orderModel);
+		OrderDetailModel getOrderDetail = orderService.getOrderDetail(orderDetailModel);
+		
+		// 장바구니에서 넘어온 상품일 경우 장바구니에서 상품 삭제
+		if (basket_num != 0) {
+			orderService.delBasket(basket_num);
+		}
+		
+		// 도서 재고 관리
+		BooksModel book = booksService.bookOne(book_num);
+		int current_count = book.getBook_current_count() - getOrderDetail.getOrder_book_count();
+		int sell_count = book.getBook_sell_count() + getOrderDetail.getOrder_book_count();
+		book.setBook_current_count(current_count);
+		book.setBook_sell_count(sell_count);
+		orderService.updateStock(book);
+
+		mv.addObject("order", getOrder);
+		mv.addObject("orderDetail", getOrderDetail);
+		mv.setViewName("singleOrderComplete");
 
 		return mv;
 	}
@@ -139,6 +199,30 @@ public class OrderController {
 		mv.addObject("memberModel",memberModel);
 		mv.setViewName("selectOrder");
 		
+		return mv;
+	}
+	
+	// 우편번호 검색 폼
+	@RequestMapping(value="/order/zipCheck.do", method=RequestMethod.GET)
+	ModelAndView orderZipCheckForm(HttpServletRequest request) {
+		
+		mv.setViewName("order/orderZipCheck");
+		return mv;
+	}
+	
+	// 우편번호 입력
+	@RequestMapping(value="/order/zipCheck.do", method=RequestMethod.POST)
+	ModelAndView orderZipCheck(HttpServletRequest request) {
+		
+		List<ZipcodeModel> zipcdodeList = new ArrayList<ZipcodeModel>(); 
+		String area3 = request.getParameter("area3");
+		System.out.println(area3);
+		if(area3 != null) {
+			zipcdodeList = memberService.zipCheck(area3);
+		}
+		
+		mv.addObject("zipcodeList", zipcdodeList);
+		mv.setViewName("order/orderZipCheck");
 		return mv;
 	}
 
