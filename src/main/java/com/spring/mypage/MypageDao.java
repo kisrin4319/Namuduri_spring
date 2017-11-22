@@ -15,6 +15,8 @@ public interface MypageDao {
 	public int memberDelete(MemberModel memberModel);
 			
 	//4. 회원정보 수정
+	public MemberModel getMemberInfo(String member_id);
+	
 	public int memberModify(MemberModel memberModel);
 			
 	//5. 주문상세내역 보기
