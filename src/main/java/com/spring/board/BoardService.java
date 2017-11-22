@@ -25,6 +25,22 @@ public class BoardService implements BoardDao {
 		return sqlSessionTemplate.selectOne("board.selectBoardOne", board_num);
 	}
 	
+	// 게시판 검색
+	@Override
+	public List<BoardModel> Search0(String search) {
+		return sqlSessionTemplate.selectList("board.Search0", "%"+search+"%"); 
+	}
+	
+	@Override
+	public List<BoardModel> Search1(String search) {
+		return sqlSessionTemplate.selectList("board.Search1", "%"+search+"%"); 
+	}
+	
+	@Override
+	public List<BoardModel> Search2(String search) {
+		return sqlSessionTemplate.selectList("board.Search2", "%"+search+"%"); 
+	} 
+	
 	// 게시글 작성
 	@Override
 	public boolean boardWrite(BoardModel boardModel) {

@@ -30,6 +30,26 @@
 		SELECT * FROM board WHERE board_title like #{search} ORDER BY no DESC
 	</select> -->
 	
+	<!-- 작성자검색 -->
+	<select id="Search0" resultMap="ModelRes" parameterType="String">
+		SELECT * FROM board	WHERE MEMBER_ID like #{search}
+		ORDER BY ref DESC, re_step ASC
+	</select>
+	
+	<!-- 제목검색 -->
+	<select id="Search1" resultMap="ModelRes" parameterType="String">
+		SELECT * FROM board WHERE board_titel like #{search}
+		ORDER BY ref DESC, re_step ASC
+	</select>
+	
+	<!-- 내용검색 -->
+	<select id="Search2" resultMap="ModelRes" parameterType="String">
+		SELECT * FROM board	WHERE board_content like #{search}
+		ORDER BY ref DESC, re_step ASC
+	</select>
+
+	
+	
 	
 	<!-- 게시글 작성 -->
 	<insert id="boardWrite" parameterType="BoardModel"> 

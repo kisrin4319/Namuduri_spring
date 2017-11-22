@@ -32,6 +32,9 @@ public class BoardController {
 	
 	ModelAndView mv = new ModelAndView();
 	String session_id;
+	
+	private int searchNum;
+	private String isSearch;
 
 	private int currentPage = 1;
 	private int totalCount;
@@ -43,11 +46,11 @@ public class BoardController {
 	
 	// 1. 게시판 목록
 	@RequestMapping(value="/board/boardList.do")
-    public ModelAndView BoardList(HttpServletRequest request, HttpSession session) throws Exception{
+    public ModelAndView BoardList(HttpServletRequest request) throws Exception{
 		mv = new ModelAndView();
 		
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
-		
+				
 		boardList = boardService.boardList();
 			System.out.println(boardList.size());
 			
@@ -58,15 +61,55 @@ public class BoardController {
         }
 		
 		totalCount = boardList.size();
+
+		isSearch = request.getParameter("isSearch");
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList" );
+		if (isSearch != null) 
+		{
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+
+			if (searchNum == 0)
+				boardList = boardService.Search0(isSearch);
+			else if (searchNum == 1)
+				boardList = boardService.Search1(isSearch);
+			else if (searchNum == 2)
+				boardList = boardService.Search2(isSearch);
+				
+			totalCount = boardList.size();
+		
+			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+	
+			int lastCount = totalCount;
+	
+			if(paging.getEndCount() < totalCount)
+				lastCount = paging.getEndCount() + 1;
+		
+			boardList = boardList.subList(paging.getStartCount(), lastCount);
+		
+			mv.addObject("isSearch",isSearch);
+			mv.addObject("searchNum",searchNum);
+			mv.addObject("boardList",boardList);
+			mv.addObject("listCount",boardList.size());
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("pagingHtml", pagingHtml);
+			mv.setViewName("boardList");
+				
+			return mv;
+			}
+		
+		mv = new ModelAndView();
+					
+		boardList = boardService.boardList();
+			System.out.println(boardList.size());
+		totalCount = boardList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
 		pagingHtml = paging.getPagingHtml().toString();
-	
-		int lastCount = totalCount;
-	
-		if(paging.getEndCount() < totalCount)
-			lastCount = paging.getEndCount() + 1;
 		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount)
+		lastCount = paging.getEndCount() + 1;
 		boardList = boardList.subList(paging.getStartCount(), lastCount);
 		
 		
@@ -75,9 +118,10 @@ public class BoardController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.setViewName("boardList");
-				
-    	return mv;
-    }
+		
+		return mv;
+		
+	}
 	
 	// 2. 게시판 내용 보기
 	@RequestMapping(value="/board/boardDetail.do")
