@@ -25,61 +25,62 @@
 	var mobile = "${memberModel.member_mobile }"
 
 	function checkIt() {
-		var selectOrderform = document.getElementById("selectOrderform");
+		var orderform = document.getElementById("orderform");
 
-		if (!selectOrderform.order_name.value) {
+		if (!orderform.order_name.value) {
 			alert("신청인 이름을 입력하세요");
-			selectOrderform.order_name.focus();
+			orderform.order_name.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_name.value) {
+		} else if (!orderform.order_receive_name.value) {
 			alert("수취인 이름을 입력하세요");
-			selectOrderform.order_receive_name.focus();
+			orderform.order_receive_name.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_phone.value) {
+		} else if (!orderform.order_receive_phone.value) {
 			alert("수취인 전화번호를 입력하세요");
-			selectOrderform.order_receive_phone.focus();
+			orderform.order_receive_phone.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_zipcode.value) {
+		} else if (!orderform.order_receive_zipcode.value) {
 			alert("수취인 우편번호를 입력하세요");
-			selectOrderform.zipcode.focus();
+			orderform.zipcode.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_addr1.value) {
+		} else if (!orderform.order_receive_addr1.value) {
 			alert("수취인 주소를 입력하세요");
-			selectOrderform.order_receive_addr1.focus();
+			orderform.order_receive_addr1.focus();
 			return false;
-		} else if (!selectOrderform.order_receive_addr2.value) {
+		} else if (!orderform.order_receive_addr2.value) {
 			alert("수취인 상세주소를 입력하세요");
-			selectOrderform.order_receive_addr2.focus();
+			orderform.order_receive_addr2.focus();
 			return false;
 		} else {
-			selectOrderform.action = "<%=cp%>/order/selectOrder.do";
-			selectOrderform.submit();
+  		orderform.action = "<%=cp%>/order/selectOrder.do";
+  		orderform.submit();
 		}
 
 	}
 	function senddata() {
-		var selectOrderform = document.getElementById("selectOrderform");
-		selectOrderform.order_receive_name.value = name;
-		selectOrderform.order_receive_zipcode.value = zipcode;
-		selectOrderform.order_receive_addr1.value = addr1;
-		selectOrderform.order_receive_addr2.value = addr2;
-		selectOrderform.order_receive_phone.value = phone;
-		selectOrderform.order_receive_mobile.value = mobile;
+		var orderform = document.getElementById("orderform");
+		orderform.order_receive_name.value = name;
+		orderform.order_receive_zipcode.value = zipcode;
+		orderform.order_receive_addr1.value = addr1;
+		orderform.order_receive_addr2.value = addr2;
+		orderform.order_receive_phone.value = phone;
+		orderform.order_receive_mobile.value = mobile;
 	}
 
 	function deldata() {
-		var selectOrderform = document.getElementById("selectOrderform");
-		selectOrderform.order_receive_name.value = "";
-		selectOrderform.order_receive_zipcode.value = "";
-		selectOrderform.order_receive_addr1.value = "";
-		selectOrderform.order_receive_addr2.value = "";
-		selectOrderform.order_receive_phone.value = "";
-		selectOrderform.order_receive_mobile.value = "";
+		var orderform = document.getElementById("orderform");
+		orderform.order_receive_name.value = "";
+		orderform.order_receive_zipcode.value = "";
+		orderform.order_receive_addr1.value = "";
+		orderform.order_receive_addr2.value = "";
+		orderform.order_receive_phone.value = "";
+		orderform.order_receive_mobile.value = "";
 	}
 
 	function orderzipCheck() {
 		var url = "<%=cp%>/order/zipCheck.do";
 		window.open(url,"post","toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+
 	}
 </script>
 </head>
@@ -97,7 +98,7 @@
 			<!-- 본문 시작 : start -->
 			<div id="content">
 				<div class="contents">
-					<form name="selectOrderform" id="selectOrderform" method="post">
+					<form name="orderform" id="orderform" method="post">
 						<input type="hidden" name="order_receive_moneysum" value="${sumMoney}"/>
 						<div class="order-page">
 							<div class="step-top">
@@ -202,16 +203,15 @@
 										표준약관 제10023호
 										<br />
 										<br />
-										이 약관은 엔에이치엔고도(주) 회사(전자거래 사업자)가 운영하는 고도:샘플샵 사이버 몰(이하 "몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+										이 약관은 나무두리(주) 회사(전자거래 사업자)가 운영하는 고도:샘플샵 사이버 몰(이하 "몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 										<br />
-										※ 「PC통신등을 이용하는 전자거래에 대해서도 그 성질에 반하지 않는한 이 약관을 준용합니다」
 										<br />
 										<br />
 										<br />
 										제2조(정의)
 										<br />
 										<br />
-										① "몰"이란 엔에이치엔고도(주) 회사가 재화 또는 용역을 이용자에게 제공하기 위하여 컴퓨터등 정보통신설비를 이용하여 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.
+										① "몰"이란 나무두리(주) 회사가 재화 또는 용역을 이용자에게 제공하기 위하여 컴퓨터등 정보통신설비를 이용하여 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.
 										<br />
 										② "이용자"란 "몰"에 접속하여 이 약관에 따라 "몰"이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.
 										<br />

@@ -189,9 +189,23 @@
 	  
 	}
 	function fn_selectDelete() {
-	  var comSubmit = new ComSubmit();
-	  comSubmit.setUrl("<c:url value = '/basket/basketCheckDelete.do' />");
-	  comSubmit.submit();
+	  
+	  var RowCheck = document.getElementsByName('RowCheck');
+	  var Count = 0;
+	 
+	  for(var i=0; i<RowCheck.length;i++){
+  	  if(RowCheck[i].checked){ Count++; }
+  	  }
+	  
+	  if(!Count){
+	    alert("1개 이상 체크 박스를 선택 해주세요");
+	    return false;
+	  }
+	  else {
+	    var comSubmit = new ComSubmit();
+	    comSubmit.setUrl("<c:url value = '/basket/basketCheckDelete.do' />");
+	    comSubmit.submit();
+	  }
 	}
 
 	function fn_basketDeleteAll() {
@@ -262,9 +276,22 @@ function singleOrder(basket_book_num, basket_book_count, basket_num) {
 	}
 
 function fn_selectOrder() {
+ 	var RowCheck = document.getElementsByName('RowCheck');
+ 	var Count = 0;
+	
+ 	for(var i=0; i<RowCheck.length;i++){
+	  if(RowCheck[i].checked){ Count++; }
+	  }
+ 	
+ 	if(!Count){
+ 	  alert("1개 이상 체크 박스를 선택 해주세요");
+ 	  return false;
+ 	  }
+ 	else {
 	   var comSubmit = new ComSubmit();
 	   comSubmit.setUrl("<c:url value = '/order/selectOrderForm.do' />");
 	   comSubmit.submit();
+ 	  }
 }
 </script>
 </body>

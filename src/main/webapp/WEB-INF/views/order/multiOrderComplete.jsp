@@ -22,7 +22,12 @@
 	<div id="wrap">
 		<div id="route">
 			<div>
-				<span><a href="#">Home</a></span> <span><b>주문완료</b></span>
+				<span>
+					<a href="#">Home</a>
+				</span>
+				<span>
+					<b>주문완료</b>
+				</span>
 			</div>
 		</div>
 		<!--  본문 시작 -->
@@ -32,12 +37,24 @@
 					<div class="step-top">
 						<h2>주문완료</h2>
 						<div>
-							<span><strong>01</strong> 장바구니</span> <span><strong>02</strong> 주문서작성/결제</span> <span title="현재페이지" class="this end"><strong>03</strong> 주문완료</span>
+							<span>
+								<strong>01</strong>
+								장바구니
+							</span>
+							<span>
+								<strong>02</strong>
+								주문서작성/결제
+							</span>
+							<span title="현재페이지" class="this end">
+								<strong>03</strong>
+								주문완료
+							</span>
 						</div>
 					</div>
 					<!-- 주문 접수 완료 -->
 					<div class="order-completion" style="padding-top: 30px;">
-						<strong>주문이 정상적으로 접수 되었습니다.</strong> <span>감사합니다.</span>
+						<strong>주문이 정상적으로 접수 되었습니다.</strong>
+						<span>감사합니다.</span>
 					</div>
 					<h3 class="fir">주문요약정보</h3>
 					<div class="table1">
@@ -47,9 +64,12 @@
 									<th class="ta-l">결제수단</th>
 									<td>
 										<p>
-											<strong>무통장 입금</strong><br /> 입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 :
+											<strong>무통장 입금</strong>
+											<br />
+											입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 :
 											<fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />
-											원</strong> 입금자명 : ${order.order_trade_payer}
+											원
+											입금자명 : ${order.order_trade_payer}
 										</p>
 									</td>
 								</tr>
@@ -59,7 +79,9 @@
 								</tr>
 								<tr>
 									<th class="ta-l">주문일자</th>
-									<td><fmt:formatDate value="${order.order_regdate}" pattern="yyyy-MM-dd" /></td>
+									<td>
+										<fmt:formatDate value="${order.order_regdate}" pattern="yyyy-MM-dd" />
+									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">주문상품</th>
@@ -84,11 +106,19 @@
 								</tr>
 								<tr>
 									<th class="ta-l">남기실 말씀</th>
-									<td><strong>${order.order_receive_memo}</strong></td>
+									<td>
+										<strong>${order.order_receive_memo}</strong>
+									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">총 결제금액</th>
-									<td><strong class="c-red"><fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />원</strong><span class="add_currency"></span></td>
+									<td>
+										<strong class="c-red">
+											<fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />
+											원
+										</strong>
+										<span class="add_currency"></span>
+									</td>
 								</tr>
 							</tbody>
 							<colgroup>
@@ -97,7 +127,12 @@
 						</table>
 					</div>
 					<div class="btn">
-						<a class="skinbtn point2 oe-confirm" href="<%=cp%>/main.do"><em>확인</em></a> <a class="skinbtn point2 oe-confirm" href="mypage.do"><em>마이페이지로</em></a>
+						<a class="skinbtn point2 oe-confirm" href="<%=cp%>/main.do">
+							<em>확인</em>
+						</a>
+						<a class="skinbtn point2 oe-confirm" href="mypage.do">
+							<em>마이페이지로</em>
+						</a>
 					</div>
 				</div>
 				<hr />

@@ -325,10 +325,6 @@ public class OrderController {
 	// 우편번호 검색 폼
 	@RequestMapping(value = "/order/zipCheck.do", method = RequestMethod.GET)
 	ModelAndView orderZipCheckForm(HttpServletRequest request) {
-
-		int form = Integer.parseInt(request.getParameter("form"));
-
-		mv.addObject("form", form);
 		mv.setViewName("order/orderZipCheck");
 		return mv;
 	}
@@ -339,7 +335,6 @@ public class OrderController {
 
 		List<ZipcodeModel> zipcdodeList = new ArrayList<ZipcodeModel>();
 		String area3 = request.getParameter("area3");
-		System.out.println(area3);
 		if (area3 != null) {
 			zipcdodeList = memberService.zipCheck(area3);
 		}
