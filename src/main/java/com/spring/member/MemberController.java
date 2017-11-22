@@ -56,7 +56,7 @@ public class MemberController {
 			return mv;
 		} else {
 			//로그인 실패
-			mv.setViewName("loginForm");
+			mv.setViewName("member/loginError");
 			return mv;
 			
 		}
@@ -66,10 +66,16 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/member/logOut.do")
 	public ModelAndView logOut(HttpSession session) {
-				
+		
+		MemberModel memberModel = new MemberModel();
+		
+		session_id = (String)session.getAttribute("member_id");
+		memberModel.setMember_id(session_id);
+		
 		if(session != null) {
 			session.invalidate();
 		}
+		
 		mv.setViewName("redirect:/main.do");
 		return mv;
 	}
@@ -78,6 +84,7 @@ public class MemberController {
 	@ModelAttribute("member")
 	public MemberModel formBack() {
 		return new MemberModel();
+		
 	}
 	//회원가입 폼
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.GET)
@@ -159,6 +166,5 @@ public class MemberController {
 		mv.setViewName("member/zipCheck");
 		return mv;
 	}
-
 	
 }
