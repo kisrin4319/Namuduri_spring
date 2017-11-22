@@ -47,7 +47,7 @@
 									<th class="ta-l">결제수단</th>
 									<td>
 										<p>
-											<strong>무통장 입금</strong><br /> 입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 : ${order.order_receive_moneysum}원 입금자명 : ${order.order_trade_payer}
+											<strong>무통장 입금</strong><br /> 입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 : <fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />원</strong> 입금자명 : ${order.order_trade_payer}
 										</p>
 									</td>
 								</tr>
@@ -79,7 +79,7 @@
 								</tr>
 								<tr>
 									<th class="ta-l">총 결제금액</th>
-									<td><strong class="c-red">${order.order_receive_moneysum}</strong><span class="add_currency"></span></td>
+									<td><strong class="c-red"><fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###"/>원</strong><span class="add_currency"></span></td>
 								</tr>
 							</tbody>
 							<colgroup>

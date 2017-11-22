@@ -18,7 +18,6 @@
       return;
     }
     document.zipform.submit();
-
   }
 
   function sendAddress(zipcode, area1, area2, area3, area4) {

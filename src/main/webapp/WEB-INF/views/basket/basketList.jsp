@@ -289,7 +289,7 @@ function fn_selectOrder() {
  	  }
  	else {
 	   var comSubmit = new ComSubmit();
-	   comSubmit.setUrl("<c:url value = '/order/selectOrder.do' />");
+	   comSubmit.setUrl("<c:url value = '/order/selectOrderForm.do' />");
 	   comSubmit.submit();
  	  }
 }

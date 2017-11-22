@@ -1,15 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<%
+	String cp = request.getContextPath();
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/content.css" rel="stylesheet" type="text/css" />
-<link href="css/reset.css" rel="stylesheet" type="text/css" />
-<link href="css/layout.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css" rel="stylesheet" type="text/css" />
 <title>주문 완료</title>
+<link href="<%=cp%>/css/content.css?ver=1" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/layout.css?ver=1" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/common.css?ver=1" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <body class="body-order body-order-end pc">
@@ -60,81 +66,56 @@
 										<p>
 											<strong>무통장 입금</strong>
 											<br />
-											입금은행 :
-											<s:property value="oparamClass.order_bankname" />
-											입금계좌 :
-											<s:property value="oparamClass.order_bank_num" />
-											예금주명 : 나무두리(주) 입금금액 :
-											<strong class="c-red">
-												<s:property value="order_goods_price*order_goods_count" />
-												원
-											</strong>
-											입금자명 :
-											<s:property value="oparamClass.order_trade_payer" />
+											입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 :
+											<fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />
+											원
+											입금자명 : ${order.order_trade_payer}
 										</p>
 									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">주문번호</th>
-									<td>
-										<s:property value="oparamClass.order_trade_num" />
-									</td>
+									<td>${order.order_trade_num}</td>
 								</tr>
 								<tr>
 									<th class="ta-l">주문일자</th>
 									<td>
-										<s:property value="oparamClass.order_regdate" />
+										<fmt:formatDate value="${order.order_regdate}" pattern="yyyy-MM-dd" />
 									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">주문상품</th>
-									<td>
-										<s:property value="oparamClass.order_goods_name" />
-									</td>
+									<c:choose>
+										<c:when test="${size == 1}">
+											<td>${order_book_name}</td>
+										</c:when>
+										<c:otherwise>
+											<td>${order_book_name}&nbsp;외${size-1}권</td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 								<tr>
 									<th class="ta-l">주문자명</th>
-									<td>
-										<s:property value="oparamClass.order_receive_name" />
-									</td>
+									<td>${order.order_trade_payer}</td>
 								</tr>
 								<tr>
 									<th class="ta-l">배송정보</th>
 									<td>
-										<p>
-											[
-											<s:property value="oparamClass.order_receive_zipcode" />
-											]
-											<s:property value="order_receive_addr1" />
-											&nbsp;
-											<s:property value="order_receive_addr2" />
-											/
-											<s:property value="oparamClass.order_receive_mobile " />
-										</p>
+										<p>[${order.order_receive_zipcode}] ${order.order_receive_addr1}&nbsp; ${order.order_receive_addr2} / ${order.order_receive_mobile}</p>
 									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">남기실 말씀</th>
 									<td>
-										<strong>
-											<s:property value="oparamClass.order_receive_memo" />
-										</strong>
-									</td>
-								</tr>
-								<tr>
-									<th class="ta-l">상품 금액</th>
-									<td>
-										<strong>
-											<s:property value="order_goods_price" />
-										</strong>
-										<span class="add_currency"></span>
+										<strong>${order.order_receive_memo}</strong>
 									</td>
 								</tr>
 								<tr>
 									<th class="ta-l">총 결제금액</th>
 									<td>
 										<strong class="c-red">
-											<s:property value="%{oparamClass.order_goods_price*oparamClass.order_goods_count}" />
+											<fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />
+											원
 										</strong>
 										<span class="add_currency"></span>
 									</td>
@@ -146,7 +127,7 @@
 						</table>
 					</div>
 					<div class="btn">
-						<a class="skinbtn point2 oe-confirm" href="main.do">
+						<a class="skinbtn point2 oe-confirm" href="<%=cp%>/main.do">
 							<em>확인</em>
 						</a>
 						<a class="skinbtn point2 oe-confirm" href="mypage.do">
