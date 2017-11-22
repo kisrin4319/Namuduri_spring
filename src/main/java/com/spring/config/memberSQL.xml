@@ -74,5 +74,31 @@
 	<select id="memberList" resultType="MemberModel">
 		select * from member ORDER BY member_join_date DESC
 	</select>
+	
+	<!-- 회원 검색 목록 -->
+	<select id="selectSearchList" parameterType="map" resultType="MemberModel">
+		SELECT * FROM MEMBER
+		<choose>
+			<when test="searchNum == 0">
+				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 1">
+				WHERE MEMBER_NAME like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 2">
+				WHERE MEMBER_EMAIL like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 3">
+				WHERE MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 4">
+				WHERE MEMBER_MOBILE like '%'||#{searchKeyword}||'%' 
+			</when>
+			<otherwise>
+				WHERE MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
+			</otherwise>
+		</choose>
+		ORDER BY MEMBER_JOIN_DATE DESC
+	</select>
 
 </mapper>

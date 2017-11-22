@@ -11,7 +11,9 @@
 <body>
 <div class="detail">
 <h2  class="detail_h2">주문 정보 상세보기</h2>
-<form method="post" action="adminOrderModify.do">
+<form method="post" action="orderModify.do">
+<input type="hidden" name="currentPage" value="${currentPage}" />
+<input type="hidden" name="order_trade_num" value="${view.order_trade_num}" />
 <table border=1 cellspacing=0 cellpadding=0 class="table_detail">
 	<c:url var="viewMemberURL" value="/admin/memberDetail.do">
 		<c:param name="member_id" value="${view.member_id}"/>
@@ -61,7 +63,7 @@
 	</tr>
 	<tr>
 		<th width=15%>입금 은행</th>
-		<td width=35%>${view.order_bankname}</td>
+		<td width=35%>${view.order_bank_name}</td>
 		<th width=15%>입금 은행 계좌번호</th>
 		<td width=35%>${view.order_bank_num}</td>
 	</tr>
@@ -134,27 +136,27 @@
 	</tr>
 	<tr>
 		<th width=15%>은행명</th>
-		<td width=35%>${view.member_bankname}</td>
+		<td width=35%>${viewM.member_bankname}</td>
 		<th width=15%>예금주</th>
-		<td width=35%>${view.member_account_holder}</td>
+		<td width=35%>${viewM.member_account_holder}</td>
 	</tr>
 	<tr>
 		<th width=15%>환불계좌</th>
-		<td width=85% colspan=3>${view.member_refund_account}</td>
+		<td width=85% colspan=3>${viewM.member_refund_account}</td>
 	</tr>	
 	<tr>
-		<th width=15%>주문 내역 표시 여부</th>
+		<th width=15%>주문 상태</th>
 		<td class="getyn" width=85% colspan=3>
 			<input type="radio" name="order_use_yn" id="order_use_yn" value="1" 
-				${view.order_use_yn == '1' ? 'checked="checked"' : '' }>사용 
+				${view.order_use_yn == '1' ? 'checked="checked"' : '' }>주문됨 <!-- 기본값 -->
 			<input type="radio" name="order_use_yn" id="order_use_yn" value="0" 
-				${view.order_use_yn == '0' ? 'checked="checked"' : '' }>비사용
+				${view.order_use_yn == '0' ? 'checked="checked"' : '' }>취소됨
 		</td>
 	</tr>
 </table>
 <br>
 <div class="detail_button">
-<input class="button" type=submit name=submit value="수정하기" onclick="javascript:location.href='<%=cp%>/admin/orderModify.do?order_trade_num=${view.order_trade_num}&currentPage=${currentPage}'">
+<input class="button" type=submit name=submit value="수정하기">
 &nbsp;&nbsp;
 <input class="button" type=button value="목록보기" onclick="javascript:location.href='<%=cp%>/admin/orderList.do?currentPage=${currentPage}'">
 </div>

@@ -12,7 +12,7 @@
 <title>회원 정보 관리</title>
 </head>
 <body>
-
+<!-- 검색창 영역 -->
 	<div class="searcharea">
 		<form>
 			<div class="search_input">
@@ -22,6 +22,7 @@
 					<option value="2">EMAIL</option>
 					<option value="3">전화번호</option>
 					<option value="4">휴대폰번호</option>
+					<option value="5">주민번호 앞자리</option>
 				</select> <input class="searchKeyword" type="text" name="searchKeyword">
 				<input class="searchbutton" name="submit" type="submit" value="검색">
 			</div>
