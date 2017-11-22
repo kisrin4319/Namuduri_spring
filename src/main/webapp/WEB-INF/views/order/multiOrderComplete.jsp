@@ -47,7 +47,9 @@
 									<th class="ta-l">결제수단</th>
 									<td>
 										<p>
-											<strong>무통장 입금</strong><br /> 입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 : <fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />원</strong> 입금자명 : ${order.order_trade_payer}
+											<strong>무통장 입금</strong><br /> 입금은행 : ${order.order_bank_name} 입금계좌 : ${order.order_bank_num} 예금주명 : 나무두리(주) 입금금액 :
+											<fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />
+											원</strong> 입금자명 : ${order.order_trade_payer}
 										</p>
 									</td>
 								</tr>
@@ -59,10 +61,17 @@
 									<th class="ta-l">주문일자</th>
 									<td><fmt:formatDate value="${order.order_regdate}" pattern="yyyy-MM-dd" /></td>
 								</tr>
-							<tr>
-                    	<th class="ta-l">주문상품 </th>                    	
-                    	<td>${order_book_name}&nbsp;외 ${size-1}권</td>                    	
-               		</tr>
+								<tr>
+									<th class="ta-l">주문상품</th>
+									<c:choose>
+										<c:when test="${size == 1}">
+											<td>${order_book_name}</td>
+										</c:when>
+										<c:otherwise>
+											<td>${order_book_name}&nbsp;외${size-1}권</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
 								<tr>
 									<th class="ta-l">주문자명</th>
 									<td>${order.order_trade_payer}</td>
@@ -79,7 +88,7 @@
 								</tr>
 								<tr>
 									<th class="ta-l">총 결제금액</th>
-									<td><strong class="c-red"><fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###"/>원</strong><span class="add_currency"></span></td>
+									<td><strong class="c-red"><fmt:formatNumber value="${order.order_receive_moneysum}" pattern="###,###,###" />원</strong><span class="add_currency"></span></td>
 								</tr>
 							</tbody>
 							<colgroup>
