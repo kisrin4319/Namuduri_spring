@@ -1,5 +1,8 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -51,6 +54,11 @@ public class MypageService implements MypageDao {
 	}
 	
 	@Override
+	public List<OrderModel> getOrderTradeNumList(String member_id) {
+		return sqlSessionTemplate.selectList("order.getOrderTradeNumList", member_id);
+	}
+	
+	@Override
 	public OrderDetailModel memberOrderDetail(String order_trade_num) {
 		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
 	}
@@ -60,4 +68,5 @@ public class MypageService implements MypageDao {
 	public void memberOrderCancel(String order_trade_num) {
 		sqlSessionTemplate.delete("order.orderCancel", order_trade_num);
 	}
+
 }

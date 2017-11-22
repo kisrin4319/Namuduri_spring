@@ -244,14 +244,22 @@ public class MypageController {
 	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) {
 		
 		mv = new ModelAndView();
+		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
-		String order_trade_num = (String) session.getAttribute("order_trade_num");
+		String member_id = (String) session.getAttribute("member_id");
 		
-		OrderModel getOrderInfo = mypageService.getOrderInfo(order_trade_num);
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		for(int i=0; i<tradeNumList.size(); i++) {
+			OrderModel model = tradeNumList.get(i);
+			String orderTradeNum = model.getOrder_trade_num();
+			
+			OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
+			
+			orderModel.add(getOrderInfo);
+		}
 		
-		mv.addObject("getOrderInfo", getOrderInfo);
+		mv.addObject("orderModel", orderModel);
 		mv.setViewName("orderListCheck1");
-		
 		return mv;
 	}
 	
