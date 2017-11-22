@@ -23,7 +23,7 @@
 	            type:'post',
 	            data:$('form').serialize(),
 	            success:function(result){
-	            	if(result.returnVal == '1'){
+	            	if(result.returnVal === "1"){
 	            		alert('회원 탈퇴가 정상적으로 처리되었습니다. 이용해 주셔서 감사합니다.');
 	            		return false;
 	            	}else {

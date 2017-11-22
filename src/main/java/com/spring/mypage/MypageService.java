@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.member.MemberModel;
 import com.spring.order.OrderDetailModel;
+import com.spring.order.OrderModel;
 
 @Service
 public class MypageService implements MypageDao {
@@ -44,6 +45,11 @@ public class MypageService implements MypageDao {
 	}
 	
 	//5. 주문상세내역 보기
+	@Override
+	public OrderModel getOrderInfo(String order_trade_num) {
+		return sqlSessionTemplate.selectOne("order.selectOrder", order_trade_num);
+	}
+	
 	@Override
 	public OrderDetailModel memberOrderDetail(String order_trade_num) {
 		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
