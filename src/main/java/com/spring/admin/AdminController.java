@@ -2,8 +2,11 @@ package com.spring.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,7 @@ import com.spring.member.MemberService;
 import com.spring.mypage.MypageService;
 import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
+import com.spring.order.OrderService;
 
 @Controller
 public class AdminController {
@@ -41,6 +45,9 @@ public class AdminController {
 	
 	@Resource
 	private MypageService mypageService;
+	
+	@Resource
+	private OrderService orderService;
 	
 	ModelAndView mv = new ModelAndView();
 	String session_id;
@@ -63,7 +70,8 @@ public class AdminController {
 	@RequestMapping("/admin/memberList.do") //회원 조회
 	public ModelAndView memberList(HttpServletRequest request) throws Exception {
 		
-		List<MemberModel> memberList = memberService.memberList();
+		String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -72,6 +80,19 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<MemberModel> memberList = new ArrayList<MemberModel>();
+		
+		if((searchNum==null || searchNum.trim().isEmpty() || searchNum.equals("0")) 
+				&& (searchKeyword==null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
+			memberList = memberService.memberList();
+		} else {
+			map.put("searchNum", searchNum);
+			map.put("searchKeyword", searchKeyword);
+			
+			memberList = adminService.searchMember(map);
+		}
+
 		totalCount = memberList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -96,12 +117,20 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/memberDetail.do") //회원 상세보기
-	public ModelAndView memberDetail(@RequestParam(required=true) String member_id, int currentPage) throws Exception {
+	public ModelAndView memberDetail(@RequestParam(required=true) String member_id, HttpServletRequest request) throws Exception {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
 		MemberModel view = memberService.SelectOne(member_id);
+		List<OrderDetailModel> orderDetailList = null;
 		
 		mv.addObject("view", view);
-		//주문 내역 추가
+		mv.addObject("orderDetailList", orderDetailList);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
 		
@@ -109,7 +138,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/memberModify.do", method=RequestMethod.GET) //회원 정보 수정 입력 폼
-	public ModelAndView memberModifyForm(@RequestParam(required=true) String member_id, @RequestParam int currentPage) throws Exception {
+	public ModelAndView memberModifyForm(@RequestParam(required=true) String member_id, HttpServletRequest request) throws Exception {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
 		MemberModel memberModel = memberService.SelectOne(member_id);
 		
@@ -121,7 +157,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/memberModify.do", method=RequestMethod.POST) //회원 정보 수정
-	public ModelAndView memberModify(@ModelAttribute("view") MemberModel memberModel, int currentPage) throws Exception {
+	public ModelAndView memberModify(@ModelAttribute("view") MemberModel memberModel, HttpServletRequest request) throws Exception {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
 		mypageService.memberModify(memberModel);
 		MemberModel view = memberService.SelectOne(memberModel.getMember_id());
@@ -134,9 +177,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/memberDelete.do") //회원 정보 삭제
-	public ModelAndView memberDelete(@RequestParam String member_id, @RequestParam int currentPage) throws Exception {
+	public ModelAndView memberDelete(@RequestParam String member_id, HttpServletRequest request) throws Exception {
 		
-		/*mypageService.memberOut(member_id);*/
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		/*mypageService.memberDelete(memberModel);*/
+		//차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 		
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/admin/memberList.do");
@@ -148,19 +199,32 @@ public class AdminController {
 	
 	@RequestMapping("/admin/bookList.do") //도서 리스트
 	public ModelAndView bookList(HttpServletRequest request) throws Exception {
-		//전체 책 리스트, 메인에 보여지는 것만. 메인에 보여지지 않는 것만. 
-		//카테고리만으로도 검색 가능하게. 
+		//전체 책 리스트, 메인에 보여지는 것만. 메인에 보여지지 않는 것만. //한 페이지 내에서 다른 세개의 리스트를 출력가능할까..?
+		//카테고리 관리 기능 추가
 		
-		//한 페이지 내에서 다른 세개의 리스트를 출력가능할까..?
-		List<BooksModel> booksList = adminService.booksListAll();
-				
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-						|| request.getParameter("currentPage").equals("0")) {
-					currentPage = 1;
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
 		}else {
-					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-				
+		
+		String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		
+		if((searchNum==null || searchNum.trim().isEmpty() || searchNum.equals("0")) 
+				&& (searchKeyword==null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
+			booksList = adminService.booksListAll();
+		} else {
+			map.put("searchNum", searchNum);
+			map.put("searchKeyword", searchKeyword);
+			
+			booksList = adminService.searchBook(map);
+		}
+	
 		totalCount = booksList.size();
 				
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookList");
@@ -201,8 +265,9 @@ public class AdminController {
 		List<ReviewModel> review = booksService.reviewList(num);
 		
 		totalCount = review.size();
+		int reviewPage = 1;
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookDetail", num);
+		paging = new Paging(reviewPage, totalCount, blockCount, blockPage, "bookDetail", num);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -213,6 +278,7 @@ public class AdminController {
 
 		review = review.subList(paging.getStartCount(), lastCount);
 		
+		mv.addObject("reviewPage", reviewPage);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("view", view);
 		mv.addObject("review", review);
@@ -349,15 +415,30 @@ public class AdminController {
 	@RequestMapping("/admin/orderList.do") //주문 조회하기
 	public ModelAndView orderList(HttpServletRequest request) throws Exception {
 		
-		List<OrderModel> orderList = adminService.selectOrderAll();
-		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 			|| request.getParameter("currentPage").equals("0")) {
 				currentPage = 1;
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-						
+		
+		
+		String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<OrderModel> orderList = new ArrayList<OrderModel>();
+		
+		if((searchNum==null || searchNum.trim().isEmpty() || searchNum.equals("0")) 
+				&& (searchKeyword==null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
+			orderList = adminService.selectOrderAll();
+		} else {
+			map.put("searchNum", searchNum);
+			map.put("searchKeyword", searchKeyword);
+			
+			orderList = adminService.searchOrder(map);
+		}
+
 		totalCount = orderList.size();
 						
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
@@ -368,7 +449,7 @@ public class AdminController {
 		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
 		}
-						
+		
 		orderList = orderList.subList(paging.getStartCount(), lastCount);
 						
 		mv.addObject("orderList", orderList);
@@ -383,14 +464,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/orderDetail.do") //주문 상세보기
-	public ModelAndView orderDetail(@RequestParam int order_trade_num) throws Exception {
+	public ModelAndView orderDetail(@RequestParam String order_trade_num) throws Exception {
 		
-		OrderModel view = null; /*= mypageService.memberOrderDetail();*/
-		
-		List<OrderDetailModel> orderDetail = null; //마이페이지?
+		OrderModel view = adminService.selectOrder(order_trade_num);
+		List<OrderDetailModel> orderDetailList = adminService.selectOrderDetail(order_trade_num);
+		MemberModel viewMember = memberService.SelectOne(view.getMember_id());
 		
 		mv.addObject("view", view);
-		mv.addObject("orderDetailList", orderDetail);
+		mv.addObject("viewM", viewMember);
+		mv.addObject("orderDetailList", orderDetailList);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminOrderDetail");
 		
@@ -401,7 +483,7 @@ public class AdminController {
 	public ModelAndView orderModify(@RequestParam String payment_status, @RequestParam String order_trans_status,
 			@RequestParam int order_use_yn, @RequestParam String order_trade_num, @RequestParam int currentPage) throws Exception {
 		
-		OrderModel orderModel = null;
+		OrderModel orderModel = new OrderModel();
 		orderModel.setPayment_status(payment_status);
 		orderModel.setOrder_trans_status(order_trans_status);
 		orderModel.setOrder_use_yn(order_use_yn);
@@ -412,14 +494,6 @@ public class AdminController {
 		mv.addObject("order_trade_num", order_trade_num);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/admin/orderDetail.do");
-		
-		return mv;
-	}
-	
-	@RequestMapping("/admin/orderDelete.do") //주문 취소하기.. 배송 관련 기능을 넣을까..
-	public ModelAndView orderDelete() throws Exception {
-		
-		//데이터 삭제?
 		
 		return mv;
 	}

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -90,20 +91,18 @@ public class BasketController {
 
 	// 2. 장바구니 추가
 	@RequestMapping("/basket/basketInsert.do")
-	public ModelAndView basketInsert(@RequestParam int book_num , @RequestParam int basket_book_count, HttpSession session) {
-		BasketModel basketModel = new BasketModel();
-		mv = new ModelAndView();
+	public ModelAndView basketInsert(@ModelAttribute BasketModel basketModel, HttpSession session) {
+		/*BasketModel basketModel = new BasketModel();
+		*/mv = new ModelAndView();
 		
 		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);
-		basketModel.setBasket_book_num(book_num);
-		basketModel.setBasket_book_count(basket_book_count);
 
 		// 장바구니에 기존 상품이 있는지 검사
 		int count = basketService.BasketSelectOne(basketModel);
 		if (count == 0) {
 			// 없으면 insert
-			BooksModel booksModel = booksService.bookOne(book_num);
+			BooksModel booksModel = booksService.bookOne(basketModel.getBasket_book_num());
 			basketModel.setBasket_book_image(booksModel.getBook_image());
 			basketModel.setBasket_book_name(booksModel.getBook_name());
 			basketModel.setBasket_book_price(booksModel.getBook_price());

@@ -52,7 +52,7 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("member_id", result.getMember_id());
 			
-			mv.setViewName("main");
+			mv.setViewName("redirect:/main.do");
 			return mv;
 		} else {
 			//로그인 실패

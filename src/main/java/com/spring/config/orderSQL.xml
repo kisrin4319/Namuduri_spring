@@ -77,12 +77,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	#{order_book_count}
  	)
  	</insert>
- 
+ 	
+ 	<!-- 전체 주문 리스트 가져오기 -->
+ 	<select id="selectAll" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK
+	</select>
+	
 	<!-- 6. 주문정보 가져오기 -->
 	<select id="getOrder" resultType="OrderModel">
 	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = ${order_trade_num}
 	</select>
-
+	
+	<select id="selectOrder" resultType="OrderModel">
+	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</select>
+	
+	<!-- 관리자 주문 검색 목록 -->
+	<select id="selectSearchList" parameterType="map" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK
+		<choose>
+			<when test="searchNum == 0">
+				WHERE ORDER_TRADE_NUM like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 1">
+				WHERE ORDER_TRANS_NUM like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 2">
+				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 3">
+				WHERE ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 4">
+				WHERE ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%' 
+			</when>
+			<otherwise>
+				WHERE ORDER_RECEIVE_PHONE like '%'||#{searchKeyword}||'%' 
+				OR ORDER_RECEIVE_MOBILE like '%'||#{searchKeyword}||'%' 
+			</otherwise>
+		</choose>
+		ORDER BY ORDER_REGDATE DESC
+	</select>
+	
 	<!-- 주문상세내역 보기 -->
 	<select id="memberOrderDetail" resultType="OrderDetailModel">
 		SELECT go.*, me.member_phone, me.member_email, tb.goods_image, tb.goods_num, od.*
@@ -97,6 +133,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT * FROM ORDER_DETAIL WHERE ORDER_TRADE_NUM = ${order_trade_num}
 	</select>
 	
+	<select id="selectOrderDetail" resultType="OrderDetailModel">
+	SELECT * FROM ORDER_DETAIL WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</select>
+	
 	<!-- 8. 주문 후 장바구니 삭제하기 -->
 	<delete id="delBasket">
 		DELETE FROM BASKET WHERE BASKET_NUM = #{basket_num}
@@ -108,20 +148,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BOOK_NUM = #{book_num} 
 	</update>
 
-	<!-- 주문내역 취소 -->
-	<delete id="orderCancel">
-		DELETE FROM GOODS_ORDER
-		WHERE ORDER_TRADE_NUM = #{order_trade_num}
-	</delete>
-	
-	<select id="selectAll" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK
-	</select>
-	
+	<!-- 주문 상태 수정 -->
 	<update id="modifyOrder" parameterType="OrderModel">
 		 UPDATE ORDER_BOOK SET PAYMENT_STATUS = #{payment_status}, 
 		 					ORDER_TRANS_STATUS = #{order_trans_status}, 
 		 					ORDER_USE_YN = #{order_use_yn} 
 		 			WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
+	
+	<!-- 주문 내역 취소 -->
+	<update id="orderCancel">
+		UPDATE FROM ORDER_BOOK SET ORDER_USE_YN = 0
+		WHERE ORDER_TRADE_NUM = #{order_trade_num}
+	</update>
+	
 </mapper>
