@@ -56,7 +56,7 @@ public class MemberController {
 			return mv;
 		} else {
 			//로그인 실패
-			mv.setViewName("loginForm");
+			mv.setViewName("member/loginError");
 			return mv;
 			
 		}
@@ -78,6 +78,7 @@ public class MemberController {
 	@ModelAttribute("member")
 	public MemberModel formBack() {
 		return new MemberModel();
+		
 	}
 	//회원가입 폼
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.GET)
@@ -159,6 +160,5 @@ public class MemberController {
 		mv.setViewName("member/zipCheck");
 		return mv;
 	}
-
 	
 }
