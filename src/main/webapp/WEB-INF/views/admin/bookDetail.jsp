@@ -59,10 +59,19 @@
 	<tr>
 		<th colspan=2 align=center>활성화 여부</th>
 		<td class="getyn" colspan=4 align=center>
-			<input type="radio" name="goods_use_yn" id="goods_use_yn" value="1" 
+			<c:choose>
+				<c:when test="${view.book_use_yn=='0'}">
+					비사용됨
+				</c:when>
+				<c:otherwise>
+					사용됨
+				</c:otherwise>
+			</c:choose>
+			
+			<%-- <input type="radio" name="goods_use_yn" id="goods_use_yn" value="1" 
 				${view.book_use_yn == '1' ? 'checked="checked"' : '' }>사용 
 			<input type="radio" name="goods_use_yn" id="goods_use_yn" value="0" 
-				${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용
+				${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용 --%>
 		</td>
 	</tr>
 </table>
