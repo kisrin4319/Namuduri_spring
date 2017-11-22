@@ -37,6 +37,7 @@
 			//var checkbox = 'No';
 			//member_email_get value = 'NO'
 			}  */
+
 			if(password == ''){
 				alert('비밀번호를 입력해 주세요.');
 				return false;
@@ -52,8 +53,8 @@
 		            success:function(result){
 		            	if(result.returnVal == '1'){
 		            		alert('회원정보 수정이 완료되었습니다.');
-		            		return false;
-		            	}else {
+		            		return true;
+		            	} else {
 		            		alert('비밀번호가 같지 않습니다.');
 		            		return false;
 		            	}
@@ -81,9 +82,11 @@
 <tr>
 	<td colspan="2">
 	<form name ="memberInfo" id="memberInfo" action="./memberModify.do" method="post" onsubmit="return check()">
+			
 		<table>
 			<p align="center">
 				<table border="0" style="width:980px;">
+			
 					<tr>
 						<td>
 							<font size="2">
