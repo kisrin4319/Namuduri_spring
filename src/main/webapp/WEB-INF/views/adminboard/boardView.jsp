@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,24 +27,22 @@
 	<table class="boardView" width="770" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<th width="100"><b>번호</b></th>
-			<td style="height: 38px;">
-				<s:property value="resultClass.board_num" />
-			</td>
+			<td style="height: 38px;">${resultClass.board_num}</td>
 			
 			<th width="100"><b>글쓴이</b></th>
 			<td style="height: 38px;">
-				<s:property value="resultClass.member_id" />
+				<property value="resultClass.member_id" />
 			</td>
 			
 			<th width="100"><b>날짜</b></th>
 			<td style="height: 25px;">
-				<s:property value="resultClass.board_regdate" />
+				<property value="resultClass.board_regdate" />
 			</td>
 		</tr>
 		<tr>
 			<th width="100"><b>제목</b></th>
 			<td colspan="5" width="770" style="height: 38px;">
-				<s:property value="resultClass.board_title" />
+				<property value="resultClass.board_title" />
 			</td>
 		</tr>
 
@@ -54,43 +54,34 @@
 		</tr>
 	</table>
 	<div id="Bbutton">
-		<s:url id="modifyURL" action="modifyForm">
-			<s:param name="board_num">
-				<s:property value="board_num" />
-			</s:param>
-		</s:url>
+		<c:url var="modifyURL" value="modifyForm">
+			<c:param name="board_num" value="board_num" />
+		</c:url>
 		<s:url id="deleteURL" action="deleteAction">
 			<s:param name="board_num">
 				<s:property value="board_num" />
 			</s:param>
 		</s:url>
 					
-		<s:if test = "resultClass.board_type == 2">
-			<s:if test="session.member_id =='admin'">
+		<c:if test = "resultClass.board_type == 2">
+			<c:if test="session.member_id =='admin'">
 				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','modify')">   
 				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','Delete')">
 				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
-			</s:if>
-			<s:else>
+			</c:if>
+			<c:if>
 				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
-			</s:else>
-		</s:if>
-		<s:else>
+			</c:if>
+		</c:if>
+		<c:if>
 			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='replyForm.do?board_num=<s:property value="board_num" />'">
 		  	<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','modify')">   
 			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','Delete')">
 			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
-		</s:else>
+		</c:if>
 	</div>			
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 

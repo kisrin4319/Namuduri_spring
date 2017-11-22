@@ -3,35 +3,53 @@
    
 <mapper namespace="board"> 
 
-	<sql id="select-board">
-		SELECT * FROM BOARD
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-BoardAll">
+		SELECT * FROM BOARD 
+	</sql>
+		
+	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<sql id="where-BoardNo">
+		WHERE board_num = #{board_num}
 	</sql>
 	
 	<!-- 게시판 목록 -->
 	<select id="boardList" resultType="BoardModel"> 
-  		<include refid="select-board" /> ORDER BY DESC;
+  		<include refid="select-BoardAll" /> ORDER BY board_regdate DESC
 	</select>
 	
 	<!-- 게시글 내용 보기 -->
 	<select id="selectBoardOne" resultType="BoardModel">
-		
+		<include refid="select-BoardAll" />
+		<include refid="where-BoardNo" />
 	</select>
+	
+	<!-- 검색 -->
+	<!-- 제목 검색 -->
+	<!-- <select id="Search0" resultMap="Sboard" parameterType="String">
+		SELECT * FROM board WHERE board_title like #{search} ORDER BY no DESC
+	</select> -->
+	
 	
 	<!-- 게시글 작성 -->
 	<insert id="boardWrite" parameterType="BoardModel"> 
-		INSERT INTO BOARD(BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE, BORAD_TYPE)
-		VALUES(BORAD_NUM_SEQ.nextVal, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate, #{board_type})
+		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate)
     </insert>
   
  	<!-- 게시글 수정 -->
  	<update id="update">
-
+ 		UPDATE BOARD 
+ 		SET BOARD_TITLE = #{board_title}, BOARD_PW = #{board_pw}, BOARD_CONTENT = #{board_content}
+			BOARD_TYPE = #{board_type}
+		WHERE BOARD_NUM = #{board_num}
 	</update>
  
  	<!-- 게시글 삭제 -->
  	<delete id="delete">
   		DELETE FROM BOARD WHERE BOARD_NUM = #{board_num}
  	</delete>
- </mapper>
+
+</mapper>
  
  

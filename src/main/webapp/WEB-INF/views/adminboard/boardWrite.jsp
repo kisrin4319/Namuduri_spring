@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>질문답변 게시판</title>
-<link rel="stylesheet" href="css/board.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/css/board.css" type="text/css" />
 <script type="text/javascript">
 	function validation() {
 
@@ -47,10 +47,10 @@
 	<br>
 		<h2 class="cscenter_h2">고객센터</h2>
 	<h3 class="bul_green">질문답변 게시판</h3>
-	<br> <s:if test="resultClass == NULL">
-			<form action="writeAction.do" name="regForm" method="post"
+	<br><!--  <s:if test="resultClass == NULL"> -->
+			<form action="boardWrite.do" name="regForm" method="post"
 				enctype="multipart/form-data" onsubmit="return validation();">
-		</s:if> <s:elseif test="reply">
+		<!-- </s:if> <s:elseif test="reply">
 			<form action="replyAction.do" name="regForm" method="post"
 				enctype="multipart/form-data" onsubmit="return validation();">
 				<s:hidden name="ref" value="%{resultClass.ref}" />
@@ -61,14 +61,10 @@
 				enctype="multipart/form-data" onsubmit="return validation();">
 				<s:hidden name="board_num" value="%{resultClass.board_num}" />
 				<s:hidden name="currentPage" value="%{currentPage}" />
-		</s:else>
-
-		<table class="boardWrite" width="770" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td colspan="6" id="fon" style="height: 25px;"><font color="#FF0000">*</font>는 필수 입력사항입니다.</td>
-			</tr>
-			<tr style="height: 30px;">
-				<th>게시글 타입</th>
+		</s:else> -->
+		
+		
+		<!-- <th>게시글 타입</th>
 				<td><select name="board_type">
 						<s:if test="%{session.member_id=='admin'}">
 							<option value="0">공개글</option>
@@ -79,28 +75,42 @@
 							<option value="0">공개글</option>
 							<option value="1">비공개 글</option>
 						</s:else>
-				</select></td>
+				 </select></td> -->
+				 
+				 
+				 
+				 
+	<input type="hidden" name="id" value="${session_member_id}" />
+	<input type="hidden" name="name" value="${session_member_name}" />
+				 
+				 
 
+		<table class="boardWrite" width="770" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td colspan="6" id="fon" style="height: 25px;"><font color="#FF0000">*</font>는 필수 입력사항입니다.</td>
+			</tr>
+			<tr style="height: 30px;">
+			
 				<th><font color="#FF0000">*</font>이름</th>
-				<td><s:textfield name="member_id" theme="simple" value="%{resultClass.member_id}"
-						cssStyle="width:150px; height: 18px;" maxlength="20" /></td>
+				<td><input type="text" name="member_id" id="member" value=""
+						Style="width:150px; height: 18px;" maxlength="20" /></td>
 				<th><font color="#FF0000">*</font> 비밀번호</th>
-				<td><s:textfield name="board_pw" theme="simple" value="%{resultClass.board_pw}"
-						cssStyle="width:150px; height: 18px;" maxlength="20" /></td>
+				<td><input type="text" name="board_pw" id="passwd" vlaue=""
+						Style="width:150px; height: 18px;" maxlength="20" /></td>
 			</tr>
 			<tr>
 				<th height="30"><font color="#FF0000">*</font>제목</th>
 				<td colspan="5" width="770" bgcolor="#FFFFFF">
-				<s:textfield name="board_title" theme="simple" value="%{resultClass.board_title}"
-					cssStyle="width:600px; height:20px;" maxlength="50" /></td>
+				<input type="text" name="board_title" id="title" value=""
+					Style="width:600px; height:20px;" maxlength="50" /></td>
 			</tr>
 
 
 			<tr>
 				<th bgcolor="#F4F4F4"><font color="#FF0000">*</font> 내용</th>
-				<td colspan="5" bgcolor="#FFFFFF"><s:textarea
-						name="board_content" theme="simple"
-						value="%{resultClass.board_content}" cols="100" rows="17" /></td>
+				<td colspan="5" bgcolor="#FFFFFF">
+				<textarea name="board_content" id="content" value="" cols="100" rows="17"></textarea> 
+				</td>
 			</tr>
 
 		</table>
