@@ -12,15 +12,20 @@
 <body>
 <!-- 검색창 영역 -->
 <div class="searcharea">
-<form >
-	<select name="searchNum" class="searchNum">
-		<option value="0">주문번호</option>
-		<option value="1">배송번호</option>
-	</select>
-	<input class="searchKeyword" type="text" name="searchKeyword">
-	<input class="searchbutton" name="submit" type="submit" value="검색">
-</form>
-</div>
+		<form>
+			<div class="search_input">
+				<select name="searchNum" class="searchNum">
+					<option value="0">주문번호</option>
+					<option value="1">배송번호</option>
+					<option value="2">주문자 ID</option>
+					<option value="3">결제인</option>
+					<option value="4">수취인</option>
+					<option value="5">전화번호</option><!-- 수취인 폰, 모바일 둘 다! -->
+				</select> <input class="searchKeyword" type="text" name="searchKeyword">
+				<input class="searchbutton" name="submit" type="submit" value="검색">
+			</div>
+		</form>
+	</div>
 <!-- 주문 리스트 출력 -->
 <div class="list">
 <table class="table_list">
@@ -28,7 +33,7 @@
 	<th width=12%><b>주문번호</b></th>
 	<th width=10%><b>주문날짜</b></th>
 	<th width=10%><b>주문자 ID</b></th>
-	<th width=10%><b>결제자</b></th>
+	<th width=10%><b>결제인</b></th>
 	<th width=10%><b>결제상태</b></th>
 	<th width=12%><b>배송번호</b></th>
 	<th width=10%><b>수취인</b></th>
