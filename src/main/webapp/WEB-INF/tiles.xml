@@ -141,8 +141,8 @@
 	</definition>
 
 	<!-- 게시판 글 읽기 -->
-	<definition name="boardviews" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardviews.jsp" />
+	<definition name="boardDetail" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardView.jsp" />
 	</definition>
 	
 	<!-- 게시판 비밀번호 체크 -->

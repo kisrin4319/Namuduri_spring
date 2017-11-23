@@ -24,38 +24,41 @@
 		<include refid="where-BoardNo" />
 	</select>
 	
-	<!-- 검색 -->
-	<!-- 제목 검색 -->
-	<!-- <select id="Search0" resultMap="Sboard" parameterType="String">
-		SELECT * FROM board WHERE board_title like #{search} ORDER BY no DESC
-	</select> -->
 	
+	<!-- 검색 -->
 	<!-- 작성자검색 -->
-	<select id="Search0" resultMap="ModelRes" parameterType="String">
-		SELECT * FROM board	WHERE MEMBER_ID like #{search}
+	<select id="Search0" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board	WHERE MEMBER_ID like #{member_id}
 		ORDER BY ref DESC, re_step ASC
 	</select>
 	
 	<!-- 제목검색 -->
-	<select id="Search1" resultMap="ModelRes" parameterType="String">
-		SELECT * FROM board WHERE board_titel like #{search}
+	<select id="Search1" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board WHERE board_title like #{board_title}
 		ORDER BY ref DESC, re_step ASC
 	</select>
 	
 	<!-- 내용검색 -->
-	<select id="Search2" resultMap="ModelRes" parameterType="String">
-		SELECT * FROM board	WHERE board_content like #{search}
+	<select id="Search2" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board	WHERE board_content like #{board_content}
 		ORDER BY ref DESC, re_step ASC
 	</select>
 
-	
-	
+		
 	
 	<!-- 게시글 작성 -->
 	<insert id="boardWrite" parameterType="BoardModel"> 
 		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE)
 		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate)
     </insert>
+    
+    <!-- 답변작성 -->
+    <insert id="boardReply" parameterType="Integer">
+    	INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE, REF, RE_STEP, RE_LEVEL)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate, #{REF}, #{RE_STEP}, #{RE_LEVEL})
+    </insert>
+  
+  
   
  	<!-- 게시글 수정 -->
  	<update id="update">

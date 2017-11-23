@@ -64,18 +64,18 @@
 		</s:else> -->
 		
 		
-		<!-- <th>게시글 타입</th>
+		<th>게시글 타입</th>
 				<td><select name="board_type">
-						<s:if test="%{session.member_id=='admin'}">
+						<c:if test="%{session.member_id=='admin'}">
 							<option value="0">공개글</option>
 							<option value="1">비공개 글</option>
 							<option value="2">공지사항</option>
-						</s:if>
-						<s:else>
+						</c:if>
+						<c:if test="%{session.member_id!='admin'}">
 							<option value="0">공개글</option>
 							<option value="1">비공개 글</option>
-						</s:else>
-				 </select></td> -->
+						</c:if>
+				 </select></td>
 				 
 				 
 				 

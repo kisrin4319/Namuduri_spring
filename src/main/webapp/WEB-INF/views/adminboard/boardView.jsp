@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>질문답변 게시판</title>
-<link rel="stylesheet" href="css/board.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp %>/css/board.css" type="text/css" />
 <script type="text/javascript">
 	function open_win_noresizable(url, member_id)
 	{
@@ -27,29 +27,27 @@
 	<table class="boardView" width="770" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<th width="100"><b>번호</b></th>
-			<td style="height: 38px;">${resultClass.board_num}</td>
+			<td style="height: 38px;">${boardModel.board_num}</td>
 			
 			<th width="100"><b>글쓴이</b></th>
-			<td style="height: 38px;">
-				<property value="resultClass.member_id" />
-			</td>
+			<td style="height: 38px;">${boardModel.member_id}</td>
 			
 			<th width="100"><b>날짜</b></th>
 			<td style="height: 25px;">
-				<property value="resultClass.board_regdate" />
+				${boardModel.board_regdate}
 			</td>
 		</tr>
 		<tr>
 			<th width="100"><b>제목</b></th>
 			<td colspan="5" width="770" style="height: 38px;">
-				<property value="resultClass.board_title" />
+				${boardModel.board_title}
 			</td>
 		</tr>
 
 		<tr>
 			<th width="100"><b>내용</b></th>
 			<td colspan="5"width="770" style="height: 70px;">
-				${resultClass.board_content }
+				${boardModel.board_content }
 			</td>
 		</tr>
 	</table>
@@ -57,27 +55,29 @@
 		<c:url var="modifyURL" value="modifyForm">
 			<c:param name="board_num" value="board_num" />
 		</c:url>
-		<s:url id="deleteURL" action="deleteAction">
-			<s:param name="board_num">
-				<s:property value="board_num" />
-			</s:param>
-		</s:url>
-					
-		<c:if test = "resultClass.board_type == 2">
-			<c:if test="session.member_id =='admin'">
-				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','modify')">   
-				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','Delete')">
-				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
+	
+		<c:url var="deleteURL" value ="deleteAction">
+			<c:param name="board_num">
+				${board_num}
+			</c:param>
+		</c:url>
+		
+		<!-- 0번 비공개,1번 일반글,2번 공지사항 -->			
+		<c:if test = "${ boardModel.board_type == 2}">
+			<c:if test="${session.member_id =='admin'}">
+				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
+				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','Delete')">
+				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 			</c:if>
-			<c:if>
-				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
+			<c:if test="${session.member_id !='admin'}">
+				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 			</c:if>
 		</c:if>
-		<c:if>
-			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='replyForm.do?board_num=<s:property value="board_num" />'">
-		  	<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','modify')">   
-			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('checkForm.do?board_num=<s:property value="resultClass.board_num" />&currentPage=<s:property value="currentPage" />','Delete')">
-			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='boardList.do?currentPage=<s:property value="currentPage" />'">
+		<c:if test="${boardModel.board_type != 2}">
+			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='<%=cp%>replyForm.do?board_num=${board_num}'">
+		  	<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
+			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','Delete')">
+			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 		</c:if>
 	</div>			
 </body>

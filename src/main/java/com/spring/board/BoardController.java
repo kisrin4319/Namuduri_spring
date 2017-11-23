@@ -124,34 +124,31 @@ public class BoardController {
 	}
 	
 	// 2. 게시판 내용 보기
-	@RequestMapping(value="/board/boardDetail.do")
-	public ModelAndView BoardDetail(HttpServletRequest request, HttpSession session) throws Exception{
+	@RequestMapping(value="/board/boardDetail.do", method = RequestMethod.GET )
+	public ModelAndView BoardDetail(HttpServletRequest request, HttpSession session){
 		
 		mv = new ModelAndView();
-		int num = Integer.parseInt(request.getParameter("board_num"));
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
+						
+		boardService.boardDetail(board_num);
+		BoardModel boardModel = boardService.boardDetail(board_num);
 		
-		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) {
-			currentPage = 1;
+		session_id = (String) session.getAttribute("member_id");
+		
+		if(boardModel.getRef() == boardModel.getBoard_num()) {
+			mv.addObject("ref", 0);
+		
 		} else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			mv.addObject("ref", 1);
+			if(session_id == null) {
+				
+			}
 		}
-		
-		BoardModel view = boardService.boardDetail(num);
-		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardDetail", num);
-		pagingHtml = paging.getPagingHtml().toString();
-		
-		int lastCount = totalCount;
-		
-		if (paging.getEndCount() < totalCount) {
-			lastCount = paging.getEndCount() + 1;
-		}
-
+				
 		mv.addObject("currentPage", currentPage);
-		mv.addObject("view", view);
-		mv.addObject("pagingHtml", pagingHtml);
-		mv.addObject("totalCount", totalCount);
+		mv.addObject("boardModel", boardModel);
+		
+		
 		mv.setViewName("boardDetail");
 					
 		return mv;

@@ -20,7 +20,7 @@
 		var bb = board_num;
 		javascript: open_win_noresizable(
 				'checkForm.do?board_num=' + board_num
-						+ '&currentPage=<property value="currentPage" />',
+						+ '&currentPage=${currentPage}',
 				'type')
 	}
 </script>
@@ -110,12 +110,12 @@
 	<tr>
 		<td id="search">
 			<form>
-			<select name="searchBdNum">
+			<select name="searchNum">
 				<option value="0">글쓴이</option>
 				<option value="1">제목</option>
 				<option value="2">내용</option>
 			</select>
-			<input class="text" type="text" name="searchBdKeyword"/>
+			<input class="text" type="text" name="isSearch"/>
 			<input name="submit" type="submit" value="검색" class="Bsearch" />
 			</form>
 		</td>
@@ -126,7 +126,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" align="center"><property value="pagingHtml" escape="false" /></td>
+		<td colspan="5" align="center"><div class="paging">${pagingHtml}</div></td>
 	</tr>
 </table>
 		
