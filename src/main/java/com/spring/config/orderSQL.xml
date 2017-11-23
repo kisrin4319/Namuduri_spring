@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = ${order_trade_num}
 	</select>
 	
-	<select id="selectOrder" resultType="OrderModel">
+	<select id="selectOrder" resultType="OrderModel" parameterType="String">
 	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</select>
 	
@@ -128,6 +128,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		tb.goods_num = od.goods_num WHERE go.order_trade_num = #{order_trade_num}
 	</select>
 	
+	<select id="getOrderTradeNumList" parameterType="String" resultType="OrderModel">
+		select * from ORDER_BOOK where member_id = #{member_id}
+	</select>
+	
 	<!-- 7. 주문 도서정보 가져오기 -->
 	<select id="getOrderDetail" resultType="OrderDetailModel">
 	SELECT * FROM ORDER_DETAIL WHERE ORDER_TRADE_NUM = ${order_trade_num}
@@ -161,5 +165,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE FROM ORDER_BOOK SET ORDER_USE_YN = 0
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
-	
+
 </mapper>

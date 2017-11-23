@@ -1,6 +1,8 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,12 +11,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.member.MemberModel;
+import com.spring.member.MemberService;
+import com.spring.member.ZipcodeModel;
+import com.spring.order.OrderDetailModel;
+import com.spring.order.OrderModel;
 
 @Controller
 public class MypageController {
@@ -23,6 +30,8 @@ public class MypageController {
 	
 	@Resource
 	private MypageService mypageService;
+	@Resource
+	private MemberService memberService;
 	
 	ModelAndView mv;
 	String session_id;
@@ -147,14 +156,26 @@ public class MypageController {
 	
 	//4. 회원정보 수정
 	@RequestMapping(value = "/member/memberModifyView.do")
-	public ModelAndView memberModify() {
+	public ModelAndView memberModify(MemberModel member, HttpServletRequest request , HttpSession session) throws Exception {
+		
 		mv = new ModelAndView();
 		
+		String member_id = (String) session.getAttribute("member_id");
+		
+		MemberModel memberInfo = mypageService.getMemberInfo(member_id);
+		/**
+		 * void = 반환되는 값 없음(ex. mypageService.getMemberInfo(member_id);)
+		 * int = 정수형 반환(ex. int memberInfo = mypageService.getMemberInfo(member_id);)
+		 * vo = vo 반환(ex. MemberModel memberInfo = mypageService.getMemberInfo(member_id);)
+		 */
+		mv.addObject("memberInfo", memberInfo);
 		mv.setViewName("memberModify");
+
 		return mv;
 	}
 	
 	@RequestMapping(value = "/member/memberModify.do")
+	@ResponseBody
 	public Map<String, Object> memberModify(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		Map<String, Object> object = new HashMap<String, Object>();
@@ -162,8 +183,7 @@ public class MypageController {
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
-		memberModel.setMember_id(session_id);
-		
+		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_pw(request.getParameter("member_pw"));
 		memberModel.setMember_name(request.getParameter("member_name"));
 		memberModel.setMember_jumin1(Integer.parseInt(request.getParameter("member_jumin1")));
@@ -178,26 +198,85 @@ public class MypageController {
 		
 		int member = mypageService.memberModify(memberModel);
 		
-		/*if(member > 0) {
-			object.put("returnVal", "1");
+		if(member > 0) {
+			object.put("returnVal", "1");	
 		}else {
 			object.put("returnVal", "0");
-		}*/
+		}
 		return object;
 	}
 	
-	//5. 주문상세내역 보기
-	/*@RequestMapping("/order/memberOrderDetailView.do")
-	public Map<String, Object> memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
+	//우편번호 검색 폼
+	@RequestMapping(value="/member/zipCheckView.do", method=RequestMethod.GET)
+	public ModelAndView zipCheckForm(HttpServletRequest request) throws Exception {
+				
+		mv = new ModelAndView();
+				
+		mv.setViewName("member/zipCheck");
+		return mv;
+	}
 		
-		Map<String, Object> object = new HashMap<String, Object>();
+	//우편번호 검색
+	@RequestMapping(value="/member/zipCheck.do", method=RequestMethod.POST)
+	public ModelAndView zipCheck(@ModelAttribute ZipcodeModel zipcodeModel, HttpServletRequest request) throws Exception{
+				
+		mv = new ModelAndView();
+				
+		String area3;
+				
+		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
+		area3 = request.getParameter("area3");
+				
+		mv.addObject("zipcodeList", zipcodeList);
+				
+		if(area3 != null) {
+			zipcodeList = memberService.zipCheck(area3);
+			mv.addObject("area3", area3);
+			mv.addObject("zipcodeList", zipcodeList);
+		}
+				
+		mv.setViewName("member/zipCheck");
+		return mv;
+	}
+	
+	//주문/배송 조회
+	@RequestMapping(value = "/order/orderListCheckView.do")
+	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) {
 		
 		mv = new ModelAndView();
-		MemberModel memberModel = new MemberModel();
+		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
-		memberModel.setMember_id(session_id);
+		String member_id = (String) session.getAttribute("member_id");
 		
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		for(int i=0; i<tradeNumList.size(); i++) {
+			OrderModel model = tradeNumList.get(i);
+			String orderTradeNum = model.getOrder_trade_num();
+			
+			OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
+			
+			orderModel.add(getOrderInfo);
+		}
 		
-	}*/
+		mv.addObject("orderModel", orderModel);
+		mv.setViewName("orderListCheck1");
+		return mv;
+	}
 	
+	//5. 주문상세내역 보기
+	@RequestMapping(value = "/order/memberOrderDetailView.do")
+	public ModelAndView memberOrderDetail(OrderDetailModel orderDetail, HttpServletRequest request, HttpSession session ) {
+		
+		mv = new ModelAndView();
+		
+		String order_trade_num = (String) session.getAttribute("order_trade_num");
+		
+		OrderDetailModel memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
+		
+		mv.addObject("memberOrderDetail", memberOrderDetail);
+		mv.setViewName("orderDetail");
+		
+		return mv;
+	}
+
 }
