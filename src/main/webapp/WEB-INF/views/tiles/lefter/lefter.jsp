@@ -12,7 +12,7 @@
 
 <table id="mypage_menu">
 	<tr><th colspan="2" align="left">주문관리</th></tr>
-		<tr><td align="left"><a href="orderListCheck.do">▶주문/배송조회</a></td></tr>
+		<tr><td align="left"><a href="http://localhost:8080/namuduri/order/orderListCheckView.do">▶주문/배송조회</a></td></tr>
 		
 	<tr><th colspan="2" align="left">회원정보관리</th></tr>
 		<tr><td align="left"><a href="http://localhost:8080/namuduri/member/memberModifyView.do">▶회원정보수정</a></td></tr>
