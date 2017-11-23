@@ -5,8 +5,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>404 page not found || Witter Multipage Responsive Template</title>
-  		<meta name="description" content="">
+        <title>About Us || Witter Multipage Responsive Template</title>
+        <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.ico">
@@ -50,7 +50,7 @@
 
         <!-- Add your site or application content here -->
         <!--Header Area Start-->
-        <div class="header-area">
+         <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-sm-6 col-xs-6">
@@ -276,12 +276,12 @@
 				<div class="row">
 					<div class="col-md-12">
 					    <div class="breadcrumbs">
-					       <h2>404 Page</h2> 
+					       <h2>About Us</h2> 
 					       <ul class="breadcrumbs-list">
 						        <li>
 						            <a title="Return to Home" href="index.html">Home</a>
 						        </li>
-						        <li>404 page</li>
+						        <li>About Us</li>
 						    </ul>
 					    </div>
 					</div>
@@ -289,21 +289,127 @@
 			</div>
 		</div> 
 		<!-- Breadcrumbs Area Start --> 
-        <!-- 404 Error Page Start -->
-        <div class="error-text-area section-padding">
-			<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/404-page.jpg">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="error-text text-center">
-							<h1>OPPS! PAGE NOT FOUND</h1>
-							<a href="index.html">BACK TO HOME PAGE</a>
-						</div>
-					</div>
-				</div>
-			</div>
+		<!-- About Us Area Start -->
+		<div class="about-us-area section-padding">
+		    <div class="container">
+                <div class="row">
+                    <div class="about-top-inner">
+                        <div class="col-md-6">
+                            <div class="about-inner">
+                                <div class="about-title">
+                                    <h2>Our Story</h2>
+                                </div>
+                                <div class="about-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Utes enim ad minim veniam, quis nostrud exerck itation ullam co laboris nisi ut aliquip ex ea commodo coes nsequat. Duis aute irure dolor in reprehenderit in.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Utes enim ad minimLorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Utes enim ad minim veniam, quis nostrud exerck itation ullam co laboris nisi ut aliquip ex ea commodo coes nsequat. Duis aute irure dolor in reprehenderit in. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="about-image">
+                                <img src="${pageContext.request.contextPath}/bootstrap/img/about/1.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-bottom-inner">
+                        <div class="col-md-6">
+                            <div class="about-image">
+                                <img src="${pageContext.request.contextPath}/bootstrap/img/about/2.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="about-inner">
+                                <div class="about-title">
+                                    <h2>Mission and Vission</h2>
+                                </div>
+                                <div class="about-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Utes enim ad minim veniam, quis nostrud exerck itation ullam co laboris nisi ut aliquip ex ea commodo coes nsequat. Duis aute irure dolor in reprehenderit in.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Utes enim ad minimLorem ipsum dolor sit amet, consectetur adipisicing elitss ed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		    </div>
 		</div>
-       <!-- 404 Error Page End -->
+		<!-- About Us Area End -->
+		<!-- Our Team Area Start -->
+		<div class="our-team-area">
+		    <h2 class="section-title">OUR WRITER</h2>
+		    <div class="container">
+		        <div class="row">
+		        <div class="team-list indicator-style">
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/1.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">rokan tech</a>
+		                        <p>WRITER</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/2.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">mirinda</a>
+		                        <p>AUTHOR</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/3.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">jone doe</a>
+		                        <p>WRITER</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/4.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">nick kon</a>
+		                        <p>WRITER</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/2.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">mirinda</a>
+		                        <p>AUTHOR</p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="single-team-member">
+		                    <a href="#">
+		                        <img src="${pageContext.request.contextPath}/bootstrap/img/about/team/1.jpg" alt="">
+		                    </a>
+		                    <div class="member-info">
+		                        <a href="#">rokan tech</a>
+		                        <p>WRITER</p>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        </div>
+		    </div>
+		</div>
+		<!-- Our Team Area End -->
 		<!-- Footer Area Start -->
 		<footer>
 		    <div class="footer-top-area">
@@ -312,7 +418,7 @@
 		                <div class="col-md-3 col-sm-8">
 		                    <div class="footer-left">
 		                        <a href="index.html">
-		                            <img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
+		                            <img src="img/logo-2.png" alt="">
 		                        </a>
 		                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
 		                        <ul class="footer-contact">
