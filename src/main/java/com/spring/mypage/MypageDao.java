@@ -1,7 +1,11 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.spring.member.MemberModel;
 import com.spring.order.OrderDetailModel;
+import com.spring.order.OrderModel;
 
 public interface MypageDao {
 
@@ -15,11 +19,18 @@ public interface MypageDao {
 	public int memberDelete(MemberModel memberModel);
 			
 	//4. 회원정보 수정
+	public MemberModel getMemberInfo(String member_id);
+	
 	public int memberModify(MemberModel memberModel);
 			
 	//5. 주문상세내역 보기
+	public List<OrderModel> getOrderTradeNumList(String member_id);
+	
+	public OrderModel getOrderInfo(String order_trade_num);
+	
 	public OrderDetailModel memberOrderDetail(String order_trade_num);
 	
 	//6. 주문내역 취소
 	public void memberOrderCancel(String order_trade_num);
+	
 }

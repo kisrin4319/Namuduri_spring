@@ -1,5 +1,8 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.member.MemberModel;
 import com.spring.order.OrderDetailModel;
+import com.spring.order.OrderModel;
 
 @Service
 public class MypageService implements MypageDao {
@@ -34,11 +38,26 @@ public class MypageService implements MypageDao {
 	
 	//4. 회원정보 수정
 	@Override
+	public MemberModel getMemberInfo(String member_id) {
+		return sqlSessionTemplate.selectOne("member.memberSelectOne", member_id);
+	}
+	
+	@Override
 	public int memberModify(MemberModel memberModel) {
 		return sqlSessionTemplate.update("member.memberModify", memberModel);
 	}
 	
 	//5. 주문상세내역 보기
+	@Override
+	public OrderModel getOrderInfo(String order_trade_num) {
+		return sqlSessionTemplate.selectOne("order.selectOrder", order_trade_num);
+	}
+	
+	@Override
+	public List<OrderModel> getOrderTradeNumList(String member_id) {
+		return sqlSessionTemplate.selectList("order.getOrderTradeNumList", member_id);
+	}
+	
 	@Override
 	public OrderDetailModel memberOrderDetail(String order_trade_num) {
 		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
@@ -49,4 +68,5 @@ public class MypageService implements MypageDao {
 	public void memberOrderCancel(String order_trade_num) {
 		sqlSessionTemplate.delete("order.orderCancel", order_trade_num);
 	}
+
 }

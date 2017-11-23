@@ -30,16 +30,19 @@
 	</delete>
 	
 	<!-- 회원정보 수정 -->
-	<update id="memberModify">
+	<update id="memberModify" parameterType="MemberModel">
 		UPDATE MEMBER
-		SET MEMBER_PW = #{member_pw}, MEMBER_NAME = #{member_name},
-		    MEMBER_JUMIN1 = #{member_jumin1}, MEMBER_JUMIN2 = #{member_jumin2},
-		    MEMBER_ZIPCODE = #{member_zipcode}, MEMBER_ADDR1 = #{member_addr1},
-		    MEMBER_ADDR2 = #{member_addr2}, MEMBER_MOBILE = #{member_mobile},
-		    MEMBER_PHONE = #{member_phone}, MEMBER_EMAIL = #{member_email},
-		    MEMBER_EMAIL_GET = #{member_email_get}
-		    <!-- <isNotNull property="member_email_get">MEMBER_EMAIL_GET = #{member_email_get}</isNotNull>
-		    <isNull property="member_email_get">MEMBER_EMAIL_GET = 'NO'</isNull> -->
+		SET MEMBER_PW = #{member_pw}, 
+			MEMBER_NAME = #{member_name},
+		    MEMBER_JUMIN1 = #{member_jumin1}, 
+	    	MEMBER_JUMIN2 = #{member_jumin2},
+		    MEMBER_ZIPCODE = #{member_zipcode}, 
+		    MEMBER_ADDR1 = #{member_addr1},
+		    MEMBER_ADDR2 = #{member_addr2}, 
+		    MEMBER_MOBILE = #{member_mobile},
+		    MEMBER_PHONE = #{member_phone}, 
+		    MEMBER_EMAIL = #{member_email},
+		   	MEMBER_EMAIL_GET = #{member_email_get, jdbcType=VARCHAR} 
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	<!-- 2. 우편번호검색 -->
@@ -66,7 +69,7 @@
 	</select>
 	
 	<!-- 5. 회원 정보 가져오기 (단일)  -->
-	<select id="memberSelectOne" resultType="MemberModel">
+	<select id="memberSelectOne" resultType="MemberModel" parameterType="String">
 		select * from member where member_id = #{member_id}
 	</select>
 
