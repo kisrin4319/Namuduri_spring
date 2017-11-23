@@ -33,7 +33,8 @@
 			<div class="out_myroom_gradearea">
 				<div class="user_section">
 					<div class="user_name">
-						<c:property value="%{session.member_id}" />	님 안녕하세요.
+						<p>"${session.member_id}"	님 안녕하세요.</p>
+						<%-- <property value="${session.member_id}" />	님 안녕하세요. --%>
 					</div>
 				</div>
 				<font size="2" style="text-align: center">주문/배송 내역을 조회 할수 있는
@@ -67,33 +68,29 @@
 							<th scope="col">배송상태</th>
 							<th scope="col">주문취소</th>
 						</tr>
-						<c:iterator value="orderlist" status="stat">
+							<%-- <c:set value="orderlist"></c:set> --%>
+						<!-- <iterator value="orderlist" status="stat"> -->
 							<!-- 주무번호와 연결되는 URL -->
-							<c:url id="viewOrderURL" action="orderDetail">
-								<c:param name="order_trade_num">
-									<c:property value="order_trade_num" />
-								</c:param>
-								<c:param name="curretPage">
-									<c:property value="currentPage" />
-								</c:param>
+							<c:url var="viewOrderURL" value="orderDetailView">
+								<c:param name="order_trade_num" value="${order_trade_num}" />
+								<c:param name="curretPage" value="${currentPage}" />	
 							</c:url>
 							
 							<c:forEach var="item" items="${ orderModel }">
 							<tr>
 								<td height="50" align="center">
-									<c:a href ="%{viewOrderURL}"><s:property value ="order_trade_num"/></c:a>
+									<a href ="${viewOrderURL}" value ="${order_trade_num}"></a>
 								${ item.order_trade_num }
 								</td>
-								<td align="center"><c:property value ="order_regdate"/></td>
-								<td align="center">
+								<td align="center" value="${order_regdate}"></td>								<td align="center">
 									<c:if test="payment_status =='PS01'">
 										결제 대기중
 									</c:if>
-									<c:else>
+									<c:catch>
 										결제 완료
-									</c:else>
+									</c:catch>
 								</td>
-								<td align="center"><s:property value="order_trans_num"/></td>
+								<td align="center" value="${order_trans_num}"></td>
 								<td align="center">
 									<c:if test="order_trans_status == 'ST01'">
 										배송 준비중
@@ -105,10 +102,11 @@
 										배송 완료
 									</c:if></td>
 								<td align="center">
-								<input type="button" value="주문취소하기" align="middle"onclick="check('cancel', '<c:property value ="order_trade_num"/>')" /></td>
+								<input type="button" value="주문취소하기" align="middle"onclick="check('cancel', 'value = "${order_trade_num}"')" /></td>
 							</tr>
 							</c:forEach>
-						</c:iterator>
+							
+						<!-- </iterator> -->
 						<c:if test="list.size()==0">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
@@ -116,7 +114,7 @@
 						</c:if>
 					</tbody>
 					<tr align="center">
-						<td colspan="8"><s:property value="pagingHtml" escape="false" /></td>
+						<td colspan="8" ${pagingHtml} escape="false"></td>
 					</tr>
 				</table>
 				<!-- 주문내역종료 -->

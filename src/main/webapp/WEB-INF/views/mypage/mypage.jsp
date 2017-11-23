@@ -63,10 +63,12 @@
 									<s:property value="currentPage" />
 								</s:param>
 							</s:url>
-
+							
+							<c:forEach var="item" items="${ orderModel }">
 							<tr>
 								<td height="50" align="center">
 									<s:a href ="%{viewOrderURL}"><s:property value ="order_trade_num"/></s:a>
+								${ item.order_trade_num }	
 								</td>
 								<td align="center"><s:property value ="order_regdate"/></td>
 								<td align="center">
@@ -98,6 +100,7 @@
 										배송 완료
 									</s:if></td>
 								</tr>
+							</c:forEach>
 						</s:iterator>
 						<s:if test="list.size()==0">
 							<tr align="center">

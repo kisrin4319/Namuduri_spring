@@ -28,7 +28,7 @@ public interface MypageDao {
 	
 	public OrderModel getOrderInfo(String order_trade_num);
 	
-	public OrderDetailModel memberOrderDetail(String order_trade_num);
+	public OrderDetailModel getmemberOrderDetail(String order_trade_num);
 	
 	//6. 주문내역 취소
 	public void memberOrderCancel(String order_trade_num);
