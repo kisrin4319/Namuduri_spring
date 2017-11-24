@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,10 +60,19 @@
 	<tr>
 		<th colspan=2 align=center>활성화 여부</th>
 		<td class="getyn" colspan=4 align=center>
-			<input type="radio" name="goods_use_yn" id="goods_use_yn" value="1" 
+			<c:choose>
+				<c:when test="${view.book_use_yn=='0'}">
+					비사용됨
+				</c:when>
+				<c:otherwise>
+					사용됨
+				</c:otherwise>
+			</c:choose>
+			
+			<%-- <input type="radio" name="goods_use_yn" id="goods_use_yn" value="1" 
 				${view.book_use_yn == '1' ? 'checked="checked"' : '' }>사용 
 			<input type="radio" name="goods_use_yn" id="goods_use_yn" value="0" 
-				${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용
+				${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용 --%>
 		</td>
 	</tr>
 </table>
@@ -92,7 +102,7 @@
 					(<a href="${viewURL}">${list.member_id}</a>)</td>
 				<td>${list.review_pw}</td>
 				<td>${list.review_regdate}</td>
-				<td rowspan="2"><input class="adminbutton" type="button" value="삭제" onclick="javascript:location.href='<%=cp%>/admin/reviewDelete.do?review_num=${review.review_num}&book_num=${view.book_num}&currentPage=${reviewPage}'"/></td>
+				<td rowspan="2"><input class="adminbutton" type="button" value="삭제" onclick="javascript:location.href='<%=cp%>/admin/reviewDelete.do?review_num=${list.review_num}&book_num=${view.book_num}&currentPage=${reviewPage}'"/></td>
 			</tr>
 			<tr>
 				<td colspan=3 style="width: 400px;">${list.review_content}</td>

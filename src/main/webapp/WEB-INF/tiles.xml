@@ -189,10 +189,11 @@
 	<!-- ================================================== -->
 
 	<!-- Admin 페이지 -->
-	<definition name="admin" template="/WEB-INF/views/tiles/layout3.jsp">
+	<definition name="admin" template="/WEB-INF/views/tiles/layout4.jsp">
 		<put-attribute name="title" value="관리자페이지" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/adminMain.jsp" />
+		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/adminLefter.jsp"/>
 	</definition>
 	
 	<!-- ========================관리자 회원관리 페이지======================== -->

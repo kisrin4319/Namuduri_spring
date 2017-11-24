@@ -90,7 +90,7 @@
 	<th width=20%>배송 상태</th>
 </tr>
 <c:forEach var="list" items="${orderList}" varStatus="stat">
-	<c:url var="viewOrder" value="/admin/memberModify.do">
+	<c:url var="viewOrder" value="/admin/orderDetail.do">
 		<c:param name="order_trade_num" value="${list.order_trade_num}"/>
 	</c:url>
 	<tr>
