@@ -120,12 +120,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 주문상세내역 보기 -->
-	<select id="memberOrderDetail" resultType="OrderDetailModel">
-		SELECT go.*, me.member_phone, me.member_email, tb.goods_image, tb.goods_num, od.*
-		FROM GOODS_ORDER go JOIN MEMBER me ON
+	<select id="memberOrderDetail" resultType="java.util.Map">
+		SELECT go.*, me.member_phone, me.member_email, tb.book_image, tb.book_num, od.*
+		FROM ORDER_BOOK go JOIN MEMBER me ON
 		go.member_id = me.member_id JOIN order_detail od ON 
-		od.order_trade_num = go.order_trade_num JOIN textbook tb ON
-		tb.goods_num = od.goods_num WHERE go.order_trade_num = #{order_trade_num}
+		od.order_trade_num = go.order_trade_num JOIN book tb ON
+		tb.book_num = od.book_num WHERE go.order_trade_num = #{order_trade_num}
 	</select>
 	
 	<select id="getOrderTradeNumList" parameterType="String" resultType="OrderModel">

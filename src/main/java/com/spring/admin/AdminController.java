@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -157,7 +158,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/memberModify.do", method=RequestMethod.POST) //회원 정보 수정
-	public ModelAndView memberModify(@ModelAttribute("view") MemberModel memberModel, HttpServletRequest request) throws Exception {
+	public ModelAndView memberModify(@ModelAttribute("view") MemberModel memberModel, BindingResult result, HttpServletRequest request) throws Exception {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -165,15 +166,27 @@ public class AdminController {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		/*
+		// validation binding
+		new MemberValidator().validate(memberModel, result);
+				
+		if(result.hasErrors()) {
+			mv.setViewName("redirect:/admin/memberModify.do");
+			return mv;
+			
+		} else { */
+			
+			mypageService.memberModify(memberModel);
+			MemberModel view = memberService.SelectOne(memberModel.getMember_id());
+			
+			mv.addObject("view", view);
+			mv.addObject("currentPage", currentPage);
+			mv.setViewName("adminMemberDetail");
+			
+			return mv;
 		
-		mypageService.memberModify(memberModel);
-		MemberModel view = memberService.SelectOne(memberModel.getMember_id());
 		
-		mv.addObject("view", view);
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("adminMemberDetail");
 		
-		return mv;
 	}
 	
 	@RequestMapping("/admin/memberDelete.do") //회원 정보 삭제
@@ -292,8 +305,8 @@ public class AdminController {
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.GET) //도서 등록 폼 띄우기
 	public ModelAndView bookWriteForm() throws Exception {
 		
-		BooksModel booksModel = null;
-		booksModel = new BooksModel();
+		BooksModel booksModel = new BooksModel();
+		booksModel.setBook_use_yn(1);
 		
 		mv.addObject("view", booksModel);
 		mv.setViewName("adminBookWrite");
@@ -323,29 +336,40 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.POST) //도서 등록하기
-	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel) throws Exception {
+	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel, BindingResult result) throws Exception {
 		
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile multipartFile = multipartRequest.getFile("book_image");
-		String book_image = null;
+		/*
+		// validation binding
+		new AdminValidator().validate(booksModel, result);
+				
+		if(result.hasErrors()) {
+			mv.setViewName("adminBookWrite");
+			return mv;
+			
+		} else { */
+			
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile multipartFile = multipartRequest.getFile("book_image");
+			String book_image = null;
+			
+			if(multipartFile.isEmpty()==false) //파일이 존재할 때 
+			{
+				book_image = getFile(request, multipartFile);
+			}else{ //파일이 존재하지 않을 때
+				book_image = null; 
+			}
+			
+			booksModel.setBook_image(book_image);
+			
+			adminService.insertBook(booksModel);
+			BooksModel view = adminService.selectNewest();
+			
+			mv.addObject("currentPage", 1);
+			mv.addObject("view", view);
+			mv.setViewName("adminBookDetail");
+			
+			return mv;
 		
-		if(multipartFile.isEmpty()==false) //파일이 존재할 때 
-		{
-			book_image = getFile(request, multipartFile);
-		}else{ //파일이 존재하지 않을 때
-			book_image = null; 
-		}
-		
-		booksModel.setBook_image(book_image);
-		
-		adminService.insertBook(booksModel);
-		BooksModel view = adminService.selectNewest();
-		
-		mv.addObject("currentPage", 1);
-		mv.addObject("view", view);
-		mv.setViewName("adminBookDetail");
-		
-		return mv;
 	}
 	
 	@RequestMapping(value="/admin/bookModify.do", method=RequestMethod.GET)

@@ -38,9 +38,24 @@ public class MypageController {
 	
 	//mypage
 	@RequestMapping(value = "/mypage.do")
-	public ModelAndView mypage() {
-		mv = new ModelAndView();
+	public ModelAndView mypage(OrderModel order, HttpServletRequest request, HttpSession session) throws Exception {
 		
+		mv = new ModelAndView();
+		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
+		
+		String member_id = (String) session.getAttribute("member_id");
+		
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		for(int i=0; i<tradeNumList.size(); i++) {
+			OrderModel model = tradeNumList.get(i);
+			String orderTradeNum = model.getOrder_trade_num();
+			
+			OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
+			
+			orderModel.add(getOrderInfo);
+		}
+		
+		mv.addObject("orderModel", orderModel);
 		mv.setViewName("mypage1");
 		return mv;
 	}
@@ -241,7 +256,7 @@ public class MypageController {
 	
 	//주문/배송 조회
 	@RequestMapping(value = "/order/orderListCheckView.do")
-	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) {
+	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
 		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
@@ -265,17 +280,22 @@ public class MypageController {
 	
 	//5. 주문상세내역 보기
 	@RequestMapping(value = "/order/memberOrderDetailView.do")
-	public ModelAndView memberOrderDetail(OrderDetailModel orderDetail, HttpServletRequest request, HttpSession session ) {
+	public ModelAndView memberOrderDetail(OrderDetailModel orderDetail, HttpServletRequest request, HttpSession session ) throws Exception {
 		
 		mv = new ModelAndView();
 		
-		String order_trade_num = (String) session.getAttribute("order_trade_num");
+		String member_id = (String) session.getAttribute("member_id");
 		
-		OrderDetailModel memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		OrderModel model = tradeNumList.get(1);
+		String orderTradeNum = model.getOrder_trade_num();
+		
+		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
+		
+		Map<String, Object> memberOrderDetail = mypageService.getmemberOrderDetail(orderTradeNum);
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
 		mv.setViewName("orderDetail");
-		
 		return mv;
 	}
 
