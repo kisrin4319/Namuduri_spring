@@ -103,7 +103,7 @@
 		</tr>	
 	</table>
 	<br>
-	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheck.do'"/>
+	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheckView.do'"/>
 	</div>
 </div>
 </body>

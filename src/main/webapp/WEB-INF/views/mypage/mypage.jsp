@@ -22,7 +22,7 @@
 		<!-- 고객 공통 컨텐츠 -->
 		<div class="out_myroom_gradearea">
 			<div class="user_section">
-				<div class="user_name"><s:property value ="%{session.member_id}" />님 안녕하세요.</div>
+				<div class="user_name"><p>${session.member_id}</p> 님 안녕하세요.</div>
 			</div>
 			<font size ="2" style ="text-align: center">mypage</font>
 		</div>
@@ -53,63 +53,58 @@
 								<th scope="col">배송번호</th>
 								<th scope="col">주문상태</th>
 							</tr>
-						<s:iterator value="orderlist" status="stat">
+						<!-- <s:iterator value="orderlist" status="stat"> -->
 							<!-- 주무번호와 연결되는 URL -->
-							<s:url id="viewOrderURL" action="orderDetail">
-								<s:param name="order_trade_num">
-									<s:property value="order_trade_num" />
-								</s:param>
-								<s:param name="curretPage">
-									<s:property value="currentPage" />
-								</s:param>
-							</s:url>
+							<c:url var="viewOrderURL" value="orderDetailView.do">
+								<c:param name="order_trade_num" value="${order_trade_num}"/>
+								<c:param name="curretPage" value="${currentPage}" />
+							</c:url>
 							
 							<c:forEach var="item" items="${ orderModel }">
 							<tr>
 								<td height="50" align="center">
-									<s:a href ="%{viewOrderURL}"><s:property value ="order_trade_num"/></s:a>
-								${ item.order_trade_num }	
+									<a href ="${viewOrderURL}">${ item.order_trade_num }</a>	
 								</td>
-								<td align="center"><s:property value ="order_regdate"/></td>
+								<td align="center">${ item.order_regdate }</td>
 								<td align="center">
-									<s:if test="payment_status =='PS01'">
+									<c:if test="payment_status =='PS01'">
 										결제 대기중
-									</s:if>
-									<s:else>
+									</c:if>
+									<c:catch>
 										결제 완료
-									</s:else>
+									</c:catch>${ item.payment_status }
 								</td>
 								<td align="center">
-									<s:if test="order_trade_status =='TR01'">
+									<c:if test="order_trade_status =='TR01'">
 										무통장 입금
-									</s:if>
-									<s:else>
+									</c:if>
+									<c:catch>
 										카드 결제
-									</s:else>
+									</c:catch>${ order_trade_status }
 								</td>
-								<td align="center"><s:property value="order_trans_num"/></td>
+								<td align="center">${item.order_trans_num}</td>
 								
 								<td align="center">
-									<s:if test="order_trans_status == 'ST01'">
+									<c:if test="order_trans_status == 'ST01'">
 										배송 준비중
-									</s:if>
-									<s:if test="order_trans_status == 'ST02'">
+									</c:if>
+									<c:if test="order_trans_status == 'ST02'">
 										배송 중
-									</s:if>
-									<s:if test="order_trans_status == 'ST03'">
+									</c:if>
+									<c:if test="order_trans_status == 'ST03'">
 										배송 완료
-									</s:if></td>
+									</c:if>${ item.order_trans_status }</td>
 								</tr>
 							</c:forEach>
-						</s:iterator>
-						<s:if test="list.size()==0">
+						<!-- </s:iterator> -->
+						<c:if test="list.size()==0">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
-						</s:if>
+						</c:if>
 					</tbody>
 					<tr align="center">
-						<td colspan="8"><s:property value="pagingHtml" escape="false"/></td>
+						<td colspan="8" value="pagingHtml" escape="false"></td>
 					</tr>
 			</table>
 			<!-- 주문내역종료 -->

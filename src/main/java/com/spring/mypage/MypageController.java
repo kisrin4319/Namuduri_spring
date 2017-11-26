@@ -292,8 +292,9 @@ public class MypageController {
 		
 		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
 		
-		OrderDetailModel memberOrderDetail = mypageService.getmemberOrderDetail(orderTradeNum);
+		Map<String, Object> memberOrderDetail = mypageService.getmemberOrderDetail(orderTradeNum);
 		
+		mv.addObject("memberOrderDetail", memberOrderDetail);
 		mv.setViewName("orderDetail");
 		return mv;
 	}

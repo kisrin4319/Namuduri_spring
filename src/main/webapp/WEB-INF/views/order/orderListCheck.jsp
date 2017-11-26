@@ -23,6 +23,16 @@
 			document.getElementById('orderListCheckForm').submit();
 		}
 	}
+	
+	/* function orderDetail(order_trade_num){
+		//$('#current').val(page);
+		$('order_trade_num').val(order_trade_num);
+		
+		var f = $('#orderListCheckForm')
+		
+		f.action = "/order/memberOrderDetailView.do";
+		f.submit();
+	} */
 </script>
 </head>
 <body>
@@ -47,7 +57,9 @@
 
 			<form name="orderListCheckForm" id="orderListCheckForm" method="post">
 				<!-- 주문내역시작 -->
+				
 				<input type="hidden" id="order_trade_num" name="order_trade_num" />
+				<input type="hidden" id="current" name="current" />
 				<table class="table_myroom td_font_12 margin_top10"
 					summary="주문번호, 주문금액, 상품정보, 주문상태를 알 수 있는 주문 내역 테이블 입니다.">
 					<caption>주문 내역</caption>
@@ -71,18 +83,21 @@
 							<%-- <c:set value="orderlist"></c:set> --%>
 						<!-- <iterator value="orderlist" status="stat"> -->
 							<!-- 주무번호와 연결되는 URL -->
-							<c:url var="viewOrderURL" value="orderDetailView">
-								<c:param name="order_trade_num" value="${order_trade_num}" />
-								<c:param name="curretPage" value="${currentPage}" />	
-							</c:url>
+							
 							
 							<c:forEach var="item" items="${ orderModel }">
 							<tr>
-								<td height="50" align="center">
-									<a href ="${viewOrderURL}" value ="${order_trade_num}"></a>
-								${ item.order_trade_num }
+								<c:url var="viewOrderURL" value="/order/memberOrderDetailView.do">
+									<c:param name="order_trade_num" value="${item.order_trade_num}" />
+									<%-- <c:param name="curretPage" value="${currentPage}" /> --%>	
+								</c:url>
+								<td height="50" align="center" onclick="orderDetail('${item.order_trade_num}')">
+									<a href ="${viewOrderURL}" >${ item.order_trade_num }</a>
+									<%-- ${ item.order_trade_num } --%>
 								</td>
-								<td align="center" value="${order_regdate}"></td>								<td align="center">
+								<td align="center">${ item.order_regdate }</td>
+															
+								<td align="center">
 									<c:if test="payment_status =='PS01'">
 										결제 대기중
 									</c:if>
@@ -90,7 +105,8 @@
 										결제 완료
 									</c:catch>
 								</td>
-								<td align="center" value="${order_trans_num}"></td>
+								<td align="center">${item.order_trans_num}</td>
+								
 								<td align="center">
 									<c:if test="order_trans_status == 'ST01'">
 										배송 준비중
@@ -100,7 +116,7 @@
 									</c:if>
 									<c:if test="order_trans_status == 'ST03'">
 										배송 완료
-									</c:if></td>
+									</c:if>${ item.order_trans_status }</td>
 								<td align="center">
 								<input type="button" value="주문취소하기" align="middle"onclick="check('cancel', 'value = "${order_trade_num}"')" /></td>
 							</tr>

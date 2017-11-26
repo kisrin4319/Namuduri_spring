@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 주문상세내역 보기 -->
-	<select id="memberOrderDetail" resultType="OrderDetailModel">
+	<select id="memberOrderDetail" resultType="java.util.Map">
 		SELECT go.*, me.member_phone, me.member_email, tb.book_image, tb.book_num, od.*
 		FROM ORDER_BOOK go JOIN MEMBER me ON
 		go.member_id = me.member_id JOIN order_detail od ON 
