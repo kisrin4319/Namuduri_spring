@@ -89,7 +89,6 @@
 									<th class="product-edit">Category</th>
 									<th class="product-quantity">Quantity</th>
 									<th class="product-subtotal">Subtotal</th>
-									<th class="product-edit"> Buy Now</th>
 									<th class="product-remove">Remove</th>
 								</tr>
 							</thead>
@@ -101,10 +100,7 @@
 										</strong>
 									</c:when>
 									<c:otherwise>
-									<form name ="basketform" id="basketform">
 										<c:forEach var="row" items="${basketList }" varStatus="i">
-											<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
-											<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
 											<tr>
 												<td class="product-edit">
 													<p>
@@ -112,13 +108,13 @@
 													</p>
 												</td>
 												<td class="product-image">
-													<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">
+													<a href="#">
 														<img src="<%=cp %>/upload/${row.basket_book_image }" alt="" width="104px" height="104px">
 													</a>
 												</td>
 												<td class="t-product-name">
 													<h3>
-														<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">${row.basket_book_name }</a>
+														<a href="#">${row.basket_book_name }</a>
 													</h3>
 												</td>
 												<td class="product-unit-price">
@@ -142,27 +138,23 @@
 														원
 													</p>
 												</td>
-												<td class="product-edit">
-													<p><a href="javascript:;" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="right-shoping-cart">BUY NOW</a></p>
-												</td>
 												<td class="product-remove">
-													<a href="javascript:;" onclick="fn_basketDelete(${row.basket_num})">
+													<a href="#">
 														<i class="flaticon-delete"></i>
 													</a>
 												</td>
 											</tr>
 										</c:forEach>
-										</form>
 									</c:otherwise>
 								</c:choose>
 							</tbody>
 						</table>
 					</div>
 					<div class="shopingcart-bottom-area">
-						<a class="left-shoping-cart" href="javascript:;">CONTINUE SHOPPING</a>
+						<a class="left-shoping-cart" href="#">CONTINUE SHOPPING</a>
 						<div class="shopingcart-bottom-area pull-right">
-							<a class="right-shoping-cart" href="javascript:;" id="deleteAll">CLEAR SHOPPING CART</a>
-							<a class="right-shoping-cart" href="javascript:;" onclick="fn_selectDelete()">CLEAR SELECTED SHOPPING CART</a>
+							<a class="right-shoping-cart" href="#" id="deleteAll">CLEAR SHOPPING CART</a>
+							<a class="right-shoping-cart" href="#">UPDATE SHOPPING CART</a>
 						</div>
 					</div>
 				</div>
@@ -191,18 +183,16 @@
 						<div class="subtotal-area">
 							<h2>
 								SUBTOTAL
-								<span><input type="text" id="SubTotal" value="<fmt:formatNumber pattern="###,###,###" value="0"/>" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" /></span>
+								<span>$ 200</span>
 							</h2>
 						</div>
 						<div class="subtotal-area">
-						<input type="hidden" id="fee" value="0" size="4" />
 							<h2>
 								GRAND TOTAL
-								<span><input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" /></span>
+								<span>$ 200</span>
 							</h2>
 						</div>
-						<a href ="javascript:;" onclick="fn_selectOrder()">SELECTED CHECKOUT</a>
-						<a href="javascript:;" onclick="fn_totalOrder()">CHECKOUT</a>
+						<a href="#">CHECKOUT</a>
 						<p>Checkout With Multiple Addresses</p>
 					</div>
 				</div>
@@ -233,116 +223,9 @@
 	    e.preventDefault();
 	    location.href = '<%=cp%>/basket/basketDeleteAll.do';
     });
+	  
 	});
-	function fn_bookDetail(basket_book_num) {
-    	location.href = '<%=cp%>/books/bookDetail.do?book_num='+basket_book_num;
-  }
 	
-	function fn_basketModify(basket_num) { 
-	  // basket_num과 basket_book_price를 넘겨준다.
-	  var num = basket_num;
-	  var count = document.getElementById(basket_num).value;
-
-	  
-	  if (confirm("변경 하시겠습니까?")) {
-	     location.href='<%=cp%>/basket/basketModify.do?basket_num='+num+'&basket_book_count='+count;
-	     
-	     //document.frm.submit();
-	  } else {
-	     alert("취소되었습니다");
-	  }	  
-	}
-	
-	function fn_selectDelete() {
-	  
-	  var RowCheck = document.getElementsByName('RowCheck');
-	  var Count = 0;
-	 
-	  for(var i=0; i<RowCheck.length;i++){
-  	  if(RowCheck[i].checked){ Count++; }
-  	  }
-	  
-	  if(!Count){
-	    alert("1개 이상 체크 박스를 선택 해주세요");
-	    return false;
-	  }
-	  else {
-	    basketform.action = '<%=cp%>/basket/basketCheckDelete.do';
-	    basketform.submit();
-	  }
-	}
-	
-	function fn_basketDelete(basket_num) {
-	  if (confirm("삭제하시겠습니까?")) {
-	    location.href='<%=cp%>/basket/basketDelete.do?basket_num='+basket_num;
-	  } else {
-	     alert("취소되었습니다");
-	  }
-	  
-	}
-	function singleOrder(basket_book_num, basket_book_count, basket_num) {
-	  var num = basket_book_num;
-	  var amount = basket_book_count;
-	  var basket_num = basket_num;
-	  
-	  if (confirm("주문 하시겠습니까?")) {
-	   location.href = '<%=cp%>/order/singleOrder.do?book_num='+num+'&order_book_count='+amount+'&basket_num='+basket_num;
-	  } else {
-	     alert("취소되었습니다");
-	     return false;
-	  }
-	}
-	
-	function fn_selectOrder() {
-	 	var RowCheck = document.getElementsByName('RowCheck');
-	 	var Count = 0;
-		
-	 	for(var i=0; i<RowCheck.length;i++){
-		  if(RowCheck[i].checked){ Count++; }
-		  }
-	 	
-	 	if(!Count){
-	 	  alert("1개 이상 체크 박스를 선택 해주세요");
-	 	  return false;
-	 	  }
-	 	else {
-	 	 basketform.action = '<%=cp%>/order/selectOrderForm.do';
-	    	 basketform.submit();
-	 	  }
-	}
-	
-	function fn_totalOrder() {
-	  location.href='<%=cp%>/order/totalOrder.do'
-	  }
-	
-	function fn_checkCount() {
-		var count = 0;
-	    	var RowCheck = document.getElementsByName('RowCheck');
-	    	for(var i=0; i<RowCheck.length;i++){
-	    	  if(RowCheck[i].checked){
-	    	    count++;
-	    	  }
-	    	}
-	    	CheckCount.value = count;
-	  }
-		function fn_checkSum() {
-	    	var sumValue =0;
-	    	var feeValue =0;
-	    	var RowCheck = document.getElementsByName('RowCheck');
-	    	for(var i =0 ; i<RowCheck.length;i++){
-	    	  if(RowCheck[i].checked){
-	    	    sumValue += parseInt(RowCheck[i].id);
-	    	  }
-	    	}
-	    	if(sumValue <100000 && sumValue!=0){
-	    	  feeValue = 5000;
-	    	} 
-	    fee.value = feeValue;
-	    SubTotal.value = sumValue;
-	    sum.value=sumValue+feeValue;
-	    fn_checkCount();
-	  }
-		
 	function onlyNumber(event){
 	   event = event || window.event;
 	   var keyID = (event.which) ? event.which : event.keyCode;
