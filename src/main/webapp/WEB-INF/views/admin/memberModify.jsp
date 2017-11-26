@@ -15,6 +15,7 @@
 	<div class="detail">
 		<h2 class="detail_h2">회원 정보 수정</h2>
 		<form:form commandName="view" method="post">
+		<%-- <form:errors element="div"/> --%>
 			<table border=1 cellspacing=0 cellpadding=0 class="table_detail">
 				<tr>
 					<th width=15%>회원 번호</th>
@@ -26,18 +27,23 @@
 					<th>ID</th>
 					<td>${view.member_id}</td>
 					<th>비밀번호</th>
-					<td class="short"><form:input path="member_pw" value="${view.member_pw}" /></td>
+					<td class="short"><form:input path="member_pw" value="${view.member_pw}" />
+						<%-- <form:errors path="member_pw" /> --%></td>
 				</tr>
 				<tr>
 					<th>이름</th>
-					<td class="short"><form:input path="member_name" value="${view.member_name}" /></td>
+					<td class="short"><form:input path="member_name" value="${view.member_name}" />
+						<%-- <form:errors path="member_name" /> --%></td>
 					<th>주민번호</th>
 					<td class="short"><form:input path="member_jumin1" value="${view.member_jumin1}" />
-						-<form:input path="member_jumin2" value="${view.member_jumin2}" /></td>
+							<%-- <form:errors path="member_jumin1" /> --%>
+						-<form:input path="member_jumin2" value="${view.member_jumin2}" />
+							<%-- <form:errors path="member_jumin2" /> --%></td>
 				</tr>
 				<tr>
 					<th>E-MAIL</th>
-					<td class="middel"><form:input path="member_email" value="${view.member_email}" /></td>
+					<td class="middel"><form:input path="member_email" value="${view.member_email}" />
+						<%-- <form:errors path="member_email" /> --%></td>
 					<th>E-MAIL 수신여부</th>
 					<td class="getyn">
 						<input type="radio" name="member_email_get" id="member_email_get" value="1"
@@ -48,19 +54,24 @@
 				</tr>
 				<tr>
 					<th>집 전화 번호</th>
-					<td class="middel"><form:input path="member_phone" value="${view.member_phone}" /></td>
+					<td class="middel"><form:input path="member_phone" value="${view.member_phone}" />
+						<%-- <form:errors path="member_phone" /> --%></td>
 					<th>휴대전화 번호</th>
-					<td class="middel"><form:input path="member_mobile" value="${view.member_mobile}" /></td>
+					<td class="middel"><form:input path="member_mobile" value="${view.member_mobile}" />
+						<%-- <form:errors path="member_mobile" /> --%></td>
 				</tr>
 				<tr>
 					<th>우편번호</th>
 					<td colspan=3><form:input path="member_zipcode" value="${view.member_zipcode}" /> 
+						<%-- <form:errors path="member_zipcode" /> --%>
 						<input class="searchbutton" type="button" value="검색"/></td> <!-- 우편번호 검색 기능 추가 -->
 				</tr>
 				<tr>
 					<th>주소</th>
 					<td class="long" colspan=3><form:input path="member_addr1" value="${view.member_addr1}" />
-						&nbsp;<form:input path="member_addr2" value="${view.member_addr2}" /></td>
+						<%-- <form:errors path="member_addr1" /> --%>
+						&nbsp;<form:input path="member_addr2" value="${view.member_addr2}" />
+						<%-- <form:errors path="member_addr2" /> --%></td>
 				</tr>
 			</table>
 			<br>
