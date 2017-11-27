@@ -42,8 +42,7 @@
 			<!-- 고객 공통 컨텐츠 -->
 			<div class="out_myroom_gradearea">
 				<div class="user_section">
-					<div class="user_name">
-						<p>"${session.member_id}"	님 안녕하세요.</p>
+					<div class="user_name"><p>${memberInfo.member_id}	님 안녕하세요.</p>
 						<%-- <property value="${session.member_id}" />	님 안녕하세요. --%>
 					</div>
 				</div>
