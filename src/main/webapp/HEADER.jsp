@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-String cp = request.getContextPath();
-%>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -44,7 +41,7 @@ String cp = request.getContextPath();
 		<!-- responsive css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
 		<!-- modernizr css -->
-        <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="<c:url value="bootstrap/js/vendor/modernizr-2.8.3.min.js" />"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -277,35 +274,35 @@ String cp = request.getContextPath();
 
 		<!-- all js here -->
 		<!-- jquery latest version -->
-        <script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/vendor/jquery-1.12.0.min.js"/> "></script>
 		<!-- bootstrap js -->
-        <script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/bootstrap.min.js"/> "></script>
 		<!-- owl.carousel js -->
-        <script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/owl.carousel.min.js" />"></script>
 		<!-- jquery-ui js -->
-        <script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/jquery-ui.min.js" />"></script>
 		<!-- jquery Counterup js -->
-        <script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
-        <script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>	
+        <script src="<c:url value ="bootstrap/js/jquery.counterup.min.js" />"></script>
+        <script src="<c:url value ="bootstrap/js/waypoints.min.js" />"></script>	
 		<!-- jquery countdown js -->
-        <script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/jquery.countdown.min.js" />"></script>
 		<!-- jquery countdown js -->
-        <script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
+        <script type="text/javascript" src="<c:url value ="bootstrap/venobox/venobox.min.js" /> "></script>
 		<!-- jquery Meanmenu js -->
-        <script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
+        <script src="<c:url value ="bootstrap/js/jquery.meanmenu.js" /> "></script>
 		<!-- wow js -->
-        <script src="<%=cp%>/bootstrap/js/wow.min.js"></script>	
+        <script src="<c:url value ="bootstrap/js/wow.min.js" /> "></script>	
 		<script>
 			new WOW().init();
 		</script>
 		<!-- scrollUp JS -->		
-        <script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
+        <script src="<c:url value ="bootstrap/js/jquery.scrollUp.min.js" /> "></script>
 		<!-- plugins js -->
-        <script src="<%=cp%>/bootstrap/js/plugins.js"></script>
+        <script src="<c:url value ="bootstrap/js/plugins.js" /> "></script>
 		<!-- Nivo slider js -->
-		<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
-		<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
+		<script src="<c:url value ="bootstrap/lib/js/jquery.nivo.slider.js" />" type="text/javascript"></script>
+		<script src="<c:url value ="bootstrap/lib/home.js" />" type="text/javascript"></script>
 		<!-- main js -->
-        <script src="<%=cp%>/bootstrap/js/main.js"></script>
+        <script src="<c:url value ="bootstrap/js/main.js" /> "></script>
     </body>
 </html>

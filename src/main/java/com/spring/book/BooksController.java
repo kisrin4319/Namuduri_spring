@@ -29,7 +29,7 @@ public class BooksController {
 
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 9;
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
