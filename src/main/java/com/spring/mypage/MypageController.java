@@ -280,23 +280,28 @@ public class MypageController {
 	
 	//5. 주문상세내역 보기
 	@RequestMapping(value = "/order/memberOrderDetailView.do")
-	public ModelAndView memberOrderDetail(OrderDetailModel orderDetail, HttpServletRequest request, HttpSession session ) throws Exception {
+	public ModelAndView memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
 		
-		String member_id = (String) session.getAttribute("member_id");
+		String session_id = (String) session.getAttribute("member_id");
 		
-		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
 		OrderModel model = tradeNumList.get(1);
+		
 		String orderTradeNum = model.getOrder_trade_num();
 		
 		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
 		
-		Map<String, Object> memberOrderDetail = mypageService.getmemberOrderDetail(orderTradeNum);
+		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(orderTradeNum);
+		
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
 		mv.setViewName("orderDetail");
 		return mv;
 	}
+	
+	//6. 주문내역 취소
+	
 
 }

@@ -24,16 +24,25 @@
 			<span>주문자 정보</span>
 	</h2>
 	<table class="table_myroom td_font_12 margin_top10">
-		<tr>
+		
+		<c:forEach var="item" items="${ orderDetailModel }">
+			<tr>
+				<td width="100">주 문 자 : ${ item.member_id }</td>
+				<td colspan="3" width="500"></td>
+			</tr>
+		</c:forEach>
+		
+		<%-- <tr>
 			<td width="100">주 문 자</td>
-			<td colspan="3" width="500"><s:property value="mresultClass.member_id"/></td>
+			<td colspan="3" width="500">${ mresultClass.member_id }</td>
 		</tr>
 		<tr>
 			<td width="40">휴대폰번호</td>
-			<td width="80"><s:property value="mresultClass.member_phone"/></td>
+			<td width="80">${ mresultClass.member_phone }</td>
 			<td width="40">이메일</td>
-			<td width="80"><s:property value="mresultClass.member_email"/></td>
-		</tr>
+			<td width="80">${ mresultClass.member_email }</td>
+		</tr> --%>
+		
 	</table><br>
 		
 		<h2 class="bul_green20">
@@ -57,50 +66,51 @@
 				<th scope="col">수량</th>
 				<th scope="col">금액</th>
 			</tr>
-		<s:iterator value ="orderlist" status ="stat">
+		<!-- <s:iterator value ="orderlist" status ="stat"> -->
 		<tr align="center">
 			
-			<td><s:property value ="#stat.index+1"/></td>
-		
-			<td width="100" height="50"><img src="/namuduri/admin/upload/<s:property value="goods_image"/>"style="width: 130px;height: 120px;"/></td>
+			<%-- <td>"${ #stat.index+1 }"</td> --%>
+			
+			<td width="100" height="50"><img src="<%=cp%>/namuduri/admin/upload/${ goods_image }" "style="width: 130px;height: 120px;"/></td>
 			<td align="left" width="270">
-			주문 번호 : <s:property value="order_trade_num"/><br><br>
-			도 서 명 : <s:property value="order_goods_name"/><br><br>
+			주문 번호 : ${ order_trade_num }<br><br>
+			도 서 명 : ${ order_book_name }<br><br>
 			주문 상태 : 
-			<s:if test="order_trans_status == 'ST01'">
-			배송 준비중
-			</s:if>
-			<s:elseif test="order_trans_status == 'ST02'">
+			<c:if test="order_trans_status == 'ST01'">
+				배송 준비중
+			</c:if>
+			<c:if test="order_trans_status == 'ST02'">
 				배송 중
-			</s:elseif>
-			<s:else>
+			</c:if>
+			<c:if test="order_trans_status == 'ST03'">
 				배송 완료
-			</s:else>
+			</c:if>
 			<br><br>
-			주문 날짜 : <s:property value="order_regdate"/><br><br>
+			주문 날짜 : ${ order_regdate }<br><br>
 			</td>
-			<td><s:property value="order_goods_count"/>권</td><br>
-			<td><s:property value="order_goods_count*order_goods_price"/>원</td>
-	
+			<td>${ order_goods_count }권</td><br>
+			<td>${ order_goods_count*order_goods_price }원</td>
+			
 		</tr>
-		</s:iterator>
+		<!-- </s:iterator> -->
 	</table>
 	<br><br>
 	<table class="table_myroom td_font_12 margin_top10">
 		<tr>
 			<td width="100">받으실 분</td>
-			<td colspan="3" width="500"><s:property value="oresultClass.order_receive_name"/></td>
+			<td colspan="3" width="500">${ oresultClass.order_receive_name }</td>
 		</tr>
 		<tr>
 			<td width="40">휴대폰번호</td>
-			<td width="80"><s:property value="oresultClass.order_receive_phone"/></td>
+			<td width="80">${ oresultClass.order_receive_phone }</td>
 			<td width="40">전화번호</td>
-			<td width="80"><s:property value="oresultClass.order_receive_mobile"/></td>
+			<td width="80">${ oresultClass.order_receive_mobile }</td>
 		</tr>
 		<tr>
 			<td width="100">주  소</td>
-			<td colspan="3" width="500"><s:property value="oresultClass.order_receive_addr1"/>&nbsp;</td>
-		</tr>	
+			<td colspan="3" width="500">${ oresultClass.order_receive_addr1 }&nbsp;</td>
+		</tr>
+		
 	</table>
 	<br>
 	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheckView.do'"/>

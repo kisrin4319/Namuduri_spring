@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.spring.member.MemberModel;
+import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
 
 @Service
@@ -58,8 +59,8 @@ public class MypageService implements MypageDao {
 	}
 	
 	@Override
-	public Map<String, Object> getmemberOrderDetail(String order_trade_num) {
-		return sqlSessionTemplate.selectMap("order.memberOrderDetail", order_trade_num);
+	public Map<String, Object> memberOrderDetail(String order_trade_num) {
+		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
 	}
 	
 	//6. 주문내역 취소
