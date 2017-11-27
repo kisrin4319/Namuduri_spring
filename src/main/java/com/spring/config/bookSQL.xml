@@ -131,9 +131,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM BOOK WHERE BOOK_NUM = #{book_num} 
 	</delete>
 	
-	<!-- 리뷰 삭제 -->
-	<delete id="deleteRevice"> 
-		DELETE FROM REVIEW WHERE REVIEW_NUM = #{review_num} 
+	<!-- 전체 리뷰 삭제 -->
+	<delete id="deleteReviewAll"> 
+		DELETE FROM REVIEW WHERE BOOK_NUM = #{book_num}
+	</delete>
+	<!-- 단일 리뷰 삭제 -->
+	<delete id="deleteReview"> 
+		DELETE FROM REVIEW WHERE BOOK_NUM = #{book_num} AND REVIEW_NUM = #{review_num} 
 	</delete>
 	
 </mapper>

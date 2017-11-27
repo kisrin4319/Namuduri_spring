@@ -26,12 +26,11 @@
 }
 
 /* 리스트 */
-.list{
+/* .list{
 	position:relative;
 	display:inline-block;
 	z-index: 3000;
-	margin-left:5%;margin-right:5%;
-}
+} */
 
 table.table_list {
     border-collapse: separate;
@@ -54,7 +53,7 @@ table.table_list td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-.table_list .adminbutton {
+.adminbutton {
     background-color:#5e6b9e;
     border: none;
     color: white;
@@ -64,7 +63,7 @@ table.table_list td {
     display: inline-block;
     font-size: 12px;
 }
-.table_list .adminbutton2 {
+.adminbutton2 {
     background-color:#5e6b9e;
     border: none;
     color: white;
@@ -74,16 +73,12 @@ table.table_list td {
     display: inline-block;
     font-size: 12px;
 }
-.list .paging{
+.paging{
 	position:relative;
 }
 
 /* 상세보기 */
 .detail_h2{
-	margin-top: 5%;
-    margin-left: 1%;
-    margin-bottom: 15px;
-    padding: 12px 5px 12px;
     border-bottom: 2px solid #565656;
     font-size: 30px;
     overflow: hidden;
@@ -92,13 +87,11 @@ table.table_list td {
     text-align: left;
 }
 
-.detail{
-	margin-top:2%;
+/* .detail{
 	position:relative;
 	display:inline-block;
 	z-index: 3000;
-	margin-left:5%;margin-right:5%;
-}
+} */
 
  table.table_detail {
     border-collapse: collapse;
@@ -124,7 +117,7 @@ table.table_detail td {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
-.list .detail_button .button{
+.detail_button .button{
     background-color: #5e6b9e;
     border: none;
     color: white;
@@ -135,7 +128,7 @@ table.table_detail td {
     font-size: 15px;
 	width: 200px;
 }
-.detail .detail_button .button{
+.detail_button .button{
     background-color: #5e6b9e;
     border: none;
     color: white;
@@ -147,7 +140,7 @@ table.table_detail td {
 	width: 200px;
 }
 
-.detail input{
+input{
 	border: 1px solid #ccc;
 	padding: 5px;
 	text-align:center;
@@ -159,9 +152,9 @@ select{
 	border:1px solid #999;  border-radius: 0px;
 }
 
-.detail .short input{width:100px;}
-.detail .long input{width:300px;}
-.detail .getyn input{width:50px;}
+.short input{width:100px;}
+.long input{width:300px;}
+.getyn input{width:50px;}
 
 table.review {
     border-collapse: collapse;
@@ -191,7 +184,7 @@ table.review input{border: 1px solid #ccc;
     text-align: center;
     width: 50px;}
 
-/* 메인페이지 */
-.main .admin_main {margin-top: 5%;}
-.main .admin_main .main_title{padding-bottom: 20px;}
-.main .admin_main .menu{padding-top: 10%;}
+
+/* 버튼 */
+.adminbutton .long
+.adminbotton .small

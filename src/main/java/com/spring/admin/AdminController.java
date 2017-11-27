@@ -199,7 +199,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		/*mypageService.memberDelete(memberModel);*/
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMember_id(member_id);
+		
+		mypageService.memberDelete(memberModel);
 		//차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 		
 		mv.addObject("currentPage", currentPage);
@@ -347,18 +350,16 @@ public class AdminController {
 			return mv;
 			
 		} else { */
-			
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultipartFile multipartFile = multipartRequest.getFile("book_image");
-			String book_image = null;
-			
-			if(multipartFile.isEmpty()==false) //파일이 존재할 때 
-			{
-				book_image = getFile(request, multipartFile);
-			}else{ //파일이 존재하지 않을 때
-				book_image = null; 
-			}
-			
+		
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("book_image");
+		String book_image = null;
+		
+		if(multipartFile.isEmpty()==false) {
+
+			book_image = getFile(request, multipartFile);
+		}
+		
 			booksModel.setBook_image(book_image);
 			
 			adminService.insertBook(booksModel);
