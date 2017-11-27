@@ -42,12 +42,9 @@
 			<!-- 고객 공통 컨텐츠 -->
 			<div class="out_myroom_gradearea">
 				<div class="user_section">
-					<c:forEach var="item" items="${ memberModel }">
-					<div class="user_name">
-						<p>${item.member_id}	님 안녕하세요.</p>
+					<div class="user_name"><p>${memberInfo.member_id}	님 안녕하세요.</p>
 						<%-- <property value="${session.member_id}" />	님 안녕하세요. --%>
 					</div>
-					</c:forEach>
 				</div>
 				<font size="2" style="text-align: center">주문/배송 내역을 조회 할수 있는
 					페이지입니다.</font>

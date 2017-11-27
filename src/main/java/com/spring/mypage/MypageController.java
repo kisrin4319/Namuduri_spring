@@ -261,9 +261,11 @@ public class MypageController {
 		mv = new ModelAndView();
 		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
-		String member_id = (String) session.getAttribute("member_id");
+		String session_id = (String) session.getAttribute("member_id");
 		
-		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		MemberModel memberInfo = memberService.SelectOne(session_id);
+		
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
 		for(int i=0; i<tradeNumList.size(); i++) {
 			OrderModel model = tradeNumList.get(i);
 			String orderTradeNum = model.getOrder_trade_num();
@@ -273,6 +275,7 @@ public class MypageController {
 			orderModel.add(getOrderInfo);
 		}
 		
+		mv.addObject("memberInfo", memberInfo);
 		mv.addObject("orderModel", orderModel);
 		mv.setViewName("orderListCheck1");
 		return mv;
@@ -280,23 +283,25 @@ public class MypageController {
 	
 	//5. 주문상세내역 보기
 	@RequestMapping(value = "/order/memberOrderDetailView.do")
-	public ModelAndView memberOrderDetail(HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView memberOrderDetail(String order_trade_num, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
 		
 		String session_id = (String) session.getAttribute("member_id");
 		
-		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
+		MemberModel memberInfo = memberService.SelectOne(session_id);
+		/*List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
 		OrderModel model = tradeNumList.get(1);
 		
 		String orderTradeNum = model.getOrder_trade_num();
 		
-		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
+		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);*/
 		
-		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(orderTradeNum);
+		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
 		
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
+		mv.addObject("memberInfo", memberInfo);
 		mv.setViewName("orderDetail");
 		return mv;
 	}

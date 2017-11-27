@@ -22,7 +22,7 @@
 		<!-- 고객 공통 컨텐츠 -->
 		<div class="out_myroom_gradearea">
 			<div class="user_section">
-				<div class="user_name"><p>${session.member_id}</p> 님 안녕하세요.</div>
+				<div class="user_name"><p>${member_id}</p> 님 안녕하세요.</div>
 			</div>
 			<font size ="2" style ="text-align: center">mypage</font>
 		</div>
