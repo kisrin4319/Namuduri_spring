@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/style.css">
 <!-- responsive css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
 <!-- modernizr css -->
 <script src="<%=cp %>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -51,112 +52,107 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 	<!-- Add your site or application content here -->
-	<!-- Breadcrumbs Area Start -->
-	<div class="breadcrumbs-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="breadcrumbs">
-						<h2>SHOPPING CART</h2>
-						<ul class="breadcrumbs-list">
-							<li>
-								<a title="Return to Home" href="index.html">Home</a>
-							</li>
-							<li>Shopping Cart</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcrumbs Area Start -->
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING CART</h2>
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+		</li>
+		<li>Shopping Cart</li>
+	</ul>
 	<!-- Cart Area Start -->
-	<div class="shopping-cart-area section-padding">
+	<div class="shopping-cart-area section-padding" style="padding-top: 20px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="wishlist-table-area table-responsive">
-						<table>
-							<thead>
-								<tr>
-									<th class="product-edit">
-										<input type="checkbox" id="checkAll" onchange="fn_checkSum()" />
-										All Check
-									</th>
-									<th class="product-image">Image</th>
-									<th class="t-product-name">Product Name</th>
-									<th class="product-unit-price">Unit Price</th>
-									<th class="product-edit">Category</th>
-									<th class="product-quantity">Quantity</th>
-									<th class="product-subtotal">Subtotal</th>
-									<th class="product-edit"> Buy Now</th>
-									<th class="product-remove">Remove</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:choose>
-									<c:when test="${basketList.size()==0 }">
-										<strong>
-											<font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
-										</strong>
-									</c:when>
-									<c:otherwise>
-									<form name ="basketform" id="basketform">
-										<c:forEach var="row" items="${basketList }" varStatus="i">
-											<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
-											<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
-											<tr>
-												<td class="product-edit">
-													<p>
-														<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
-													</p>
-												</td>
-												<td class="product-image">
-													<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">
-														<img src="<%=cp %>/upload/${row.basket_book_image }" alt="" width="104px" height="104px">
-													</a>
-												</td>
-												<td class="t-product-name">
-													<h3>
-														<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">${row.basket_book_name }</a>
-													</h3>
-												</td>
-												<td class="product-unit-price">
-													<p>
-														<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price}" groupingUsed="true" />
-														원
-													</p>
-												</td>
-												<td class="product-edit">
-													<p>${row.book_category }</p>
-												</td>
-												<td class="product-quantity product-cart-details">
-													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
-													<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
-														<em>수정</em>
-													</button>
-												</td>
-												<td class="product-quantity">
-													<p>
-														<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />
-														원
-													</p>
-												</td>
-												<td class="product-edit">
-													<p><a href="javascript:;" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="right-shoping-cart">BUY NOW</a></p>
-												</td>
-												<td class="product-remove">
-													<a href="javascript:;" onclick="fn_basketDelete(${row.basket_num})">
-														<i class="flaticon-delete"></i>
-													</a>
-												</td>
-											</tr>
-										</c:forEach>
-										</form>
-									</c:otherwise>
-								</c:choose>
-							</tbody>
-						</table>
+						<form name="basketform" id="basketform">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-edit">
+											<div class="checkbox checkbox-primary">
+												<input type="checkbox" id="checkbox2" onchange="fn_checkSum()" />
+												<label for="checkbox2"> All Check </label>
+											</div>
+										</th>
+										<th class="product-image">Image</th>
+										<th class="t-product-name">Product Name</th>
+										<th class="product-unit-price">Unit Price</th>
+										<th class="product-edit">Category</th>
+										<th class="product-quantity">Quantity</th>
+										<th class="product-subtotal">Subtotal</th>
+										<th class="product-edit">Buy Now</th>
+										<th class="product-remove">Remove</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${basketList.size()==0 }">
+											<strong>
+												<font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
+											</strong>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="row" items="${basketList }" varStatus="i">
+												<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
+												<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
+												<tr>
+													<td class="product-edit">
+														<div class="checkbox checkbox-primary">
+															<p>
+																<input type="checkbox" name="RowCheck" value="${row.basket_book_price*row.basket_book_count }" id="checkbox2" onchange="fn_checkSum()" />
+																<label for="checkbox2"></label>
+															</p>
+														</div>
+													</td>
+													<td class="product-image">
+														<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">
+															<img src="<%=cp %>/upload/${row.basket_book_image }" alt="" width="104px" height="104px">
+														</a>
+													</td>
+													<td class="t-product-name">
+														<h3>
+															<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">${row.basket_book_name }</a>
+														</h3>
+													</td>
+													<td class="product-unit-price">
+														<p>
+															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price}" groupingUsed="true" />
+															원
+														</p>
+													</td>
+													<td class="product-edit">
+														<p>${row.book_category }</p>
+													</td>
+													<td class="product-quantity product-cart-details">
+														<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
+														<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
+															<em>수정</em>
+														</button>
+													</td>
+													<td class="product-quantity">
+														<p>
+															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />
+															원
+														</p>
+													</td>
+													<td class="product-edit">
+														<p>
+															<a href="javascript:;" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="right-shoping-cart">BUY NOW</a>
+														</p>
+													</td>
+													<td class="product-remove">
+														<a href="javascript:;" onclick="fn_basketDelete(${row.basket_num})">
+															<i class="flaticon-delete"></i>
+														</a>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</tbody>
+							</table>
+						</form>
 					</div>
 					<div class="shopingcart-bottom-area">
 						<a class="left-shoping-cart" href="javascript:;">CONTINUE SHOPPING</a>
@@ -191,17 +187,23 @@
 						<div class="subtotal-area">
 							<h2>
 								SUBTOTAL
-								<span><input type="text" id="SubTotal" value="<fmt:formatNumber pattern="###,###,###" value="0"/>" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" /></span>
+								<span>
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									원
+								</span>
 							</h2>
 						</div>
 						<div class="subtotal-area">
-						<input type="hidden" id="fee" value="0" size="4" />
+							<input type="hidden" id="fee" value="0" size="4" />
 							<h2>
 								GRAND TOTAL
-								<span><input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" /></span>
+								<span>
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									원
+								</span>
 							</h2>
 						</div>
-						<a href ="javascript:;" onclick="fn_selectOrder()">SELECTED CHECKOUT</a>
+						<a href="javascript:;" onclick="fn_selectOrder()">SELECTED CHECKOUT</a>
 						<a href="javascript:;" onclick="fn_totalOrder()">CHECKOUT</a>
 						<p>Checkout With Multiple Addresses</p>
 					</div>
@@ -210,187 +212,37 @@
 		</div>
 	</div>
 	<!-- Discount Area End -->
-	<script type="text/javascript">
-	$(document).ready(function(){
-	  
-	  //전체 선택 체크박스 클릭
-	  $("#checkAll").click(function () {
-      //전체 선택 체크박스가 체크된 상태일 경우
-      if($("#checkAll").prop("checked")){
-        //해당 화면에 전체 checkbox들을 체크해준다.
-        $("input[type=checkbox]").prop("checked",true);
-      } else{
-        $("input[type=checkbox]").prop("checked",false);
-      }
-    });
-	  
-	  $(".left-shoping-cart").click(function(e) {
-	    	e.preventDefault();
-      	location.href ='<%=cp%>/books/booksList.do';
-    });
-	  
-	  $("#deleteAll").on("click",function(e){ //전체 삭제 하기 버튼
-	    e.preventDefault();
-	    location.href = '<%=cp%>/basket/basketDeleteAll.do';
-    });
-	});
-	function fn_bookDetail(basket_book_num) {
-    	location.href = '<%=cp%>/books/bookDetail.do?book_num='+basket_book_num;
-  }
-	
-	function fn_basketModify(basket_num) { 
-	  // basket_num과 basket_book_price를 넘겨준다.
-	  var num = basket_num;
-	  var count = document.getElementById(basket_num).value;
-
-	  
-	  if (confirm("변경 하시겠습니까?")) {
-	     location.href='<%=cp%>/basket/basketModify.do?basket_num='+num+'&basket_book_count='+count;
-	     
-	     //document.frm.submit();
-	  } else {
-	     alert("취소되었습니다");
-	  }	  
-	}
-	
-	function fn_selectDelete() {
-	  
-	  var RowCheck = document.getElementsByName('RowCheck');
-	  var Count = 0;
-	 
-	  for(var i=0; i<RowCheck.length;i++){
-  	  if(RowCheck[i].checked){ Count++; }
-  	  }
-	  
-	  if(!Count){
-	    alert("1개 이상 체크 박스를 선택 해주세요");
-	    return false;
-	  }
-	  else {
-	    basketform.action = '<%=cp%>/basket/basketCheckDelete.do';
-	    basketform.submit();
-	  }
-	}
-	
-	function fn_basketDelete(basket_num) {
-	  if (confirm("삭제하시겠습니까?")) {
-	    location.href='<%=cp%>/basket/basketDelete.do?basket_num='+basket_num;
-	  } else {
-	     alert("취소되었습니다");
-	  }
-	  
-	}
-	function singleOrder(basket_book_num, basket_book_count, basket_num) {
-	  var num = basket_book_num;
-	  var amount = basket_book_count;
-	  var basket_num = basket_num;
-	  
-	  if (confirm("주문 하시겠습니까?")) {
-	   location.href = '<%=cp%>/order/singleOrder.do?book_num='+num+'&order_book_count='+amount+'&basket_num='+basket_num;
-	  } else {
-	     alert("취소되었습니다");
-	     return false;
-	  }
-	}
-	
-	function fn_selectOrder() {
-	 	var RowCheck = document.getElementsByName('RowCheck');
-	 	var Count = 0;
-		
-	 	for(var i=0; i<RowCheck.length;i++){
-		  if(RowCheck[i].checked){ Count++; }
-		  }
-	 	
-	 	if(!Count){
-	 	  alert("1개 이상 체크 박스를 선택 해주세요");
-	 	  return false;
-	 	  }
-	 	else {
-	 	 basketform.action = '<%=cp%>/order/selectOrderForm.do';
-	    	 basketform.submit();
-	 	  }
-	}
-	
-	function fn_totalOrder() {
-	  location.href='<%=cp%>/order/totalOrder.do'
-	  }
-	
-	function fn_checkCount() {
-		var count = 0;
-	    	var RowCheck = document.getElementsByName('RowCheck');
-	    	for(var i=0; i<RowCheck.length;i++){
-	    	  if(RowCheck[i].checked){
-	    	    count++;
-	    	  }
-	    	}
-	    	CheckCount.value = count;
-	  }
-		function fn_checkSum() {
-	    	var sumValue =0;
-	    	var feeValue =0;
-	    	var RowCheck = document.getElementsByName('RowCheck');
-	    	for(var i =0 ; i<RowCheck.length;i++){
-	    	  if(RowCheck[i].checked){
-	    	    sumValue += parseInt(RowCheck[i].id);
-	    	  }
-	    	}
-	    	if(sumValue <100000 && sumValue!=0){
-	    	  feeValue = 5000;
-	    	} 
-	    fee.value = feeValue;
-	    SubTotal.value = sumValue;
-	    sum.value=sumValue+feeValue;
-	    fn_checkCount();
-	  }
-		
-	function onlyNumber(event){
-	   event = event || window.event;
-	   var keyID = (event.which) ? event.which : event.keyCode;
-	   if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
-	      return;
-	   else
-	      return false;
-	}
-	function removeChar(event) {
-	   event = event || window.event;
-	   var keyID = (event.which) ? event.which : event.keyCode;
-	   if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
-	      return;
-	   else
-	      event.target.value = event.target.value.replace(/[^0-9]/g, ""); 
-	}
-	
-	</script>
+	<script src ="<%=cp%>/bootstrap/js/custom.js"></script>
 	<!-- all js here -->
 	<!-- jquery latest version -->
-	<script src="<%=cp %>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
 	<!-- bootstrap js -->
-	<script src="<%=cp %>/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
 	<!-- owl.carousel js -->
-	<script src="<%=cp %>/bootstrap/js/owl.carousel.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
 	<!-- jquery-ui js -->
-	<script src="<%=cp %>/bootstrap/js/jquery-ui.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
 	<!-- jquery Counterup js -->
-	<script src="<%=cp %>/bootstrap/js/jquery.counterup.min.js"></script>
-	<script src="<%=cp %>/bootstrap/js/waypoints.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>
 	<!-- jquery countdown js -->
-	<script src="<%=cp %>/bootstrap/js/jquery.countdown.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
 	<!-- jquery countdown js -->
-	<script type="text/javascript" src="<%=cp %>/bootstrap/venobox/venobox.min.js"></script>
+	<script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
 	<!-- jquery Meanmenu js -->
-	<script src="<%=cp %>/bootstrap/js/jquery.meanmenu.js"></script>
+	<script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
 	<!-- wow js -->
-	<script src="<%=cp %>/bootstrap/js/wow.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/wow.min.js"></script>
 	<script>
     new WOW().init();
   </script>
 	<!-- scrollUp JS -->
-	<script src="<%=cp %>/bootstrap/js/jquery.scrollUp.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
 	<!-- plugins js -->
-	<script src="<%=cp %>/bootstrap/js/plugins.js"></script>
+	<script src="<%=cp%>/bootstrap/js/plugins.js"></script>
 	<!-- Nivo slider js -->
-	<script src="<%=cp %>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
-	<script src="<%=cp %>/bootstrap/lib/home.js" type="text/javascript"></script>
+	<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+	<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
 	<!-- main js -->
 	<script src="<%=cp %>/bootstrap/js/main.js"></script>
 </body>
