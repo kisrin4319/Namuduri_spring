@@ -3,17 +3,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>주문 상세보기</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/layout_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/myroom.css" rel="stylesheet" type="text/css" />
-<link href="css/order_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style2_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/layout_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/myroom.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/order_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 		
@@ -102,7 +103,7 @@
 		</tr>	
 	</table>
 	<br>
-	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheck.do'"/>
+	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheckView.do'"/>
 	</div>
 </div>
 </body>
