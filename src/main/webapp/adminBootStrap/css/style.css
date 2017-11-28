@@ -3227,7 +3227,7 @@ Table-Layout
   color: #ffffff; }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background: #f2f4f8; }
+  background: #fbfbfb; }
 
 .color-table.success-table thead th {
   background-color: #26c6da;

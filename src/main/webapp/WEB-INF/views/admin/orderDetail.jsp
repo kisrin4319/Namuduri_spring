@@ -109,7 +109,7 @@
 								</tr>
 								<tr>
 									<th width=15%>배송번호</th>
-									<td width=35%>"${view.order_trans_num}</td>
+									<td width=35%>${view.order_trans_num}</td>
 									<th width=15%>배송 상태</th>
 									<td width=35%><select name="order_trans_status">
 											<c:choose>
@@ -165,12 +165,11 @@
 								</tr>
 								<tr>
 									<th width=15%>주문 상태</th>
-									<td class="getyn" width=85% colspan=3><input type="radio"
-										name="order_use_yn" id="order_use_yn" value="1"
-										${view.order_use_yn == '1' ? 'checked="checked"' : '' }>주문됨
-										<!-- 기본값 --> <input type="radio" name="order_use_yn"
-										id="order_use_yn" value="0"
-										${view.order_use_yn == '0' ? 'checked="checked"' : '' }>취소됨
+									<td class="getyn" width=85% colspan=3>
+										<input type="radio" name="order_use_yn" id="order_use_yn" value="1"
+											${view.order_use_yn == '1' ? 'checked="checked"' : '' }>주문됨<!-- 기본값 --> 
+										<input type="radio" name="order_use_yn" id="order_use_yn" value="0"
+											${view.order_use_yn == '0' ? 'checked="checked"' : '' }>취소됨
 									</td>
 								</tr>
 							</table>

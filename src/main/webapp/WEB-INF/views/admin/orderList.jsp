@@ -25,7 +25,8 @@
 
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
 
-		<!-- 검색창 영역 -->
+		<div class="col-lg-12">
+			<!-- 검색창 영역 --><!-- 체크박스로 조건별 검색 기능 추가 --><!-- 기간별 조회 기능도 추가 -->
 		<div class="searcharea">
 			<form>
 				<div class="search_input">
@@ -42,13 +43,22 @@
 				</div>
 			</form>
 		</div>
-
-		<div class="row">
-			<!-- column -->
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-block">
-						<div class="table-responsive">
+			
+			<div class="card">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs profile-tab" role="tablist">
+					<li class="nav-item"><a class="nav-link active"
+						data-toggle="tab" href="#home" role="tab">전체</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#profile" role="tab">결제중</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#settings" role="tab">배송중</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<!-- first tab -->
+					<div class="tab-pane active" id="home" role="tabpanel">
+						<div class="card-block">
 							<table class="table">
 								<thead>
 									<tr>
@@ -96,10 +106,17 @@
 							</table>
 						</div>
 					</div>
+					<!-- second tab -->
+					<div class="tab-pane" id="profile" role="tabpanel">
+						<div class="card-block"></div>
+					</div>
+					<!-- third tab -->
+					<div class="tab-pane" id="settings" role="tabpanel">
+						<div class="card-block"></div>
+					</div>
 				</div>
 			</div>
 		</div>
-
 		<table class="paging">
 			<tr align=center>
 				<td colspan=8>${pagingHtml}</td>
