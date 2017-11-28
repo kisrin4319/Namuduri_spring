@@ -155,7 +155,6 @@ public class MypageController {
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
-		
 		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_pw(request.getParameter("member_pw"));
 		
@@ -257,12 +256,6 @@ public class MypageController {
 		String session_id = (String) session.getAttribute("member_id");
 		
 		MemberModel memberInfo = memberService.SelectOne(session_id);
-		/*List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
-		OrderModel model = tradeNumList.get(1);
-		
-		String orderTradeNum = model.getOrder_trade_num();
-		
-		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);*/
 		
 		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
 		
@@ -274,16 +267,22 @@ public class MypageController {
 	
 	//6. 주문내역 취소
 	@RequestMapping(value = "/order/memberOrderCancel.do")
-	public ModelAndView memberOrderCancel(HttpServletRequest request, HttpSession session, String order_trade_num) {
+	@ResponseBody
+	public String memberOrderCancel(HttpServletRequest request, HttpSession session, String order_trade_num) {
 		
-		mv = new ModelAndView();
-		
+		String returnVal = "";
+		//mv = new ModelAndView();
 		//String session_id = (String) session.getAttribute("member_id");
+	
+		int result = mypageService.memberOrderCancel(order_trade_num);
 		
-		mypageService.memberOrderCancel(order_trade_num);
-			
-		mv.setViewName("orderCancel1");
-		return mv;
+		if(result > 0) {
+			returnVal = "1";
+		}else {
+			returnVal = "0";
+		}
+		
+		return returnVal;
 		
 	}
 
