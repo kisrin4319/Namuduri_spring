@@ -32,11 +32,10 @@
 			}
 		}
 		
-		/* //체크박스를 선택하지 않았을때
-		if(checkbox == ''){
-			//var checkbox = 'No';
-			//member_email_get value = 'NO'
-			}  */
+		//체크박스를 선택하지 않았을때
+		if($('input:checkbox[name="member_email_get"]').is(":checked") == false){
+			$('input:checkbox[name="member_email_get"]').val('NO');
+		} 
 
 			if(password == ''){
 				alert('비밀번호를 입력해 주세요.');
