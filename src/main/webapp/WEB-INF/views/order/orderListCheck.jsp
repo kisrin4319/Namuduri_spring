@@ -19,20 +19,20 @@
 	function check(type, num){
 		document.getElementById('order_trade_num').value = num;
 		if(type == 'cancel'){
-			document.getElementById('orderListCheckForm').action = 'orderCancel.do';
+			document.getElementById('orderListCheckForm').action = '<%=cp%>/order/memberOrderCancel.do';
 			document.getElementById('orderListCheckForm').submit();
 		}
 	}
 	
-	/* function orderDetail(order_trade_num){
-		//$('#current').val(page);
+	function orderDetail(order_trade_num){
+		$('#current').val(page);
 		$('order_trade_num').val(order_trade_num);
 		
 		var f = $('#orderListCheckForm')
 		
 		f.action = "/order/memberOrderDetailView.do";
 		f.submit();
-	} */
+	}
 </script>
 </head>
 <body>
@@ -117,7 +117,7 @@
 										배송 완료
 									</c:if>${ item.order_trans_status }</td>
 								<td align="center">
-								<input type="button" value="주문취소하기" align="middle"onclick="check('cancel', 'value = "${order_trade_num}"')" /></td>
+								<input type="button" value="주문취소하기" align="middle" onclick="check('cancel', 'value = ${item.order_trade_num}')" /></td>
 							</tr>
 							</c:forEach>
 							

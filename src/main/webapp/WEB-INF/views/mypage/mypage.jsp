@@ -113,7 +113,7 @@
 		<h2 class="bul_green20 margin_top30">
 			<span>주문/배송안내</span>
 		</h2>
-		<img align="middle" src="/namuduri/mypage/image/mypage.JPG" />
+		<img align="middle" src="<%=cp%>/mypage/image/mypage.JPG" />
 		</div>
 	</div>	
 </body>

@@ -66,7 +66,7 @@ public class MypageService implements MypageDao {
 	//6. 주문내역 취소
 	@Override
 	public void memberOrderCancel(String order_trade_num) {
-		sqlSessionTemplate.delete("order.orderCancel", order_trade_num);
+		sqlSessionTemplate.update("order.orderCancel", order_trade_num);
 	}
 
 }

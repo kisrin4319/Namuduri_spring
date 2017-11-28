@@ -32,4 +32,5 @@ public interface MypageDao {
 	//6. 주문내역 취소
 	public void memberOrderCancel(String order_trade_num);
 	
+	
 }
