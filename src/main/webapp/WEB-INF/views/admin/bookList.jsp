@@ -13,9 +13,8 @@
 	function deleteCheck(id) {
 		var page = ${currentPage};
 		alert("정말 삭제하시겠습니까?");
-		document.location.href="<%=cp%>
-	/admin/bookDelete.do?book_num=" + id
-				+ "&currentPage=" + page;
+		document.location.href=
+			"<%=cp%> /admin/bookDelete.do?book_num=" + id + "&currentPage=" + page;
 	}
 </script>
 </head>
@@ -30,114 +29,149 @@
 				</ol>
 			</div>
 		</div>
-		<div class="col-lg-12">
-			<!-- 검색창 영역 -->
-			<div class="searcharea">
+
+		<nav class="main-navbar">
+			<form class="form-inline" method="POST"
+				action="/admin/default/jqadm/search/product?lang=en">
+				<i class="fa more"></i>
+
+				<div class="input-group">
+					<select class="custom-select filter-key" name="filter[key][0]">
+						<option value="product.label" data-type="string">
+						Label					</option>
+					</select> <select class="custom-select filter-operator" name="filter[op][0]">
+						<option value="=~">
+					=~&nbsp;&nbsp;starts with				</option>
+					</select> <input type="text" class="form-control filter-value"
+						name="filter[val][0]" value="">
+					<button class="input-group-addon btn btn-primary fa fa-search"></button>
+				</div>
+			</form>
+		</nav>
+	</div>
+	<div class="col-lg-12">
+		<!-- 검색창 영역 -->
+		<!-- <div class="searcharea">
 				<form>
 					<div class="search_input">
 						<select name="searchNum" class="searchNum">
-							<option value="0">카테고리</option>
-							<option value="1">도서명</option>
-							<option value="2">저자</option>
-							<option value="3">출판사</option>
-							<option value="4">내용</option>
+							<option value="0">ID</option>
+							<option value="1">이름</option>
+							<option value="2">EMAIL</option>
+							<option value="3">전화번호</option>
+							<option value="4">휴대폰번호</option>
+							<option value="5">주민번호 앞자리</option>
 						</select> <input class="searchKeyword" type="text" name="searchKeyword">
 						<input class="searchbutton" name="submit" type="submit" value="검색">
 					</div>
 				</form>
-			</div>
-			
-			<div class="card">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs profile-tab" role="tablist">
-					<li class="nav-item"><a class="nav-link active"
-						data-toggle="tab" href="#home" role="tab">전체</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#profile" role="tab">사용 도서</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#settings" role="tab">비사용 도서</a></li>
-				</ul>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<!-- first tab -->
-					<div class="tab-pane active" id="home" role="tabpanel">
-						<div class="card-block">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th width=3%><b>번호</b></th>
-											<th width=5%><b>&nbsp;</b></th>
-											<th width=20%><b>도서명</b></th>
-											<th width=8%><b>카테고리</b></th>
-											<th width=10%><b>저자</b></th>
-											<th width=10%><b>출판사</b></th>
-											<th width=8%><b>가격</b></th>
-											<th width=8%><b>재고</b></th>
-											<th width=30% align=center><b>관리</b></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${listCount==0}">
-												<tr align=center>
-													<td colspan=8>등록된 도서가 없습니다.</td>
-												</tr>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="list" items="${booksList}" varStatus="stat">
-													<c:url var="viewURL" value="/admin/bookDetail.do">
-														<c:param name="book_num" value="${list.book_num}" />
-														<c:param name="currentPage" value="${currentPage}" />
-													</c:url>
-													<tr>
-														<td>${list.book_num}</td>
-														<td><img src="<%=cp%>/upload/${list.book_image}"
-															width="100" height="130" border="0" /></td>
-														<td><a href="${viewURL}">${list.book_name}</a></td>
-														<td>${list.book_category}</td>
-														<td>${list.book_auth}</td>
-														<td>${list.company_id}</td>
-														<td>${list.book_price}</td>
-														<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
-														<td align=center><input class="adminbutton2"
-															type=button value="수정"
-															onclick="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${list.book_num}&currentPage=${currentPage}'" />
-															<br> <br> <input class="adminbutton2"
-															type=button value="삭제"
-															onclick="deleteCheck('${list.book_num}')" /></td>
+			</div> -->
+		<div class="card">
+			<div class="card-block">
+				<div class="table-responsive">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs profile-tab" role="tablist">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#home" role="tab">전체</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#profile" role="tab">사용 도서</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#settings" role="tab">비사용 도서</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<!-- first tab -->
+						<div class="tab-pane active" id="home" role="tabpanel">
+							<div class="card-block">
+								<form class="list list-product" method="POST">
+									<table class="list-items table table-hover table-striped">
+										<thead class="list-header">
+											<tr>
+												<th>#</th>
+												<th></th>
+												<th>NAME</th>
+												<th>CATEGORY</th>
+												<th>AUTH</th>
+												<th>COMPANY</th>
+												<th>가격</th>
+												<th>재고</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="list-search">
+												<td colspan=2><input class="insertButton" type=button
+													value="도서 등록하기"
+													onclick="javascript:location.href='<%=cp%>/admin/bookWrite.do'" />
+												</td>
+												<td><input class="form-control" type="text"
+													name="book_name" value="" /></td>
+												<td><input class="form-control" type="text"
+													name="book_category" value="" /></td>
+												<td><input class="form-control" type="text"
+													name="book_auth" value="" /></td>
+												<td><input class="form-control" type="text"
+													name="book_comapny" value="" /></td>
+												<td colspan=2></td>
+												<td class="actions" style="vertical-align: middle;">
+													<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
+													<button type="submit" style="font-size: 20px;"
+														class="fa fa-search" title="Search"></button>
+												</td>
+											</tr>
+
+
+											<c:choose>
+												<c:when test="${listCount==0}">
+													<tr align=center>
+														<td colspan=8>등록된 도서가 없습니다.</td>
 													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
+												</c:when>
+												<c:otherwise>
+													<c:forEach var="list" items="${booksList}" varStatus="stat">
+														<c:url var="viewURL" value="/admin/bookDetail.do">
+															<c:param name="book_num" value="${list.book_num}" />
+															<c:param name="currentPage" value="${currentPage}" />
+														</c:url>
+														<tr>
+															<td class="num">${list.book_num}</td>
+															<td><img src="<%=cp%>/upload/${list.book_image}"
+																width="100" height="130" border="0" /></td>
+															<td><a href="${viewURL}">${list.book_name}</a></td>
+															<td>${list.book_category}</td>
+															<td>${list.book_auth}</td>
+															<td>${list.company_id}</td>
+															<td>${list.book_price}</td>
+															<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
+															<td><a class="mdi mdi-grease-pencil" title="Modify"
+																href="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${list.book_num}&currentPage=${currentPage}'"></a>
+																<a class="mdi mdi-delete" title="Delete"
+																href="deleteCheck('${list.book_num}')"></a></td>
+														</tr>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										</tbody>
+									</table>
+								</form>
+								<table class="paging">
+									<tr align=center>
+										<td colspan=8>${pagingHtml}</td>
+									</tr>
 								</table>
 							</div>
 						</div>
-					</div>
-					<!--second tab-->
-					<div class="tab-pane" id="profile" role="tabpanel">
-						<div class="card-block"></div>
-					</div>
-					<!-- third tab -->
-					<div class="tab-pane" id="settings" role="tabpanel">
-						<div class="card-block"></div>
+						<!--second tab-->
+						<div class="tab-pane" id="profile" role="tabpanel">
+							<div class="card-block"></div>
+						</div>
+						<!-- third tab -->
+						<div class="tab-pane" id="settings" role="tabpanel">
+							<div class="card-block"></div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<table class="paging">
-			<tr>
-				<td align=center colspan=8>${pagingHtml}</td>
-			</tr>
-		</table>
-
-		<div class="detail_button">
-			<form>
-				<input class="button" type=button value="도서 등록하기"
-					onclick="javascript:location.href='<%=cp%>/admin/bookWrite.do'" />
-			</form>
 		</div>
 	</div>
 	<footer class="footer"> © 2017 Material Pro Admin by

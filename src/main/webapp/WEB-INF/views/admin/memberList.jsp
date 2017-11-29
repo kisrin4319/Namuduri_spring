@@ -33,9 +33,28 @@
 		</div>
 
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
+		<nav class="main-navbar">
+			<form class="form-inline" method="POST"
+				action="/admin/default/jqadm/search/product?lang=en">
+				<input class="csrf-token" type="hidden" name="_token"
+					value="l5mVyaZRPdp53vmVVmSSuP02irvG7LuQi76Q86Xe" /> <i
+					class="fa more"></i>
 
+				<div class="input-group">
+					<select class="custom-select filter-key" name="filter[key][0]">
+						<option value="product.label" data-type="string">
+						Label					</option>
+					</select> <select class="custom-select filter-operator" name="filter[op][0]">
+						<option value="=~">
+					=~&nbsp;&nbsp;starts with				</option>
+					</select> <input type="text" class="form-control filter-value"
+						name="filter[val][0]" value="">
+					<button class="input-group-addon btn btn-primary fa fa-search"></button>
+				</div>
+
+			</form>
+		</nav>
 		<div class="col-lg-12">
-
 			<!-- 검색창 영역 -->
 			<!-- <div class="searcharea">
 				<form>
@@ -52,7 +71,6 @@
 					</div>
 				</form>
 			</div> -->
-
 			<div class="card">
 				<div class="card-block">
 					<div class="table-responsive">
@@ -70,11 +88,11 @@
 							<!-- first tab -->
 							<div class="tab-pane active" id="home" role="tabpanel">
 								<div class="card-block">
-
-									<form method="POST" action="">
-										<table>
-											<thead>
+									<form class="list list-product" method="POST">
+										<table class="list-items table table-hover table-striped">
+											<thead class="list-header">
 												<tr>
+													<th>#</th>
 													<th>ID</th>
 													<th>NAME</th>
 													<th>주민번호</th>
@@ -85,7 +103,8 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<tr class="list-search">
+													<td></td>
 													<td><input class="form-control" type="text"
 														name="member_id" value="" /></td>
 													<td><input class="form-control" type="text"
@@ -98,7 +117,13 @@
 														name="member_emial" value="" /></td>
 													<td><input class="form-control" type="text"
 														name="member_join" value="" /></td>
+													<td class="actions" style="vertical-align: middle;">
+														<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
+														<button type="submit" style="font-size: 20px;"
+															class="fa fa-search" title="Search"></button>
+													</td>
 												</tr>
+
 												<c:choose>
 													<c:when test="${listCount==0}">
 														<tr align=center>
@@ -115,20 +140,17 @@
 															</c:url>
 
 															<tr>
-																<%-- <td>${list.member_num}</td> --%>
+																<td>${list.member_num}</td>
 																<td><a href="${viewURL}">${list.member_id}</a></td>
 																<td>${list.member_name}</td>
 																<td>${list.member_jumin1}-${list.member_jumin2}</td>
 																<td>${list.member_email}</td>
 																<td>${list.member_mobile}</td>
 																<td>${list.member_join_date}</td>
-																<td>&nbsp; <a class="mdi mdi-grease-pencil"
-																	title="Modify this entry" aria-label="Modify"
+																<td><a class="mdi mdi-grease-pencil" title="Modify"
 																	href="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${list.member_id}&currentPage=${currentPage}'"></a>
-																	<a class="mdi mdi-delete" title="Delete this entry"
-																	aria-label="Delete"
-																	href="deleteCheck('${list.member_id}')"></a>
-																</td>
+																	<a class="mdi mdi-delete" title="Delete"
+																	href="deleteCheck('${list.member_id}')"></a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>
@@ -136,7 +158,6 @@
 											</tbody>
 										</table>
 									</form>
-									<br>
 									<table class="paging">
 										<tr align=center>
 											<td colspan=8>${pagingHtml}</td>
@@ -157,7 +178,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<footer class="footer"> © 2017 Material Pro Admin by
 		wrappixel.com </footer>

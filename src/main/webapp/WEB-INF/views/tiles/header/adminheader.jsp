@@ -14,12 +14,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap Core CSS -->
-<link href="<%=cp%>/adminBootStrap/css/bootstrap.min.css"
+<link href="<%=cp%>/adminBootStrap/css/bootstrap.min.css?ver=1"
 	rel="stylesheet">
 <!--This page css - Morris CSS -->
 <link href="<%=cp%>/adminBootStrap/css/c3.min.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="<%=cp%>/adminBootStrap/css/style.css" rel="stylesheet">
+<link href="<%=cp%>/adminBootStrap/css/style.css?ver=1" rel="stylesheet">
 <!-- You can change the theme colors from here -->
 <link href="<%=cp%>/adminBootStrap/css/blue.css" id="theme"
 	rel="stylesheet">
@@ -32,8 +32,8 @@
 <link href="<%=cp%>/adminBootStrap/css/chartist-plugin-tooltip.css"
 	rel="stylesheet">
 
-<link href="<%=cp%>/css/adminPage.css?ver=1" rel="stylesheet"
-	type="text/css" />
+<%-- <link href="<%=cp%>/css/adminPage.css?ver=1" rel="stylesheet"
+	type="text/css" /> --%>
 
 <!-- ============================================================== -->
 <!-- All Jquery -->
