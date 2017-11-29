@@ -76,15 +76,15 @@
 			주문 번호 : ${ memberOrderDetail.ORDER_TRADE_NUM }<br><br>
 			도 서 명 : ${ memberOrderDetail.ORDER_BOOK_NAME }<br><br>
 			주문 상태 : 
-			<c:if test="order_trans_status == 'ST01'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST01' }">
 				배송 준비중
 			</c:if>
-			<c:if test="order_trans_status == 'ST02'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST02' }">
 				배송 중
 			</c:if>
-			<c:if test="order_trans_status == 'ST03'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST03' }">
 				배송 완료
-			</c:if>${ memberOrderDetail.ORDER_TRANS_STATUS }
+			</c:if>
 			<br><br>
 			주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }<br><br>
 			</td>
