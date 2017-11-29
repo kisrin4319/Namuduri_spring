@@ -15,7 +15,7 @@
 	
 	<!-- 게시판 목록 -->
 	<select id="boardList" resultType="BoardModel"> 
-  		<include refid="select-BoardAll" /> ORDER BY board_regdate DESC
+  		<include refid="select-BoardAll" /> ORDER BY ref DESC, re_step ASC, board_regdate DESC
 	</select>
 	
 	<!-- 게시글 내용 보기 -->
@@ -44,32 +44,28 @@
 		ORDER BY ref DESC, re_step ASC
 	</select>
 
-		
 	
 	<!-- 게시글 작성 -->
 	<insert id="boardWrite" parameterType="BoardModel"> 
-		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE)
-		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate)
+		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate)
     </insert>
     
     <!-- 답변작성 -->
-    <insert id="boardReply" parameterType="Integer">
-    	INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE, REF, RE_STEP, RE_LEVEL)
-		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate, #{REF}, #{RE_STEP}, #{RE_LEVEL})
+    <insert id="BoardReply" parameterType="BoardModel">
+    	INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BORAD_TYPE, BOARD_REGDATE, REF, RE_STEP)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate, #{REF}, #{RE_STEP})
     </insert>
   
-  
-  
- 	<!-- 게시글 수정 -->
- 	<update id="update">
+  	<!-- 게시글 수정 -->
+ 	<update id="BoardModify" parameterType="BoardModel">
  		UPDATE BOARD 
- 		SET BOARD_TITLE = #{board_title}, BOARD_PW = #{board_pw}, BOARD_CONTENT = #{board_content}
-			BOARD_TYPE = #{board_type}
+ 		SET BOARD_TITLE = #{board_title}, BOARD_PW = #{board_pw}, BOARD_CONTENT = #{board_content}, BOARD_TYPE = #{board_type}
 		WHERE BOARD_NUM = #{board_num}
 	</update>
  
  	<!-- 게시글 삭제 -->
- 	<delete id="delete">
+ 	<delete id="BoardDelete" parameterType="int">
   		DELETE FROM BOARD WHERE BOARD_NUM = #{board_num}
  	</delete>
 

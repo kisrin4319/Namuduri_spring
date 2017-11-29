@@ -54,6 +54,7 @@
 		<c:when test="${listCount==0 }">
 			등록된 게시글이 없습니다.
 		</c:when>
+		
 		<c:otherwise>
 			<form name = "boardform" id = "baordform">
 				<c:forEach var ="list" items="${boardList }" varStatus="stat">
@@ -68,15 +69,15 @@
 						
 						<c:if test="re_level != 0">
 								<c:forEach var="i" begin="${re_level}" end="0">&nbsp;</c:forEach>→
-							</c:if>
-					 	<c:if test="board_type ==2">
-								<font size='2' color='black'><b>[공지]</b></font>
-							</c:if>
-							<c:if test="board_type ==1">
+						</c:if>
+					 	<c:if test="${list.board_type ==2}">
+								<font size='2' color='black'><b>[공지]</b><a href="${viewURL}">${list.board_title}</a></font>
+						</c:if>
+						<c:if test="${list.board_type ==1}">
 								<input type="hidden" id="board_num" value="${list.board_num }" />
 					
 								<c:if test="${session.member_id=='admin'}">
-									<a href="%{viewURL}">${list.board_title}</a>						
+									<a href="${viewURL}">${list.board_title}</a>						
 								</c:if>
 								<c:if test="${session.member_id!='admin'}">
 									<a href="javascript:checkForm(${list.board_num})">
@@ -84,14 +85,14 @@
 										<img src="images/common/secret.gif" />
 									</a>
 								</c:if>				
-							</c:if>
-							<c:if test="board_type ==0">
-								<a href="${viewURL}">${list.board_title}</a>
-							</c:if>
+						</c:if>
+						<c:if test="${list.board_type ==0}">
 							<a href="${viewURL}">${list.board_title}</a>
+						</c:if>							
 						</td>
 						<td class="td_line_none">${list.member_id}</td>
 						<td class="td_line_none">${list.board_regdate}</td>
+						
 					</tr> 
 								
 				</c:forEach>

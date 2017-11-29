@@ -1,6 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
-<?xml version="1.0" encoding="UTF-8" ?>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -43,73 +46,70 @@
 	font-weight: bolder;
 }
 </style>
-
 	<br>
 		<h2 class="cscenter_h2">고객센터</h2>
 	<h3 class="bul_green">질문답변 게시판</h3>
-	<br><!--  <s:if test="resultClass == NULL"> -->
-			<form action="boardWrite.do" name="regForm" method="post"
-				enctype="multipart/form-data" onsubmit="return validation();">
-		<!-- </s:if> <s:elseif test="reply">
-			<form action="replyAction.do" name="regForm" method="post"
-				enctype="multipart/form-data" onsubmit="return validation();">
-				<s:hidden name="ref" value="%{resultClass.ref}" />
-				<s:hidden name="re_level" value="%{resultClass.re_level}" />
-				<s:hidden name="re_step" value="%{resultClass.re_step}" />
-		</s:elseif> <s:else>
-			<form action="modifyAction.do" name="regForm" method="post"
-				enctype="multipart/form-data" onsubmit="return validation();">
-				<s:hidden name="board_num" value="%{resultClass.board_num}" />
-				<s:hidden name="currentPage" value="%{currentPage}" />
-		</s:else> -->
+	<br>
+	<c:choose>
+		<c:when test="${view == null}">
+			<form action="boardWrite.do" name="regForm" method="post" onsubmit="return validation();">
+		</c:when>
 		
+		<%-- <c:when test="${view.board_num !=0 }">
+				<form action="boardWrite.do" name="regForm" method="post" onsubmit="return validation();" >
+				<input type="hidden" name = "board_num" value="${param.board_num }"/>
+				<input type="hidden" name="ref" value="${param.ref}" />
+				<input type="hidden" name="re_step" value="${param.re_step}" />
+		</c:when> --%>
 		
-		<th>게시글 타입</th>
-				<td><select name="board_type">
-						<c:if test="%{session.member_id=='admin'}">
-							<option value="0">공개글</option>
-							<option value="1">비공개 글</option>
-							<option value="2">공지사항</option>
-						</c:if>
-						<c:if test="%{session.member_id!='admin'}">
-							<option value="0">공개글</option>
-							<option value="1">비공개 글</option>
-						</c:if>
-				 </select></td>
-				 
-				 
-				 
-				 
+		<c:otherwise>
+			<form action="boardModifyProc.do" name="regForm" method="post" onsubmit="return validation();">
+				<input type="hidden" name="board_num" value="${view.board_num}" />
+				<input type="hidden" name="currentPage" value="${currentPage}" />
+		</c:otherwise>
+	</c:choose>
+	
+	
 	<input type="hidden" name="id" value="${session_member_id}" />
 	<input type="hidden" name="name" value="${session_member_name}" />
-				 
-				 
 
-		<table class="boardWrite" width="770" border="0" cellspacing="0" cellpadding="0">
+	<table class="boardWrite" width="770" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td colspan="6" id="fon" style="height: 25px;"><font color="#FF0000">*</font>는 필수 입력사항입니다.</td>
 			</tr>
 			<tr style="height: 30px;">
-			
+			<th>게시글 타입</th>
+			<td>
+			<select name="board_type">
+					<c:if test="${session.member_id=='admin'}">
+						<option value="0">공개글</option>
+						<option value="1">비공개 글</option>
+						<option value="2">공지사항</option>
+					</c:if>
+					<c:if test="${session.member_id!='admin'}">
+						<option value="0">공개글</option>
+						<option value="1">비공개 글</option>
+					</c:if>
+			</select>
+				</td> 
 				<th><font color="#FF0000">*</font>이름</th>
-				<td><input type="text" name="member_id" id="member" value=""
-						Style="width:150px; height: 18px;" maxlength="20" /></td>
+				<td><input type="text" name="member_id" id="member" value="${member_id}"
+						style="width:150px; height: 18px;" maxlength="20" /></td>
 				<th><font color="#FF0000">*</font> 비밀번호</th>
-				<td><input type="text" name="board_pw" id="passwd" vlaue=""
-						Style="width:150px; height: 18px;" maxlength="20" /></td>
+				<td><input type="text" name="board_pw" id="passwd" value="${view.board_pw}"
+						style="width:150px; height: 18px;" maxlength="20" /></td>
 			</tr>
 			<tr>
 				<th height="30"><font color="#FF0000">*</font>제목</th>
 				<td colspan="5" width="770" bgcolor="#FFFFFF">
-				<input type="text" name="board_title" id="title" value=""
-					Style="width:600px; height:20px;" maxlength="50" /></td>
+				<input type="text" name="board_title" id="title" value="${view.board_title}" style="width:600px; height:20px;" maxlength="50" /></td>
 			</tr>
 
 
 			<tr>
 				<th bgcolor="#F4F4F4"><font color="#FF0000">*</font> 내용</th>
 				<td colspan="5" bgcolor="#FFFFFF">
-				<textarea name="board_content" id="content" value="" cols="100" rows="17"></textarea> 
+				<textarea name="board_content" id="content" cols="100" rows="17"> ${view.board_content}</textarea> 
 				</td>
 			</tr>
 

@@ -25,17 +25,16 @@ public class BoardService implements BoardDao {
 		return sqlSessionTemplate.selectOne("board.selectBoardOne", board_num);
 	}
 	
+	
 	// 게시판 검색
 	@Override
 	public List<BoardModel> Search0(String search) {
 		return sqlSessionTemplate.selectList("board.Search0", "%"+search+"%"); 
 	}
-	
 	@Override
 	public List<BoardModel> Search1(String search) {
 		return sqlSessionTemplate.selectList("board.Search1", "%"+search+"%"); 
 	}
-	
 	@Override
 	public List<BoardModel> Search2(String search) {
 		return sqlSessionTemplate.selectList("board.Search2", "%"+search+"%"); 
@@ -47,17 +46,22 @@ public class BoardService implements BoardDao {
 		sqlSessionTemplate.insert("board.boardWrite", boardModel);
 		return true;
 	}
-
+	
+	// 게시글 답변 작성
+	public void BoardReply(BoardModel boardModel) {
+		sqlSessionTemplate.insert("board.BoardReply", boardModel);
+	}
+	
 	// 게시글 수정
 	@Override
-	public void BoardModify(int board_num) {
-		sqlSessionTemplate.update("board.boardUpdate", board_num);
+	public void BoardModify(BoardModel boardModel) {
+		sqlSessionTemplate.update("board.BoardModify", boardModel);
 	}
 	
 	// 게시글 삭제
 	@Override
 	public void BoardDelete(int board_num) {
-		sqlSessionTemplate.delete("board.boardDelete", board_num);
+		sqlSessionTemplate.delete("board.BoardDelete", board_num);
 	}
 
 }

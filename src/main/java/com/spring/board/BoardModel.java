@@ -16,6 +16,5 @@ public class BoardModel {
 	private int board_type; //게시글 타입
 	private int ref; //그룹 번호
 	private int re_step; //답변글 순서
-	private int re_level; //답변글 레벨
-
+	/*private int re_level; //답변글 레벨 */
 }

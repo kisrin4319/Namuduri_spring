@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>비밀번호 확인</title>
-<link rel = "stylesheet" href ="css/style1.css" type="text/css" />
-<link rel = "stylesheet" href ="css/button.css" type="text/css" />
+<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
+<link rel = "stylesheet" href ="<%=cp%>/css/button.css" type="text/css" />
 </head>
 <body style="width: 540px; height: 215px;">
 
@@ -21,21 +23,22 @@
     padding-top: 50px;
     padding-left: 100px;">
 <form action="checkAction.do" method="post">
-<s:hidden name="board_num" value="%{board_num}" />
-<s:hidden name="currentPage" value="%{currentPage}" />
+<input type="hidden" name="board_num" value="${board_num}" />
+<input type="hidden" name="currentPage" value="${currentPage}" />
 
 <tbody>
 <tr>
 	<td width="100" bgcolor="#F4F4F4"><p id="fon">&nbsp;&nbsp;&nbsp;비밀번호 입력</p></td>
 	<td width="300" bgcolor="#FFFFFF">
-		&nbsp;&nbsp; <s:textfield name="board_pw" theme="simple" cssStyle="width:150px" maxlength="40" />
+		&nbsp;&nbsp; <input type="text" name="board_pw" maxlength="40">
 		&nbsp;&nbsp; <input name="submit" type="submit" value="확인" class="inputb" style="width: 34px; height: 24px;"> 
 	</td>
 </tr>
 <tr bgcolor="#777777">
 	<td height="1" colspan="2"></td>
 </tr>
-		</table>
-	</form>
+</tbody>
+	
+</form>
 </body>
 </html>

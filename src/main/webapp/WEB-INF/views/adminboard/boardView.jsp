@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,16 +58,15 @@
 			<c:param name="board_num" value="board_num" />
 		</c:url>
 	
-		<c:url var="deleteURL" value ="deleteAction">
-			<c:param name="board_num">
-				${board_num}
-			</c:param>
+		<c:url var="deleteURL" value ="/board/boardDelete.do">
+			<c:param name="board_num" value = "board_num" />
+			
 		</c:url>
 		
 		<!-- 0번 비공개,1번 일반글,2번 공지사항 -->			
 		<c:if test = "${ boardModel.board_type == 2}">
 			<c:if test="${session.member_id =='admin'}">
-				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
+				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
 				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','Delete')">
 				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 			</c:if>
@@ -74,19 +75,11 @@
 			</c:if>
 		</c:if>
 		<c:if test="${boardModel.board_type != 2}">
-			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='<%=cp%>replyForm.do?board_num=${board_num}'">
-		  	<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
-			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','Delete')">
+			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/replyForm.do?board_num=${boardModel.board_num}&ref=${boardModel.ref }&re_step=${boardModel.re_step }'">
+		  	<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">   
+			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','Delete')">
 			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 		</c:if>
 	</div>			
 </body>
 </html>
-
-
-
-
-
-
-
-

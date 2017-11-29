@@ -13,10 +13,13 @@ import org.apache.log4j.Logger;
 import org.apache.tiles.request.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.spring.board.BoardService;
 import com.spring.book.BooksModel;
@@ -96,7 +99,7 @@ public class BoardController {
 			mv.setViewName("boardList");
 				
 			return mv;
-			}
+		}
 		
 		mv = new ModelAndView();
 					
@@ -158,11 +161,9 @@ public class BoardController {
 	
 	// 3.게시판 작성
 	@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.GET)
-	/*public String form(Model model) {
-		return "boardWrite";*/
 	public String writeForm(HttpServletRequest request, HttpSession session) {
 		
-		session_id = "test3";
+		session_id = (String) session.getAttribute("member_id");
 		
 		mv.addObject("member_id", session_id);
 		mv.setViewName("boardWrite");
@@ -171,26 +172,168 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.POST)
-	public String boardWrite(@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
-			HttpSession session) throws Exception {
+	public String boardWrite(@ModelAttribute("boardModel") BoardModel boardModel, HttpSession session ,HttpServletRequest request) throws Exception {
+		
+		mv = new ModelAndView();
+		session_id = (String) session.getAttribute("member_id");
+		//BoardModel boardModel = new BoardModel();
+				
+		
+		
+		
+		mv.addObject("boardModel", boardModel);
+		mv.setViewName("boardWrite");
+		boardService.boardWrite(boardModel);
+		return "redirect:boardList.do";
+	}
+	
+	// 게시판 답변 작성
+	@RequestMapping(value="/board/replyForm.do", method = RequestMethod.GET)
+	public String replyForm(HttpServletRequest request, HttpSession session) {
+		
+		session_id = (String) session.getAttribute("member_id");
+		String board_num = request.getParameter("board_num");
+		System.out.println(board_num);
+		BoardModel view = boardService.boardDetail(Integer.parseInt(board_num)); 
+		mv.addObject("member_id", session_id);
+		mv.addObject("view", view);
+		mv.setViewName("BoardReply");
+		
+		return "boardWrite";
+	}
+	
+	@RequestMapping(value="/board/BoardReply.do", method = RequestMethod.POST)
+	public String BoardReply(@RequestParam int board_num,@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
+			int board_type, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
 		session_id = (String) session.getAttribute("member_id");
 		BoardModel boardModel = new BoardModel();
 		
+		boardModel.setBoard_num(board_num);
+		boardModel.setBoard_title("[re] " +board_title);
+		boardModel.setBoard_pw(board_pw);
+		boardModel.setBoard_content(board_content);
+		boardModel.setMember_id(session_id);
+		boardModel.setBoard_type(board_type);
+						
+		boardService.BoardReply(boardModel);
+		
+		mv.addObject("boardModel", boardModel);
+		mv.setViewName("BoardReply");
+		
+		return "redirect:boardList.do";
+	}
+	
+	// 비밀번호 확인 폼
+	@RequestMapping(value="/board/checkForm.do", method = RequestMethod.GET)
+	public ModelAndView passwdCheck(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
+			HttpServletRequest request){
+		mv=new ModelAndView();
+		String board_num = request.getParameter("board_num");
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		mv.addObject("board_num",board_num);
+		mv.addObject("currentPage",currentPage);
+		mv.setViewName("adminboard/passwordCheck");
+		
+		return mv;
+	}
+	
+	// 비밀번호 확인 액션
+	@RequestMapping(value="/board/checkAction.do", method = RequestMethod.POST)
+	public ModelAndView passwdCheck2(@ModelAttribute("boardModel") BoardModel boardModel, 
+			BindingResult result, HttpSession session, HttpServletRequest request) {
+				
+		mv=new ModelAndView();
+		
+		int modi;
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		String pass = request.getParameter("board_pw");
+		
+		BoardModel boardModel1 = new BoardModel();
+		boardModel1 = boardService.boardDetail(board_num);
+		
+		if(boardModel1.getBoard_pw().equals(pass)) {
+			modi = 1;
+		}else {
+			modi = 2;
+		}
+		
+		mv.addObject("modi", modi);
+		mv.addObject("boardModel",boardModel1);
+		mv.addObject("board_num",board_num);
+		mv.addObject("currentPage",currentPage);
+		mv.setViewName("adminboard/pwSuccess");
+		
+		return mv;
+	}
+
+	// 4.게시글 수정
+	@RequestMapping(value="/board/boardModify.do", method = RequestMethod.GET)
+	public String boardModify(HttpServletRequest request, HttpSession session, Model model) {
+		
+		session_id = (String) session.getAttribute("member_id");
+		
+		int num = Integer.parseInt(request.getParameter("board_num"));
+		System.out.println(num);
+		BoardModel view = boardService.boardDetail(num);
+		//System.out.println(view.getBoard_content());
+		model.addAttribute("view", view);
+		model.addAttribute("member_id", session_id);
+		mv.setViewName("boardModify");
+		
+		return "boardWrite";
+	}
+	
+	@RequestMapping(value="/board/boardModifyProc.do", method = RequestMethod.POST)
+	public String boardModify(@RequestParam int board_num,@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
+		int board_type, HttpSession session) throws Exception {
+		
+		mv = new ModelAndView();
+		session_id = (String) session.getAttribute("member_id");
+		BoardModel boardModel = new BoardModel();
+		
+		boardModel.setBoard_num(board_num);	
 		boardModel.setBoard_title(board_title);
 		boardModel.setBoard_pw(board_pw);
 		boardModel.setBoard_content(board_content);
 		boardModel.setMember_id(session_id);
-		/*boardModel.setBoard_type(board_type);*/
-				
-		boardService.boardWrite(boardModel);
+		boardModel.setBoard_type(board_type);
+		boardService.BoardModify(boardModel);
+		
 		
 		mv.addObject("boardModel", boardModel);
-		mv.setViewName("boardWrite");
+		mv.setViewName("boardModify");
 		
 		return "redirect:boardList.do";
 	}
-}
+	
+	
 
+	// 5.게시글 삭제
+	@RequestMapping(value="/board/boardDelete.do")
+	public ModelAndView boardDelete(@RequestParam int board_num, @RequestParam int currentPage) throws Exception{
+	
+		mv=new ModelAndView();
+		
+		boardService.BoardDelete(board_num);
+	
+		mv.addObject("currentPage", currentPage);
+		mv.setViewName("redirect:/board/boardList.do");
+			
+		return mv;
+	}
+	
+		
+		
+	
+	
+	
+	
+	
+	
+	
+}	
+	
 	
