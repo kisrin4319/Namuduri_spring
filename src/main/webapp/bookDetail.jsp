@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String cp = request.getContextPath();
+%>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -8,13 +11,7 @@
         <title>Product Details || Witter Multipage Responsive Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.ico">
-        <!-- Place favicon.ico in the root directory -->
-        <!-- Google Fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
-
-		<!-- all css here -->
+        <!-- all css here -->
 		<!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<!-- animate css -->
@@ -41,16 +38,9 @@
 		<!-- responsive css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
 		<!-- modernizr css -->
-        <script src="<c:url value="bootstrap/js/vendor/modernizr-2.8.3.min.js" />"></script>
+        <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-       
-        <!-- Single Product Area Start -->
         <div class="single-product-area section-padding">
             <div class="container">
                 <div class="row">
@@ -87,9 +77,6 @@
                                 <i class="fa fa-star"></i>
                             </div>
                             <h2>Cold mountain</h2>
-                            <div class="availability">
-                                <span>In stock</span>
-                            </div>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
                             <div class="single-product-price">
                                 <h2>$49.66</h2>
@@ -389,38 +376,37 @@
             </div>
         </div>
         <!-- Related Product Area End -->
-		
-		<!-- all js here -->
+        <!-- all js here -->
 		<!-- jquery latest version -->
-        <script src="<c:url value ="bootstrap/js/vendor/jquery-1.12.0.min.js"/> "></script>
+        <script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
 		<!-- bootstrap js -->
-        <script src="<c:url value ="bootstrap/js/bootstrap.min.js"/> "></script>
+        <script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
 		<!-- owl.carousel js -->
-        <script src="<c:url value ="bootstrap/js/owl.carousel.min.js" />"></script>
+        <script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
 		<!-- jquery-ui js -->
-        <script src="<c:url value ="bootstrap/js/jquery-ui.min.js" />"></script>
+        <script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
 		<!-- jquery Counterup js -->
-        <script src="<c:url value ="bootstrap/js/jquery.counterup.min.js" />"></script>
-        <script src="<c:url value ="bootstrap/js/waypoints.min.js" />"></script>	
+        <script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
+        <script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>	
 		<!-- jquery countdown js -->
-        <script src="<c:url value ="bootstrap/js/jquery.countdown.min.js" />"></script>
+        <script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
 		<!-- jquery countdown js -->
-        <script type="text/javascript" src="<c:url value ="bootstrap/venobox/venobox.min.js" /> "></script>
+        <script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
 		<!-- jquery Meanmenu js -->
-        <script src="<c:url value ="bootstrap/js/jquery.meanmenu.js" /> "></script>
+        <script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
 		<!-- wow js -->
-        <script src="<c:url value ="bootstrap/js/wow.min.js" /> "></script>	
+        <script src="<%=cp%>/bootstrap/js/wow.min.js"></script>	
 		<script>
 			new WOW().init();
 		</script>
 		<!-- scrollUp JS -->		
-        <script src="<c:url value ="bootstrap/js/jquery.scrollUp.min.js" /> "></script>
+        <script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
 		<!-- plugins js -->
-        <script src="<c:url value ="bootstrap/js/plugins.js" /> "></script>
+        <script src="<%=cp%>/bootstrap/js/plugins.js"></script>
 		<!-- Nivo slider js -->
-		<script src="<c:url value ="bootstrap/lib/js/jquery.nivo.slider.js" />" type="text/javascript"></script>
-		<script src="<c:url value ="bootstrap/lib/home.js" />" type="text/javascript"></script>
+		<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+		<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
 		<!-- main js -->
-        <script src="<c:url value ="bootstrap/js/main.js" /> "></script>
+        <script src="<%=cp%>/bootstrap/js/main.js"></script>
     </body>
 </html>
