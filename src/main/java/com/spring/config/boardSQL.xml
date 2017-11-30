@@ -47,14 +47,14 @@
 	
 	<!-- 게시글 작성 -->
 	<insert id="boardWrite" parameterType="BoardModel"> 
-		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE)
-		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate)
+		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE, ref, re_step)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate, BOARD_NUM_SEQ.CURRVAL, #{re_step})
     </insert>
     
     <!-- 답변작성 -->
-    <insert id="BoardReply" parameterType="BoardModel">
-    	INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BORAD_TYPE, BOARD_REGDATE, REF, RE_STEP)
-		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate, #{REF}, #{RE_STEP})
+    <insert id="BoardReply" parameterType="Integer">
+    	INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE, REF, RE_STEP)
+		VALUES( BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, #{board_type}, sysdate, #{ref}, #{re_step})
     </insert>
   
   	<!-- 게시글 수정 -->

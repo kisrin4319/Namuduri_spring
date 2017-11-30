@@ -48,8 +48,8 @@ public class BoardService implements BoardDao {
 	}
 	
 	// 게시글 답변 작성
-	public void BoardReply(BoardModel boardModel) {
-		sqlSessionTemplate.insert("board.BoardReply", boardModel);
+	public int BoardReply(BoardModel boardModel) {
+		return sqlSessionTemplate.insert("board.BoardReply", boardModel);
 	}
 	
 	// 게시글 수정

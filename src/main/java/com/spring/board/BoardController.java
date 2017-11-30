@@ -160,7 +160,7 @@ public class BoardController {
 	
 	
 	// 3.게시판 작성
-	@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.GET)
+	/*@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.GET)
 	public String writeForm(HttpServletRequest request, HttpSession session) {
 		
 		session_id = (String) session.getAttribute("member_id");
@@ -169,40 +169,72 @@ public class BoardController {
 		mv.setViewName("boardWrite");
 		
 		return "boardWrite";
+	} */
+	@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.GET)
+	public ModelAndView boardWrite(HttpServletRequest request) {
+		mv = new ModelAndView();
+		mv.setViewName("boardWrite");
+		return mv;
 	}
 	
-	@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.POST)
+	/*@RequestMapping(value="/board/boardWrite.do", method = RequestMethod.POST)
 	public String boardWrite(@ModelAttribute("boardModel") BoardModel boardModel, HttpSession session ,HttpServletRequest request) throws Exception {
 		
 		mv = new ModelAndView();
 		session_id = (String) session.getAttribute("member_id");
 		//BoardModel boardModel = new BoardModel();
 				
-		
-		
+		//
+		boardModel.setRe_step(0);
+		//
 		
 		mv.addObject("boardModel", boardModel);
 		mv.setViewName("boardWrite");
 		boardService.boardWrite(boardModel);
 		return "redirect:boardList.do";
+	}*/
+	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.POST)
+	public String boardWriteSql(@ModelAttribute("boardModel") BoardModel boardModel, HttpServletRequest request) {
+
+		boardModel.setRe_step(0);
+		boardService.boardWrite(boardModel);
+
+		return "redirect:/board/boardList.do";
+
 	}
 	
 	// 게시판 답변 작성
-	@RequestMapping(value="/board/replyForm.do", method = RequestMethod.GET)
-	public String replyForm(HttpServletRequest request, HttpSession session) {
+	/*@RequestMapping(value="/board/replyForm.do", method = RequestMethod.GET)
+	public String replyForm(BoardModel boardModel, HttpServletRequest request, HttpSession session) {
 		
+		mv = new ModelAndView();
 		session_id = (String) session.getAttribute("member_id");
 		String board_num = request.getParameter("board_num");
-		System.out.println(board_num);
+		
+		
 		BoardModel view = boardService.boardDetail(Integer.parseInt(board_num)); 
+		
+		mv.addObject("boardModel", boardModel);
 		mv.addObject("member_id", session_id);
 		mv.addObject("view", view);
 		mv.setViewName("BoardReply");
 		
 		return "boardWrite";
+	}*/
+	@RequestMapping(value = "/board/replyForm.do", method = RequestMethod.GET)
+	public ModelAndView replyForm(BoardModel boardModel, HttpServletRequest request) {
+		mv = new ModelAndView();
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
+		boardModel = boardService.boardDetail(board_num);
+		String content = boardModel.getBoard_content().replaceAll("<br />", "\r\n");
+		boardModel.setBoard_content(content);
+		boardModel.setRe_step(1);
+		mv.addObject("boardModel", boardModel);
+		mv.setViewName("/adminboard/BoardReply");
+		return mv;
 	}
 	
-	@RequestMapping(value="/board/BoardReply.do", method = RequestMethod.POST)
+	/*@RequestMapping(value="/board/BoardReply.do", method = RequestMethod.POST)
 	public String BoardReply(@RequestParam int board_num,@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
 			int board_type, HttpSession session) throws Exception {
 		
@@ -223,6 +255,26 @@ public class BoardController {
 		mv.setViewName("BoardReply");
 		
 		return "redirect:boardList.do";
+	}*/
+	@RequestMapping(value = "/board/BoardReply.do", method = RequestMethod.POST)
+	public ModelAndView BoardReply(@ModelAttribute("BoardModel") BoardModel boardModel, HttpServletRequest request) {
+
+		mv = new ModelAndView();
+		//System.out.println(qnaModel.getPasswd());
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
+
+		boardModel.setRef(board_num);
+		boardModel.setRe_step(1);
+		
+		/*boardModel.setBoard_pw("admin");*/
+		
+		String content = boardModel.getBoard_content().replaceAll("\r\n", "<br />");
+		boardModel.setBoard_content(content);
+		boardService.BoardReply(boardModel);
+
+		mv.addObject("currentPage", currentPage);
+		mv.setViewName("redirect:/board/boardList.do");
+		return mv;
 	}
 	
 	// 비밀번호 확인 폼

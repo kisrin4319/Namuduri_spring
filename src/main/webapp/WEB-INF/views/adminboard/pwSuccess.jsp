@@ -21,7 +21,7 @@ var chk	= ${modi}
 			window.close();	
 		}else if(window.name == 'type'){
 			alert('접근 되었습니다.');
-			window.opener.parent.location.href="viewAction.do?board_num=${board_num}&currentPage=${currentPage}";
+			window.opener.parent.location.href="boardDetail.do?board_num=${board_num}&currentPage=${currentPage}";
 			window.close();	
 		}
 		window.close();	

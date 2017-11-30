@@ -14,7 +14,7 @@ public interface BoardDao {
 		public boolean boardWrite(BoardModel boardModel);
 		
 		//게시글 답변 작성
-		public void BoardReply(BoardModel boardModel);
+		public int BoardReply(BoardModel boardModel);
 		
 		// 게시글 수정
 		public void BoardModify(BoardModel boardModel);

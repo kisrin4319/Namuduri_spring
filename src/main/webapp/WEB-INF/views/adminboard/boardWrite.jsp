@@ -51,16 +51,16 @@
 	<h3 class="bul_green">질문답변 게시판</h3>
 	<br>
 	<c:choose>
-		<c:when test="${view == null}">
+		<c:when test="${boardModel.board_num == null}">
 			<form action="boardWrite.do" name="regForm" method="post" onsubmit="return validation();">
 		</c:when>
 		
-		<%-- <c:when test="${view.board_num !=0 }">
+		<%-- <c:when test="${boardModel.board_num !=null }">
 				<form action="boardWrite.do" name="regForm" method="post" onsubmit="return validation();" >
 				<input type="hidden" name = "board_num" value="${param.board_num }"/>
 				<input type="hidden" name="ref" value="${param.ref}" />
 				<input type="hidden" name="re_step" value="${param.re_step}" />
-		</c:when> --%>
+		</c:when>  --%>
 		
 		<c:otherwise>
 			<form action="boardModifyProc.do" name="regForm" method="post" onsubmit="return validation();">
@@ -109,7 +109,7 @@
 			<tr>
 				<th bgcolor="#F4F4F4"><font color="#FF0000">*</font> 내용</th>
 				<td colspan="5" bgcolor="#FFFFFF">
-				<textarea name="board_content" id="content" cols="100" rows="17"> ${view.board_content}</textarea> 
+				<textarea name="board_content" id="content" cols="100" rows="17">${view.board_content}</textarea> 
 				</td>
 			</tr>
 
