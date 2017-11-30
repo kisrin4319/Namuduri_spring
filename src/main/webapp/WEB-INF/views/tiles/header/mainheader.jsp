@@ -74,7 +74,8 @@
 									</c:if>
 									<c:if test="${not empty member_id }">
 										<c:if test="${member_id!='admin' }">
-											<img src="<%=cp%>/img/member.png" width="20" height="20">
+										
+										<%-- 	<img src="<%=cp%>/img/member.png" width="20" height="20"> --%>
 										</c:if>
 										<c:if test="${member_id=='admin' }">
 											<img src="<%=cp%>/img/member(admin).png" width="20" height="20">

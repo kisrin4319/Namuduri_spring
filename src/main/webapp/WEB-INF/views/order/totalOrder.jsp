@@ -380,9 +380,8 @@ var mobile = "${memberModel.member_mobile}";
          orderform.order_receive_addr2.focus();
          return false;
       } else {
-         orderform.action = "<%=cp%>
-    /order/totalOrder.do";
-        orderform.submit();
+         orderform.action = "<%=cp%>/order/totalOrder.do";
+         orderform.submit();
       }
     }
     function senddata() {
