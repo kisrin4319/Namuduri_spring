@@ -312,13 +312,13 @@ function submit() {
 				<div class="row">
 					<div class="col-md-12">
 					    <div class="breadcrumbs">
-					       <h2>LOGIN/REGISTER</h2> 
-					       <ul class="breadcrumbs-list">
+					       <!-- <h2>LOGIN/REGISTER</h2> --> 
+					       <!-- <ul class="breadcrumbs-list">
 						        <li>
 						            <a title="Return to Home" href="index.html">Home</a>
 						        </li>
 						        <li>Login</li>
-						    </ul>
+						    </ul> -->
 					    </div>
 					</div>
 				</div>
@@ -347,15 +347,15 @@ function submit() {
                             </div>
                         </form>
                     </div> -->
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-6 col-sm-4">
                        <form action="memberIdFind.do" class="create-account-form" method="post" name="findidform" id="findidform" onsubmit="return checkk()">
                             <h2 class="heading-title">
                                 	아이디 찾기
                             </h2>
-                            <p class="form-row">
+                            <p class="form-row"><h5>이&nbsp;&nbsp;름</h5>
                                 <input type="text" name="member_name" size="10" maxlength="10">
                             </p>
-                            <p class="form-row">
+                            <p class="form-row"><h5>주민등록번호</h5>
                                 <input type="text" name="member_jumin1" size="7" maxlength="6"> - <input type="text" name="member_jumin2" size="7" maxlength="7">
                          
                             </p>

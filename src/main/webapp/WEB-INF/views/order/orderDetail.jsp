@@ -25,13 +25,6 @@
 	</h2>
 	<table class="table_myroom td_font_12 margin_top10">
 		
-		<%-- <c:forEach var="item" items="${ orderDetailModel }">
-			<tr>
-				<td width="100">주 문 자 : ${ item.member_id }</td>
-				<td colspan="3" width="500"></td>
-			</tr>
-		</c:forEach> --%>
-		
 		<tr>
 			<td width="100">주 문 자</td>
 			<td colspan="3" width="500">${ memberInfo.member_id }</td>
