@@ -12,12 +12,24 @@
 				<div class="row">
 					<div class="col-md-3 col-sm-8">
 						<div class="footer-left">
-							<a href="index.html"> <img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
-							</a> <br /> <br />
+							<a href="index.html">
+								<img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
+							</a>
+							<br />
+							<br />
 							<ul class="footer-contact">
-								<li><i class="flaticon-location"></i> Gangnam-gu, Seoul</li>
-								<li><i class="flaticon-technology"></i> 1544-9970</li>
-								<li><i class="flaticon-web"></i> namuduri@namuduri.com</li>
+								<li>
+									<i class="flaticon-location"></i>
+									Gangnam-gu, Seoul
+								</li>
+								<li>
+									<i class="flaticon-technology"></i>
+									1544-9970
+								</li>
+								<li>
+									<i class="flaticon-web"></i>
+									namuduri@namuduri.com
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -25,10 +37,18 @@
 						<div class="single-footer">
 							<h2 class="footer-title">My Account</h2>
 							<ul class="footer-list">
-								<li><a href="#">&nbsp;Login</a></li>
-								<li><a href="#">&nbsp;My Cart</a></li>
-								<li><a href="#">&nbsp;Wish List</a></li>
-								<li><a href="#">&nbsp;Manage Account</a></li>
+								<li>
+									<a href="#">&nbsp;Login</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;My Cart</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;Wish List</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;Manage Account</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -36,10 +56,18 @@
 						<div class="single-footer">
 							<h2 class="footer-title">Shop</h2>
 							<ul class="footer-list">
-								<li><a href="my-account.html">&nbsp;Main</a></li>
-								<li><a href="account.html">&nbsp;Best Seller</a></li>
-								<li><a href="cart.html">&nbsp;New Books</a></li>
-								<li><a href="wishlist.html">&nbsp;Used Books</a></li>
+								<li>
+									<a href="my-account.html">&nbsp;Main</a>
+								</li>
+								<li>
+									<a href="account.html">&nbsp;Best Seller</a>
+								</li>
+								<li>
+									<a href="cart.html">&nbsp;New Books</a>
+								</li>
+								<li>
+									<a href="wishlist.html">&nbsp;Used Books</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -47,10 +75,18 @@
 						<div class="single-footer">
 							<h2 class="footer-title">Service</h2>
 							<ul class="footer-list">
-								<li><a href="#">&nbsp;FAQ</a></li>
-								<li><a href="#">&nbsp;Q&A</a></li>
-								<li><a href="#">&nbsp;Contact</a></li>
-								<li><a href="#">&nbsp;My Page</a></li>
+								<li>
+									<a href="#">&nbsp;FAQ</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;Q&A</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;Contact</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;My Page</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -71,11 +107,21 @@
 						<div class="single-footer">
 							<h2 class="footer-title">Shop</h2>
 							<ul class="footer-list">
-								<li><a href="#">Orders & Returns</a></li>
-								<li><a href="#">Search Terms</a></li>
-								<li><a href="#">Advance Search</a></li>
-								<li><a href="#">Affiliates</a></li>
-								<li><a href="#">Group Sales</a></li>
+								<li>
+									<a href="#">Orders & Returns</a>
+								</li>
+								<li>
+									<a href="#">Search Terms</a>
+								</li>
+								<li>
+									<a href="#">Advance Search</a>
+								</li>
+								<li>
+									<a href="#">Affiliates</a>
+								</li>
+								<li>
+									<a href="#">Group Sales</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -88,8 +134,11 @@
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; Namuduri.com 2017 <span> <a href="#">DevItems</a>
-								</span> . All Right Reserved.
+								Copyright &copy; Namuduri.com 2017
+								<span>
+									<a href="#">DevItems</a>
+								</span>
+								. All Right Reserved.
 							</p>
 						</div>
 					</div>

@@ -16,8 +16,12 @@
 <body>
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-		<li><a title="Return to Home" href="<%=cp%>/main.do">Home</a></li>
-		<li><a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a></li>
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+		</li>
+		<li>
+			<a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a>
+		</li>
 	</ul>
 	<hr>
 	<!-- Check Out Area Start -->
@@ -30,7 +34,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
 									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <span>1</span> Checkout Method
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											<span>1</span>
+											Checkout Method
 										</a>
 									</h4>
 								</div>
@@ -41,12 +47,20 @@
 												<div class="checkout-collapse-inner">
 													<h2 class="collapse-title">CHECKOUT AS A GUEST OR REGISTER</h2>
 													<h4 class="collapse-sub-title">Register with us for future convenience:</h4>
-													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" /> <input type="hidden" name="order_book_count" value="${order_book_count}" /> <input type="hidden" name="book_num" value="${book.book_num}" /> <input type="hidden" name="order_book_name" value="${book.book_name}" /> <input type="hidden" name="order_book_price" value="${book.book_price}" /> <input type="hidden" name="order_book_count" value="${order_book_count}" /> <input type="hidden" name="basket_num" value="${basket_num}" />
+													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
+													<input type="hidden" name="order_book_count" value="${order_book_count}" />
+													<input type="hidden" name="book_num" value="${book.book_num}" />
+													<input type="hidden" name="order_book_name" value="${book.book_name}" />
+													<input type="hidden" name="order_book_price" value="${book.book_price}" />
+													<input type="hidden" name="order_book_count" value="${order_book_count}" />
+													<input type="hidden" name="basket_num" value="${basket_num}" />
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="deldata();" /> <label>직접입력</label>
+														<input type="radio" name="choice" onclick="deldata();" />
+														<label>직접입력</label>
 													</div>
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="senddata();" /> <label>주문자 정보와 동일</label>
+														<input type="radio" name="choice" onclick="senddata();" />
+														<label>주문자 정보와 동일</label>
 													</div>
 													<p>Register and save time!</p>
 													<p>Register with us for future convenience:</p>
@@ -62,7 +76,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <span>2</span> Billing Information
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+											<span>2</span>
+											Billing Information
 										</a>
 									</h4>
 								</div>
@@ -71,8 +87,11 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="shop-select">
-													<label> Country <span class="required">*</span>
-													</label> <select>
+													<label>
+														Country
+														<span class="required">*</span>
+													</label>
+													<select>
 														<option value="volvo">SOUTH KOREA</option>
 														<option value="saab">Algeria</option>
 														<option value="mercedes">Afghanistan</option>
@@ -86,7 +105,8 @@
 											</div>
 											<div class="col-md-6">
 												<p class="form-row">
-													<input type="text" name="order_receive_name" value="" placeholder="First Name *"> <input type="hidden" name="order_trade_payer" value="name" />
+													<input type="text" name="order_receive_name" value="" placeholder="First Name *">
+													<input type="hidden" name="order_trade_payer" value="name" />
 												</p>
 											</div>
 											<div class="col-md-12">
@@ -115,13 +135,18 @@
 												</p>
 											</div>
 											<div class="col-md-12">
-												<label class="checbox-info"> <input type="checkbox" id="cbox"> Create an account?
+												<label class="checbox-info">
+													<input type="checkbox" id="cbox">
+													Create an account?
 												</label>
 												<div id="cbox_info">
 													<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
 													<p class="form-row form-row-phone">
-														<label> Phone <span class="required">*</span>
-														</label> <input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Phone">
+														<label>
+															Phone
+															<span class="required">*</span>
+														</label>
+														<input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Phone">
 													</p>
 												</div>
 											</div>
@@ -132,7 +157,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingThree">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> <span>3</span> Shopping Method
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+											<span>3</span>
+											Shopping Method
 										</a>
 									</h4>
 								</div>
@@ -150,7 +177,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingFour">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> <span>4</span> Payment Information
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+											<span>4</span>
+											Payment Information
 										</a>
 									</h4>
 								</div>
@@ -158,8 +187,14 @@
 									<div class="panel-body no-padding">
 										<div class="payment-met">
 											<ul class="form-list">
-												<li class="control"><input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo"> <label for="p_method_checkmo"> Check / Money order </label></li>
-												<li class="control"><input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave"> <label for="p_method_ccsave">Credit Card (saved) </label></li>
+												<li class="control">
+													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo">
+													<label for="p_method_checkmo"> Check / Money order </label>
+												</li>
+												<li class="control">
+													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave">
+													<label for="p_method_ccsave">Credit Card (saved) </label>
+												</li>
 											</ul>
 											<div class="buttons-set">
 												<button class="btn btn-default">CONTINUE</button>
@@ -171,7 +206,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingFive">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive"> <span>5</span> Order Review
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+											<span>5</span>
+											Order Review
 										</a>
 									</h4>
 								</div>
@@ -192,39 +229,68 @@
 													<tbody>
 														<c:forEach var="bas" items="${basketList}">
 															<tr>
-																<td style="text-align: center;"><span class="cart-price"> <span class="check-price"> <img src="<%=cp%>/upload/${bas.basket_book_image}" width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}" />
+																<td style="text-align: center;">
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<img src="<%=cp%>/upload/${bas.basket_book_image}" width="40" alt="${bas.basket_book_name}" title="${bas.basket_book_name}" />
+																		</span>
 																	</span>
-																</span></td>
+																</td>
 																<td>
 																	<h3 class="product-name">${bas.basket_book_name}</h3>
 																</td>
-																<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${bas.basket_book_price}" pattern="###,###,###" /> 원
+																<td>
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<fmt:formatNumber value="${bas.basket_book_price}" pattern="###,###,###" />
+																			원
+																		</span>
 																	</span>
-																</span></td>
+																</td>
 																<td>${bas.basket_book_count}</td>
 																<!-- sub total starts here -->
-																<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${bas.basket_book_price * bas.basket_book_count}" pattern="###,###,###" /> 원
+																<td>
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<fmt:formatNumber value="${bas.basket_book_price * bas.basket_book_count}" pattern="###,###,###" />
+																			원
+																		</span>
 																	</span>
-																</span></td>
+																</td>
 															</tr>
 														</c:forEach>
 													</tbody>
 													<tfoot>
 														<tr>
 															<td colspan="4">Subtotal</td>
-															<td><span class="check-price"> <fmt:formatNumber value="${bookMoney}" pattern="###,###,###" /> 원
-															</span></td>
+															<td>
+																<span class="check-price">
+																	<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+																	원
+																</span>
+															</td>
 														</tr>
 														<tr>
 															<td colspan="4">Fee</td>
-															<td><span class="check-price"> <fmt:formatNumber value="${deliveryFee}" pattern="#,###" /> 원
-															</span></td>
+															<td>
+																<span class="check-price">
+																	<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
+																	원
+																</span>
+															</td>
 														</tr>
 														<tr>
-															<td colspan="4"><strong>Grand Total</strong></td>
-															<td><strong> <span class="check-price"> <fmt:formatNumber value="${sumMoney}" pattern="###,###,###" /> 원
-																</span>
-															</strong></td>
+															<td colspan="4">
+																<strong>Grand Total</strong>
+															</td>
+															<td>
+																<strong>
+																	<span class="check-price">
+																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
+																		원
+																	</span>
+																</strong>
+															</td>
 														</tr>
 													</tfoot>
 												</table>
@@ -232,7 +298,8 @@
 											<div id="checkout-review-submit">
 												<div class="cart-btn-3" id="review-buttons-container">
 													<p class="left">
-														Forgot an Item? <a href="#">Edit Your Cart</a>
+														Forgot an Item?
+														<a href="#">Edit Your Cart</a>
 													</p>
 													<button type="submit" title="Place Order" class="btn btn-default" onclick="checkIt();">
 														<span>Place Order</span>
@@ -250,14 +317,30 @@
 					<div class="checkout-widget">
 						<h2 class="widget-title">YOUR CHECKOUT PROGRESS</h2>
 						<ul>
-							<li><a href="#"> <i class="fa fa-minus"></i> Billing Address
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Address
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Method
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Payment Method
-							</a></li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Billing Address
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Shipping Address
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Shipping Method
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Payment Method
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -297,35 +380,36 @@ var mobile = "${memberModel.member_mobile}";
          orderform.order_receive_addr2.focus();
          return false;
       } else {
-         orderform.action = "<%=cp%>/order/totalOrder.do";
-         orderform.submit();
+         orderform.action = "<%=cp%>
+    /order/totalOrder.do";
+        orderform.submit();
       }
-   }
-   function senddata() {
+    }
+    function senddata() {
       var orderform = document.getElementById("orderform");
-      
+
       orderform.order_receive_name.value = "${memberModel.member_name}";
       orderform.order_receive_zipcode.value = "${memberModel.member_zipcode}";
       orderform.order_receive_addr1.value = "${memberModel.member_addr1}";
       orderform.order_receive_addr2.value = "${memberModel.member_addr2}";
       orderform.order_receive_phone.value = "${memberModel.member_phone}";
       orderform.order_receive_mobile.value = "${memberModel.member_mobile}";
-   }
+    }
 
-   function deldata() {
+    function deldata() {
       var orderform = document.getElementById("orderform");
-      
+
       orderform.order_receive_name.value = "";
       orderform.order_receive_zipcode.value = "";
       orderform.order_receive_addr1.value = "";
       orderform.order_receive_addr2.value = "";
       orderform.order_receive_phone.value = "";
       orderform.order_receive_mobile.value = "";
-   }
+    }
 
-   function orderzipCheck() {
+    function orderzipCheck() {
       var url = '<%=cp%>/order/zipCheck.do';
-			window.open(url,	"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+	 window.open(url,"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 		}
 	</script>
 </body>

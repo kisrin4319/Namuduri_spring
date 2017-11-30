@@ -1,22 +1,11 @@
 package com.spring.order;
 
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -356,5 +345,4 @@ public class OrderController {
       mv.setViewName("order/orderZipCheck");
       return mv;
    }
-
 }

@@ -13,7 +13,6 @@
         <!-- Place favicon.ico in the root directory -->
         <!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
-
 		<!-- all css here -->
 		<!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
