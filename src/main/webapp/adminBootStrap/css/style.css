@@ -4240,6 +4240,10 @@ Table-Layout
 	border: 0px;
 }
 
+.order th {
+	background-color: aliceblue;
+}
+
 .color-table.primary-table thead th {
 	background-color: #7460ee;
 	color: #ffffff;

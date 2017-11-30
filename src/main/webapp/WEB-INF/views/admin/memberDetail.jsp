@@ -320,7 +320,7 @@
 														</tr>
 
 														<c:choose>
-															<c:when test="${listCount==0}">
+															<c:when test="${orderList.size==0}">
 																<tr align=center>
 																	<td colspan=8>주문 내역이 없습니다.</td>
 																</tr>
