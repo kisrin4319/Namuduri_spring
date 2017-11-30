@@ -110,14 +110,12 @@
 													<td><input class="form-control" type="text"
 														name="member_name" value="" /></td>
 													<td><input class="form-control" type="text"
-														name="member_jumin" value="" /></td>
+														name="member_jumin1" value="" /></td>
 													<td><input class="form-control" type="text"
 														name="member_phone" value="" /></td>
 													<td><input class="form-control" type="text"
-														name="member_emial" value="" /></td>
-													<td><input class="form-control" type="text"
-														name="member_join" value="" /></td>
-													<td class="actions" style="vertical-align: middle;">
+														name="member_email" value="" /></td>
+													<td class="actions" colspan=2 style="vertical-align: middle;">
 														<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
 														<button type="submit" style="font-size: 20px;"
 															class="fa fa-search" title="Search"></button>
