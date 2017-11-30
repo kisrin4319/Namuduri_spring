@@ -12,40 +12,6 @@
 <title>Shopping Cart || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.ico">
-<!-- Place favicon.ico in the root directory -->
-<!-- Google Fonts -->
-<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
-<!-- all css here -->
-<!-- bootstrap v3.3.6 css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-<!-- animate css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/animate.css">
-<!-- jquery-ui.min css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/jquery-ui.min.css">
-<!-- meanmenu css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/meanmenu.min.css">
-<!-- Font-Awesome css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css">
-<!-- pe-icon-7-stroke css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/pe-icon-7-stroke.css">
-<!-- Flaticon css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/flaticon.css">
-<!-- venobox css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/venobox/venobox.css" type="text/css" media="screen" />
-<!-- nivo slider css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/lib/css/nivo-slider.css" type="text/css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/lib/css/preview.css" type="text/css" media="screen" />
-<!-- owl.carousel css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/owl.carousel.css">
-<!-- style css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/style.css">
-<!-- responsive css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
-<!-- modernizr css -->
-<script src="<%=cp %>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -71,7 +37,7 @@
 									<tr>
 										<th class="product-edit">
 											<div class="checkbox checkbox-primary">
-												<input type="checkbox" id="checkbox2" onchange="fn_checkSum()" />
+												<input type="checkbox" id="checkbox2" name="AllCheck" onchange="fn_checkSum()" />
 												<label for="checkbox2"> All Check </label>
 											</div>
 										</th>
@@ -100,8 +66,8 @@
 													<td class="product-edit">
 														<div class="checkbox checkbox-primary">
 															<p>
-																<input type="checkbox" name="RowCheck" value="${row.basket_book_price*row.basket_book_count }" id="checkbox2" onchange="fn_checkSum()" />
-																<label for="checkbox2"></label>
+																<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
+																<label for="checkbox"></label>
 															</p>
 														</div>
 													</td>
@@ -212,38 +178,6 @@
 		</div>
 	</div>
 	<!-- Discount Area End -->
-	<script src ="<%=cp%>/bootstrap/js/custom.js"></script>
-	<!-- all js here -->
-	<!-- jquery latest version -->
-	<script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
-	<!-- bootstrap js -->
-	<script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
-	<!-- owl.carousel js -->
-	<script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
-	<!-- jquery-ui js -->
-	<script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
-	<!-- jquery Counterup js -->
-	<script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
-	<script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>
-	<!-- jquery countdown js -->
-	<script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
-	<!-- jquery countdown js -->
-	<script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
-	<!-- jquery Meanmenu js -->
-	<script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
-	<!-- wow js -->
-	<script src="<%=cp%>/bootstrap/js/wow.min.js"></script>
-	<script>
-    new WOW().init();
-  </script>
-	<!-- scrollUp JS -->
-	<script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
-	<!-- plugins js -->
-	<script src="<%=cp%>/bootstrap/js/plugins.js"></script>
-	<!-- Nivo slider js -->
-	<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
-	<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
-	<!-- main js -->
-	<script src="<%=cp %>/bootstrap/js/main.js"></script>
+	<script src="<%=cp%>/bootstrap/js/custom.js"></script>
 </body>
 </html>

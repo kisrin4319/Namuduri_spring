@@ -1,6 +1,4 @@
-
-$(document).ready(function(){
-    
+  $(document).ready(function(){    
     //전체 선택 체크박스 클릭
     $("#checkbox2").click(function () {
       //전체 선택 체크박스가 체크된 상태일 경우
@@ -22,8 +20,7 @@ $(document).ready(function(){
       location.href = getContextPath()+'/basket/basketDeleteAll.do';
     });
   });
-
-  function getContextPath(){
+function getContextPath(){
     var offset=location.href.indexOf(location.host)+location.host.length;
     var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
     return ctxPath;
@@ -110,23 +107,13 @@ $(document).ready(function(){
     location.href=getContextPath()+'/order/totalOrder.do'
     }
   
-  function fn_checkCount() {
-    var count = 0;
-        var RowCheck = document.getElementsByName('RowCheck');
-        for(var i=0; i<RowCheck.length;i++){
-          if(RowCheck[i].checked){
-            count++;
-          }
-        }
-        CheckCount.value = count;
-    }
     function fn_checkSum() {
         var sumValue =0;
         var feeValue =0;
         var RowCheck = document.getElementsByName('RowCheck');
         for(var i =0 ; i<RowCheck.length;i++){
           if(RowCheck[i].checked){
-            sumValue += parseInt(RowCheck[i].value);
+            sumValue += parseInt(RowCheck[i].id);
           }
         }
         if(sumValue <100000 && sumValue!=0){

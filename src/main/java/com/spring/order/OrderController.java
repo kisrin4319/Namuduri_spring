@@ -1,12 +1,22 @@
 package com.spring.order;
 
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -90,13 +100,14 @@ public class OrderController {
 	// 단일 주문 완료
 	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.POST)
 	ModelAndView singleOrder(@ModelAttribute OrderModel orderModel, @ModelAttribute OrderDetailModel orderDetailModel,
-			int book_num, int basket_num, HttpSession session) {
+			int book_num, int basket_num, HttpSession session,HttpServletRequest request) {
 
 		session_id = (String) session.getAttribute("member_id");
 		Calendar today = Calendar.getInstance();
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
-
+		String order_receive_memo=request.getParameter("order_receive_memo");
+		System.out.println(request.getParameter("order_receive_memo"));
 		// 데이터베이스에 주문 정보 넣기
 		orderModel.setOrder_trade_num(book_num + simple.format(day));
 		int random = (int) Math.random() * 99 + 1;
@@ -104,6 +115,8 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_receive_memo(order_receive_memo);
+		orderModel.setOrder_trade_payer(session_id);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기
@@ -186,6 +199,7 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_trade_payer(session_id);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기 + 재고관리

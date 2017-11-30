@@ -12,7 +12,69 @@
 <title>Checkout || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+<script type="text/javascript">
+
+var name = "${memberModel.member_name}";
+var zipcode ="${memberModel.member_zipcode}";
+var addr1 = "${memberModel.member_addr1}";
+var addr2 = "${memberModel.member_addr2}";
+var phone = "${memberModel.member_phone}";
+var mobile = "${memberModel.member_mobile}";
+
+	function checkIt() {
+	var orderform = document.getElementById("orderform");
+		if (!orderform.order_receive_name.value) {
+			alert("수취인 이름을 입력하세요");
+			orderform.order_receive_name.focus();
+			return false;
+		} else if (!orderform.order_receive_phone.value) {
+			alert("수취인 전화번호를 입력하세요");
+			orderform.order_receive_phone.focus();
+			return false;
+		} else if (!orderform.order_receive_zipcode.value) {
+			alert("수취인 우편번호를 입력하세요");
+			orderform.order_receive_zipcode.focus();
+			return false;
+		} else if (!orderform.order_receive_addr1.value) {
+			alert("수취인 주소를 입력하세요");
+			orderform.order_receive_addr1.focus();
+			return false;
+		} else if (!orderform.order_receive_addr2.value) {
+			alert("수취인 상세주소를 입력하세요");
+			orderform.order_receive_addr2.focus();
+			return false;
+		} else {
+			orderform.action = "<%=cp%>/order/singleOrder.do";
+			orderform.submit();
+		}
+	}
+	function senddata() {
+		var orderform = document.getElementById("orderform");
+		
+		orderform.order_receive_name.value = name;
+		orderform.order_receive_zipcode.value = zipcode;
+		orderform.order_receive_addr1.value = addr1;
+		orderform.order_receive_addr2.value = addr2;
+		orderform.order_receive_phone.value = phone;
+		orderform.order_receive_mobile.value = mobile;
+	}
+
+	function deldata() {
+		var orderform = document.getElementById("orderform");
+		
+		orderform.order_receive_name.value = "";
+		orderform.order_receive_zipcode.value = "";
+		orderform.order_receive_addr1.value = "";
+		orderform.order_receive_addr2.value = "";
+		orderform.order_receive_phone.value = "";
+		orderform.order_receive_mobile.value = "";
+	}
+
+	function orderzipCheck() {
+		var url = '<%=cp%>/order/zipCheck.do';
+		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+  }
+</script>
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -41,7 +103,6 @@
 	<div class="check-out-area section-padding">
 		<div class="container">
 			<div class="row">
-			<form name="orderform" id="orderform" method="post">
 				<div class="col-md-8">
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-default">
@@ -60,21 +121,23 @@
 											<div class="checkout-collapse-inner">
 												<h2 class="collapse-title">CHECKOUT AS A GUEST OR REGISTER</h2>
 												<h4 class="collapse-sub-title">Register with us for future convenience:</h4>
-												<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
-												<input type="hidden" name="order_book_count" value="${order_book_count}" />
-												<input type="hidden" name="book_num" value="${book.book_num}" />
-												<input type="hidden" name="order_book_name" value="${book.book_name}" />
-												<input type="hidden" name="order_book_price" value="${book.book_price}" />
-												<input type="hidden" name="order_book_count" value="${order_book_count}" />
-												<input type="hidden" name="basket_num" value="${basket_num}" />
-												<div class="check-register">
-													<input type="radio" name="choice" onclick="deldata();" />
-													<label>직접입력</label>
-												</div>
-												<div class="check-register">
-													<input type="radio" name="choice" onclick="senddata();" />
-													<label>주문자 정보와 동일</label>
-												</div>
+												<form name="orderform" id="orderform" method="post">
+													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
+													<input type="hidden" name="order_book_count" value="${order_book_count}" />
+													<input type="hidden" name="book_num" value="${book.book_num}" />
+													<input type="hidden" name="order_book_name" value="${book.book_name}" />
+													<input type="hidden" name="order_book_price" value="${book.book_price}" />
+													<input type="hidden" name="order_book_count" value="${order_book_count}" />
+													<input type="hidden" name="basket_num" value="${basket_num}" />
+													<div class="check-register">
+														<input type="radio" checked="checked" onclick="deldata();" />
+														<label>직접입력</label>
+													</div>
+													<div class="check-register">
+														<input type="radio" onclick="senddata();" />
+														<label>주문자 정보와 동일</label>
+													</div>
+												</form>
 												<p>Register and save time!</p>
 												<p>Register with us for future convenience:</p>
 												<p>Fast and easy check out</p>
@@ -121,6 +184,7 @@
 												<input type="text" name="order_receive_name" value="" placeholder="First Name *">
 											</p>
 										</div>
+										
 										<div class="col-md-12">
 											<p class="form-row">
 												<input type="text" name="order_receive_addr1" value="" placeholder="Street address">
@@ -131,6 +195,7 @@
 												<input type="text" name="order_receive_addr2" value="" placeholder="Town / City">
 											</p>
 										</div>
+										
 										<div class="col-md-6">
 											<p class="form-row">
 												<input type="text" name="order_receive_zipcode" value="" placeholder="Postcode / Zip">
@@ -138,7 +203,7 @@
 										</div>
 										<div class="col-md-6">
 											<p class="form-row">
-												<input type="text" name="order_email" value="" placeholder="Email Address *">
+												<input type="text" name="order_email" value="${memberModel.member_email }" placeholder="Email Address *">
 											</p>
 										</div>
 										<div class="col-md-6">
@@ -148,7 +213,8 @@
 										</div>
 										<div class="col-md-12">
 											<label class="checbox-info">
-												<input type="checkbox" id="cbox"> Create an account? 
+												<input type="checkbox" id="cbox">
+												Create an account?
 											</label>
 											<div id="cbox_info">
 												<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
@@ -177,9 +243,80 @@
 							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								<div class="panel-body">
 									<div class="different-address">
+										<div class="ship-different-title">
+											<h3>
+												<label>Ship to a different address?</label>
+												<input type="checkbox" id="ship-box">
+											</h3>
+										</div>
+										<div id="ship-box-info" class="row">
+											<div class="col-md-12">
+												<div class="shop-select">
+													<label>
+														Country
+														<span class="required">*</span>
+													</label>
+													<select>
+														<option value="volvo">Bangladesh</option>
+														<option value="saab">Algeria</option>
+														<option value="mercedes">Afghanistan</option>
+														<option value="audi">Ghana</option>
+														<option value="audi2">Albania</option>
+														<option value="audi3">Bahrain</option>
+														<option value="audi4">Colombia</option>
+														<option value="audi5">Dominican Republic</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="First Name *">
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="Last Nane *">
+												</p>
+											</div>
+											<div class="col-md-12">
+												<p class="form-row">
+													<input type="text" placeholder="Company Name">
+												</p>
+											</div>
+											<div class="col-md-12">
+												<p class="form-row">
+													<input type="text" placeholder="Street address *">
+												</p>
+											</div>
+											<div class="col-md-12">
+												<p class="form-row">
+													<input type="text" placeholder="Town / City *">
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="State / County *">
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="Postcode / Zip *">
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="Email Address *">
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="form-row">
+													<input type="text" placeholder="Phone *">
+												</p>
+											</div>
+										</div>
 										<div class="order-notes">
 											<label>Order Notes</label>
-											<textarea placeholder="Notes about your order, e.g. special notes for delivery." rows="10" cols="30" id="order_receive_memo" name="order_receive_memo"></textarea>
+											<textarea placeholder="Notes about your order, e.g. special notes for delivery." rows="10" cols="30" id="checkout-mess" name="order_receive_memo"></textarea>
 										</div>
 									</div>
 								</div>
@@ -196,17 +333,19 @@
 							</div>
 							<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 								<div class="panel-body no-padding">
-									<div class="payment-met">										
+									<div class="payment-met">
+										<form action="#" id="payment-form">
 											<ul class="form-list">
 												<li class="control">
 													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo">
-													<label for="p_method_checkmo"> Check / Money order </label>
+													<label for="p_method_checkmo">Check / Money order </label>
 												</li>
 												<li class="control">
 													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave">
 													<label for="p_method_ccsave">Credit Card (saved) </label>
 												</li>
 											</ul>
+										</form>
 										<div class="buttons-set">
 											<button class="btn btn-default">CONTINUE</button>
 										</div>
@@ -230,8 +369,8 @@
 											<table class="data-table" id="checkout-review-table">
 												<thead>
 													<tr>
-														<th colspan="1" style="width: 20%;">Image</th>
-														<th rowspan="2">Product Name</th>
+														<th colspan="1">Image</th>
+														<th rowspan="1">Product Name</th>
 														<th colspan="1">Price</th>
 														<th rowspan="1">Qty</th>
 														<th colspan="1">Subtotal</th>
@@ -239,65 +378,51 @@
 												</thead>
 												<tbody>
 													<tr>
-														<td style="text-align: center;">
-															<span class="cart-price">
-																<span class="check-price">
-																	<img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" />
-																</span>
-															</span>
+														<td>
+															<h3 class ="product-name">
+																<img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" />
+															</h3>
 														</td>
 														<td>
-															<h3 class="product-name">${book.book_name}</h3>
+															<h3 class="product-name"> ${book.book_name}</h3>
 														</td>
 														<td>
 															<span class="cart-price">
-																<span class="check-price">
-																	<fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />
-																	원
-																</span>
+																<span class="check-price"><fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />
+													원</span>
 															</span>
 														</td>
 														<td>${order_book_count}</td>
 														<!-- sub total starts here -->
 														<td>
 															<span class="cart-price">
-																<span class="check-price">
-																	<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
-																	원
-																</span>
+																<span class="check-price"><fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+														원</span>
 															</span>
 														</td>
 													</tr>
 												</tbody>
 												<tfoot>
 													<tr>
-														<td colspan="4">Subtotal</td>
+														<td colspan="3">Subtotal</td>
 														<td>
-															<span class="check-price">
-																<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
-																원
-															</span>
+															<span class="check-price"><fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+														원</span>
 														</td>
 													</tr>
 													<tr>
-														<td colspan="4">Fee</td>
+														<td colspan="3">Fee</td>
 														<td>
-															<span class="check-price">
-																<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
-																원
-															</span>
+															<span class="check-price">$<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />원</span>
 														</td>
 													</tr>
 													<tr>
-														<td colspan="4">
+														<td colspan="3">
 															<strong>Grand Total</strong>
 														</td>
 														<td>
 															<strong>
-																<span class="check-price">
-																	<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
-																	원
-																</span>
+																<span class="check-price"><fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원</span>
 															</strong>
 														</td>
 													</tr>
@@ -310,7 +435,7 @@
 													Forgot an Item?
 													<a href="#">Edit Your Cart</a>
 												</p>
-												<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt();">
+												<button type="submit" title="Place Order" class="btn btn-default">
 													<span>Place Order</span>
 												</button>
 											</div>
@@ -321,7 +446,6 @@
 						</div>
 					</div>
 				</div>
-				</form>
 				<div class="col-md-offset-1 col-md-3">
 					<div class="checkout-widget">
 						<h2 class="widget-title">YOUR CHECKOUT PROGRESS</h2>
@@ -434,82 +558,5 @@
 		</div>
 	</div>
 	<!-- Our Team Area End -->
-	<script type="text/javascript">
-
-var name = "${memberModel.member_name}";
-var zipcode ="${memberModel.member_zipcode}";
-var addr1 = "${memberModel.member_addr1}";
-var addr2 = "${memberModel.member_addr2}";
-var phone = "${memberModel.member_phone}";
-var mobile = "${memberModel.member_mobile}";
-
-	function checkIt() {
-	var orderform = document.getElementById("orderform");
-		if (!orderform.order_receive_name.value) {
-			alert("수취인 이름을 입력하세요");
-			orderform.order_receive_name.focus();
-			return false;
-		} else if (!orderform.order_receive_phone.value) {
-			alert("수취인 전화번호를 입력하세요");
-			orderform.order_receive_phone.focus();
-			return false;
-		} else if (!orderform.order_receive_zipcode.value) {
-			alert("수취인 우편번호를 입력하세요");
-			orderform.order_receive_zipcode.focus();
-			return false;
-		} else if (!orderform.order_receive_addr1.value) {
-			alert("수취인 주소를 입력하세요");
-			orderform.order_receive_addr1.focus();
-			return false;
-		} else if (!orderform.order_receive_addr2.value) {
-			alert("수취인 상세주소를 입력하세요");
-			orderform.order_receive_addr2.focus();
-			return false;
-		} else {
-		  	payment_Proc()
-			orderform.action = "<%=cp%>/order/singleOrder.do";
-			orderform.submit();
-		}
-	}
-	function senddata() {
-		var orderform = document.getElementById("orderform");
-		
-		orderform.order_receive_name.value = "${memberModel.member_name}";
-		orderform.order_receive_zipcode.value = "${memberModel.member_zipcode}";
-		orderform.order_receive_addr1.value = "${memberModel.member_addr1}";
-		orderform.order_receive_addr2.value = "${memberModel.member_addr2}";
-		orderform.order_receive_phone.value = "${memberModel.member_phone}";
-		orderform.order_receive_mobile.value = "${memberModel.member_mobile}";
-		orderform.order_email.value="${memberModel.member_email}";
-	}
-
-	function deldata() {
-		var orderform = document.getElementById("orderform");
-		
-		orderform.order_receive_name.value = "";
-		orderform.order_receive_zipcode.value = "";
-		orderform.order_receive_addr1.value = "";
-		orderform.order_receive_addr2.value = "";
-		orderform.order_receive_phone.value = "";
-		orderform.order_receive_mobile.value = "";
-		orderform.order_email.value="";
-	}
-
-	function orderzipCheck() {
-		var url = '<%=cp%>/order/zipCheck.do';
-    window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
-  }
-	function payment_Proc() {
-	  
-	  	var check = document.orderform;
-	  	var url ='<%=cp%>/payment.jsp';
-	  	window.open(url,"post","toolbar=no,width=605,heigth=400,directoris=no,status=yes,scrollbars=yes,menubar=no")
-	  	
-	  	check.target="post";
-	  	check.submit();
-  }
-	
-</script>
-
 </body>
 </html>
