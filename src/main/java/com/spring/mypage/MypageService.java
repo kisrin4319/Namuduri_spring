@@ -1,7 +1,7 @@
 package com.spring.mypage;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -49,24 +49,24 @@ public class MypageService implements MypageDao {
 	
 	//5. 주문상세내역 보기
 	@Override
-	public OrderModel getOrderInfo(String order_trade_num) {
-		return sqlSessionTemplate.selectOne("order.selectOrder", order_trade_num);
-	}
-	
-	@Override
 	public List<OrderModel> getOrderTradeNumList(String member_id) {
 		return sqlSessionTemplate.selectList("order.getOrderTradeNumList", member_id);
 	}
 	
 	@Override
-	public OrderDetailModel memberOrderDetail(String order_trade_num) {
+	public OrderModel getOrderInfo(String order_trade_num) {
+		return sqlSessionTemplate.selectOne("order.selectOrder", order_trade_num);
+	}
+	
+	@Override
+	public Map<String, Object> memberOrderDetail(String order_trade_num) {
 		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
 	}
 	
 	//6. 주문내역 취소
 	@Override
-	public void memberOrderCancel(String order_trade_num) {
-		sqlSessionTemplate.delete("order.orderCancel", order_trade_num);
+	public int memberOrderCancel(String order_trade_num) {
+		return sqlSessionTemplate.update("order.orderCancel", order_trade_num);
 	}
 
 }

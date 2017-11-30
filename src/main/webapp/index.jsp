@@ -242,17 +242,19 @@
 						<div class="mobile-menu">
 							<nav id="dropdown">
 								<ul>
-                                    <li><a href="index.html">HOME</a></li>
+<!--                                     <li><a href="index.html">HOME</a></li>
                                     <li><a href="shop.html">FEATURED</a></li>
-                                    <li><a href="shop.html">REVIEW BOOK</a></li>
+                                    <li><a href="shop.html">REVIEW BOOK</a></li> -->
                                     <li><a href="shop.html">ABOUT AUTHOR</a></li>
                                     <li><a href="shop.html">TESTIMONIAL</a></li>
                                     <li><a href="blog.html">pages</a>
-                                        <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="checkout.html">Check Out</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                    				<li>	<div class="layer-4">
+                        <form action="#" class="title-4">
+                            <input type="text" placeholder="Enter your book title here">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+					</div>        </li>
+                                    <li><a href="contact.html">Contact</a></li>
                                             <li><a href="login.html">Login</a></li>
                                             <li><a href="my-account.html">My Account</a></li>
                                             <li><a href="shop.html">Shopping Page</a></li>

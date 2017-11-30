@@ -16,13 +16,32 @@
 <link href="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
 <link href="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-	function check(type, num){
-		document.getElementById('order_trade_num').value = num;
-		if(type == 'cancel'){
-			document.getElementById('orderListCheckForm').action = 'orderCancel.do';
-			document.getElementById('orderListCheckForm').submit();
-		}
+	function check(num){
+		
+		$('#order_trade_num').val(num);
+ 
+			$.ajax({
+            	url:'/namuduri/order/memberOrderCancel.do',
+            	type:'post',
+            	data:$('form').serialize(),
+            	success:function(result){
+            		if(result == '1'){
+            			alert('주문번호' + num +  '이 취소되었습니다.');
+            			location.reload();
+            		}
+           	 	}
+        	})	
 	}
+	
+	/* function orderDetail(order_trade_num){
+		$('#current').val(page);
+		$('order_trade_num').val(order_trade_num);
+		
+		var f = $('#orderListCheckForm')
+		
+		f.action = "/order/memberOrderDetailView.do";
+		f.submit();
+	} */
 </script>
 </head>
 <body>
@@ -32,8 +51,8 @@
 			<!-- 고객 공통 컨텐츠 -->
 			<div class="out_myroom_gradearea">
 				<div class="user_section">
-					<div class="user_name">
-						<c:property value="%{session.member_id}" />	님 안녕하세요.
+					<div class="user_name"><p>${memberInfo.member_id}	님 안녕하세요.</p>
+						<%-- <property value="${session.member_id}" />	님 안녕하세요. --%>
 					</div>
 				</div>
 				<font size="2" style="text-align: center">주문/배송 내역을 조회 할수 있는
@@ -44,9 +63,11 @@
 				<span>주문/배송조회</span>
 			</h2>
 
-			<form name="orderListCheckForm" id="orderListCheckForm" method="post">
+			<form name="orderListCheckForm" id="orderListCheckForm">
 				<!-- 주문내역시작 -->
+				
 				<input type="hidden" id="order_trade_num" name="order_trade_num" />
+				<input type="hidden" id="current" name="current" />
 				<table class="table_myroom td_font_12 margin_top10"
 					summary="주문번호, 주문금액, 상품정보, 주문상태를 알 수 있는 주문 내역 테이블 입니다.">
 					<caption>주문 내역</caption>
@@ -67,48 +88,50 @@
 							<th scope="col">배송상태</th>
 							<th scope="col">주문취소</th>
 						</tr>
-						<c:iterator value="orderlist" status="stat">
+							<%-- <c:set value="orderlist"></c:set> --%>
+						<!-- <iterator value="orderlist" status="stat"> -->
 							<!-- 주무번호와 연결되는 URL -->
-							<c:url id="viewOrderURL" action="orderDetail">
-								<c:param name="order_trade_num">
-									<c:property value="order_trade_num" />
-								</c:param>
-								<c:param name="curretPage">
-									<c:property value="currentPage" />
-								</c:param>
-							</c:url>
+							
 							
 							<c:forEach var="item" items="${ orderModel }">
 							<tr>
-								<td height="50" align="center">
-									<c:a href ="%{viewOrderURL}"><s:property value ="order_trade_num"/></c:a>
-								${ item.order_trade_num }
+								<c:url var="viewOrderURL" value="/order/memberOrderDetailView.do">
+									<c:param name="order_trade_num" value="${item.order_trade_num}" />
+									<%-- <c:param name="curretPage" value="${currentPage}" /> --%>	
+								</c:url>
+								<td height="50" align="center" onclick="orderDetail('${item.order_trade_num}')">
+									<a href ="${viewOrderURL}" >${ item.order_trade_num }</a>
+									<%-- ${ item.order_trade_num } --%>
 								</td>
-								<td align="center"><c:property value ="order_regdate"/></td>
+								<td align="center">${ item.order_regdate }</td>
+															
 								<td align="center">
-									<c:if test="payment_status =='PS01'">
+									<c:if test="${ item.payment_status =='PS01' }">
 										결제 대기중
 									</c:if>
-									<c:else>
+									<c:if test="${ item.payment_status =='PS02' }">
 										결제 완료
-									</c:else>
+									</c:if>
 								</td>
-								<td align="center"><s:property value="order_trans_num"/></td>
+								<td align="center">${item.order_trans_num}</td>
+								
 								<td align="center">
-									<c:if test="order_trans_status == 'ST01'">
+									<c:if test="${ item.order_trans_status == 'ST01' }">
 										배송 준비중
 									</c:if>
-									<c:if test="order_trans_status == 'ST02'">
+									<c:if test="${ item.order_trans_status == 'ST02' }">
 										배송 중
 									</c:if>
-									<c:if test="order_trans_status == 'ST03'">
+									<c:if test="${ item.order_trans_status == 'ST03' }">
 										배송 완료
-									</c:if></td>
+									</c:if>
+								</td>
 								<td align="center">
-								<input type="button" value="주문취소하기" align="middle"onclick="check('cancel', '<c:property value ="order_trade_num"/>')" /></td>
+								<input type="button" value="주문취소하기" align="middle" onclick="check('${item.order_trade_num}')" /></td>
 							</tr>
 							</c:forEach>
-						</c:iterator>
+							
+						<!-- </iterator> -->
 						<c:if test="list.size()==0">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
@@ -116,7 +139,7 @@
 						</c:if>
 					</tbody>
 					<tr align="center">
-						<td colspan="8"><s:property value="pagingHtml" escape="false" /></td>
+						<td colspan="8" ${pagingHtml} escape="false"></td>
 					</tr>
 				</table>
 				<!-- 주문내역종료 -->

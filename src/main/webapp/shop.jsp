@@ -42,6 +42,12 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
 		<!-- modernizr css -->
         <script src="<c:url value="bootstrap/js/vendor/modernizr-2.8.3.min.js" />"></script>
+        <style type="text/css">
+        	img.resize{
+        	width: 270px;
+        	height: 280px;
+        	}
+        </style>
     </head>
     <body>
         <!--[if lt IE 8]>

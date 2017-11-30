@@ -3,17 +3,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>주문 상세보기</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/layout_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/myroom.css" rel="stylesheet" type="text/css" />
-<link href="css/order_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style_ssl.css" rel="stylesheet" type="text/css" />
-<link href="css/style2_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/layout_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/myroom.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/order_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 		
@@ -23,16 +24,25 @@
 			<span>주문자 정보</span>
 	</h2>
 	<table class="table_myroom td_font_12 margin_top10">
+		
+		<%-- <c:forEach var="item" items="${ orderDetailModel }">
+			<tr>
+				<td width="100">주 문 자 : ${ item.member_id }</td>
+				<td colspan="3" width="500"></td>
+			</tr>
+		</c:forEach> --%>
+		
 		<tr>
 			<td width="100">주 문 자</td>
-			<td colspan="3" width="500"><s:property value="mresultClass.member_id"/></td>
+			<td colspan="3" width="500">${ memberInfo.member_id }</td>
 		</tr>
 		<tr>
 			<td width="40">휴대폰번호</td>
-			<td width="80"><s:property value="mresultClass.member_phone"/></td>
+			<td width="80">${ memberInfo.member_phone }</td>
 			<td width="40">이메일</td>
-			<td width="80"><s:property value="mresultClass.member_email"/></td>
+			<td width="80">${ memberInfo.member_email }</td>
 		</tr>
+		
 	</table><br>
 		
 		<h2 class="bul_green20">
@@ -56,53 +66,54 @@
 				<th scope="col">수량</th>
 				<th scope="col">금액</th>
 			</tr>
-		<s:iterator value ="orderlist" status ="stat">
+		<!-- <s:iterator value ="orderlist" status ="stat"> -->
 		<tr align="center">
 			
-			<td><s:property value ="#stat.index+1"/></td>
-		
-			<td width="100" height="50"><img src="/namuduri/admin/upload/<s:property value="goods_image"/>"style="width: 130px;height: 120px;"/></td>
+			<td>${ memberOrderDetail.BOOK_NUM }</td>
+			<!-- <script>alert('${memberOrderDetail.BOOK_IMAGE}')</script> -->
+			<td width="100" height="50"><img src="<%=cp%>/upload/${ memberOrderDetail.BOOK_IMAGE }" style="width: 130px;height: 120px;"/></td>
 			<td align="left" width="270">
-			주문 번호 : <s:property value="order_trade_num"/><br><br>
-			도 서 명 : <s:property value="order_goods_name"/><br><br>
+			주문 번호 : ${ memberOrderDetail.ORDER_TRADE_NUM }<br><br>
+			도 서 명 : ${ memberOrderDetail.ORDER_BOOK_NAME }<br><br>
 			주문 상태 : 
-			<s:if test="order_trans_status == 'ST01'">
-			배송 준비중
-			</s:if>
-			<s:elseif test="order_trans_status == 'ST02'">
+			<c:if test="order_trans_status == 'ST01'">
+				배송 준비중
+			</c:if>
+			<c:if test="order_trans_status == 'ST02'">
 				배송 중
-			</s:elseif>
-			<s:else>
+			</c:if>
+			<c:if test="order_trans_status == 'ST03'">
 				배송 완료
-			</s:else>
+			</c:if>${ memberOrderDetail.ORDER_TRANS_STATUS }
 			<br><br>
-			주문 날짜 : <s:property value="order_regdate"/><br><br>
+			주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }<br><br>
 			</td>
-			<td><s:property value="order_goods_count"/>권</td><br>
-			<td><s:property value="order_goods_count*order_goods_price"/>원</td>
-	
+			<td>${ memberOrderDetail.ORDER_BOOK_COUNT }권</td><br>
+			<td>${ memberOrderDetail.ORDER_BOOK_COUNT * memberOrderDetail.ORDER_BOOK_PRICE }원</td>
+			
 		</tr>
-		</s:iterator>
+		<!-- </s:iterator> -->
 	</table>
 	<br><br>
 	<table class="table_myroom td_font_12 margin_top10">
 		<tr>
 			<td width="100">받으실 분</td>
-			<td colspan="3" width="500"><s:property value="oresultClass.order_receive_name"/></td>
+			<td colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_NAME }</td>
 		</tr>
 		<tr>
 			<td width="40">휴대폰번호</td>
-			<td width="80"><s:property value="oresultClass.order_receive_phone"/></td>
+			<td width="80">${ memberOrderDetail.ORDER_RECEIVE_PHONE }</td>
 			<td width="40">전화번호</td>
-			<td width="80"><s:property value="oresultClass.order_receive_mobile"/></td>
+			<td width="80">${ memberOrderDetail.ORDER_RECEIVE_MOBILE }</td>
 		</tr>
 		<tr>
 			<td width="100">주  소</td>
-			<td colspan="3" width="500"><s:property value="oresultClass.order_receive_addr1"/>&nbsp;</td>
-		</tr>	
+			<td colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_ADDR1 }&nbsp;</td>
+		</tr>
+		
 	</table>
 	<br>
-	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/orderListCheck.do'"/>
+	<input type=button value="닫기" align="middle" onclick="javascript:location.href='http://localhost:8080/namuduri/order/orderListCheckView.do'"/>
 	</div>
 </div>
 </body>
