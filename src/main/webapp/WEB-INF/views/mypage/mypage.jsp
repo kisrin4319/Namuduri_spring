@@ -22,7 +22,7 @@
 		<!-- 고객 공통 컨텐츠 -->
 		<div class="out_myroom_gradearea">
 			<div class="user_section">
-				<div class="user_name"><p>${session.member_id}</p> 님 안녕하세요.</div>
+				<div class="user_name"><p>${member_id}</p> 님 안녕하세요.</div>
 			</div>
 			<font size ="2" style ="text-align: center">mypage</font>
 		</div>
@@ -67,15 +67,15 @@
 								</td>
 								<td align="center">${ item.order_regdate }</td>
 								<td align="center">
-									<c:if test="payment_status =='PS01'">
+									<c:if test="${ item.payment_status =='PS01' }">
 										결제 대기중
 									</c:if>
-									<c:catch>
+									<c:if test="${ item.payment_status =='PS02' }">
 										결제 완료
-									</c:catch>${ item.payment_status }
+									</c:if>
 								</td>
 								<td align="center">
-									<c:if test="order_trade_status =='TR01'">
+									<c:if test="${ order_trade_status =='TR01' }">
 										무통장 입금
 									</c:if>
 									<c:catch>
@@ -85,15 +85,16 @@
 								<td align="center">${item.order_trans_num}</td>
 								
 								<td align="center">
-									<c:if test="order_trans_status == 'ST01'">
+									<c:if test="${ item.order_trans_status == 'ST01' }">
 										배송 준비중
 									</c:if>
-									<c:if test="order_trans_status == 'ST02'">
+									<c:if test="${ order_trans_status == 'ST02' }">
 										배송 중
 									</c:if>
-									<c:if test="order_trans_status == 'ST03'">
+									<c:if test="${ order_trans_status == 'ST03' }">
 										배송 완료
-									</c:if>${ item.order_trans_status }</td>
+									</c:if>
+								</td>
 								</tr>
 							</c:forEach>
 						<!-- </s:iterator> -->
@@ -113,7 +114,7 @@
 		<h2 class="bul_green20 margin_top30">
 			<span>주문/배송안내</span>
 		</h2>
-		<img align="middle" src="/namuduri/mypage/image/mypage.JPG" />
+		<img align="middle" src="<%=cp%>/mypage/image/mypage.JPG" />
 		</div>
 	</div>	
 </body>

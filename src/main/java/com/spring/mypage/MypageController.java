@@ -155,7 +155,6 @@ public class MypageController {
 		MemberModel memberModel = new MemberModel();
 		
 		memberModel.setMember_id(session_id);
-		
 		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_pw(request.getParameter("member_pw"));
 		
@@ -221,39 +220,6 @@ public class MypageController {
 		return object;
 	}
 	
-	//우편번호 검색 폼
-	@RequestMapping(value="/member/zipCheckView.do", method=RequestMethod.GET)
-	public ModelAndView zipCheckForm(HttpServletRequest request) throws Exception {
-				
-		mv = new ModelAndView();
-				
-		mv.setViewName("member/zipCheck");
-		return mv;
-	}
-		
-	//우편번호 검색
-	@RequestMapping(value="/member/zipCheck.do", method=RequestMethod.POST)
-	public ModelAndView zipCheck(@ModelAttribute ZipcodeModel zipcodeModel, HttpServletRequest request) throws Exception{
-				
-		mv = new ModelAndView();
-				
-		String area3;
-				
-		List<ZipcodeModel> zipcodeList = new ArrayList<ZipcodeModel>();
-		area3 = request.getParameter("area3");
-				
-		mv.addObject("zipcodeList", zipcodeList);
-				
-		if(area3 != null) {
-			zipcodeList = memberService.zipCheck(area3);
-			mv.addObject("area3", area3);
-			mv.addObject("zipcodeList", zipcodeList);
-		}
-				
-		mv.setViewName("member/zipCheck");
-		return mv;
-	}
-	
 	//주문/배송 조회
 	@RequestMapping(value = "/order/orderListCheckView.do")
 	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) throws Exception {
@@ -261,9 +227,11 @@ public class MypageController {
 		mv = new ModelAndView();
 		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
-		String member_id = (String) session.getAttribute("member_id");
+		String session_id = (String) session.getAttribute("member_id");
 		
-		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
+		MemberModel memberInfo = memberService.SelectOne(session_id);
+		
+		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(session_id);
 		for(int i=0; i<tradeNumList.size(); i++) {
 			OrderModel model = tradeNumList.get(i);
 			String orderTradeNum = model.getOrder_trade_num();
@@ -273,6 +241,7 @@ public class MypageController {
 			orderModel.add(getOrderInfo);
 		}
 		
+		mv.addObject("memberInfo", memberInfo);
 		mv.addObject("orderModel", orderModel);
 		mv.setViewName("orderListCheck1");
 		return mv;
@@ -280,23 +249,41 @@ public class MypageController {
 	
 	//5. 주문상세내역 보기
 	@RequestMapping(value = "/order/memberOrderDetailView.do")
-	public ModelAndView memberOrderDetail(OrderDetailModel orderDetail, HttpServletRequest request, HttpSession session ) throws Exception {
+	public ModelAndView memberOrderDetail(String order_trade_num, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
 		
-		String member_id = (String) session.getAttribute("member_id");
+		String session_id = (String) session.getAttribute("member_id");
 		
-		List<OrderModel> tradeNumList = mypageService.getOrderTradeNumList(member_id);
-		OrderModel model = tradeNumList.get(1);
-		String orderTradeNum = model.getOrder_trade_num();
+		MemberModel memberInfo = memberService.SelectOne(session_id);
 		
-		OrderModel getOrderInfo = mypageService.getOrderInfo(orderTradeNum);
-		
-		Map<String, Object> memberOrderDetail = mypageService.getmemberOrderDetail(orderTradeNum);
+		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
+		mv.addObject("memberInfo", memberInfo);
 		mv.setViewName("orderDetail");
 		return mv;
+	}
+	
+	//6. 주문내역 취소
+	@RequestMapping(value = "/order/memberOrderCancel.do")
+	@ResponseBody
+	public String memberOrderCancel(HttpServletRequest request, HttpSession session, String order_trade_num) {
+		
+		String returnVal = "";
+		//mv = new ModelAndView();
+		//String session_id = (String) session.getAttribute("member_id");
+	
+		int result = mypageService.memberOrderCancel(order_trade_num);
+		
+		if(result > 0) {
+			returnVal = "1";
+		}else {
+			returnVal = "0";
+		}
+		
+		return returnVal;
+		
 	}
 
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!doctype html>
 <html class="no-js" lang="">
@@ -15,63 +15,39 @@ String cp = request.getContextPath();
 							<a href="index.html">
 								<img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
 							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+							<br />
+							<br />
 							<ul class="footer-contact">
 								<li>
 									<i class="flaticon-location"></i>
-									450 fifth Avenue, 34th floor. NYC
+									Gangnam-gu, Seoul
 								</li>
 								<li>
 									<i class="flaticon-technology"></i>
-									(+800) 123 4567 890
+									1544-9970
 								</li>
 								<li>
 									<i class="flaticon-web"></i>
-									info@bookstore.com
+									namuduri@namuduri.com
 								</li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-4">
 						<div class="single-footer">
-							<h2 class="footer-title">Information</h2>
-							<ul class="footer-list">
-								<li>
-									<a href="about.html">About Us</a>
-								</li>
-								<li>
-									<a href="#">Delivery Information</a>
-								</li>
-								<li>
-									<a href="#">Privacy & Policy</a>
-								</li>
-								<li>
-									<a href="#">Terms & Conditions</a>
-								</li>
-								<li>
-									<a href="#">Manufactures</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-2 hidden-sm">
-						<div class="single-footer">
 							<h2 class="footer-title">My Account</h2>
 							<ul class="footer-list">
 								<li>
-									<a href="my-account.html">My Account</a>
+									<a href="#">&nbsp;Login</a>
 								</li>
 								<li>
-									<a href="account.html">Login</a>
+									<a href="#">&nbsp;My Cart</a>
 								</li>
 								<li>
-									<a href="cart.html">My Cart</a>
+									<a href="#">&nbsp;Wish List</a>
 								</li>
 								<li>
-									<a href="wishlist.html">Wishlist</a>
-								</li>
-								<li>
-									<a href="checkout.html">Checkout</a>
+									<a href="#">&nbsp;Manage Account</a>
 								</li>
 							</ul>
 						</div>
@@ -81,19 +57,35 @@ String cp = request.getContextPath();
 							<h2 class="footer-title">Shop</h2>
 							<ul class="footer-list">
 								<li>
-									<a href="#">Orders & Returns</a>
+									<a href="my-account.html">&nbsp;Main</a>
 								</li>
 								<li>
-									<a href="#">Search Terms</a>
+									<a href="account.html">&nbsp;Best Seller</a>
 								</li>
 								<li>
-									<a href="#">Advance Search</a>
+									<a href="cart.html">&nbsp;New Books</a>
 								</li>
 								<li>
-									<a href="#">Affiliates</a>
+									<a href="wishlist.html">&nbsp;Used Books</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2 hidden-sm" style="text-align: left;">
+						<div class="single-footer">
+							<h2 class="footer-title">Service</h2>
+							<ul class="footer-list">
+								<li>
+									<a href="#">&nbsp;FAQ</a>
 								</li>
 								<li>
-									<a href="#">Group Sales</a>
+									<a href="#">&nbsp;Q&A</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;Contact</a>
+								</li>
+								<li>
+									<a href="#">&nbsp;My Page</a>
 								</li>
 							</ul>
 						</div>
@@ -109,28 +101,6 @@ String cp = request.getContextPath();
 								<button class="btn btn-search btn-small" type="submit">SUBSCRIBE</button>
 								<i class="flaticon-networking"></i>
 							</form>
-							<ul class="social-icon">
-								<li>
-									<a href="#">
-										<i class="flaticon-social"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="flaticon-social-1"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="flaticon-social-2"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="flaticon-video"></i>
-									</a>
-								</li>
-							</ul>
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-4 visible-sm">
@@ -164,7 +134,7 @@ String cp = request.getContextPath();
 					<div class="col-md-6">
 						<div class="footer-bottom-left pull-left">
 							<p>
-								Copyright &copy; 2016
+								Copyright &copy; Namuduri.com 2017
 								<span>
 									<a href="#">DevItems</a>
 								</span>
@@ -203,8 +173,8 @@ String cp = request.getContextPath();
 	<!-- wow js -->
 	<script src="<%=cp%>/bootstrap/js/wow.min.js"></script>
 	<script>
-			new WOW().init();
-		</script>
+		new WOW().init();
+	</script>
 	<!-- scrollUp JS -->
 	<script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
 	<!-- plugins js -->

@@ -120,16 +120,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 주문상세내역 보기 -->
-	<select id="memberOrderDetail" resultType="java.util.Map">
+	<select id="memberOrderDetail" resultType="java.util.Map" parameterType="String">
 		SELECT go.*, me.member_phone, me.member_email, tb.book_image, tb.book_num, od.*
-		FROM ORDER_BOOK go JOIN MEMBER me ON
+		FROM order_book go JOIN member me ON
 		go.member_id = me.member_id JOIN order_detail od ON 
 		od.order_trade_num = go.order_trade_num JOIN book tb ON
 		tb.book_num = od.book_num WHERE go.order_trade_num = #{order_trade_num}
 	</select>
 	
 	<select id="getOrderTradeNumList" parameterType="String" resultType="OrderModel">
-		select * from ORDER_BOOK where member_id = #{member_id}
+		select * from ORDER_BOOK where member_id = #{member_id} AND ORDER_USE_YN = 1
 	</select>
 	
 	<!-- 7. 주문 도서정보 가져오기 -->
@@ -162,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 주문 내역 취소 -->
 	<update id="orderCancel">
-		UPDATE FROM ORDER_BOOK SET ORDER_USE_YN = 0
+		UPDATE ORDER_BOOK SET ORDER_USE_YN = 0
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
 

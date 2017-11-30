@@ -91,9 +91,14 @@ public class BasketController {
 
 	// 2. 장바구니 추가
 	@RequestMapping("/basket/basketInsert.do")
-	public ModelAndView basketInsert(@ModelAttribute BasketModel basketModel, HttpSession session) {
-		/*BasketModel basketModel = new BasketModel();
-		*/mv = new ModelAndView();
+	public ModelAndView basketInsert(@ModelAttribute BasketModel basketModel, HttpSession session,HttpServletRequest request) {
+		
+		mv = new ModelAndView();
+		
+		if (!(request.getParameter("amount") == null || request.getParameter("amount").trim().isEmpty()
+				|| request.getParameter("amount").equals("0"))) {
+			basketModel.setBasket_book_count(Integer.parseInt(request.getParameter("amount")));
+		}
 		
 		session_id = (String) session.getAttribute("member_id");
 		basketModel.setMember_id(session_id);

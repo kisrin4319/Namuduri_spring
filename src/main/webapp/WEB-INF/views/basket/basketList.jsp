@@ -98,8 +98,7 @@
 													</td>
 													<td class="product-quantity">
 														<p>
-															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />
-															원
+															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />원
 														</p>
 													</td>
 													<td class="product-edit">
@@ -154,8 +153,7 @@
 							<h2>
 								SUBTOTAL
 								<span>
-									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
-									원
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />원
 								</span>
 							</h2>
 						</div>
@@ -164,8 +162,7 @@
 							<h2>
 								GRAND TOTAL
 								<span>
-									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
-									원
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />원
 								</span>
 							</h2>
 						</div>

@@ -90,9 +90,7 @@
 											</a>
 										</c:if>
 										<c:if test="${not empty member_id }">
-											<a href="<%=cp%>/member/logOut.do">
-												SIGN OUT
-											</a>
+											<a href="<%=cp%>/member/logOut.do"> SIGN OUT </a>
 										</c:if>
 									</div>
 									<div class="cart-checkout">
@@ -235,9 +233,7 @@
 											</a>
 										</c:if>
 										<c:if test="${not empty member_id }">
-											<a href="<%=cp%>/member/logOut.do">
-												Sign Out
-											</a>
+											<a href="<%=cp%>/member/logOut.do"> Sign Out </a>
 										</c:if>
 									</div>
 									<div class="cart-checkout">
