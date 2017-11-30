@@ -25,7 +25,7 @@
 		</div>
 
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
-
+		
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-block">
@@ -35,7 +35,7 @@
 							<input type="hidden" name="currentPage" value="${currentPage}" />
 							<input type="hidden" name="order_trade_num"
 								value="${view.order_trade_num}" />
-							<table border=1 class="table_detail">
+							<table border=1 class="table">
 								<c:url var="viewMemberURL" value="/admin/memberDetail.do">
 									<c:param name="member_id" value="${view.member_id}" />
 								</c:url>
@@ -46,13 +46,62 @@
 									<td width=35%>${view.order_regdate}</td>
 								</tr>
 								<tr>
-									<th width=15%>주문자</th>
-									<td colspan=3>
+									<th>주문자</th>
+									<td>
 										<%-- ${view.member_name} --%> (<a href="${viewMemberURL}">${view.member_id}</a>)
 									</td>
+									<th width=15%>결제 상태</th>
+									<td width=85% colspan=3><c:choose>
+											<c:when test="${view.payment_status =='PS01'}">
+												<select name="payment_status">
+													<option value="PS01" selected="selected">결제 대기중</option>
+													<option value="PS02">결제 완료</option>
+												</select>
+											</c:when>
+											<c:otherwise>
+												<select name="payment_status">
+													<option value="PS01">결제 대기중</option>
+													<option value="PS02" selected="selected">결제 완료</option>
+												</select>
+											</c:otherwise>
+										</c:choose></td>
 								</tr>
 								<tr>
-									<td align=center colspan=4><h2>주문 내역</h2></td>
+									<th width=15%>결제자</th>
+									<td width=35%>${view.order_trade_payer}</td>
+									<th width=15%>결제 방법</th>
+									<td width=35%>${view.order_trade_status}</td>
+								</tr>
+								<tr>
+									<th width=15%>입금 은행</th>
+									<td width=35%>${view.order_bank_name}</td>
+									<th width=15%>입금 은행 계좌번호</th>
+									<td width=35%>${view.order_bank_num}</td>
+								</tr>
+								<tr>
+									<th width=15%>은행명</th>
+									<td width=35%>${viewM.member_bankname}</td>
+									<th width=15%>예금주</th>
+									<td width=35%>${viewM.member_account_holder}</td>
+								</tr>
+								<tr>
+									<th width=15%>환불계좌</th>
+									<td width=85% colspan=3>${viewM.member_refund_account}</td>
+								</tr>
+								<tr>
+									<th width=15%>주문 상태</th>
+									<td class="getyn" width=85% colspan=3>
+										<input type="radio" name="order_use_yn" id="order_use_yn" value="1"
+											${view.order_use_yn == '1' ? 'checked="checked"' : '' }>주문됨<!-- 기본값 --> 
+										<input type="radio" name="order_use_yn" id="order_use_yn" value="0"
+											${view.order_use_yn == '0' ? 'checked="checked"' : '' }>취소됨
+									</td>
+								</tr>
+							</table>
+							<br>
+							<table border=1 class="table">
+								<tr>
+									<td align=center colspan=4><h2>주문 상품 목록</h2></td>
 								</tr>
 								<tr>
 									<th width=15>상품 번호</th>
@@ -78,35 +127,9 @@
 								<tr>
 									<td colspan=4><b>총 금액 : <font size="red">${view.order_receive_moneysum}</font></b></td>
 								</tr>
-								<tr>
-									<th width=15%>결제자</th>
-									<td width=35%>${view.order_trade_payer}</td>
-									<th width=15%>결제 방법</th>
-									<td width=35%>${view.order_trade_status}</td>
-								</tr>
-								<tr>
-									<th width=15%>입금 은행</th>
-									<td width=35%>${view.order_bank_name}</td>
-									<th width=15%>입금 은행 계좌번호</th>
-									<td width=35%>${view.order_bank_num}</td>
-								</tr>
-								<tr>
-									<th width=15%>결제 상태</th>
-									<td width=85% colspan=3><c:choose>
-											<c:when test="${view.payment_status =='PS01'}">
-												<select name="payment_status">
-													<option value="PS01" selected="selected">결제 대기중</option>
-													<option value="PS02">결제 완료</option>
-												</select>
-											</c:when>
-											<c:otherwise>
-												<select name="payment_status">
-													<option value="PS01">결제 대기중</option>
-													<option value="PS02" selected="selected">결제 완료</option>
-												</select>
-											</c:otherwise>
-										</c:choose></td>
-								</tr>
+							</table>
+							<br>
+							<table border=1 class="table">
 								<tr>
 									<th width=15%>배송번호</th>
 									<td width=35%>${view.order_trans_num}</td>
@@ -152,25 +175,6 @@
 								<tr>
 									<th width=15%>요청 사항</th>
 									<td width=85% colspan=3>${view.order_receive_memo}</td>
-								</tr>
-								<tr>
-									<th width=15%>은행명</th>
-									<td width=35%>${viewM.member_bankname}</td>
-									<th width=15%>예금주</th>
-									<td width=35%>${viewM.member_account_holder}</td>
-								</tr>
-								<tr>
-									<th width=15%>환불계좌</th>
-									<td width=85% colspan=3>${viewM.member_refund_account}</td>
-								</tr>
-								<tr>
-									<th width=15%>주문 상태</th>
-									<td class="getyn" width=85% colspan=3>
-										<input type="radio" name="order_use_yn" id="order_use_yn" value="1"
-											${view.order_use_yn == '1' ? 'checked="checked"' : '' }>주문됨<!-- 기본값 --> 
-										<input type="radio" name="order_use_yn" id="order_use_yn" value="0"
-											${view.order_use_yn == '0' ? 'checked="checked"' : '' }>취소됨
-									</td>
 								</tr>
 							</table>
 							<br>

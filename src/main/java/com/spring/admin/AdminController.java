@@ -128,10 +128,11 @@ public class AdminController {
 		}
 		
 		MemberModel view = memberService.SelectOne(member_id);
-		List<OrderDetailModel> orderDetailList = null;
+		List<OrderModel> orderList = mypageService.getOrderTradeNumList(member_id);
 		
 		mv.addObject("view", view);
-		mv.addObject("orderDetailList", orderDetailList);
+		mv.addObject("orderList", orderList);
+		mv.addObject("listCount", orderList.size());
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
 		

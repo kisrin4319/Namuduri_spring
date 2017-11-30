@@ -36,84 +36,153 @@
 				</ol>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<h3>Book Information</h3>
+				<div class="card">
+					<div class="card-block">
+						<form class="form-horizontal form-material">
+							<div class="row">
+								<div class="col-lg-4" style="margin: auto; text-align: center;">
+									<img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" />
+								</div>
+								<div class="col-lg-8">
+									<div class="form-group"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="row">
+												<div class="col-md-4">
+													<b>#</b> ${view.book_num}
+												</div>
+												<div class="col-md-8">
+													${view.book_date} <b>등록</b>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12">Book Name</label>
+										<div class="col-md-12">
+											<input type="text" class="form-control form-control-line"
+												value="${view.book_name}">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label class="col-md-6">Category</label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_category}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-6">Author</label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_auth}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label class="col-md-6">Company</label>
+												<div class="col-md-12">
+													<input type="text" value="${view.company_id}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-6">Publish Date</label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_publish_date}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-3">
+												<label class="col-md-12">Price</label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_price}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+											<div class="col-md-3">
+												<label class="col-md-12"><b>판매량</b></label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_sell_count}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+											<div class="col-md-3">
+												<label class="col-md-12"><b>현재 재고</b></label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_current_count}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+											<div class="col-md-3">
+												<label class="col-md-12"><b>기초 재고</b></label>
+												<div class="col-md-12">
+													<input type="text" value="${view.book_base_count}"
+														class="form-control form-control-line">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12">Content</label>
+								<div class="form-group"></div>
+								<div class="col-md-12">
+									<textarea rows="20" class="form-control form-control-line">${view.book_content}</textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<div class="row">
+										<label class="col-sm-4"><b>활성화
+												여부</b></label>
+										<div class="col-sm-8">
+											<input type="radio" name="book_use_yn" id="book_use_yn"
+												value="1"
+												${view.book_use_yn == '1' ? 'checked="checked"' : '' }>사용
+											<input type="radio" name="book_use_yn" id="book_use_yn"
+												value="0"
+												${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용
+										</div>
+									</div>
 
-		<div class="col-lg-12">
-			<h2 class="detail_h2">도서 정보 상세보기</h2>
-			<div class="card">
-				<div class="card-block">
-					<div class="table-responsive">
-						<table class="table_detail" border=1>
-							<tr>
-								<th rowspan=7>이미지</th>
-								<td align=center rowspan=7><img
-									src="<%=cp%>/upload/${view.book_image}" width="200"
-									height="300" border="0" /></td>
-							</tr>
-							<tr>
-								<th>도서 번호</th>
-								<td>${view.book_num}</td>
-								<th>등록일</th>
-								<td>${view.book_date}</td>
-							</tr>
-							<tr>
-								<th>카테고리</th>
-								<td>${view.book_category}</td>
-								<th>저자</th>
-								<td>${view.book_auth}</td>
-							</tr>
-							<tr>
-								<th>출판사</th>
-								<td>${view.company_id}</td>
-								<th>출판일</th>
-								<td>${view.book_publish_date}</td>
-							</tr>
-							<tr>
-								<th>제목</th>
-								<td colspan=4>${view.book_name}</td>
-							</tr>
-							<tr>
-								<th>가격</th>
-								<td>${view.book_price}</td>
-								<th>판매량</th>
-								<td>${view.book_sell_count}</td>
-							</tr>
-							<tr>
-								<th>기초 재고</th>
-								<td>${view.book_base_count}</td>
-								<th>현재 재고</th>
-								<td>${view.book_current_count}</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td colspan=5>${view.book_content}</td>
-							</tr>
-
-							<tr>
-								<th colspan=2 align=center>활성화 여부</th>
-								<td class="getyn" colspan=4 align=center><c:choose>
-										<c:when test="${view.book_use_yn=='0'}">비사용됨</c:when>
-										<c:otherwise>사용됨</c:otherwise>
-									</c:choose></td>
-							</tr>
-						</table>
-						<div class="detail_button">
-							<input class="button" type=button value="목록보기"
-								onclick="javascript:location.href='<%=cp%>/admin/bookList.do?currentPage=${currentPage}'">
-							<input class="button" type=button value="수정하기"
-								onclick="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${view.book_num}&currentPage=${currentPage}'">
-							<input class="button" type=button value="삭제하기"
-								onclick="deleteCheck(${view.book_num})" />
-						</div>
+								</div>
+							</div>
+							<div class="form-group"></div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<button class="btn btn-warning"
+										onclick="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${view.book_num}&currentPage=${currentPage}'">Update
+										Profile</button>&nbsp;
+									<button class="btn btn-danger"
+										onclick="deleteCheck(${view.book_num})">Delete
+										Profile</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="col-lg-12">
+			<h3>Book Review</h3>
 			<div class="card">
 				<div class="card-block">
 					<div class="table-responsive">
-						<table class="review">
+						<table class="table list-items review">
 							<c:choose>
 								<c:when test="${totalCount==0}">
 									<tr>
@@ -125,21 +194,22 @@
 										<c:url var="viewURL" value="/admin/memberDetail.do">
 											<c:param name="member_id" value="${list.member_id}" />
 										</c:url>
-										<tr>
-											<td>${list.review_num}</td>
-											<td>
-												<!-- member_name review에서 조인하기.. --> (<a href="${viewURL}">${list.member_id}</a>)
-											</td>
-											<td>${list.review_pw}</td>
-											<td>${list.review_regdate}</td>
-											<td rowspan="2"><input class="adminbutton" type="button" value="삭제"
-												onclick="deleteCheck2(${list.review_num}, ${view.book_num})" /></td>
-										</tr>
+											<tr>
+												<td>${list.review_num}</td>
+												<td>
+													<!-- member_name review에서 조인하기.. --> (<a href="${viewURL}">${list.member_id}</a>)
+												</td>
+												<td>${list.review_pw}</td>
+												<td>${list.review_regdate}</td>
+												<td rowspan="2">
+													<a class="mdi mdi-delete" title="Delete" onclick="deleteCheck2(${list.review_num}, ${view.book_num})"></a>
+												</td>
+											</tr>
+											
 										<tr>
 											<td colspan=3 style="width: 400px;">${list.review_content}</td>
 											<td>${list.star_point}</td>
 										</tr>
-										<br>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
