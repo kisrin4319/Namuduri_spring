@@ -1,40 +1,139 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<% String cp = request.getContextPath(); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-<link href="<%= cp %>/css/footer.css" rel="stylesheet" type="text/css" />
-</head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String cp = request.getContextPath();
+%>
+<!doctype html>
+<html class="no-js" lang="">
 <body>
-	<div id="footer">
-	<div class="footer_con">
-		<ul class="member_area">
-			
-		</ul>
-	</div>
-    <div class="container">
-        <div class="logo">
-			<a href="main.do" ><img src="/namuduri/images/common/Logo.png" alt="Namuduri" style="width: 150px;"/></a>
+	<footer>
+		<div class="footer-top-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-8">
+						<div class="footer-left">
+							<a href="index.html"> <img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
+							</a> <br /> <br />
+							<ul class="footer-contact">
+								<li><i class="flaticon-location"></i> Gangnam-gu, Seoul</li>
+								<li><i class="flaticon-technology"></i> 1544-9970</li>
+								<li><i class="flaticon-web"></i> namuduri@namuduri.com</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-4">
+						<div class="single-footer">
+							<h2 class="footer-title">My Account</h2>
+							<ul class="footer-list">
+								<li><a href="#">&nbsp;Login</a></li>
+								<li><a href="#">&nbsp;My Cart</a></li>
+								<li><a href="#">&nbsp;Wish List</a></li>
+								<li><a href="#">&nbsp;Manage Account</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2 hidden-sm">
+						<div class="single-footer">
+							<h2 class="footer-title">Shop</h2>
+							<ul class="footer-list">
+								<li><a href="my-account.html">&nbsp;Main</a></li>
+								<li><a href="account.html">&nbsp;Best Seller</a></li>
+								<li><a href="cart.html">&nbsp;New Books</a></li>
+								<li><a href="wishlist.html">&nbsp;Used Books</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2 hidden-sm" style="text-align: left;">
+						<div class="single-footer">
+							<h2 class="footer-title">Service</h2>
+							<ul class="footer-list">
+								<li><a href="#">&nbsp;FAQ</a></li>
+								<li><a href="#">&nbsp;Q&A</a></li>
+								<li><a href="#">&nbsp;Contact</a></li>
+								<li><a href="#">&nbsp;My Page</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-8">
+						<div class="single-footer footer-newsletter">
+							<h2 class="footer-title">Our Newsletter</h2>
+							<p>Consectetur adipisicing elit se do eiusm od tempor incididunt ut labore et dolore magnas aliqua.</p>
+							<form action="#" method="post">
+								<div>
+									<input type="text" placeholder="email address">
+								</div>
+								<button class="btn btn-search btn-small" type="submit">SUBSCRIBE</button>
+								<i class="flaticon-networking"></i>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-4 visible-sm">
+						<div class="single-footer">
+							<h2 class="footer-title">Shop</h2>
+							<ul class="footer-list">
+								<li><a href="#">Orders & Returns</a></li>
+								<li><a href="#">Search Terms</a></li>
+								<li><a href="#">Advance Search</a></li>
+								<li><a href="#">Affiliates</a></li>
+								<li><a href="#">Group Sales</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-        <div class="policy">
-            <address style="text-align: left;"><strong>나무두리(주)</strong>  서울특별시 강남구 테헤란로14길 6 남도빌딩 3F </address>
-            <ul>
-                <li>대표 : 윤대명</li>
-                <li>사업자등록번호 : 851-87-00622</li>
-                <li>통신판매업신고번호 : 서울 강남 제2014-01호</li>
-                <li>개인정보관리자 : 윤대명</li>
-            </ul>
-            <ul>
-                <li>대표번호 : <strong>1544-9970</strong></li>
-                <li>팩스번호 : 070-8290-2889</li>
-                <li>메일 : namuduri@namuduri.co.kr</li>
-            </ul>
-            <p>copyright (c) <strong>namuduri.com</strong> all rights reserved.</p>
-        </div>
-    </div>
-</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="footer-bottom-left pull-left">
+							<p>
+								Copyright &copy; Namuduri.com 2017 <span> <a href="#">DevItems</a>
+								</span> . All Right Reserved.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="footer-bottom-right pull-right">
+							<img src="${pageContext.request.contextPath}/bootstrap/img/paypal.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer Area End -->
+	<!-- all js here -->
+	<!-- jquery latest version -->
+	<script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
+	<!-- bootstrap js -->
+	<script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
+	<!-- owl.carousel js -->
+	<script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
+	<!-- jquery-ui js -->
+	<script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
+	<!-- jquery Counterup js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>
+	<!-- jquery countdown js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
+	<!-- jquery countdown js -->
+	<script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
+	<!-- jquery Meanmenu js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
+	<!-- wow js -->
+	<script src="<%=cp%>/bootstrap/js/wow.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+	<!-- scrollUp JS -->
+	<script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
+	<!-- plugins js -->
+	<script src="<%=cp%>/bootstrap/js/plugins.js"></script>
+	<!-- Nivo slider js -->
+	<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+	<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
+	<!-- main js -->
+	<script src="<%=cp%>/bootstrap/js/main.js"></script>
 </body>
 </html>
