@@ -64,7 +64,7 @@
 	}
 	
 	function openZipCheck() {
-		var zipUrl = 'http://localhost:8080/namuduri/zipCheck.do'
+		var zipUrl = '/namuduri/member/zipCheckForm.do';
 		window.open(
 				zipUrl,
 				"confirm",
@@ -160,7 +160,7 @@
 							<td>
 								&nbsp;&nbsp;&nbsp;
 								<input type="text" name="member_zipcode" size="7"  value="${memberInfo.member_zipcode }"/>
-								<input type="text" name="member_addr1" size="50"  value="${memberInfo.member_addr1 }"/> <input type="button" class="btn_small3" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" style="height: 20px;"/>
+								<input type="text" name="member_addr1" size="50"  value="${memberInfo.member_addr1 }"/> <input type="button" class="btn_small3" name="zipcode" value="우편번호" onclick="openZipCheck()" style="height: 20px;"/>
 							</td>
 						</tr>
 						
