@@ -3,6 +3,40 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
+    <script type="text/javascript">
+function submit() {
+	var fi = document.findidform;
+	
+	if(fi.member_name.value ==""){
+		alert("이름을 입력해주세요.")
+		fi.member_name.focus();
+	}
+	else if(fi.member_jumin1.value ==""){
+		alert("주민등록번호를 입력해주세요.");
+		fi.member_jumin1.focus();
+	}
+	else if(fi.member_jumin2.value==""){
+		alert("주민등록번호를 입력해주세요.");
+		fi.member_jumin2.focus();
+	}
+	else {
+		$.ajax({
+            url:'/namuduri/member/memberIdFind.do',
+            type:'post',
+            data:$('form').serialize(),
+            success:function(result){
+            	if(result.returnVal == '1'){
+            		alert('당신의 아이디는' + result.member_id + '입니다.');
+            		return false;
+            	}else {
+            		alert('아이디가 존재하지 않습니다. 가입 후 이용해 주세요.');
+            		return false;
+            	}
+            }
+        })
+	}
+}
+</script>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Creat An Account || Witter Multipage Responsive Template</title>
@@ -136,13 +170,15 @@
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul id="nav">
-                                    <li><a href="index.html">HOME</a></li>
-                                    <li><a href="shop.html">FEATURED</a></li>
-                                    <li><a href="shop.html">REVIEW BOOK</a></li>
-                                    <li><a href="shop.html">ABOUT AUTHOR</a></li>
-                                    <li><a href="shop.html">TESTIMONIAL</a></li>
-                                    <li><a href="blog.html">pages</a>
-                                        <ul class="sub-menu">
+                                    <li><a href="index.html">전체보기</a></li>
+                                    <li><a href="shop.html">단편소설</a></li>
+                                    <li><a href="shop.html">장편소설</a></li>
+                                    <li><a href="shop.html">자기계발</a></li>
+                                    <li><a href="shop.html">시/에세이</a></li>
+                                    <li><a href="shop.html">어린이(초등)</a></li>
+                                    <li><a href="shop.html">중/고등참고서</a></li>
+                                    <li><a href="shop.html">취업/참고서</a></li>
+                                        <!-- <ul class="sub-menu">
                                             <li><a href="about.html">About Us</a></li>
                                             <li><a href="cart.html">Cart Page</a></li>
                                             <li><a href="checkout.html">Check Out</a></li>
@@ -153,9 +189,9 @@
                                             <li><a href="single-product.html">Single Shop Page</a></li>
                                             <li><a href="wishlist.html">Wishlist Page</a></li>
                                             <li><a href="404.html">404 Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact-us.html">CONTACT</a></li>
+                                        </ul> -->
+                                    
+                                    <!-- <li><a href="contact-us.html">CONTACT</a></li> -->
                                 </ul>
                             </nav>
                         </div>                        
@@ -277,13 +313,13 @@
 				<div class="row">
 					<div class="col-md-12">
 					    <div class="breadcrumbs">
-					       <h2>LOGIN/REGISTER</h2> 
-					       <ul class="breadcrumbs-list">
+					       <!-- <h2>LOGIN/REGISTER</h2> --> 
+					       <!-- <ul class="breadcrumbs-list">
 						        <li>
 						            <a title="Return to Home" href="index.html">Home</a>
 						        </li>
 						        <li>Login</li>
-						    </ul>
+						    </ul> -->
 					    </div>
 					</div>
 				</div>
@@ -294,7 +330,8 @@
         <div class="login-account section-padding">
            <div class="container">
                 <div class="row">
-<!--                     <div class="col-md-6 col-sm-6">
+
+                    <!-- <div class="col-md-6 col-sm-6">
                         <form action="#" class="create-account-form" method="post">
                             <h2 class="heading-title">
                                 CREATE AN ACCOUNT
@@ -312,25 +349,32 @@
                             </div>
                         </form>
                     </div> -->
-                    <div class="col-md-6 col-sm-6">
-                       <form action="#" class="create-account-form" method="post">
+                    <div class="col-md-6 col-sm-4">
+                       <form action="memberIdFind.do" class="create-account-form" method="post" name="findidform" id="findidform" onsubmit="return checkk()">
+
                             <h2 class="heading-title">
-                                ALREADY RESIGTERED?
+                                	아이디 찾기
                             </h2>
-                            <p class="form-row">
-                                <input type="email" placeholder="Email address">
+                            <p class="form-row"><h5>이&nbsp;&nbsp;름</h5>
+                                <input type="text" name="member_name" size="10" maxlength="10">
                             </p>
-                            <p class="form-row">
-                                <input type="password" placeholder="Password">
+                            <p class="form-row"><h5>주민등록번호</h5>
+                                <input type="text" name="member_jumin1" size="7" maxlength="6"> - <input type="text" name="member_jumin2" size="7" maxlength="7">               
                             </p>
-                            <p class="lost-password form-group">
+                            <!-- <p class="lost-password form-group">
                                 <a href="#" rel="nofollow">Forgot your password?</a>
-                            </p> 
+                            </p> --> 
                             <div class="submit">					
                                 <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
-                                        SING IN
+                                       	 확인
+                                    </span>
+                                </button>
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                       	 취소
                                     </span>
                                 </button>
                             </div>                          
@@ -342,7 +386,7 @@
         <!-- Loging Area End -->
 		<!-- Footer Area Start -->
 		<footer>
-		    <div class="footer-top-area">
+		    <%-- <div class="footer-top-area">
 		        <div class="container">
 		            <div class="row">
 		                <div class="col-md-3 col-sm-8">
@@ -468,7 +512,7 @@
 		                </div>
 		            </div>
 		        </div>
-		    </div>
+		    </div> --%>
 		</footer>
 		<!-- Footer Area End -->
 		<!-- all js here -->

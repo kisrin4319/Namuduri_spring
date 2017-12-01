@@ -25,13 +25,6 @@
 	</h2>
 	<table class="table_myroom td_font_12 margin_top10">
 		
-		<%-- <c:forEach var="item" items="${ orderDetailModel }">
-			<tr>
-				<td width="100">주 문 자 : ${ item.member_id }</td>
-				<td colspan="3" width="500"></td>
-			</tr>
-		</c:forEach> --%>
-		
 		<tr>
 			<td width="100">주 문 자</td>
 			<td colspan="3" width="500">${ memberInfo.member_id }</td>
@@ -76,15 +69,15 @@
 			주문 번호 : ${ memberOrderDetail.ORDER_TRADE_NUM }<br><br>
 			도 서 명 : ${ memberOrderDetail.ORDER_BOOK_NAME }<br><br>
 			주문 상태 : 
-			<c:if test="order_trans_status == 'ST01'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST01' }">
 				배송 준비중
 			</c:if>
-			<c:if test="order_trans_status == 'ST02'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST02' }">
 				배송 중
 			</c:if>
-			<c:if test="order_trans_status == 'ST03'">
+			<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST03' }">
 				배송 완료
-			</c:if>${ memberOrderDetail.ORDER_TRANS_STATUS }
+			</c:if>
 			<br><br>
 			주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }<br><br>
 			</td>

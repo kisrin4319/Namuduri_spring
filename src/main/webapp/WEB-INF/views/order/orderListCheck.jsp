@@ -18,15 +18,15 @@
 <script type="text/javascript">
 	function check(num){
 		
-		$('#order_trade_num').val(num);
+		//$('#order_trade_num').val(num);
  
 			$.ajax({
             	url:'/namuduri/order/memberOrderCancel.do',
             	type:'post',
-            	data:$('form').serialize(),
+            	data:{order_trade_num : num},
             	success:function(result){
             		if(result == '1'){
-            			alert('주문번호' + num +  '이 취소되었습니다.');
+            			alert('주문번호' +  num  +  '이 취소되었습니다.');
             			location.reload();
             		}
            	 	}
@@ -127,7 +127,7 @@
 									</c:if>
 								</td>
 								<td align="center">
-								<input type="button" value="주문취소하기" align="middle" onclick="check('${item.order_trade_num}')" /></td>
+								<input type="button" value="주문취소하기" align="middle" onclick="check(${item.order_trade_num});" /></td>
 							</tr>
 							</c:forEach>
 							

@@ -36,12 +36,12 @@ function check(){
 }
 
 function openConfirmId(loginform){	
-	var url='http://localhost:8080/namuduri/memberIdFindForm.do';
+	var url='/namuduri/member/memberIdFindView.do';
 	window.open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=610, height=210");
 }
 
 function openConfirmPw(loginform){
-	var url='http://localhost:8080/namuduri/memberPwFindForm.do';
+	var url='/namuduri/member/memberPwFindView.do';
 	window.open(url, "confirm", "tollbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=605, height=195");
 }
 

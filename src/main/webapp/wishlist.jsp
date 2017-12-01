@@ -53,23 +53,24 @@
                         <div class="shop-widget">
                             <div class="shop-widget-top">
                                 <aside class="widget widget-categories">
-                                    <h2 class="sidebar-title text-center">CATEGORY</h2>
+                                    <h2 class="sidebar-title text-center">마이페이지</h2>
                                     <ul class="sidebar-menu">
-                                        <li>
-                                            <a href="#">
-                                               <i class="fa fa-angle-double-right"></i>
-                                                LEARNING                                          
-                                                <span>(5)</span>
-                                            </a>
+                                        <li>                                         
+                                               <i class="fa fa-angle-double-right">주문관리</i>                                                                                                                              
                                         </li>
                                         <li>
-                                            <a href="#">
-                                               <i class="fa fa-angle-double-right"></i>
-                                                LIGHTING                                            
-                                                <span>(8)</span>
-                                            </a>
+                                        	<a href="http://localhost:8080/namuduri/order/orderListCheckView.do">▶주문/배송조회</a>
+                                        </li>	
+                                        <li>                                           
+                                               <i class="fa fa-angle-double-right">회원정보관리</i>                                                                                                                                                                     
                                         </li>
                                         <li>
+                                        	<a href="http://localhost:8080/namuduri/member/memberModifyView.do">▶회원정보수정</a>                                       	
+                                        </li>
+                                        <li>
+                                        	<a href="http://localhost:8080/namuduri/member/memberDeleteView.do">▶회원 탈퇴</a>
+                                        </li>                                      
+                                        <!-- <li>
                                             <a href="#">
                                               <i class="fa fa-angle-double-right"></i>
                                                LIVING ROOMS
@@ -82,10 +83,10 @@
                                                 LAMP                                           
                                                 <span>(7)</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </aside> 
-                                <aside class="widget shop-filter">
+                                <!-- <aside class="widget shop-filter">
                                     <h2 class="sidebar-title text-center">PRICE SLIDER</h2>
                                     <div class="info-widget">
                                         <div class="price-filter">
@@ -99,9 +100,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </aside>                            
+                                </aside> -->                     
                             </div>
-                            <div class="shop-widget-bottom">
+                            <%-- <div class="shop-widget-bottom">
                                 <aside class="widget widget-tag">
                                     <h2 class="sidebar-title">POPULAR TAG</h2>
                                     <ul class="tag-list">
@@ -160,13 +161,24 @@
                                         </div>
                                     </div>
                                 </aside>
-                            </div>
+                            </div> --%>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
+                    	<div class="wishlist-right-area table-responsive">
+                    		<div class="content_middle" style="width:800px;">                  		                 			
+                    			<div class="user_name"><p>${ member_id }</p> 님 안녕하세요. | My page</div><br>
+                    		</div>                  		
+                    	</div>
+                    	<h4>
+                    		<span>주문/배송조희</span>
+                    	</h4>                   		
+                    </div>
+                    </div>           
+                    <%-- <div class="col-md-9 col-sm-9 col-xs-12">
                         <div class="wishlist-right-area table-responsive">
                             <table class="wish-list-table">
-                                <thead>
+                               <thead>
                                     <tr>
                                         <th class="t-product-name">Products</th>
                                         <th class="product-details-comment">Product Details & Comment</th>
@@ -270,13 +282,13 @@
                                 <a href="#" class="right-shoping-cart">UPDATE WISHLIST</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
         </div>
         <!-- Shop Area End -->
 		<!-- Footer Area Start -->
-		<footer>
+		<%-- <footer>
 		    <div class="footer-top-area">
 		        <div class="container">
 		            <div class="row">
@@ -404,7 +416,7 @@
 		            </div>
 		        </div>
 		    </div>
-		</footer>
+		</footer> --%>
 		<!-- Footer Area End -->
 		<!-- all js here -->
 		<!-- jquery latest version -->
