@@ -397,7 +397,6 @@ public class BoardController {
 		boardService.BoardDelete(board_num);
 		
 		
-		mv.addObject("ref", ref);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/board/boardList.do");
 			
