@@ -4,19 +4,31 @@
 <%
 	String cp = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=cp%>/css/adminPage.css" rel="stylesheet" type="text/css" />
 <title>회원 정보 수정</title>
 </head>
 <body>
+<div class="container-fluid">
+	<div class="row page-titles">
+		<div class="col-md-5 col-8 align-self-center">
+			<h3 class="text-themecolor">Member Modify</h3>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="<%=cp%>/admin/main.do">Home</a></li>
+				<li class="breadcrumb-item"><a href="<%=cp%>/admin/memberList.do">Member List</a></li>
+				<li class="breadcrumb-item active">Member Modify</li>
+			</ol>
+		</div>
+	</div>
+	
+	<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
 	<div class="detail">
 		<h2 class="detail_h2">회원 정보 수정</h2>
 		<form:form commandName="view" method="post">
 		<%-- <form:errors element="div"/> --%>
-			<table border=1 cellspacing=0 cellpadding=0 class="table_detail">
+			<table border=1 class="table_detail">
 				<tr>
 					<th width=15%>회원 번호</th>
 					<td width=35%>${view.member_num}</td>
@@ -76,7 +88,7 @@
 			</table>
 			<br>
 			<h2>환불 정보 수정</h2>
-			<table border=1 cellspacing=0 cellpadding=0 class="table_detail">
+			<table border=1 class="table_detail">
 				<tr>
 					<th>은행명</th>
 					<td><form:input path="member_bankname" value="${view.member_bankname}"/></td>
@@ -97,5 +109,8 @@
 			</div>
 		</form:form>
 	</div>
+	
+</div>
+<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

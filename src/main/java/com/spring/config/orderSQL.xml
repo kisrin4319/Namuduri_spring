@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getOrderTradeNumList" parameterType="String" resultType="OrderModel">
-		select * from ORDER_BOOK where member_id = #{member_id} AND ORDER_USE_YN = 1
+		select * from ORDER_BOOK where member_id = #{member_id}
 	</select>
 	
 	<!-- 7. 주문 도서정보 가져오기 -->
