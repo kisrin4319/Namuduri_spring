@@ -51,6 +51,7 @@ public class AdminService implements AdminDao {
 	public void deleteBook(int book_num) {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("book.deleteBook", book_num);
+		sqlSessionTemplate.delete("book.deleteReviewAll", book_num);
 	}
 
 	@Override //도서 리뷰 삭제
