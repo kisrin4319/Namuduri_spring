@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>비밀번호 찾기</title>
-<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
->>>>>>> e9cc1ccc9c1bd2461238f630d4cfc2bffe8c1a32
-<script language="javascript">
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>FIND PW MEMBER</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" /> --%>
+<script type="text/javascript">
 function submit() {
 	var fw = document.findpwform;
 	
@@ -38,7 +40,60 @@ function submit() {
 }
 </script>
 </head>
-<body scroll="" style ="overflow-x:hidden">
+<body>
+
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">FIND PW MEMBER PAGE</h2>
+		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+			<li>
+				<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
+			</li>
+			<li>
+				<a title="Go to Find Id" href="<%=cp%>/member/memberIdFindView.do">Find ID</a>
+			</li>
+		</ul>
+		
+	<!-- Find PW Area Start -->
+		<div class="login-account section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<form action="memberPwFind.do" class="create-account-form" id="findpwform" name="findpwform" method="post">
+							<h2 class="heading-title">
+								Find PW
+							</h2>
+							<div class="form-group">
+							<!-- <p class="form-row"><h5>ID</h5> -->
+								<label for="usr" class="form-row">ID:</label>
+								<input type="text" name="member_id">
+							<!-- </p> -->
+							</div>
+							<!-- <p class="form-row"><h5>E-MAIL</h5> -->
+							<div class="form-group">
+								<label for="usr" class="form-row">E-MAIL:</label>
+								<input type="text" name="member_email">
+							</div>
+							<!-- </p> -->
+							<div class="submit">					
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                       	 SING IN
+                                    </span>
+                                </button>
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                       	 CLOSE
+                                    </span>
+                                </button>
+                            </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+<%-- <body scroll="" style ="overflow-x:hidden">
 	<div id ="popup_type01" style ="width:600px;">
 		<div class ="popup_shadow">
 			<div class ="popup_wrap">
@@ -73,5 +128,5 @@ function submit() {
 			</div>
 		</div>
 	</div>
-</body>
+</body> --%>
 </html>

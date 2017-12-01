@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디 찾기</title>
-<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>FIND ID MEMBER</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" /> --%>
 <script type="text/javascript">
 function submit() {
 	var fi = document.findidform;
@@ -39,11 +42,63 @@ function submit() {
         })
 	}
 }
-
-
 </script>
 </head>
-<body scroll="" style ="overflow-x:hidden">
+<body>
+
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">FIND ID MEMBER PAGE</h2>
+		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+			<li>
+				<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
+			</li>
+			<li>
+				<a title="Go to Find Pw" href="<%=cp%>/member/memberPwFindView.do">Find PW</a>
+			</li>
+		</ul>
+		
+	 <!-- Find ID Area Start -->
+        <div class="login-account section-padding">
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-md-6 col-sm-6">
+        				<form action="memberIdFind.do" class="create-account-form" name ="findidform" id="findidform" method="post" onsubmit="return checkk()">
+        					<h2 class="heading-title">
+        						Find ID
+        					</h2>
+        					<div class="form-group">
+        					<!-- <p class="form-row"><h5>NAME</h5> -->
+        						<label for="usr" class="form-row">NAME:</label>
+                                <input type="text" class="form-contorl" id="usr" name="member_name">                        
+                            <!-- </p> -->
+                            </div>
+                            <div class="form-group">
+                            <!-- <p class="form-row"><h5>JUMIN NUMBER</h5> -->
+                            	<label for="usr" class="form-row">JUMIN NUMBER:</label>
+                                <input type="text" name="member_jumin1" size="7" maxlength="6"> - <input type="text" name="member_jumin2" size="7" maxlength="7">  
+                            <!-- </p> -->
+                            </div>
+                            <div class="submit">					
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left" ></i>                                      
+                                       	 SING IN
+                                    </span>
+                                </button>
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>                                       
+                                       	 CLOSE
+                                    </span>
+                                </button>
+                            </div>
+        				</form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+		
+</body>
+<%-- <body scroll="" style ="overflow-x:hidden">
 	<div id ="popup_type01" style ="width:600px;">
 		<div class ="popup_shadow">
 			<div class ="popup_wrap">
@@ -81,5 +136,5 @@ function submit() {
 </div>
 </div>
 </div>
-</body>
+</body> --%>
 </html>

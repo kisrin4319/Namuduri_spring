@@ -1,22 +1,115 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="java.util.HashMap" %>
 <% String cp = request.getContextPath(); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>mypage</title>
-<link href ="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>MY PAGE</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <link href ="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/layout_ssl.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/myroom.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/order_ssl.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
-<link href ="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" />
+<link href ="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" /> --%>
 </head>
-<body>		
+<body>
+	
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">MY PAGE</h2>
+		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+			<li>
+				<a title="Go to Main" href="<%=cp%>/main.do">MAIN</a>
+			</li>
+			<li>
+				<a title="Go to Books" href="<%=cp%>/books/booksList.do">BOOKS</a>
+			</li>
+		</ul>
+		
+		<%-- <div class="shopping-area section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<div class="shop-widget">
+							<div class="shop-widget-top">
+								<aside class="widget widget-categories">
+									<h2 class="sidebar-title text-center">CATEGORY</h2>
+									<ul class="sidebar-menu">
+										<li>
+											<a href="<%=cp%>/order/orderListCheckView.do">
+												<i class="fa fa-angle-double-right"></i>
+												주문/배송조회
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/member/memberModifyView.do">
+												<i class="fa fa-angle-double-right"></i>
+												회원 정보 수정
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/member/memberDeleteView.do">
+												<i class="fa fa-angle-double-right"></i>
+												회원 탈퇴
+											</a>
+										</li>
+									</ul> 
+								</aside>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> --%>
+			<div class="container">
+			<div id="myroom_contents">
+				<div class="user_section">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>NAME : <div class="user_name">${ member_id } 님 안녕하세요.</div></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			</div>
+			
+			<h5>주문 내역</h5>
+			<div class="container">
+				<div id="orderListCheckForm">
+					<input type="hidden" id="order_trade_num" name="order_trade_num"/>
+					<table class="table table-striped">
+						<thead>
+							<colgroup>
+								<col width="14%"/>
+								<col width="10%"/>
+								<col width="10%"/>
+								<col width="10%"/>
+								<col width="15%"/>
+								<col width="14%"/>
+							</colgroup>
+							<tr>
+								<th class="first" scope="col">주문번호</th>
+								<th scope="col">주문날짜</th>
+								<th scope="col">결제상태</th>
+								<th scope="col">결제방법</th>
+								<th scope="col">배송번호</th>
+								<th scope="col">주문상태</th>
+							</tr>
+						</thead>
+					</table>
+					
+				</div>
+			</div>
+			
+		
+</body>
+<%-- <body>		
 	<div class="content_middle" style="width:800px;margin-right:100px;"> 
 	<div id="myroom_contents">
 		<!-- 고객 공통 컨텐츠 -->
@@ -117,5 +210,5 @@
 		<img align="middle" src="<%=cp%>/mypage/image/mypage.JPG" />
 		</div>
 	</div>	
-</body>
+</body> --%>
 </html>
