@@ -41,8 +41,8 @@ public class BoardController {
 
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 6;
-	private int blockPage = 4;
+	private int blockCount = 10;
+	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
 
@@ -55,8 +55,7 @@ public class BoardController {
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
 				
 		boardList = boardService.boardList();
-			System.out.println(boardList.size());
-			
+					
 		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
             currentPage = 1;
         } else {
@@ -104,7 +103,7 @@ public class BoardController {
 		mv = new ModelAndView();
 					
 		boardList = boardService.boardList();
-			System.out.println(boardList.size());
+			
 		totalCount = boardList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -338,18 +337,21 @@ public class BoardController {
 		return "boardWrite";
 	}*/
 	@RequestMapping(value ="/board/boardModify.do", method = RequestMethod.GET)
-	public ModelAndView qnaModifyForm(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
+	public ModelAndView modifyForm(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
 			HttpServletRequest request) {
-	 mv = new ModelAndView();
-	 int board_num=Integer.parseInt(request.getParameter("board_num"));
 	 
-	 boardModel = boardService.boardDetail(board_num);
-	 boardModel.setBoard_num(board_num);
+	mv = new ModelAndView();
 	 
-	 mv.addObject("boardModel", boardModel);
-	 mv.setViewName("boardModify");
+	int board_num=Integer.parseInt(request.getParameter("board_num"));
+	 
+	boardModel = boardService.boardDetail(board_num);
+	boardModel.setBoard_num(board_num);
+	 	 
+	mv.addObject("boardModel", boardModel);
+	mv.setViewName("boardModify");
+	
 	return mv;
- }
+	}
 	
 	/*@RequestMapping(value="/board/boardModifyProc.do", method = RequestMethod.POST)
 	public String boardModify(@RequestParam int board_num,@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
@@ -373,39 +375,34 @@ public class BoardController {
 		return "redirect:boardList.do";
 	}*/
 	@RequestMapping(value ="/board/boardModify.do", method = RequestMethod.POST)
-	public ModelAndView qnaModify(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
+	public ModelAndView boardModify(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
 			HttpServletRequest request) {
 
-		mv = new ModelAndView();
-		boardService.BoardModify(boardModel);
-
-		mv.setViewName("redirect:/board/boardList.do");
-		return mv;
+	mv = new ModelAndView();
+	
+	boardService.boardModify(boardModel);
+		
+	mv.addObject("boardModel", boardModel);
+	mv.setViewName("redirect:/board/boardList.do");
+	
+	return mv;
 	}
 	
-	
-
 	// 5.게시글 삭제
 	@RequestMapping(value="/board/boardDelete.do")
-	public ModelAndView boardDelete(@RequestParam int board_num, @RequestParam int currentPage) throws Exception{
+	public ModelAndView boardDelete(@RequestParam int board_num, @RequestParam int ref, @RequestParam int currentPage) throws Exception{
 	
 		mv=new ModelAndView();
 		
 		boardService.BoardDelete(board_num);
-	
+		
+		
+		mv.addObject("ref", ref);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/board/boardList.do");
 			
 		return mv;
 	}
-	
-		
-		
-	
-	
-	
-	
-	
 	
 	
 }	

@@ -54,8 +54,9 @@ public class BoardService implements BoardDao {
 	
 	// 게시글 수정
 	@Override
-	public void BoardModify(BoardModel boardModel) {
-		sqlSessionTemplate.update("board.BoardModify", boardModel);
+	public void boardModify(BoardModel boardModel) {
+		sqlSessionTemplate.update("board.boardModify", boardModel);
+		
 	}
 	
 	// 게시글 삭제
@@ -63,5 +64,7 @@ public class BoardService implements BoardDao {
 	public void BoardDelete(int board_num) {
 		sqlSessionTemplate.delete("board.BoardDelete", board_num);
 	}
+
+	
 
 }

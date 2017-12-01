@@ -80,6 +80,9 @@
 									<a href="${viewURL}">${list.board_title}</a>						
 								</c:if>
 								<c:if test="${session.member_id!='admin'}">
+								<c:if test="${list.re_step != 0}">
+									<c:forEach var="i" begin="${re_level}" end="0">[답변]</c:forEach>
+								</c:if>
 									<a href="javascript:checkForm(${list.board_num})">
 										<font color='gray'>*비공개 글 입니다</font>
 										<img src="images/common/secret.gif" />

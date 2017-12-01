@@ -17,7 +17,7 @@ public interface BoardDao {
 		public int BoardReply(BoardModel boardModel);
 		
 		// 게시글 수정
-		public void BoardModify(BoardModel boardModel);
+		public void boardModify(BoardModel boardModel);
 		
 		// 게시글 삭제
 		public void BoardDelete(int board_num);

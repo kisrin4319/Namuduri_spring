@@ -15,7 +15,7 @@
 	
 	<!-- 게시판 목록 -->
 	<select id="boardList" resultType="BoardModel"> 
-  		<include refid="select-BoardAll" /> ORDER BY ref DESC, re_step ASC, board_regdate DESC
+  		<include refid="select-BoardAll" /> ORDER BY ref DESC, re_step ASC, board_regdate ASC
 	</select>
 	
 	<!-- 게시글 내용 보기 -->
@@ -23,6 +23,17 @@
 		<include refid="select-BoardAll" />
 		<include refid="where-BoardNo" />
 	</select>
+	
+	
+	<select id="selectBd2" resultType="BoardModel" parameterType="int">
+		SELECT * FROM board WHERE BOARD_TYPE ='2' ORDER BY board_regdate DESC
+	</select>
+	
+	<select id="selectBdAll" resultType="BoardModel" parameterType="int">
+		SELECT * FROM board WHERE BOARD_TYPE ='0' OR BOARD_TYPE ='1'
+		ORDER BY ref DESC, re_step ASC, board_regdate DESC
+	</select>
+	
 	
 	
 	<!-- 검색 -->
@@ -58,7 +69,7 @@
     </insert>
   
   	<!-- 게시글 수정 -->
- 	<update id="BoardModify" parameterType="BoardModel">
+ 	<update id="boardModify" parameterType="BoardModel">
  		UPDATE BOARD 
  		SET BOARD_TITLE = #{board_title}, BOARD_PW = #{board_pw}, BOARD_CONTENT = #{board_content}, BOARD_TYPE = #{board_type}
 		WHERE BOARD_NUM = #{board_num}
