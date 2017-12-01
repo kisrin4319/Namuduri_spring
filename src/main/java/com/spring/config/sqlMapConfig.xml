@@ -17,6 +17,7 @@
 	<!-- Book -->	
 	<typeAlias type="com.spring.book.BooksModel" alias="BooksModel" />
 	<typeAlias type="com.spring.book.ReviewModel" alias="ReviewModel" />
+	<typeAlias type="com.spring.usedbook.UsedBooksModel" alias="UsedBooksModel"/>
 	
 	<!-- Order -->
 	<typeAlias type="com.spring.order.OrderModel" alias="OrderModel" />
@@ -32,6 +33,7 @@
 		<mapper resource="com/spring/config/memberSQL.xml" />
 		<mapper resource="com/spring/config/basketSQL.xml" />
 		<mapper resource="com/spring/config/bookSQL.xml" />
+		<mapper resource="com/spring/config/usedBookSQL.xml"/>
  		<mapper resource="com/spring/config/orderSQL.xml" />
  		<mapper resource="com/spring/config/boardSQL.xml" />
 	</mappers>

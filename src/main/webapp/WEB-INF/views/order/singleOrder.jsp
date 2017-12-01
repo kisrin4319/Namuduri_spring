@@ -409,10 +409,10 @@ var mobile = "${memberModel.member_mobile}";
 		var url = '<%=cp%>/order/zipCheck.do';
    		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
   }
-	function payment_Proc(form) {
+	function payment_Proc() {
 	  
-	  	var check = form.value;
-	  	alert(check);
+	  	var check = eval("document.orderform");
+	  	alert(check.value);
 	  	var url ='<%=cp%>/payment.jsp?sumMoney='+${sumMoney}+'&';
 	  	window.open(url,"post","toolbar=no,width=605,heigth=400,directoris=no,status=yes,scrollbars=yes,menubar=no")
 	  	

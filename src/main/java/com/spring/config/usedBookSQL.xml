@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="usedbook">
+
+	<sql id="select-bookall">
+		SELECT * FROM USED_BOOK
+	</sql>
+
+	<sql id="where-booknum">
+		WHERE BOOK_NUM = #{BOOK_NUM}
+	</sql>
+
+	<!-- 도서 목록 -->
+	<select id="selectBooksAll" resultType="UsedBooksModel">
+		<include refid="select-bookall" />
+		ORDER BY USED_BOOK_REGDATE DESC
+	</select>
+
+	<!-- 카테고리 도서 목록 -->
+	<select id="selectBookList" resultType="UsedBooksModel" parameterType="String">
+		<include refid="select-bookall" />
+		WHERE
+		<if test="value!=null">
+			BOOK_CATEGORY = #{value}
+		</if>
+		ORDER BY USED_BOOK_REGDATE DESC
+	</select>
+
+	<!-- 도서 검색 목록 -->
+	<select id="selectSearchList" parameterType="map" resultType="UsedBooksModel">
+		<include refid="select-bookall" />
+		<choose>
+			<when test="searchNum == 0">
+				AND( BOOK_NAME like '%'||#{searchKeyword}||'%'
+				OR
+				BOOK_AUTH like '%'||#{searchKeyword}||'%'
+				OR COMPANY_ID like
+				'%'||#{searchKeyword}||'%' )
+			</when>
+			<when test="searchNum == 1">
+				AND BOOK_NAME like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchNum == 2">
+				AND BOOK_AUTH like '%'||#{searchKeyword}||'%'
+			</when>
+			<otherwise>
+				AND COMPANY_ID like '%'||#{searchKeyword}||'%'
+			</otherwise>
+		</choose>
+		ORDER BY USED_BOOK_REGDATE DESC
+	</select>
+
+	<!-- 도서 상세보기 -->
+	<select id="selectBookOne" resultType="UsedBooksModel">
+		<include refid="select-bookall" />
+		<include refid="where-booknum" />
+	</select>
+	<select id="selectNewest" resultType="UsedBooksModel">
+		select BOOK_NUM,
+		BOOK_CATEGORY, BOOK_NAME, BOOK_CONTENT, BOOK_PRICE, BOOK_IMAGE,
+		BOOK_SELL_COUNT, BOOK_BASE_COUNT,
+		BOOK_CURRENT_COUNT,
+		BOOK_PUBLISH_DATE, BOOK_DATE, COMPANY_ID, BOOK_AUTH, BOOK_USE_YN from
+		(select rownum, a.* from (select * from book order by book_date desc)
+		a where rownum=1)
+	</select>
+
+	<!-- 도서 작성 -->
+	<insert id="insertUsedBook" parameterType="UsedBooksModel">
+		INSERT INTO USED_BOOK(USED_BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, BOOK_AUTH,
+		COMPANY_ID, BOOK_PRICE, BOOK_NEW_PRICE, BOOK_IMAGE, USED_BOOK_REGDATE, USED_BOOK_STATUS,BOOK_NUM,MEMBER_ID)
+		VALUES (USED_BOOK_NUM_SEQ.NEXTVAL, #{book_category}, #{book_name},
+		#{book_auth}, #{company_id}, #{book_price}, #{book_new_price} #{book_image}, sysdate, #{used_book_status}, #{book_num}, #{member_id})
+	</insert>
+	
+	<!-- 도서 정보 수정 -->
+	<update id="modifyUsedBook" parameterType="UsedBooksModel"> 
+		UPDATE BOOK SET BOOK_CATEGORY = #{book_category}, 
+						BOOK_NAME = #{book_name}, BOOK_AUTH = #{book_auth}, 
+						COMPANY_ID = #{company_id},BOOK_PRICE = #{book_price},BOOK_NEW_PRICE = #{book_new_price},
+						BOOK_IMAGE = #{book_image},USED_BOOK_STATUS = #{used_book_status}, BOOK_NUM =#{book_num}, MEMBER_ID = #{member_id} 
+						WHERE USED_BOOK_NUM = #{used_book_num} 
+	</update>
+	<!-- 도서 삭제 -->
+	<delete id="deleteUsedBook">
+		DELETE FROM BOOK WHERE USED_BOOK_NUM = #{used_book_num}
+	</delete>
+
+</mapper>

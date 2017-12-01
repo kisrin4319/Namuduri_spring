@@ -186,6 +186,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/book/bookDetail.jsp" />
 	</definition>
 	
+	<!-- 중고 서적 리스트 -->
+	<definition name="usedBooksList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbooksList.jsp" />
+	</definition>
+	
+	<!-- 중고 서적 등록 폼 -->
+	<definition name="usedBooksWriteForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbookWrite.jsp" />
+	</definition>
 	<!-- ================================================== -->
 
 	<!-- Admin 페이지 -->

@@ -74,8 +74,7 @@
 									</c:if>
 									<c:if test="${not empty member_id }">
 										<c:if test="${member_id!='admin' }">
-										
-										<%-- 	<img src="<%=cp%>/img/member.png" width="20" height="20"> --%>
+											<img src="<%=cp%>/img/member.png" width="20" height="20">
 										</c:if>
 										<c:if test="${member_id=='admin' }">
 											<img src="<%=cp%>/img/member(admin).png" width="20" height="20">
@@ -175,7 +174,7 @@
 									<a href="<%=cp%>/books/booksList.do">NEW BOOKS</a>
 								</li>
 								<li>
-									<a href="#">USED BOOKS</a>
+									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
 									<a href="#">WISH LIST</a>
@@ -337,7 +336,7 @@
 									<a href="<%=cp%>/books/booksList.do">NEW BOOKS</a>
 								</li>
 								<li>
-									<a href="#">USED BOOKS</a>
+									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
 									<a href="#">WISH LIST</a>
