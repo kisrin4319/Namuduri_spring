@@ -308,18 +308,18 @@ function submit() {
 		</div>		
 		<!-- Mobile Menu End -->   
         <!-- Breadcrumbs Area Start -->
-        <div class="breadcrumbs-area">
+        <!-- <div class="breadcrumbs-area"> -->
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 					    <div class="breadcrumbs">
-					       <!-- <h2>LOGIN/REGISTER</h2> --> 
-					       <!-- <ul class="breadcrumbs-list">
+					       <h2>LOGIN/REGISTER</h2>
+					       <ul class="breadcrumbs-list">
 						        <li>
 						            <a title="Return to Home" href="index.html">Home</a>
 						        </li>
 						        <li>Login</li>
-						    </ul> -->
+						   </ul>
 					    </div>
 					</div>
 				</div>
