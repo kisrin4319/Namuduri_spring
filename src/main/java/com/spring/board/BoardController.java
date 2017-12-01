@@ -322,13 +322,13 @@ public class BoardController {
 	}
 
 	// 4.게시글 수정
-	@RequestMapping(value="/board/boardModify.do", method = RequestMethod.GET)
+	/*@RequestMapping(value="/board/boardModify.do", method = RequestMethod.GET)
 	public String boardModify(HttpServletRequest request, HttpSession session, Model model) {
 		
 		session_id = (String) session.getAttribute("member_id");
 		
 		int num = Integer.parseInt(request.getParameter("board_num"));
-		System.out.println(num);
+		
 		BoardModel view = boardService.boardDetail(num);
 		//System.out.println(view.getBoard_content());
 		model.addAttribute("view", view);
@@ -336,9 +336,22 @@ public class BoardController {
 		mv.setViewName("boardModify");
 		
 		return "boardWrite";
-	}
+	}*/
+	@RequestMapping(value ="/board/boardModify.do", method = RequestMethod.GET)
+	public ModelAndView qnaModifyForm(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
+			HttpServletRequest request) {
+	 mv = new ModelAndView();
+	 int board_num=Integer.parseInt(request.getParameter("board_num"));
+	 
+	 boardModel = boardService.boardDetail(board_num);
+	 boardModel.setBoard_num(board_num);
+	 
+	 mv.addObject("boardModel", boardModel);
+	 mv.setViewName("boardModify");
+	return mv;
+ }
 	
-	@RequestMapping(value="/board/boardModifyProc.do", method = RequestMethod.POST)
+	/*@RequestMapping(value="/board/boardModifyProc.do", method = RequestMethod.POST)
 	public String boardModify(@RequestParam int board_num,@RequestParam String board_title, @RequestParam String board_pw, @RequestParam String board_content, 
 		int board_type, HttpSession session) throws Exception {
 		
@@ -354,11 +367,20 @@ public class BoardController {
 		boardModel.setBoard_type(board_type);
 		boardService.BoardModify(boardModel);
 		
-		
 		mv.addObject("boardModel", boardModel);
 		mv.setViewName("boardModify");
 		
 		return "redirect:boardList.do";
+	}*/
+	@RequestMapping(value ="/board/boardModify.do", method = RequestMethod.POST)
+	public ModelAndView qnaModify(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
+			HttpServletRequest request) {
+
+		mv = new ModelAndView();
+		boardService.BoardModify(boardModel);
+
+		mv.setViewName("redirect:/board/boardList.do");
+		return mv;
 	}
 	
 	

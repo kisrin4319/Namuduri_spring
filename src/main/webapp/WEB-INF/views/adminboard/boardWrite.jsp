@@ -63,9 +63,14 @@
 		</c:when>  --%>
 		
 		<c:otherwise>
-			<form action="boardModifyProc.do" name="regForm" method="post" onsubmit="return validation();">
+			<%-- <form action="boardModifyProc.do" name="regForm" method="post" onsubmit="return validation();">
 				<input type="hidden" name="board_num" value="${view.board_num}" />
-				<input type="hidden" name="currentPage" value="${currentPage}" />
+				<input type="hidden" name="currentPage" value="${currentPage}" /> --%>
+				
+			<form action="<%= cp %>/board/boardModify.do" method="post">
+			<input type="hidden" name="board_num" value="${board_Model.board_num}"/>
+			<input type="hidden" name="currentPage" value="${currentPage}" />
+				
 		</c:otherwise>
 	</c:choose>
 	
@@ -96,20 +101,20 @@
 				<td><input type="text" name="member_id" id="member" value="${member_id}"
 						style="width:150px; height: 18px;" maxlength="20" /></td>
 				<th><font color="#FF0000">*</font> 비밀번호</th>
-				<td><input type="text" name="board_pw" id="passwd" value="${view.board_pw}"
+				<td><input type="text" name="board_pw" id="passwd" value="${boardModel.board_pw}"
 						style="width:150px; height: 18px;" maxlength="20" /></td>
 			</tr>
 			<tr>
 				<th height="30"><font color="#FF0000">*</font>제목</th>
 				<td colspan="5" width="770" bgcolor="#FFFFFF">
-				<input type="text" name="board_title" id="title" value="${view.board_title}" style="width:600px; height:20px;" maxlength="50" /></td>
+				<input type="text" name="board_title" id="title" value="${boardModel.board_title}" style="width:600px; height:20px;" maxlength="50" /></td>
 			</tr>
 
 
 			<tr>
 				<th bgcolor="#F4F4F4"><font color="#FF0000">*</font> 내용</th>
 				<td colspan="5" bgcolor="#FFFFFF">
-				<textarea name="board_content" id="content" cols="100" rows="17">${view.board_content}</textarea> 
+				<textarea name="board_content" id="content" cols="100" rows="17">${boardModel.board_content}</textarea> 
 				</td>
 			</tr>
 
