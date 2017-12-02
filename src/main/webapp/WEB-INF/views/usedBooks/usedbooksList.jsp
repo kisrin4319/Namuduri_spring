@@ -259,12 +259,12 @@ img.resize {
 																<i class="fa fa-star"></i>
 															</div>
 														</a>
-													
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="<%=cp%>/basket/basketList.do">
-																	
-																	<i class="fa fa-shopping-cart"><br /></i>
+																<a href="javascript:;" onclick="fn_Basket(${list.book_num})">
+																	<i class="fa fa-shopping-cart">
+																		<br />
+																	</i>
 																</a>
 																<a href="#" title="Add to Wishlist">
 																	<i class="fa fa-heart-o"></i>
@@ -277,7 +277,8 @@ img.resize {
 													</div>
 													<div class="banner-bottom text-center">
 														<a href="#">
-															<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />원
+															<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
+															원
 														</a>
 													</div>
 												</div>
@@ -307,10 +308,12 @@ img.resize {
 														</h4>
 														<div class="product-price">
 															<span class="new-price">
-																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />원
+																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
+																원
 															</span>
 															<span class="old-price">
-																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원
+																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+																원
 															</span>
 														</div>
 														<div class="list-rating-icon">
@@ -322,15 +325,26 @@ img.resize {
 														</div>
 														<p>${list.book_auth}</p>
 														<p>${list.company_id}</p>
-														<p>등록자 : ${list.member_id }&nbsp; 등록일 :[<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />]</p>
+														<p>책의 상태 설명 : ${list.used_book_status }</p>
+														<p>
+															등록자 : ${list.member_id }&nbsp; 등록일 :[
+															<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />
+															]
+														</p>
 														<div class="availability">
-															<span>
-																<a href="javascript:isBuy(${list.used_book_num});">BUY NOW</a>
-															</span>
-															<br />
-															<span>
-																<a href="javascript:isBasket(${list.used_book_num});">ADD TO CART</a>
-															</span>
+															<c:if test="${list.member_id eq member_id }">
+																<span>
+																	<a href="javascript:fn_Modify(${list.used_book_num});">Modify</a>
+																</span>
+																<span>
+																	<a href="javascript:fn_Delete(${list.used_book_num});">Delete</a>
+																</span>
+															</c:if>
+															<c:if test="${list.member_id ne member_id }">
+																<span>
+																	<a href="javascript:fn_Buy(${list.used_book_num});">BUY NOW</a>
+																</span>
+															</c:if>
 														</div>
 													</div>
 												</div>
@@ -338,7 +352,7 @@ img.resize {
 										</c:forEach>
 									</div>
 								</div>
-								<input type ="button" value = "중고 서적 등록" onclick="fn_writeBook()">
+								<input type="button" value="중고 서적 등록" onclick="fn_writeBook()">
 							</div>
 						</div>
 					</div>
@@ -349,11 +363,10 @@ img.resize {
 	<!-- Shop Area End -->
 	<script type="text/javascript">
 	function fn_writeBook() {
-	  location.href = '<%=cp%>/books/usedBookWrite.do';
+	  location.href = '<%=cp%>/books/usedBookWriteForm.do';
   }
-function isBasket(book_num) {
+function fn_Basket(book_num) {
 	 var isbuy=confirm("장바구니에 담으시겠습니까?");
-	 var product=eval("document.frmList");
 	 if(isbuy==true) {
 	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+1;
 	 } else {
@@ -362,20 +375,20 @@ function isBasket(book_num) {
 	}
 	
 	
-function isBuy(book_num) {
+function fn_Buy(book_num) {
 	var isbuy=confirm("구매 하시겠습니까?");
-	var product=eval("document.frmList");
 	if(isbuy==true) {
 		 location.href='<%=cp%>/order/singleOrder.do?book_num='+book_num+'&order_book_count='+1;
 	} else {
 		return false;
 	}
 }
-function upScroll() {
-	document.documentElement.scrollTop = 0;
+
+function fn_Modify(used_book_num) {
+	location.href = '<%=cp%>/books/usedBookModifyForm.do?used_book_num='+used_book_num;
 }
-function downScroll() {
-	document.documentElement.scrollTop = document.body.scrollHeight;
+function fn_Delete(used_book_num) {
+	location.href = '<%=cp%>/books/usedBookDelete.do?used_book_num='+used_book_num;
 }
 </script>
 </body>

@@ -15,7 +15,7 @@ public class UsedBooksModel {
 	private int book_new_price;
 	private String book_image;
 	private Date used_book_regdate;
-	private int used_book_status;
+	private String used_book_status;
 	private String member_id;
 	private int book_num;	
 }

@@ -30,8 +30,8 @@ public class UsedBooksService implements UsedBooksDao {
 	
 	//3. 중고 서적 내용 보기
 	@Override
-	public UsedBooksModel UsedbookOne(int book_num) {
-		return sqlSessionTemplate.selectOne("usedbook.selectBookOne",book_num);
+	public UsedBooksModel UsedbookOne(int used_book_num) {
+		return sqlSessionTemplate.selectOne("usedbook.selectBookOne",used_book_num);
 	}
 	//4. 중고 서적 등록
 	@Override

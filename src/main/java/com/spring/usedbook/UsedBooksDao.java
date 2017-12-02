@@ -12,7 +12,7 @@ public interface UsedBooksDao {
 	List<UsedBooksModel> UsedBooksSearchList(Map<String, Object> map);
 	
 	//3. 중고 서적 내용보기
-	UsedBooksModel UsedbookOne(int book_num);
+	UsedBooksModel UsedbookOne(int used_book_num);
 	
 	//4. 중고 서적 등록
 	public void UsedBooksInsert(UsedBooksModel usedBooksModel);

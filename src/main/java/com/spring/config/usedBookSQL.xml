@@ -8,7 +8,7 @@
 	</sql>
 
 	<sql id="where-booknum">
-		WHERE BOOK_NUM = #{BOOK_NUM}
+		WHERE USED_BOOK_NUM = #{used_book_num}
 	</sql>
 
 	<!-- 도서 목록 -->
@@ -71,20 +71,20 @@
 		INSERT INTO USED_BOOK(USED_BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, BOOK_AUTH,
 		COMPANY_ID, BOOK_PRICE, BOOK_NEW_PRICE, BOOK_IMAGE, USED_BOOK_REGDATE, USED_BOOK_STATUS,BOOK_NUM,MEMBER_ID)
 		VALUES (USED_BOOK_NUM_SEQ.NEXTVAL, #{book_category}, #{book_name},
-		#{book_auth}, #{company_id}, #{book_price}, #{book_new_price} #{book_image}, sysdate, #{used_book_status}, #{book_num}, #{member_id})
+		#{book_auth}, #{company_id}, #{book_price}, #{book_new_price}, #{book_image}, sysdate, #{used_book_status}, #{book_num}, #{member_id})
 	</insert>
 	
 	<!-- 도서 정보 수정 -->
 	<update id="modifyUsedBook" parameterType="UsedBooksModel"> 
-		UPDATE BOOK SET BOOK_CATEGORY = #{book_category}, 
+		UPDATE USED_BOOK SET BOOK_CATEGORY = #{book_category}, 
 						BOOK_NAME = #{book_name}, BOOK_AUTH = #{book_auth}, 
-						COMPANY_ID = #{company_id},BOOK_PRICE = #{book_price},BOOK_NEW_PRICE = #{book_new_price},
-						BOOK_IMAGE = #{book_image},USED_BOOK_STATUS = #{used_book_status}, BOOK_NUM =#{book_num}, MEMBER_ID = #{member_id} 
+						COMPANY_ID = #{company_id}, BOOK_PRICE = #{book_price}, BOOK_NEW_PRICE = #{book_new_price},
+						BOOK_IMAGE = #{book_image}, USED_BOOK_STATUS = #{used_book_status}, BOOK_NUM = #{book_num}, MEMBER_ID = #{member_id} 
 						WHERE USED_BOOK_NUM = #{used_book_num} 
 	</update>
 	<!-- 도서 삭제 -->
 	<delete id="deleteUsedBook">
-		DELETE FROM BOOK WHERE USED_BOOK_NUM = #{used_book_num}
+		DELETE FROM USED_BOOK WHERE USED_BOOK_NUM = #{used_book_num}
 	</delete>
 
 </mapper>
