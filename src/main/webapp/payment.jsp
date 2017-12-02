@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String cp = request.getContextPath(); %>
+<% 
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +18,7 @@ IMP.request_pay({
     pay_method : 'card',	// 결제 수단
     merchant_uid : 'merchant_' + new Date().getTime(),
    name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
-    amount : '${sumMoney}',	// 결제 금액
+    amount : 'sumMoney',	// 결제 금액
     buyer_email : '${memberModel.member_email}',	// 구매자 email
    buyer_name :  '${memberModel.member_name}',	// 구매자 이름
     buyer_tel :  '${memberModel.member_mobile}',	// 구매자 전화번호

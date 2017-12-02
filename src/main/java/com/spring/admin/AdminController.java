@@ -128,10 +128,11 @@ public class AdminController {
 		}
 		
 		MemberModel view = memberService.SelectOne(member_id);
-		List<OrderDetailModel> orderDetailList = null;
+		List<OrderModel> orderList = mypageService.getOrderTradeNumList(member_id);
 		
 		mv.addObject("view", view);
-		mv.addObject("orderDetailList", orderDetailList);
+		mv.addObject("orderList", orderList);
+		mv.addObject("listCount", orderList.size());
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
 		
@@ -166,15 +167,6 @@ public class AdminController {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		/*
-		// validation binding
-		new MemberValidator().validate(memberModel, result);
-				
-		if(result.hasErrors()) {
-			mv.setViewName("redirect:/admin/memberModify.do");
-			return mv;
-			
-		} else { */
 			
 			mypageService.memberModify(memberModel);
 			MemberModel view = memberService.SelectOne(memberModel.getMember_id());
@@ -199,7 +191,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		/*mypageService.memberDelete(memberModel);*/
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMember_id(member_id);
+		
+		mypageService.memberDelete(memberModel);
 		//차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 		
 		mv.addObject("currentPage", currentPage);
@@ -338,27 +333,15 @@ public class AdminController {
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.POST) //도서 등록하기
 	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel, BindingResult result) throws Exception {
 		
-		/*
-		// validation binding
-		new AdminValidator().validate(booksModel, result);
-				
-		if(result.hasErrors()) {
-			mv.setViewName("adminBookWrite");
-			return mv;
-			
-		} else { */
-			
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultipartFile multipartFile = multipartRequest.getFile("book_image");
-			String book_image = null;
-			
-			if(multipartFile.isEmpty()==false) //파일이 존재할 때 
-			{
-				book_image = getFile(request, multipartFile);
-			}else{ //파일이 존재하지 않을 때
-				book_image = null; 
-			}
-			
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("book_image");
+		String book_image = null;
+		
+		if(multipartFile.isEmpty()==false) {
+
+			book_image = getFile(request, multipartFile);
+		}
+		
 			booksModel.setBook_image(book_image);
 			
 			adminService.insertBook(booksModel);

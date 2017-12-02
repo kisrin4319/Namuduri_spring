@@ -1,37 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-<mapper namespace="board"> 
 
-	<sql id="select-board">
+<mapper namespace="board">
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-BoardAll">
 		SELECT * FROM BOARD
 	</sql>
-	
+
+	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<sql id="where-BoardNo">
+		WHERE board_num = #{board_num}
+	</sql>
+
 	<!-- 게시판 목록 -->
-	<select id="boardList" resultType="BoardModel"> 
-  		<include refid="select-board" /> ORDER BY DESC;
+	<select id="boardList" resultType="BoardModel">
+		<include refid="select-BoardAll" />
+		ORDER BY ref DESC, re_step ASC, board_regdate ASC
 	</select>
-	
+
 	<!-- 게시글 내용 보기 -->
 	<select id="selectBoardOne" resultType="BoardModel">
-		
+		<include refid="select-BoardAll" />
+		<include refid="where-BoardNo" />
 	</select>
-	
-	<!-- 게시글 작성 -->
-	<insert id="boardWrite" parameterType="BoardModel"> 
-		INSERT INTO BOARD(BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW, BOARD_CONTENT, BOARD_REGDATE, BORAD_TYPE)
-		VALUES(BORAD_NUM_SEQ.nextVal, #{board_title}, #{member_id}, #{board_pw}, #{board_content}, sysdate, #{board_type})
-    </insert>
-  
- 	<!-- 게시글 수정 -->
- 	<update id="update">
 
+
+	<select id="selectBd2" resultType="BoardModel" parameterType="int">
+		SELECT * FROM board WHERE BOARD_TYPE ='2' ORDER BY board_regdate DESC
+	</select>
+
+	<select id="selectBdAll" resultType="BoardModel" parameterType="int">
+		SELECT * FROM board WHERE BOARD_TYPE ='0' OR BOARD_TYPE ='1'
+		ORDER BY
+		ref DESC, re_step ASC, board_regdate DESC
+	</select>
+
+	<!-- 검색 -->
+	<!-- 작성자검색 -->
+	<select id="Search0" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board WHERE MEMBER_ID like #{member_id}
+		ORDER BY ref
+		DESC, re_step ASC
+	</select>
+
+	<!-- 제목검색 -->
+	<select id="Search1" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board WHERE board_title like #{board_title}
+		ORDER BY ref
+		DESC, re_step ASC
+	</select>
+
+	<!-- 내용검색 -->
+	<select id="Search2" resultType="BoardModel" parameterType="String">
+		SELECT * FROM board WHERE board_content like #{board_content}
+		ORDER BY
+		ref DESC, re_step ASC
+	</select>
+
+
+	<!-- 게시글 작성 -->
+	<insert id="boardWrite" parameterType="BoardModel">
+		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW,
+		BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE, ref, re_step)
+		VALUES(
+		BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw},
+		#{board_content}, #{board_type}, sysdate, BOARD_NUM_SEQ.CURRVAL,
+		#{re_step})
+	</insert>
+
+	<!-- 답변작성 -->
+	<insert id="BoardReply" parameterType="Integer">
+		INSERT INTO BOARD( BOARD_NUM, BOARD_TITLE, MEMBER_ID, BOARD_PW,
+		BOARD_CONTENT, BOARD_TYPE, BOARD_REGDATE, REF, RE_STEP)
+		VALUES(
+		BOARD_NUM_SEQ.NEXTVAL, #{board_title}, #{member_id}, #{board_pw},
+		#{board_content}, #{board_type}, sysdate, #{ref}, #{re_step})
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="boardModify" parameterType="BoardModel">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{board_title}, BOARD_PW = #{board_pw}, BOARD_CONTENT =
+		#{board_content}, BOARD_TYPE = #{board_type}
+		WHERE BOARD_NUM =
+		#{board_num}
 	</update>
- 
- 	<!-- 게시글 삭제 -->
- 	<delete id="delete">
-  		DELETE FROM BOARD WHERE BOARD_NUM = #{board_num}
- 	</delete>
- </mapper>
+
+	<!-- 게시글 삭제 -->
+	<delete id="BoardDelete" parameterType="int">
+		DELETE FROM BOARD WHERE BOARD_NUM = #{board_num}
+	</delete>
+
+</mapper>
  
  

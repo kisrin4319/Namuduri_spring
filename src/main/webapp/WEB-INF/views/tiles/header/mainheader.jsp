@@ -174,7 +174,7 @@
 									<a href="<%=cp%>/books/booksList.do">NEW BOOKS</a>
 								</li>
 								<li>
-									<a href="#">USED BOOKS</a>
+									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
 									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
@@ -336,7 +336,7 @@
 									<a href="<%=cp%>/books/booksList.do">NEW BOOKS</a>
 								</li>
 								<li>
-									<a href="#">USED BOOKS</a>
+									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
 									<a href="#">WISH LIST</a>
