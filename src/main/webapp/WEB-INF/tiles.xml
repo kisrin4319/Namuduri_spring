@@ -141,10 +141,10 @@
 	</definition>
 
 	<!-- 게시판 글 읽기 -->
-	<definition name="boardviews" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardviews.jsp" />
+	<definition name="boardDetail" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardView.jsp" />
 	</definition>
-	
+		
 	<!-- 게시판 비밀번호 체크 -->
 	<definition name="PasswdCheckForm" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/passwordCheck.jsp" />
@@ -156,7 +156,7 @@
 	</definition>
 
 	<!-- 질문답변 게시판 수정 -->
-	<definition name="modifyForm" extends="main">
+	<definition name="boardModify" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardWrite.jsp" />
 	</definition>
 
@@ -165,9 +165,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
 	</definition>
 	
-	<definition name="boardType" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardvviews.jsp" />
-	</definition>
 
 	<!-- ========================BASKET======================== -->
 	 <definition name="basketList" extends="main">
@@ -186,6 +183,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/book/bookDetail.jsp" />
 	</definition>
 	
+	<!-- 중고 서적 리스트 -->
+	<definition name="usedBooksList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbooksList.jsp" />
+	</definition>
+	
+	<!-- 중고 서적 등록 폼 -->
+	<definition name="usedBooksWriteForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbookWrite.jsp" />
+	</definition>
+	
+	<!-- 중고 서적 수정 폼 -->
+	<definition name="usedBooksModifyForm" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbookModify.jsp" />
+	</definition>
 	<!-- ================================================== -->
 
 	<!-- Admin 페이지 -->

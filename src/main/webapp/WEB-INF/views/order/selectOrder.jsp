@@ -327,7 +327,7 @@ var mobile = "${memberModel.member_mobile}";
 
    function orderzipCheck() {
       var url = '<%=cp%>/order/zipCheck.do';
-			window.open(url,	"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+      window.open(url,"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 		}
 	</script>
 </body>

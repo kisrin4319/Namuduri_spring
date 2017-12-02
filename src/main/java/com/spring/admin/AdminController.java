@@ -167,15 +167,6 @@ public class AdminController {
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		/*
-		// validation binding
-		new MemberValidator().validate(memberModel, result);
-				
-		if(result.hasErrors()) {
-			mv.setViewName("redirect:/admin/memberModify.do");
-			return mv;
-			
-		} else { */
 			
 			mypageService.memberModify(memberModel);
 			MemberModel view = memberService.SelectOne(memberModel.getMember_id());
@@ -341,16 +332,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/bookWrite.do", method=RequestMethod.POST) //도서 등록하기
 	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel, BindingResult result) throws Exception {
-		
-		/*
-		// validation binding
-		new AdminValidator().validate(booksModel, result);
-				
-		if(result.hasErrors()) {
-			mv.setViewName("adminBookWrite");
-			return mv;
-			
-		} else { */
 		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile multipartFile = multipartRequest.getFile("book_image");
