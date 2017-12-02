@@ -183,76 +183,18 @@
                                         </td>
                                         <td class="product-details">
                                             <h4>People of the book</h4>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                                            <textarea placeholder="Please Enter Your Comment"></textarea>
+                                            <input type="text" placeholder="Please Enter Your Comment" size="50">
                                         </td>
                                         <td class="product-cart">
-                                            <div class="product-cart-details">
+                                            <div class="product-cart-details" style="margin-bottom: 10px; margin-top: 10px;">
                                                 <span>$ 200.00</span>
                                                 <input type="number" value="1">
                                                 <input type="submit" value="ADD TO CART">
                                             </div>
-                                            <p>
-                                                <a href="#">Edit</a>
-                                            </p>
                                         </td>
                                         <td class="product-remove">
                                             <a href="#">
                                                 <i class="flaticon-delete"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-image">
-                                            <a href="#">
-                                                <img src="${pageContext.request.contextPath}/bootstrap/img/wishlist/2.jpg" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="product-details">
-                                            <h4>The historian</h4>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                                            <textarea placeholder="Please Enter Your Comment"></textarea>
-                                        </td>
-                                        <td class="product-cart">
-                                            <div class="product-cart-details">
-                                                <span>$ 200.00</span>
-                                                <input type="number" value="1">
-                                                <input type="submit" value="ADD TO CART">
-                                            </div>
-                                            <p>
-                                                <a href="#">Edit</a>
-                                            </p>
-                                        </td>
-                                        <td class="product-remove">
-                                            <a href="#">
-                                                <i class="flaticon-delete"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-image">
-                                            <a href="#">
-                                                <img src="${pageContext.request.contextPath}/bootstrap/img/wishlist/3.jpg" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="product-details">
-                                            <h4>Consequences</h4>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                                            <textarea placeholder="Please Enter Your Comment"></textarea>
-                                        </td>
-                                        <td class="product-cart">
-                                            <div class="product-cart-details">
-                                                <span>$ 200.00</span>
-                                                <input type="number" value="1">
-                                                <input type="submit" value="ADD TO CART">
-                                            </div>
-                                            <p>
-                                                <a href="#">Edit</a>
-                                            </p>
-                                        </td>
-                                        <td class="product-remove">
-                                            <a href="#">
-                                                <i class="fa fa-trash-o"></i>
                                             </a>
                                         </td>
                                     </tr>

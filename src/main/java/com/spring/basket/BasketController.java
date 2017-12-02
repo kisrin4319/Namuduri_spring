@@ -95,28 +95,27 @@ public class BasketController {
 		
 		mv = new ModelAndView();
 		
-		if (!(request.getParameter("amount") == null || request.getParameter("amount").trim().isEmpty()
-				|| request.getParameter("amount").equals("0"))) {
-			basketModel.setBasket_book_count(Integer.parseInt(request.getParameter("amount")));
-		}
-		
 		session_id = (String) session.getAttribute("member_id");
-		basketModel.setMember_id(session_id);
-
-		// 장바구니에 기존 상품이 있는지 검사
-		int count = basketService.BasketSelectOne(basketModel);
-		if (count == 0) {
-			// 없으면 insert
-			BooksModel booksModel = booksService.bookOne(basketModel.getBasket_book_num());
-			basketModel.setBasket_book_image(booksModel.getBook_image());
-			basketModel.setBasket_book_name(booksModel.getBook_name());
-			basketModel.setBasket_book_price(booksModel.getBook_price());
-			basketModel.setBook_category(booksModel.getBook_category());
-			
-			basketService.BasketInsert(basketModel);
-		} else {
-			// 있으면 update
-			basketService.BasketUpdate(basketModel);
+		String[] basket_book_num = request.getParameterValues("basket_book_num");
+		String[] wish_count = request.getParameterValues("amount");
+		
+		for (int i = 0; i < basket_book_num.length; i++) {
+			int num = Integer.parseInt(basket_book_num[i]);
+			int amount = Integer.parseInt(wish_count[i]);
+			basketModel.setBasket_book_num(num);
+			basketModel.setBasket_book_count(amount);
+			basketModel.setMember_id(session_id);
+			int count = basketService.BasketSelectOne(basketModel);
+			if(count == 0) {
+				BooksModel book = booksService.bookOne(num);
+				basketModel.setBasket_book_image(book.getBook_image());
+				basketModel.setBasket_book_name(book.getBook_name());
+				basketModel.setBasket_book_price(book.getBook_price());
+				basketModel.setBook_category(book.getBook_category());
+				basketService.BasketInsert(basketModel);
+			} else {
+				basketService.BasketUpdate(basketModel);
+			}
 		}
 		mv.setViewName("redirect:/basket/basketList.do");
 		return mv;
@@ -178,4 +177,5 @@ public class BasketController {
 
 		return mv;
 	}
+	
 }

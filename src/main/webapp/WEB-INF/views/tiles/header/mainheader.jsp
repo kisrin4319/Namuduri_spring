@@ -177,7 +177,7 @@
 									<a href="#">USED BOOKS</a>
 								</li>
 								<li>
-									<a href="#">WISH LIST</a>
+									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
 								</li>
 								<li>
 									<a href="<%=cp%>/mypage.do">MY PAGE</a>

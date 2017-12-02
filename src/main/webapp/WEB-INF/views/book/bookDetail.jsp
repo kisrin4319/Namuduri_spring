@@ -91,7 +91,7 @@ img.resize {
 								</span>
 							</div>
 							<div class="add-to-wishlist">
-								<a class="wish-btn" href="cart.html">
+								<a class="wish-btn" href="javascript:isWish(${view.book_num})">
 									<i class="fa fa-heart-o"></i>
 									   ADD TO WISHLIST
 								</a>
@@ -585,7 +585,7 @@ img.resize {
 		      var product = eval("document.detailForm");
 		      var amount = document.detailForm.amount.value;
 		      if (isbuy == true) {
-		         document.detailForm.action='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+amount;
+		         document.detailForm.action='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&amount='+amount;
 		         product.submit();
 		      } else {
 		         return false;
@@ -600,6 +600,12 @@ img.resize {
 					return;
 				}
 			}
+	   function isWish(book_num) {
+			 var comment=prompt('Please Enter Your Comment');
+			 var amount=document.detailForm.amount.value;
+			 if (comment == null) return false;
+				 window.location.href='<%=cp%>/wish/wishInsert.do?wish_book_num='+book_num+'&wish_book_count='+amount+'&wish_comment='+comment;
+		}
 	</script>
 </body>
 </html>

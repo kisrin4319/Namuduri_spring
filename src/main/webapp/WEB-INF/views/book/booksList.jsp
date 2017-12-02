@@ -167,7 +167,8 @@ img.resize {
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="<%=cp%>/basket/basketList.do"> <i class="fa fa-shopping-cart"></i></a> <a href="#" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
+																<a href="javascript:isBasket(${list.book_num})"> <i class="fa fa-shopping-cart"></i></a> 
+																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
 															</div>
 														</div>
 													</div>
@@ -205,8 +206,9 @@ img.resize {
 														</div>
 														<p>${list.book_auth}</p>
 														<p>${list.company_id}[${list.book_publish_date}]</p>
-														<div class="availability">
-															<span><a href="javascript:isBuy(${list.book_num});">BUY NOW</a></span><br /> <span><a href="javascript:isBasket(${list.book_num});">ADD TO CART</a></span>
+														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right">
+															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart">BUY NOW</a></span>
+															<span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart">ADD TO CART</a></span>
 														</div>
 													</div>
 												</div>
@@ -225,18 +227,21 @@ img.resize {
 	<script type="text/javascript">	
 function isBasket(book_num) {
 	 var isbuy=confirm("장바구니에 담으시겠습니까?");
-	 var product=eval("document.frmList");
 	 if(isbuy==true) {
-	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+1;
+	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&amount='+1;
 	 } else {
 	  return false;
 	 }
 	}
 	
+function isWish(book_num) {
+	 var comment=prompt('Please Enter Your Comment');
+	 if (comment == null) return false;
+		 location.href='<%=cp%>/wish/wishInsert.do?wish_book_num='+book_num+'&wish_book_count='+1+'&wish_comment='+comment;
+}
 	
 function isBuy(book_num) {
 	var isbuy=confirm("구매 하시겠습니까?");
-	var product=eval("document.frmList");
 	if(isbuy==true) {
 		 location.href='<%=cp%>/order/singleOrder.do?book_num='+book_num+'&order_book_count='+1;
 	} else {
