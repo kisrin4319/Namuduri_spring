@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String cp = request.getContextPath(); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" />
-<title>회원 탈퇴</title>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>DELETE MEMBER</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript">
 	function checkIn() {
 		
@@ -31,12 +33,60 @@
 	            		return false;
 	            	}
 	            }
-			})
+			});
 		}
 	}
 </script>
 </head>
 <body>
+	
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">DELETE MEMBER PAGE</h2>
+		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+			<li>
+				<a title="Go to Login" href="<%=cp%>/main.do">MAIN</a>
+			</li>
+			<li>
+				<a title="Go to Find Pw" href="<%=cp%>/mypage.do">MY PAGE</a>
+			</li>
+		</ul>
+		
+		<div class="login-account section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<form class="create-account-form" name="memberDelete" id="memberform" onsubmit="return checkIn();">
+							<h2 class="heading-title">
+								DELETE MEMBER
+							</h2>
+							<div class="form-group">
+								<label for="usr" class="form-row">ID:</label>
+								<input type="text" class="form-contorl" id="usr" name="member_id">
+							</div>
+							<div class="form-group">
+								<label for="usr" class="form-row">PW:</label>
+								<input type="password" name="member_pw">
+							</div>
+							<div>
+								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:checkIn()">
+									<span>
+										<i class="fa fa-user left"></i>
+										SING IN
+									</span>
+								</button>
+								<button name="submitcreate" id="submitcreate" class="btn-default">
+									<span>
+										<i class="fa fa-user left"></i>
+										CLOSE
+									</span>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+<%-- <body>
 <div id="contents">
 <div class="member_content" style="width: 800px; margin-top: 30px;">
 <h3 class="bul_green02">회원탈퇴</h3>
@@ -86,6 +136,6 @@
 	</table>
 </div>
 </div>
-</body>
+</body> --%>
 
 </html>

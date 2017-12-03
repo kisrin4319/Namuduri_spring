@@ -11,17 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
-import com.spring.member.ZipcodeModel;
-import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
+import com.spring.order.OrderService;
 
 @Controller
 public class MypageController {
@@ -32,6 +29,8 @@ public class MypageController {
 	private MypageService mypageService;
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private OrderService orderService;
 	
 	ModelAndView mv;
 	String session_id;
@@ -268,12 +267,10 @@ public class MypageController {
 	//6. 주문내역 취소
 	@RequestMapping(value = "/order/memberOrderCancel.do")
 	@ResponseBody
-	public String memberOrderCancel(HttpServletRequest request, HttpSession session, String order_trade_num) {
+	public String memberOrderCancel(OrderModel orderModel, HttpServletRequest request, HttpSession session, String order_trade_num) {
 		
 		String returnVal = "";
-		//mv = new ModelAndView();
-		//String session_id = (String) session.getAttribute("member_id");
-	
+
 		int result = mypageService.memberOrderCancel(order_trade_num);
 		
 		if(result > 0) {

@@ -12,7 +12,7 @@
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body3.jsp" />
-		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" />
+		<!-- <put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" /> -->
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
 	</definition>
 
@@ -29,6 +29,13 @@
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/mainheader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp" />
 		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="mypage2" template="/WEB-INF/views/tiles/layout1.jsp">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/mainheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
 	</definition>
 	
@@ -111,20 +118,20 @@
 	 </definition>
 	 
 	 <!-- 아이디 찾기 -->
-	<definition name="memberIdFind" extends="mypage1">
+	<!-- <definition name="memberIdFind" extends="mypage1">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findIdForm.jsp" />
-	</definition>
+	</definition> -->
 	
-	<definition name="findId" extends="mypage1">
+	<definition name="findId" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findIdForm.jsp" />
 	</definition>
 
 	<!-- 비밀번호 찾기 -->
-	<definition name="memberPwFind" extends="mypage1">
+	<!-- <definition name="memberPwFind" extends="mypage1">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
-	</definition>
+	</definition> -->
 	
-	<definition name="findPw" extends="mypage1">
+	<definition name="findPw" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
 	</definition>
 
