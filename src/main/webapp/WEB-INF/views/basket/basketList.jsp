@@ -52,70 +52,69 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:choose>
-										<c:when test="${basketList.size()==0 }">
-											<strong>
-												<font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
-											</strong>
-										</c:when>
-										<c:otherwise>
-											<c:forEach var="row" items="${basketList }" varStatus="i">
-												<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
-												<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
-												<tr>
-													<td class="product-edit">
-														<div class="checkbox checkbox-primary">
-															<p>
-																<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
-																<label for="checkbox"></label>
-															</p>
-														</div>
-													</td>
-													<td class="product-image">
-														<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">
-															<img src="<%=cp %>/upload/${row.basket_book_image }" alt="" width="104px" height="104px">
-														</a>
-													</td>
-													<td class="t-product-name">
-														<h3>
-															<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">${row.basket_book_name }</a>
-														</h3>
-													</td>
-													<td class="product-unit-price">
+									<c:if test="${basketList.size() ne 0 }">
+										<c:forEach var="row" items="${basketList }" varStatus="i">
+											<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
+											<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
+											<tr>
+												<td class="product-edit">
+													<div class="checkbox checkbox-primary">
 														<p>
-															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price}" groupingUsed="true" />
-															원
+															<input type="checkbox" name="RowCheck" value="${row.basket_num }" id="${row.basket_book_price*row.basket_book_count }" onchange="fn_checkSum()" />
+															<label for="checkbox"></label>
 														</p>
-													</td>
-													<td class="product-edit">
-														<p>${row.book_category }</p>
-													</td>
-													<td class="product-quantity product-cart-details">
-														<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
-														<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
-															<em>수정</em>
-														</button>
-													</td>
-													<td class="product-quantity">
-														<p>
-															<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />원
-														</p>
-													</td>
-													<td class="product-edit">
-														<p>
-															<a href="javascript:;" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="right-shoping-cart">BUY NOW</a>
-														</p>
-													</td>
-													<td class="product-remove">
-														<a href="javascript:;" onclick="fn_basketDelete(${row.basket_num})">
-															<i class="flaticon-delete"></i>
-														</a>
-													</td>
-												</tr>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
+													</div>
+												</td>
+												<td class="product-image">
+													<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">
+														<img src="<%=cp %>/upload/${row.basket_book_image }" alt="" width="104px" height="104px">
+													</a>
+												</td>
+												<td class="t-product-name">
+													<h3>
+														<a href="javascript:;" onclick="fn_bookDetail(${row.basket_book_num})">${row.basket_book_name }</a>
+													</h3>
+												</td>
+												<td class="product-unit-price">
+													<p>
+														<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price}" groupingUsed="true" />
+														원
+													</p>
+												</td>
+												<td class="product-edit">
+													<p>${row.book_category }</p>
+												</td>
+												<td class="product-quantity product-cart-details">
+													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
+													<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
+														<em>수정</em>
+													</button>
+												</td>
+												<td class="product-quantity">
+													<p>
+														<fmt:formatNumber pattern="###,###,###" value="${row.basket_book_price*row.basket_book_count}" groupingUsed="true" />
+														원
+													</p>
+												</td>
+												<td class="product-edit">
+													<p>
+														<a href="javascript:;" onclick="singleOrder(${row.basket_book_num}, ${row.basket_book_count}, ${row.basket_num})" class="right-shoping-cart">BUY NOW</a>
+													</p>
+												</td>
+												<td class="product-remove">
+													<a href="javascript:;" onclick="fn_basketDelete(${row.basket_num})">
+														<i class="flaticon-delete"></i>
+													</a>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
+								<c:if test="${basketList.size() eq 0 }">
+									<strong>
+										<font size="3">장바구니에 담겨있는 상품이 없습니다.</font>
+									</strong>
+								</c:if>
 							</table>
 						</form>
 					</div>
@@ -153,7 +152,8 @@
 							<h2>
 								SUBTOTAL
 								<span>
-									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />원
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									원
 								</span>
 							</h2>
 						</div>
@@ -162,7 +162,8 @@
 							<h2>
 								GRAND TOTAL
 								<span>
-									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />원
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									원
 								</span>
 							</h2>
 						</div>

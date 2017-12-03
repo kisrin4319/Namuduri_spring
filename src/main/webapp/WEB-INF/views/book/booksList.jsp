@@ -1,3 +1,4 @@
+
 <%
 	String cp = request.getContextPath();
 %>
@@ -22,17 +23,15 @@ img.resize {
 </style>
 </head>
 <body>
-
-<h2 style="text-align: -webkit-center;padding-top: 30px;">SHOPPING BOOK PAGE</h2>
-      <ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-         <li>
-            <a title="Return to Home" href="<%=cp%>/main.do">Home</a>
-         </li>
-         <li>
-          <a title="Go to Basket" href="<%=cp%>/basket/basketList.do">Basket</a> 
-         </li>
-      </ul>
-
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING BOOK PAGE</h2>
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+		</li>
+		<li>
+			<a title="Go to Basket" href="<%=cp%>/basket/basketList.do">Basket</a>
+		</li>
+	</ul>
 	<!-- Shop Area Start -->
 	<form name="frmList">
 		<div class="shopping-area section-padding">
@@ -44,20 +43,55 @@ img.resize {
 								<aside class="widget widget-categories">
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu" style="text-align: left;">
-										<li><a href="<%=cp%>/books/booksList.do?book_category=단편소설"> <i class="fa fa-angle-double-right"></i> 단편소설 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=장편소설"> <i class="fa fa-angle-double-right"></i> 장편소설 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=자기계발"> <i class="fa fa-angle-double-right"></i> 자기계발 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=시/에세이"> <i class="fa fa-angle-double-right"></i> 시/에세이 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)"> <i class="fa fa-angle-double-right"></i> 어린이(초등) <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서"> <i class="fa fa-angle-double-right"></i> 중/고등 참고서 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=취업/참고서"> <i class="fa fa-angle-double-right"></i> 취업/참고서 <span></span>
-										</a></li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=단편소설">
+												<i class="fa fa-angle-double-right"></i>
+												단편소설
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=장편소설">
+												<i class="fa fa-angle-double-right"></i>
+												장편소설
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=자기계발">
+												<i class="fa fa-angle-double-right"></i>
+												자기계발
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=시/에세이">
+												<i class="fa fa-angle-double-right"></i>
+												시/에세이
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)">
+												<i class="fa fa-angle-double-right"></i>
+												어린이(초등)
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서">
+												<i class="fa fa-angle-double-right"></i>
+												중/고등 참고서
+												<span></span>
+											</a>
+										</li>
+										<li>
+											<a href="<%=cp%>/books/booksList.do?book_category=취업/참고서">
+												<i class="fa fa-angle-double-right"></i>
+												취업/참고서
+												<span></span>
+											</a>
+										</li>
 									</ul>
 								</aside>
 								<aside class="widget shop-filter">
@@ -68,7 +102,8 @@ img.resize {
 											<div class="price-slider-amount">
 												<input type="text" id="amount" name="price" placeholder="Add Your Price" />
 												<div class="widget-buttom">
-													<input type="submit" value="Filter" /> <input type="reset" value="CLEAR" />
+													<input type="submit" value="Filter" />
+													<input type="reset" value="CLEAR" />
 												</div>
 											</div>
 										</div>
@@ -79,12 +114,24 @@ img.resize {
 								<aside class="widget widget-tag">
 									<h2 class="sidebar-title">POPULAR TAG</h2>
 									<ul class="tag-list">
-										<li><a href="#">e-book</a></li>
-										<li><a href="#">writer</a></li>
-										<li><a href="#">book’s</a></li>
-										<li><a href="#">eassy</a></li>
-										<li><a href="#">nice</a></li>
-										<li><a href="#">author</a></li>
+										<li>
+											<a href="#">e-book</a>
+										</li>
+										<li>
+											<a href="#">writer</a>
+										</li>
+										<li>
+											<a href="#">book’s</a>
+										</li>
+										<li>
+											<a href="#">eassy</a>
+										</li>
+										<li>
+											<a href="#">nice</a>
+										</li>
+										<li>
+											<a href="#">author</a>
+										</li>
 									</ul>
 								</aside>
 								<aside class="widget widget-seller">
@@ -94,14 +141,26 @@ img.resize {
 											<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="" />
 										</div>
 										<div class="seller-details">
-											<a href="shop.html"><h5>Cold mountain</h5></a>
+											<a href="shop.html">
+												<h5>Cold mountain</h5>
+											</a>
 											<h5>$ 50.00</h5>
 											<ul>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
 											</ul>
 										</div>
 									</div>
@@ -110,14 +169,26 @@ img.resize {
 											<img src="${pageContext.request.contextPath}/bootstrap/img/shop/2.jpg" alt="" />
 										</div>
 										<div class="seller-details">
-											<a href=""><h5>The historian</h5></a>
+											<a href="">
+												<h5>The historian</h5>
+											</a>
 											<h5>$ 50.00</h5>
 											<ul>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
+												<li>
+													<i class="fa fa-star icolor"></i>
+												</li>
 											</ul>
 										</div>
 									</div>
@@ -130,22 +201,41 @@ img.resize {
 							<div class="shop-tab-list">
 								<div class="shop-tab-pill pull-left">
 									<ul>
-										<li class="active" id="left"><a data-toggle="pill" href="#home"><i class="fa fa-th"></i><span>Grid</span></a></li>
-										<li><a data-toggle="pill" href="#menu1"><i class="fa fa-th-list"></i><span>List</span></a></li>
+										<li class="active" id="left">
+											<a data-toggle="pill" href="#home">
+												<i class="fa fa-th"></i>
+												<span>Grid</span>
+											</a>
+										</li>
+										<li>
+											<a data-toggle="pill" href="#menu1">
+												<i class="fa fa-th-list"></i>
+												<span>List</span>
+											</a>
+										</li>
 									</ul>
 								</div>
 								<div class="shop-tab-pill pull-right">
 									<ul>
 										<li class="product-size-deatils">
 											<div class="show-label">
-												<label><i class="fa fa-sort-amount-asc"></i>Sort by : </label> <select>
+												<label>
+													<i class="fa fa-sort-amount-asc"></i>
+													Sort by :
+												</label>
+												<select>
 													<option value="date" selected="selected" onclick="<%=cp%>/books/booksList.do?option=date">Date</option>
 													<option value="name">Name</option>
 													<option value="price">Price</option>
 												</select>
 											</div>
-										</li> ${pagingHtml}
-										<li class="shop-pagination"><a href="booksList.do?currentPage=${currentPage+1 }"><i class="fa fa-caret-right"></i></a></li>
+										</li>
+										${pagingHtml}
+										<li class="shop-pagination">
+											<a href="booksList.do?currentPage=${currentPage+1 }">
+												<i class="fa fa-caret-right"></i>
+											</a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -160,20 +250,35 @@ img.resize {
 											<div class="col-md-4 col-sm-6">
 												<div class="single-banner">
 													<div class="product-wrapper">
-														<a href="${viewURL}" class="single-banner-image-wrapper"> <img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
+														<a href="${viewURL}" class="single-banner-image-wrapper">
+															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
 															<div class="rating-icon">
-																<i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
 															</div>
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="javascript:isBasket(${list.book_num})"> <i class="fa fa-shopping-cart"></i></a> 
-																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
+																<a href="javascript:isBasket(${list.book_num})">
+																	<i class="fa fa-shopping-cart"></i>
+																</a>
+																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+																	<i class="fa fa-heart-o"></i>
+																</a>
+																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+																	<i class="fa fa-compress"></i>
+																</a>
 															</div>
 														</div>
 													</div>
 													<div class="banner-bottom text-center">
-														<a href="#"><fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원</a>
+														<a href="#">
+															<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+															원
+														</a>
 													</div>
 												</div>
 											</div>
@@ -190,7 +295,9 @@ img.resize {
 											<div class="single-shop-product">
 												<div class="col-xs-12 col-sm-5 col-md-4">
 													<div class="left-item">
-														<a href="${viewURL}" title="East of eden"><img class="resize" src="${pageContext.request.contextPath}/upload/${list.book_image}" alt=""> </a>
+														<a href="${viewURL}" title="East of eden">
+															<img class="resize" src="${pageContext.request.contextPath}/upload/${list.book_image}" alt="">
+														</a>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-7 col-md-8">
@@ -199,16 +306,28 @@ img.resize {
 															<a href="${viewURL}">${list.book_name}</a>
 														</h4>
 														<div class="product-price">
-															<span class="new-price"><fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원</span> <span class="old-price"></span>
+															<span class="new-price">
+																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+																원
+															</span>
+															<span class="old-price"></span>
 														</div>
 														<div class="list-rating-icon">
-															<i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
 														</div>
 														<p>${list.book_auth}</p>
 														<p>${list.company_id}[${list.book_publish_date}]</p>
 														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right">
-															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart">BUY NOW</a></span>
-															<span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart">ADD TO CART</a></span>
+															<span>
+																<a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart">BUY NOW</a>
+															</span>
+															<span>
+																<a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart">ADD TO CART</a>
+															</span>
 														</div>
 													</div>
 												</div>
