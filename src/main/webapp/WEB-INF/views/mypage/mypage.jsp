@@ -30,10 +30,10 @@
 			</li>
 		</ul>
 		
-		<%-- <div class="shopping-area section-padding">
+		<div class="shopping-area section-padding">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3 col-sm-3 col-xs-12">
+					<div class="col-md-2 col-sm-3 col-xs-12">
 						<div class="shop-widget">
 							<div class="shop-widget-top">
 								<aside class="widget widget-categories">
@@ -62,52 +62,94 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-9 col-sm-12 hidden-xs">
+                        <div class="mainmenu text-center">
+						<table class="table">
+							<thead>
+								<tr>
+									<th><div class="user_name">${ member_id } 님 안녕하세요.</div></th>
+								</tr>
+							</thead>
+						</table>
+						<input type="hidden" id="order_trade_num" name="order_trade_num"/>
+						<table class="table table-striped">
+							<thead>
+								<colgroup>
+									<col width="14%"/>
+									<col width="10%"/>
+									<col width="10%"/>
+									<col width="10%"/>
+									<col width="15%"/>
+									<col width="14%"/>
+								</colgroup>
+								<tr>
+									<th class="first" scope="col">주문번호</th>
+									<th scope="col">주문날짜</th>
+									<th scope="col">결제상태</th>
+									<th scope="col">결제방법</th>
+									<th scope="col">배송번호</th>
+									<th scope="col">주문상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:url var="viewOrderURL" value="orderDetailView.do">
+									<c:param name="order_trade_num" value="${order_trade_num}"/>
+									<c:param name="curretPage" value="${currentPage}" />
+								</c:url>
+								
+								<c:forEach var="item" items="${ orderModel }">
+								<tr>
+									<td height="50" align="center">
+										<a href ="${viewOrderURL}">${ item.order_trade_num }</a>	
+									</td>
+									<td align="center">${ item.order_regdate }</td>
+									<td align="center">
+										<c:if test="${ item.payment_status =='PS01' }">
+											결제 대기중
+										</c:if>
+										<c:if test="${ item.payment_status =='PS02' }">
+											결제 완료
+										</c:if>
+									</td>
+									<td align="center">
+										<c:if test="${ order_trade_status =='TR01' }">
+											무통장 입금
+										</c:if>
+										<c:catch>
+											카드 결제
+										</c:catch>${ order_trade_status }
+									</td>
+									<td align="center">${item.order_trans_num}</td>
+									
+									<td align="center">
+										<c:if test="${ item.order_trans_status == 'ST01' }">
+											배송 준비중
+										</c:if>
+										<c:if test="${ order_trans_status == 'ST02' }">
+											배송 중
+										</c:if>
+										<c:if test="${ order_trans_status == 'ST03' }">
+											배송 완료
+										</c:if>
+									</td>
+									</tr>
+								</c:forEach>
+								<c:if test="list.size()==0">
+									<tr align="center">
+										<td colspan="8">주문 내역이 없습니다.</td>
+									</tr>
+								</c:if>
+							</tbody>
+						</table>
+						<tr align="center">
+							<td colspan="8" value="pagingHtml" escape="false"></td>
+						</tr>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div> --%>
-			<div class="container">
-			<div id="myroom_contents">
-				<div class="user_section">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>NAME : <div class="user_name">${ member_id } 님 안녕하세요.</div></th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
-			</div>
+		</div>
 			
-			<h5>주문 내역</h5>
-			<div class="container">
-				<div id="orderListCheckForm">
-					<input type="hidden" id="order_trade_num" name="order_trade_num"/>
-					<table class="table table-striped">
-						<thead>
-							<colgroup>
-								<col width="14%"/>
-								<col width="10%"/>
-								<col width="10%"/>
-								<col width="10%"/>
-								<col width="15%"/>
-								<col width="14%"/>
-							</colgroup>
-							<tr>
-								<th class="first" scope="col">주문번호</th>
-								<th scope="col">주문날짜</th>
-								<th scope="col">결제상태</th>
-								<th scope="col">결제방법</th>
-								<th scope="col">배송번호</th>
-								<th scope="col">주문상태</th>
-							</tr>
-						</thead>
-					</table>
-					
-				</div>
-			</div>
-			
-		
 </body>
 <%-- <body>		
 	<div class="content_middle" style="width:800px;margin-right:100px;"> 

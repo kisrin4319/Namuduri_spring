@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%-- <link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" /> --%>
 <script type="text/javascript">
-function submit() {
+function check() {
 	var fw = document.findpwform;
 	
 	if(fw.member_id.value ==""){
@@ -26,6 +26,7 @@ function submit() {
 			url:'/namuduri/member/memberPwFind.do',
             type:'post',
             data:$('form').serialize(),
+            async:false,
             success:function(result){
             	if(result.returnVal == '1'){
             		alert('당신의 비밀번호는' + result.member_pw + '입니다.');
@@ -34,8 +35,10 @@ function submit() {
             		alert('아이디 또는 이메일이 바르지 않습니다.');
             		return false;
             	}
+            },
+            error:function(request,status,error) {
             }
-		})
+		});
 	}
 }
 </script>
@@ -57,7 +60,7 @@ function submit() {
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<form action="memberPwFind.do" class="create-account-form" id="findpwform" name="findpwform" method="post">
+						<form class="create-account-form" name="findpwform" id="findpwform">
 							<h2 class="heading-title">
 								Find PW
 							</h2>
@@ -73,14 +76,14 @@ function submit() {
 								<input type="text" name="member_email">
 							</div>
 							<!-- </p> -->
-							<div class="submit">					
-                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+							<div>					
+                                <button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 SING IN
                                     </span>
                                 </button>
-                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                <button name="submitcreate" id="submitcreate" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 CLOSE
