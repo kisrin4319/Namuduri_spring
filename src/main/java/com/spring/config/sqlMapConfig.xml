@@ -17,6 +17,7 @@
 	<!-- Book -->	
 	<typeAlias type="com.spring.book.BooksModel" alias="BooksModel" />
 	<typeAlias type="com.spring.book.ReviewModel" alias="ReviewModel" />
+	<typeAlias type="com.spring.usedbook.UsedBooksModel" alias="UsedBooksModel"/>
 	
 	<!-- Order -->
 	<typeAlias type="com.spring.order.OrderModel" alias="OrderModel" />
@@ -25,6 +26,8 @@
 	<!-- Board -->
 	<typeAlias type="com.spring.board.BoardModel" alias="BoardModel"/>
 	
+	<!-- WishList -->
+	<typeAlias type="com.spring.wishlist.WishModel" alias="WishModel" />
 	
 	</typeAliases>
 	
@@ -32,7 +35,9 @@
 		<mapper resource="com/spring/config/memberSQL.xml" />
 		<mapper resource="com/spring/config/basketSQL.xml" />
 		<mapper resource="com/spring/config/bookSQL.xml" />
+		<mapper resource="com/spring/config/usedBookSQL.xml"/>
  		<mapper resource="com/spring/config/orderSQL.xml" />
  		<mapper resource="com/spring/config/boardSQL.xml" />
+ 		<mapper resource="com/spring/config/wishlistSQL.xml" />
 	</mappers>
 </configuration>

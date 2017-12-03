@@ -55,6 +55,10 @@ public class OrderController {
       if (request.getParameter("basket_num") != null) {
          basket_num = Integer.parseInt(request.getParameter("basket_num"));
       }
+      
+      if(request.getParameter("used_book_num")!=null) {
+    	  
+      }
 
       int book_num = Integer.parseInt(request.getParameter("book_num"));
       int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
