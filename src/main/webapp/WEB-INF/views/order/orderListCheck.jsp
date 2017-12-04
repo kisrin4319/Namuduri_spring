@@ -120,6 +120,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:if test="${ fn:length(orderModel) != '0' }">
 								<c:forEach var="item" items="${ orderModel }">
 							<tr>
 								<c:url var="viewOrderURL" value="/order/memberOrderDetailView.do">
@@ -153,18 +154,19 @@
 									</c:if>
 								</td>
 								<td align="center">
-									<input type="button" value="주문취소하기" align="middle" onclick="check(${item.order_trade_num});" />
+									<input type="button" value="주문취소" align="middle" onclick="check(${item.order_trade_num});" />
 								</td>
 							</tr>
 							</c:forEach>
-							<c:if test="list.size()==0">
+							</c:if>
+							<c:if test="${ fn:length(orderModel) == '0' }">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
 							</c:if>
 							</tbody>
 							<tr align="center">
-								<td colspan="8" ${pagingHtml}></td>
+								<td colspan="8">${pagingHtml}</td>
 							</tr>
 						</table>
 						<table class="table">

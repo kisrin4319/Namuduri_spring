@@ -34,7 +34,8 @@
 			$.ajax({
 				url:'/namuduri/member/memberDelete.do',
 	            type:'post',
-	            data:$('form').serialize(),	        
+	            data:$('form').serialize(),
+	            async:false,
 	            success:function(result){
 	            	if(result.returnVal === "1"){
 	            		alert('회원 탈퇴가 정상적으로 처리되었습니다. 이용해 주셔서 감사합니다.');
@@ -43,7 +44,10 @@
 	            		alert('아이디 또는 비밀번호가 바르지 않습니다.');
 	            		return false;
 	            	}
-	            }	            
+	            },
+	            error:function(request,status,error) {
+	            	
+	            }
 			});
 		}
 	}

@@ -17,6 +17,11 @@
 <link href ="<%=cp%>/css/order_ssl.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/style_ssl.css" rel="stylesheet" type="text/css" />
 <link href ="<%=cp%>/css/style2_ssl.css" rel="stylesheet" type="text/css" /> --%>
+<!-- <style>
+.jb-center {
+        text-align: center;
+      }
+</style> -->
 </head>
 <body>
 	
@@ -97,6 +102,7 @@
 									<c:param name="curretPage" value="${currentPage}" />
 								</c:url>
 								
+								<c:if test="${ fn:length(orderModel) != '0' }">
 								<c:forEach var="item" items="${ orderModel }">
 								<tr>
 									<td height="50" align="center">
@@ -134,19 +140,31 @@
 									</td>
 									</tr>
 								</c:forEach>
-								<c:if test="list.size()==0">
+								</c:if>
+								<c:if test="${ fn:length(orderModel) == '0' }">
 									<tr align="center">
 										<td colspan="8">주문 내역이 없습니다.</td>
 									</tr>
 								</c:if>
 							</tbody>
 						<tr align="center">
-							<td colspan="8" ${ pagingHtml }></td>
+							<td colspan="8">${ pagingHtml }</td>
 						</tr>
+						
 						</table>
 						</div>
 					</div>
+				
 				</div>
+				<%-- <div class="row">
+				<div class="col-xs-12">
+					<div class="jb-center">
+			            <ul class="pagination">
+			              	${ pagingHtml }
+			            </ul>
+			        </div>
+		        </div>
+		        </div> --%>
 			</div>
 		</div>
 			

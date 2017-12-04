@@ -70,7 +70,7 @@ public class MypageController {
 		}
 		totalCount = orderModel.size();
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderModel");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "mypage");
 		pagingHtml = paging.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
@@ -279,7 +279,7 @@ public class MypageController {
 		}
 		totalCount = orderModel.size();
 		
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderModel");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderListCheckView");
 		pagingHtml = paging.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
