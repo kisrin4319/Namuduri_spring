@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="book">
 
@@ -52,6 +50,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY BOOK_DATE DESC
 	</select>
 	
+	<!-- 날짜 등록 순 도서 목록 -->
+	<select id="selectDateList" resultType="BooksModel">
+		<include refid="select-bookall" />
+		ORDER BY BOOK_DATE DESC
+	</select>
+	<!-- 베스트셀러 도서 목록 -->
+	<select id="bestSellerList" resultType="BooksModel">
+		<include refid="select-bookall" />
+		ORDER BY BOOK_SELL_COUNT DESC
+	</select>
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="adminSearchList" parameterType="map" resultType="BooksModel">
 		<include refid="select-bookall" />

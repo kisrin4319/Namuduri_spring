@@ -283,8 +283,7 @@
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
-																		원
+																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
 																	</span>
 																</strong>
 															</td>
@@ -298,7 +297,7 @@
 														Forgot an Item?
 														<a href="#">Edit Your Cart</a>
 													</p>
-													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt();">
+													<button type="button" title="Place Order" class="btn btn-default" onclick="payment_Proc(this.form);">
 														<span>Place Order</span>
 													</button>
 												</div>
@@ -376,7 +375,8 @@ var mobile = "${memberModel.member_mobile}";
 			orderform.order_receive_addr2.focus();
 			return false;
 		} else {
-		  	payment_Proc()
+		  	payment_Proc();
+		  	
 			orderform.action = "<%=cp%>/order/singleOrder.do";
 			orderform.submit();
 		}
@@ -411,8 +411,9 @@ var mobile = "${memberModel.member_mobile}";
   }
 	function payment_Proc() {
 	  
-	  	var check = document.orderform;
-	  	var url ='<%=cp%>/payment.jsp';
+	  	var check = eval("document.orderform");
+	  	alert(check.value);
+	  	var url ='<%=cp%>/payment.jsp?sumMoney='+${sumMoney}+'&';
 	  	window.open(url,"post","toolbar=no,width=605,heigth=400,directoris=no,status=yes,scrollbars=yes,menubar=no")
 	  	
 	  	check.target="post";

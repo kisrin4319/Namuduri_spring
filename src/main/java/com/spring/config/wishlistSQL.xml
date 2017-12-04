@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishlist">
+
+	<!-- 1. 위시리스트 -->
+	<select id="wishList" resultType="WishModel">
+		select * from wishlist where member_id = #{member_id} order by wish_num desc
+	</select>
+
+	<!-- 2. 위시리스트에 기존의 상품이 존재하는 지 확인 -->
+	<select id="wishConfirm" resultType="int">
+		select count(*) from wishlist where member_id = #{member_id} and wish_book_num = #{wish_book_num}
+	</select>
+
+	<!-- 3. 위시리스트 추가 -->
+		<insert id="wishInsert" parameterType="WishModel">
+			insert into wishlist(
+			wish_num, 
+			member_id, 
+			wish_book_num, 
+			wish_book_name, 
+			wish_book_price, 
+			wish_book_image, 
+			wish_book_count, 
+			wish_comment, 
+			wish_date) 
+			values(
+			wishlist_num_seq.nextval, 
+			#{member_id}, 
+			#{wish_book_num}, 
+			#{wish_book_name}, 
+			#{wish_book_price}, 
+			#{wish_book_image}, 
+			#{wish_book_count}, 
+			#{wish_comment}, 
+			sysdate)
+		</insert>
+		
+	<!-- 4. 위시리스트에 기존 상품이 존재한다면 수량 업데이트  -->
+	<update id="wishUpdate">
+		update wishlist 
+		set wish_book_count = wish_book_count+ #{wish_book_count}, wish_comment = #{wish_comment} 
+		where member_id = #{member_id} and wish_book_num = #{wish_book_num}
+	</update>
+	
+	<!-- 5. 위시리스트 삭제 -->
+	<delete id="wishDelete">
+		delete from wishlist where wish_num = #{wish_num}
+	</delete>	
+	
+	<!-- 6. 위시리스트 전체 삭제 -->
+	<delete id="wishDeleteAll">
+		delete from wishlist where member_id = #{member_id}
+	</delete>
+	
+	<!-- 7. 위시리스트 코멘트 수정  -->
+	<update id="commentModify">
+		update wishlist 
+		set wish_comment = #{wish_comment} 
+		where member_id = #{member_id} and wish_book_num = #{wish_book_num} 
+	</update>
+	
+</mapper>

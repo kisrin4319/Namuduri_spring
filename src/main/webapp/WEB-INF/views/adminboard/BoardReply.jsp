@@ -49,7 +49,7 @@
 <body>
 	<h2 class="cscenter_h2">고객센터</h2>
 	<h3 class="bul_green">질문답변 게시판</h3>
-	<form action="<%=cp%>/board/BoardReply.do" method="post" name ="regform" id ="regform">
+	<form action="<%=cp%>/board/BoardReply.do" method="post" name="regform" id="regform">
 		<input type="hidden" name="board_num" value="${boardModel.board_num}" />
 		<input type="hidden" name="currentPage" value="${currentPage}" />
 		<input type="hidden" name="id" value="${session_member_id}" />

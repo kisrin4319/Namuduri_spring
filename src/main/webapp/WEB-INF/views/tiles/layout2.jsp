@@ -20,7 +20,7 @@ html, body{
 			<td colspan="2"><tiles:insertAttribute name="header" /></td>
 		</tr>
 		<tr>
-			<td valign="top"  width="105"><tiles:insertAttribute name="lefter" /></td>
+			<%-- <td valign="top"  width="105"><tiles:insertAttribute name="lefter" /></td> --%>
 			<td valign="top"><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<tr>

@@ -1,10 +1,9 @@
-
-<%
-	String cp = request.getContextPath();
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -23,7 +22,7 @@ img.resize {
 </style>
 </head>
 <body>
-	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING BOOK PAGE</h2>
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">USED BOOK PAGE</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
 			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
@@ -44,49 +43,49 @@ img.resize {
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu" style="text-align: left;">
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=단편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=단편소설">
 												<i class="fa fa-angle-double-right"></i>
 												단편소설
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=장편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=장편소설">
 												<i class="fa fa-angle-double-right"></i>
 												장편소설
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=자기계발">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=자기계발">
 												<i class="fa fa-angle-double-right"></i>
 												자기계발
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=시/에세이">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=시/에세이">
 												<i class="fa fa-angle-double-right"></i>
 												시/에세이
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=어린이(초등)">
 												<i class="fa fa-angle-double-right"></i>
 												어린이(초등)
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=중/고등참고서">
 												<i class="fa fa-angle-double-right"></i>
 												중/고등 참고서
 												<span></span>
 											</a>
 										</li>
 										<li>
-											<a href="<%=cp%>/books/booksList.do?book_category=취업/참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=취업/참고서">
 												<i class="fa fa-angle-double-right"></i>
 												취업/참고서
 												<span></span>
@@ -224,7 +223,7 @@ img.resize {
 													Sort by :
 												</label>
 												<select>
-													<option value="date" selected="selected" onclick="<%=cp%>/books/booksList.do?option=date">Date</option>
+													<option value="date" selected="selected" onclick="<%=cp%>/books/usedBooksList.do?option=date">Date</option>
 													<option value="name">Name</option>
 													<option value="price">Price</option>
 												</select>
@@ -232,7 +231,7 @@ img.resize {
 										</li>
 										${pagingHtml}
 										<li class="shop-pagination">
-											<a href="booksList.do?currentPage=${currentPage+1 }">
+											<a href="usedBooksList.do?currentPage=${currentPage+1 }">
 												<i class="fa fa-caret-right"></i>
 											</a>
 										</li>
@@ -243,15 +242,15 @@ img.resize {
 								<!-- GRID 형식 -->
 								<div class="row tab-pane fade in active" id="home">
 									<div class="shop-single-product-area">
-										<c:forEach var="list" items="${booksList}" varStatus="stat">
+										<c:forEach var="list" items="${usedBooksList}" varStatus="stat">
 											<c:url var="viewURL" value="/books/bookDetail.do">
-												<c:param name="book_num" value="${list.book_num}" />
+												<c:param name="used_book_num" value="${list.used_book_num}" />
 											</c:url>
 											<div class="col-md-4 col-sm-6">
 												<div class="single-banner">
 													<div class="product-wrapper">
 														<a href="${viewURL}" class="single-banner-image-wrapper">
-															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
+															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
 															<div class="rating-icon">
 																<i class="fa fa-star icolor"></i>
 																<i class="fa fa-star icolor"></i>
@@ -262,10 +261,12 @@ img.resize {
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="javascript:isBasket(${list.book_num})">
-																	<i class="fa fa-shopping-cart"></i>
+																<a href="javascript:;" onclick="fn_Basket(${list.book_num})">
+																	<i class="fa fa-shopping-cart">
+																		<br />
+																	</i>
 																</a>
-																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+																<a href="#" title="Add to Wishlist">
 																	<i class="fa fa-heart-o"></i>
 																</a>
 																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
@@ -276,7 +277,7 @@ img.resize {
 													</div>
 													<div class="banner-bottom text-center">
 														<a href="#">
-															<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+															<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
 															원
 														</a>
 													</div>
@@ -288,7 +289,7 @@ img.resize {
 								<!--LIST 형식  -->
 								<div id="menu1" class="tab-pane fade">
 									<div class="row">
-										<c:forEach var="list" items="${booksList}" varStatus="stat">
+										<c:forEach var="list" items="${usedBooksList}" varStatus="stat">
 											<c:url var="viewURL" value="/books/bookDetail.do">
 												<c:param name="book_num" value="${list.book_num}" />
 											</c:url>
@@ -307,10 +308,13 @@ img.resize {
 														</h4>
 														<div class="product-price">
 															<span class="new-price">
+																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
+																원
+															</span>
+															<span class="old-price">
 																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
 																원
 															</span>
-															<span class="old-price"></span>
 														</div>
 														<div class="list-rating-icon">
 															<i class="fa fa-star icolor"></i>
@@ -320,14 +324,27 @@ img.resize {
 															<i class="fa fa-star"></i>
 														</div>
 														<p>${list.book_auth}</p>
-														<p>${list.company_id}[${list.book_publish_date}]</p>
-														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right">
-															<span>
-																<a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart">BUY NOW</a>
-															</span>
-															<span>
-																<a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart">ADD TO CART</a>
-															</span>
+														<p>${list.company_id}</p>
+														<p>책의 상태 설명 : ${list.used_book_status }</p>
+														<p>
+															등록자 : ${list.member_id }&nbsp; 등록일 :[
+															<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />
+															]
+														</p>
+														<div class="availability">
+															<c:if test="${list.member_id eq member_id }">
+																<span>
+																	<a href="javascript:fn_Modify(${list.used_book_num});">Modify</a>
+																</span>
+																<span>
+																	<a href="javascript:fn_Delete(${list.used_book_num});">Delete</a>
+																</span>
+															</c:if>
+															<c:if test="${list.member_id ne member_id }">
+																<span>
+																	<a href="javascript:fn_Buy(${list.used_book_num});">BUY NOW</a>
+																</span>
+															</c:if>
 														</div>
 													</div>
 												</div>
@@ -335,6 +352,7 @@ img.resize {
 										</c:forEach>
 									</div>
 								</div>
+								<input type="button" value="중고 서적 등록" onclick="fn_writeBook()">
 							</div>
 						</div>
 					</div>
@@ -343,23 +361,21 @@ img.resize {
 		</div>
 	</form>
 	<!-- Shop Area End -->
-	<script type="text/javascript">	
-function isBasket(book_num) {
+	<script type="text/javascript">
+	function fn_writeBook() {
+	  location.href = '<%=cp%>/books/usedBookWriteForm.do';
+  }
+function fn_Basket(book_num) {
 	 var isbuy=confirm("장바구니에 담으시겠습니까?");
 	 if(isbuy==true) {
-	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&amount='+1;
+	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+1;
 	 } else {
 	  return false;
 	 }
 	}
 	
-function isWish(book_num) {
-	 var comment=prompt('Please Enter Your Comment');
-	 if (comment == null) return false;
-		 location.href='<%=cp%>/wish/wishInsert.do?wish_book_num='+book_num+'&wish_book_count='+1+'&wish_comment='+comment;
-}
 	
-function isBuy(book_num) {
+function fn_Buy(book_num) {
 	var isbuy=confirm("구매 하시겠습니까?");
 	if(isbuy==true) {
 		 location.href='<%=cp%>/order/singleOrder.do?book_num='+book_num+'&order_book_count='+1;
@@ -367,11 +383,12 @@ function isBuy(book_num) {
 		return false;
 	}
 }
-function upScroll() {
-	document.documentElement.scrollTop = 0;
+
+function fn_Modify(used_book_num) {
+	location.href = '<%=cp%>/books/usedBookModifyForm.do?used_book_num='+used_book_num;
 }
-function downScroll() {
-	document.documentElement.scrollTop = document.body.scrollHeight;
+function fn_Delete(used_book_num) {
+	location.href = '<%=cp%>/books/usedBookDelete.do?used_book_num='+used_book_num;
 }
 </script>
 </body>
