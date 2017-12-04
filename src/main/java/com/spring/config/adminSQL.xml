@@ -19,7 +19,7 @@
 	</select>
 	
 	<!-- 회원 검색 목록 -->
-	<!-- <select id="selectSearchList" parameterType="map" resultType="MemberModel">
+	<select id="searchMember" parameterType="map" resultType="MemberModel">
 		SELECT * FROM MEMBER
 		<choose>
 			<when test="searchNum == 0">
@@ -42,9 +42,9 @@
 			</otherwise>
 		</choose>
 		ORDER BY MEMBER_JOIN_DATE DESC
-	</select> -->
+	</select>
 	<!-- POST 전송 검색 폼 데이터로 검색 --><!-- 기간 조건 추가.. -->
-	<select id="searchMember" resultType="MemberModel">
+	<!-- <select id="searchMember" resultType="MemberModel">
 		SELECT * FROM MEMBER WHERE MEMBER_ID like '%'||#{member_id}||'%'
 								AND MEMBER_NAME like '%'||#{member_name}||'%'
 								AND MEMBER_JUMIN1 like '%'||#{member_jumin1}||'%'
@@ -53,9 +53,9 @@
 								AND MEMBER_MOBILE like '%'||#{member_phone}||'%'
 								AND MEMBER_EMIAL like '%'||#{member_email}||'%'
 		ORDER BY MEMBER_JOIN_DATE DESC
-		<!-- WHERE MEMBER_JOIN_DATE >= #{date_min} AND MEMBER_JOIN_DATE <= #{date_max} -->
-		<!-- WHERE MEMBER_USE_YN = 1 OR MEMBER_USE_YN = 0 -->
-	</select>
+		WHERE MEMBER_JOIN_DATE >= #{date_min} AND MEMBER_JOIN_DATE <= #{date_max}
+		WHERE MEMBER_USE_YN = 1 OR MEMBER_USE_YN = 0
+	</select> -->
 	
 	<!-- 회원 정보 조회 -->
 	<select id="memberView" resultType="MemberModel">

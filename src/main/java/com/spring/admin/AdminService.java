@@ -40,9 +40,9 @@ public class AdminService implements AdminDao {
 	}
 	
 	@Override //회원 검색
-	public List<MemberModel> searchMember(MemberModel memberModel) {
+	public List<MemberModel> searchMember(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("admin.searchMember", memberModel);
+		return sqlSessionTemplate.selectList("admin.searchMember", map);
 	}
 	
 	@Override //개별 회원 조회

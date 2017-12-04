@@ -28,7 +28,7 @@ public interface AdminDao {
 	//이메일 수신 여부를 통해서 일괄 이메일 작성하는 기능이... 필요할까? //이건 진짜 나중에
 	//일단 기본 검색폼은 넣어둘까? 대표적 자료가 아닌 다른 자료로 검색을 할 경우..?
 	//탭 내부 검색과 외부 검색의 분리 필요성에 대해
-	public List<MemberModel> searchMember(MemberModel memberModel);
+	public List<MemberModel> searchMember(Map<String, Object> map);
 	
 	//회원 아이디로 회원 정보 조회
 	public MemberModel memberView(String member_id);

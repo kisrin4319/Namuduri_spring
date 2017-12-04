@@ -68,7 +68,7 @@ public class AdminController {
 
 	////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/admin/memberList.do", method = RequestMethod.GET) // 회원 조회
+	@RequestMapping("/admin/memberList.do") // 회원 조회
 	public ModelAndView memberList(HttpServletRequest request, @ModelAttribute MemberModel memberModel)
 			throws Exception {
 
@@ -79,32 +79,20 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		/*
-		 * String searchNum = request.getParameter("searchNum"); String searchKeyword =
-		 * request.getParameter("searchKeyword");
-		 
-		 Map<String, Object> map = new HashMap<String, Object>(); 
+		String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");
 
-		
-		 * if((searchNum==null || searchNum.trim().isEmpty() || searchNum.equals("0"))
-		 * && (searchKeyword==null || searchKeyword.trim().isEmpty() ||
-		 * searchKeyword.equals("0"))) { memberList = memberService.memberList(); } else
-		 * { map.put("searchNum", searchNum); map.put("searchKeyword", searchKeyword);
-		 * 
-		 * memberList = adminService.searchMember(map); }
-		 */
-
+		Map<String, Object> map = new HashMap<String, Object>();
 		List<MemberModel> memberList = new ArrayList<MemberModel>();
 
-		if (request.getMethod()=="POST") {
-			
-			MemberModel searchModel = new MemberModel();
-			searchModel = memberModel;
-
-			memberList = adminService.searchMember(searchModel);
-			
+		if ((searchNum == null || searchNum.trim().isEmpty() || searchNum.equals("0"))
+				&& (searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
+			memberList = memberService.memberList();
 		} else {
-			memberList = adminService.memberListAll();
+			map.put("searchNum", searchNum);
+			map.put("searchKeyword", searchKeyword);
+
+			memberList = adminService.searchMember(map);
 		}
 
 		totalCount = memberList.size();
@@ -129,18 +117,6 @@ public class AdminController {
 
 		return mv;
 	}
-
-	/*@RequestMapping(value="/admin/memberList.do", method=RequestMethod.POST) //회원 검색
-	public ModelAndView memberSearch(@ModelAttribute MemberModel memberModel, HttpServletRequest request) {
-		
-		
-		
-		totalCount
-		
-		mv.addObject("memberList", searchList);
-		
-		return mv;
-	}*/
 
 	@RequestMapping(value = "/admin/memberInfo.do", method = RequestMethod.GET) // 회원 상세보기
 	public ModelAndView memberDetail(@RequestParam(required = true) String member_id, HttpServletRequest request)
@@ -319,8 +295,8 @@ public class AdminController {
 		// !fileType.equals("gif") {Validation 이미지 파일만 업로드 가능합니다}
 
 		String fileName = "textbook_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + '.' + fileType;
-		String filePath = request.getSession().getServletContext().getRealPath("/")+"upload";
-		
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "upload";
+
 		multipartFile.transferTo(new File(filePath + File.separator + fileName));
 
 		return fileName;
@@ -338,7 +314,7 @@ public class AdminController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/admin/bookWrite.do", method = RequestMethod.POST) // 도서 등록하기
 	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,
 			BindingResult result) throws Exception {
@@ -479,7 +455,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(value="/admin/orderDetail.do", method=RequestMethod.GET) // 주문 상세보기
+	@RequestMapping(value = "/admin/orderDetail.do", method = RequestMethod.GET) // 주문 상세보기
 	public ModelAndView orderDetail(@RequestParam String order_trade_num, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -488,7 +464,7 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		OrderModel view = adminService.selectOrder(order_trade_num);
 		List<OrderDetailModel> orderDetailList = adminService.selectOrderDetail(order_trade_num);
 		MemberModel viewMember = memberService.SelectOne(view.getMember_id());
@@ -502,7 +478,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(value="/admin/orderDetail.do", method=RequestMethod.POST) // 주문 수정하기
+	@RequestMapping(value = "/admin/orderDetail.do", method = RequestMethod.POST) // 주문 수정하기
 	public ModelAndView orderModify(@ModelAttribute OrderModel orderModel, HttpServletRequest request)
 			throws Exception {
 
@@ -512,7 +488,7 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		adminService.modifyOrder(orderModel);
 
 		mv.addObject("order_trade_num", orderModel.getOrder_trade_num());
