@@ -99,20 +99,20 @@
 									<ul class="sidebar-menu">
 										<li>
 											<a href="<%=cp%>/mypage.do">
-												<i class="fa fa-angle-double-right"></i>
-												MY PAGE
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">MY PAGE</p>
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/order/orderListCheckView.do">
-												<i class="fa fa-angle-double-right"></i>
-												주문/배송 조회
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">주문/배송 조회</p>
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/member/memberDeleteView.do">
-												<i class="fa fa-angle-double-right"></i>
-												회원 탈퇴
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">회원 탈퇴</p>
 											</a>
 										</li>
 									</ul>
@@ -166,9 +166,9 @@
 										</th>
 										<td style="width:35%">
 											<input type="password" class="form-control" id="passwordCheck" onkeyup="passWorkCheck();"/>
-											<span id="passwordCheckText"></span>
+											<!-- <span id="passwordCheckText"></span> -->
 										</td>
-										<td style="width:35%; vertical-align: middle">
+										<td style="width:35%; vertical-align: middle"><span id="passwordCheckText"></span>
 											&nbsp;
 										</td>	
 									</tr>
@@ -199,7 +199,7 @@
 													
 												<!-- </div> -->
 											</div>
-											&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<div class="form-group">
 												<!-- <div class="col-xs-4"> -->
 													<input type="text" class="form-control" name="member_jumin2" maxlength="7" value="${memberInfo.member_jumin2 }" />
@@ -282,7 +282,7 @@
 								SING IN
 							</span>
 						</button>
-						<button name="submitcreate" id="submitcreate" class="btn-default">
+						<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:history.back(-1);">
 							<span>
 								<i class="fa fa-user left"></i>
 								CLOSE
