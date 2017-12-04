@@ -49,4 +49,16 @@ public class BooksService implements BooksDao {
 		return true;
 	}
 
+	// 베스트셀러 TOP2 뽑기
+	@Override
+	public List<BooksModel> top2() {
+		return sqlSessionTemplate.selectList("book.top2");
+	}
+
+	// 평점 구하기
+	@Override
+	public int star(int book_num) {
+		return sqlSessionTemplate.selectOne("book.star");
+	}
+
 }

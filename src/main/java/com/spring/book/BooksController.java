@@ -59,9 +59,7 @@ public class BooksController {
 			map.put("searchKeyword", searchKeyword);
 
 			booksList = booksService.booksSearchList(map);
-
 		}
-
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 
@@ -83,7 +81,10 @@ public class BooksController {
 		}
 
 		booksList = booksList.subList(paging.getStartCount(), lastCount);
+		
+		List<BooksModel> top2 = booksService.top2();
 
+		mv.addObject("top2", top2);
 		mv.addObject("booksList", booksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);

@@ -183,6 +183,6 @@
 	<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
 	<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
 	<!-- main js -->
-	<script src="<%=cp%>/bootstrap/js/main.js"></script>
+	<script src="<%=cp%>/bootstrap/js/main.js?ver=1"></script>
 </body>
 </html>

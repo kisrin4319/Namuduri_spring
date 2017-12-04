@@ -1,3 +1,4 @@
+
 <%
 	String cp = request.getContextPath();
 %>
@@ -19,20 +20,19 @@ img.resize {
 	width: 220px;
 	height: 280px;
 }
+
+img.top2 {
+	width: 104px;
+	height: 104px;
+}
 </style>
 </head>
 <body>
-
-<h2 style="text-align: -webkit-center;padding-top: 30px;">SHOPPING BOOK PAGE</h2>
-      <ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-         <li>
-            <a title="Return to Home" href="<%=cp%>/main.do">Home</a>
-         </li>
-         <li>
-          <a title="Go to Basket" href="<%=cp%>/basket/basketList.do">Basket</a> 
-         </li>
-      </ul>
-
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING BOOK PAGE</h2>
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li><a title="Return to Home" href="<%=cp%>/main.do">Home</a></li>
+		<li><a title="Go to Basket" href="<%=cp%>/basket/basketList.do">Basket</a></li>
+	</ul>
 	<!-- Shop Area Start -->
 	<form name="frmList">
 		<div class="shopping-area section-padding">
@@ -44,19 +44,17 @@ img.resize {
 								<aside class="widget widget-categories">
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu" style="text-align: left;">
-										<li><a href="<%=cp%>/books/booksList.do?book_category=단편소설"> <i class="fa fa-angle-double-right"></i> 단편소설 <span></span>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=단편소설"><i class="fa fa-angle-double-right"></i> short story</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=장편소설"><i class="fa fa-angle-double-right"></i> feature novel</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=자기계발"> <i class="fa fa-angle-double-right"></i> self-development
 										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=장편소설"> <i class="fa fa-angle-double-right"></i> 장편소설 <span></span>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=시/에세이"> <i class="fa fa-angle-double-right"></i> poem & essay
 										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=자기계발"> <i class="fa fa-angle-double-right"></i> 자기계발 <span></span>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)"> <i class="fa fa-angle-double-right"></i> kids & schoolchild
 										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=시/에세이"> <i class="fa fa-angle-double-right"></i> 시/에세이 <span></span>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서"> <i class="fa fa-angle-double-right"></i> teenager
 										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)"> <i class="fa fa-angle-double-right"></i> 어린이(초등) <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서"> <i class="fa fa-angle-double-right"></i> 중/고등 참고서 <span></span>
-										</a></li>
-										<li><a href="<%=cp%>/books/booksList.do?book_category=취업/참고서"> <i class="fa fa-angle-double-right"></i> 취업/참고서 <span></span>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=취업/참고서"> <i class="fa fa-angle-double-right"></i> job applicants
 										</a></li>
 									</ul>
 								</aside>
@@ -66,8 +64,8 @@ img.resize {
 										<div class="price-filter">
 											<div id="slider-range"></div>
 											<div class="price-slider-amount">
-												<input type="text" id="amount" name="price" placeholder="Add Your Price" />
-												<div class="widget-buttom">
+												<input type="text" id="price" name="price" placeholder="Add Your Price" />
+												<div class="widget-buttom" style="margin-left: 34px;">
 													<input type="submit" value="Filter" /> <input type="reset" value="CLEAR" />
 												</div>
 											</div>
@@ -87,44 +85,35 @@ img.resize {
 										<li><a href="#">author</a></li>
 									</ul>
 								</aside>
+								<!-- 베스트 셀러 TOP2 -->
 								<aside class="widget widget-seller">
-									<h2 class="sidebar-title">TOP SELLERS</h2>
-									<div class="single-seller">
-										<div class="seller-img">
-											<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="" />
+									<h2 class="sidebar-title" style="margin-bottom: 5px;">TOP SELLERS</h2>
+									<c:forEach var="top" items="${top2}">
+										<div class="single-seller">
+											<div class="seller-img">
+												<img class="top2" src="${pageContext.request.contextPath}/upload/${top.book_image}" alt="${top.book_name}" />
+											</div>
+											<div class="seller-details">
+												<a href="shop.html"><h5>${top.book_name}</h5></a>
+												<h5>
+													<fmt:formatNumber pattern="###,###,###" value="${top.book_price}" />
+													원
+												</h5>
+												<ul>
+													<li><i class="fa fa-star icolor"></i></li>
+													<li><i class="fa fa-star icolor"></i></li>
+													<li><i class="fa fa-star icolor"></i></li>
+													<li><i class="fa fa-star icolor"></i></li>
+													<li><i class="fa fa-star icolor"></i></li>
+												</ul>
+											</div>
 										</div>
-										<div class="seller-details">
-											<a href="shop.html"><h5>Cold mountain</h5></a>
-											<h5>$ 50.00</h5>
-											<ul>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-seller">
-										<div class="seller-img">
-											<img src="${pageContext.request.contextPath}/bootstrap/img/shop/2.jpg" alt="" />
-										</div>
-										<div class="seller-details">
-											<a href=""><h5>The historian</h5></a>
-											<h5>$ 50.00</h5>
-											<ul>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-												<li><i class="fa fa-star icolor"></i></li>
-											</ul>
-										</div>
-									</div>
+									</c:forEach>
 								</aside>
 							</div>
 						</div>
 					</div>
+					<!-- booksList 부분 -->
 					<div class="col-md-9 col-sm-9 col-xs-12">
 						<div class="shop-tab-area">
 							<div class="shop-tab-list">
@@ -137,13 +126,17 @@ img.resize {
 								<div class="shop-tab-pill pull-right">
 									<ul>
 										<li class="product-size-deatils">
-											<div class="show-label">
-												<label><i class="fa fa-sort-amount-asc"></i>Sort by : </label> <select>
-													<option value="date" selected="selected" onclick="<%=cp%>/books/booksList.do?option=date">Date</option>
-													<option value="name">Name</option>
-													<option value="price">Price</option>
-												</select>
-											</div>
+											<form method="post" action="<%=cp%>/books/booksList.do" class="title-4">
+												<select name="searchNum" style="height: 27px; border-color: #5e6b9e; width: 85px; padding-left: 5px; padding-top: 0px; border-top-width: 1px;">
+													<option value="0">통합검색</option>
+													<option value="1">제목</option>
+													<option value="2">저자</option>
+													<option value="3">출판사</option>
+												</select> <input type="text" placeholder="Enter your book keyword here" name="searchKeyword" size="25">
+												<button type="submit" style="height: 26px;">
+													<i class="fa fa-search"></i>
+												</button>
+											</form>
 										</li> ${pagingHtml}
 										<li class="shop-pagination"><a href="booksList.do?currentPage=${currentPage+1 }"><i class="fa fa-caret-right"></i></a></li>
 									</ul>
@@ -162,13 +155,53 @@ img.resize {
 													<div class="product-wrapper">
 														<a href="${viewURL}" class="single-banner-image-wrapper"> <img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
 															<div class="rating-icon">
-																<i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+																<c:if test="${list.star_point == 0}">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 1}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 2}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 3}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 4}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 5}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
 															</div>
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="javascript:isBasket(${list.book_num})"> <i class="fa fa-shopping-cart"></i></a> 
-																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
+																<a href="javascript:isBasket(${list.book_num})"> <i class="fa fa-shopping-cart"></i></a> <a href="javascript:isWish(${list.book_num})" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
 															</div>
 														</div>
 													</div>
@@ -198,17 +231,60 @@ img.resize {
 														<h4>
 															<a href="${viewURL}">${list.book_name}</a>
 														</h4>
-														<div class="product-price">
+														<div class="product-price" style="margin-bottom: 5px;">
 															<span class="new-price"><fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원</span> <span class="old-price"></span>
 														</div>
 														<div class="list-rating-icon">
-															<i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star icolor"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+																<c:if test="${list.star_point == 0}">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 1}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 2}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 3}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 4}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.star_point == 5}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
 														</div>
 														<p>${list.book_auth}</p>
 														<p>${list.company_id}[${list.book_publish_date}]</p>
-														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right">
-															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart">BUY NOW</a></span>
-															<span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart">ADD TO CART</a></span>
+														<p>
+															<a href="javascript:isWish(${list.book_num})">♡ WISH LIST</a>
+														</p>
+														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
+															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: x-small; font-style: oblique;">BUY NOW</a></span><br /> <span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-style: oblique; font-size: x-small;">ADD TO CART</a></span>
 														</div>
 													</div>
 												</div>
@@ -243,17 +319,17 @@ function isWish(book_num) {
 function isBuy(book_num) {
 	var isbuy=confirm("구매 하시겠습니까?");
 	if(isbuy==true) {
-		 location.href='<%=cp%>/order/singleOrder.do?book_num='+book_num+'&order_book_count='+1;
-	} else {
-		return false;
-	}
-}
-function upScroll() {
-	document.documentElement.scrollTop = 0;
-}
-function downScroll() {
-	document.documentElement.scrollTop = document.body.scrollHeight;
-}
-</script>
+		 location.href='<%=cp%>/order/singleOrder.do?book_num='	+ book_num + '&order_book_count=' + 1;
+			} else {
+				return false;
+			}
+		}
+		function upScroll() {
+			document.documentElement.scrollTop = 0;
+		}
+		function downScroll() {
+			document.documentElement.scrollTop = document.body.scrollHeight;
+		}
+	</script>
 </body>
 </html>

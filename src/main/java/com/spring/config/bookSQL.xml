@@ -10,21 +10,14 @@
 	<sql id="where-goodsnum">
 		WHERE BOOK_NUM = #{BOOK_NUM} AND BOOK_USE_YN = '1'
 	</sql>
-
-	<!-- 도서 목록 -->
-	<select id="selectBooksAll" resultType="BooksModel">
-		<include refid="select-bookall"/>
-		ORDER BY BOOK_DATE DESC
-	</select>
 	
 	<!-- 카테고리 도서 목록  -->
 	<select id="selectBookList" resultType="BooksModel" parameterType="String">
-		<include refid="select-bookall" />
-		WHERE BOOK_USE_YN = '1'
+	select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num
 		<if test="value!=null">
-			AND BOOK_CATEGORY = #{value}
+			where  a.BOOK_CATEGORY = #{value}
 		</if>
-		ORDER BY BOOK_DATE DESC
+		ORDER BY a.BOOK_DATE DESC
 	</select>
 
 	<!-- 도서 검색 목록 -->
@@ -138,4 +131,13 @@
 		DELETE FROM REVIEW WHERE BOOK_NUM = #{book_num} AND REVIEW_NUM = #{review_num} 
 	</delete>
 	
+	<!-- 베스트셀러 TOP2 -->
+	<select id="top2" resultType="BooksModel">
+	select * from(select a.*, row_number() over(order by book_sell_count desc) rn from book a) where  rn = 1 or rn = 2
+	</select>
+	
+	<!-- 평점구하기  -->
+	<select id="star">
+	select avg(star_point) from review where book_num= #{book_num};
+	</select>
 </mapper>
