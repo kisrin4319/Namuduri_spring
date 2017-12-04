@@ -89,34 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectOrder" resultType="OrderModel" parameterType="String">
-	SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = #{order_trade_num}
-	</select>
-	
-	<!-- 관리자 주문 검색 목록 -->
-	<select id="selectSearchList" parameterType="map" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK
-		<choose>
-			<when test="searchNum == 0">
-				WHERE ORDER_TRADE_NUM like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 1">
-				WHERE ORDER_TRANS_NUM like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 2">
-				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 3">
-				WHERE ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 4">
-				WHERE ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%' 
-			</when>
-			<otherwise>
-				WHERE ORDER_RECEIVE_PHONE like '%'||#{searchKeyword}||'%' 
-				OR ORDER_RECEIVE_MOBILE like '%'||#{searchKeyword}||'%' 
-			</otherwise>
-		</choose>
-		ORDER BY ORDER_REGDATE DESC
+		SELECT * FROM ORDER_BOOK WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</select>
 	
 	<!-- 주문상세내역 보기 -->

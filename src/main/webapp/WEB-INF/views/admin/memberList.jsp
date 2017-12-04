@@ -10,13 +10,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 정보 관리</title>
 <script>
-	function deleteCheck(id) {
-		var page = ${currentPage};
-		alert("정말 삭제하시겠습니까?");
-		document.location.href="<%=cp%>
-	/admin/memberDelete.do?member_id="
-				+ id + "&currentPage=" + page;
+var page = ${currentPage};
+function deleteCheck(id) {
+	if(confirm("정말 삭제하시겠습니까?")==true){
+		document.location.href="<%=cp%>/admin/memberDelete.do?member_id=" + id + "&currentPage=" + page;
+	}else{
+		return false;
 	}
+}
+function update(id){
+		document.location.href="<%=cp%>/admin/memberInfo.do?member_id=" + id + "&currentPage=" + page;
+}
 </script>
 
 </head>
@@ -33,7 +37,7 @@
 		</div>
 
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
-		<nav class="main-navbar">
+		<nav class="main-navbar"><!-- 상세 검색 -->
 			<form class="form-inline" method="POST"
 				action="/admin/default/jqadm/search/product?lang=en">
 				<input class="csrf-token" type="hidden" name="_token"
@@ -71,7 +75,7 @@
 					</div>
 				</form>
 			</div> -->
-			<div class="card">
+			<div class="card"><!-- 사용 방법 도움말 같은거 추가해야겠다.. -->
 				<div class="card-block">
 					<div class="table-responsive">
 						<!-- Nav tabs -->
@@ -88,7 +92,6 @@
 							<!-- first tab -->
 							<div class="tab-pane active" id="home" role="tabpanel">
 								<div class="card-block">
-									<form class="list list-product" method="POST">
 										<table class="list-items table table-hover table-striped">
 											<thead class="list-header">
 												<tr>
@@ -132,7 +135,7 @@
 														<c:forEach var="list" items="${memberList}"
 															varStatus="stat">
 															<!-- 아이디와 연결되는 URL -->
-															<c:url var="viewURL" value="/admin/memberDetail.do">
+															<c:url var="viewURL" value="/admin/memberInfo.do">
 																<c:param name="member_id" value="${list.member_id}" />
 																<c:param name="currentPage" value="${currentPage}" />
 															</c:url>
@@ -146,16 +149,15 @@
 																<td>${list.member_mobile}</td>
 																<td>${list.member_join_date}</td>
 																<td><a class="mdi mdi-grease-pencil" title="Modify"
-																	href="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${list.member_id}&currentPage=${currentPage}'"></a>
+																	href="javascript:update('${list.member_id}')"></a>
 																	<a class="mdi mdi-delete" title="Delete"
-																	href="deleteCheck('${list.member_id}')"></a></td>
+																	href="javascript:deleteCheck('${list.member_id}')"></a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>
 												</c:choose>
 											</tbody>
 										</table>
-									</form>
 									<table class="paging">
 										<tr align=center>
 											<td colspan=8>${pagingHtml}</td>
@@ -177,7 +179,6 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
+	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

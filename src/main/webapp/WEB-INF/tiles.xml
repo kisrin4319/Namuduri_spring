@@ -233,11 +233,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/memberDetail.jsp" />
 	</definition>
 	
-	<!-- 관리자 회원 수정 -->
-	<definition name="adminMemberModify" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/memberModify.jsp" />
-	</definition>
-	
 	<!-- ========================관리자 상품관리 페이지======================== -->
 	
 	<!-- 관리자 상품 리스트 -->

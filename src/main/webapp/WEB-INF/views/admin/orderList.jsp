@@ -147,7 +147,7 @@
 															<c:url var="viewOrderURL" value="/admin/orderDetail.do">
 																<c:param name="order_trade_num"
 																	value="${list.order_trade_num}" />
-																<c:param name="currentPage" value="currentPage" />
+																<c:param name="currentPage" value="${currentPage}" />
 															</c:url>
 															<tr>
 																<td><a href="${viewOrderURL}">${list.order_trade_num}</a></td>

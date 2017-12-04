@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+
+<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- 회원 정보 가져오기(리스트) -->
+	<select id="memberListAll" resultType="MemberModel">
+		SELECT * FROM MEMBER ORDER BY MEMBER_JOIN_DATE DESC
+	</select>
+	<!-- 활성화 회원 조회 -->
+	<select id="memberListAct" resultType="MemberModel">
+		SELECT * FROM MEMBER WHERE MEMBER_USE_YN = 0 ORDER BY MEMBER_JOIN_DATE DESC
+	</select>
+	<!-- 차단 회원 조회 -->
+	<select id="memberListBck" resultType="MemberModel">
+		SELECT * FROM MEMBER WHERE MEMBER_USE_YN = 1 ORDER BY MEMBER_JOIN_DATE DESC
+	</select>
+	
+	<!-- 회원 검색 목록 -->
+	<!-- <select id="selectSearchList" parameterType="map" resultType="MemberModel">
+		SELECT * FROM MEMBER
+		<choose>
+			<when test="searchNum == 0">
+				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 1">
+				WHERE MEMBER_NAME like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 2">
+				WHERE MEMBER_EMAIL like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 3">
+				WHERE MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 4">
+				WHERE MEMBER_MOBILE like '%'||#{searchKeyword}||'%' 
+			</when>
+			<otherwise>
+				WHERE MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
+			</otherwise>
+		</choose>
+		ORDER BY MEMBER_JOIN_DATE DESC
+	</select> -->
+	<!-- POST 전송 검색 폼 데이터로 검색 --><!-- 기간 조건 추가.. -->
+	<select id="searchMember" resultType="MemberModel">
+		SELECT * FROM MEMBER WHERE MEMBER_ID like '%'||#{member_id}||'%'
+								AND MEMBER_NAME like '%'||#{member_name}||'%'
+								AND MEMBER_JUMIN1 like '%'||#{member_jumin1}||'%'
+								AND MEMBER_JUMIN2 like '%'||#{member_jumin1}||'%'
+								AND MEMBER_PHONE like '%'||#{member_phone}||'%'
+								AND MEMBER_MOBILE like '%'||#{member_phone}||'%'
+								AND MEMBER_EMIAL like '%'||#{member_email}||'%'
+		ORDER BY MEMBER_JOIN_DATE DESC
+		<!-- WHERE MEMBER_JOIN_DATE >= #{date_min} AND MEMBER_JOIN_DATE <= #{date_max} -->
+		<!-- WHERE MEMBER_USE_YN = 1 OR MEMBER_USE_YN = 0 -->
+	</select>
+	
+	<!-- 회원 정보 조회 -->
+	<select id="memberView" resultType="MemberModel">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="memberModify" parameterType="MemberModel">
+		UPDATE MEMBER SET MEMBER_PW = #{member_pw}, 
+						MEMBER_NAME = #{member_name},
+		    			MEMBER_JUMIN1 = #{member_jumin1}, 
+	    				MEMBER_JUMIN2 = #{member_jumin2},
+				    	MEMBER_EMAIL = #{member_email},
+					   	MEMBER_EMAIL_GET = #{member_email_get, jdbcType=VARCHAR},
+					   	MEMBER_PHONE = #{member_phone}, 
+					    MEMBER_MOBILE = #{member_mobile},
+					    MEMBER_ZIPCODE = #{member_zipcode}, 
+					    MEMBER_ADDR1 = #{member_addr1},
+					    MEMBER_ADDR2 = #{member_addr2}, 
+					    MEMBER_BANKNAME = #{member_bankname},
+					    MEMBER_REFUND_ACCOUNT = #{member_refund_account},
+					    MEMBER_ACCOUNT_HOLDER = #{member_account_holder},
+					    MEMBER_USE_YN = #{member_use_yn}  
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	
+<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- 도서 정보 가져오기(리스트) -->
+	<select id="bookListAll" resultType="BooksModel">
+		SELECT * FROM BOOK ORDER BY BOOK_DATE DESC
+	</select>
+	<!-- 사용 도서 조회 -->
+	<select id="bookListAct" resultType="BooksModel">
+		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 1 ORDER BY BOOK_DATE DESC
+	</select>
+	<!-- 비사용 도서 조회 -->
+	<select id="bookListBck" resultType="BooksModel">
+		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
+	</select>
+	
+	<!-- 관리자 도서 검색 목록 -->
+	<!-- <select id="adminSearchList" parameterType="map" resultType="BooksModel">
+		<include refid="select-bookall" />
+		<choose>
+			<when test="searchNum == 0">
+				WHERE BOOK_CATEGORY like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 1">
+				WHERE BOOK_NAME like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 2">
+				WHERE BOOK_AUTH like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 3">
+				WHERE COMPANY_ID like '%'||#{searchKeyword}||'%' 
+			</when>
+			<otherwise>
+				WHERE BOOK_CONTENT like '%'||#{searchKeyword}||'%' 
+			</otherwise>
+		</choose>
+		ORDER BY BOOK_DATE DESC
+	</select> -->
+	<select id="searchBook" resultType="BooksModel">
+		SELECT * FROM BOOK WHERE BOOK_NAME like '%'||#{book_name}||'%'
+								AND BOOK_CATEGORY like '%'||#{book_category}||'%'
+								AND BOOK_AUTH like '%'||#{book_auth}||'%'
+								AND BOOK_COMPANY like '%'||#{book_company}||'%'
+		ORDER BY BOOK_DATE DESC
+		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
+		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
+	</select>
+	
+	<!-- 가장 최근의 도서 정보 조회 -->
+	<select id="selectNewest" resultType="BooksModel">
+		<!-- select rownum, a.* from (select * from book order by book_date desc) a where rownum=1 -->
+		select BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, BOOK_CONTENT, BOOK_PRICE, BOOK_IMAGE, BOOK_SELL_COUNT, BOOK_BASE_COUNT, 
+			BOOK_CURRENT_COUNT, BOOK_PUBLISH_DATE, BOOK_DATE, COMPANY_ID, BOOK_AUTH, BOOK_USE_YN from 
+				(select rownum, a.* from (select * from book order by book_date desc) a where rownum=1)
+	</select>
+	
+	<!-- 단일 도서 정보 조회 -->
+	<select id="selectOne" resultType="BooksModel">
+		SELECT * FROM BOOK WHERE BOOK_NUM = #{BOOK_NUM}
+	</select>
+	
+<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- 전체 주문 리스트 가져오기 -->
+ 	<select id="orderListAll" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE
+	</select>
+	<!-- 처리완료(배송까지 완료) 주문 -->
+	<select id="orderListAct" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 ORDER BY ORDER_REGDATE
+	</select>
+	<!-- 취소된 주문 -->
+	<select id="orderListBck" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE
+	</select>
+
+	<!-- 관리자 주문 검색 목록 -->
+	<!-- <select id="selectSearchList" parameterType="map" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK
+		<choose>
+			<when test="searchNum == 0">
+				WHERE ORDER_TRADE_NUM like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 1">
+				WHERE ORDER_TRANS_NUM like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 2">
+				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 3">
+				WHERE ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%' 
+			</when>
+			<when test="searchNum == 4">
+				WHERE ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%' 
+			</when>
+			<otherwise>
+				WHERE ORDER_RECEIVE_PHONE like '%'||#{searchKeyword}||'%' 
+				OR ORDER_RECEIVE_MOBILE like '%'||#{searchKeyword}||'%' 
+			</otherwise>
+		</choose>
+		ORDER BY ORDER_REGDATE DESC
+	</select> -->
+	<select id="searchOrder" resultType="OrderModel">
+		SELECT * FROM BOOK WHERE ORDER_TRADE_NUM like '%'||#{order_trade_num}||'%'
+								AND MEMBER_ID like '%'||#{member_id}||'%'
+								AND ORDER_TRADE_PAYER like '%'||#{order_trade_payer}||'%'
+								AND ORDER_TRANS_NUM like '%'||#{order_trans_num}||'%'
+								AND ORDER_RECEIVE_NAME like '%'||#{order_receive_name}||'%'
+								AND ORDER_RECEIVE_PHONE like '%'||#{order_receive_phone}||'%'
+								AND ORDER_RECEIVE_MOBILE like '%'||#{order_receive_phone}||'%'
+								AND PAYMENT_STATUS = #{payment_status}
+								AND ORDER_TRANS_STATUS = #{order_trans_status}
+		ORDER BY BOOK_DATE DESC
+		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
+		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
+	</select>
+	
+</mapper>
