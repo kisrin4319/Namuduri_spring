@@ -69,20 +69,20 @@
 									<ul class="sidebar-menu">
 										<li>
 											<a href="<%=cp%>/mypage.do">
-												<i class="fa fa-angle-double-right"></i>
-												MY PAGE
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">MY PAGE</p>
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/member/memberModifyView.do">
-												<i class="fa fa-angle-double-right"></i>
-												회원 정보 수정
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">회원 정보수정</p>
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/member/memberDeleteView.do">
-												<i class="fa fa-angle-double-right"></i>
-												회원 탈퇴
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">회원 탈퇴</p>											
 											</a>
 										</li>
 									</ul>
@@ -111,15 +111,16 @@
 									<col width="14%"/>
 								</colgroup>
 								<tr>
-									<th class="first" scope="col">주문번호</th>
-									<th scope="col">주문날짜</th>
-									<th scope="col">결제상태</th>
-									<th scope="col">배송번호</th>
-									<th scope="col">배송상태</th>
-									<th scope="col">주문취소</th>
+									<th class="first" scope="col"><p class="text-center">주문번호</p></th>
+									<th scope="col"><p class="text-center">주문날짜</p></th>
+									<th scope="col"><p class="text-center">결제상태</p></th>
+									<th scope="col"><p class="text-center">배송번호</p></th>
+									<th scope="col"><p class="text-center">배송상태</p></th>
+									<th scope="col"><p class="text-center">주문취소</p></th>
 								</tr>
 							</thead>
 							<tbody>
+								<c:if test="${ fn:length(orderModel) != '0' }">
 								<c:forEach var="item" items="${ orderModel }">
 							<tr>
 								<c:url var="viewOrderURL" value="/order/memberOrderDetailView.do">
@@ -138,7 +139,7 @@
 									<c:if test="${ item.payment_status =='PS02' }">
 										결제 완료
 									</c:if>
-								</td>
+								</td> 
 								<td align="center">${item.order_trans_num}</td>
 								
 								<td align="center">
@@ -153,15 +154,20 @@
 									</c:if>
 								</td>
 								<td align="center">
-								<input type="button" value="주문취소하기" align="middle" onclick="check(${item.order_trade_num});" /></td>
+									<input type="button" value="주문취소" align="middle" onclick="check(${item.order_trade_num});" />
+								</td>
 							</tr>
 							</c:forEach>
-							<c:if test="list.size()==0">
+							</c:if>
+							<c:if test="${ fn:length(orderModel) == '0' }">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
 							</c:if>
 							</tbody>
+							<tr align="center">
+								<td colspan="8">${pagingHtml}</td>
+							</tr>
 						</table>
 						<table class="table">
 							<thead>
