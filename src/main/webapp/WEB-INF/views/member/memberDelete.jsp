@@ -9,21 +9,32 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript">
-	function checkIn() {
+	function check() {
+		var di = document.memberform;
 		
-		if($('#member_id').val() == ""){
+		if(di.member_id.value=="") {
+			alert("아이디를 입력해주십시오.");
+			return false;
+		}
+		
+		if(di.member_pw.value=="") {
+			alert("비밀번호를 입력해주십시오.");
+			return false;
+		}
+		
+		/* if($('#member_id').val() == ""){
 			alert("아이디를 입력해주십시오.");
 			return false;
 		}
 		if($('#member_pw').val() == ""){
 			alert("비밀번호를 입력해주십시오.");
 			return false;
-		}
+		} */
 		else {
 			$.ajax({
 				url:'/namuduri/member/memberDelete.do',
 	            type:'post',
-	            data:$('form').serialize(),
+	            data:$('form').serialize(),	        
 	            success:function(result){
 	            	if(result.returnVal === "1"){
 	            		alert('회원 탈퇴가 정상적으로 처리되었습니다. 이용해 주셔서 감사합니다.');
@@ -32,7 +43,7 @@
 	            		alert('아이디 또는 비밀번호가 바르지 않습니다.');
 	            		return false;
 	            	}
-	            }
+	            }	            
 			});
 		}
 	}
@@ -54,7 +65,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<form class="create-account-form" name="memberDelete" id="memberform" onsubmit="return checkIn();">
+						<form class="create-account-form" name="memberform" id="memberform">
 							<h2 class="heading-title">
 								DELETE MEMBER
 							</h2>
@@ -67,13 +78,13 @@
 								<input type="password" name="member_pw">
 							</div>
 							<div>
-								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:checkIn()">
+								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="check()">
 									<span>
 										<i class="fa fa-user left"></i>
 										SING IN
 									</span>
 								</button>
-								<button name="submitcreate" id="submitcreate" class="btn-default">
+								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:history.back(-1);">
 									<span>
 										<i class="fa fa-user left"></i>
 										CLOSE

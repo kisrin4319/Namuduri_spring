@@ -41,20 +41,20 @@
 									<ul class="sidebar-menu">
 										<li>
 											<a href="<%=cp%>/order/orderListCheckView.do">
-												<i class="fa fa-angle-double-right"></i>
-												주문/배송조회
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">주문/배송 조회</p>								
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/member/memberModifyView.do">
-												<i class="fa fa-angle-double-right"></i>
-												회원 정보 수정
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">회원 정보수정</p>
 											</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/member/memberDeleteView.do">
-												<i class="fa fa-angle-double-right"></i>
-												회원 탈퇴
+												<!-- <i class="fa fa-angle-double-right"></i> -->
+												<p class="text-left">회원 탈퇴</p>
 											</a>
 										</li>
 									</ul> 
@@ -83,12 +83,12 @@
 									<col width="14%"/>
 								</colgroup>
 								<tr>
-									<th class="first" scope="col">주문번호</th>
-									<th scope="col">주문날짜</th>
-									<th scope="col">결제상태</th>
-									<th scope="col">결제방법</th>
-									<th scope="col">배송번호</th>
-									<th scope="col">주문상태</th>
+									<th class="first" scope="col"><p class="text-center">주문번호</p></th>
+									<th scope="col"><p class="text-center">주문날짜</p></th>
+									<th scope="col"><p class="text-center">결제상태</p></th>
+									<th scope="col"><p class="text-center">결제방법</p></th>
+									<th scope="col"><p class="text-center">배송번호</p></th>
+									<th scope="col"><p class="text-center">주문상태</p></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -140,10 +140,10 @@
 									</tr>
 								</c:if>
 							</tbody>
-						</table>
 						<tr align="center">
-							<td colspan="8" value="pagingHtml" escape="false"></td>
+							<td colspan="8" ${ pagingHtml }></td>
 						</tr>
+						</table>
 						</div>
 					</div>
 				</div>
