@@ -131,9 +131,8 @@
                             </ul>
                         </div>
                     </div>          
-      
                     <div class="col-md-9 col-sm-12 hidden-xs">
-                        <div class="mainmenu text-center">
+                    <div class="mainmenu text-center">
                             <nav>
                                 <ul id="nav">
                                     <li><a href="index.html">HOME</a></li>
@@ -158,7 +157,8 @@
                                     <li><a href="contact-us.html">CONTACT</a></li>
                                 </ul>
                             </nav>
-                        </div>                        
+                    </div>                        
+                    </div>                       
                     </div>
                     <div class="col-md-1 hidden-sm">
                         <div class="header-right">
@@ -277,24 +277,29 @@
 				<div class="row">
 					<div class="col-md-12">
 					    <div class="breadcrumbs">
-					       <h2>LOGIN/REGISTER</h2> 
-					       <ul class="breadcrumbs-list">
+					       <!-- <h2>LOGIN/REGISTER</h2>
+					       <ul class="breadcrumbs-list"> -->
+					       <h2 style="text-align: -webkit-center;padding-top: 30px;">FIND ID MEMBER PAGE</h2>
+      					   <ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 						        <li>
-						            <a title="Return to Home" href="index.html">Home</a>
+						            <a title="Go to Login" href="index.html">Login</a>
 						        </li>
-						        <li>Login</li>
-						    </ul>
+						        <li>
+						        	<a title="Go to Find Pw" href="/member/memberPwFind.do">Find Pw</a>
+						        </li>
+						   </ul>
+						   </ul>
 					    </div>
 					</div>
 				</div>
 			</div>
 		</div> 
 		<!-- Breadcrumbs Area Start --> 
-        <!-- Loging Area Start -->
+        <!-- Find ID Area Start -->
         <div class="login-account section-padding">
            <div class="container">
                 <div class="row">
-<!--                     <div class="col-md-6 col-sm-6">
+                    <!-- <div class="col-md-6 col-sm-6">
                         <form action="#" class="create-account-form" method="post">
                             <h2 class="heading-title">
                                 CREATE AN ACCOUNT
@@ -312,25 +317,33 @@
                             </div>
                         </form>
                     </div> -->
+                    <div class="col-md-6 col-sm-4">
+                    </div>
                     <div class="col-md-6 col-sm-6">
                        <form action="#" class="create-account-form" method="post">
                             <h2 class="heading-title">
-                                ALREADY RESIGTERED?
+                                	Find ID
                             </h2>
-                            <p class="form-row">
-                                <input type="email" placeholder="Email address">
+                            <p class="form-row"><h5>NAME</h5>
+                                <input type="text" name="member_name" size="10" maxlength="10">
                             </p>
-                            <p class="form-row">
-                                <input type="password" placeholder="Password">
+                            <p class="form-row"><h5>JUMIN NUMBER</h5>
+                                <input type="text" name="member_jumin1" size="7" maxlength="6"> - <input type="text" name="member_jumin2" size="7" maxlength="7">
                             </p>
-                            <p class="lost-password form-group">
+                            <!-- <p class="lost-password form-group">
                                 <a href="#" rel="nofollow">Forgot your password?</a>
-                            </p> 
+                            </p> --> 
                             <div class="submit">					
                                 <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
-                                        SING IN
+                                       	 SING IN
+                                    </span>
+                                </button>
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                       	 CLOSE
                                     </span>
                                 </button>
                             </div>                          

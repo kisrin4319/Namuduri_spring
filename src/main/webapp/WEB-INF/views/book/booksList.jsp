@@ -77,12 +77,24 @@ img.top2 {
 								<aside class="widget widget-tag">
 									<h2 class="sidebar-title">POPULAR TAG</h2>
 									<ul class="tag-list">
-										<li><a href="#">e-book</a></li>
-										<li><a href="#">writer</a></li>
-										<li><a href="#">book’s</a></li>
-										<li><a href="#">eassy</a></li>
-										<li><a href="#">nice</a></li>
-										<li><a href="#">author</a></li>
+										<li>
+											<a href="#">e-book</a>
+										</li>
+										<li>
+											<a href="#">writer</a>
+										</li>
+										<li>
+											<a href="#">book’s</a>
+										</li>
+										<li>
+											<a href="#">eassy</a>
+										</li>
+										<li>
+											<a href="#">nice</a>
+										</li>
+										<li>
+											<a href="#">author</a>
+										</li>
 									</ul>
 								</aside>
 								<!-- 베스트 셀러 TOP2 -->
@@ -107,6 +119,7 @@ img.top2 {
 													<li><i class="fa fa-star icolor"></i></li>
 												</ul>
 											</div>
+									</div>
 										</div>
 									</c:forEach>
 								</aside>
@@ -119,8 +132,18 @@ img.top2 {
 							<div class="shop-tab-list">
 								<div class="shop-tab-pill pull-left">
 									<ul>
-										<li class="active" id="left"><a data-toggle="pill" href="#home"><i class="fa fa-th"></i><span>Grid</span></a></li>
-										<li><a data-toggle="pill" href="#menu1"><i class="fa fa-th-list"></i><span>List</span></a></li>
+										<li class="active" id="left">
+											<a data-toggle="pill" href="#home">
+												<i class="fa fa-th"></i>
+												<span>Grid</span>
+											</a>
+										</li>
+										<li>
+											<a data-toggle="pill" href="#menu1">
+												<i class="fa fa-th-list"></i>
+												<span>List</span>
+											</a>
+										</li>
 									</ul>
 								</div>
 								<div class="shop-tab-pill pull-right">
@@ -153,7 +176,8 @@ img.top2 {
 											<div class="col-md-4 col-sm-6">
 												<div class="single-banner">
 													<div class="product-wrapper">
-														<a href="${viewURL}" class="single-banner-image-wrapper"> <img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
+														<a href="${viewURL}" class="single-banner-image-wrapper">
+															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}">
 															<div class="rating-icon">
 																<c:if test="${list.star_point == 0}">
 																	<i class="fa fa-star"></i>
@@ -201,12 +225,24 @@ img.top2 {
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
-																<a href="javascript:isBasket(${list.book_num})"> <i class="fa fa-shopping-cart"></i></a> <a href="javascript:isWish(${list.book_num})" title="Add to Wishlist"> <i class="fa fa-heart-o"></i></a> <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal"> <i class="fa fa-compress"></i></a>
+
+																<a href="javascript:isBasket(${list.book_num})">
+																	<i class="fa fa-shopping-cart"></i>
+																</a>
+																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+																	<i class="fa fa-heart-o"></i>
+																</a>
+																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+																	<i class="fa fa-compress"></i>
+																</a>
 															</div>
 														</div>
 													</div>
 													<div class="banner-bottom text-center">
-														<a href="#"><fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />원</a>
+														<a href="#">
+															<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+															원
+														</a>
 													</div>
 												</div>
 											</div>
@@ -223,7 +259,9 @@ img.top2 {
 											<div class="single-shop-product">
 												<div class="col-xs-12 col-sm-5 col-md-4">
 													<div class="left-item">
-														<a href="${viewURL}" title="East of eden"><img class="resize" src="${pageContext.request.contextPath}/upload/${list.book_image}" alt=""> </a>
+														<a href="${viewURL}" title="East of eden">
+															<img class="resize" src="${pageContext.request.contextPath}/upload/${list.book_image}" alt="">
+														</a>
 													</div>
 												</div>
 												<div class="col-xs-12 col-sm-7 col-md-8">

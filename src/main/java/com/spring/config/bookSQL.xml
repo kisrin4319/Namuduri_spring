@@ -43,6 +43,16 @@
 		ORDER BY BOOK_DATE DESC
 	</select>
 	
+	<!-- 날짜 등록 순 도서 목록 -->
+	<select id="selectDateList" resultType="BooksModel">
+		<include refid="select-bookall" />
+		ORDER BY BOOK_DATE DESC
+	</select>
+	<!-- 베스트셀러 도서 목록 -->
+	<select id="bestSellerList" resultType="BooksModel">
+		<include refid="select-bookall" />
+		ORDER BY BOOK_SELL_COUNT DESC
+	</select>
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="adminSearchList" parameterType="map" resultType="BooksModel">
 		<include refid="select-bookall" />

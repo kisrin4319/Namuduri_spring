@@ -29,6 +29,17 @@ public class BooksService implements BooksDao {
 	public List<BooksModel> booksSearchList(Map<String, Object> map) {
 		return sqlSessionTemplate.selectList("book.selectSearchList", map);
 	}
+	
+	@Override
+	public List<BooksModel> booksListDate() {
+		return sqlSessionTemplate.selectList("book.selectDateList");
+	}
+
+	@Override
+	public List<BooksModel> bestSellerList() {	
+		return sqlSessionTemplate.selectList("book.bestSellerList");
+	}
+
 
 	// 책 내용 보기
 	@Override
