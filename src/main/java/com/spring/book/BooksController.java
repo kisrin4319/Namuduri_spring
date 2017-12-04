@@ -170,4 +170,27 @@ public class BooksController {
 		mv.setViewName("/book/writeReviewSuccess");
 		return mv;
 	}
+	
+	//Slider를 이용한 책 정렬
+	@RequestMapping("/books/bookSlider.do")
+	public ModelAndView SliderList(HttpServletRequest request) {
+		String price = request.getParameter("price");
+		
+		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
+		String max = price.substring(price.indexOf("-")+3);
+		
+		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("min", Integer.parseInt(min));
+		map.put("max", Integer.parseInt(max));
+		
+		booksList = booksService.SliderBookList(map);
+		
+		mv.addObject("booksList",booksList);
+		
+		mv.setViewName("booksList");
+		
+		return mv;
+	}
 }

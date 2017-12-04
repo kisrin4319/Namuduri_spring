@@ -27,15 +27,17 @@ public class MainController {
 		
 		List<BooksModel> booksDateList = new ArrayList<BooksModel>();
 		List<BooksModel> bestSellerList = new ArrayList<BooksModel>();
+		List<BooksModel> newBookList = new ArrayList<BooksModel>();
 		
 		booksDateList = booksService.booksListDate();
 		bestSellerList = booksService.bestSellerList();
+		newBookList = booksService.newBookList();
 		
-		booksDateList.subList(0, 11);
-		bestSellerList.subList(0, 11);
+		newBookList=newBookList.subList(0, 3);
+		
 		mv.addObject("booksDateList",booksDateList);
 		mv.addObject("bestSellerList",bestSellerList);
-		
+		mv.addObject("newBookList",newBookList);
 		
 		mv.setViewName("main");
 		return mv;

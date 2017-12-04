@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	String cp = request.getContextPath();
+   String cp = request.getContextPath();
 %>
 <!doctype html>
 <html class="no-js" lang="">
@@ -352,7 +352,11 @@ img.resize {
 										</c:forEach>
 									</div>
 								</div>
-								<input type="button" value="중고 서적 등록" onclick="fn_writeBook()">
+								<div class="shopingcart-bottom-area">
+									<div class="shopingcart-bottom-area pull-right">
+										<a class="right-shoping-cart" href="javascript:;" onclick="fn_writeBook()">Enrollment Book</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -362,34 +366,35 @@ img.resize {
 	</form>
 	<!-- Shop Area End -->
 	<script type="text/javascript">
-	function fn_writeBook() {
-	  location.href = '<%=cp%>/books/usedBookWriteForm.do';
-  }
-function fn_Basket(book_num) {
-	 var isbuy=confirm("장바구니에 담으시겠습니까?");
-	 if(isbuy==true) {
-	   location.href='<%=cp%>/basket/basketInsert.do?basket_book_num='+book_num+'&basket_book_count='+1;
-	 } else {
-	  return false;
-	 }
-	}
-	
-	
-function fn_Buy(book_num) {
-	var isbuy=confirm("구매 하시겠습니까?");
-	if(isbuy==true) {
-		 location.href='<%=cp%>/order/singleOrder.do?book_num='+book_num+'&order_book_count='+1;
-	} else {
-		return false;
-	}
-}
+    function fn_writeBook() {
+        location.href = '<%=cp%>/books/usedBookWriteForm.do';
+    }
 
-function fn_Modify(used_book_num) {
-	location.href = '<%=cp%>/books/usedBookModifyForm.do?used_book_num='+used_book_num;
-}
-function fn_Delete(used_book_num) {
-	location.href = '<%=cp%>/books/usedBookDelete.do?used_book_num='+used_book_num;
-}
+    function fn_Basket(book_num) {
+        var isbuy = confirm("장바구니에 담으시겠습니까?");
+        if (isbuy == true) {
+            location.href = '<%=cp%>/basket/basketInsert.do?basket_book_num=' + book_num + '&basket_book_count=' + 1;
+        } else {
+            return false;
+        }
+    }
+
+    function fn_Buy(book_num) {
+        var isbuy = confirm("구매 하시겠습니까?");
+        if (isbuy == true) {
+            location.href = '<%=cp%>/order/singleOrder.do?book_num=' + book_num + '&order_book_count=' + 1;
+        } else {
+            return false;
+        }
+    }
+
+    function fn_Modify(used_book_num) {
+        location.href = '<%=cp%>/books/usedBookModifyForm.do?used_book_num=' + used_book_num;
+    }
+
+    function fn_Delete(used_book_num) {
+        location.href = '<%=cp%>/books/usedBookDelete.do?used_book_num=' + used_book_num;
+    }
 </script>
 </body>
 </html>

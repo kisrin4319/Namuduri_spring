@@ -100,9 +100,9 @@ img.resize {
 										<div class="price-filter">
 											<div id="slider-range"></div>
 											<div class="price-slider-amount">
-												<input type="text" id="amount" name="price" placeholder="Add Your Price" />
+												<input type="text" id="price" name="price" placeholder="Add Your Price" />
 												<div class="widget-buttom">
-													<input type="submit" value="Filter" />
+													<input type="button" value="Filter" onclick="fn_slider()" />
 													<input type="reset" value="CLEAR" />
 												</div>
 											</div>
@@ -366,6 +366,11 @@ function isBuy(book_num) {
 	} else {
 		return false;
 	}
+}
+function fn_slider() {
+  var price = document.getElementById("price").value;
+  alert(price);
+  location.href = '<%=cp%>/books/bookSlider.do?price='+price;
 }
 function upScroll() {
 	document.documentElement.scrollTop = 0;
