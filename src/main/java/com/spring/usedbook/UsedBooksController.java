@@ -98,7 +98,28 @@ public class UsedBooksController {
 
 		return mv;
 	}
-
+	// 중고 서적 가격 슬라이더 이용 정렬
+	@RequestMapping("/books/usedBookSlider.do")
+	public ModelAndView SliderList(HttpServletRequest request) {
+		String price = request.getParameter("price");
+		
+		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
+		String max = price.substring(price.indexOf("-")+3);
+		
+		List<UsedBooksModel> usedBooksList = new ArrayList<UsedBooksModel>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("min", Integer.parseInt(min));
+		map.put("max", Integer.parseInt(max));
+		
+		usedBooksList = usedBooksService.SliderBookList(map);
+		
+		mv.addObject("usedBooksList",usedBooksList);
+		
+		mv.setViewName("usedBooksList");
+		
+		return mv;
+	}
 	// 2. 중고 서적 등록 form
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.GET)
 	public ModelAndView usedBookWriteForm() throws Exception {
@@ -185,4 +206,6 @@ public class UsedBooksController {
 		mv.setViewName("redirect:/books/usedBooksList.do");
 		return mv;
 	}
+	
+	
 }

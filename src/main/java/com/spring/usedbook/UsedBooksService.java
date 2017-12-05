@@ -51,4 +51,9 @@ public class UsedBooksService implements UsedBooksDao {
 		sqlSessionTemplate.delete("usedbook.deleteUsedBook",used_book_num);
 	}
 
+	@Override
+	public List<UsedBooksModel> SliderBookList(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("usedbook.SliderBookList",map);
+	}
+
 }

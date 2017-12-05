@@ -99,9 +99,9 @@ img.resize {
 										<div class="price-filter">
 											<div id="slider-range"></div>
 											<div class="price-slider-amount">
-												<input type="text" id="amount" name="price" placeholder="Add Your Price" />
+												<input type="text" id="price" name="price" placeholder="Add Your Price" />
 												<div class="widget-buttom">
-													<input type="submit" value="Filter" />
+													<input type="button" value="Filter" onclick="fn_slider()" />
 													<input type="reset" value="CLEAR" />
 												</div>
 											</div>
@@ -367,7 +367,7 @@ img.resize {
 	<!-- Shop Area End -->
 	<script type="text/javascript">
     function fn_writeBook() {
-        location.href = '<%=cp%>/books/usedBookWriteForm.do';
+     location.href = '<%=cp%>/books/usedBookWriteForm.do';
     }
 
     function fn_Basket(book_num) {
@@ -382,7 +382,7 @@ img.resize {
     function fn_Buy(book_num) {
         var isbuy = confirm("구매 하시겠습니까?");
         if (isbuy == true) {
-            location.href = '<%=cp%>/order/singleOrder.do?book_num=' + book_num + '&order_book_count=' + 1;
+            location.href = '<%=cp%>/order/singleOrder.do?used_book_num=' + book_num + '&order_book_count=' + 1;
         } else {
             return false;
         }
@@ -395,6 +395,19 @@ img.resize {
     function fn_Delete(used_book_num) {
         location.href = '<%=cp%>/books/usedBookDelete.do?used_book_num=' + used_book_num;
     }
+   
+    function fn_slider() {
+      var price = document.getElementById("price").value;
+      if(!price){
+        alert("가격 범위를 정확히 설정 해주세요.");
+        return false;
+      }
+      else
+      {
+     	 location.href = '<%=cp%>/books/usedBookSlider.do?price='+price;
+      }
+    }
+    
 </script>
 </body>
 </html>

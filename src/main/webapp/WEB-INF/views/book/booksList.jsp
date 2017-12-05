@@ -369,8 +369,14 @@ function isBuy(book_num) {
 }
 function fn_slider() {
   var price = document.getElementById("price").value;
-  alert(price);
-  location.href = '<%=cp%>/books/bookSlider.do?price='+price;
+  if(!price){
+    alert("가격 범위를 정확히 설정 해주세요.");
+    return false;
+  }
+  else
+  {
+ 	 location.href = '<%=cp%>/books/bookSlider.do?price='+price;
+  }
 }
 function upScroll() {
 	document.documentElement.scrollTop = 0;

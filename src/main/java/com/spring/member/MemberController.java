@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +25,9 @@ public class MemberController {
 	
 	@Resource
 	private MemberService memberService;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	ModelAndView mv;
 	String session_id;
@@ -41,16 +46,27 @@ public class MemberController {
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
-		memberModel.setMember_id(member_id);
-		memberModel.setMember_pw(member_pw);
+		memberModel = memberService.SelectOne(member_id);
+		passwordEncoder = new BCryptPasswordEncoder();
 		
-		MemberModel result = memberService.loginCheck(memberModel);
+		System.out.println("=============================================================");
 		
+		String password =memberModel.getMember_pw();
+		String encryptPassword = passwordEncoder.encode(password);
+		System.out.println(encryptPassword);
+		
+		if(passwordEncoder.matches(password, encryptPassword)){
+			System.out.println("계정정보 일치");
+			}else{
+			System.out.println("계정정보 불일치");
+			}
+		
+		System.out.println("=============================================================");
 		//로그인 성공
-		if (result != null){
+		if (passwordEncoder.matches(member_pw, memberModel.getMember_pw())){
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("member_id", result.getMember_id());
+			session.setAttribute("member_id", member_id);
 			
 			mv.setViewName("redirect:/main.do");
 			return mv;
@@ -109,7 +125,17 @@ public class MemberController {
 			
 			mv.setViewName("memberInfo");
 			return mv;
-		} else { 
+		} else {
+			passwordEncoder = new BCryptPasswordEncoder();
+			
+			System.out.println("=============================================================");
+			
+			String password = memberModel.getMember_pw();
+			String encryptPassword = passwordEncoder.encode(password);
+			System.out.println(encryptPassword);
+			
+			memberModel.setMember_pw(encryptPassword);
+			
 			memberService.insertMember(memberModel);
 			
 			mv.addObject("memberModel", memberModel);
