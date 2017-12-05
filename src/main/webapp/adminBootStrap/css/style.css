@@ -4133,12 +4133,12 @@ table th {
 .datepicker table tr td.today, .datepicker table tr td.today.disabled,
 	.datepicker table tr td.today.disabled:hover, .datepicker table tr td.today:hover
 	{
-	background: #009efb;
-	color: #ffffff;
+	/* background: #009efb;
+	color: #ffffff; */
 }
 
 .datepicker td, .datepicker th {
-	padding: 5px 10px;
+	padding: 3px 7px;
 }
 
 /*******************

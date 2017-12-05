@@ -8,14 +8,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 정보 관리</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 var page = ${currentPage};
 function deleteCheck(id) {
@@ -35,7 +29,6 @@ function update(id){
 		$("#datepicker2").datepicker();
 	});
 </script>
-
 </head>
 <body>
 	<div class="container-fluid">
