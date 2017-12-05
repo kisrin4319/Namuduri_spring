@@ -48,14 +48,14 @@
 									<th>주문자 정보</th>
 								</tr>
 							<tr>
-								<td width="100">주 문 자</td>
-								<td colspan="3" width="500">${ memberInfo.member_id }</td>
+								<th width="100">주 문 자</th>
+								<th colspan="3" width="500">${ memberInfo.member_id }</th>
 							</tr>
 							<tr>
-								<td width="40">휴대폰번호</td>
-								<td width="80">${ memberInfo.member_phone }</td>
-								<td width="40">이메일</td>
-								<td width="80">${ memberInfo.member_email }</td>
+								<th width="40">휴대폰번호</th>
+								<th width="80">${ memberInfo.member_phone }</th>
+								<th width="40">이메일</th>
+								<th width="80">${ memberInfo.member_email }</th>
 							</tr>
 						</thead>
 						</table>
@@ -73,16 +73,16 @@
 								</colgroup>
 
 								<tr>
-									<th class="first" scope="col">번호</th>
-									<th scope="col">상품이미지</th>
-									<th scope="col">상품 정보</th>
-									<th scope="col">수량</th>
-									<th scope="col">금액</th>
+									<th class="first" scope="col"><p class="text-center">번호</p></th>
+									<th scope="col"><p class="text-center">상품이미지</p></th>
+									<th scope="col"><p class="text-center">상품 정보</p></th>
+									<th scope="col"><p class="text-center">수량</p></th>
+									<th scope="col"><p class="text-center">금액</p></th>
 								</tr>
 								<tr align="center">
-									<td>${ memberOrderDetail.BOOK_NUM }</td>
-									<td width="100" height="50"><img src="<%=cp%>/upload/${ memberOrderDetail.BOOK_IMAGE }" style="width: 130px; height: 120px;" /></td>
-									<td align="left" width="270">
+									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.BOOK_NUM }</p></th>
+									<td width="100" height="50"><img src="<%=cp%>/upload/${ memberOrderDetail.BOOK_IMAGE }"/></td>
+									<th style="vertical-align: middle"><p class="text-left">
 										주문 번호 : ${ memberOrderDetail.ORDER_TRADE_NUM }<br><br> 
 										도 서 명 : ${ memberOrderDetail.ORDER_BOOK_NAME }<br><br> 
 										주문 상태 : 
@@ -93,28 +93,28 @@
 										</c:if> <c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST03' }">
 										배송 완료
 										</c:if> <br><br> 
-										주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }<br><br>
-									</td>
-									<td>${ memberOrderDetail.ORDER_BOOK_COUNT }권</td><br>
-									<td>${ memberOrderDetail.ORDER_BOOK_COUNT * memberOrderDetail.ORDER_BOOK_PRICE }원</td>
+										주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }</p><br><br>
+									</th>
+									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.ORDER_BOOK_COUNT }권</p></th><br>
+									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.ORDER_BOOK_COUNT * memberOrderDetail.ORDER_BOOK_PRICE }원</p></th>
 								</tr>
 							</thead>
 						</table>
 						<table class="table">
 							<thead>
 							<tr>
-								<td width="100">받으실 분</td>
-								<td colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_NAME }</td>
+								<th width="100">받으실 분</th>
+								<th colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_NAME }</th>
 							</tr>
 							<tr>
-								<td width="40">휴대폰번호</td>
-								<td width="80">${ memberOrderDetail.ORDER_RECEIVE_PHONE }</td>
-								<td width="40">전화번호</td>
-								<td width="80">${ memberOrderDetail.ORDER_RECEIVE_MOBILE }</td>
+								<th width="40">휴대폰번호</th>
+								<th width="80">${ memberOrderDetail.ORDER_RECEIVE_PHONE }</th>
+								<th width="40">전화번호</th>
+								<th width="80">${ memberOrderDetail.ORDER_RECEIVE_MOBILE }</th>
 							</tr>
 							<tr>
-								<td width="100">주 소</td>
-								<td colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_ADDR1 }&nbsp;</td>
+								<th width="100">주 소</th>
+								<th colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_ADDR1 }&nbsp;</th>
 							</tr>
 						</thead>
 						</table>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.common.Paging;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
 import com.spring.order.OrderModel;
@@ -35,12 +36,19 @@ public class MypageController {
 	ModelAndView mv;
 	String session_id;
 	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 5;
+	private int blockPage = 10;
+	private String pagingHtml;
+	private Paging paging;
+	
 	//mypage
 	@RequestMapping(value = "/mypage.do")
 	public ModelAndView mypage(OrderModel order, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
-		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
+		List<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
 		String member_id = (String) session.getAttribute("member_id");
 		
@@ -54,7 +62,30 @@ public class MypageController {
 			orderModel.add(getOrderInfo);
 		}
 		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		totalCount = orderModel.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "mypage");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+		orderModel = orderModel.subList(paging.getStartCount(), lastCount);
+		
 		mv.addObject("orderModel", orderModel);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", orderModel.size());
+		mv.setViewName("orderListCheck1");
 		mv.setViewName("mypage1");
 		return mv;
 	}
@@ -224,7 +255,7 @@ public class MypageController {
 	public ModelAndView orderListCheck(OrderModel order, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		mv = new ModelAndView();
-		ArrayList<OrderModel> orderModel = new ArrayList<OrderModel>();
+		List<OrderModel> orderModel = new ArrayList<OrderModel>();
 		
 		String session_id = (String) session.getAttribute("member_id");
 		
@@ -240,8 +271,30 @@ public class MypageController {
 			orderModel.add(getOrderInfo);
 		}
 		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		totalCount = orderModel.size();
+		
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderListCheckView");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+		orderModel = orderModel.subList(paging.getStartCount(), lastCount);
+		
 		mv.addObject("memberInfo", memberInfo);
 		mv.addObject("orderModel", orderModel);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", orderModel.size());
 		mv.setViewName("orderListCheck1");
 		return mv;
 	}
