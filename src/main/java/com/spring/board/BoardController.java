@@ -49,7 +49,7 @@ public class BoardController {
 	@RequestMapping(value = "/board/boardList.do")
 	public ModelAndView BoardList(HttpServletRequest request) throws Exception {
 		mv = new ModelAndView();
-
+		
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
 
 		boardList = boardService.boardList();
@@ -107,7 +107,7 @@ public class BoardController {
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
-
+		
 		if (paging.getEndCount() < totalCount)
 			lastCount = paging.getEndCount() + 1;
 		boardList = boardList.subList(paging.getStartCount(), lastCount);
@@ -128,7 +128,6 @@ public class BoardController {
 
 		mv = new ModelAndView();
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
-
 		boardService.boardDetail(board_num);
 		BoardModel boardModel = boardService.boardDetail(board_num);
 
@@ -136,17 +135,15 @@ public class BoardController {
 
 		if (boardModel.getRef() == boardModel.getBoard_num()) {
 			mv.addObject("ref", 0);
-
 		} else {
 			mv.addObject("ref", 1);
 			if (session_id == null) {
-
 			}
 		}
 
+		mv.addObject("board_num", board_num);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("boardModel", boardModel);
-
 		mv.setViewName("boardDetail");
 
 		return mv;
@@ -273,8 +270,16 @@ public class BoardController {
 		mv = new ModelAndView();
 		String board_num = request.getParameter("board_num");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		int ref = 0;
+		
+		if (!(request.getParameter("ref") == null || request.getParameter("ref").trim().isEmpty()|| request.getParameter("ref").equals("0"))) {
+			ref = Integer.parseInt(request.getParameter("ref"));
+		}
+
 		mv.addObject("board_num", board_num);
 		mv.addObject("currentPage", currentPage);
+		mv.addObject("ref", ref);
 		mv.setViewName("adminboard/passwordCheck");
 
 		return mv;
@@ -290,6 +295,7 @@ public class BoardController {
 		int modi;
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int ref = Integer.parseInt(request.getParameter("ref"));
 		String pass = request.getParameter("board_pw");
 
 		BoardModel boardModel1 = new BoardModel();
@@ -305,6 +311,7 @@ public class BoardController {
 		mv.addObject("boardModel", boardModel1);
 		mv.addObject("board_num", board_num);
 		mv.addObject("currentPage", currentPage);
+		mv.addObject("ref", ref);
 		mv.setViewName("adminboard/pwSuccess");
 
 		return mv;
@@ -378,7 +385,7 @@ public class BoardController {
 	}
 
 	// 5.게시글 삭제
-	@RequestMapping(value = "/board/boardDelete.do")
+	@RequestMapping(value = "/board/BoardDelete.do")
 	public ModelAndView boardDelete(@RequestParam int board_num, @RequestParam int ref, @RequestParam int currentPage)
 			throws Exception {
 
@@ -390,6 +397,13 @@ public class BoardController {
 		mv.setViewName("redirect:/board/boardList.do");
 
 		return mv;
+	}
+	
+	// 게시글 원문삭제
+	@RequestMapping(value = "/board.BoardAllDelete.do")
+	public ModelAndView boardAllDelete(@RequestParam int board_num, @RequestParam int ref, @RequestParam int currentPage)
+			throws Exception {
+	
 	}
 
 }

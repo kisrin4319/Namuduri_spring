@@ -18,13 +18,13 @@ public class BoardService implements BoardDao {
 	public List<BoardModel> boardList() {
 		return sqlSessionTemplate.selectList("board.boardList");
 	}
-
+	
 	// 게시글 내용 보기
 	@Override
 	public BoardModel boardDetail(int board_num) {
 		return sqlSessionTemplate.selectOne("board.selectBoardOne", board_num);
 	}
-
+	
 	// 게시판 검색
 	@Override
 	public List<BoardModel> Search0(String search) {
@@ -64,6 +64,12 @@ public class BoardService implements BoardDao {
 	@Override
 	public void BoardDelete(int board_num) {
 		sqlSessionTemplate.delete("board.BoardDelete", board_num);
+	}
+	
+	// 게시글 원문삭제
+	@Override
+	public void BoardAllDelete(int ref) {
+		sqlSessionTemplate.delete("board.BoardAllDelete", ref);
 	}
 
 }

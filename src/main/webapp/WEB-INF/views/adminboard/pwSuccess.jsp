@@ -17,11 +17,11 @@ var chk	= ${modi}
 			window.close();	
 		}else if(window.name == 'Delete'){
 			alert('삭제 되었습니다.');
-			window.opener.parent.location.href="boardDelete.do?board_num=${board_num}&ref=${ref}&currentPage=${currentPage}";
+			window.opener.parent.location.href="BoardDelete.do?board_num=${board_num}&ref=${ref}&currentPage=${currentPage}";
 			window.close();	
 		}else if(window.name == 'type'){
 			alert('접근 되었습니다.');
-			window.opener.parent.location.href="boardDetail.do?board_num=${board_num}&currentPage=${currentPage}";
+			window.opener.parent.location.href="boardDetail.do?board_num=${board_num}&ref=${ref}&currentPage=${currentPage}";
 			window.close();	
 		}
 		window.close();	
