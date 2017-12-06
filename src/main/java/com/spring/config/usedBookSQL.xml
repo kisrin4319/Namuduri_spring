@@ -32,20 +32,18 @@
 		<include refid="select-bookall" />
 		<choose>
 			<when test="searchNum == 0">
-				AND( BOOK_NAME like '%'||#{searchKeyword}||'%'
-				OR
-				BOOK_AUTH like '%'||#{searchKeyword}||'%'
-				OR COMPANY_ID like
-				'%'||#{searchKeyword}||'%' )
+				WHERE ( BOOK_NAME like '%'||#{searchKeyword}||'%'
+				OR BOOK_AUTH like '%'||#{searchKeyword}||'%'
+				OR COMPANY_ID like	'%'||#{searchKeyword}||'%' )
 			</when>
 			<when test="searchNum == 1">
-				AND BOOK_NAME like '%'||#{searchKeyword}||'%'
+				WHERE BOOK_NAME like '%'||#{searchKeyword}||'%'
 			</when>
 			<when test="searchNum == 2">
-				AND BOOK_AUTH like '%'||#{searchKeyword}||'%'
+				WHERE BOOK_AUTH like '%'||#{searchKeyword}||'%'
 			</when>
 			<otherwise>
-				AND COMPANY_ID like '%'||#{searchKeyword}||'%'
+				WHERE COMPANY_ID like '%'||#{searchKeyword}||'%'
 			</otherwise>
 		</choose>
 		ORDER BY USED_BOOK_REGDATE DESC

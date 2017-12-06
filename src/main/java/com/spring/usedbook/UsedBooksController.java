@@ -90,6 +90,10 @@ public class UsedBooksController {
 
 		usedBooksList = usedBooksList.subList(paging.getStartCount(), lastCount);
 
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+
+		mv.addObject("top2", top2);
 		mv.addObject("usedBooksList", usedBooksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -111,7 +115,7 @@ public class UsedBooksController {
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookWriteSearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -152,7 +156,7 @@ public class UsedBooksController {
 	@RequestMapping(value ="/books/usedBookModifyForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookModifySearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
