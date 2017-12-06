@@ -9,19 +9,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<!-- mail bean -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.transport.protocol">smtp</prop> <!-- // 메일서버 프로토콜 (smtp) -->
-				<prop key="mail.smtp.auth">false</prop> <!-- // 인증여부 (false라면 미인증, 단 서버에서 허용IP 설정이 되어야 함.) -->
-				<prop key="mail.smtp.starttls.enable">true</prop>
-			</props>
-		</property>
-	</bean>
-
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"

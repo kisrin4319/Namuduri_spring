@@ -181,7 +181,7 @@ public class BooksController {
 		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
 		String max = price.substring(price.indexOf("-")+3);
 		
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("min", Integer.parseInt(min));

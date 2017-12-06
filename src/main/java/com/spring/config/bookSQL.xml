@@ -68,12 +68,12 @@
 	</select>
 	
 	<!-- 날짜 등록 순 도서 목록 -->
-	<select id="selectDateList" resultType="BooksModel">
+	<select id="selectDateList" resultMap="book">
 		<include refid="select-bookall" />
 		ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 베스트셀러 도서 목록 -->
-	<select id="bestSellerList" resultType="BooksModel">
+	<select id="bestSellerList" resultMap="book">
 		<include refid="select-bookall" />
 		ORDER BY BOOK_SELL_COUNT DESC
 	</select>
@@ -85,7 +85,7 @@
 	
 	<!-- 최소 , 최대 필터 도서 목록 -->
 	
-	<select id="SliderBookList" parameterType="map" resultType="BooksModel">
+	<select id="SliderBookList" parameterType="map" resultMap="book">
 		<![CDATA[
 		select * from book
 		where book_price >=#{min} and book_price <=#{max} order by book_price asc

@@ -1,13 +1,10 @@
 package com.spring.common;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,36 +16,40 @@ public class MailController {
 
 	ModelAndView mv = new ModelAndView();
 
-	@Autowired
-	private JavaMailSender mailSender; // xml에 등록한 bean autowired
-
 	@RequestMapping("/common/contact.do")
 	public ModelAndView Contact(HttpServletRequest request) {
 
-		mv.addObject("contact");
-
+		mv.setViewName("contact");
 		return mv;
 	}
 
 	// mailSending 코드
 	@RequestMapping(value = "/mail/mailSending")
-	public String mailSending(HttpServletRequest request) {
-		String tomail = request.getParameter("tomail"); // 받는 사람 이메일
-		String name = request.getParameter("name"); // 이름
-		String content = request.getParameter("message"); // 내용
+	public ModelAndView mailSending(HttpServletRequest request) {
+
 		try {
-			MimeMessage message = mailSender.createMimeMessage();
+			SimpleEmail email = new SimpleEmail();
 
-			message.setFrom(new InternetAddress("khiclass@gmail.com"));
-			message.addRecipient(RecipientType.TO, new InternetAddress(tomail));
-			message.setSubject(name);
-			message.setText(content, "utf-8", "html");
+			email.setCharset("UTF-8");
+			email.setHostName("smtp.gmail.com"); // SMTP서버 설정
+			email.setSmtpPort(587);
+			email.setSSL(true);
+			email.setAuthentication("kisrin4319", "aaudlfdnutzkthsi");
 
-			mailSender.send(message);
-		} catch (Exception e) {
-			System.out.println(e);
+			email.addTo("kisrin4319@naver.com", "kisrin4319"); // 수신자를 추가
+			email.setFrom(request.getParameter("tomail"), request.getParameter("tomail")); // 보내는 사람 지정
+			email.setSubject(request.getParameter("name") + "님이 보낸 메일입니다."); // 메일 제목
+			email.setContent(request.getParameter("message"), "text/plain; charset=euc-kr");
+			email.send(); // 메일 발송
+			
+		} catch (EmailException e) {
+			e.printStackTrace();
 		}
 
-		return "redirect:/main.do";
+		mv.setViewName("redirect:/main.do");
+
+		return mv;
+
 	}
+
 }
