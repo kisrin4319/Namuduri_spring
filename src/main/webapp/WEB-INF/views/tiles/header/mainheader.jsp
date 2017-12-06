@@ -339,7 +339,7 @@
 									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
-									<a href="#">WISH LIST</a>
+									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
 								</li>
 								<li>
 									<a href="<%=cp%>/mypage.do">MY PAGE</a>
@@ -353,7 +353,7 @@
 									</ul>
 								</li>
 								<li>
-									<a href="contact-us.html">CONTACT</a>
+									<a href="<%=cp%>/etc/contact.do">CONTACT</a>
 								</li>
 							</ul>
 						</nav>

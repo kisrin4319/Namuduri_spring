@@ -38,16 +38,16 @@
 							<h2 class="footer-title">My Account</h2>
 							<ul class="footer-list">
 								<li>
-									<a href="#">&nbsp;Login</a>
+									<a href="<%=cp%>/member/loginForm.do">&nbsp;Login</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;My Cart</a>
+									<a href="<%=cp%>/basket/basketList.do">&nbsp;My Cart</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;Wish List</a>
+									<a href="<%=cp%>/wish/wishList.do">&nbsp;Wish List</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;Manage Account</a>
+									<a href="<%=cp%>/member/memberModifyView.do">&nbsp;Manage Account</a>
 								</li>
 							</ul>
 						</div>
@@ -57,16 +57,16 @@
 							<h2 class="footer-title">Shop</h2>
 							<ul class="footer-list">
 								<li>
-									<a href="my-account.html">&nbsp;Main</a>
+									<a href="<%=cp%>/main.do">&nbsp;Main</a>
 								</li>
 								<li>
 									<a href="account.html">&nbsp;Best Seller</a>
 								</li>
 								<li>
-									<a href="cart.html">&nbsp;New Books</a>
+									<a href="<%=cp%>/books/booksList.do">&nbsp;New Books</a>
 								</li>
 								<li>
-									<a href="wishlist.html">&nbsp;Used Books</a>
+									<a href="<%=cp%>/books/usedBooksList.do">&nbsp;Used Books</a>
 								</li>
 							</ul>
 						</div>
@@ -79,13 +79,13 @@
 									<a href="#">&nbsp;FAQ</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;Q&A</a>
+									<a href="<%=cp%>/board/boardList.do">&nbsp;Q&A</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;Contact</a>
+									<a href="<%=cp%>/etc/contact.do">&nbsp;Contact</a>
 								</li>
 								<li>
-									<a href="#">&nbsp;My Page</a>
+									<a href="<%=cp%>/mypage.do">&nbsp;My Page</a>
 								</li>
 							</ul>
 						</div>

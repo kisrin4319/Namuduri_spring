@@ -1,6 +1,8 @@
 package com.spring.wishlist;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,10 @@ public class WishController {
 		wishModel.setMember_id(session_id);
 		List<WishModel> wishList = wishService.wishList(wishModel);
 
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 2);
+		
+		mv.addObject("top2", top2);
 		mv.addObject("wishList", wishList);
 		mv.setViewName("wishList");
 		return mv;

@@ -16,6 +16,11 @@ img.resize {
 	width: 90px;
 	height: 90px;
 }
+
+img.top2 {
+	width: 104px;
+	height: 104px;
+}
 </style>
 </head>
 <body>
@@ -38,56 +43,19 @@ img.resize {
 							<aside class="widget widget-categories">
 								<h2 class="sidebar-title text-center">CATEGORY</h2>
 								<ul class="sidebar-menu" style="text-align: left;">
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=단편소설">
-											<i class="fa fa-angle-double-right"></i>
-											단편소설
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=장편소설">
-											<i class="fa fa-angle-double-right"></i>
-											장편소설
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=자기계발">
-											<i class="fa fa-angle-double-right"></i>
-											자기계발
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=시/에세이">
-											<i class="fa fa-angle-double-right"></i>
-											시/에세이
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)">
-											<i class="fa fa-angle-double-right"></i>
-											어린이(초등)
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서">
-											<i class="fa fa-angle-double-right"></i>
-											중/고등 참고서
-											<span></span>
-										</a>
-									</li>
-									<li>
-										<a href="<%=cp%>/books/booksList.do?book_category=취업/참고서">
-											<i class="fa fa-angle-double-right"></i>
-											취업/참고서
-											<span></span>
-										</a>
-									</li>
-								</ul>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=단편소설"><i class="fa fa-angle-double-right"></i> short story</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=장편소설"><i class="fa fa-angle-double-right"></i> feature novel</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=자기계발"> <i class="fa fa-angle-double-right"></i> self-development
+										</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=시/에세이"> <i class="fa fa-angle-double-right"></i> poem & essay
+										</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)"> <i class="fa fa-angle-double-right"></i> kids & schoolchild
+										</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서"> <i class="fa fa-angle-double-right"></i> teenager
+										</a></li>
+										<li style="margin-left: 35px;"><a href="<%=cp%>/books/booksList.do?book_category=취업/참고서"> <i class="fa fa-angle-double-right"></i> job applicants
+										</a></li>
+									</ul>
 							</aside>
 							<aside class="widget shop-filter">
 								<h2 class="sidebar-title text-center">PRICE SLIDER</h2>
@@ -130,64 +98,66 @@ img.resize {
 								</ul>
 							</aside>
 							<aside class="widget widget-seller">
-								<h2 class="sidebar-title">TOP SELLERS</h2>
-								<div class="single-seller">
-									<div class="seller-img">
-										<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="" />
+									<h2 class="sidebar-title" style="margin-bottom: 5px;">TOP SELLERS</h2>
+									<c:forEach var="top" items="${top2}">
+										<div class="single-seller">
+											<div class="seller-img">
+												<img class="top2" src="${pageContext.request.contextPath}/upload/${top.book_image}" alt="${top.book_name}" />
+											</div>
+											<div class="seller-details">
+												<a href="shop.html"><h5>${top.book_name}</h5></a>
+												<h5>
+													<fmt:formatNumber pattern="###,###,###" value="${top.book_price}" />
+													원
+												</h5>
+												<ul>
+																<c:if test="${top.star_point == 0}">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 1}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 2}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 3}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 4}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 5}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
+												</ul>
+											</div>
 									</div>
-									<div class="seller-details">
-										<a href="shop.html">
-											<h5>Cold mountain</h5>
-										</a>
-										<h5>$ 50.00</h5>
-										<ul>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="single-seller">
-									<div class="seller-img">
-										<img src="${pageContext.request.contextPath}/bootstrap/img/shop/2.jpg" alt="" />
-									</div>
-									<div class="seller-details">
-										<a href="">
-											<h5>The historian</h5>
-										</a>
-										<h5>$ 50.00</h5>
-										<ul>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-											<li>
-												<i class="fa fa-star icolor"></i>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</aside>
+									</c:forEach>
+								</aside>
 						</div>
 					</div>
 				</div>
