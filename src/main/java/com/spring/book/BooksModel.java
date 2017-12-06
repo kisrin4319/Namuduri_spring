@@ -22,5 +22,4 @@ public class BooksModel {
 	private String company_id; // 출판사 이름
 	private String book_auth; // 도서 작가
 	private int book_use_yn; // 도서 활성화 유무
-	private int star_point; // 주문 수량
 }

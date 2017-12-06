@@ -41,7 +41,7 @@ public class BooksController {
 	@RequestMapping("/books/booksList.do")
 	public ModelAndView booksList(HttpServletRequest request) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
 
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
@@ -82,7 +82,9 @@ public class BooksController {
 
 		booksList = booksList.subList(paging.getStartCount(), lastCount);
 		
-		List<BooksModel> top2 = booksService.top2();
+
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 2);
 
 		mv.addObject("top2", top2);
 		mv.addObject("booksList", booksList);
@@ -109,7 +111,7 @@ public class BooksController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		BooksModel view = booksService.bookOne(num);
+		Map<String, Object> view = booksService.book_star(num);
 		List<ReviewModel> review = booksService.reviewList(num);
 
 		totalCount = review.size();

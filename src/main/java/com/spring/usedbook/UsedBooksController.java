@@ -111,7 +111,7 @@ public class UsedBooksController {
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookWriteSearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -152,7 +152,7 @@ public class UsedBooksController {
 	@RequestMapping(value ="/books/usedBookModifyForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookModifySearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 

@@ -112,15 +112,51 @@ img.top2 {
 													원
 												</h5>
 												<ul>
-													<li><i class="fa fa-star icolor"></i></li>
-													<li><i class="fa fa-star icolor"></i></li>
-													<li><i class="fa fa-star icolor"></i></li>
-													<li><i class="fa fa-star icolor"></i></li>
-													<li><i class="fa fa-star icolor"></i></li>
+																<c:if test="${top.star_point == 0}">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 1}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 2}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 3}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 4}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${top.star_point == 5}">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
 												</ul>
 											</div>
 									</div>
-										</div>
 									</c:forEach>
 								</aside>
 							</div>
@@ -226,13 +262,13 @@ img.top2 {
 														<div class="product-description">
 															<div class="functional-buttons">
 
-																<a href="javascript:isBasket(${list.book_num})">
+																<a href="javascript:isBasket(${list.book_num})" style="padding-top: 11px; ">
 																	<i class="fa fa-shopping-cart"></i>
 																</a>
-																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist" style="padding-top: 11px; ">
 																	<i class="fa fa-heart-o"></i>
 																</a>
-																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px; ">
 																	<i class="fa fa-compress"></i>
 																</a>
 															</div>
@@ -322,7 +358,8 @@ img.top2 {
 															<a href="javascript:isWish(${list.book_num})">♡ WISH LIST</a>
 														</p>
 														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
-															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: x-small; font-style: oblique;">BUY NOW</a></span><br /> <span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-style: oblique; font-size: x-small;">ADD TO CART</a></span>
+															<span><a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px;font-size: small;font-style: oblique;margin-left: 0px;padding-bottom: 10px;padding-left: 18px;padding-right: 18px;height: 35px;">ADD TO CART</a></span><br />
+															<span><a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px;font-size: small; font-style: oblique;margin-left: 0px;padding-bottom: 10px;padding-left: 30px;padding-right: 30px;height: 35px;">BUY NOW</a></span> 
 														</div>
 													</div>
 												</div>
