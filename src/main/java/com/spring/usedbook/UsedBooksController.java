@@ -91,7 +91,7 @@ public class UsedBooksController {
 		usedBooksList = usedBooksList.subList(paging.getStartCount(), lastCount);
 
 		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
-		top2 = booksService.top2().subList(0, 2);
+		top2 = booksService.top2().subList(0, 3);
 
 		mv.addObject("top2", top2);
 		mv.addObject("usedBooksList", usedBooksList);
