@@ -78,38 +78,15 @@ img.top2 {
 								</aside>
 							</div>
 							<div class="shop-widget-bottom">
-								<aside class="widget widget-tag">
-									<h2 class="sidebar-title">POPULAR TAG</h2>
-									<ul class="tag-list">
-										<li>
-											<a href="#">e-book</a>
-										</li>
-										<li>
-											<a href="#">writer</a>
-										</li>
-										<li>
-											<a href="#">book’s</a>
-										</li>
-										<li>
-											<a href="#">eassy</a>
-										</li>
-										<li>
-											<a href="#">nice</a>
-										</li>
-										<li>
-											<a href="#">author</a>
-										</li>
-									</ul>
-								</aside>
 								<aside class="widget widget-seller">
 									<h2 class="sidebar-title" style="margin-bottom: 5px;">TOP SELLERS</h2>
 									<c:forEach var="top" items="${top2}">
 										<div class="single-seller">
 											<div class="seller-img">
-												<img class="top2" src="${pageContext.request.contextPath}/upload/${top.book_image}" alt="${top.book_name}" />
+											<a href="<%=cp%>/books/bookDetail.do?book_num=${top.book_num}"><img class="top2" src="${pageContext.request.contextPath}/upload/${top.book_image}" alt="${top.book_name}" /></a>
 											</div>
 											<div class="seller-details">
-												<a href="shop.html"><h5>${top.book_name}</h5></a>
+												<a href="<%=cp%>/books/bookDetail.do?book_num=${top.book_num}"><h5>${top.book_name}</h5></a>
 												<h5>
 													<fmt:formatNumber pattern="###,###,###" value="${top.book_price}" />
 													원
@@ -208,13 +185,10 @@ img.top2 {
 								<div class="row tab-pane fade in active" id="home">
 									<div class="shop-single-product-area">
 										<c:forEach var="list" items="${usedBooksList}" varStatus="stat">
-											<c:url var="viewURL" value="/books/bookDetail.do">
-												<c:param name="used_book_num" value="${list.used_book_num}" />
-											</c:url>
 											<div class="col-md-4 col-sm-6">
 												<div class="single-banner">
 													<div class="product-wrapper">
-														<a href="${viewURL}" class="single-banner-image-wrapper">
+														<a class="single-banner-image-wrapper">
 															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
 															<div class="rating-icon">
 																<i class="fa fa-star icolor"></i>
@@ -246,7 +220,7 @@ img.top2 {
 											<div class="single-shop-product">
 												<div class="col-xs-12 col-sm-5 col-md-4">
 													<div class="left-item">
-														<a href="${viewURL}" title="East of eden">
+														<a href="#">
 															<img class="resize" src="${pageContext.request.contextPath}/upload/${list.book_image}" alt="">
 														</a>
 													</div>
@@ -254,7 +228,7 @@ img.top2 {
 												<div class="col-xs-12 col-sm-7 col-md-8">
 													<div class="deal-product-content">
 														<h4>
-															<a href="${viewURL}">${list.book_name}</a>
+															${list.book_name}
 														</h4>
 														<div class="product-price">
 															<span class="new-price">
