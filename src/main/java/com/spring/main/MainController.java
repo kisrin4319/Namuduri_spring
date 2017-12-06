@@ -2,6 +2,7 @@ package com.spring.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ public class MainController {
 	public ModelAndView mainView(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
 		
-		List<BooksModel> booksDateList = new ArrayList<BooksModel>();
-		List<BooksModel> bestSellerList = new ArrayList<BooksModel>();
-		List<BooksModel> newBookList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksDateList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> bestSellerList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> newBookList = new ArrayList<Map<String, Object>>();
 		
 		booksDateList = booksService.booksListDate();
 		bestSellerList = booksService.bestSellerList();
