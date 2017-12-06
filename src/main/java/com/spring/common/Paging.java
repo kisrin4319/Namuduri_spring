@@ -68,13 +68,28 @@ public class Paging {
 			if (i == currentPage) {
 				pagingHtml.append("<strong>");
 				pagingHtml.append(i);
-				pagingHtml.append("</strong>");
+				pagingHtml.append("</strong>&nbsp;&nbsp;");
+				
+				/*pagingHtml.append("<li class='active'><a href='#'>");
+				pagingHtml.append(i);
+				pagingHtml.append("<span class='sr-only'>");
+				pagingHtml.append(i);
+				pagingHtml.append("</span></a></li>");*/
+
 			} else {
 				pagingHtml.append("<a class='page' href=" + viewName + ".do?currentPage=");
 				pagingHtml.append(i);
 				pagingHtml.append(">");
 				pagingHtml.append(i);
-				pagingHtml.append("</a>");
+				pagingHtml.append("</a>&nbsp;&nbsp;");
+				/*pagingHtml.append("<li class=''><a href="+viewName+".do?currentPage=");
+				pagingHtml.append(i);
+				pagingHtml.append(">");
+				pagingHtml.append(i);
+				pagingHtml.append("<span class='sr-only'>");
+				pagingHtml.append(i);
+				pagingHtml.append("</span></a></li>");*/
+
 			}
 		}
 
@@ -83,6 +98,10 @@ public class Paging {
 			pagingHtml.append("<a class='page next' href=" + viewName + ".do?currentPage=" + (endPage + 1) + ">");
 			pagingHtml.append("&gt;");
 			pagingHtml.append("</a>");
+			
+			/*pagingHtml.append("<li class=''><a href=" + viewName + ".do?currentPage=" + (endPage + 1)+"' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+		    sb.append("' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");*/
+
 		}
 	}
 
