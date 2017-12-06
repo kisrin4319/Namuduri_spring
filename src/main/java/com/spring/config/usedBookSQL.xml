@@ -18,7 +18,8 @@
 	</select>
 
 	<!-- 카테고리 도서 목록 -->
-	<select id="selectBookList" resultType="UsedBooksModel" parameterType="String">
+	<select id="selectBookList" resultType="UsedBooksModel"
+		parameterType="String">
 		<include refid="select-bookall" />
 		WHERE
 		<if test="value!=null">
@@ -49,6 +50,15 @@
 		ORDER BY USED_BOOK_REGDATE DESC
 	</select>
 
+	<!-- 최소 , 최대 필터 도서 목록 -->
+
+	<select id="SliderBookList" parameterType="map" resultType="UsedBooksModel">
+		<![CDATA[
+		select * from USED_BOOK
+		where book_new_price >=#{min} and book_new_price <=#{max} order by book_new_price asc
+		]]>
+	</select>
+	
 	<!-- 도서 상세보기 -->
 	<select id="selectBookOne" resultType="UsedBooksModel">
 		<include refid="select-bookall" />
@@ -66,23 +76,31 @@
 
 	<!-- 도서 작성 -->
 	<insert id="insertUsedBook" parameterType="UsedBooksModel">
-		INSERT INTO USED_BOOK(USED_BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, BOOK_AUTH,
-		COMPANY_ID, BOOK_PRICE, BOOK_NEW_PRICE, BOOK_IMAGE, USED_BOOK_REGDATE, USED_BOOK_STATUS,BOOK_NUM,MEMBER_ID)
-		VALUES (USED_BOOK_NUM_SEQ.NEXTVAL, #{book_category}, #{book_name},
-		#{book_auth}, #{company_id}, #{book_price}, #{book_new_price}, #{book_image}, sysdate, #{used_book_status}, #{book_num}, #{member_id})
+		INSERT INTO
+		USED_BOOK(USED_BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, BOOK_AUTH,
+		COMPANY_ID, BOOK_PRICE, BOOK_NEW_PRICE, BOOK_IMAGE, USED_BOOK_REGDATE,
+		USED_BOOK_STATUS,BOOK_NUM,MEMBER_ID)
+		VALUES (USED_BOOK_NUM_SEQ.NEXTVAL,
+		#{book_category}, #{book_name},
+		#{book_auth}, #{company_id},
+		#{book_price}, #{book_new_price}, #{book_image}, sysdate,
+		#{used_book_status}, #{book_num}, #{member_id})
 	</insert>
-	
+
 	<!-- 도서 정보 수정 -->
-	<update id="modifyUsedBook" parameterType="UsedBooksModel"> 
-		UPDATE USED_BOOK SET BOOK_CATEGORY = #{book_category}, 
-						BOOK_NAME = #{book_name}, BOOK_AUTH = #{book_auth}, 
-						COMPANY_ID = #{company_id}, BOOK_PRICE = #{book_price}, BOOK_NEW_PRICE = #{book_new_price},
-						BOOK_IMAGE = #{book_image}, USED_BOOK_STATUS = #{used_book_status}, BOOK_NUM = #{book_num}, MEMBER_ID = #{member_id} 
-						WHERE USED_BOOK_NUM = #{used_book_num} 
+	<update id="modifyUsedBook" parameterType="UsedBooksModel">
+		UPDATE USED_BOOK SET BOOK_CATEGORY = #{book_category},
+		BOOK_NAME = #{book_name}, BOOK_AUTH = #{book_auth},
+		COMPANY_ID = #{company_id}, BOOK_PRICE = #{book_price}, BOOK_NEW_PRICE =
+		#{book_new_price},
+		BOOK_IMAGE = #{book_image}, USED_BOOK_STATUS = #{used_book_status}, BOOK_NUM =
+		#{book_num}, MEMBER_ID = #{member_id}
+		WHERE USED_BOOK_NUM = #{used_book_num}
 	</update>
 	<!-- 도서 삭제 -->
 	<delete id="deleteUsedBook">
-		DELETE FROM USED_BOOK WHERE USED_BOOK_NUM = #{used_book_num}
+		DELETE FROM USED_BOOK WHERE USED_BOOK_NUM =
+		#{used_book_num}
 	</delete>
 
 </mapper>

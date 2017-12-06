@@ -1,10 +1,9 @@
-
-<%
-	String cp = request.getContextPath();
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -21,16 +20,16 @@ img.resize {
 </style>
 </head>
 <body>
-<h2 style="text-align: -webkit-center;padding-top: 30px;">SINGLE PRODUCT DETAIL</h2>
-      <ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-         <li>
-            <a title="Return to Home" href="<%=cp%>/main.do">Home</a>
-         </li>
-         <li>
-          <a title="Go to Basket" href="<%=cp%>/books/booksList.do">List</a> 
-         </li>
-      </ul>
-      <hr>
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">SINGLE PRODUCT DETAIL</h2>
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+		</li>
+		<li>
+			<a title="Go to Basket" href="<%=cp%>/books/booksList.do">List</a>
+		</li>
+	</ul>
+	<hr>
 	<div class="single-product-area section-padding">
 		<div class="container">
 			<form name="detailForm" action="#">
@@ -43,7 +42,7 @@ img.resize {
 					<div class="col-md-6 col-sm-7" style="width: 370px;">
 						<div class="single-product-image-inner">
 							<!-- Tab panes -->
-							<div class="tab-content" >
+							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="one">
 									<a class="venobox" href="${pageContext.request.contextPath}/bootstrap/img/single-product/bg-1.jpg" data-gall="gallery" title="">
 										<img class="resize" src="<%=cp%>/upload/${view.book_image}" alt="${view.book_name}" alt="">
@@ -55,48 +54,48 @@ img.resize {
 					<div class="col-md-6 col-sm-5">
 						<div class="single-product-details">
 							<div class="list-pro-rating">
-																<c:if test="${view.star_point == 0}">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</c:if>
-																<c:if test="${view.star_point == 1}">
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</c:if>
-																<c:if test="${view.star_point == 2}">
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</c:if>
-																<c:if test="${view.star_point == 3}">
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</c:if>
-																<c:if test="${view.star_point == 4}">
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star"></i>
-																</c:if>
-																<c:if test="${view.star_point == 5}">
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																	<i class="fa fa-star icolor"></i>
-																</c:if>
+								<c:if test="${view.star_point == 0}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</c:if>
+								<c:if test="${view.star_point == 1}">
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</c:if>
+								<c:if test="${view.star_point == 2}">
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</c:if>
+								<c:if test="${view.star_point == 3}">
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</c:if>
+								<c:if test="${view.star_point == 4}">
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star"></i>
+								</c:if>
+								<c:if test="${view.star_point == 5}">
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+									<i class="fa fa-star icolor"></i>
+								</c:if>
 							</div>
 							<h2>${view.book_name}</h2>
 							<p style="margin-bottom: 5px;">${view.book_auth}/${view.company_id}</p>
@@ -130,29 +129,9 @@ img.resize {
 							<div class="add-to-wishlist">
 								<a class="wish-btn" href="javascript:isWish(${view.book_num})">
 									<i class="fa fa-heart-o"></i>
-									   ADD TO WISHLIST
+									ADD TO WISHLIST
 								</a>
 							</div>
-							<!-- <div class="social-share">
-								<label>Share: </label>
-								<ul class="social-share-icon">
-									<li>
-										<a href="#">
-											<i class="flaticon-social"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="flaticon-social-1"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="flaticon-social-2"></i>
-										</a>
-									</li>
-								</ul>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -284,7 +263,9 @@ img.resize {
 						</div>
 						<div role="tabpanel" class="tab-pane" id="guide">
 							<table class="table-data-sheet">
-								<caption class="caption_hidden"><교환/반품/품절안내></caption>
+								<caption class="caption_hidden">
+									<교환 /반품/품절안내>
+								</caption>
 								<colgroup>
 									<col width="22%" />
 									<col width="*" />
@@ -303,7 +284,8 @@ img.resize {
 											</strong>
 											<br />
 											※ 오픈마켓, 해외배송주문, 기프트 주문시
-											<a href="boardList.do">[1:1상담&gt;반품/교환/환불]</a> 또는 고객센터 (1544-1900)
+											<a href="boardList.do">[1:1상담&gt;반품/교환/환불]</a>
+											또는 고객센터 (1544-1900)
 										</td>
 									</tr>
 									<tr>
@@ -340,9 +322,7 @@ img.resize {
 												<li>소비자의 요청에 따라 개별적으로 주문 제작되는 상품의 경우 ((1)해외주문도서)</li>
 												<li>디지털 컨텐츠인 eBook, 오디오북 등을 1회 이상 다운로드를 받았을 경우</li>
 												<li>시간의 경과에 의해 재판매가 곤란한 정도로 가치가 현저히 감소한 경우</li>
-												<li>
-													전자상거래 등에서의 소비자보호에 관한 법률이 정하는 소비자 청약철회 제한 내용에 해당되는 경우
-												</li>
+												<li>전자상거래 등에서의 소비자보호에 관한 법률이 정하는 소비자 청약철회 제한 내용에 해당되는 경우</li>
 											</ul>
 											(1) 해외주문도서 : 이용자의 요청에 의한 개인주문상품으로 단순변심 및 착오로 인한 취소/교환/반품 시 ‘해외주문 반품/취소 수수료’ 고객 부담 (해외주문 반품/취소 수수료 : ①양서-판매정가의 12%, ②일서-판매정가의 7%를 적용)
 										</td>
@@ -352,7 +332,7 @@ img.resize {
 										<td>
 											공급사(출판사) 재고 사정에 의해 품절/지연될 수 있으며,
 											<br />
-											 품절 시 관련 사항에 대해서는 이메일과 문자로 안내드리겠습니다.
+											품절 시 관련 사항에 대해서는 이메일과 문자로 안내드리겠습니다.
 										</td>
 									</tr>
 									<tr>

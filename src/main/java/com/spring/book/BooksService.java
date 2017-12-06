@@ -30,16 +30,30 @@ public class BooksService implements BooksDao {
 		return sqlSessionTemplate.selectList("book.selectSearchList", map);
 	}
 	
+	//도서 목록 (등록 순서)
 	@Override
 	public List<BooksModel> booksListDate() {
 		return sqlSessionTemplate.selectList("book.selectDateList");
 	}
 
+	//도서 목록(BestSeller)
 	@Override
 	public List<BooksModel> bestSellerList() {	
 		return sqlSessionTemplate.selectList("book.bestSellerList");
 	}
 
+	//도서 목록(새로 나올 책)
+	@Override
+	public List<BooksModel> newBookList() {
+		return sqlSessionTemplate.selectList("book.NewBookList");
+	}
+
+	//도서 목록(가격 범위 지정)
+	@Override
+	public List<BooksModel> SliderBookList(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("book.SliderBookList",map);
+	}
+	
 	// 책 하나 선택
 	@Override
 	public BooksModel bookOne(int book_num) {
@@ -70,7 +84,5 @@ public class BooksService implements BooksDao {
 	public List<Map<String, Object>> top2() {
 		return sqlSessionTemplate.selectList("book.top2");
 	}
-
-
 
 }

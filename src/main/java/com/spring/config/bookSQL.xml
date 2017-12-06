@@ -77,6 +77,20 @@
 		<include refid="select-bookall" />
 		ORDER BY BOOK_SELL_COUNT DESC
 	</select>
+	
+	<!-- 발행 예정 중인 최신 도서 -->
+	<select id="NewBookList" resultType="BooksModel">
+		<![CDATA[select * from book where book_date <=(select To_Char(sysdate,'yy/mm/dd') from dual)]]>
+	</select>
+	
+	<!-- 최소 , 최대 필터 도서 목록 -->
+	
+	<select id="SliderBookList" parameterType="map" resultType="BooksModel">
+		<![CDATA[
+		select * from book
+		where book_price >=#{min} and book_price <=#{max} order by book_price asc
+		]]>
+	</select>
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="adminSearchList" parameterType="map" resultType="BooksModel">
 		<include refid="select-bookall" />

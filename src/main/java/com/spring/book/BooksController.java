@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.apache.tiles.request.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -174,6 +173,27 @@ public class BooksController {
 		return mv;
 	}
 	
+	//Slider를 이용한 책 정렬
+	@RequestMapping("/books/bookSlider.do")
+	public ModelAndView SliderList(HttpServletRequest request) {
+		String price = request.getParameter("price");
+		
+		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
+		String max = price.substring(price.indexOf("-")+3);
+		
+		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("min", Integer.parseInt(min));
+		map.put("max", Integer.parseInt(max));
+		
+		booksList = booksService.SliderBookList(map);
+		
+		mv.addObject("booksList",booksList);
+		
+		mv.setViewName("booksList");
+		return mv;
+	}
 	// 베스트셀러 리스트 띄우기
 	@RequestMapping("/books/best.do")
 	public ModelAndView best(HttpServletRequest request) {
