@@ -21,26 +21,25 @@
 	<!-- 회원 검색 목록 -->
 	<select id="searchMember" parameterType="map" resultType="MemberModel">
 		SELECT * FROM MEMBER
-		<choose>
-			<when test="searchNum == 0">
-				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 1">
-				WHERE MEMBER_NAME like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 2">
-				WHERE MEMBER_EMAIL like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 3">
-				WHERE MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 4">
-				WHERE MEMBER_MOBILE like '%'||#{searchKeyword}||'%' 
-			</when>
-			<otherwise>
-				WHERE MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
-			</otherwise>
-		</choose>
+		<where>
+			<if test="searchNum == 1">MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
+			<if test="searchNum == 2">MEMBER_NAME like '%'||#{searchKeyword}||'%'</if>
+			<if test="searchNum == 3">MEMBER_EMAIL like '%'||#{searchKeyword}||'%'</if>
+			<if test="searchNum == 4">MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
+				AND MEMBER_MOBILE like '%'||#{searchKeyword}||'%'</if>
+			<if test="searchNum == 5">MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
+				AND MEMBER_JUMIN2 like '%'||#{searchKeyword}||'%'</if>
+			<if test="active!=0">
+					<if test="active==1">
+						AND MEMBER_USE_YN = 0
+					</if>
+					<if test="active==2">
+						AND MEMBER_USE_YN = 1
+					</if>
+			</if>
+			<if test="date_min!=null">AND MEMBER_JOIN_DATE >= #{date_min}</if>
+			<if test="date_max!=null">AND MEMBER_JOIN_DATE <= #{date_max}</if>
+		</where>
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
 	<!-- POST 전송 검색 폼 데이터로 검색 --><!-- 기간 조건 추가.. -->
@@ -53,8 +52,6 @@
 								AND MEMBER_MOBILE like '%'||#{member_phone}||'%'
 								AND MEMBER_EMIAL like '%'||#{member_email}||'%'
 		ORDER BY MEMBER_JOIN_DATE DESC
-		WHERE MEMBER_JOIN_DATE >= #{date_min} AND MEMBER_JOIN_DATE <= #{date_max}
-		WHERE MEMBER_USE_YN = 1 OR MEMBER_USE_YN = 0
 	</select> -->
 	
 	<!-- 회원 정보 조회 -->

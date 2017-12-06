@@ -21,7 +21,7 @@
 <!-- Custom CSS -->
 <link href="<%=cp%>/adminBootStrap/css/style.css" rel="stylesheet">
 <!-- You can change the theme colors from here -->
-<link href="<%=cp%>/adminBootStrap/css/blue.css" id="theme"
+<link href="<%=cp%>/adminBootStrap/css/blue.css?ver=1" id="theme"
 	rel="stylesheet">
 <!-- chartist CSS -->
 <link href="<%=cp%>/adminBootStrap/css/chartist.min.css"
@@ -87,9 +87,6 @@
 					</span>
 				</a>
 			</div>
-			<!-- ============================================================== -->
-			<!-- End Logo -->
-			<!-- ============================================================== -->
 			<div class="navbar-collapse">
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->

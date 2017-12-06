@@ -68,8 +68,8 @@ public class AdminController {
 
 	////////////////////////////////////////////////////////////////////
 
-	@RequestMapping("/admin/memberList.do") // 회원 조회
-	public ModelAndView memberList(HttpServletRequest request, @ModelAttribute MemberModel memberModel)
+	@RequestMapping(value="/admin/memberList.do", method=RequestMethod.GET) // 회원 조회
+	public ModelAndView memberList(HttpServletRequest request)
 			throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -78,23 +78,10 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
-		String searchNum = request.getParameter("searchNum");
-		String searchKeyword = request.getParameter("searchKeyword");
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		
 		List<MemberModel> memberList = new ArrayList<MemberModel>();
-
-		if ((searchNum == null || searchNum.trim().isEmpty() || searchNum.equals("0"))
-				&& (searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-			memberList = memberService.memberList();
-		} else {
-			map.put("searchNum", searchNum);
-			map.put("searchKeyword", searchKeyword);
-
-			memberList = adminService.searchMember(map);
-		}
-
+		memberList = adminService.memberListAll();
+		
 		totalCount = memberList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -115,6 +102,56 @@ public class AdminController {
 
 		mv.setViewName("adminMemberList");
 
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/memberList.do", method=RequestMethod.POST) // 회원 검색
+	public ModelAndView memberSearch(HttpServletRequest request) {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");
+		String date_min = request.getParameter("date_min");
+		String date_max = request.getParameter("date_max");
+		int active = Integer.parseInt(request.getParameter("active"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<MemberModel> memberList = new ArrayList<MemberModel>();
+		
+		map.put("searhNum", searchNum);
+		map.put("searchKeyword", searchKeyword);
+		map.put("date_min", date_min);
+		map.put("date_max", date_max);
+		map.put("active", active);
+		
+		memberList = adminService.searchMember(map);
+		
+		totalCount = memberList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		memberList = memberList.subList(paging.getStartCount(), lastCount);
+
+		mv.addObject("memberList", memberList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", memberList.size());
+
+		mv.setViewName("adminMemberList");
+		
 		return mv;
 	}
 
