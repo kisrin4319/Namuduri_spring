@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String cp  = request.getContextPath();
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -405,12 +408,12 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<form action="mail.php" method="POST">
+					<form action="<%=cp %>/mail/mailSending.do" method="POST">
 						<div class="row">
 							<div class="col-md-5">
 								<div class="contact-form-left">
 									<input type="text" placeholder="Your Name" name="name" id="name" />
-									<input type="email" placeholder="Your Email" name="email" id="email" />
+									<input type="email" placeholder="Your Email" name="tomail" id="tomail" />
 									<input type="text" placeholder="Your phone" name="phone" id="phone" />
 								</div>
 							</div>
