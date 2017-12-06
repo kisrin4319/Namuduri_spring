@@ -173,4 +173,45 @@ public class BooksController {
 		mv.setViewName("/book/writeReviewSuccess");
 		return mv;
 	}
+	
+	// 베스트셀러 리스트 띄우기
+	@RequestMapping("/books/best.do")
+	public ModelAndView best(HttpServletRequest request) {
+		
+		List<Map<String, Object>> best = new ArrayList<Map<String,Object>>();
+		best = booksService.top2();
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+
+			currentPage = 1;
+
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+
+		totalCount = best.size();
+
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "booksList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+		best = best.subList(paging.getStartCount(), lastCount);
+
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 2);
+
+		mv.addObject("top2", top2);
+		mv.addObject("booksList", best);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", best.size());
+		mv.setViewName("booksList");
+		return mv;
+	}
 }

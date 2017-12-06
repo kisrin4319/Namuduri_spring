@@ -41,9 +41,6 @@
 	<!-- 베스트셀러 TOP2 -->
 	<select id="top2" resultMap="book" parameterType="String">
 	select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num where a.book_use_yn='1'
-		<if test="value!=null">
-			and  a.BOOK_CATEGORY = #{value}
-		</if>
 		ORDER BY a.book_sell_count DESC
 	</select>
 

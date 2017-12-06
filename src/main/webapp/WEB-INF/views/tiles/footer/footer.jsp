@@ -60,7 +60,7 @@
 									<a href="<%=cp%>/main.do">&nbsp;Main</a>
 								</li>
 								<li>
-									<a href="account.html">&nbsp;Best Seller</a>
+									<a href="<%=cp%>/books/best.do">&nbsp;Best Seller</a>
 								</li>
 								<li>
 									<a href="<%=cp%>/books/booksList.do">&nbsp;New Books</a>
