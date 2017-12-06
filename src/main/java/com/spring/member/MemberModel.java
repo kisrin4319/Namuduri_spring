@@ -25,6 +25,6 @@ public class MemberModel {
 	private String member_bankname; //은행명
 	private String member_refund_account; //환불계좌
 	private String member_account_holder; //예금주
-	
+	private int member_use_yn; //차단여부
 
 }

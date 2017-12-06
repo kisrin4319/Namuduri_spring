@@ -10,11 +10,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+var page = ${currentPage};
 	function deleteCheck(id) {
-		var page = ${currentPage};
-		alert("정말 삭제하시겠습니까?");
-		document.location.href=
-			"<%=cp%> /admin/bookDelete.do?book_num=" + id + "&currentPage=" + page;
+		if(confirm("정말 삭제하시겠습니까?")){
+			document.location.href=
+				"<%=cp%> /admin/bookDelete.do?book_num=" + id + "&currentPage=" + page;
+		}else{
+			return false;
+		}
+	}
+	function update(id){
+		document.location.href="<%=cp%>/admin/bookDetail.do?member_id=" + id + "&currentPage=" + page;
 	}
 </script>
 </head>
@@ -144,9 +150,9 @@
 															<td>${list.book_price}</td>
 															<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
 															<td><a class="mdi mdi-grease-pencil" title="Modify"
-																href="javascript:location.href='<%=cp%>/admin/bookModify.do?book_num=${list.book_num}&currentPage=${currentPage}'"></a>
+																href="javascript:update('${list.book_num}')"></a>
 																<a class="mdi mdi-delete" title="Delete"
-																href="deleteCheck('${list.book_num}')"></a></td>
+																href="javascript:deleteCheck('${list.book_num}')"></a></td>
 														</tr>
 													</c:forEach>
 												</c:otherwise>

@@ -31,9 +31,8 @@
 				<div class="card-block">
 					<h2>주문 정보 상세보기</h2>
 					<div class="table-responsive">
+					<form method="POST">
 						<input type="hidden" name="currentPage" value="${currentPage}" />
-						<input type="hidden" name="order_trade_num"
-							value="${view.order_trade_num}" />
 						<table class="table order">
 							<c:url var="viewMemberURL" value="/admin/memberDetail.do">
 								<c:param name="member_id" value="${view.member_id}" />
@@ -47,7 +46,7 @@
 							<tr>
 								<th>주문자</th>
 								<td>
-									<%-- ${view.member_name} --%> (<a href="${viewMemberURL}">${view.member_id}</a>)
+									${viewM.member_name} (<a href="${viewMemberURL}">${view.member_id}</a>)
 								</td>
 								<th>결제 상태</th>
 								<td><select class="form-control" style="width: auto;" name="payment_status">
@@ -132,10 +131,10 @@
 						<h2>배송 정보 상세보기</h2>
 						<table class="table order">
 							<tr>
-								<th width=15%>배송번호</th>
-								<td width=35%>${view.order_trans_num}</td>
-								<th width=15%>배송 상태</th>
-								<td width=35%><select class="form-control"
+								<th>배송번호</th>
+								<td>${view.order_trans_num}</td>
+								<th>배송 상태</th>
+								<td><select class="form-control"
 									style="width: auto;" class="form-control"
 									name="order_trans_status">
 										<c:choose>
@@ -161,28 +160,27 @@
 									</button></td>
 							</tr>
 							<tr>
-								<th width=15%>수취인</th>
-								<td width=85% colspan=3>${view.order_receive_name}</td>
+								<th>수취인</th>
+								<td>${view.order_receive_name}</td>
 							</tr>
 							<tr>
-								<th width=15%>집 전화 번호</th>
-								<td width=35%>${view.order_receive_phone}</td>
-								<th width=15%>휴대전화 번호</th>
-								<td width=35%>${view.order_receive_mobile}</td>
+								<th>집 전화 번호</th>
+								<td>${view.order_receive_phone}</td>
+								<th>휴대전화 번호</th>
+								<td>${view.order_receive_mobile}</td>
 							</tr>
 							<tr>
-								<th width=15%>우편번호</th>
-								<td width=85% colspan=3>${view.order_receive_zipcode}</td>
+								<th>우편번호</th>
+								<td>${view.order_receive_zipcode}</td>
+								<th>주소</th>
+								<td colspan=3>${view.order_receive_addr1}&nbsp;${view.order_receive_addr2}</td>
 							</tr>
 							<tr>
-								<th width=15%>주소</th>
-								<td width=85% colspan=3>${view.order_receive_addr1}&nbsp;${view.order_receive_addr2}</td>
-							</tr>
-							<tr>
-								<th width=15%>요청 사항</th>
-								<td width=85% colspan=3>${view.order_receive_memo}</td>
+								<th>요청 사항</th>
+								<td colspan=3>${view.order_receive_memo}</td>
 							</tr>
 						</table>
+						</form>
 					</div>
 				</div>
 			</div>
