@@ -10,44 +10,61 @@
 	<sql id="where-goodsnum">
 		WHERE BOOK_NUM = #{BOOK_NUM} AND BOOK_USE_YN = '1'
 	</sql>
-
-	<!-- 도서 목록 -->
-	<select id="selectBooksAll" resultType="BooksModel">
-		<include refid="select-bookall"/>
-		ORDER BY BOOK_DATE DESC
-	</select>
+	
+	<resultMap type="java.util.HashMap" id="book">
+	<result javaType="java.lang.Integer" column="book_num" property="book_num" />
+	<result javaType="java.lang.String" column="book_category" property="book_category" />
+	<result javaType="java.lang.String" column="book_name" property="book_name" />
+	<result javaType="java.lang.String" column="book_content" property="book_content" />
+	<result javaType="java.lang.Integer" column="book_price" property="book_price" />
+	<result javaType="java.lang.String" column="book_image" property="book_image" />
+	<result javaType="java.lang.Integer" column="book_sell_count" property="book_sell_count" />
+	<result javaType="java.lang.Integer" column="book_base_count" property="book_base_count" />
+	<result javaType="java.lang.Integer" column="book_current_count" property="book_current_count" />
+	<result javaType="java.lang.String" column="book_publish_date" property="book_publish_date" />
+	<result javaType="java.util.Date" column="book_date" property="book_date" />
+	<result javaType="java.lang.String" column="company_id" property="company_id" />
+	<result javaType="java.lang.String" column="book_auth" property="book_auth" />
+	<result javaType="java.lang.Integer" column="book_use_yn" property="book_use_yn" />
+	<result javaType="java.lang.Integer" column="star_point" property="star_point" />
+	</resultMap>
 	
 	<!-- 카테고리 도서 목록  -->
-	<select id="selectBookList" resultType="BooksModel" parameterType="String">
-		<include refid="select-bookall" />
-		WHERE BOOK_USE_YN = '1'
+	<select id="selectBookList" resultMap="book" parameterType="String">
+	select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num where a.book_use_yn = '1'
 		<if test="value!=null">
-			AND BOOK_CATEGORY = #{value}
+			and  a.BOOK_CATEGORY = #{value}
 		</if>
-		ORDER BY BOOK_DATE DESC
+		ORDER BY a.book_date DESC
+	</select>
+	
+	<!-- 베스트셀러 TOP2 -->
+	<select id="top2" resultMap="book" parameterType="String">
+	select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num where a.book_use_yn='1'
+		ORDER BY a.book_sell_count DESC
 	</select>
 
 	<!-- 도서 검색 목록 -->
-	<select id="selectSearchList" parameterType="map" resultType="BooksModel">
-		<include refid="select-bookall" />
-		WHERE BOOK_USE_YN = '1'
+	<select id="selectSearchList" parameterType="map" resultMap="book">
+		select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num
+		WHERE a.BOOK_USE_YN = '1'
 		<choose>
 			<when test="searchNum == 0">
-				AND( BOOK_NAME like '%'||#{searchKeyword}||'%' 
-				OR BOOK_AUTH like '%'||#{searchKeyword}||'%' 
-				OR COMPANY_ID like '%'||#{searchKeyword}||'%' )
+				AND( a.BOOK_NAME like '%'||#{searchKeyword}||'%' 
+				OR a.BOOK_AUTH like '%'||#{searchKeyword}||'%' 
+				OR a.COMPANY_ID like '%'||#{searchKeyword}||'%' )
 			</when>
 			<when test="searchNum == 1">
-				AND BOOK_NAME like '%'||#{searchKeyword}||'%' 
+				AND a.BOOK_NAME like '%'||#{searchKeyword}||'%' 
 			</when>
 			<when test="searchNum == 2">
-				AND BOOK_AUTH like '%'||#{searchKeyword}||'%' 
+				AND a.BOOK_AUTH like '%'||#{searchKeyword}||'%' 
 			</when>
 			<otherwise>
-				AND COMPANY_ID like '%'||#{searchKeyword}||'%'
+				AND a.COMPANY_ID like '%'||#{searchKeyword}||'%'
 			</otherwise>
 		</choose>
-		ORDER BY BOOK_DATE DESC
+		ORDER BY a.BOOK_DATE DESC
 	</select>
 	
 	<!-- 날짜 등록 순 도서 목록 -->
@@ -99,8 +116,13 @@
 	
 	<!-- 도서 상세보기 -->
 	<select id="selectBookOne" resultType="BooksModel">
-		<include refid="select-bookall" />
-		<include refid="where-goodsnum" />
+	select * from book where book_num = #{book_num}
+	</select>
+	
+	<!-- star_point 포함한 도서 상세보기  -->
+	<select id="bookStar" resultMap="book">
+		select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num
+		where a.book_num = #{book_num}  
 	</select>
 
 	<!-- 리뷰 리스트 -->
