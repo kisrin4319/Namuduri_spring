@@ -22,13 +22,15 @@
 	<select id="searchMember" parameterType="map" resultType="MemberModel">
 		SELECT * FROM MEMBER
 		<where>
-			<if test="searchNum == 1">MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
-			<if test="searchNum == 2">MEMBER_NAME like '%'||#{searchKeyword}||'%'</if>
-			<if test="searchNum == 3">MEMBER_EMAIL like '%'||#{searchKeyword}||'%'</if>
-			<if test="searchNum == 4">MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
-				AND MEMBER_MOBILE like '%'||#{searchKeyword}||'%'</if>
-			<if test="searchNum == 5">MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
-				AND MEMBER_JUMIN2 like '%'||#{searchKeyword}||'%'</if>
+			<if test="searchNum!=0">
+				<if test="searchNum == 1">AND MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 2">AND MEMBER_NAME like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 3">AND MEMBER_EMAIL like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 4">AND MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
+					AND MEMBER_MOBILE like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 5">AND MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
+					AND MEMBER_JUMIN2 like '%'||#{searchKeyword}||'%'</if>
+			</if>
 			<if test="active!=0">
 					<if test="active==1">
 						AND MEMBER_USE_YN = 0
@@ -37,8 +39,8 @@
 						AND MEMBER_USE_YN = 1
 					</if>
 			</if>
-			<if test="date_min!=null">AND MEMBER_JOIN_DATE >= #{date_min}</if>
-			<if test="date_max!=null">AND MEMBER_JOIN_DATE <= #{date_max}</if>
+			<if test="date_min!=null"><![CDATA[AND MEMBER_JOIN_DATE >= #{date_min}]]></if>
+			<if test="date_max!=null"><![CDATA[AND MEMBER_JOIN_DATE <= #{date_max}]]></if>
 		</where>
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
@@ -94,38 +96,39 @@
 	<select id="bookListBck" resultType="BooksModel">
 		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
 	</select>
-	
 	<!-- 관리자 도서 검색 목록 -->
-	<!-- <select id="adminSearchList" parameterType="map" resultType="BooksModel">
-		<include refid="select-bookall" />
-		<choose>
-			<when test="searchNum == 0">
-				WHERE BOOK_CATEGORY like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 1">
-				WHERE BOOK_NAME like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 2">
-				WHERE BOOK_AUTH like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 3">
-				WHERE COMPANY_ID like '%'||#{searchKeyword}||'%' 
-			</when>
-			<otherwise>
-				WHERE BOOK_CONTENT like '%'||#{searchKeyword}||'%' 
-			</otherwise>
-		</choose>
+	<select id="searchBook" parameterType="map" resultType="BooksModel">
+		SELECT * FROM BOOK
+		<where>
+			<if test="searchNum!=0">
+				<if test="searchNum == 1">AND BOOK_NAME like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 2">AND BOOK_CATEGORY like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 3">AND BOOK_AUTH like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 4">AND COMPANY_ID like '%'||#{searchKeyword}||'%'</if>
+			</if>
+			<if test="active!=0">
+					<if test="active==1">
+						AND BOOK_USE_YN = 1
+					</if>
+					<if test="active==2">
+						AND BOOK_USE_YN = 0
+					</if>
+			</if>
+			<if test="date_min!=null"><![CDATA[AND BOOK_DATE >= #{date_min}]]></if>
+			<if test="date_max!=null"><![CDATA[AND BOOK_DATE <= #{date_max}]]></if>
+		</where>
 		ORDER BY BOOK_DATE DESC
-	</select> -->
-	<select id="searchBook" resultType="BooksModel">
+	</select>
+	
+	<!-- <select id="searchBook" resultType="BooksModel">
 		SELECT * FROM BOOK WHERE BOOK_NAME like '%'||#{book_name}||'%'
 								AND BOOK_CATEGORY like '%'||#{book_category}||'%'
 								AND BOOK_AUTH like '%'||#{book_auth}||'%'
 								AND BOOK_COMPANY like '%'||#{book_company}||'%'
-		ORDER BY BOOK_DATE DESC
+		ORDER BY BOOK_DATE DESC -->
 		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
 		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
-	</select>
+	<!-- </select> -->
 	
 	<!-- 가장 최근의 도서 정보 조회 -->
 	<select id="selectNewest" resultType="BooksModel">
@@ -156,32 +159,25 @@
 	</select>
 
 	<!-- 관리자 주문 검색 목록 -->
-	<!-- <select id="selectSearchList" parameterType="map" resultType="OrderModel">
+	<select id="searchOrder" parameterType="map" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK
-		<choose>
-			<when test="searchNum == 0">
-				WHERE ORDER_TRADE_NUM like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 1">
-				WHERE ORDER_TRANS_NUM like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 2">
-				WHERE MEMBER_ID like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 3">
-				WHERE ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%' 
-			</when>
-			<when test="searchNum == 4">
-				WHERE ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%' 
-			</when>
-			<otherwise>
-				WHERE ORDER_RECEIVE_PHONE like '%'||#{searchKeyword}||'%' 
-				OR ORDER_RECEIVE_MOBILE like '%'||#{searchKeyword}||'%' 
-			</otherwise>
-		</choose>
+		<where>
+			<if test="searchNum!=0">
+				<if test="searchNum == 1">AND ORDER_TRADE_NUM like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 2">AND ORDER_TRANS_NUM like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 3">AND MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 4">AND ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 5">AND ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%'</if>
+			</if>
+			<if test="active!=0">
+				AND ORDER_USE_YN = 0
+			</if>
+			<if test="date_min!=null"><![CDATA[AND ORDER_REGDATE >= #{date_min}]]></if>
+			<if test="date_max!=null"><![CDATA[AND ORDER_REGDATE <= #{date_max}]]></if>
+		</where>
 		ORDER BY ORDER_REGDATE DESC
-	</select> -->
-	<select id="searchOrder" resultType="OrderModel">
+	</select>
+	<!-- <select id="searchOrder" resultType="OrderModel">
 		SELECT * FROM BOOK WHERE ORDER_TRADE_NUM like '%'||#{order_trade_num}||'%'
 								AND MEMBER_ID like '%'||#{member_id}||'%'
 								AND ORDER_TRADE_PAYER like '%'||#{order_trade_payer}||'%'
@@ -192,8 +188,8 @@
 								AND PAYMENT_STATUS = #{payment_status}
 								AND ORDER_TRANS_STATUS = #{order_trans_status}
 		ORDER BY BOOK_DATE DESC
-		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
-		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
-	</select>
+		WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max}
+		WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0
+	</select> -->
 	
 </mapper>

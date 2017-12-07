@@ -53,7 +53,7 @@
 								 <i class="mdi mdi-bookmark-check"></i> <span class="nav-dropdown-item">카테고리 관리</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/bookWrite.do" aria-expanded="false">
 								 <i class="mdi mdi-book-plus"></i> <span class="nav-dropdown-item">도서 등록</span></a>
 							</li>
 							<li>

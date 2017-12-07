@@ -96,7 +96,7 @@ function update(id){
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="list-search">
+								<!-- <tr class="list-search">
 									<td></td>
 									<td><input class="form-control" type="text"
 										name="member_id" value="" /></td>
@@ -109,11 +109,11 @@ function update(id){
 									<td><input class="form-control" type="text"
 										name="member_email" value="" /></td>
 									<td class="actions" colspan=2 style="vertical-align: middle;">
-										<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
+										<a class="fa fa-refresh" href="#" title="Reset"></a>
 										<button type="submit" style="font-size: 20px;"
 											class="fa fa-search" title="Search"></button>
 									</td>
-								</tr>
+								</tr> -->
 
 								<c:choose>
 									<c:when test="${listCount==0}">
@@ -134,8 +134,8 @@ function update(id){
 												<td><a href="${viewURL}">${list.member_id}</a></td>
 												<td>${list.member_name}</td>
 												<td>${list.member_jumin1}-${list.member_jumin2}</td>
-												<td>${list.member_email}</td>
 												<td>${list.member_mobile}</td>
+												<td>${list.member_email}</td>
 												<td>${list.member_join_date}</td>
 												<td><a class="mdi mdi-grease-pencil" title="Modify"
 													href="javascript:update('${list.member_id}')"></a> <a
