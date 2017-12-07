@@ -1,14 +1,30 @@
 package com.spring.member;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,47 +37,142 @@ public class MemberController {
 	
 	Logger log = Logger.getLogger(this.getClass());
 	
+	
 	@Resource
 	private MemberService memberService;
+	
+
+	
+/*	private static String RSA_WEB_KEY = "_RSA_WEB_Key_";//개인키 session key
+	private static String RSA_INSTANCE = "RSA";  // RSA transformation
+*/	
+	
+	//GoogleLogin
+	@Autowired
+	private GoogleConnectionFactory googleConnectionFactory;
+	@Autowired
+	private OAuth2Parameters googleOAuth2Parameters;
+	
+	//BCrypt
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	ModelAndView mv;
 	String session_id;
 	String member_id;
+	String member_email;
+	
+	
 	
 	//로그인 폼
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.GET)
-	public String loginForm() {
+	public String loginForm(HttpServletRequest request) {
+		
+		/*initRsa(request);*/
+		
+		
 		return "loginForm";
 	}
 	
 	//로그인 처리
 	@RequestMapping(value="/member/loginForm.do", method=RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, HttpServletRequest request) {
+	public ModelAndView loginCheck(@RequestParam String member_id, @RequestParam String member_pw, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		mv = new ModelAndView();
-		MemberModel memberModel = new MemberModel();
-		
-		memberModel.setMember_id(member_id);
-		memberModel.setMember_pw(member_pw);
-		
-		MemberModel result = memberService.loginCheck(memberModel);
-		
-		//로그인 성공
-		if (result != null){
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("member_id", result.getMember_id());
-			
-			mv.setViewName("redirect:/main.do");
-			return mv;
-		} else {
-			//로그인 실패
-			mv.setViewName("member/loginError");
-			return mv;
-			
-		}
+			mv = new ModelAndView();
+	      MemberModel memberModel = new MemberModel();
+	      
+	      memberModel = memberService.SelectOne(member_id);
+	      passwordEncoder = new BCryptPasswordEncoder();
+	      
+	      System.out.println("=============================================================");
+	      
+	      String password =memberModel.getMember_pw();
+	      String encryptPassword = passwordEncoder.encode(password);
+	      System.out.println(encryptPassword);
+	      
+	      if(passwordEncoder.matches(password, encryptPassword)){
+	         System.out.println("계정정보 일치");
+	         }else{
+	         System.out.println("계정정보 불일치");
+	         }
+	      
+	      System.out.println("=============================================================");
+	      
+	      //구글code 발행
+	      OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+	      String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+
+	      System.out.println("/member/loginForm, url : " + url);
+		  
+	      PrintWriter out;
+	      try {
+	    	  out = response.getWriter();
+	    	  out.write(url);
+	    	  out.flush();
+	    	  out.close();
+	      } catch (IOException e) {
+	    	  throw new RuntimeException(e.getMessage(), e);
+	      }
+
+	      
+	      //로그인 성공
+	      if (passwordEncoder.matches(member_pw, memberModel.getMember_pw())){
+	         
+	         HttpSession session = request.getSession();
+	         session.setAttribute("member_id", member_id);
+	         
+	         mv.setViewName("redirect:/main.do");
+	         return mv;
+	      } else {
+	         //로그인 실패
+	         mv.setViewName("member/loginError");
+	         return mv;
+	         
+	      }
 		
 	}
+	
+	@RequestMapping("/member/loginFormCallback")
+	public String doSessionAssignActionPage( HttpServletRequest request){
+		System.out.println("/member/loginFormCallback");
+		String code = request.getParameter("code");
+		
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
+		
+		String accessToken = accessGrant.getAccessToken();
+		Long expireTime = accessGrant.getExpireTime();
+		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+			accessToken = accessGrant.getRefreshToken();
+			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+		}
+		Connection connection = (Connection) googleConnectionFactory.createConnection(accessGrant);
+		Google google = connection == null ? new GoogleTemplate(accessToken) : ((org.springframework.social.connect.Connection<Google>) connection).getApi();
+		
+		PlusOperations plusOperations = google.plusOperations();
+		Person person = plusOperations.getGoogleProfile();
+		
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMember_name(person.getDisplayName());
+		memberModel.setAuth("USR");
+
+		HttpSession session = request.getSession();
+		session.setAttribute("_MEMBER_", memberModel );
+		
+		System.out.println(person.getDisplayName());
+		
+		return "redirect:/";
+		
+	}
+	
+	// 구글 Callback호출 메소드
+	/*@RequestMapping(value = "/oauth2callback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String googleCallback(MemberModel memberModel, @RequestParam String code) throws IOException {
+		
+		System.out.println("여기는 googleCallback");
+
+		return "googleSuccess";
+	}*/
 	
 	//로그아웃
 	@RequestMapping("/member/logOut.do")
@@ -86,6 +197,7 @@ public class MemberController {
 		return new MemberModel();
 		
 	}
+
 	//회원가입 폼
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.GET)
 	public ModelAndView memberJoin() {
@@ -97,25 +209,36 @@ public class MemberController {
 	}
 	//회원가입
 	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.POST)
-	public ModelAndView memberJoin2(@ModelAttribute("member") MemberModel memberModel, BindingResult result) {
+	public ModelAndView memberJoin2(@ModelAttribute("member") MemberModel memberModel, BindingResult result, HttpServletRequest request) {
 		
 		// validation binding
 		new MemberValidator().validate(memberModel, result);
 		
+		
 		//회원가입 에러시 회원가입폼으로 이동
 		if(result.hasErrors()) {
-			
 			mv = new ModelAndView();
 			
 			mv.setViewName("memberInfo");
 			return mv;
-		} else { 
-			memberService.insertMember(memberModel);
+		} else {
 			
-			mv.addObject("memberModel", memberModel);
-			mv.setViewName("loginForm");
-			return mv;	
-		}
+			 passwordEncoder = new BCryptPasswordEncoder();
+	         
+	         System.out.println("=============================================================");
+	         
+	         String password = memberModel.getMember_pw();
+	         String encryptPassword = passwordEncoder.encode(password);
+	         System.out.println(encryptPassword);
+	         
+	         memberModel.setMember_pw(encryptPassword);
+	         
+	         memberService.insertMember(memberModel);
+	         
+	         mv.addObject("memberModel", memberModel);
+	         mv.setViewName("loginForm");
+	         return mv;   
+	      }
 		
 	}
 	//아이디 중복확인
@@ -167,4 +290,59 @@ public class MemberController {
 		return mv;
 	}
 	
+	/*private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception{
+		Cipher cipher = Cipher.getInstance(MemberController.RSA_INSTANCE);
+		byte[] encryptedBytes = hexToByteArray(securedValue);
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+		String decryptedValue = new String (decryptedBytes, "UTF-8");
+		
+		return decryptedValue;
+	}
+	
+	//16진 문자열을  byte 배열로 변환
+	public static byte[] hexToByteArray(String hex) {
+		if(hex == null || hex.length() % 2 != 0) { 
+			return new byte[] {};
+		}
+		
+		byte[] bytes = new byte[hex.length() / 2];
+		
+		for (int i=0; i<hex.length(); i += 2) {
+			byte value = (byte) Integer.parseInt(hex.substring(i, i + 2), 16);
+			bytes[(int)Math.floor(i / 2)] = value;
+		}
+		
+		return bytes;
+	}
+	
+	
+	//rsa 공개키, 개인키 생성
+	@Autowired
+	public void initRsa(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		KeyPairGenerator generator;
+        try {
+            generator = KeyPairGenerator.getInstance(MemberController.RSA_INSTANCE);
+            generator.initialize(1024);
+ 
+            KeyPair keyPair = generator.genKeyPair();
+            KeyFactory keyFactory = KeyFactory.getInstance(MemberController.RSA_INSTANCE);
+            java.security.PublicKey publicKey = keyPair.getPublic();
+            PrivateKey privateKey = keyPair.getPrivate();
+ 
+            session.setAttribute(MemberController.RSA_WEB_KEY, privateKey); // session에 RSA 개인키를 세션에 저장
+ 
+            RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+            String publicKeyModulus = publicSpec.getModulus().toString(16);
+            String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+ 
+            request.setAttribute("RSAModulus", publicKeyModulus); // rsa modulus 를 request 에 추가
+            request.setAttribute("RSAExponent", publicKeyExponent); // rsa exponent 를 request 에 추가
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        }
+	}*/
 }

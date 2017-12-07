@@ -46,5 +46,7 @@
 	
 	<!-- 트랜잭션 관련 어노테이션을 자동인식하는 옵션 -->
 	<tx:annotation-driven/>
+	
+	
 		
 </beans>

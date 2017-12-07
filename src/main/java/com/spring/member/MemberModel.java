@@ -26,5 +26,16 @@ public class MemberModel {
 	private String member_refund_account; //환불계좌
 	private String member_account_holder; //예금주
 	
+	public void addAttribute(String string, String url) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setAuth(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }
