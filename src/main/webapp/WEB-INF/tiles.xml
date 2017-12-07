@@ -265,4 +265,9 @@
 	<definition name="adminOrderDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/orderDetail.jsp" />
 	</definition>
+	
+	<!-- ============================================================= -->
+	<definition name="efeelog" extends="mypage2">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/efeelog.jsp"/>
+	</definition>
 </tiles-definitions>

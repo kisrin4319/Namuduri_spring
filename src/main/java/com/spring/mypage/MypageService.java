@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
+import com.spring.book.BooksModel;
 import com.spring.member.MemberModel;
-import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
 
 @Service
@@ -68,5 +68,10 @@ public class MypageService implements MypageDao {
 	public int memberOrderCancel(String order_trade_num) {
 		return sqlSessionTemplate.update("order.orderCancel", order_trade_num);
 	}
+	
+	/*//7. 도서 검색
+	public List<BooksModel> booksListAll() {
+		return sqlSessionTemplate.selectList("book.selectBooksAll");
+	}*/
 
 }

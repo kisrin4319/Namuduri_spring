@@ -62,6 +62,11 @@
 												<p class="text-left">회원 탈퇴</p>
 											</a>
 										</li>
+										<li>
+											<a href="<%=cp%>/eFeelogView.do">
+												<p class="text-left">eFeelog</p>
+											</a>
+										</li>
 									</ul> 
 								</aside>
 							</div>
