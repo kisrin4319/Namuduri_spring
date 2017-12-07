@@ -433,8 +433,7 @@ KH는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 �
 											</td>
 											<td>
 												&nbsp;&nbsp;&nbsp;
-												<input type="text" name="member_id" id="member_id" size="20" maxlength="15" />
-												<input type="button" name="idChk" value="중복확인" onclick="javascript:openIdCheck(this.form)" class="btn_small3" style="height: 20px;" />
+												<input type="text" placeholder="Enter ID" name="member_id" oninput="checkId()" id="member_id" class="id">
 												<font size="1" color="#ff3f3f">&nbsp;&nbsp;(영문대소문자/숫자, 4~16자)</font>
 											</td>
 										</tr>
@@ -616,5 +615,41 @@ KH는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 �
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	//     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+    var idCheck = 0;
+    var pwdCheck = 0;
+    //아이디 체크하여 가입버튼 비활성화, 중복확인.
+    function checkId() {
+        var inputed = $('.id').val();
+        $.ajax({
+            data : {
+                member_id : inputed
+            },
+            url : "idCheck.do",
+            success : function(data) {
+                if(inputed=="" && data=='0') {
+                    $(".signupbtn").prop("disabled", true);
+                    $(".signupbtn").css("background-color", "#aaaaaa");
+                    $("#member_id").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                } else if (data == '0') {
+                    $("#member_id").css("background-color", "#B0F6AC");
+                    idCheck = 1;
+                    if(idCheck==1 && pwdCheck == 1) {
+                        $(".signupbtn").prop("disabled", false);
+                        $(".signupbtn").css("background-color", "#4CAF50");
+                        signupCheck();
+                    } 
+                } else if (data == '1') {
+                    $(".signupbtn").prop("disabled", true);
+                    $(".signupbtn").css("background-color", "#aaaaaa");
+                    $("#member_id").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                } 
+            }
+        });
+    }
+    </script>
 </body>
 </html>

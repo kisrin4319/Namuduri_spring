@@ -2,6 +2,7 @@ package com.spring.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,13 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.Data;
@@ -229,19 +232,13 @@ public class MemberController {
 	}
 
 	// 아이디 중복확인
-	@RequestMapping("/member/idCheck.do")
-	public ModelAndView idCheck(HttpServletRequest request) {
+	@RequestMapping(value="/member/idCheck.do",method = { RequestMethod.GET, RequestMethod.POST})	
+	public @ResponseBody int idCheck(MemberModel memberModel, Model model,HttpServletRequest request) {
 
 		mv = new ModelAndView();
-
-		String member_id = request.getParameter("member_id");
-		int count = memberService.idCheck(member_id);
-
-		mv.addObject("count", count);
-		mv.addObject("member_id", member_id);
-		mv.setViewName("member/idCheck");
-
-		return mv;
+		memberModel.setMember_id(request.getParameter("member_id"));
+		int count = memberService.idCheck(memberModel);
+		return count;
 	}
 
 	// 우편번호 검색 폼
