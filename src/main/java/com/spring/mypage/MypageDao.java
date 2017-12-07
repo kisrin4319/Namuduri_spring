@@ -33,7 +33,4 @@ public interface MypageDao {
 	//6. 주문내역 취소
 	public int memberOrderCancel(String order_trade_num);
 	
-	/*//7. 도서 검색
-	public List<BooksModel> booksListAll();*/
-	
 }

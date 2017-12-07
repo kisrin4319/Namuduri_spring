@@ -339,35 +339,5 @@ public class MypageController {
 		return returnVal;
 		
 	}
-	
-	//7. eFeelog
-	@RequestMapping(value = "/eFeelogView.do")
-	public ModelAndView efeelog(HttpServletRequest request, HttpSession session) throws Exception {
-		
-		mv = new ModelAndView();
-		
-		String session_id = (String) session.getAttribute("member_id");
-		MemberModel memberInfo = mypageService.getMemberInfo(session_id);
-				
-		String book_category = request.getParameter("book_category");
-		String searchKeyword = request.getParameter("searchKeyword");
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
-		
-		if((searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-			booksList = booksService.booksList(book_category);
-		} else {
-			map.put("searchKeyword", searchKeyword);
-			
-			booksList = booksService.booksSearchList(map);
-		}
-		
-		mv.addObject("memberInfo", memberInfo);
-		mv.addObject("booksList", booksList);
-		
-		mv.setViewName("efeelog");
-		return mv;
-	}
 
 }

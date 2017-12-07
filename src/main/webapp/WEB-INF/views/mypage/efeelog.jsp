@@ -11,6 +11,7 @@
 <title>eFeelog</title>
 <meta name="description" content="">
 <meta name="viewport" cotent="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script language="javascript">
 
 </script>
@@ -39,29 +40,42 @@
 											<th><div class="user_name">${ member_id }님 안녕하세요.</div></th>
 										</tr>
 									</thead>
-								</table>
-								<div class="form-group">
-								<table>								
-									<thead>
-										<tr>
-											<td><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span></td>
-										</tr>
-									</thead>
-								</table>
+								</table><br><br>
+								<div class="btn-toolbar">
+									<button type="button" class="btn btn-default btn-lg" onclick=""><span class="glyphicon glyphicon-book"></span>Search</button>
 								</div>
 								<div class="form-group">
 								<table>
 									<thead>
 										<tr>
 											<td>
-												<textarea rows="3" cols="30"></textarea>
+												<textarea class="form-control" rows="3" cols="30"></textarea>
 											</td>
-										</tr>
+										</tr><br><br>
 									</thead>
-								</table>
+								</table><br><br>
+								</div>
+								<div>
+									<button name="submitcreate" id="submitcreate" class="btn-default" onclick="">
+										<span>
+											<i class="fa fa-user"></i>
+											게시글 올리기
+										</span>
+									</button>
 								</div>																
 							</div>
 						</form>
+						<%-- <div class="row">
+							<div class="col-md-3 col-md-offset-3">
+								<form action="" class="search-form">
+									<div class="form-group has-feedback">
+										<label for="search" class="sr-only">Search</label>
+										<input type="text" class="form-control" name="search" id="search" placeholder="search">
+										<span class="glyphicon glyphicon-search form-control-feedback"></span>
+									</div>
+								</form>
+							</div>
+						</div> --%>
 					</div>
 				</div>
 			</div>

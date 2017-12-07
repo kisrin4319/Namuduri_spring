@@ -69,9 +69,4 @@ public class MypageService implements MypageDao {
 		return sqlSessionTemplate.update("order.orderCancel", order_trade_num);
 	}
 	
-	/*//7. 도서 검색
-	public List<BooksModel> booksListAll() {
-		return sqlSessionTemplate.selectList("book.selectBooksAll");
-	}*/
-
 }
