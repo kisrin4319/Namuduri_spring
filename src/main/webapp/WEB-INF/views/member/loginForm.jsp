@@ -231,7 +231,7 @@ function openConfirmPw(loginform){
 										</tr>
 										<tr>
 											<td width="110" style="padding-left: 25px;">
-											<input type="password" name="member_pw" size="45" maxlength="20">
+											<input type="password" name="member_pw" size="60">
 											</td>
 										</tr>
 									<br />

@@ -9,6 +9,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 상세보기</title>
+<script>
+var page = ${currentPage};
+var id = ${view.member_id};
+
+function updateCheck(id){
+	if(confirm("정말 수정하시겠습니까?")){
+		document.memberModel.submit();
+	}else{
+		return false
+	}	
+}
+function deleteCheck(path) {
+	if(confirm("정말 삭제하시겠습니까?")==true){
+		document.location.href="<%=cp%>/admin/memberDelete.do?member_id="+id+"&currentPage="+page;
+	}else{
+		return false;
+	}
+}
+
+function updateCheck2(id){
+	if(confirm("정말 수정하시겠습니까?")==true){
+		document.location.href="<%=cp%>/admin/"+path+"?member_id="+id+"&currentPage="+page;
+	}else{
+		return;
+	}	
+}
+function deleteCheck2(path) {
+	if(confirm("정말 삭제하시겠습니까?")==true){
+		document.location.href="<%=cp%>/admin/"+path+"?member_id="+id+"&currentPage="+page;
+	}else{
+		return;
+	}
+}
+</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -43,12 +77,12 @@
 								</h6>
 								<div class="row text-center justify-content-md-center">
 									<div class="col-4">
-										<a href="javascript:void(0)" class="link"> <i
-											class="icon-people"></i> <font class="font-medium">회원정보</font></a>
+										<a href="#info" class="link"> <i class="icon-people"></i>
+										 <font class="font-medium">회원정보</font></a>
 									</div>
 									<div class="col-4">
-										<a href="javascript:void(0)" class="link"> <i
-											class="mdi mdi-cart-outline"> </i> <font class="font-medium">구매내역</font></a>
+										<a href="#purchase" class="link"> <i class="mdi mdi-cart-outline"></i>
+										 <font class="font-medium">구매내역</font></a>
 									</div>
 								</div>
 							</div>
@@ -57,20 +91,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="info">
 			<div class="col-lg-12">
 				<h4>
 					<b>회원 정보</b>
 				</h4>
 				<div class="card">
 					<div class="card-block">
-						<form class="form-horizontal form-material">
+						<form class="form-horizontal form-material" method="post" 
+							id="memberModel" onsubmit="return updateCheck()">
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-6">
 										<label class="col-md-6">Name</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_name}"
+											<input type="text" name="member_name" value="${view.member_name}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -78,7 +113,7 @@
 									<div class="col-md-6">
 										<label class="col-md-6">Password</label>
 										<div class="col-md-12">
-											<input type="password" value="${view.member_pw}"
+											<input type="password" name="member_pw" value="${view.member_pw}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -90,7 +125,7 @@
 									<div class="col-md-6">
 										<label class="col-md-5">Number1</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_jumin1}"
+											<input type="text" name="member_jumin1" value="${view.member_jumin1}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -98,7 +133,7 @@
 									<div class="col-md-5">
 										<label class="col-md-6">Number2</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_jumin2}"
+											<input type="text" name="member_jumin2" value="${view.member_jumin2}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -109,7 +144,7 @@
 									<div class="col-md-8">
 										<label class="col-md-6">Email</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_email}"
+											<input type="text" name="member_email" value="${view.member_email}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -132,14 +167,14 @@
 									<div class="col-md-6">
 										<label class="col-md-6">Phone No</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_phone}"
+											<input type="text" name="member_phone" value="${view.member_phone}"
 												class="form-control form-control-line">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<label class="col-md-6">Mobile No</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_mobile}"
+											<input type="text" name="member_mobile" value="${view.member_mobile}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -150,18 +185,18 @@
 									<div class="row">
 										<label class="col-md-12">Address</label>
 										<div class="col-md-2">
-											<input type="text" class="form-control form-control-line"
+											<input type="text" name="member_zipcode" class="form-control form-control-line"
 												value="${view.member_zipcode}">
 										</div>
 										<div class="col-md-1">
 											<input type="button" value="검색">
 										</div>
 										<div class="col-md-5">
-											<input type="text" class="form-control form-control-line"
+											<input type="text" name="member_addr1" class="form-control form-control-line"
 												value="${view.member_addr1}">
 										</div>
 										<div class="col-md-4">
-											<input type="text" class="form-control form-control-line"
+											<input type="text" name="member_addr2" class="form-control form-control-line"
 												value="${view.member_addr2}">
 										</div>
 									</div>
@@ -174,14 +209,14 @@
 									<div class="col-md-6">
 										<label class="col-md-6">Bank Name</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_bankname}"
+											<input type="text" name="member_bankname" value="${view.member_bankname}"
 												class="form-control form-control-line">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<label class="col-md-6">예금주</label>
 										<div class="col-md-12">
-											<input type="text" value="${view.member_account_holder}"
+											<input type="text" name="member_account_holder" value="${view.member_account_holder}"
 												class="form-control form-control-line">
 										</div>
 									</div>
@@ -191,20 +226,19 @@
 
 								<label class="col-md-6">환불 계좌</label>
 								<div class="col-md-12">
-									<input type="text" value="${view.member_refund_account}"
+									<input type="text" name="member_refund_account" value="${view.member_refund_account}"
 										class="form-control form-control-line">
 								</div>
 							</div>
-							<div class="form-group"></div>
+							<div class="form-group">
+								<input type="hidden" name="currentPage" value="${currentPage}">
+								<%-- <input type="hidden" name="member_id" value="${view.member_id}"> --%>
+							</div>
 							<div class="form-group">
 								<div class="col-sm-12">
-									<button class="btn btn-warning"
-										onclick="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${view.member_id}&currentPage=${currentPage}'">Update
-										Profile</button>
+									<button class="btn btn-warning">Update Profile</button>
 									&nbsp;
-									<button class="btn btn-danger"
-										onclick="javascript:location.href='<%=cp%>/admin/memberDelete.do?member_id=${view.member_id}&currentPage=${currentPage}'">Delete
-										Profile</button>
+									<a class="btn btn-danger" onclick="deleteCheck()">Delete Profile</a>
 								</div>
 							</div>
 						</form>
@@ -212,7 +246,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="purchase">
 			<div class="col-lg-12">
 				<h4>
 					<b>구매 내역</b>
@@ -320,7 +354,7 @@
 														</tr>
 
 														<c:choose>
-															<c:when test="${orderList.size==0}">
+															<c:when test="${listCount==0}">
 																<tr align=center>
 																	<td colspan=8>주문 내역이 없습니다.</td>
 																</tr>
