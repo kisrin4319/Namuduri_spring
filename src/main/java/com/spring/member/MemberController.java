@@ -2,7 +2,6 @@ package com.spring.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.impl.GoogleTemplate;
-import org.springframework.social.google.api.plus.Person;
-import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
-import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -29,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.Data;
@@ -223,10 +218,25 @@ public class MemberController {
 	         return mv;   
 	      }
 		
+		/*//아이디 중복체크
+        boolean isDuplicateUserID = this.memberService.checkDuplicateUserID(memberInfoVO.getUsrId());
+        
+        if(isDuplicateUserID){
+            mv.setViewName("member/memberInfo");
+            mv.addObject("duplicateUserId","이미사용중인 아이디입니다.");
+            return mv;
+        }
+        mv.setViewName("redirect:/member/loginForm");
+        this.memberService.joinMember();
+    }
+    return mv;*/
+
+		
 	}
 
 	// 아이디 중복확인
-	@RequestMapping("/member/idCheck.do")
+	@RequestMapping(value = "/member/idCheck.do", method = { RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
 	public ModelAndView idCheck(HttpServletRequest request) {
 
 		mv = new ModelAndView();

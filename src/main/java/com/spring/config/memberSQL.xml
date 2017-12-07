@@ -104,4 +104,6 @@
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
 
+	
+
 </mapper>

@@ -156,8 +156,11 @@ located in SOUTH KOREA for the resolution of any disputes.
             <p align="center">
                
                <div class="col-pjh-1 col-sm-6">
+               
+               
               	  <!-- 아이디============================================================================== -->
-                  	<span class="form-row"><input type="text" placeholder="ID" id="member_id" name="member_id" maxlength="15"></span>
+                  	<span class="form-row"><input type="text" placeholder="ID" id="member_id" name="member_id" maxlength="15" oninput="checkId()"></span>
+                  	<div id="checkMsg"></div>
                     <span><input type="button" name="idChk" value="중복확인" onclick="javascript:openIdCheck(this.form)" class="btn-default" style="height:20px; margin-top: 5px;margin-left: 10px;"/></span>
                      
                      
@@ -267,7 +270,7 @@ located in SOUTH KOREA for the resolution of any disputes.
                                 
                                 <a href="javascript:" onclick="window.location='loginForm.do';">CANCLE</a>
                                 
-                                <a href="javascript:check();">CREATE AN ACCOUNT</a>
+                                <a href="javascript:check();" >CREATE AN ACCOUNT</a>
                                 
                             </div>                          
                             <br/>
@@ -281,6 +284,69 @@ located in SOUTH KOREA for the resolution of any disputes.
         <!-- Loging Area End -->
 </body>
 <script language="javascript">
+
+//아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+var idCheck = 0;
+//아이디 체크하여 가입버튼 비활성화, 중복확인.
+function checkId() {
+	
+ var inputed = $('.member_id').val();
+ $.ajax({
+     data : {
+       id : inputed
+     },
+     url : "idCheck.do",
+     success : function(data) {
+    	 
+    	/*  if($.trim(data) == 0){
+    		 $('#checkMsg').html('<p style="color:blue">사용가능한 아이디입니다.</p>');
+    		 
+    	 } else{
+    		 $('#checkMsg').html('<p style="color:red">사용불가능한 아이디입니다.</p>');
+    	 }
+    	  */
+         if(inputed=="" && data=='0') {
+             $(".signupbtn").prop("disabled", true);
+             $(".signupbtn").css("background-color", "#aaaaaa");
+             $("#member_id").css("background-color", "#FFCECE");
+             idCheck = 0;
+         } else if (data == '0') {
+             $("#member_id").css("background-color", "#B0F6AC");
+             idCheck = 1;
+             if(idCheck==1 && pwdCheck == 1) {
+                 $(".signupbtn").prop("disabled", false);
+                 $(".signupbtn").css("background-color", "#4CAF50");
+                 signupCheck();
+             } 
+         } else if (data == '1') {
+             $(".signupbtn").prop("disabled", true);
+             $(".signupbtn").css("background-color", "#aaaaaa");
+             $("#member_id").css("background-color", "#FFCECE");
+             idCheck = 0;
+         }
+     }
+ });
+}
+/* if($("#member_id").val() != ""){
+    $("#member_id").keyup();
+};
+
+$("#member_id").keyup(function(){
+    $.post("<c:url value="/member/memberInfo"/>"
+            ,{"member_id" : $("#member_id").val()}
+            , function(data){
+            console.log(data);
+        
+        if(data =="true"){
+            $("#duplicateResult").text("이미사용중인 아이디입니다.")
+        }else{
+            $("#duplicateResult").text("사용가능한 아이디입니다.")
+        }
+    });
+}) */
+
+
+
 function check() {
    var f = document.memberInfo;
    
