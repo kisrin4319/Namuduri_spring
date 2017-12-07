@@ -23,6 +23,8 @@ import com.spring.book.BooksService;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
 import com.spring.member.ZipcodeModel;
+import com.spring.usedbook.UsedBooksModel;
+import com.spring.usedbook.UsedBooksService;
 
 @Controller
 public class OrderController {
@@ -39,6 +41,9 @@ public class OrderController {
    private BasketService basketService;
 
    @Resource
+   private UsedBooksService usedBookService;
+   
+   @Resource
    private MemberService memberService;
 
    ModelAndView mv = new ModelAndView();
@@ -50,19 +55,29 @@ public class OrderController {
    public ModelAndView singleOrderForm(HttpServletRequest request, HttpSession session) {
 
       session_id = (String) session.getAttribute("member_id");
-
+      BooksModel booksModel = new BooksModel();
+      UsedBooksModel usedBooksModel = new UsedBooksModel();
+      
       int basket_num = 0;
+      int used_book_num = 0;
+      
       if (request.getParameter("basket_num") != null) {
          basket_num = Integer.parseInt(request.getParameter("basket_num"));
-      }
-      
-      if(request.getParameter("used_book_num")!=null) {
-    	  
+      } else if(request.getParameter("used_book_num")!=null) {
+    	  used_book_num = Integer.parseInt(request.getParameter("used_book_num"));
+    	  usedBooksModel = usedBookService.UsedbookOne(used_book_num);
+    	  booksModel.setBook_image(usedBooksModel.getBook_image());
+    	  booksModel.setBook_category(usedBooksModel.getBook_category());
+    	  booksModel.setBook_name(usedBooksModel.getBook_name());
+    	  booksModel.setBook_price(usedBooksModel.getBook_new_price());
+      } else {
+    	  int book_num = Integer.parseInt(request.getParameter("book_num"));
+    	  booksModel = booksService.bookOne(book_num);
       }
 
-      int book_num = Integer.parseInt(request.getParameter("book_num"));
+     
       int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
-      BooksModel booksModel = booksService.bookOne(book_num);
+     
       MemberModel memberModel = memberService.SelectOne(session_id);
 
       int bookMoney = booksModel.getBook_price() * order_book_count;
@@ -85,6 +100,7 @@ public class OrderController {
       mv.addObject("session_id", session_id);
       mv.addObject("memberModel", memberModel);
       mv.addObject("basket_num", basket_num);
+      mv.addObject("used_book_num",used_book_num);
       mv.setViewName("singleOrder");
 
       return mv;
@@ -93,7 +109,7 @@ public class OrderController {
    // 단일 주문 완료
    @RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.POST)
    ModelAndView singleOrder(@ModelAttribute OrderModel orderModel, @ModelAttribute OrderDetailModel orderDetailModel,
-         int book_num, int basket_num, HttpSession session,HttpServletRequest request) {
+         int book_num, int basket_num,int used_book_num, HttpSession session,HttpServletRequest request) {
 
       session_id = (String) session.getAttribute("member_id");
       Calendar today = Calendar.getInstance();
@@ -123,8 +139,9 @@ public class OrderController {
       // 장바구니에서 넘어온 상품일 경우 장바구니에서 상품 삭제
       if (basket_num != 0) {
          orderService.delBasket(basket_num);
-      }
-
+      } else if(used_book_num!=0) {
+    	  usedBookService.UsedBooksDelete(used_book_num);
+      } else {
       // 도서 재고 관리
       BooksModel book = booksService.bookOne(book_num);
       int current_count = book.getBook_current_count() - getOrderDetail.getOrder_book_count();
@@ -132,7 +149,7 @@ public class OrderController {
       book.setBook_current_count(current_count);
       book.setBook_sell_count(sell_count);
       orderService.updateStock(book);
-
+      }
       mv.addObject("order", getOrder);
       mv.addObject("orderDetail", getOrderDetail);
       mv.setViewName("singleOrderComplete");

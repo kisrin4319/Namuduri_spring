@@ -53,15 +53,6 @@
 </style>
 </head>
 <body>
-	<h2 style="text-align: -webkit-center; padding-top: 30px;">USED BOOK PAGE</h2>
-	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
-		</li>
-		<li>
-			<a title="Go to UsedBooksList" href="<%=cp%>/books/usedBooksList.do">UsedBookList</a>
-		</li>
-	</ul>
 	<!-- Shop Area Start -->
 	<div class="container">
 		<h1 class="well" style="text-align: -webkit-center;">Used Book Registration Form</h1>

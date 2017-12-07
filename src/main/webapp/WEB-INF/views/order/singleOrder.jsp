@@ -54,6 +54,7 @@
 													<input type="hidden" name="order_book_price" value="${book.book_price}" />
 													<input type="hidden" name="order_book_count" value="${order_book_count}" />
 													<input type="hidden" name="basket_num" value="${basket_num}" />
+													<input type ="hidden" name = "used_book_num" value="${used_book_num }" />
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="deldata();" />
 														<label>직접입력</label>

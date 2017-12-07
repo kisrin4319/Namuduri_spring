@@ -11,6 +11,9 @@ public interface UsedBooksDao {
 	//2. 중고 서적 검색 목록
 	List<UsedBooksModel> UsedBooksSearchList(Map<String, Object> map);
 	
+	//도서 목록(가격 범위 지정)
+	List<UsedBooksModel> SliderBookList(Map<String, Object> map);
+	
 	//3. 중고 서적 내용보기
 	UsedBooksModel UsedbookOne(int used_book_num);
 	

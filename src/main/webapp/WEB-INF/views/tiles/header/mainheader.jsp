@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
 <!-- modernizr css -->
 <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -201,7 +202,7 @@
 										</li>
 									</ul>
 								<li>
-									<a href="<%=cp%>/etc/contact.do">CONTACT</a>
+									<a href="<%=cp%>/common/contact.do">CONTACT</a>
 								</li>
 							</ul>
 						</nav>
@@ -229,6 +230,10 @@
 										<c:if test="${empty member_id }">
 											<a href="<%=cp%>/member/loginForm.do">
 												Sign In
+												<i class="fa fa-chevron-right"></i>
+											</a>
+											<a href="javascript:;" onclick="startApp()">
+												GOOGLE LOGIN
 												<i class="fa fa-chevron-right"></i>
 											</a>
 										</c:if>
@@ -339,7 +344,7 @@
 									<a href="<%=cp%>/books/usedBooksList.do">USED BOOKS</a>
 								</li>
 								<li>
-									<a href="#">WISH LIST</a>
+									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
 								</li>
 								<li>
 									<a href="<%=cp%>/mypage.do">MY PAGE</a>
@@ -353,7 +358,7 @@
 									</ul>
 								</li>
 								<li>
-									<a href="contact-us.html">CONTACT</a>
+									<a href="<%=cp%>/etc/contact.do">CONTACT</a>
 								</li>
 							</ul>
 						</nav>
