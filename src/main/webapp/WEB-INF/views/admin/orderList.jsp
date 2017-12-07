@@ -49,7 +49,7 @@ $(function() {
 								</tr>
 								<tr>
 									<th>항목별 검색 :</th>
-									<td>
+									<td colspan=2>
 										<div class="input-group">
 											<select name="searchNum" class="form-control col-md-3">
 												<option value="0">전체</option>
@@ -62,6 +62,19 @@ $(function() {
 											<input class="form-control col-md-9" type="text" name="searchKeyword">
 											<button class="fa fa-search" style="padding-left: 10px;"></button>
 										</div>
+									</td>
+									<td>
+										<select class="form-control" name="payment_status">
+											<option value="0">결제상태</option>
+											<option value="1">PS01</option>
+											<option value="2">PS02</option>
+										</select>
+										<select class="form-control" name="order_trans_status">
+											<option value="0">배송상태</option>
+											<option value="1">ST01</option>
+											<option value="2">ST02</option>
+											<option value="3">ST03</option>
+										</select>
 									</td>
 								</tr>
 							</table>
@@ -81,46 +94,6 @@ $(function() {
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="list-search">
-									<td>
-										<input class="form-control" type="text" name="member_id" value="" />
-									</td>
-									<td>
-										<input class="form-control" type="text" name="member_name" value="" />
-									</td>
-									<td>
-										<input class="form-control" type="text" name="member_jumin" value="" />
-									</td>
-									<td>
-										<input class="form-control" type="text" name="member_phone" value="" />
-									</td>
-									<td>
-										<input class="form-control" type="text" name="member_emial" value="" />
-									</td>
-									<td>
-										<input class="form-control" type="text" name="member_join" value="" />
-									</td>
-									<td>
-										<select class="form-control" name="payment_status">
-											<option value="">All</option>
-											<option value="0">PS01</option>
-											<option value="1">PS02</option>
-										</select>
-									</td>
-									<td>
-										<select class="form-control" name="payment_status">
-											<option value="">All</option>
-											<option value="0">ST01</option>
-											<option value="1">ST02</option>
-											<option value="2">ST03</option>
-										</select>
-									</td>
-									<td class="actions" style="vertical-align: middle;">
-										<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
-										<button type="submit" style="font-size: 20px;" class="fa fa-search" title="Search"></button>
-									</td>
-								</tr>
-
 								<c:choose>
 									<c:when test="${listCount==0}">
 										<tr align=center>

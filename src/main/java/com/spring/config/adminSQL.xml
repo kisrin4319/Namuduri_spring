@@ -169,6 +169,15 @@
 				<if test="searchNum == 4">AND ORDER_TRADE_PAYER like '%'||#{searchKeyword}||'%'</if>
 				<if test="searchNum == 5">AND ORDER_RECEIVE_NAME like '%'||#{searchKeyword}||'%'</if>
 			</if>
+			<if test="pay_s!=0">
+				<if test="pay_s == 1">AND PAYMENT_STATUS='PS01'</if>
+				<if test="pay_s == 2">AND PAYMENT_STATUS='PS02'</if>
+			</if>
+			<if test="trans_s!=0">
+				<if test="trans_s == 1">AND ORDER_TRANS_STATUS='ST01'</if>
+				<if test="trans_s == 2">AND ORDER_TRANS_STATUS='ST02'</if>
+				<if test="trans_s == 3">AND ORDER_TRANS_STATUS='ST03'</if>
+			</if>
 			<if test="active!=0">
 				AND ORDER_USE_YN = 0
 			</if>

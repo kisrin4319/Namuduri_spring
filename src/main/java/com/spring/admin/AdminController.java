@@ -582,6 +582,8 @@ public class AdminController {
 		String date_min = request.getParameter("date_min");
 		String date_max = request.getParameter("date_max");
 		int active = Integer.parseInt(request.getParameter("active"));
+		int pay_s = Integer.parseInt(request.getParameter("payment_status"));
+		int trans_s = Integer.parseInt(request.getParameter("order_trans_status"));
 		
 		if(searchKeyword.trim().isEmpty()) {
 			searchKeyword = null;
@@ -600,8 +602,10 @@ public class AdminController {
 		map.put("date_min", date_min);
 		map.put("date_max", date_max);
 		map.put("active", active);
+		map.put("pay_s", pay_s);
+		map.put("trans_s", trans_s);
 		
-		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0) {
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0 && pay_s==0 && trans_s==0) {
 			orderList = adminService.selectOrderAll();
 		}else {
 			orderList = adminService.searchOrder(map);
