@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%String cp = request.getContextPath();%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<%
+	String cp = request.getContextPath();
+%>
+<!doctype html>
 <html class="no-js" lang="">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>질문답변 게시판</title>
-
+<title>WishList || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- favicon -->
@@ -48,28 +46,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
 <!-- modernizr css -->
 <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
-
 <style type="text/css">
 .content_accordion {
 	margin: 20px;
 }
 </style>
-<script type="text/javascript">
-	function open_win_noresizable(url, member_id) {
-		var oWin = window.open(url, member_id,"scrollbars=no, status=no, resizable=no, width=500, height=200");
-	}
-	function checkForm(board_num) {
-		var bb = board_num;
-		javascript: open_win_noresizable('checkForm.do?board_num=' + board_num + '&currentPage=${currentPage}&ref=${boardModel.ref }','type')
-	}
-</script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					질문답변 게시판
+					Syllabus for CSS
 					<!--small>Statistics Overview</small-->
 				</h1>
 				<!--ul class="nav nav-tabs">
@@ -81,8 +69,8 @@
                            <li><a href="#">PHP</a></li>
                         </ul-->
 				<ul id="myTab" class="nav nav-tabs">
-					<li class="active"><a href="#home" data-toggle="tab"> 전체 </a></li>
-					<li><a href="#a" data-toggle="tab">공지사항</a></li>
+					<li class="active"><a href="#home" data-toggle="tab"> Compulsory Subjects </a></li>
+					<li><a href="#a" data-toggle="tab">Group A</a></li>
 					<!--li class="dropdown">
                               <a href="#" id="myTabDrop1" class="dropdown-toggle" 
                                  data-toggle="dropdown">Java 
@@ -93,12 +81,14 @@
                                  <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
                               </ul>
                            </li-->
-					<li><a href="#b" data-toggle="tab">게시판</a></li>
-					<li><a href="#c" data-toggle="tab">비공개 게시판</a></li>
+					<li><a href="#b" data-toggle="tab">Group B</a></li>
+					<li><a href="#c" data-toggle="tab">Group C</a></li>
 					<li><a href="#d" data-toggle="tab">Group D</a></li>
-				
-					
-								
+					<li><a href="#e" data-toggle="tab">Group E</a></li>
+					<li><a href="#f" data-toggle="tab">Group F</a></li>
+					<li><a href="#g" data-toggle="tab">Group G</a></li>
+					<li><a href="#h" data-toggle="tab">Group H</a></li>
+					<li><a href="#i" data-toggle="tab">Group I</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade in active" id="home">
@@ -458,15 +448,344 @@
 										</div>
 									</div>
 								</div>
-							
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gd" href="#bot">5. Botany</a>
+										</h4>
+									</div>
+									<div id="bot" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<!--accordion end-->
 					</div>
-				
-					
-					
-				
+					<div class="tab-pane fade" id="e">
+						<div class="content_accordion">
+							<div class="panel-group" id="ge">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#ge" href="#ihc">1. Islamic History & Culture </a>
+										</h4>
+									</div>
+									<div id="ihc" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>
+												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#ge" href="#iph">2. Indo Pak History</a>
+										</h4>
+									</div>
+									<div id="iph" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
+												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#ge" href="#bh">3. British history </a>
+										</h4>
+									</div>
+									<div id="bh" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#ge" href="#ah">4. History of United States of America</a>
+										</h4>
+									</div>
+									<div id="ah" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#ge" href="#eh">5. European History</a>
+										</h4>
+									</div>
+									<div id="eh" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--accordion end-->
+					</div>
+					<div class="tab-pane fade" id="f">
+						<div class="content_accordion">
+							<div class="panel-group" id="gf">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gf" href="#law">1. Law </a>
+										</h4>
+									</div>
+									<div id="law" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>
+												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gf" href="#ilaw">2. International Law</a>
+										</h4>
+									</div>
+									<div id="ilaw" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
+												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gf" href="#claw">3. Constitutional Law </a>
+										</h4>
+									</div>
+									<div id="claw" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gf" href="#mlaw">4. Mercantile Law</a>
+										</h4>
+									</div>
+									<div id="mlaw" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gf" href="#mlj">5. Muslim Law and Jurisprudence</a>
+										</h4>
+									</div>
+									<div id="mlj" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--accordion end-->
+					</div>
+					<div class="tab-pane fade" id="g">
+						<div class="content_accordion">
+							<div class="panel-group" id="gg">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gg" href="#psy">1. Psychology </a>
+										</h4>
+									</div>
+									<div id="psy" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>
+												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gg" href="#phi">2. Philosophy</a>
+										</h4>
+									</div>
+									<div id="phi" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
+												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--accordion end-->
+					</div>
+					<div class="tab-pane fade" id="h">
+						<div class="content_accordion">
+							<div class="panel-group" id="gh">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gh" href="#sind">1. Sindhi </a>
+										</h4>
+									</div>
+									<div id="sind" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>
+												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gh" href="#bal">2. Balochi</a>
+										</h4>
+									</div>
+									<div id="bal" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
+												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gh" href="#kpk">3. Pushto </a>
+										</h4>
+									</div>
+									<div id="kpk" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gh" href="#pun">4.Punjabi</a>
+										</h4>
+									</div>
+									<div id="pun" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--accordion end-->
+					</div>
+					<div class="tab-pane fade" id="i">
+						<div class="content_accordion">
+							<div class="panel-group" id="gi">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gi" href="#el">1. English Literature </a>
+										</h4>
+									</div>
+									<div id="el" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>
+												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gi" href="#urd">2. Urdu</a>
+										</h4>
+									</div>
+									<div id="urd" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
+												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gi" href="#per">3. Persian </a>
+										</h4>
+									</div>
+									<div id="per" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#gi" href="#arb">4. Arabic</a>
+										</h4>
+									</div>
+									<div id="arb" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												<a href="" target="_blank">Learn more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--accordion end-->
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- /.row -->

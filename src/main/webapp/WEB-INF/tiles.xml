@@ -134,8 +134,12 @@
 	<definition name="findPw" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
 	</definition>
-
+	
+	
 	<!-- ========================BOARD======================== -->
+	<definition name="faqList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqList.jsp" />
+	</definition> 
 	<!-- 질문답변 게시판 -->
 	<!-- 질문답변 게시판 리스트 -->
 	<definition name="boardList" extends="main">
@@ -172,7 +176,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
 	</definition>
 	
-
 	<!-- ========================BASKET======================== -->
 	 <definition name="basketList" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/basket/basketList.jsp" />

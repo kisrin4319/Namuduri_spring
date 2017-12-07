@@ -68,8 +68,8 @@ public class BoardService implements BoardDao {
 	
 	// 게시글 원문삭제
 	@Override
-	public void BoardAllDelete(int ref) {
-		sqlSessionTemplate.delete("board.BoardAllDelete", ref);
+	public void BoardAllDelete(int board_num) {
+		sqlSessionTemplate.delete("board.BoardAllDelete", board_num);
 	}
 
 }

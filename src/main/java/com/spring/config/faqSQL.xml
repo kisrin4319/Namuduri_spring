@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="faq">
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-FaqAll">
+		SELECT * FROM FAQ 
+	</sql>
+		
+	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<sql id="where-FaqNo">
+		WHERE faq_num = #{faq_num}
+	</sql>
+	
+	<!-- faq 목록 -->
+	<select id="faqList" resultType="FaqModel"> 
+	  		<include refid="select-FaqAll" /> order by faq_regdate DESC
+	</select>
+	
+	<!-- faq 내용 -->
+	<select id="selectFaqOne" resultType="FaqModel">
+		<include refid="select-FaqAll" />
+		<include refid="where-FaqNo" />
+	</select>
+	
+	<!-- faq 작성 -->
+	<insert id="faqWrite" parameterType="FaqModel"> 
+		INSERT INTO faq( FAQ_NUM, FAQ_TITLE, MEMBER_ID, FAQ_CONTENT, FAQ_CATEGORY, FAQ_REGDATE, READCOUNT)
+		VALUES( FAQ_NUM_SEQ.NEXTVAL, #{faq_title}, #{member_id}, #{faq_content}, #{faq_category}, sysdate, #{readcount})
+    </insert>
+	
+	<!-- faq 수정 -->
+ 	<update id="faqModify" parameterType="FaqModel">
+ 		UPDATE faq 
+ 		SET faq_title = #{faq_title}, faq_content = #{faq_content}, faq_category = #{faq_category}
+		WHERE faq_num = #{faq_num}
+	</update>
+	
+	<!-- faq 삭제 -->
+ 	<delete id="faqdDelete" parameterType="int">
+  		DELETE FROM faq WHERE faq_num = #{faq_num}
+ 	</delete>
+		
+</mapper>	

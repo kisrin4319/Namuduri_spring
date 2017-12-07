@@ -59,14 +59,17 @@
 			</c:if>
 		</c:if>
 		<c:if test="${boardModel.board_type != 2}">
-			<%-- <c:when test="${boardModel.re_step == 1 }">
-				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
-			</c:when> --%>
-				
-						
+			<c:choose>
+				<c:when test="${boardModel.re_step == 1 }">
+					<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
+				</c:when>
+				<c:when test="${boardModel.re_step != 1 }">
+					<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','DeleteAll')">
+				</c:when>
+			</c:choose>				
 			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/replyForm.do?board_num=${boardModel.board_num}&ref=${boardModel.ref }&re_step=${boardModel.re_step }'">
 			<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','modify')">
-			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
+			<%-- <input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')"> --%>
 			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 		</c:if>
 	</div>

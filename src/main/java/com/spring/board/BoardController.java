@@ -400,9 +400,18 @@ public class BoardController {
 	}
 	
 	// 게시글 원문삭제
-	@RequestMapping(value = "/board.BoardAllDelete.do")
+	@RequestMapping(value = "/board/BoardAllDelete.do")
 	public ModelAndView boardAllDelete(@RequestParam int board_num, @RequestParam int ref, @RequestParam int currentPage)
 			throws Exception {
+		
+		mv = new ModelAndView();
+		
+		boardService.BoardAllDelete(board_num);
+		
+		mv.addObject("currentPage", currentPage);
+		mv.setViewName("redirect:/board/boardList.do");
+
+		return mv;
 	
 	}
 

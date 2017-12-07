@@ -23,7 +23,7 @@ public interface BoardDao {
 	public void BoardDelete(int board_num);
 	
 	// 게시글 원문삭제
-	public void BoardAllDelete(int ref);
+	public void BoardAllDelete(int board_num);
 
 	// 게시판 검색
 	List<BoardModel> Search0(String search);

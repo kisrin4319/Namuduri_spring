@@ -16,7 +16,8 @@
 	
 	<!-- 게시판 목록 -->
 	<select id="boardList" resultType="BoardModel"> 
-	  		<include refid="select-BoardAll" /> order by BOARD_TYPE desc, board_num desc, ref asc, re_step ASC, board_regdate DESC
+	  		<include refid="select-BoardAll" /> order by BOARD_TYPE desc, board_regdate DESC
+	  		<!-- order by BOARD_TYPE desc, board_num desc, ref asc, re_step ASC, board_regdate DESC -->
 	  		<!-- ORDER BY ref DESC, re_step ASC, board_regdate ASC -->
 	</select>
 	
@@ -72,7 +73,7 @@
  	
  	<!-- 게시글 원문삭제 -->
  	<delete id="BoardAllDelete" parameterType="int">
- 		delete from board where ref = (select ref from board where board_num)
+ 		delete from board where ref = (select ref from board where board_num=#{board_num})
  	</delete>
 
 </mapper>
