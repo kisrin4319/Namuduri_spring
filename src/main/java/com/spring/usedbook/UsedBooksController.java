@@ -90,6 +90,10 @@ public class UsedBooksController {
 
 		usedBooksList = usedBooksList.subList(paging.getStartCount(), lastCount);
 
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+
+		mv.addObject("top2", top2);
 		mv.addObject("usedBooksList", usedBooksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -98,7 +102,28 @@ public class UsedBooksController {
 
 		return mv;
 	}
-
+	// 중고 서적 가격 슬라이더 이용 정렬
+	@RequestMapping("/books/usedBookSlider.do")
+	public ModelAndView SliderList(HttpServletRequest request) {
+		String price = request.getParameter("price");
+		
+		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
+		String max = price.substring(price.indexOf("-")+3);
+		
+		List<UsedBooksModel> usedBooksList = new ArrayList<UsedBooksModel>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("min", Integer.parseInt(min));
+		map.put("max", Integer.parseInt(max));
+		
+		usedBooksList = usedBooksService.SliderBookList(map);
+		
+		mv.addObject("usedBooksList",usedBooksList);
+		
+		mv.setViewName("usedBooksList");
+		
+		return mv;
+	}
 	// 2. 중고 서적 등록 form
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.GET)
 	public ModelAndView usedBookWriteForm() throws Exception {
@@ -111,7 +136,7 @@ public class UsedBooksController {
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookWriteSearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -152,7 +177,7 @@ public class UsedBooksController {
 	@RequestMapping(value ="/books/usedBookModifyForm.do", method = RequestMethod.POST)
 	public ModelAndView usedBookModifySearch(@RequestParam String searchKeyword) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList <Map<String, Object>>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -185,4 +210,6 @@ public class UsedBooksController {
 		mv.setViewName("redirect:/books/usedBooksList.do");
 		return mv;
 	}
+	
+	
 }

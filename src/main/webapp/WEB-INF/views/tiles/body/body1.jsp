@@ -14,6 +14,10 @@ img.resize {
 	width: 270px;
 	height: 280px;
 }
+img.Newresize {
+	width: 370px;
+	height: 300px;
+}
 </style>
 </head>
 <body>
@@ -87,48 +91,44 @@ img.resize {
 			</div>
 			<div class="row">
 				<div class="banner-list">
-					<div class="col-md-4 col-sm-6">
-						<div class="single-banner">
-							<a href="#">
-								<img src="${pageContext.request.contextPath}/bootstrap/img/banner/1.jpg" alt="">
-							</a>
-							<div class="price">
-								<span>$</span>
-								160
+					<c:forEach var="list" items="${newBookList }">
+						<div class="col-md-4 col-sm-6">
+							<div class="single-banner">
+								<c:url var="viewURL" value="/books/bookDetail.do">
+									<c:param name="book_num" value="${list.book_num}" />
+								</c:url>
+								<a href="${viewURL}" class="single-banner-image-wrapper">
+									<img class="Newresize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
+									<div class="rating-icon">
+										<i class="fa fa-star icolor"></i>
+										<i class="fa fa-star icolor"></i>
+										<i class="fa fa-star icolor"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</a>
+								<div class="product-description">
+									<div class="functional-buttons">
+										<a href="javascript:isBasket(${list.book_num})">
+											<i class="fa fa-shopping-cart"></i>
+										</a>
+										<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+											<i class="fa fa-heart-o"></i>
+										</a>
+										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+											<i class="fa fa-compress"></i>
+										</a>
+									</div>
+								</div>
 							</div>
 							<div class="banner-bottom text-center">
-								<a href="#">NEW RELEASE 2016</a>
+								<a href="#">
+									<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+									원
+								</a>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="single-banner">
-							<a href="#">
-								<img src="${pageContext.request.contextPath}/bootstrap/img/banner/2.jpg" alt="">
-							</a>
-							<div class="price">
-								<span>$</span>
-								160
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">NEW RELEASE 2016</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 hidden-sm">
-						<div class="single-banner">
-							<a href="#">
-								<img src="${pageContext.request.contextPath}/bootstrap/img/banner/3.jpg" alt="">
-							</a>
-							<div class="price">
-								<span>$</span>
-								160
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">NEW RELEASE 2016</a>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

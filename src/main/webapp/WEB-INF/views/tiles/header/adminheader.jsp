@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -23,7 +23,6 @@
 <!-- You can change the theme colors from here -->
 <link href="<%=cp%>/adminBootStrap/css/blue.css" id="theme"
 	rel="stylesheet">
-
 <!-- chartist CSS -->
 <link href="<%=cp%>/adminBootStrap/css/chartist.min.css"
 	rel="stylesheet">
@@ -63,6 +62,10 @@
 <!-- chartist chart -->
 <script src="<%=cp%>adminBootStrap/js/chartist.min.js"></script>
 <script src="<%=cp%>adminBootStrap/js/chartist-plugin-tooltip.min.js"></script>
+
+<!-- datepicker -->
+<link rel="stylesheet" href="<%=cp%>/adminBootStrap/css/datepicker.css">
+<script src="<%=cp%>/adminBootStrap/js/bootstrap-datepicker.js"></script>
 
 </head>
 
