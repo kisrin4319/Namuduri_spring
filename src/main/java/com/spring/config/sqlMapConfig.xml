@@ -32,6 +32,7 @@
 	</typeAliases>
 	
 	<mappers>	
+		<mapper resource="com/spring/config/adminSQL.xml" />
 		<mapper resource="com/spring/config/memberSQL.xml" />
 		<mapper resource="com/spring/config/basketSQL.xml" />
 		<mapper resource="com/spring/config/bookSQL.xml" />

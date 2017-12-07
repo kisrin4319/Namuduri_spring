@@ -198,17 +198,17 @@
 	
 	<!-- 중고 서적 리스트 -->
 	<definition name="usedBooksList" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbooksList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/usedbooks/usedbooksList.jsp" />
 	</definition>
 	
 	<!-- 중고 서적 등록 폼 -->
 	<definition name="usedBooksWriteForm" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbookWrite.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/usedbooks/usedbookWrite.jsp" />
 	</definition>
 	
 	<!-- 중고 서적 수정 폼 -->
 	<definition name="usedBooksModifyForm" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/usedBooks/usedbookModify.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/usedbooks/usedbookModify.jsp" />
 	</definition>
 	<!-- ================================================== -->
 
@@ -231,11 +231,6 @@
 	<!-- 관리자 회원관리 자세히보기 -->
 	<definition name="adminMemberDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/memberDetail.jsp" />
-	</definition>
-	
-	<!-- 관리자 회원 수정 -->
-	<definition name="adminMemberModify" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/memberModify.jsp" />
 	</definition>
 	
 	<!-- ========================관리자 상품관리 페이지======================== -->
@@ -265,9 +260,15 @@
 	<definition name="adminOrderDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/orderDetail.jsp" />
 	</definition>
+
+	<!--============================= etc ============================= -->
+	<definition name="contact" extends="main">
+		<put-attribute name="body" value = "/WEB-INF/views/common/contact.jsp" />
+	</definition>
 	
 	<!-- ============================================================= -->
 	<definition name="efeelog" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/efeelog.jsp"/>
 	</definition>
+		
 </tiles-definitions>

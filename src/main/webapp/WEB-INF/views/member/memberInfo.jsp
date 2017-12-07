@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입 폼</title>
-<link href="<%=cp %>/css/style1.css"  rel="stylesheet" type="text/css" />
+<link href="<%=cp %>/css/style1.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
 function check() {
    var f = document.memberInfo;
@@ -52,7 +52,7 @@ function check() {
    }
    else {
    alert("회원가입 되었습니다.")
-   f.action="Info.do";
+   f.action="memberInfo.do";
    f.submit();
    }   
 }
@@ -110,24 +110,30 @@ function validate(element,min,max) {
 </script>
 </head>
 <body>
-<div id="contents"><br><br>
-<h2 class="h2_member" style="width:1000px;margin:0 auto;"><img src="member/images/memberInfo2.png" alt="회원가입"></h2>
-<div class="member_content" style="width: 1000px; margin-left: 0px;">
-<br><br><br>
-<h3 class="bul_green02">정보입력</h3>
-                     <p class="font_11">입력하신 정보는 가입완료 전까지 저장되지 않습니다.</p>
-                     <p class="font_11 margin_top5" style="color:#5282ca;">주민번호를 수집하지 않으면서 회원님이 입력한 회원정보는 회원을 식별하는 매우 소중한 정보가 됩니다.<br />
-                        입력하신 회원정보는 아이디, 비밀번호 찾기 시 본인확인용 정보로 사용되기 때문에 최신의 정보를 정확히 입력해 주시기 바랍니다.</p>
-                        <br>
-                        
-                        <h3 height="23" colspan="5" align="center">이용약관</h3>
-                        <br>
-                        
-               <table border="0" class="junho2">
-                           
-            
-            <tr>
-               <td colspan="2"><textarea class="junho3" rows="10" cols="90%" style="margin: 0px; width: 988px; height: 265px;">
+	<div id="contents">
+		<br>
+		<br>
+		<h2 class="h2_member" style="width: 1000px; margin: 0 auto;">
+			<img src="member/images/memberInfo2.png" alt="회원가입">
+		</h2>
+		<div class="member_content" style="width: 1000px; margin-left: 0px;">
+			<br>
+			<br>
+			<br>
+			<h3 class="bul_green02">정보입력</h3>
+			<p class="font_11">입력하신 정보는 가입완료 전까지 저장되지 않습니다.</p>
+			<p class="font_11 margin_top5" style="color: #5282ca;">
+				주민번호를 수집하지 않으면서 회원님이 입력한 회원정보는 회원을 식별하는 매우 소중한 정보가 됩니다.
+				<br />
+				입력하신 회원정보는 아이디, 비밀번호 찾기 시 본인확인용 정보로 사용되기 때문에 최신의 정보를 정확히 입력해 주시기 바랍니다.
+			</p>
+			<br>
+			<h3 height="23" colspan="5" align="center">이용약관</h3>
+			<br>
+			<table border="0" class="junho2">
+				<tr>
+					<td colspan="2">
+						<textarea class="junho3" rows="10" cols="90%" style="margin: 0px; width: 988px; height: 265px;">
 1장 총칙
 
  제1조 (목적) 
@@ -297,23 +303,28 @@ function validate(element,min,max) {
 
  부 칙
 (시행일) 이 약관은 2017년 9월 20일부터 적용합니다.
-            </textarea><br></td>
-            </tr>
-            <tr>
-               <td colspan="2" height="23" align="left"> 
-               &nbsp;<input type="checkbox" name="cb1" checked="checked"
-                  disabled="disabled" />
-                  &nbsp;이용약관에 동의합니다.
-                  <br>
-               <br>
-               </td>
-            </tr>
-            <tr>
-               <td class="BTD2" height="23" colspan="5" align="center"><h3>개인정보취급방침</h3><br>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2"><textarea class="junho3" rows="10" cols="90%" style="margin: 0px; width: 988px; height: 265px;">
+            </textarea>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="23" align="left">
+						&nbsp;
+						<input type="checkbox" name="cb1" checked="checked" disabled="disabled" />
+						&nbsp;이용약관에 동의합니다.
+						<br>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td class="BTD2" height="23" colspan="5" align="center">
+						<h3>개인정보취급방침</h3>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea class="junho3" rows="10" cols="90%" style="margin: 0px; width: 988px; height: 265px;">
 KH는 회원님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 
 KH는 개인정보취급방침을 통하여 회원님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
@@ -389,238 +400,221 @@ KH는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 �
 2.정보보호마크인증위원회 (www.eprivacy.or.kr/02-580-0533~4)
 3.대검찰청 인터넷범죄수사센터 (http://icic.sppo.go.kr/02-3480-3600)
 4.경찰청 사이버테러대응센터 (www.ctrc.go.kr/02-392-0330)
-            </textarea><br></td>
-            </tr>
-            <tr>
-               <td colspan="2" height="23" align="left">
-                  &nbsp;&nbsp;<input type="checkbox"
-                  name="cb2" checked="checked" disabled="disabled" />
-                  &nbsp;개인정보 취급방침에 동의합니다.
-                  <br>
-               <br>
-               </td>
-            </tr>
-                  </table>
-                     <br><h4 class="h4_member margin_top15">&nbsp;&nbsp;필수입력사항</h4>
-<div id="junho">            
-<table class="table_style01"  width="1080" cellspacing="0" border="0" align="center">
-   <tr>
-      <td colspan="2">      
-         <form name="memberInfo" action="./memberInfo.do" method="post" onsubmit="return check()">
-            <table>
-            <p align="center">
-               
-               <table border="0" style="width: 980px;">
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;아이디
-                           <font size="2" color="#ff3f3f">*</font>                              
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_id" id="member_id" size="20" maxlength="15"/>
-                        <input type="button" name="idChk" value="중복확인" onclick="javascript:openIdCheck(this.form)" class="btn_small3" style=" height: 20px;"/>
-                              <font size="1" color="#ff3f3f">&nbsp;&nbsp;(영문대소문자/숫자, 4~16자)</font>
-                     </td>                     
-                  </tr>                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;비밀번호
-                           <font size="2" color="#ff3f3f">*</font>
-                        </font>
-                     </td>
-                     <td colspan="2">
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="password" name="member_pw" id="member_pw" size="21" maxlength="16" minlength="4" />
-                              <font size="1" color="#ff3f3f">&nbsp;&nbsp;(영문 대소문자/숫자, 4~16자)</font>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;비밀번호확인
-                           <font size="2" color="#ff3f3f">*</font>
-                        </font>                        
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="password" id="passwordCheck" size="21"  onkeyup="passWorkCheck();"/>&nbsp;<span id="passwordCheckText"></span>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td style="width: 100px;" >
-                        <font size="2">
-                           &nbsp;&nbsp;이름
-                           <font size="2" color="#ff3f3f">*</font>
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_name" size="20"/>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;주민등록번호
-                           <font size="2" color="#ff3f3f">*</font>
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_jumin1" size="12" maxlength="6"/> -
-                        <input type="text" name="member_jumin2" size="12" maxlength="7"/>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2"></font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_zipcode" size="7" readonly/> 
-                        <input type="button" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" class="btn_small3" style="height: 20px;"/>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;주소
-                           <font size="2" color="#ff3f3f">*</font>
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_addr1" size="50" />
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                        &nbsp;&nbsp;
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_addr2" size="50"/>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                        &nbsp;&nbsp;일반전화
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_phone" maxlength="11"/>
-                           <font size="1" color="#ff3f3f">
-                                  &nbsp;&nbsp;(일반전화가 없을 경우 휴대전화를 기재해주세요)
-                           </font>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                        &nbsp;&nbsp;휴대전화
-                        <font size="2" color="#ff3f3f">*</font>
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_mobile" maxlength="11"/>
-                           
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 100px;">
-                        <font size="2">
-                           &nbsp;&nbsp;이메일
-                           <font size="2" color="#ff3f3f">
-                                 *
-                           </font>
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_email" size="19"/>@
-                        <input type="text" name="member_email1" size="19"/>
-                        <input type="checkbox" name="member_email_get" value ="on" /> 동의함
-                        <font size="1">배송현황 및 쇼핑정보를 받으시겠습니까?</font>
-                     </td>
-                  </tr>
-                  
-               </table>
-         <table>
-            <h4 class="h4_member margin_top15">선택입력사항</h4>
-            
-               
-               <table border="0" style="width: 980px;">
-               
-                  <tr>
-                     <td style="width: 95px;">
-                        <font size="2">
-                        &nbsp;&nbsp;은행명
-                        </font>
-                        
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_bankname" size="20"/>&nbsp;&nbsp; (환불용계좌)
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 95px;">   
-                        <font size="2">
-                        &nbsp;&nbsp;환불계좌
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_refund_account" size="30"/>
-                        <font size="1">&nbsp;&nbsp;( - 빼고 입력하세요.)</font>
-                     </td>
-                  </tr>
-                  
-                  <tr>
-                     <td style="width: 95px;">
-                        <font size="2">
-                        &nbsp;&nbsp;예금주
-                        </font>
-                     </td>
-                     <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="member_account_holder" size="20"/>
-                     </td>
-                  </tr>
-               </table>
-         </table>
-            
-                  <tr>
-                     <td colspan="2" align="center"><br><br>
-                        <a href ="javascript:check();"><img src="<%=cp %>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
-                           &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href = "javascript:window.location='loginForm.do';"><img src="<%=cp %>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
-                        <br>
-                     </td>
-                  </tr>
-               
-            </table>
-         </form>
-   </table>
-</div>
-</div>
-</div>
+            </textarea>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="23" align="left">
+						&nbsp;&nbsp;
+						<input type="checkbox" name="cb2" checked="checked" disabled="disabled" />
+						&nbsp;개인정보 취급방침에 동의합니다.
+						<br>
+						<br>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<h4 class="h4_member margin_top15">&nbsp;&nbsp;필수입력사항</h4>
+			<div id="junho">
+				<table class="table_style01" width="1080" cellspacing="0" border="0" align="center">
+					<tr>
+						<td colspan="2">
+							<form name="memberInfo" action="memberInfo.do" method="post" onsubmit="return check()">
+								<table>
+									<p align="center">
+									<table border="0" style="width: 980px;">
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;아이디
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_id" id="member_id" size="20" maxlength="15" />
+												<input type="button" name="idChk" value="중복확인" onclick="javascript:openIdCheck(this.form)" class="btn_small3" style="height: 20px;" />
+												<font size="1" color="#ff3f3f">&nbsp;&nbsp;(영문대소문자/숫자, 4~16자)</font>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;비밀번호
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td colspan="2">
+												&nbsp;&nbsp;&nbsp;
+												<input type="password" name="member_pw" id="member_pw" size="21" maxlength="16" minlength="4" />
+												<font size="1" color="#ff3f3f">&nbsp;&nbsp;(영문 대소문자/숫자, 4~16자)</font>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;비밀번호확인
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="password" id="passwordCheck" size="21" onkeyup="passWorkCheck();" />
+												&nbsp;
+												<span id="passwordCheckText"></span>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;이름
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_name" size="20" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;주민등록번호
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_jumin1" size="12" maxlength="6" />
+												-
+												<input type="text" name="member_jumin2" size="12" maxlength="7" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2"></font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_zipcode" size="7" readonly />
+												<input type="button" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" class="btn_small3" style="height: 20px;" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;주소
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_addr1" size="50" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2"> &nbsp;&nbsp; </font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_addr2" size="50" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2"> &nbsp;&nbsp;일반전화 </font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_phone" maxlength="11" />
+												<font size="1" color="#ff3f3f"> &nbsp;&nbsp;(일반전화가 없을 경우 휴대전화를 기재해주세요) </font>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;휴대전화
+													<font size="2" color="#ff3f3f">*</font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_mobile" maxlength="11" />
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 100px;">
+												<font size="2">
+													&nbsp;&nbsp;이메일
+													<font size="2" color="#ff3f3f"> * </font>
+												</font>
+											</td>
+											<td>
+												&nbsp;&nbsp;&nbsp;
+												<input type="text" name="member_email" size="19" />
+												@
+												<input type="text" name="member_email1" size="19" />
+												<input type="checkbox" name="member_email_get" value="on" />
+												동의함
+												<font size="1">배송현황 및 쇼핑정보를 받으시겠습니까?</font>
+											</td>
+										</tr>
+									</table>
+									<table>
+										<h4 class="h4_member margin_top15">선택입력사항</h4>
+										<table border="0" style="width: 980px;">
+											<tr>
+												<td style="width: 95px;">
+													<font size="2"> &nbsp;&nbsp;은행명 </font>
+												</td>
+												<td>
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="text" name="member_bankname" size="20" />
+													&nbsp;&nbsp; (환불용계좌)
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 95px;">
+													<font size="2"> &nbsp;&nbsp;환불계좌 </font>
+												</td>
+												<td>
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="text" name="member_refund_account" size="30" />
+													<font size="1">&nbsp;&nbsp;( - 빼고 입력하세요.)</font>
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 95px;">
+													<font size="2"> &nbsp;&nbsp;예금주 </font>
+												</td>
+												<td>
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="text" name="member_account_holder" size="20" />
+												</td>
+											</tr>
+										</table>
+									</table>
+									<tr>
+										<td colspan="2" align="center">
+											<br>
+											<br>
+											<a href="javascript:check();">
+												<img src="<%=cp %>/img/member/btn_ok.gif" value="회원가입" class="button" />
+											</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="javascript:window.location='loginForm.do';">
+												<img src="<%=cp %>/img/member/btn_cancel.gif" value="가입취소" class="button" />
+											</a>
+											<br>
+										</td>
+									</tr>
+								</table>
+							</form>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
