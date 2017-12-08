@@ -36,7 +36,7 @@ public class MailController {
 			email.setSSL(true);
 			email.setAuthentication("kisrin4319", "aaudlfdnutzkthsi");
 
-			email.addTo("kisrin4319@naver.com", "kisrin4319"); // 수신자를 추가
+			email.addTo("wnsgh8879@naver.com", "wnsgh8879"); // 수신자를 추가
 			email.setFrom(request.getParameter("tomail"), request.getParameter("tomail")); // 보내는 사람 지정
 			email.setSubject(request.getParameter("name") + "님이 보낸 메일입니다."); // 메일 제목
 			email.setContent(request.getParameter("message"), "text/plain; charset=euc-kr");
