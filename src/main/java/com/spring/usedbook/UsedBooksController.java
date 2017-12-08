@@ -52,21 +52,30 @@ public class UsedBooksController {
 		String searchKeyword = request.getParameter("searchKeyword");
 
 		int searchNum = 0;
+		int used_book_num = 0;
 
 		if (request.getParameter("searchNum") != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 		}
+		
+		if(request.getParameter("used_book_num") != null) {
+			used_book_num = Integer.parseInt(request.getParameter("used_book_num"));
+		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (searchKeyword == null) {
+		if (searchKeyword == null && used_book_num == 0) {
 			usedBooksList = usedBooksService.UsedBooksList(book_category);
-		} else {
+		}
+		else if(searchKeyword == null && used_book_num != 0) {
+			usedBooksList = usedBooksService.selectUsed(used_book_num);
+		}else {
 			map.put("searchNum", searchNum);
 			map.put("searchKeyword", searchKeyword);
 
 			usedBooksList = usedBooksService.UsedBooksSearchList(map);
 		}
+
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
