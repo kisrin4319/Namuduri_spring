@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.apache.tiles.request.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +40,7 @@ public class BooksController {
 	@RequestMapping("/books/booksList.do")
 	public ModelAndView booksList(HttpServletRequest request) throws Exception {
 
-		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
 
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
@@ -59,9 +58,7 @@ public class BooksController {
 			map.put("searchKeyword", searchKeyword);
 
 			booksList = booksService.booksSearchList(map);
-
 		}
-
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 
@@ -83,7 +80,12 @@ public class BooksController {
 		}
 
 		booksList = booksList.subList(paging.getStartCount(), lastCount);
+		
 
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+
+		mv.addObject("top2", top2);
 		mv.addObject("booksList", booksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -108,7 +110,7 @@ public class BooksController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		BooksModel view = booksService.bookOne(num);
+		Map<String, Object> view = booksService.book_star(num);
 		List<ReviewModel> review = booksService.reviewList(num);
 
 		totalCount = review.size();
@@ -168,6 +170,68 @@ public class BooksController {
 		booksService.reviewWrite(writeReview);
 
 		mv.setViewName("/book/writeReviewSuccess");
+		return mv;
+	}
+	
+	//Slider를 이용한 책 정렬
+	@RequestMapping("/books/bookSlider.do")
+	public ModelAndView SliderList(HttpServletRequest request) {
+		String price = request.getParameter("price");
+		
+		String min = price.substring(price.indexOf("￦")+1,price.indexOf("-")-1);
+		String max = price.substring(price.indexOf("-")+3);
+		
+		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("min", Integer.parseInt(min));
+		map.put("max", Integer.parseInt(max));
+		
+		booksList = booksService.SliderBookList(map);
+		
+		mv.addObject("booksList",booksList);
+		
+		mv.setViewName("booksList");
+		return mv;
+	}
+	// 베스트셀러 리스트 띄우기
+	@RequestMapping("/books/best.do")
+	public ModelAndView best(HttpServletRequest request) {
+		
+		List<Map<String, Object>> best = new ArrayList<Map<String,Object>>();
+		best = booksService.top2();
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+
+			currentPage = 1;
+
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+
+		totalCount = best.size();
+
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "booksList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+		best = best.subList(paging.getStartCount(), lastCount);
+
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+
+		mv.addObject("top2", top2);
+		mv.addObject("booksList", best);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", best.size());
+		mv.setViewName("booksList");
 		return mv;
 	}
 }
