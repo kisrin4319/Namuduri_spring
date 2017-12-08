@@ -79,7 +79,7 @@ public class UsedBooksController {
 
 		totalCount = usedBooksList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "booksList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "usedBooksList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
