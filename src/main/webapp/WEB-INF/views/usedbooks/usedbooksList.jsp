@@ -268,7 +268,7 @@ img.top2 {
 												<div class="col-xs-12 col-sm-7 col-md-8">
 													<div class="deal-product-content">
 														<h4>${list.book_name}</h4>
-														<div class="product-price">
+														<div class="product-price" style="margin-bottom: 7px;">
 															<span class="new-price">
 																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
 																원
@@ -279,32 +279,29 @@ img.top2 {
 															</span>
 														</div>
 														<div class="list-rating-icon">
+															등급 : 
 															<i class="fa fa-star icolor"></i>
 															<i class="fa fa-star icolor"></i>
 															<i class="fa fa-star icolor"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 														</div>
-														<p>${list.book_auth}</p>
-														<p>${list.company_id}</p>
-														<p>책의 상태 설명 : ${list.used_book_status }</p>
-														<p>
-															등록자 : ${list.member_id }&nbsp; 등록일 :[
-															<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />
-															]
+														<p>${list.book_auth}(${list.company_id})</p>
+														<p>등록자 : ${list.member_id }</p>
+														<p>등록일 : [<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />]
 														</p>
-														<div class="availability">
+														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
 															<c:if test="${list.member_id eq member_id }">
 																<span>
-																	<a href="javascript:fn_Modify(${list.used_book_num});">Modify</a>
-																</span>
+																	<a href="javascript:fn_Modify(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">Modify</a>
+																</span><br/>
 																<span>
-																	<a href="javascript:fn_Delete(${list.used_book_num});">Delete</a>
+																	<a href="javascript:fn_Delete(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 23px; height: 35px;">Delete</a>
 																</span>
 															</c:if>
 															<c:if test="${list.member_id ne member_id }">
 																<span>
-																	<a href="javascript:fn_Buy(${list.used_book_num});">BUY NOW</a>
+																	<a href="javascript:fn_Buy(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">BUY NOW</a>
 																</span>
 															</c:if>
 														</div>

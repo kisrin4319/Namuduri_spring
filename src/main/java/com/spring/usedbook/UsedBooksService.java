@@ -56,4 +56,15 @@ public class UsedBooksService implements UsedBooksDao {
 		return sqlSessionTemplate.selectList("usedbook.SliderBookList",map);
 	}
 
+	//7. NEW BOOKS에 중고상품 띄우기
+	@Override
+	public List<UsedBooksModel> NewList(int book_num) {
+		return sqlSessionTemplate.selectList("usedbook.newList", book_num);
+	}
+
+	@Override
+	public List<UsedBooksModel> selectUsed(int used_book_num) {
+		return sqlSessionTemplate.selectList("usedbook.selectUsed", used_book_num);
+	}
+
 }
