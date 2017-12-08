@@ -130,7 +130,28 @@
 							</div>
 							<div class="col-sm-8 form-group">
 								<label>BOOK_STATUS</label>
-								<input type="text" name="used_book_status" placeholder="Enter Book Status Here.." class="form-control">
+								<div class="checkbox checkbox-primary">
+									<p>
+										<input type="checkbox" id="used_book_status" name="used_book_status" value="최상" />
+										<label for="checkbox">최상</label>
+									</p>
+									<p>
+										<input type="checkbox" id="used_book_status" name="used_book_status" value="상" />
+										<label for="checkbox">상</label>
+									</p>
+									<p>
+										<input type="checkbox" id="used_book_status" name="used_book_status" value="중" />
+										<label for="checkbox">중</label>
+									</p>
+									<p>
+										<input type="checkbox" id="used_book_status" name="used_book_status" value="허" />
+										<label for="checkbox">하</label>
+									</p>
+									<p>
+										<input type="checkbox" id="used_book_status" name="used_book_status" value="최하" />
+										<label for="checkbox">최하</label>
+									</p>
+								</div>
 							</div>
 							<div class="col-sm-8 form-group">
 								<label>MEMBER_ID</label>
@@ -144,5 +165,18 @@
 		</div>
 	</div>
 	<!-- Shop Area End -->
+	<script type="text/javascript">
+$(document).ready(function() {
+    //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
+    $('input[type="checkbox"][name="group"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="group"]').prop('checked', false);
+            $(this).prop('checked', true);
+        }
+    });
+});
+</script>
 </body>
 </html>

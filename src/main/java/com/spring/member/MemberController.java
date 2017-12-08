@@ -18,7 +18,6 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import lombok.Data;
-
 @Controller
-@Data
 public class MemberController {
 
 	Logger log = Logger.getLogger(this.getClass());
@@ -98,62 +94,6 @@ public class MemberController {
 
 	}
 
-	@RequestMapping(value = "/member/googleSignIn")
-	public void doGoogleSignInActionPage(HttpServletResponse response) {
-		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.write(url);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-	}
-
-	/*@RequestMapping("/member/googleSignInCallback")
-	public String doSessionAssignActionPage(HttpServletRequest request) {
-		System.out.println("/member/googleSignInCallback");
-		String code = request.getParameter("code");
-
-		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
-				null);
-
-		String accessToken = accessGrant.getAccessToken();
-		Long expireTime = accessGrant.getExpireTime();
-		if (expireTime != null && expireTime < System.currentTimeMillis()) {
-			accessToken = accessGrant.getRefreshToken();
-			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
-		}
-
-		PlusOperations plusOperations = google.plusOperations();
-		Person person = plusOperations.getGoogleProfile();
-
-		MemberModel member = new MemberModel();
-		member.setMember_id(person.getDisplayName());
-		member.setMember_name(person.getDisplayName());
-
-		HttpSession session = request.getSession();
-		session.setAttribute("_MEMBER_", member);
-
-		System.out.println(person.getDisplayName());
-
-		return "redirect:/";*/
-		/*
-		 * System.out.println(person.getAccountEmail());
-		 * System.out.println(person.getAboutMe());
-		 * System.out.println(person.getDisplayName());
-		 * System.out.println(person.getEtag());
-		 * System.out.println(person.getFamilyName());
-		 * System.out.println(person.getGender());
-		 */
-
-	/*}*/
-
 	// 로그아웃
 	@RequestMapping("/member/logOut.do")
 	public ModelAndView logOut(HttpSession session) {
@@ -217,30 +157,13 @@ public class MemberController {
 	         mv.addObject("memberModel", memberModel);
 	         mv.setViewName("loginForm");
 	         return mv;   
-	      }
-		
-		/*//아이디 중복체크
-        boolean isDuplicateUserID = this.memberService.checkDuplicateUserID(memberInfoVO.getUsrId());
-        
-        if(isDuplicateUserID){
-            mv.setViewName("member/memberInfo");
-            mv.addObject("duplicateUserId","이미사용중인 아이디입니다.");
-            return mv;
-        }
-        mv.setViewName("redirect:/member/loginForm");
-        this.memberService.joinMember();
-    }
-    return mv;*/
-
-		
+	      }	
 	}
 
 	// 아이디 중복확인
 	@RequestMapping(value="/member/idCheck.do",method = { RequestMethod.GET, RequestMethod.POST})	
-	public @ResponseBody int idCheck(MemberModel memberModel, Model model,HttpServletRequest request) {
-		mv = new ModelAndView();
-		memberModel.setMember_id(request.getParameter("member_id"));
-		int count = memberService.idCheck(memberModel);
+	public @ResponseBody int idCheck(HttpServletRequest request) {
+		int count = memberService.idCheck(request.getParameter("member_id"));
 		return count;
 	}
 

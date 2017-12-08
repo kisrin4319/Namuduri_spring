@@ -14,13 +14,15 @@ public interface MemberDao {
 	public void insertMember(MemberModel memberModel);
 	
 	//아이디 중복확인
-	public int idCheck(MemberModel memberModel);
+	public int idCheck(String member_id);
 	
 	// 회원 정보 가져오기
 	public MemberModel SelectOne(String member_id);
 	
 	// 회원 리스트 가져오기
 	public List<MemberModel> memberList();
+
+	
 
 	
 }

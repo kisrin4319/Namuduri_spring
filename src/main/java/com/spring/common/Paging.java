@@ -68,7 +68,7 @@ public class Paging {
 			if (i == currentPage) {
 				pagingHtml.append("<strong>");
 				pagingHtml.append(i);
-				pagingHtml.append("</strong>&nbsp;&nbsp;");
+				pagingHtml.append("</strong>");
 				
 				/*pagingHtml.append("<li class='active'><a href='#'>");
 				pagingHtml.append(i);
@@ -81,7 +81,7 @@ public class Paging {
 				pagingHtml.append(i);
 				pagingHtml.append(">");
 				pagingHtml.append(i);
-				pagingHtml.append("</a>&nbsp;&nbsp;");
+				pagingHtml.append("</a>");
 				/*pagingHtml.append("<li class=''><a href="+viewName+".do?currentPage=");
 				pagingHtml.append(i);
 				pagingHtml.append(">");

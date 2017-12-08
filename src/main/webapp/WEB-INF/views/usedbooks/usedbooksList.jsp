@@ -231,11 +231,41 @@ img.top2 {
 														<a class="single-banner-image-wrapper">
 															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
 															<div class="rating-icon">
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
+																<c:if test="${list.used_book_status eq '최상' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '상' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '중' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '하' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '최하' }">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
 															</div>
 														</a>
 													</div>
@@ -279,11 +309,41 @@ img.top2 {
 															</span>
 														</div>
 														<div class="list-rating-icon">
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
+															<c:if test="${list.used_book_status eq '최상' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '상' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '중' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '하' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '최하' }">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
 														</div>
 														<p>${list.book_auth}</p>
 														<p>${list.company_id}</p>
