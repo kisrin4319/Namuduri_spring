@@ -21,4 +21,8 @@ public interface MemberDao {
 	
 	// 회원 리스트 가져오기
 	public List<MemberModel> memberList();
+
+	
+
+	
 }

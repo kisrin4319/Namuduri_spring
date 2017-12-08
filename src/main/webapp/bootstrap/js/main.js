@@ -150,9 +150,9 @@ Blog list owl active
 ------------------------------ */  
 	  $( "#slider-range" ).slider({
 	   range: true,
-	   min: 10000,
+	   min: 0,
 	   max: 100000,
-	   values: [ 10000, 100000 ],
+	   values: [ 0, 100000 ],
 	   slide: function( event, ui ) {
 		$( "#price" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
 	   }

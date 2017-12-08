@@ -136,6 +136,12 @@ img.used {
 									<i class="fa fa-heart-o"></i>
 									ADD TO WISHLIST
 								</a>
+								<br />
+								<a class="wish-btn" href="javascript:openMap()">
+									배송 거리 확인
+								</a>
+							</div>
+								
 							</div>
 						</div>
 					</div>
@@ -433,6 +439,10 @@ img.used {
 			 if (comment == null) return false;
 				 window.location.href='<%=cp%>/wish/wishInsert.do?wish_book_num='+book_num+'&wish_book_count='+amount+'&wish_comment='+comment;
 		}
+	   function openMap() {
+		var url = '<%=cp%>/common/openMap.do';
+		window.open(url,"openMap","toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800")
+	}
 	</script>
 </body>
 </html>
