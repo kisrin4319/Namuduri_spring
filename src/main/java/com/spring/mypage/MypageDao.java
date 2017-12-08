@@ -3,6 +3,7 @@ package com.spring.mypage;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.book.BooksModel;
 import com.spring.member.MemberModel;
 import com.spring.order.OrderModel;
 
@@ -31,6 +32,5 @@ public interface MypageDao {
 	
 	//6. 주문내역 취소
 	public int memberOrderCancel(String order_trade_num);
-	
 	
 }
