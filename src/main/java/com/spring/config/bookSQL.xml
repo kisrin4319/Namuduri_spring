@@ -11,6 +11,9 @@
 		WHERE BOOK_NUM = #{BOOK_NUM} AND BOOK_USE_YN = '1'
 	</sql>
 	
+	<sql id ="select-bookalls">
+		select distinct a.*, NVL((select round(avg(star_point),0) from review b where b.book_num=a.book_num),0) as star_point from BOOK a left outer join review b on a.book_num = b.book_num where a.book_use_yn='1'
+	</sql>
 	<resultMap type="java.util.HashMap" id="book">
 	<result javaType="java.lang.Integer" column="book_num" property="book_num" />
 	<result javaType="java.lang.String" column="book_category" property="book_category" />
@@ -69,12 +72,12 @@
 	
 	<!-- 날짜 등록 순 도서 목록 -->
 	<select id="selectDateList" resultMap="book">
-		<include refid="select-bookall" />
+		<include refid="select-bookalls" />
 		ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 베스트셀러 도서 목록 -->
 	<select id="bestSellerList" resultMap="book">
-		<include refid="select-bookall" />
+		<include refid="select-bookalls" />
 		ORDER BY BOOK_SELL_COUNT DESC
 	</select>
 	

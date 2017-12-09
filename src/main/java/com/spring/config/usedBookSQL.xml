@@ -18,12 +18,10 @@
 	</select>
 
 	<!-- 카테고리 도서 목록 -->
-	<select id="selectBookList" resultType="UsedBooksModel"
-		parameterType="String">
-		<include refid="select-bookall" />
-		WHERE
+	<select id="selectBookList" resultType="UsedBooksModel"	parameterType="String">
+		<include refid="select-bookall" />		
 		<if test="value!=null">
-			BOOK_CATEGORY = #{value}
+			WHERE BOOK_CATEGORY = #{value}
 		</if>
 		ORDER BY USED_BOOK_REGDATE DESC
 	</select>

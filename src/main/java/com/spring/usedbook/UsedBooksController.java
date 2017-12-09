@@ -52,24 +52,17 @@ public class UsedBooksController {
 		String searchKeyword = request.getParameter("searchKeyword");
 
 		int searchNum = 0;
-		int used_book_num = 0;
 
 		if (request.getParameter("searchNum") != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 		}
 		
-		if(request.getParameter("used_book_num") != null) {
-			used_book_num = Integer.parseInt(request.getParameter("used_book_num"));
-		}
-
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (searchKeyword == null && used_book_num == 0) {
+		if (searchKeyword == null) {
 			usedBooksList = usedBooksService.UsedBooksList(book_category);
 		}
-		else if(searchKeyword == null && used_book_num != 0) {
-			usedBooksList = usedBooksService.selectUsed(used_book_num);
-		}else {
+		else {
 			map.put("searchNum", searchNum);
 			map.put("searchKeyword", searchKeyword);
 
@@ -136,6 +129,10 @@ public class UsedBooksController {
 	// 2. 중고 서적 등록 form
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.GET)
 	public ModelAndView usedBookWriteForm() throws Exception {
+	
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+		mv.addObject("top2", top2);
 		mv.setViewName("usedBooksWriteForm");
 
 		return mv;
