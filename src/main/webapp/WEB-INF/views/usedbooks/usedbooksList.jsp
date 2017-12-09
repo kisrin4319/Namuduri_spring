@@ -48,43 +48,43 @@ img.top2 {
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu" style="text-align: left;">
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=단편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=단편소설">
 												<i class="fa fa-angle-double-right"></i>
 												short story
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=장편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=장편소설">
 												<i class="fa fa-angle-double-right"></i>
 												feature novel
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=자기계발">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=자기계발">
 												<i class="fa fa-angle-double-right"></i>
 												self-development
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=시/에세이">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=시/에세이">
 												<i class="fa fa-angle-double-right"></i>
 												poem & essay
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=어린이(초등)">
 												<i class="fa fa-angle-double-right"></i>
 												kids & schoolchild
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=중/고등참고서">
 												<i class="fa fa-angle-double-right"></i>
 												teenager
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=취업/참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=취업/참고서">
 												<i class="fa fa-angle-double-right"></i>
 												job applicants
 											</a>
@@ -309,7 +309,7 @@ img.top2 {
 															</span>
 														</div>
 														<div class="list-rating-icon">
-															등급 : 														
+															보관 상태 : 														
 															<c:if test="${list.used_book_status eq '최상' }">
 																<i class="fa fa-star icolor"></i>
 																<i class="fa fa-star icolor"></i>
