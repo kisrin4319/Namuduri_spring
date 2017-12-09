@@ -43,7 +43,7 @@ img.used {
 				<input type="hidden" name="book_name" value="${view.book_name}" />
 				<input type="hidden" name="book_price" value="${view.book_price}" />
 				<input type="hidden" name="book_image" value="${view.book_image}" />
-				<div class="row">
+				<div class="row" style="margin-left: 0px; margin-right: 0px;">
 					<div class="col-md-6 col-sm-7" style="width: 370px;">
 						<div class="single-product-image-inner">
 							<!-- Tab panes -->
@@ -58,57 +58,55 @@ img.used {
 					</div>
 					<div class="col-md-6 col-sm-5">
 						<div class="single-product-details">
-							<div class="list-pro-rating">
+							<h2 style="margin-bottom: 5px;">${view.book_name}</h2>
+							<div class="list-pro-rating" style="margin-bottom: 5px;">
 								<c:if test="${view.star_point == 0}">
-									<i class="fa fa-star"></i>
+									&nbsp;<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 1}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 2}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 3}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 4}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 5}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 								</c:if>
 							</div>
-							<h2>${view.book_name}</h2>
 							<p style="margin-bottom: 5px;">${view.book_auth}/${view.company_id}</p>
 							<div class="single-product-price" style="height: 60px;">
-								<h2>
-									<fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />
-									원
-								</h2>
+								<h3><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" /> 원</h3>
+								<h5 style="font-style: inherit;">P <fmt:formatNumber pattern="#,###" value="${view.book_price * 0.05}"/> (5% 적립)</h5>
 							</div>
 							<div class="product-attributes clearfix">
 								<span class="pull-left" id="quantity-wanted-p">
@@ -138,7 +136,7 @@ img.used {
 								</a>
 								<br />
 								<a class="wish-btn" href="javascript:openMap()">
-									배송 거리 확인
+									→   배송 거리 확인
 								</a>
 							</div>
 								
@@ -146,7 +144,7 @@ img.used {
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-left: 0px;">
 					<div class="col-md-9">
 						<div class="p-details-tab-content">
 							<div class="p-details-tab">

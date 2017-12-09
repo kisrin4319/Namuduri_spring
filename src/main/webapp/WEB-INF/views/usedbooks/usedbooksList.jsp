@@ -297,18 +297,8 @@ img.top2 {
 												</div>
 												<div class="col-xs-12 col-sm-7 col-md-8">
 													<div class="deal-product-content">
-														<h4>${list.book_name}</h4>
-														<div class="product-price" style="margin-bottom: 7px;">
-															<span class="new-price">
-																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
-																원
-															</span>
-															<span class="old-price">
-																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
-																원
-															</span>
-														</div>
-														<div class="list-rating-icon">
+														<h4 style="margin-bottom: 7px;">${list.book_name}</h4>
+														<div class="list-rating-icon" style="margin-bottom: 7px;">
 															등급 : 														
 															<c:if test="${list.used_book_status eq '최상' }">
 																<i class="fa fa-star icolor"></i>
@@ -346,11 +336,22 @@ img.top2 {
 																<i class="fa fa-star"></i>
 															</c:if>
 														</div>
-														<p>${list.book_auth}(${list.company_id})</p>
-														<p>등록자 : ${list.member_id }</p>
-														<p>등록일 : [<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />]
+														<div class="product-price" style="margin-bottom: 7px;">
+															<span class="new-price">
+																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
+																원
+															</span>
+															<span class="old-price">
+																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
+																원
+															</span>
+														</div>
+														<h5 style="margin-bottom: 7px;">P <fmt:formatNumber pattern="#,###" value="${list.book_price * 0.05}"/> (5% 적립)</h5>
+														<p style="margin-bottom: 7px;">${list.book_auth}(${list.company_id})</p>
+														<p style="margin-bottom: 7px;">등록자 : ${list.member_id }</p>
+														<p style="margin-bottom: 7px;">등록일 : [<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />]
 														</p>
-														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
+														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important; margin-bottom: 7px;">
 															<c:if test="${list.member_id eq member_id }">
 																<span>
 																	<a href="javascript:fn_Modify(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">Modify</a>
@@ -361,7 +362,7 @@ img.top2 {
 															</c:if>
 															<c:if test="${list.member_id ne member_id }">
 																<span>
-																	<a href="javascript:fn_Buy(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">BUY NOW</a>
+																	<a href="javascript:fn_Buy(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; margin-top: 17px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">BUY NOW</a>
 																</span>
 															</c:if>
 														</div>

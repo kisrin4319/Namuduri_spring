@@ -277,6 +277,14 @@
 																</span>
 															</td>
 														</tr>
+															<tr>
+															<td colspan="4">Point(${memberModel.member_point}P)</td>															
+															<td>
+																<span class="check-price">
+																	- <input type="text" size="2" name="point" id="point" value="0"><input type="button" value="USE" onclick="usePoint();">
+																</span>
+															</td>
+														</tr>
 														<tr>
 															<td colspan="4">
 																<strong>Grand Total</strong>
@@ -284,7 +292,7 @@
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
+																		<input type="text" name="grandTotal"  id="grandTotal" size="3" readonly="readonly" value="<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />">원
 																	</span>
 																</strong>
 															</td>
@@ -411,7 +419,6 @@ var mobile = "${memberModel.member_mobile}";
    		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
   }
 	function payment_Proc() {
-	  
 	  	var check = eval("document.orderform");
 	  	alert(check.value);
 	  	var url ='<%=cp%>/payment.jsp?sumMoney='+${sumMoney}+'&';
@@ -420,6 +427,19 @@ var mobile = "${memberModel.member_mobile}";
 	  	check.target="post";
 	  	check.submit();
   }
+	
+	function usePoint() {
+		var use = confirm("포인트를 사용하시겠습니까?")
+		var point = document.getElementById(point).value;
+		var grandtotal = document.getElementById(grandTotal).value;
+		
+		if(use==true) {
+			grandtotal = grandtotal-use;
+		} else {
+			return false;
+		}
+
+	}
 </script>
 </body>
 </html>
