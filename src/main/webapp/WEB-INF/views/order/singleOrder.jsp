@@ -298,7 +298,7 @@
 														Forgot an Item?
 														<a href="#">Edit Your Cart</a>
 													</p>
-													<button type="button" title="Place Order" class="btn btn-default" onclick="payment_Proc(this.form);">
+													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt()">
 														<span>Place Order</span>
 													</button>
 												</div>
