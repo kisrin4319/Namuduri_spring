@@ -86,14 +86,13 @@ public class OrderController {
 		MemberModel memberModel = memberService.SelectOne(session_id);
 
 		int bookMoney = booksModel.getBook_price() * order_book_count;
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 
 		if (bookMoney < 100000) {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 
@@ -121,7 +120,9 @@ public class OrderController {
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
 		String order_receive_memo = request.getParameter("order_receive_memo");
-		System.out.println(request.getParameter("order_receive_memo"));
+		int point = Integer.parseInt(request.getParameter("point"));
+		int sum = orderModel.getOrder_receive_moneysum();
+		
 		// 데이터베이스에 주문 정보 넣기
 		orderModel.setOrder_trade_num(book_num + simple.format(day));
 		int random = (int) Math.random() * 99 + 1;
@@ -131,6 +132,7 @@ public class OrderController {
 		orderModel.setMember_id(session_id);
 		orderModel.setOrder_receive_memo(order_receive_memo);
 		orderModel.setOrder_trade_payer(session_id);
+		orderModel.setOrder_receive_moneysum(sum-point);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기
@@ -140,7 +142,7 @@ public class OrderController {
 		// 데이터베이스에 넣은 정보 꺼내오기
 		OrderModel getOrder = orderService.getOrder(orderModel);
 		OrderDetailModel getOrderDetail = orderService.getOrderDetail(orderDetailModel);
-
+		
 		// 장바구니에서 넘어온 상품일 경우 장바구니에서 상품 삭제
 		if (basket_num != 0) {
 			orderService.delBasket(basket_num);
@@ -155,6 +157,23 @@ public class OrderController {
 			book.setBook_sell_count(sell_count);
 			orderService.updateStock(book);
 		}
+		
+		// 사용시 차감 & 포인트적립
+		if(point != 0) {
+			MemberModel member = memberService.SelectOne(session_id);
+			int member_point = member.getMember_point();
+			int update = member_point-point;
+			member.setMember_point(update);
+			orderService.point(member);
+		}
+		MemberModel member = memberService.SelectOne(session_id);
+		int saving = (int)((orderDetailModel.getOrder_book_count()*orderDetailModel.getOrder_book_price()) *0.05);
+		int current = member.getMember_point();
+		int now = saving + current;
+		member.setMember_point(now);
+		orderService.point(member);
+		
+		
 		mv.addObject("order", getOrder);
 		mv.addObject("orderDetail", getOrderDetail);
 		mv.setViewName("singleOrderComplete");
@@ -172,14 +191,13 @@ public class OrderController {
 		MemberModel memberModel = memberService.SelectOne(session_id);
 
 		int bookMoney = orderService.totalSum(session_id);
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 
 		if (bookMoney < 100000) {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 
@@ -265,7 +283,7 @@ public class OrderController {
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
 
 		int bookMoney = 0;
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 		for (int i = 0; i < basket_num.length; i++) {
 			int num = Integer.parseInt(basket_num[i]);
@@ -277,7 +295,6 @@ public class OrderController {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 
