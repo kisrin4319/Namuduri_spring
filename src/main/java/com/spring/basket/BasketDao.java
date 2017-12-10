@@ -10,6 +10,8 @@ public interface BasketDao {
 	//2.장바구니 상품 한개 선택 , 장바구니에 기존의 상품이 존재하는 지 확인
 	public int BasketSelectOne(BasketModel basketModel);
 
+	//
+	public BasketModel basketDetail(int basket_num);
 	//3.장바구니 추가
 	public void BasketInsert(BasketModel basketModel);
 	

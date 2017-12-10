@@ -187,8 +187,10 @@ img.top2 {
 								<tbody>
 									<c:choose>
 										<c:when test="${wishList.size() == 0}">
-											<tr>
-												<h4>등록된 위시리스트가 없습니다.</h4>
+											<tr align="center">
+												<td></td>
+												<td style="margin-top: 2px;"><h4>등록된 위시리스트가 없습니다.</h4></td>
+												<td/><td/>
 											</tr>
 										</c:when>
 										<c:otherwise>

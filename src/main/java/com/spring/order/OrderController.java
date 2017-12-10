@@ -29,341 +29,354 @@ import com.spring.usedbook.UsedBooksService;
 @Controller
 public class OrderController {
 
-   Logger log = Logger.getLogger(this.getClass());
+	Logger log = Logger.getLogger(this.getClass());
 
-   @Resource
-   private OrderService orderService;
+	@Resource
+	private OrderService orderService;
 
-   @Resource
-   private BooksService booksService;
+	@Resource
+	private BooksService booksService;
 
-   @Resource
-   private BasketService basketService;
+	@Resource
+	private BasketService basketService;
 
-   @Resource
-   private UsedBooksService usedBookService;
-   
-   @Resource
-   private MemberService memberService;
+	@Resource
+	private UsedBooksService usedBookService;
 
-   ModelAndView mv = new ModelAndView();
-   BasketModel basketModel = new BasketModel();
-   String session_id;
+	@Resource
+	private MemberService memberService;
 
-   // 단일 주문
-   @RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.GET)
-   public ModelAndView singleOrderForm(HttpServletRequest request, HttpSession session) {
+	ModelAndView mv = new ModelAndView();
+	BasketModel basketModel = new BasketModel();
+	String session_id;
 
-      session_id = (String) session.getAttribute("member_id");
-      BooksModel booksModel = new BooksModel();
-      UsedBooksModel usedBooksModel = new UsedBooksModel();
-      
-      int basket_num = 0;
-      int used_book_num = 0;
-      
-      if (request.getParameter("basket_num") != null) {
-         basket_num = Integer.parseInt(request.getParameter("basket_num"));
-      } else if(request.getParameter("used_book_num")!=null) {
-    	  used_book_num = Integer.parseInt(request.getParameter("used_book_num"));
-    	  usedBooksModel = usedBookService.UsedbookOne(used_book_num);
-    	  booksModel.setBook_image(usedBooksModel.getBook_image());
-    	  booksModel.setBook_category(usedBooksModel.getBook_category());
-    	  booksModel.setBook_name(usedBooksModel.getBook_name());
-    	  booksModel.setBook_price(usedBooksModel.getBook_new_price());
-      } else {
-    	  int book_num = Integer.parseInt(request.getParameter("book_num"));
-    	  booksModel = booksService.bookOne(book_num);
-      }
+	// 단일 주문
+	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.GET)
+	public ModelAndView singleOrderForm(HttpServletRequest request, HttpSession session) {
 
-     
-      int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
-     
-      MemberModel memberModel = memberService.SelectOne(session_id);
+		session_id = (String) session.getAttribute("member_id");
+		BooksModel booksModel = new BooksModel();
+		UsedBooksModel usedBooksModel = new UsedBooksModel();
+		BasketModel basketModel = new BasketModel();
+		int basket_num = 0;
+		int used_book_num = 0;
 
-      int bookMoney = booksModel.getBook_price() * order_book_count;
-      int deliveryFee;
-      int sumMoney;
+		if (request.getParameter("basket_num") != null) {
+			basket_num = Integer.parseInt(request.getParameter("basket_num"));
+			basketModel = basketService.basketDetail(basket_num);
+			booksModel.setBook_image(basketModel.getBasket_book_image());
+			booksModel.setBook_category(basketModel.getBook_category());
+			booksModel.setBook_name(basketModel.getBasket_book_name());
+			booksModel.setBook_price(basketModel.getBasket_book_price());
 
-      if (bookMoney < 100000) {
-         deliveryFee = 5000;
-         sumMoney = bookMoney + deliveryFee;
-      } else {
-         deliveryFee = 0;
-         sumMoney = bookMoney;
-      }
+		} else if (request.getParameter("used_book_num") != null) {
+			used_book_num = Integer.parseInt(request.getParameter("used_book_num"));
+			usedBooksModel = usedBookService.UsedbookOne(used_book_num);
+			booksModel.setBook_image(usedBooksModel.getBook_image());
+			booksModel.setBook_category(usedBooksModel.getBook_category());
+			booksModel.setBook_name(usedBooksModel.getBook_name());
+			booksModel.setBook_price(usedBooksModel.getBook_new_price());
+		} else {
+			int book_num = Integer.parseInt(request.getParameter("book_num"));
+			booksModel = booksService.bookOne(book_num);
+		}
 
-      mv.addObject("book", booksModel);
-      mv.addObject("order_book_count", order_book_count);
-      mv.addObject("bookMoney", bookMoney);
-      mv.addObject("deliveryFee", deliveryFee);
-      mv.addObject("sumMoney", sumMoney);
-      mv.addObject("session_id", session_id);
-      mv.addObject("memberModel", memberModel);
-      mv.addObject("basket_num", basket_num);
-      mv.addObject("used_book_num",used_book_num);
-      mv.setViewName("singleOrder");
+		int order_book_count = Integer.parseInt(request.getParameter("order_book_count"));
 
-      return mv;
-   }
+		MemberModel memberModel = memberService.SelectOne(session_id);
 
-   // 단일 주문 완료
-   @RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.POST)
-   ModelAndView singleOrder(@ModelAttribute OrderModel orderModel, @ModelAttribute OrderDetailModel orderDetailModel,
-         int book_num, int basket_num,int used_book_num, HttpSession session,HttpServletRequest request) {
+		int bookMoney = booksModel.getBook_price() * order_book_count;
+		int deliveryFee;
+		int sumMoney;
 
-      session_id = (String) session.getAttribute("member_id");
-      Calendar today = Calendar.getInstance();
-      Date day = today.getTime();
-      SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
-      String order_receive_memo=request.getParameter("order_receive_memo");
-      System.out.println(request.getParameter("order_receive_memo"));
-      // 데이터베이스에 주문 정보 넣기
-      orderModel.setOrder_trade_num(book_num + simple.format(day));
-      int random = (int) Math.random() * 99 + 1;
-      orderModel.setOrder_trans_num(orderModel.getOrder_trade_num() + String.valueOf(random));
-      orderModel.setOrder_bank_name("국민은행 (주)나무두리");
-      orderModel.setOrder_bank_num("147963-01-794613");
-      orderModel.setMember_id(session_id);
-      orderModel.setOrder_receive_memo(order_receive_memo);
-      orderModel.setOrder_trade_payer(session_id);
-      orderService.orderIn(orderModel);
+		if (bookMoney < 100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+		} else {
+			deliveryFee = 0;
+			sumMoney = bookMoney;
+		}
 
-      // 데이터베이스에 도서 정보 넣기
-      orderDetailModel.setOrder_trade_num(book_num + simple.format(day));
-      orderService.orderDetailIn(orderDetailModel);
+		mv.addObject("book", booksModel);
+		mv.addObject("order_book_count", order_book_count);
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
+		mv.addObject("sumMoney", sumMoney);
+		mv.addObject("session_id", session_id);
+		mv.addObject("memberModel", memberModel);
+		mv.addObject("basket_num", basket_num);
+		mv.addObject("used_book_num", used_book_num);
+		mv.setViewName("singleOrder");
 
-      // 데이터베이스에 넣은 정보 꺼내오기
-      OrderModel getOrder = orderService.getOrder(orderModel);
-      OrderDetailModel getOrderDetail = orderService.getOrderDetail(orderDetailModel);
+		return mv;
+	}
 
-      // 장바구니에서 넘어온 상품일 경우 장바구니에서 상품 삭제
-      if (basket_num != 0) {
-         orderService.delBasket(basket_num);
-      } else if(used_book_num!=0) {
-    	  usedBookService.UsedBooksDelete(used_book_num);
-      } else {
-      // 도서 재고 관리
-      BooksModel book = booksService.bookOne(book_num);
-      int current_count = book.getBook_current_count() - getOrderDetail.getOrder_book_count();
-      int sell_count = book.getBook_sell_count() + getOrderDetail.getOrder_book_count();
-      book.setBook_current_count(current_count);
-      book.setBook_sell_count(sell_count);
-      orderService.updateStock(book);
-      }
-      mv.addObject("order", getOrder);
-      mv.addObject("orderDetail", getOrderDetail);
-      mv.setViewName("singleOrderComplete");
+	// 단일 주문 완료
+	@RequestMapping(value = "/order/singleOrder.do", method = RequestMethod.POST)
+	ModelAndView singleOrder(@ModelAttribute OrderModel orderModel, @ModelAttribute OrderDetailModel orderDetailModel,
+			int book_num, int basket_num, int used_book_num, HttpSession session, HttpServletRequest request) {
 
-      return mv;
-   }
+		session_id = (String) session.getAttribute("member_id");
+		Calendar today = Calendar.getInstance();
+		Date day = today.getTime();
+		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
+		String order_receive_memo = request.getParameter("order_receive_memo");
+		System.out.println(request.getParameter("order_receive_memo"));
+		// 데이터베이스에 주문 정보 넣기
+		orderModel.setOrder_trade_num(book_num + simple.format(day));
+		int random = (int) Math.random() * 99 + 1;
+		orderModel.setOrder_trans_num(orderModel.getOrder_trade_num() + String.valueOf(random));
+		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
+		orderModel.setOrder_bank_num("147963-01-794613");
+		orderModel.setMember_id(session_id);
+		orderModel.setOrder_receive_memo(order_receive_memo);
+		orderModel.setOrder_trade_payer(session_id);
+		orderService.orderIn(orderModel);
 
-   // 전체 주문
-   @RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.GET)
-   public ModelAndView totalOrderForm(HttpServletRequest request, HttpSession session) {
+		// 데이터베이스에 도서 정보 넣기
+		orderDetailModel.setOrder_trade_num(book_num + simple.format(day));
+		orderService.orderDetailIn(orderDetailModel);
 
-      session_id = (String) session.getAttribute("member_id");
-      basketModel.setMember_id(session_id);
-      List<BasketModel> basketList = basketService.basketList(basketModel);
-      MemberModel memberModel = memberService.SelectOne(session_id);
+		// 데이터베이스에 넣은 정보 꺼내오기
+		OrderModel getOrder = orderService.getOrder(orderModel);
+		OrderDetailModel getOrderDetail = orderService.getOrderDetail(orderDetailModel);
 
-      int bookMoney = orderService.totalSum(session_id);
-      int deliveryFee;
-      int sumMoney;
+		// 장바구니에서 넘어온 상품일 경우 장바구니에서 상품 삭제
+		if (basket_num != 0) {
+			orderService.delBasket(basket_num);
+		} else if (used_book_num != 0) {
+			usedBookService.UsedBooksDelete(used_book_num);
+		} else {
+			// 도서 재고 관리
+			BooksModel book = booksService.bookOne(book_num);
+			int current_count = book.getBook_current_count() - getOrderDetail.getOrder_book_count();
+			int sell_count = book.getBook_sell_count() + getOrderDetail.getOrder_book_count();
+			book.setBook_current_count(current_count);
+			book.setBook_sell_count(sell_count);
+			orderService.updateStock(book);
+		}
+		mv.addObject("order", getOrder);
+		mv.addObject("orderDetail", getOrderDetail);
+		mv.setViewName("singleOrderComplete");
 
-      if (bookMoney < 100000) {
-         deliveryFee = 5000;
-         sumMoney = bookMoney + deliveryFee;
-      } else {
-         deliveryFee = 0;
-         sumMoney = bookMoney;
-      }
+		return mv;
+	}
 
-      mv.addObject("bookMoney", bookMoney);
-      mv.addObject("deliveryFee", deliveryFee);
-      mv.addObject("sumMoney", sumMoney);
-      mv.addObject("basketList", basketList);
-      mv.addObject("memberModel", memberModel);
-      mv.setViewName("totalOrder");
+	// 전체 주문
+	@RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.GET)
+	public ModelAndView totalOrderForm(HttpServletRequest request, HttpSession session) {
 
-      return mv;
-   }
+		session_id = (String) session.getAttribute("member_id");
+		basketModel.setMember_id(session_id);
+		List<BasketModel> basketList = basketService.basketList(basketModel);
+		MemberModel memberModel = memberService.SelectOne(session_id);
 
-   // 전체 주문 완료
-   @RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.POST)
-   public ModelAndView totalOrder(@ModelAttribute OrderModel orderModel, HttpSession session) {
+		int bookMoney = orderService.totalSum(session_id);
+		int deliveryFee;
+		int sumMoney;
 
-      session_id = (String) session.getAttribute("member_id");
-      Calendar today = Calendar.getInstance();
-      Date day = today.getTime();
-      SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
-      String trade_num = String.valueOf(simple.format(day));
+		if (bookMoney < 100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+		} else {
+			deliveryFee = 0;
+			sumMoney = bookMoney;
+		}
 
-      BasketModel basket = new BasketModel();
-      basket.setMember_id(session_id);
-      List<BasketModel> basAll = basketService.basketList(basket);
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
+		mv.addObject("sumMoney", sumMoney);
+		mv.addObject("basketList", basketList);
+		mv.addObject("memberModel", memberModel);
+		mv.setViewName("totalOrder");
 
-      // 데이터베이스에 주문 정보 넣기
-      orderModel.setOrder_trade_num(trade_num);
-      int random = (int) Math.random() * 99 + 1;
-      orderModel.setOrder_trans_num(trade_num + String.valueOf(random));
-      orderModel.setOrder_bank_name("국민은행 (주)나무두리");
-      orderModel.setOrder_bank_num("147963-01-794613");
-      orderModel.setMember_id(session_id);
-      orderService.orderIn(orderModel);
+		return mv;
+	}
 
-      // 데이터베이스에 도서 정보 넣기 + 재고관리
-      OrderDetailModel detail = new OrderDetailModel();
-      for (int i = 0; i < basAll.size(); i++) {
-         BasketModel bas = basAll.get(i);
-         detail.setOrder_trade_num(trade_num);
-         detail.setBook_num(bas.getBasket_book_num());
-         detail.setOrder_book_name(bas.getBasket_book_name());
-         detail.setOrder_book_price(bas.getBasket_book_price());
-         detail.setOrder_book_count(bas.getBasket_book_count());
-         orderService.orderDetailIn(detail);
-         /* ------------------------------------------------------------------------------*/
-         BooksModel book = booksService.bookOne(bas.getBasket_book_num());
-         int current_count = book.getBook_current_count() - bas.getBasket_book_count();
-         int sell_count = book.getBook_sell_count() + bas.getBasket_book_count();
-         book.setBook_current_count(current_count);
-         book.setBook_sell_count(sell_count);
-         orderService.updateStock(book);
-      }
+	// 전체 주문 완료
+	@RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.POST)
+	public ModelAndView totalOrder(@ModelAttribute OrderModel orderModel, HttpSession session) {
 
-      // 장바구니에 물건 삭제하기
-      basketService.BasketDeleteAll(session_id);
+		session_id = (String) session.getAttribute("member_id");
+		Calendar today = Calendar.getInstance();
+		Date day = today.getTime();
+		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
+		String trade_num = String.valueOf(simple.format(day));
 
-      // JSP 사용하기 위한 작업
-      OrderModel getOrder = orderService.getOrder(orderModel);
-      String order_book_name = detail.getOrder_book_name();
-      int size = basAll.size();
-      mv.addObject("size", size);
-      mv.addObject("order_book_name", order_book_name);
-      mv.addObject("order", getOrder);
-      mv.setViewName("multiOrderComplete");
+		BasketModel basket = new BasketModel();
+		basket.setMember_id(session_id);
+		List<BasketModel> basAll = basketService.basketList(basket);
 
-      return mv;
-   }
+		// 데이터베이스에 주문 정보 넣기
+		orderModel.setOrder_trade_num(trade_num);
+		int random = (int) Math.random() * 99 + 1;
+		orderModel.setOrder_trans_num(trade_num + String.valueOf(random));
+		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
+		orderModel.setOrder_bank_num("147963-01-794613");
+		orderModel.setMember_id(session_id);
+		orderService.orderIn(orderModel);
 
-   // 선택 주문
-   @RequestMapping("/order/selectOrderForm.do")
-   public ModelAndView selectOrderForm(HttpServletRequest request, HttpSession session) {
+		// 데이터베이스에 도서 정보 넣기 + 재고관리
+		OrderDetailModel detail = new OrderDetailModel();
+		for (int i = 0; i < basAll.size(); i++) {
+			BasketModel bas = basAll.get(i);
+			detail.setOrder_trade_num(trade_num);
+			detail.setBook_num(bas.getBasket_book_num());
+			detail.setOrder_book_name(bas.getBasket_book_name());
+			detail.setOrder_book_price(bas.getBasket_book_price());
+			detail.setOrder_book_count(bas.getBasket_book_count());
+			orderService.orderDetailIn(detail);
+			/*
+			 * -----------------------------------------------------------------------------
+			 * -
+			 */
+			BooksModel book = booksService.bookOne(bas.getBasket_book_num());
+			int current_count = book.getBook_current_count() - bas.getBasket_book_count();
+			int sell_count = book.getBook_sell_count() + bas.getBasket_book_count();
+			book.setBook_current_count(current_count);
+			book.setBook_sell_count(sell_count);
+			orderService.updateStock(book);
+		}
 
-      session_id = (String) session.getAttribute("member_id");
-      String[] basket_num = request.getParameterValues("RowCheck");
+		// 장바구니에 물건 삭제하기
+		basketService.BasketDeleteAll(session_id);
 
-      MemberModel memberModel = memberService.SelectOne(session_id);
+		// JSP 사용하기 위한 작업
+		OrderModel getOrder = orderService.getOrder(orderModel);
+		String order_book_name = detail.getOrder_book_name();
+		int size = basAll.size();
+		mv.addObject("size", size);
+		mv.addObject("order_book_name", order_book_name);
+		mv.addObject("order", getOrder);
+		mv.setViewName("multiOrderComplete");
 
-      List<BasketModel> selectList = new ArrayList<BasketModel>();
+		return mv;
+	}
 
-      int bookMoney = 0;
-      int deliveryFee;
-      int sumMoney;
-      for (int i = 0; i < basket_num.length; i++) {
-         int num = Integer.parseInt(basket_num[i]);
-         selectList.add(orderService.BasketSelect(num));
-         bookMoney += orderService.selectSum(num);
-      }
+	// 선택 주문
+	@RequestMapping("/order/selectOrderForm.do")
+	public ModelAndView selectOrderForm(HttpServletRequest request, HttpSession session) {
 
-      if (bookMoney < 100000) {
-         deliveryFee = 5000;
-         sumMoney = bookMoney + deliveryFee;
-      } else {
-         deliveryFee = 0;
-         sumMoney = bookMoney;
-      }
+		session_id = (String) session.getAttribute("member_id");
+		String[] basket_num = request.getParameterValues("RowCheck");
 
-      mv.addObject("bookMoney", bookMoney);
-      mv.addObject("deliveryFee", deliveryFee);
-      mv.addObject("sumMoney", sumMoney);
-      mv.addObject("selectList", selectList);
-      mv.addObject("memberModel", memberModel);
-      mv.setViewName("selectOrder");
+		MemberModel memberModel = memberService.SelectOne(session_id);
 
-      return mv;
-   }
+		List<BasketModel> selectList = new ArrayList<BasketModel>();
 
-   // 선택 주문 완료
-   @RequestMapping("/order/selectOrder.do")
-   ModelAndView selectOrder(@ModelAttribute OrderModel orderModel, HttpServletRequest request, HttpSession session) {
+		int bookMoney = 0;
+		int deliveryFee;
+		int sumMoney;
+		for (int i = 0; i < basket_num.length; i++) {
+			int num = Integer.parseInt(basket_num[i]);
+			selectList.add(orderService.BasketSelect(num));
+			bookMoney += orderService.selectSum(num);
+		}
 
-      session_id = (String) session.getAttribute("member_id");
-      Calendar today = Calendar.getInstance();
-      Date day = today.getTime();
-      SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
-      String trade_num = String.valueOf(simple.format(day));
-      
-      // 체크된 장바구니 번호로 구매할 상품 리스트 담기
-      String[] basket_num = request.getParameterValues("basket_num");
-      List<BasketModel> basketList = new ArrayList<BasketModel>();
-      for (int i = 0; i < basket_num.length; i++) {
-         int num = Integer.parseInt(basket_num[i]);
-         basketList.add(orderService.BasketSelect(num));
-      }
-      int size = basketList.size();
-      
-      // 데이터베이스에 주문 정보 넣기
-      orderModel.setOrder_trade_num(trade_num);
-      int random = (int) Math.random() * 99 + 1;
-      orderModel.setOrder_trans_num(trade_num + String.valueOf(random));
-      orderModel.setOrder_bank_name("국민은행 (주)나무두리");
-      orderModel.setOrder_bank_num("147963-01-794613");
-      orderModel.setMember_id(session_id);
-      orderService.orderIn(orderModel);
-      
-      // 데이터베이스에 도서 정보 넣기 + 장바구니 삭제 + 재고관리
-      BasketModel basketModel = new BasketModel();
-      for (int i=0 ; i < basketList.size(); i++) {
-         basketModel = basketList.get(i); 
-         orderService.BasketSelect(basketModel.getBasket_num());
-         OrderDetailModel detail = new OrderDetailModel();
-         detail.setOrder_trade_num(trade_num);
-         detail.setBook_num(basketModel.getBasket_book_num());
-         detail.setOrder_book_name(basketModel.getBasket_book_name());
-         detail.setOrder_book_price(basketModel.getBasket_book_price());
-         detail.setOrder_book_count(basketModel.getBasket_book_count());
-         orderService.orderDetailIn(detail);
-         /* ------------------------------------------------------------------------------*/
-         orderService.delBasket(basketModel.getBasket_num());
-         /* ------------------------------------------------------------------------------*/
-         BooksModel book = booksService.bookOne(basketModel.getBasket_book_num());
-         int current_count = book.getBook_current_count() - basketModel.getBasket_book_count();
-         int sell_count = book.getBook_sell_count() + basketModel.getBasket_book_count();
-         book.setBook_current_count(current_count);
-         book.setBook_sell_count(sell_count);
-         orderService.updateStock(book);
-      }
-      
-      
-      // JSP 사용하기 위한 작업
-      OrderModel getOrder = orderService.getOrder(orderModel);
-      mv.addObject("size", size);
-      mv.addObject("order", getOrder);
-      mv.addObject("order_book_name", basketModel.getBasket_book_name());
-      mv.setViewName("multiOrderComplete");
-      
-      return mv;
-   }
+		if (bookMoney < 100000) {
+			deliveryFee = 5000;
+			sumMoney = bookMoney + deliveryFee;
+		} else {
+			deliveryFee = 0;
+			sumMoney = bookMoney;
+		}
 
-   // 우편번호 검색 폼
-   @RequestMapping(value = "/order/zipCheck.do", method = RequestMethod.GET)
-   ModelAndView orderZipCheckForm(HttpServletRequest request) {
-      mv.setViewName("order/orderZipCheck");
-      return mv;
-   }
+		mv.addObject("bookMoney", bookMoney);
+		mv.addObject("deliveryFee", deliveryFee);
+		mv.addObject("sumMoney", sumMoney);
+		mv.addObject("selectList", selectList);
+		mv.addObject("memberModel", memberModel);
+		mv.setViewName("selectOrder");
 
-   // 우편번호 입력
-   @RequestMapping(value = "/order/zipCheck.do", method = RequestMethod.POST)
-   ModelAndView orderZipCheck(HttpServletRequest request) {
+		return mv;
+	}
 
-      List<ZipcodeModel> zipcdodeList = new ArrayList<ZipcodeModel>();
-      String area3 = request.getParameter("area3");
-      if (area3 != null) {
-         zipcdodeList = memberService.zipCheck(area3);
-      }
+	// 선택 주문 완료
+	@RequestMapping("/order/selectOrder.do")
+	ModelAndView selectOrder(@ModelAttribute OrderModel orderModel, HttpServletRequest request, HttpSession session) {
 
-      mv.addObject("zipcodeList", zipcdodeList);
-      mv.setViewName("order/orderZipCheck");
-      return mv;
-   }
+		session_id = (String) session.getAttribute("member_id");
+		Calendar today = Calendar.getInstance();
+		Date day = today.getTime();
+		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
+		String trade_num = String.valueOf(simple.format(day));
+
+		// 체크된 장바구니 번호로 구매할 상품 리스트 담기
+		String[] basket_num = request.getParameterValues("basket_num");
+		List<BasketModel> basketList = new ArrayList<BasketModel>();
+		for (int i = 0; i < basket_num.length; i++) {
+			int num = Integer.parseInt(basket_num[i]);
+			basketList.add(orderService.BasketSelect(num));
+		}
+		int size = basketList.size();
+
+		// 데이터베이스에 주문 정보 넣기
+		orderModel.setOrder_trade_num(trade_num);
+		int random = (int) Math.random() * 99 + 1;
+		orderModel.setOrder_trans_num(trade_num + String.valueOf(random));
+		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
+		orderModel.setOrder_bank_num("147963-01-794613");
+		orderModel.setMember_id(session_id);
+		orderService.orderIn(orderModel);
+
+		// 데이터베이스에 도서 정보 넣기 + 장바구니 삭제 + 재고관리
+		BasketModel basketModel = new BasketModel();
+		for (int i = 0; i < basketList.size(); i++) {
+			basketModel = basketList.get(i);
+			orderService.BasketSelect(basketModel.getBasket_num());
+			OrderDetailModel detail = new OrderDetailModel();
+			detail.setOrder_trade_num(trade_num);
+			detail.setBook_num(basketModel.getBasket_book_num());
+			detail.setOrder_book_name(basketModel.getBasket_book_name());
+			detail.setOrder_book_price(basketModel.getBasket_book_price());
+			detail.setOrder_book_count(basketModel.getBasket_book_count());
+			orderService.orderDetailIn(detail);
+			/*
+			 * -----------------------------------------------------------------------------
+			 * -
+			 */
+			orderService.delBasket(basketModel.getBasket_num());
+			/*
+			 * -----------------------------------------------------------------------------
+			 * -
+			 */
+			BooksModel book = booksService.bookOne(basketModel.getBasket_book_num());
+			int current_count = book.getBook_current_count() - basketModel.getBasket_book_count();
+			int sell_count = book.getBook_sell_count() + basketModel.getBasket_book_count();
+			book.setBook_current_count(current_count);
+			book.setBook_sell_count(sell_count);
+			orderService.updateStock(book);
+		}
+
+		// JSP 사용하기 위한 작업
+		OrderModel getOrder = orderService.getOrder(orderModel);
+		mv.addObject("size", size);
+		mv.addObject("order", getOrder);
+		mv.addObject("order_book_name", basketModel.getBasket_book_name());
+		mv.setViewName("multiOrderComplete");
+
+		return mv;
+	}
+
+	// 우편번호 검색 폼
+	@RequestMapping(value = "/order/zipCheck.do", method = RequestMethod.GET)
+	ModelAndView orderZipCheckForm(HttpServletRequest request) {
+		mv.setViewName("order/orderZipCheck");
+		return mv;
+	}
+
+	// 우편번호 입력
+	@RequestMapping(value = "/order/zipCheck.do", method = RequestMethod.POST)
+	ModelAndView orderZipCheck(HttpServletRequest request) {
+
+		List<ZipcodeModel> zipcdodeList = new ArrayList<ZipcodeModel>();
+		String area3 = request.getParameter("area3");
+		if (area3 != null) {
+			zipcdodeList = memberService.zipCheck(area3);
+		}
+
+		mv.addObject("zipcodeList", zipcdodeList);
+		mv.setViewName("order/orderZipCheck");
+		return mv;
+	}
 }

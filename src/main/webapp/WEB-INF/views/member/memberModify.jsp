@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="viewport" cotent="width=device-width, initial-scale=1">
 <%-- <link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" /> --%>
-<script language="javascript">
+<script type="text/javascript">
 		
 	function passWorkCheck(){
 		var password = document.getElementById("password").value;

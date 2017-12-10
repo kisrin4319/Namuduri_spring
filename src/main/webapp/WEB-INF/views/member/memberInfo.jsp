@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String cp = request.getContextPath(); %>
+<%
+	String cp = request.getContextPath();
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -235,22 +237,15 @@ var idCheck = 0;
 //아이디 체크하여 가입버튼 비활성화, 중복확인.
 function checkId() {
 	
- var inputed = $('.member_id').val();
+ var inputed = $('#member_id').val();
  $.ajax({
      data : {
-       id : inputed
+       member_id : inputed
      },
      url : "idCheck.do",
      success : function(data) {
-    	 
-    	/*  if($.trim(data) == 0){
-    		 $('#checkMsg').html('<p style="color:blue">사용가능한 아이디입니다.</p>');
-    		 
-    	 } else{
-    		 $('#checkMsg').html('<p style="color:red">사용불가능한 아이디입니다.</p>');
-    	 }
-    	  */
-         if(inputed=="" && data=='0') {
+  	
+    	 if(inputed=="" && data=='0') {
              $(".signupbtn").prop("disabled", true);
              $(".signupbtn").css("background-color", "#aaaaaa");
              $("#member_id").css("background-color", "#FFCECE");
@@ -272,25 +267,6 @@ function checkId() {
      }
  });
 }
-/* if($("#member_id").val() != ""){
-    $("#member_id").keyup();
-};
-
-$("#member_id").keyup(function(){
-    $.post("<c:url value="/member/memberInfo"/>"
-            ,{"member_id" : $("#member_id").val()}
-            , function(data){
-            console.log(data);
-        
-        if(data =="true"){
-            $("#duplicateResult").text("이미사용중인 아이디입니다.")
-        }else{
-            $("#duplicateResult").text("사용가능한 아이디입니다.")
-        }
-    });
-}) */
-
-
 
 function check() {
    var f = document.memberInfo;
@@ -365,33 +341,29 @@ function openIdCheck(){
       member_id.focus();
       return false;
    }
-   var idUrl = 'http://localhost:8080/namuduri/member/idCheck.do?member_id='+ id;
+   var idUrl = '<%=cp%>/member/idCheck.do?member_id='+ id;
    window.open(idUrl,"confirm", "toolbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=353, height=186");
    
 }
 
 function openZipCheck() {  
    
-   var zipUrl = 'http://localhost:8080/namuduri/member/zipCheckForm.do';
-   window.open(
-         zipUrl,
-         "confirm",
-         "toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=603, height=236");
-}
+   var zipUrl = '<%=cp%>/member/zipCheckForm.do';
+		window.open(zipUrl,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=603, height=236");
+	}
 
-function validate(element,min,max) {              
-    var len = element.value.length ;
-  if ((len<min)||(len>max)) {
-          alert(min + '자 이상 ' + max + '자 이하로 입력해야 합니다' ) ;
-          element.style.borderColor="#FF0000";
-          // 입력 필드의 경계선을 빨강으로 설정함
-          element.focus();
-          // 입력 필드로 포커스를 이동
-  } 
-   else  {
-          element.style.borderColor="#ffffff";
-          // 입력 필드의 경계선을 흰색으로 설정
- }
-} 
+	function validate(element, min, max) {
+		var len = element.value.length;
+		if ((len < min) || (len > max)) {
+			alert(min + '자 이상 ' + max + '자 이하로 입력해야 합니다');
+			element.style.borderColor = "#FF0000";
+			// 입력 필드의 경계선을 빨강으로 설정함
+			element.focus();
+			// 입력 필드로 포커스를 이동
+		} else {
+			element.style.borderColor = "#ffffff";
+			// 입력 필드의 경계선을 흰색으로 설정
+		}
+	}
 </script>
 </html>

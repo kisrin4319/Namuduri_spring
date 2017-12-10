@@ -56,17 +56,19 @@ public class UsedBooksController {
 		if (request.getParameter("searchNum") != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 		}
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (searchKeyword == null) {
 			usedBooksList = usedBooksService.UsedBooksList(book_category);
-		} else {
+		}
+		else {
 			map.put("searchNum", searchNum);
 			map.put("searchKeyword", searchKeyword);
 
 			usedBooksList = usedBooksService.UsedBooksSearchList(map);
 		}
+
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -79,7 +81,7 @@ public class UsedBooksController {
 
 		totalCount = usedBooksList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "booksList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "usedBooksList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -127,6 +129,10 @@ public class UsedBooksController {
 	// 2. 중고 서적 등록 form
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.GET)
 	public ModelAndView usedBookWriteForm() throws Exception {
+	
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+		mv.addObject("top2", top2);
 		mv.setViewName("usedBooksWriteForm");
 
 		return mv;

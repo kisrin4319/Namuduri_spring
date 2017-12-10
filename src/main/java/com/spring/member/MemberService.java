@@ -33,8 +33,8 @@ public class MemberService implements MemberDao{
 	
 	//아이디 중복확인
 	@Override
-	public int idCheck(MemberModel memberModel) {
-		return sqlSessionTemplate.selectOne("member.idCheck", memberModel);
+	public int idCheck(String member_id) {
+		return sqlSessionTemplate.selectOne("member.idCheck", member_id);
 	}
 
 	//회원 정보 가져오기

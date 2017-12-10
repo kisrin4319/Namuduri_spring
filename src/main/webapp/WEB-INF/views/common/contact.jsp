@@ -87,7 +87,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<form action="<%=cp %>/mail/mailSending.do" method="POST">
+					<form action="<%=cp %>/common/mailSending.do" method="POST">
 						<div class="row">
 							<div class="col-md-5">
 								<div class="contact-form-left">
