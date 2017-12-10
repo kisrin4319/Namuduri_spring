@@ -13,7 +13,13 @@
 <meta name="viewport" cotent="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script language="javascript">
-
+	function bookSearch() {
+		var searchUrl = 'http://localhost:8080/namuduri/efeelogSearchView.do';
+		window.open(
+				searchUrl,
+				"confirm",
+				"toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
+	}
 </script>
 </head>
 <body>
@@ -42,7 +48,7 @@
 									</thead>
 								</table><br><br>
 								<div class="btn-toolbar">
-									<button type="button" class="btn btn-default btn-lg" onclick=""><span class="glyphicon glyphicon-book"></span>Search</button>
+									<button type="button" class="btn btn-default btn-lg" onclick="javascript:bookSearch(this.form)"><span class="glyphicon glyphicon-book"></span>Search</button>
 								</div>
 								<div class="form-group">
 								<table>

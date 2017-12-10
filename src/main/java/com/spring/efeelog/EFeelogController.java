@@ -36,7 +36,16 @@ public class EFeelogController {
 	
 	//7. eFeelog
 		@RequestMapping(value = "/eFeelogView.do")
-		public ModelAndView efeelog(HttpServletRequest request, HttpSession session) throws Exception {
+		public ModelAndView efeelog() {
+			mv = new ModelAndView();
+			
+			mv.setViewName("efeelog");
+			return mv;
+		}
+		
+	//search form
+		@RequestMapping(value = "/efeelogSearchView.do")
+		public ModelAndView efeelogSearch(HttpServletRequest request, HttpSession session) throws Exception {
 			
 			mv = new ModelAndView();
 			List<EFeelogModel> eFeelogList = new ArrayList<EFeelogModel>();
@@ -56,9 +65,10 @@ public class EFeelogController {
 				map.put("searchKeyword", searchKeyword);
 			}
 			
-			mv.setViewName("efeelog");
+			mv.setViewName("mypage/search");
 			return mv;
 		}
+		
 }
 			
 			/*mv = new ModelAndView();
