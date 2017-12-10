@@ -4,34 +4,37 @@
 <mapper namespace="efeelog">
 	
 	<sql id="select-bookall">
-		SELECT * FROM EFEELOG
+		SELECT * FROM BOOK
 	</sql>
 	
 	<!-- efeelog 작성 -->
-	<insert id="efwrite" parameterType="EFeelogModel">
+	<insert id="efeelogInsert" parameterType="EFeelogModel">
 		INSERT INTO EFEELOG (
 		MEMBER_ID,
-		BOOK_IMAGE,
-		BOOK_NAME,
+		BOOK_NUM,
 		BOOK_MEMO,
 		EFEELOG_REGDATE
 		) VALUES (
 		#{member_id},
-		#{book_image},
-		#{book_name},
+		#{book_num},
 		#{book_memo},
 		#{efeelog_regdate}
 		)
 	</insert>
 	
 	<!-- 도서 검색 -->
-	<select id="efeelogSearch" parameterType="map" resultType="EFeelogModel">
-		<include refid="select-bookall"/>
-		<choose>
-			<when test="searchNum == 1">
-				WHERE BOOK_NAME like '%'||#{searchKeyword}||'%'
-			</when>
-		</choose>	
+	<select id="efeelogSearch" parameterType="map" resultType="BooksModel">
+		select * 
+		from book 
+		WHERE 1=1
+			<if test='search != null and !search.equals("")'> 
+				AND to_char(BOOK_NAME) like '%'||to_char(#{search})||'%'
+			</if>
+	</select>
+	
+	<!-- EFeelogList -->
+	<select id="efeelogList" resultType="EFeelogModel">
+		SELECT * FROM EFEELOG ORDER BY EFEELOG_REGDATE DESC
 	</select>
 	
 </mapper>

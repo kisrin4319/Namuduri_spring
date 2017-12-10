@@ -20,6 +20,8 @@
 				"confirm",
 				"toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
 	}
+	
+	
 </script>
 </head>
 <body>
@@ -40,29 +42,31 @@
 					<div class="col-md-3">
 						<form class="create-account-form" name="efeelog" id="efeelog">
 							<div class="form-group">
-								<table>
+								<table>							
 									<thead>
 										<tr>
 											<th><div class="user_name">${ member_id }님 안녕하세요.</div></th>
 										</tr>
-									</thead>
+									</thead>							
 								</table><br><br>
 								<div class="btn-toolbar">
 									<button type="button" class="btn btn-default btn-lg" onclick="javascript:bookSearch(this.form)"><span class="glyphicon glyphicon-book"></span>Search</button>
+									
 								</div>
 								<div class="form-group">
+								<img src="" id="book_img">
 								<table>
 									<thead>
 										<tr>
 											<td>
 												<textarea class="form-control" rows="3" cols="30"></textarea>
 											</td>
-										</tr><br><br>
+										</tr><br><br><br>
 									</thead>
-								</table><br><br>
+								</table><br><br>								
 								</div>
 								<div>
-									<button name="submitcreate" id="submitcreate" class="btn-default" onclick="">
+									<button name="submitcreate" id="submitcreate" class="btn-default" onclick="<%=cp%>/eFeelogList.do">
 										<span>
 											<i class="fa fa-user"></i>
 											게시글 올리기
@@ -70,19 +74,50 @@
 									</button>
 								</div>																
 							</div>
-						</form>
-						<%-- <div class="row">
-							<div class="col-md-3 col-md-offset-3">
-								<form action="" class="search-form">
-									<div class="form-group has-feedback">
-										<label for="search" class="sr-only">Search</label>
-										<input type="text" class="form-control" name="search" id="search" placeholder="search">
-										<span class="glyphicon glyphicon-search form-control-feedback"></span>
-									</div>
-								</form>
-							</div>
-						</div> --%>
+						</form>						
 					</div>
+					
+					<c:forEach var="item" items="${ efList }">
+					<div class="col-md-3">
+						<form class="create-account-form" name="efeelog" id="efeelog">
+							<div class="form-group">
+								<%-- <table>							
+									<thead>
+										<tr>
+											<th><div class="user_name">${ member_id }님</div></th>
+										</tr>
+									</thead>							
+								</table><br><br>
+								<div class="form-group">
+								<img src="" id="book_img">
+								<table>
+									<thead>
+										<tr>
+											<td align="center">
+												<textarea class="form-control" rows="3" cols="30"></textarea>
+											</td>
+										</tr><br><br><br>
+									</thead>
+								</table><br><br>								
+								</div>
+								<table>
+									<thead>
+										<tr>
+											<td align="center">${ item.book_name }</td>
+										</tr>
+									</thead>
+								</table><br><br>
+								<table>
+									<thead>
+										<tr>
+											<td align="center">${ item.book_memo }</td>
+										</tr>
+									</thead>
+								</table> --%>																
+							</div>
+						</form>
+					</div>
+					</c:forEach>				
 				</div>
 			</div>
 		</div>

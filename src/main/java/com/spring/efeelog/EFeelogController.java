@@ -36,62 +36,64 @@ public class EFeelogController {
 	
 	//7. eFeelog
 		@RequestMapping(value = "/eFeelogView.do")
-		public ModelAndView efeelog() {
-			mv = new ModelAndView();
+		public ModelAndView efeelog(HttpServletRequest request, HttpSession session) {
 			
+			mv = new ModelAndView();
+			EFeelogModel eFeelogModel = new EFeelogModel();
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			session_id = (String) session.getAttribute("member_id");
+			
+			List<EFeelogModel> efList = eFeelogService.efeelogList(map);
+			
+			mv.addObject("efList", efList);
 			mv.setViewName("efeelog");
 			return mv;
 		}
 		
 	//search form
 		@RequestMapping(value = "/efeelogSearchView.do")
-		public ModelAndView efeelogSearch(HttpServletRequest request, HttpSession session) throws Exception {
-			
+		public ModelAndView efeelogSearch() {
 			mv = new ModelAndView();
-			List<EFeelogModel> eFeelogList = new ArrayList<EFeelogModel>();
-			
-			String searchKeyword = request.getParameter("searchKeyword");
-			
-			int searchNum = 0;
-			Map<String, Object> map = new HashMap<String, Object>();
-			
-			if(request.getParameter("searchNum") != null) {
-				searchNum = Integer.parseInt(request.getParameter("searchNum"));
-			} else {
-				if(searchKeyword == null) {
-					eFeelogList = eFeelogService.efeelogSearchList(map);
-				}
-				map.put("searchNum", searchNum);
-				map.put("searchKeyword", searchKeyword);
-			}
 			
 			mv.setViewName("mypage/search");
 			return mv;
 		}
 		
-}
+		
+		//search
+		@RequestMapping(value = "/efeelogSearch.do")
+		public ModelAndView efeelogSearch(String search, HttpServletRequest request, HttpSession session) throws Exception {
 			
-			/*mv = new ModelAndView();
-			
-			String session_id = (String) session.getAttribute("member_id");
-			MemberModel memberInfo = mypageService.getMemberInfo(session_id);
-					
-			String searchKeyword = request.getParameter("searchKeyword");
+			mv = new ModelAndView();
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			List<BooksModel> booksList = new ArrayList<BooksModel>();
+			map.put("search", search);
 			
-			//List<EFeelogModel> efeelogSearch = new ArrayList<EFeelogModel>();
+			List<BooksModel> eFeelogList = eFeelogService.efeelogSearchList(map);
 			
-			if((searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-				booksList = booksService.booksSearchList(map);
-			}
+			mv.setViewName("mypage/search");
+			mv.addObject("eFeelogList",eFeelogList);
+			return mv;
+		}
+		
+		@RequestMapping(value = "/eFeelogList.do")
+		public ModelAndView efeelogInsert(HttpServletRequest request, HttpSession session) throws Exception {
 			
-			if((searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-				booksList = booksService.booksList(book_category);
-			} else {
-				map.put("searchKeyword", searchKeyword);
-				
-				booksList = booksService.booksSearchList(map);
-			}*/
+			mv = new ModelAndView();
+			EFeelogModel eFeelogModel = new EFeelogModel();
+			
+			session_id = (String) session.getAttribute("member_id");
+			
+			eFeelogModel.setBook_memo(request.getParameter("book_memo"));
+			
+			//EFeelogModel EFeelogInsert = eFeelogService.EFeelogInsert(eFeelogModel);
+			eFeelogService.EFeelogInsert(eFeelogModel);
+			mv.setViewName("redirect:/eFeelogView.do");
+			return mv;
+		}
+}
+			
+			
 			
