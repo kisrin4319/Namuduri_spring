@@ -72,7 +72,8 @@ public class OrderService implements OrderDao {
 	}
 
 	// 10. 포인트 사용후 차감 처리
-	public void pointUse(MemberModel member) {
-		sqlSessionTemplate.update("order.pointUse", member);
+	@Override
+	public void point(MemberModel memberModel) {
+		sqlSessionTemplate.update("order.point", memberModel);
 	}
 }

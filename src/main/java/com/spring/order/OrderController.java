@@ -86,14 +86,13 @@ public class OrderController {
 		MemberModel memberModel = memberService.SelectOne(session_id);
 
 		int bookMoney = booksModel.getBook_price() * order_book_count;
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 
 		if (bookMoney < 100000) {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 
@@ -159,14 +158,21 @@ public class OrderController {
 			orderService.updateStock(book);
 		}
 		
-		// 포인트 사용시 차감 처리
+		// 사용시 차감 & 포인트적립
 		if(point != 0) {
 			MemberModel member = memberService.SelectOne(session_id);
 			int member_point = member.getMember_point();
 			int update = member_point-point;
 			member.setMember_point(update);
-			orderService.pointUse(member);
+			orderService.point(member);
 		}
+		MemberModel member = memberService.SelectOne(session_id);
+		int saving = (int)((orderDetailModel.getOrder_book_count()*orderDetailModel.getOrder_book_price()) *0.05);
+		int current = member.getMember_point();
+		int now = saving + current;
+		member.setMember_point(now);
+		orderService.point(member);
+		
 		
 		mv.addObject("order", getOrder);
 		mv.addObject("orderDetail", getOrderDetail);
@@ -185,14 +191,13 @@ public class OrderController {
 		MemberModel memberModel = memberService.SelectOne(session_id);
 
 		int bookMoney = orderService.totalSum(session_id);
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 
 		if (bookMoney < 100000) {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 
@@ -278,7 +283,7 @@ public class OrderController {
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
 
 		int bookMoney = 0;
-		int deliveryFee;
+		int deliveryFee=0;
 		int sumMoney;
 		for (int i = 0; i < basket_num.length; i++) {
 			int num = Integer.parseInt(basket_num[i]);
@@ -290,7 +295,6 @@ public class OrderController {
 			deliveryFee = 5000;
 			sumMoney = bookMoney + deliveryFee;
 		} else {
-			deliveryFee = 0;
 			sumMoney = bookMoney;
 		}
 

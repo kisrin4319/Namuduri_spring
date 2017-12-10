@@ -36,5 +36,5 @@ public interface OrderDao {
 	public void updateStock(BooksModel book);
 
 	// 10. 포인트 사용 후 차감 처리
-	public void pointUse(MemberModel member);
+	public void point(MemberModel memberModel);
 }

@@ -140,7 +140,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 포인트 사용시 차감처리 -->
-	<update id="pointUse">
+	<update id="point">
 	update member set member_point = #{member_point} where member_id = #{member_id}
 	</update>
 
