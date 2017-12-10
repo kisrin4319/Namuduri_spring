@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.book.BooksModel;
+import com.spring.book.BooksService;
 import com.spring.common.Paging;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
@@ -32,6 +34,8 @@ public class MypageController {
 	private MemberService memberService;
 	@Resource
 	private OrderService orderService;
+	@Resource
+	private BooksService booksService;
 	
 	ModelAndView mv;
 	String session_id;

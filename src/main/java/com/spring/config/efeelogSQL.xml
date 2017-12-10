@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="efeelog">
+	
+	<sql id="select-bookall">
+		SELECT * FROM BOOK
+	</sql>
+	
+	<!-- efeelog 작성 -->
+	<insert id="efeelogInsert" parameterType="EFeelogModel">
+		INSERT INTO EFEELOG (
+		MEMBER_ID,
+		BOOK_NUM,
+		BOOK_MEMO,
+		EFEELOG_REGDATE
+		) VALUES (
+		#{member_id},
+		#{book_num},
+		#{book_memo},
+		#{efeelog_regdate}
+		)
+	</insert>
+	
+	<!-- 도서 검색 -->
+	<select id="efeelogSearch" parameterType="map" resultType="BooksModel">
+		select * 
+		from book 
+		WHERE 1=1
+			<if test='search != null and !search.equals("")'> 
+				AND to_char(BOOK_NAME) like '%'||to_char(#{search})||'%'
+			</if>
+	</select>
+	
+	<!-- EFeelogList -->
+	<select id="efeelogList" resultType="EFeelogModel">
+		SELECT * FROM EFEELOG ORDER BY EFEELOG_REGDATE DESC
+	</select>
+	
+</mapper>
