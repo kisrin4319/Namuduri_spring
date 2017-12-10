@@ -114,4 +114,10 @@
 		where used_book_num = #{used_book_num}
 	</select>
 
+	<!-- 중고 거래 도서 등록을 확인 하기 위한 누적 금액 -->
+	<select id="checkResult" resultType="int">
+	<![CDATA[
+		select sum(order_book_price) from order_detail INNER JOIN order_book ON order_book.order_trade_num = order_detail.order_trade_num where member_id = #{member_id}
+		]]>
+	</select>
 </mapper>

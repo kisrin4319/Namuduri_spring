@@ -372,11 +372,13 @@ img.top2 {
 										</c:forEach>
 									</div>
 								</div>
+								<c:if test="${checkResult >=100000 }">
 								<div class="shopingcart-bottom-area">
 									<div class="shopingcart-bottom-area pull-right">
 										<a class="right-shoping-cart" href="javascript:;" onclick="fn_writeBook()">Enrollment Book</a>
 									</div>
 								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

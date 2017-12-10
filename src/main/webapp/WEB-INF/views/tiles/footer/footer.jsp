@@ -13,10 +13,8 @@
 					<div class="col-md-3 col-sm-8">
 						<div class="footer-left">
 							<a href="index.html">
-								<img src="${pageContext.request.contextPath}/bootstrap/img/logo-2.png" alt="">
+								<img src="${pageContext.request.contextPath}/img/footerLogo.png" style="padding-top: 30px; margin-top: 10px;">
 							</a>
-							<br />
-							<br />
 							<ul class="footer-contact">
 								<li>
 									<i class="flaticon-location"></i>

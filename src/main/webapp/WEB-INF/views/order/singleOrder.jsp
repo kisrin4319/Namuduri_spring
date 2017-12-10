@@ -67,7 +67,7 @@
 													<p>Register with us for future convenience:</p>
 													<p>Fast and easy check out</p>
 													<p>Easy access to your order history and status</p>
-													<button class="btn btn-default btn-checkout">CONTINUE</button>
+													<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseTwo" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 												</div>
 											</div>
 										</div>
@@ -135,12 +135,7 @@
 												</p>
 											</div>
 											<div class="col-md-12">
-												<label class="checbox-info">
-													<input type="checkbox" id="cbox">
-													Create an account?
-												</label>
 												<div id="cbox_info">
-													<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
 													<p class="form-row form-row-phone">
 														<label>
 															Phone
@@ -185,19 +180,19 @@
 								</div>
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 									<div class="panel-body no-padding">
-										<div class="payment-met">
-											<ul class="form-list">
+										<div class="payment-met" style="padding-top: 20px; padding-bottom: 20px;">
+											<ul class="form-list" style="margin-left: 5px; padding-bottom: 20px;">
 												<li class="control">
-													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo">
+													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo" style="float: left; margin-right:10px;">
 													<label for="p_method_checkmo"> Check / Money order </label>
 												</li>
 												<li class="control">
-													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave">
+													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
 													<label for="p_method_ccsave">Credit Card (saved) </label>
 												</li>
 											</ul>
 											<div class="buttons-set">
-												<button class="btn btn-default">CONTINUE</button>
+												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 											</div>
 										</div>
 									</div>
@@ -305,7 +300,7 @@
 														Forgot an Item?
 														<a href="#">Edit Your Cart</a>
 													</p>
-													<button type="button" title="Place Order" class="btn btn-default" onclick="payment_Proc(this.form);">
+													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt()">
 														<span>Place Order</span>
 													</button>
 												</div>

@@ -67,4 +67,9 @@ public class UsedBooksService implements UsedBooksDao {
 		return sqlSessionTemplate.selectList("usedbook.selectUsed", used_book_num);
 	}
 
+	@Override
+	public int checkResult(String member_id) {
+		return sqlSessionTemplate.selectOne("usedbook.checkResult",member_id);
+	}
+
 }

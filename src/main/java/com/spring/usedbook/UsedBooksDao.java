@@ -31,4 +31,7 @@ public interface UsedBooksDao {
 	
 	//8. Book Detail에서 중고상품 선택시 중고 리스트로 이동
 	public List<UsedBooksModel> selectUsed(int used_book_num);
+	
+	//실적 확인용 (중고 거래 등록 권한)
+	public int checkResult(String member_id);
 }
