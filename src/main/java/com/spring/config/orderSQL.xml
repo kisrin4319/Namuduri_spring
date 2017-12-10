@@ -138,5 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE ORDER_BOOK SET ORDER_USE_YN = 0
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
+	
+	<!-- 포인트 사용시 차감처리 -->
+	<update id="pointUse">
+	update member set member_point = #{member_point} where member_id = #{member_id}
+	</update>
 
 </mapper>
