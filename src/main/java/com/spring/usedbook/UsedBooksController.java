@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -44,13 +45,18 @@ public class UsedBooksController {
 
 	// 1. 중고 서적 리스트
 	@RequestMapping("/books/usedBooksList.do")
-	public ModelAndView usedBooksList(HttpServletRequest request) throws Exception {
+	public ModelAndView usedBooksList(HttpServletRequest request,HttpSession session) throws Exception {
 
 		List<UsedBooksModel> usedBooksList = new ArrayList<UsedBooksModel>();
 
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
-
+		int checkResult =0;
+		if(session.getAttribute("member_id")!=null) {
+		session_id = (String) session.getAttribute("member_id");
+		checkResult = usedBooksService.checkResult(session_id);
+		}
+		
 		int searchNum = 0;
 
 		if (request.getParameter("searchNum") != null) {
@@ -100,6 +106,7 @@ public class UsedBooksController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("usedBooksCount", usedBooksList.size());
+		mv.addObject("checkResult",checkResult);
 		mv.setViewName("usedBooksList");
 
 		return mv;
