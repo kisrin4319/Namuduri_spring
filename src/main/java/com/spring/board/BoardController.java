@@ -51,9 +51,14 @@ public class BoardController {
 		mv = new ModelAndView();
 		
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
+		List<BoardModel> adminBoardList = new ArrayList<BoardModel>();
 
 		boardList = boardService.boardList();
-
+		adminBoardList = boardService.adminBoardList();
+		 =>>> select * from board where board_type = '2';*/
+		/*normalBoardList = boardService.normalBoardList(); =>>> select * from board where board_type ='1';
+		secretBoardList = boardService.secretBoardList(); =>>> select * from board where board_type = '0';*/
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;

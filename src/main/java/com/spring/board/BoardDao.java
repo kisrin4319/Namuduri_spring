@@ -7,6 +7,8 @@ public interface BoardDao {
 	// 게시판 목록
 	public List<BoardModel> boardList();
 	
+	public List<BoardModel> adminBoardList();
+	
 	// 게시글 내용 보기
 	public BoardModel boardDetail(int board_num);
 
