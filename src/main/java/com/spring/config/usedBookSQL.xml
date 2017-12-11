@@ -8,7 +8,7 @@
 	</sql>
 
 	<sql id="where-booknum">
-		WHERE USED_BOOK_NUM = #{used_book_num}
+		WHERE BOOK_NUM = #{book_num}
 	</sql>
 
 	<!-- 도서 목록 -->
@@ -18,12 +18,10 @@
 	</select>
 
 	<!-- 카테고리 도서 목록 -->
-	<select id="selectBookList" resultType="UsedBooksModel"
-		parameterType="String">
-		<include refid="select-bookall" />
-		WHERE
+	<select id="selectBookList" resultType="UsedBooksModel"	parameterType="String">
+		<include refid="select-bookall" />		
 		<if test="value!=null">
-			BOOK_CATEGORY = #{value}
+			WHERE BOOK_CATEGORY = #{value}
 		</if>
 		ORDER BY USED_BOOK_REGDATE DESC
 	</select>
@@ -102,5 +100,24 @@
 		DELETE FROM USED_BOOK WHERE USED_BOOK_NUM =
 		#{used_book_num}
 	</delete>
+	
+	<!-- NEW BOOKS에 중고상품 띄우기  -->
+	<select id="newList" resultType="UsedBooksModel">
+	<include refid="select-bookall" />
+	<include refid="where-booknum" />
+	order by book_new_price desc
+	</select>
+	
+	<!-- 상품 DETAIL에서 중고상품 선택시 중고리스트로 가기  -->
+	<select id="selectUsed" resultType="UsedBooksModel">
+		<include refid="select-bookall" />
+		where used_book_num = #{used_book_num}
+	</select>
 
+	<!-- 중고 거래 도서 등록을 확인 하기 위한 누적 금액 -->
+	<select id="checkResult" resultType="int">
+	<![CDATA[
+		select sum(order_book_price) from order_detail INNER JOIN order_book ON order_book.order_trade_num = order_detail.order_trade_num where member_id = #{member_id}
+		]]>
+	</select>
 </mapper>

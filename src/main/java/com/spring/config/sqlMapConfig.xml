@@ -29,6 +29,9 @@
 	<!-- WishList -->
 	<typeAlias type="com.spring.wishlist.WishModel" alias="WishModel" />
 	
+	<!-- EFeelog -->
+	<typeAlias type="com.spring.efeelog.EFeelogModel" alias="EFeelogModel"/>
+	
 	</typeAliases>
 	
 	<mappers>	
@@ -40,5 +43,6 @@
  		<mapper resource="com/spring/config/orderSQL.xml" />
  		<mapper resource="com/spring/config/boardSQL.xml" />
  		<mapper resource="com/spring/config/wishlistSQL.xml" />
+ 		<mapper resource="com/spring/config/efeelogSQL.xml"/>
 	</mappers>
 </configuration>

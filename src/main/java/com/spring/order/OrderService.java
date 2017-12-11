@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.basket.BasketModel;
 import com.spring.book.BooksModel;
+import com.spring.member.MemberModel;
 
 @Service
 public class OrderService implements OrderDao {
@@ -68,5 +69,11 @@ public class OrderService implements OrderDao {
 	@Override
 	public void updateStock(BooksModel book) {
 		sqlSessionTemplate.update("order.stock", book);
+	}
+
+	// 10. 포인트 사용후 차감 처리
+	@Override
+	public void point(MemberModel memberModel) {
+		sqlSessionTemplate.update("order.point", memberModel);
 	}
 }

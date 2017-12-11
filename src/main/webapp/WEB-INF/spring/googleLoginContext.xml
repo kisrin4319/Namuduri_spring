@@ -13,9 +13,4 @@
 		<beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" />
 		<beans:property name="redirectUri" value="http://localhost:8080/namuduri/member/googleSignIn" />
 	</beans:bean>
-
-	<beans:bean id="memberController" class="com.spring.member.MemberController">
-		<beans:property name="googleConnectionFactory" ref="googleConnectionFactory" />
-		<beans:property name="googleOAuth2Parameters" ref="googleOAuth2Parameters" />
-	</beans:bean>
 </beans:beans>
