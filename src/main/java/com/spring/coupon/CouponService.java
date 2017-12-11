@@ -35,7 +35,7 @@ public class CouponService implements CouponDao {
 	
 	@Override
 	public void CouponDelete(String coupon_code) {
-		sqlSessionTemplate.delete("coupon.deleteCoupon");
+		sqlSessionTemplate.delete("coupon.deleteCoupon",coupon_code);
 
 	}
 

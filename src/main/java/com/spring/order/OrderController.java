@@ -21,6 +21,7 @@ import com.spring.basket.BasketModel;
 import com.spring.basket.BasketService;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
+import com.spring.coupon.CouponService;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
 import com.spring.member.ZipcodeModel;
@@ -47,6 +48,9 @@ public class OrderController {
 	@Resource
 	private MemberService memberService;
 
+	@Resource
+	private CouponService couponService;
+	
 	ModelAndView mv = new ModelAndView();
 	BasketModel basketModel = new BasketModel();
 	String session_id;
@@ -295,7 +299,12 @@ public class OrderController {
 
 		session_id = (String) session.getAttribute("member_id");
 		String[] basket_num = request.getParameterValues("RowCheck");
-
+		String coupon_code = "";
+		int coupon_price = 0;
+		if(request.getParameter("c_code")!=null || !request.getParameter("c_code").equals("")) {
+			coupon_code = request.getParameter("c_code");
+			coupon_price = couponService.CouponUse(coupon_code);
+		}
 		MemberModel memberModel = memberService.SelectOne(session_id);
 
 		List<BasketModel> selectList = new ArrayList<BasketModel>();
@@ -308,6 +317,7 @@ public class OrderController {
 			selectList.add(orderService.BasketSelect(num));
 			bookMoney += orderService.selectSum(num);
 		}
+		bookMoney-=coupon_price;
 
 		if (bookMoney < 100000) {
 			deliveryFee = 5000;
@@ -315,7 +325,8 @@ public class OrderController {
 		} else {
 			sumMoney = bookMoney;
 		}
-
+		
+		mv.addObject("coupon_code",coupon_code);
 		mv.addObject("bookMoney", bookMoney);
 		mv.addObject("deliveryFee", deliveryFee);
 		mv.addObject("sumMoney", sumMoney);
@@ -334,6 +345,14 @@ public class OrderController {
 		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
 		int point = Integer.parseInt(request.getParameter("point"));
 		int sum = orderModel.getOrder_receive_moneysum();
+		
+		String coupon_code = "";
+		if(request.getParameter("c_code")!=null || !request.getParameter("c_code").equals("")) {
+			coupon_code = request.getParameter("c_code");
+			couponService.CouponDelete(coupon_code);
+		}
+		
+		
 		Calendar today = Calendar.getInstance();
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");

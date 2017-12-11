@@ -56,6 +56,7 @@
 										<c:forEach var="row" items="${basketList }" varStatus="i">
 											<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
 											<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
+											<input type ="hidden" id="c_code" name="c_code" value="" />
 											<tr>
 												<td class="product-edit">
 													<div class="checkbox checkbox-primary">
@@ -142,7 +143,7 @@
 						</div>
 						<div class="discount-middle">
 							<input type="text" placeholder="" id="coupon_code" name="coupon_code">
-							<a class="" href="javascript:couponCheck()">APPLY COUPON</a>
+							<a class="" href="javscript:;" onclick="couponCheck(); this.onclick='';">APPLY COUPON</a>
 						</div>
 					</div>
 				</div>
@@ -181,6 +182,7 @@
 	function couponCheck() {
     
 	  var inputed = $("#coupon_code").val();
+	  c_code.value = inputed;
 	  $.ajax({
 	    data : {
 	      coupon_code : inputed
@@ -204,9 +206,10 @@
           if(sum.value-data < 0){
             alert("할인 쿠폰을 적용할수 없습니다.");
           } else{
-            alert(sum.value);
-            alert(data);
-            sum.value = parseInt(sum.value)-data; 
+            var x = sum.value.replace(/,/g,'');
+            
+            sum.value = parseInt(x)-data;
+            fn_format(sum);
           }
         }
     	});

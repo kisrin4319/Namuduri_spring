@@ -58,6 +58,8 @@ public class MainController {
 				couponService.CouponInsert();
 			}
 		}
+		couponService.CouponDeleteAll();
+		
 		mv.addObject("booksDateList",booksDateList);
 		mv.addObject("bestSellerList",bestSellerList);
 		mv.addObject("newBookList",newBookList);

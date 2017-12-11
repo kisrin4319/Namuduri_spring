@@ -27,6 +27,7 @@
 				<form name="orderform" id="orderform" method="post">
 				<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
 				<input type="hidden" name="bookMoney" value="${bookMoney}" />
+				<input type ="hidden" name ="c_code" value ="${coupon_code }" />
 					<div class="col-md-8">
 						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
