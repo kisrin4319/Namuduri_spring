@@ -24,8 +24,8 @@ public class EFeelogService implements EFeelogDao {
 	
 	//insert
 	@Override
-	public void EFeelogInsert(EFeelogModel eFeelogModel) {
-		sqlSessionTemplate.insert("efeelog.efeelogInsert", eFeelogModel);
+	public void EFeelogInsert(Map<String, Object> map) {
+		sqlSessionTemplate.insert("efeelog.efeelogInsert", map);
 	}
 	
 	//efeelog페이지에서 보여지는 모든 리스트

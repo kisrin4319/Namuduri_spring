@@ -13,4 +13,6 @@ public class EFeelogModel {
 	private String Efeelog_memo;
 	private Date Efeelog_regdate;
 	private int book_num;
+	private String book_image;
+	private String book_name;
 }

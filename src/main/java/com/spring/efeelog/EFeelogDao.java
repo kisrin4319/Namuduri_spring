@@ -9,7 +9,7 @@ public interface EFeelogDao {
 
 	public List<BooksModel> efeelogSearchList(Map<String, Object> map);
 	
-	public void EFeelogInsert(EFeelogModel eFeelogModel);
+	public void EFeelogInsert(Map<String, Object> map);
 	
 	public List<EFeelogModel> efeelogList(Map<String, Object> map);
 	
