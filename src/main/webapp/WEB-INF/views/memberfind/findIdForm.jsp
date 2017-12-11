@@ -8,7 +8,6 @@
 <title>FIND ID MEMBER</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<%-- <link rel = "stylesheet" href ="<%=cp%>/css/style1.css" type="text/css" /> --%>
 <script type="text/javascript">
 function check() {
 	var fi = document.findidform;
@@ -101,43 +100,4 @@ function check() {
         </div>
 		
 </body>
-<%-- <body scroll="" style ="overflow-x:hidden">
-	<div id ="popup_type01" style ="width:600px;">
-		<div class ="popup_shadow">
-			<div class ="popup_wrap">
-				<div class ="tit">
-					<h1 class ="title_h_cartlist">아이디 찾기</h1>
-				</div>
-				
-				<div class ="popup_container">
-					<form action="memberIdFind.do" name ="findidform" id="findidform" method="post" onsubmit="return checkk()">			
-						<table width="500" border="0" cellpadding="0" cellspacing="0" class="zip"><br />
-			<tr>
-				<td>
-					<h4>이&nbsp;&nbsp;름</h4>
-					<input type="text" name="member_name" size="10" maxlength="10">
-				</td>
-			</tr>
-			<br />
-			<tr>
-				<td align="left"><h4>주민등록번호</h4>
-					<input type="text" name="member_jumin1" size="7" maxlength="6"> -
-					<input type="text" name="member_jumin2" size="7" maxlength="7">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<a href ="javascript: submit();"><img src="<%=cp%>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href = "javascript:window.close();"><img src="<%=cp%>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
-				<br>
-				</td>
-			</tr>
-		</table>
-	</form>	
-</div>
-</div>
-</div>
-</div>
-</body> --%>
 </html>

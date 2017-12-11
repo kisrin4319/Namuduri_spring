@@ -8,7 +8,9 @@ import lombok.Data;
 public class EFeelogModel {
 
 	private String member_id;
-	private int book_num;
-	private String book_memo;
+	private String Efeelog_image;
+	private String Efeelog_name;
+	private String Efeelog_memo;
 	private Date Efeelog_regdate;
+	private int book_num;
 }

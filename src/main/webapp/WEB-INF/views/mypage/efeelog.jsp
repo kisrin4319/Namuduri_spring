@@ -89,13 +89,11 @@
 									</thead>							
 								</table><br><br>
 								<div class="form-group">
-								<img src="" id="book_img">
+								<img src="" id="book_img">${ book_image }
 								<table>
 									<thead>
 										<tr>
-											<td align="center">
-												<textarea class="form-control" rows="3" cols="30"></textarea>
-											</td>
+											<td align="center">${ item.book_name }</td>
 										</tr><br><br><br>
 									</thead>
 								</table><br><br>								
@@ -103,14 +101,14 @@
 								<table>
 									<thead>
 										<tr>
-											<td align="center">${ item.book_name }</td>
+											<td align="center">${ item.book_memo }</td>
 										</tr>
 									</thead>
 								</table><br><br>
 								<table>
 									<thead>
 										<tr>
-											<td align="center">${ item.book_memo }</td>
+											<td align="center"></td>
 										</tr>
 									</thead>
 								</table> --%>																

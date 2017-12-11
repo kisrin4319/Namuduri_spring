@@ -11,14 +11,18 @@
 	<insert id="efeelogInsert" parameterType="EFeelogModel">
 		INSERT INTO EFEELOG (
 		MEMBER_ID,
-		BOOK_NUM,
-		BOOK_MEMO,
-		EFEELOG_REGDATE
+		EFEELOG_REGDATE,
+		EFEELOG_IMAGE,
+		EFEELOG_NAME,
+		EFEELOG_MEMO,
+		BOOK_NUM
 		) VALUES (
 		#{member_id},
-		#{book_num},
-		#{book_memo},
-		#{efeelog_regdate}
+		#{efeelog_regdate},
+		#{efeelog_image},
+		#{efeelog_name},
+		#{efeelog_memo},
+		#{book_num}
 		)
 	</insert>
 	
@@ -35,6 +39,11 @@
 	<!-- EFeelogList -->
 	<select id="efeelogList" resultType="EFeelogModel">
 		SELECT * FROM EFEELOG ORDER BY EFEELOG_REGDATE DESC
+	</select>
+	
+	<select id="efeelogData" resultType="BooksModel">
+		SELECT * FROM BOOK
+		WHERE BOOK_NUM = #{book_num}
 	</select>
 	
 </mapper>
