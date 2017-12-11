@@ -8,17 +8,17 @@
 	</sql>
 	
 	<!-- efeelog 작성 -->
-	<insert id="efeelogInsert" parameterType="EFeelogModel">
+	<insert id="efeelogInsert" parameterType="map">
 		INSERT INTO EFEELOG (
-		MEMBER_ID,
-		BOOK_NUM,
-		BOOK_MEMO,
-		EFEELOG_REGDATE
+			MEMBER_ID,
+			EFEELOG_REGDATE,
+			EFEELOG_MEMO,
+			BOOK_NUM
 		) VALUES (
-		#{member_id},
-		#{book_num},
-		#{book_memo},
-		#{efeelog_regdate}
+			#{member_id},
+			(select sysdate from dual),
+			#{memo},
+			#{book_num}
 		)
 	</insert>
 	
@@ -34,7 +34,15 @@
 	
 	<!-- EFeelogList -->
 	<select id="efeelogList" resultType="EFeelogModel">
-		SELECT * FROM EFEELOG ORDER BY EFEELOG_REGDATE DESC
+		SELECT e.*, b.book_image, b.book_name 
+		FROM EFEELOG e
+		JOIN book b ON e.book_num = b.book_num 
+		ORDER BY EFEELOG_REGDATE DESC
+	</select>
+	
+	<select id="efeelogData" resultType="BooksModel">
+		SELECT * FROM BOOK
+		WHERE BOOK_NUM = #{book_num}
 	</select>
 	
 </mapper>

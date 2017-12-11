@@ -21,7 +21,11 @@
 				"toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
 	}
 	
-	
+	function goPage(){
+		var f = $('form#efeelog')
+		//f.action = "eFeelogList.do";
+		f.submit();
+	}
 </script>
 </head>
 <body>
@@ -40,7 +44,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						<form class="create-account-form" name="efeelog" id="efeelog">
+						<form class="create-account-form" name="efeelog" id="efeelog" action="eFeelogList.do" method="post">
 							<div class="form-group">
 								<table>							
 									<thead>
@@ -55,23 +59,24 @@
 								</div>
 								<div class="form-group">
 								<img src="" id="book_img">
+								<input type="hidden" name="book_num" id="book_num">
 								<table>
 									<thead>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" cols="30"></textarea>
+												<textarea class="form-control" rows="3" cols="30" name="memo"></textarea>
 											</td>
 										</tr><br><br><br>
 									</thead>
 								</table><br><br>								
 								</div>
 								<div>
-									<button name="submitcreate" id="submitcreate" class="btn-default" onclick="<%=cp%>/eFeelogList.do">
-										<span>
+									<input type="button" class="btn-default" value="게시글 올리기" onclick="goPage()">
+										<!-- <span>
 											<i class="fa fa-user"></i>
 											게시글 올리기
-										</span>
-									</button>
+										</span> -->
+									
 								</div>																
 							</div>
 						</form>						
@@ -79,41 +84,49 @@
 					
 					<c:forEach var="item" items="${ efList }">
 					<div class="col-md-3">
-						<form class="create-account-form" name="efeelog" id="efeelog">
+						<form class="create-account-form" name="efeelogList" id="efeelogList">
 							<div class="form-group">
-								<%-- <table>							
+								<table>							
 									<thead>
 										<tr>
-											<th><div class="user_name">${ member_id }님</div></th>
+											<th><div class="user_name">${ session_id }님</div></th>										
 										</tr>
 									</thead>							
-								</table><br><br>
-								<div class="form-group">
-								<img src="" id="book_img">
+								</table><br>
 								<table>
 									<thead>
 										<tr>
-											<td align="center">
-												<textarea class="form-control" rows="3" cols="30"></textarea>
-											</td>
-										</tr><br><br><br>
+											<td><div class="write_date">${ item.efeelog_regdate }</div></td>
+										</tr>
 									</thead>
-								</table><br><br>								
-								</div>
+								</table>
+								<div class="form-group">
 								<table>
 									<thead>
 										<tr>
 											<td align="center">${ item.book_name }</td>
-										</tr>
+										</tr><br>
 									</thead>
-								</table><br><br>
+								</table>								
+								<img src="<%=cp%>/upload/${ item.book_image }" id="book_img">
+								</div>
 								<table>
 									<thead>
+										<td>
+											<textarea class="form-control" rows="3" cols="30" name="memo">${ item.efeelog_memo }</textarea>
+										</td>
+										<%-- <tr>
+											<td align="center">${ item.efeelog_memo }</td>
+										</tr> --%>
+									</thead>
+								</table>
+								<!-- <table>
+									<thead>
 										<tr>
-											<td align="center">${ item.book_memo }</td>
+											<td align="center"></td>
 										</tr>
 									</thead>
-								</table> --%>																
+								</table> -->														
 							</div>
 						</form>
 					</div>
