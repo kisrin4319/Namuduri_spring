@@ -141,8 +141,8 @@
 							<p>Enter your coupon code if have one</p>
 						</div>
 						<div class="discount-middle">
-							<input type="text" placeholder="">
-							<a class="" href="#">APPLY COUPON</a>
+							<input type="text" placeholder="" id="coupon_code" name="coupon_code">
+							<a class="" href="javascript:couponCheck()">APPLY COUPON</a>
 						</div>
 					</div>
 				</div>
@@ -177,5 +177,40 @@
 	</div>
 	<!-- Discount Area End -->
 	<script src="<%=cp%>/bootstrap/js/custom.js"></script>
+	<script type="text/javascript">
+	function couponCheck() {
+    
+	  var inputed = $("#coupon_code").val();
+	  $.ajax({
+	    data : {
+	      coupon_code : inputed
+	    },
+	    url : "<%=cp%>/coupon/couponCheck.do",
+	    success : function(data){
+	      if(data != "0"){
+	        couponUse();
+	      }
+	    }
+	  });
+  }
+	function couponUse() {
+    	var inputed = $("#coupon_code").val();
+    	$.ajax({
+    	  data :{
+    	    coupon_code : inputed
+    	  },
+    	  url : "<%=cp%>/coupon/couponUse.do",
+    	  success : function(data) {
+          if(sum.value-data < 0){
+            alert("할인 쿠폰을 적용할수 없습니다.");
+          } else{
+            alert(sum.value);
+            alert(data);
+            sum.value = parseInt(sum.value)-data; 
+          }
+        }
+    	});
+  }
+	</script>
 </body>
 </html>
