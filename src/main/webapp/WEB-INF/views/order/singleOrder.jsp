@@ -54,7 +54,8 @@
 													<input type="hidden" name="order_book_price" value="${book.book_price}" />
 													<input type="hidden" name="order_book_count" value="${order_book_count}" />
 													<input type="hidden" name="basket_num" value="${basket_num}" />
-													<input type ="hidden" name = "used_book_num" value="${used_book_num }" />
+													<input type ="hidden" name="used_book_num" value="${used_book_num }" />
+													<input type="hidden" name="bookMoney" value="${bookMoney}" />
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="deldata();" />
 														<label>직접입력</label>
@@ -211,7 +212,8 @@
 									<div class="panel-body no-padding">
 										<div class="order-review" id="checkout-review">
 											<div class="table-responsive" id="checkout-review-table-wrapper">
-												<table class="data-table" id="checkout-review-table">												<thead>
+												<table class="data-table" id="checkout-review-table">												
+												<thead>
 														<tr>
 															<th colspan="1" style="width: 20%;">Image</th>
 															<th rowspan="2">Product Name</th>
@@ -271,11 +273,11 @@
 																</span>
 															</td>
 														</tr>
-															<tr>
-															<td colspan="4">Point(${memberModel.member_point}P)</td>															
+														<tr>
+															<td colspan="4">Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)</td>															
 															<td>
 																<span class="check-price">
-																	- <input type="text" size="2" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
+																	- <input type="text" size="1" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
 																</span>
 															</td>
 														</tr>

@@ -22,6 +22,11 @@ img.used {
 	width: 270px;
 	height: 280px;
 	}
+	
+img.soldout {
+	width: 120px;
+	height: 80px;
+}
 </style>
 </head>
 <body>
@@ -111,13 +116,18 @@ img.used {
 							<div class="product-attributes clearfix">
 								<span class="pull-left" id="quantity-wanted-p">
 									<span class="dec qtybutton">-</span>
-									<input type="text" value="1" class="cart-plus-minus-box" name="amount" maxlength="3" />
+									<input type="text" value="1" class="cart-plus-minus-box" name="amount" maxlength="3" min="1" max="99" />
 									<span class="inc qtybutton">+</span>
 									<br />
 								</span>
 							</div>
 							<div class="product-attributes clearfix">
 								<span>
+									<c:choose>
+									<c:when test="${view.book_current_count == 0}">
+									<img alt="" src="<%=cp%>/img/6-2-sold-out-png-hd.png" class="soldout" style="margin-top: 15px;">
+									</c:when>
+									<c:otherwise>
 									<a class="cart-btn btn-default" href="javascript:javascript:isBuy(${view.book_num});">
 										<i class="flaticon-shop"></i>
 										BUY NOW
@@ -127,9 +137,12 @@ img.used {
 										<i class="flaticon-shop"></i>
 										ADD TO CART
 									</a>
+									</c:otherwise>
+									</c:choose>
 								</span>
 							</div>
 							<div class="add-to-wishlist">
+								<c:if test="${view.book_current_count != 0}">
 								<a class="wish-btn" href="javascript:isWish(${view.book_num})">
 									<i class="fa fa-heart-o"></i>
 									ADD TO WISHLIST
@@ -138,8 +151,8 @@ img.used {
 								<a class="wish-btn" href="javascript:openMap()">
 									→   배송 거리 확인
 								</a>
-							</div>
-								
+								</c:if>
+							</div>				
 							</div>
 						</div>
 					</div>
@@ -423,8 +436,13 @@ img.used {
 		      }
 		   }
 	   function isBuy(book_num) {
-		      var isbuy = confirm("구매하시겠습니까?");
 		      var amount = document.detailForm.amount.value;
+		      var stock = ${view.book_current_count};
+		      if(amount > stock) {
+		    	  alert("현재 재고는 " + stock + "권입니다");
+		    	  return false;
+		      }
+		      var isbuy = confirm("구매하시겠습니까?");
 		      if (isbuy == true) {
 		         window.location.href = '<%=cp%>/order/singleOrder.do?book_num='+ book_num + '&order_book_count=' + amount;
 				} else {
