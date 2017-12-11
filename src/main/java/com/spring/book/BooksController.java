@@ -45,7 +45,7 @@ public class BooksController {
 	public ModelAndView booksList(HttpServletRequest request) throws Exception {
 
 		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
-
+		
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
 		int searchNum = 0;

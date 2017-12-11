@@ -54,6 +54,7 @@
 													<input type="hidden" name="order_book_price" value="${book.book_price}" />
 													<input type="hidden" name="order_book_count" value="${order_book_count}" />
 													<input type="hidden" name="basket_num" value="${basket_num}" />
+													<input type="hidden" name="bookMoney" value="${bookMoney}" />
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="deldata();" />
 														<label>직접입력</label>
@@ -66,7 +67,7 @@
 													<p>Register with us for future convenience:</p>
 													<p>Fast and easy check out</p>
 													<p>Easy access to your order history and status</p>
-													<button class="btn btn-default btn-checkout">CONTINUE</button>
+													<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseTwo" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 												</div>
 											</div>
 										</div>
@@ -197,7 +198,7 @@
 												</li>
 											</ul>
 											<div class="buttons-set">
-												<button class="btn btn-default">CONTINUE</button>
+												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 											</div>
 										</div>
 									</div>
@@ -280,14 +281,21 @@
 															</td>
 														</tr>
 														<tr>
+															<td colspan="4">Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)</td>															
+															<td>
+																<span class="check-price">
+																	- <input type="text" size="1" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
+																</span>
+															</td>
+														</tr>
+														<tr>
 															<td colspan="4">
 																<strong>Grand Total</strong>
 															</td>
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />
-																		원
+																	<input type="text" name="grandTotal"  id="grandTotal" size="3"  value="${sumMoney}" style="text-align: end;" readonly>원
 																	</span>
 																</strong>
 															</td>
@@ -301,7 +309,7 @@
 														Forgot an Item?
 														<a href="#">Edit Your Cart</a>
 													</p>
-													<button type="submit" title="Place Order" class="btn btn-default" onclick="checkIt();">
+													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt();">
 														<span>Place Order</span>
 													</button>
 												</div>
@@ -410,6 +418,23 @@ var mobile = "${memberModel.member_mobile}";
       var url = '<%=cp%>/order/zipCheck.do';
 	 window.open(url,"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
 		}
+    
+    function usePoint() {
+		var use = confirm("포인트를 사용하시겠습니까?")
+		var point = document.getElementById("point").value;
+		var grandtotal = document.getElementById("grandTotal").value;
+		if(use==true) {
+			grandTotal.value = grandtotal-point;
+			fn_format(grandTotal);
+		} else {
+			return false;
+		}
+
+	}
+	 function fn_format(obj) {
+	      var x = obj.value.replace(/[^0-9]/g, '');
+	      obj.value = x.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+	  }
 	</script>
 </body>
 </html>

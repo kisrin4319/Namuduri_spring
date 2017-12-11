@@ -24,6 +24,11 @@ img.top2 {
 	width: 104px;
 	height: 104px;
 }
+
+img.soldout {
+	width: 100px;
+	height: 60px;
+}
 </style>
 </head>
 <body>
@@ -207,7 +212,7 @@ img.top2 {
 													<option value="2">저자</option>
 													<option value="3">출판사</option>
 												</select>
-												<input type="text" placeholder="Enter your book keyword here" name="searchKeyword" size="25">
+												<input type="text" name="searchKeyword" size="8">
 												<button type="submit" style="height: 26px;">
 													<i class="fa fa-search"></i>
 												</button>
@@ -282,6 +287,13 @@ img.top2 {
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
+																<c:choose>
+																<c:when test="${list.book_current_count == 0}">
+																	<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
+																	<i class="fa fa-compress"></i>
+																</a>
+																</c:when>
+																<c:otherwise>
 																<a href="javascript:isBasket(${list.book_num})" style="padding-top: 11px;">
 																	<i class="fa fa-shopping-cart"></i>
 																</a>
@@ -291,6 +303,8 @@ img.top2 {
 																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 																	<i class="fa fa-compress"></i>
 																</a>
+																</c:otherwise>
+																</c:choose>
 															</div>
 														</div>
 													</div>
@@ -377,10 +391,19 @@ img.top2 {
 														<h5 style="margin-bottom: 5px;">P <fmt:formatNumber pattern="#,###" value="${list.book_price * 0.05}"/> (5% 적립)</h5>
 														<p style="margin-bottom: 5px;">${list.book_auth}</p>
 														<p style="margin-bottom: 5px;">${list.company_id}[${list.book_publish_date}]</p>
+														<c:if test="${list.book_current_count != 0}">
 														<p style="margin-bottom: 5px;">
 															<a href="javascript:isWish(${list.book_num})">♡ WISH LIST</a>
 														</p>
+														</c:if>
 														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
+															<c:choose>
+															<c:when test="${list.book_current_count == 0}">
+															<span>
+																<img alt="" src="<%=cp%>/img/6-2-sold-out-png-hd.png" class="soldout" style="margin-top: 15px;">
+															</span>
+															</c:when>
+															<c:otherwise>
 															<span>
 																<a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">ADD TO CART</a>
 															</span>
@@ -388,6 +411,8 @@ img.top2 {
 															<span>
 																<a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 30px; padding-right: 30px; height: 35px;">BUY NOW</a>
 															</span>
+															</c:otherwise>
+															</c:choose>
 														</div>
 													</div>
 												</div>
