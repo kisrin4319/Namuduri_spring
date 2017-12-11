@@ -72,44 +72,19 @@
 					질문답변 게시판
 					<!--small>Statistics Overview</small-->
 				</h1>
-				<!--ul class="nav nav-tabs">
-                           <li class="active"><a href="#">Home</a></li>
-                           <li><a href="#">SVN</a></li>
-                           <li><a href="#">iOS</a></li>
-                           <li><a href="#">VB.Net</a></li>
-                           <li><a href="#">Java</a></li>
-                           <li><a href="#">PHP</a></li>
-                        </ul-->
+				
 				<ul id="myTab" class="nav nav-tabs">
 					<li class="active"><a href="#home" data-toggle="tab"> 전체 </a></li>
 					<li><a href="#a" data-toggle="tab">공지사항</a></li>
-					<!--li class="dropdown">
-                              <a href="#" id="myTabDrop1" class="dropdown-toggle" 
-                                 data-toggle="dropdown">Java 
-                                 <b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                                 <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
-                                 <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
-                              </ul>
-                           </li-->
 					<li><a href="#b" data-toggle="tab">게시판</a></li>
 					<li><a href="#c" data-toggle="tab">비공개 게시판</a></li>
-					<li><a href="#d" data-toggle="tab">Group D</a></li>
-				
-					
-								
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade in active" id="home">
 						<div class="content_accordion">
 							<div class="panel-group" id="accordion">
-							
-							
 								<div class="container">
-							
-								<!-- <table class="table_style02" cellspacing="0" cellpadding="0" border="0"> -->
-								<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
+									<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
 									<colgroup>
 										<col width="86px" />
 										<col width="*" />
@@ -118,16 +93,10 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<!-- <th scope="col" class="title">
-												<p class="th_line">번호</p> -->
 											<th>번호</th>
-											<th scope="col" class="title">
-												<p class="th_line">제목</p>
-											</th>
-											<th scope="col" class="title">
-												<p class="th_line">글쓴이</p>
-											</th>
-											<th scope="col" class="th_line_none">날 짜</th>
+											<th>제목</th>
+											<th>글쓴이</th>
+											<th>날 짜</th>
 										</tr>
 										<c:choose>
 											<c:when test="${listCount==0 }">
@@ -173,22 +142,17 @@
 							</div>
 								
 								
-						
-								
+							
 							</div>
 						</div>
 						<!--accordion end-->
 					</div>
+					
 					<div class="tab-pane fade" id="a">
 						<div class="content_accordion">
 							<div class="panel-group" id="ga">
-							
-							
-							
-							<div class="container">
-							
-								<!-- <table class="table_style02" cellspacing="0" cellpadding="0" border="0"> -->
-								<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
+								<div class="container">
+									<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
 									<colgroup>
 										<col width="86px" />
 										<col width="*" />
@@ -197,16 +161,10 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<!-- <th scope="col" class="title">
-												<p class="th_line">번호</p> -->
 											<th>번호</th>
-											<th scope="col" class="title">
-												<p class="th_line">제목</p>
-											</th>
-											<th scope="col" class="title">
-												<p class="th_line">글쓴이</p>
-											</th>
-											<th scope="col" class="th_line_none">날 짜</th>
+											<th>제목</th>
+											<th>글쓴이</th>
+											<th>날 짜</th>
 										</tr>
 										<c:choose>
 											<c:when test="${listCount==0 }">
@@ -243,76 +201,13 @@
 						</div>
 						<!--accordion end-->
 					</div>
+					
+					
 					<div class="tab-pane fade" id="b">
 						<div class="content_accordion">
 							<div class="panel-group" id="gb">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#gb" href="#ps">1. Political Science </a>
-										</h4>
-									</div>
-									<div id="ps" class="panel-collapse collapse in">
-										<div class="panel-body">
-											<p>
-												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#gb" href="#agr">2. Agriculture</a>
-										</h4>
-									</div>
-									<div id="agr" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												The examination will be based upon a paper carrying 100 marks and will be geared to test the candidates' ability to handle grammatical structure, reading comprehension and analysis, and precise writing and composition. The candidates should be capable of: Using English correctly and efficiently as a vehicle of communication. Reading, comprehending and analyzing advanced texts. Grammar and Vocabulary The candidate's ability to handle the structure of English will be tested by framing items based upon grammatical categories that usually create problems for foreign students. There shall be no prescribed course for this purpose. Reading Comprehension and Analysis Two unseen passages shall be given with a fixed reading time and multiple choice questions would be placed at the end to be answered. The passage for comprehension shall be fairly technical. The passages would be selected from writings on economic, social, cultural subjects and international affairs. Precise Writing
-												The candidates will be required to present an acceptable precis of a given passage. The unseen passage will be selected from current, economic, social, cultural and international affairs. <a href="" target="_blank">Learn more.</a>
-											</p>
-										</div>
-									</div>
-								</div>
-							
-								
-							</div>
-						</div>
-						<!--accordion end-->
-					</div>
-					<div class="tab-pane fade" id="c">
-						<div class="content_accordion">
-							<div class="panel-group" id="gc">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#gc" href="#pm">1. Pure Mathematics </a>
-										</h4>
-									</div>
-									<div id="pm" class="panel-collapse collapse in">
-										<div class="panel-body">
-											<p>
-												Candidates will be required to write one or more essays in English. A wide choice of subject will be given. <a href="" target="_blank">Learn more.</a>
-											</p>
-										</div>
-									</div>
-								</div>
-							
-							
-							</div>
-						</div>
-						<!--accordion end-->
-					</div>
-					
-					
-					
-					<div class="tab-pane fade" id="d">
-						<div class="content_accordion">
-							<div class="panel-group" id="gd">
 							<div class="container">
-							
-								<!-- <table class="table_style02" cellspacing="0" cellpadding="0" border="0"> -->
+								
 								<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
 									<colgroup>
 										<col width="86px" />
@@ -322,16 +217,10 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<!-- <th scope="col" class="title">
-												<p class="th_line">번호</p> -->
 											<th>번호</th>
-											<th scope="col" class="title">
-												<p class="th_line">제목</p>
-											</th>
-											<th scope="col" class="title">
-												<p class="th_line">글쓴이</p>
-											</th>
-											<th scope="col" class="th_line_none">날 짜</th>
+											<th>제목</th>
+											<th>글쓴이</th>
+											<th>날 짜</th>
 										</tr>
 										<c:choose>
 											<c:when test="${listCount==0 }">
@@ -339,19 +228,75 @@
 											</c:when>
 											<c:otherwise>
 												<form name="boardform" id="boardform">
-													<c:forEach var="list" items="${boardList }" varStatus="stat">
+													<c:forEach var="list" items="${normalBoardList }" varStatus="stat">
 														<c:url var="viewURL" value="/board/boardDetail.do">
 															<c:param name="board_num" value="${list.board_num}" />
 														</c:url>
 														<a href="${viewURL }"></a>
 														<tr>
 															<td class="td_line_none">${list.board_num}</td>
+															
 															<td class="td_line_none align_left">
+															
+																<c:if test="${list.board_type ==0}">
+																	<a href="${viewURL}">${list.board_title}</a>
+																</c:if>
+															</td>
+															
+															<td class="td_line_none">${list.member_id}</td>
+															<td class="td_line_none">${list.board_regdate}</td>
+														</tr>
+													</c:forEach>
+												</form>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
+							</div>
+								
+							
+							</div>
+						</div>
+						<!--accordion end-->
+					</div>
+					
+					
+					
+					<div class="tab-pane fade" id="c">
+						<div class="content_accordion">
+							<div class="panel-group" id="gc">
+								
+								<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
+									<colgroup>
+										<col width="86px" />
+										<col width="*" />
+										<col width="126px" />
+										<col width="126px" />
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>글쓴이</th>
+											<th>날 짜</th>
+										</tr>
+										<c:choose>
+											<c:when test="${listCount==0 }">
+												등록된 게시글이 없습니다.
+											</c:when>
+											<c:otherwise>
+												<form name="boardform" id="boardform">
+													<c:forEach var="list" items="${secretBoardList }" varStatus="stat">
+														<c:url var="viewURL" value="/board/boardDetail.do">
+															<c:param name="board_num" value="${list.board_num}" />
+														</c:url>
+														<a href="${viewURL }"></a>
+														<tr>
+															<td class="td_line_none">${list.board_num}</td>
+															
+															<td class="td_line_none align_left"> 
 															<c:if test="re_level != 0">
 																<c:forEach var="i" begin="${re_level}" end="0">&nbsp;</c:forEach>→
-															</c:if> 
-															<c:if test="${list.board_type ==2}">
-																<font size='2' color='black'><b>[공지]</b><a href="${viewURL}">${list.board_title}</a></font>
 															</c:if> 
 															<c:if test="${list.board_type ==1}">
 																<input type="hidden" id="board_num" value="${list.board_num }" />
@@ -368,7 +313,9 @@
 															</c:if> 
 															<c:if test="${list.board_type ==0}">
 																<a href="${viewURL}">${list.board_title}</a>
-															</c:if></td>
+															</c:if>
+															</td>
+															
 															<td class="td_line_none">${list.member_id}</td>
 															<td class="td_line_none">${list.board_regdate}</td>
 														</tr>
@@ -379,14 +326,13 @@
 									</tbody>
 								</table>
 							</div>
-								
+							
+							
 							</div>
-							
 						</div>
-							
 						<!--accordion end-->
-						
 					</div>
+					
 				
 				</div>
 			
@@ -394,8 +340,7 @@
 			<!-- /.row -->
 		</div>
 		<!-- /.container-fluid -->
-	</div>
-	
+		
 	<table class="table_style03" cellspacing="0" cellpadding="0" border="0">
 		<tr>
 			<td id="search">

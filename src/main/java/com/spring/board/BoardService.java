@@ -18,12 +18,22 @@ public class BoardService implements BoardDao {
 	public List<BoardModel> boardList() {
 		return sqlSessionTemplate.selectList("board.boardList");
 	}
-	
-	// 공지사항 목록
+		
 	@Override
 	public List<BoardModel> adminBoardList() {
 		return sqlSessionTemplate.selectList("board.adminBoardList");
 	}
+	
+	@Override
+	public List<BoardModel> normalBoardList() {
+		return sqlSessionTemplate.selectList("board.normalBoardList");
+	}
+	
+	@Override
+	public List<BoardModel> secretBoardList() {
+		return sqlSessionTemplate.selectList("board.secretBoardList");
+	}
+	
 	
 	// 게시글 내용 보기
 	@Override

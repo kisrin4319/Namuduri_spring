@@ -17,7 +17,8 @@
 	<!-- 게시판 목록 -->
 	<!-- 전체 게시판 목록 -->
 	<select id="boardList" resultType="BoardModel"> 
-	  		<include refid="select-BoardAll" /> order by BOARD_TYPE desc, board_regdate DESC
+	  		<include refid="select-BoardAll" /> where board_type!='2' order by ref desc, re_step asc, board_regdate DESC
+	  		<!-- order by BOARD_TYPE desc, board_regdate DESC -->
 	  		<!-- order by BOARD_TYPE desc, board_num desc, ref asc, re_step ASC, board_regdate DESC -->
 	  		<!-- ORDER BY ref DESC, re_step ASC, board_regdate ASC -->
 	</select>
@@ -25,22 +26,22 @@
 	<!-- 공지사항 -->
 	<select id="adminBoardList" resultType="BoardModel"> 
 	  		<include refid="select-BoardAll" /> 
-	  		select * from board where board_type = '2'; 
-	  		order by board_regdate DESC
+	  		where board_type = '2'
+	  		order by ref desc, re_step asc, board_regdate DESC
 	</select>
 	
 	<!-- 일반 게시판 -->
 	<select id="normalBoardList" resultType="BoardModel"> 
 	  		<include refid="select-BoardAll" /> 
-	  		select * from board where board_type ='1';
-	  		order by board_regdate DESC
+	  		where board_type ='0'
+	  		order by ref desc, re_step asc, board_regdate DESC
 	</select>
 
-	<!-- 비겅개 게시판 -->
+	<!-- 비공개 게시판 -->
 	<select id="secretBoardList" resultType="BoardModel"> 
 	  		<include refid="select-BoardAll" /> 
-	  		select * from board where board_type = '0'; 
-	  		order by board_regdate DESC
+	  		where board_type = '1'
+	  		order by ref desc, re_step asc, board_regdate DESC
 	</select>
 	
 	

@@ -58,8 +58,6 @@ public class FaqController {
 		}
 		totalCount = faqList.size();
 	
-		faqList = faqService.faqList();
-
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "faqList");
 		pagingHtml = paging.getPagingHtml().toString();
 
@@ -78,7 +76,7 @@ public class FaqController {
 		return mv;
 	}
 	
-	//2. faq 목록
+	//2. faq 내용 보기
 	@RequestMapping(value = "/faq/faqDetail.do", method = RequestMethod.GET)
 	public ModelAndView faqDetail(HttpServletRequest request, HttpSession session) {
 
@@ -97,7 +95,7 @@ public class FaqController {
 		return mv;
 	}
 	
-	//3. faq작성
+	//3. faq 작성
 	@RequestMapping(value = "/faq/faqWrite.do", method = RequestMethod.GET)
 	public ModelAndView faqWrite(HttpServletRequest request) {
 		mv = new ModelAndView();
@@ -113,7 +111,7 @@ public class FaqController {
 		return "redirect:/faq/faqList.do";
 	}
 	
-	// 4.게시글 수정
+	// 4.faq 수정
 	@RequestMapping(value = "/faq/faqModify.do", method = RequestMethod.GET)
 	public ModelAndView modifyForm(@ModelAttribute("faqModel") FaqModel faqModel, BindingResult result,
 			HttpServletRequest request) {
@@ -145,7 +143,7 @@ public class FaqController {
 		return mv;
 	}
 	
-	// 5.게시글 삭제
+	// 5.faq 삭제
 	@RequestMapping(value = "/faq/faqDelete.do")
 	public ModelAndView faqDelete(@RequestParam int faq_num, @RequestParam int currentPage)
 			throws Exception {

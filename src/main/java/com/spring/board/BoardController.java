@@ -52,12 +52,16 @@ public class BoardController {
 		
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
 		List<BoardModel> adminBoardList = new ArrayList<BoardModel>();
+		List<BoardModel> normalBoardList = new ArrayList<BoardModel>();
+		List<BoardModel> secretBoardList = new ArrayList<BoardModel>();
 
-		boardList = boardService.boardList();
-		adminBoardList = boardService.adminBoardList();
-		 =>>> select * from board where board_type = '2';*/
-		/*normalBoardList = boardService.normalBoardList(); =>>> select * from board where board_type ='1';
-		secretBoardList = boardService.secretBoardList(); =>>> select * from board where board_type = '0';*/
+		adminBoardList = boardService.adminBoardList(); 	/*=>>>select * from board where board_type ='2';*/
+		normalBoardList = boardService.normalBoardList();	/*=>>>select * from board where board_type ='1';*/
+		secretBoardList = boardService.secretBoardList();	/*=>>>select * from board where board_type ='0';*/
+
+		boardList.addAll(boardService.adminBoardList());
+		boardList.addAll(boardService.boardList());
+		
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -66,7 +70,7 @@ public class BoardController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		totalCount = boardList.size();
+		
 
 		isSearch = request.getParameter("isSearch");
 
@@ -79,12 +83,15 @@ public class BoardController {
 				boardList = boardService.Search1(isSearch);
 			else if (searchNum == 2)
 				boardList = boardService.Search2(isSearch);
-
-			totalCount = boardList.size();
-
+		
 			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", searchNum, isSearch);
 			pagingHtml = paging.getPagingHtml().toString();
-
+		} else {
+			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
+			pagingHtml = paging.getPagingHtml().toString();
+		}
+			
+			totalCount = boardList.size();
 			int lastCount = totalCount;
 
 			if (paging.getEndCount() < totalCount)
@@ -95,36 +102,15 @@ public class BoardController {
 			mv.addObject("isSearch", isSearch);
 			mv.addObject("searchNum", searchNum);
 			mv.addObject("boardList", boardList);
+			mv.addObject("adminBoardList", adminBoardList);
+			mv.addObject("normalBoardList", normalBoardList);
+			mv.addObject("secretBoardList", secretBoardList);
 			mv.addObject("listCount", boardList.size());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("pagingHtml", pagingHtml);
 			mv.setViewName("boardList");
 
 			return mv;
-		}
-
-		mv = new ModelAndView();
-
-		boardList = boardService.boardList();
-
-		totalCount = boardList.size();
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
-		pagingHtml = paging.getPagingHtml().toString();
-
-		int lastCount = totalCount;
-		
-		if (paging.getEndCount() < totalCount)
-			lastCount = paging.getEndCount() + 1;
-		boardList = boardList.subList(paging.getStartCount(), lastCount);
-
-		mv.addObject("boardList", boardList);
-		mv.addObject("listCount", boardList.size());
-		mv.addObject("currentPage", currentPage);
-		mv.addObject("pagingHtml", pagingHtml);
-		mv.setViewName("boardList");
-
-		return mv;
-
 	}
 
 	// 2. 게시판 내용 보기
@@ -155,16 +141,6 @@ public class BoardController {
 	}
 
 	// 3.게시판 작성
-	/*
-	 * @RequestMapping(value="/board/boardWrite.do", method = RequestMethod.GET)
-	 * public String writeForm(HttpServletRequest request, HttpSession session) {
-	 * 
-	 * session_id = (String) session.getAttribute("member_id");
-	 * 
-	 * mv.addObject("member_id", session_id); mv.setViewName("boardWrite");
-	 * 
-	 * return "boardWrite"; }
-	 */
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.GET)
 	public ModelAndView boardWrite(HttpServletRequest request) {
 		mv = new ModelAndView();
@@ -172,20 +148,6 @@ public class BoardController {
 		return mv;
 	}
 
-	/*
-	 * @RequestMapping(value="/board/boardWrite.do", method = RequestMethod.POST)
-	 * public String boardWrite(@ModelAttribute("boardModel") BoardModel boardModel,
-	 * HttpSession session ,HttpServletRequest request) throws Exception {
-	 * 
-	 * mv = new ModelAndView(); session_id = (String)
-	 * session.getAttribute("member_id"); //BoardModel boardModel = new
-	 * BoardModel();
-	 * 
-	 * // boardModel.setRe_step(0); //
-	 * 
-	 * mv.addObject("boardModel", boardModel); mv.setViewName("boardWrite");
-	 * boardService.boardWrite(boardModel); return "redirect:boardList.do"; }
-	 */
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.POST)
 	public String boardWriteSql(@ModelAttribute("boardModel") BoardModel boardModel, HttpServletRequest request) {
 
@@ -196,24 +158,7 @@ public class BoardController {
 
 	}
 
-	// 게시판 답변 작성
-	/*
-	 * @RequestMapping(value="/board/replyForm.do", method = RequestMethod.GET)
-	 * public String replyForm(BoardModel boardModel, HttpServletRequest request,
-	 * HttpSession session) {
-	 * 
-	 * mv = new ModelAndView(); session_id = (String)
-	 * session.getAttribute("member_id"); String board_num =
-	 * request.getParameter("board_num");
-	 * 
-	 * 
-	 * BoardModel view = boardService.boardDetail(Integer.parseInt(board_num));
-	 * 
-	 * mv.addObject("boardModel", boardModel); mv.addObject("member_id",
-	 * session_id); mv.addObject("view", view); mv.setViewName("BoardReply");
-	 * 
-	 * return "boardWrite"; }
-	 */
+	// 게시판 답변
 	@RequestMapping(value = "/board/replyForm.do", method = RequestMethod.GET)
 	public ModelAndView replyForm(BoardModel boardModel, HttpServletRequest request) {
 		mv = new ModelAndView();
@@ -227,26 +172,6 @@ public class BoardController {
 		return mv;
 	}
 
-	/*
-	 * @RequestMapping(value="/board/BoardReply.do", method = RequestMethod.POST)
-	 * public String BoardReply(@RequestParam int board_num,@RequestParam String
-	 * board_title, @RequestParam String board_pw, @RequestParam String
-	 * board_content, int board_type, HttpSession session) throws Exception {
-	 * 
-	 * mv = new ModelAndView(); session_id = (String)
-	 * session.getAttribute("member_id"); BoardModel boardModel = new BoardModel();
-	 * 
-	 * boardModel.setBoard_num(board_num); boardModel.setBoard_title("[re] "
-	 * +board_title); boardModel.setBoard_pw(board_pw);
-	 * boardModel.setBoard_content(board_content);
-	 * boardModel.setMember_id(session_id); boardModel.setBoard_type(board_type);
-	 * 
-	 * boardService.BoardReply(boardModel);
-	 * 
-	 * mv.addObject("boardModel", boardModel); mv.setViewName("BoardReply");
-	 * 
-	 * return "redirect:boardList.do"; }
-	 */
 	@RequestMapping(value = "/board/BoardReply.do", method = RequestMethod.POST)
 	public ModelAndView BoardReply(@ModelAttribute("BoardModel") BoardModel boardModel, HttpServletRequest request) {
 
@@ -323,22 +248,6 @@ public class BoardController {
 	}
 
 	// 4.게시글 수정
-	/*
-	 * @RequestMapping(value="/board/boardModify.do", method = RequestMethod.GET)
-	 * public String boardModify(HttpServletRequest request, HttpSession session,
-	 * Model model) {
-	 * 
-	 * session_id = (String) session.getAttribute("member_id");
-	 * 
-	 * int num = Integer.parseInt(request.getParameter("board_num"));
-	 * 
-	 * BoardModel view = boardService.boardDetail(num);
-	 * //System.out.println(view.getBoard_content()); model.addAttribute("view",
-	 * view); model.addAttribute("member_id", session_id);
-	 * mv.setViewName("boardModify");
-	 * 
-	 * return "boardWrite"; }
-	 */
 	@RequestMapping(value = "/board/boardModify.do", method = RequestMethod.GET)
 	public ModelAndView modifyForm(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
 			HttpServletRequest request) {
@@ -356,25 +265,6 @@ public class BoardController {
 		return mv;
 	}
 
-	/*
-	 * @RequestMapping(value="/board/boardModifyProc.do", method =
-	 * RequestMethod.POST) public String boardModify(@RequestParam int
-	 * board_num,@RequestParam String board_title, @RequestParam String
-	 * board_pw, @RequestParam String board_content, int board_type, HttpSession
-	 * session) throws Exception {
-	 * 
-	 * mv = new ModelAndView(); session_id = (String)
-	 * session.getAttribute("member_id"); BoardModel boardModel = new BoardModel();
-	 * 
-	 * boardModel.setBoard_num(board_num); boardModel.setBoard_title(board_title);
-	 * boardModel.setBoard_pw(board_pw); boardModel.setBoard_content(board_content);
-	 * boardModel.setMember_id(session_id); boardModel.setBoard_type(board_type);
-	 * boardService.BoardModify(boardModel);
-	 * 
-	 * mv.addObject("boardModel", boardModel); mv.setViewName("boardModify");
-	 * 
-	 * return "redirect:boardList.do"; }
-	 */
 	@RequestMapping(value = "/board/boardModify.do", method = RequestMethod.POST)
 	public ModelAndView boardModify(@ModelAttribute("boardModel") BoardModel boardModel, BindingResult result,
 			HttpServletRequest request) {
