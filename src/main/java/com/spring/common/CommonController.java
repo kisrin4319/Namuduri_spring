@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MailController {
+public class CommonController {
 
 	Logger log = Logger.getLogger(this.getClass());
 
@@ -24,7 +24,7 @@ public class MailController {
 	}
 
 	// mailSending 코드
-	@RequestMapping(value = "/mail/mailSending")
+	@RequestMapping("/common/mailSending.do")
 	public ModelAndView mailSending(HttpServletRequest request) {
 
 		try {
@@ -36,7 +36,7 @@ public class MailController {
 			email.setSSL(true);
 			email.setAuthentication("kisrin4319", "aaudlfdnutzkthsi");
 
-			email.addTo("kisrin4319@naver.com", "kisrin4319"); // 수신자를 추가
+			email.addTo("wnsgh8879@naver.com", "wnsgh8879"); // 수신자를 추가
 			email.setFrom(request.getParameter("tomail"), request.getParameter("tomail")); // 보내는 사람 지정
 			email.setSubject(request.getParameter("name") + "님이 보낸 메일입니다."); // 메일 제목
 			email.setContent(request.getParameter("message"), "text/plain; charset=euc-kr");
@@ -49,7 +49,13 @@ public class MailController {
 		mv.setViewName("redirect:/main.do");
 
 		return mv;
-
+	}
+	//지도 열기 코드
+	
+	@RequestMapping("/common/openMap.do")
+	public ModelAndView openMap() {
+		mv.setViewName("/common/map");		
+		return mv;
 	}
 
 }

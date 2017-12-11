@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -44,29 +45,36 @@ public class UsedBooksController {
 
 	// 1. 중고 서적 리스트
 	@RequestMapping("/books/usedBooksList.do")
-	public ModelAndView usedBooksList(HttpServletRequest request) throws Exception {
+	public ModelAndView usedBooksList(HttpServletRequest request,HttpSession session) throws Exception {
 
 		List<UsedBooksModel> usedBooksList = new ArrayList<UsedBooksModel>();
 
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
-
+		int checkResult =0;
+		if(session.getAttribute("member_id")!=null) {
+		session_id = (String) session.getAttribute("member_id");
+		checkResult = usedBooksService.checkResult(session_id);
+		}
+		
 		int searchNum = 0;
 
 		if (request.getParameter("searchNum") != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 		}
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (searchKeyword == null) {
 			usedBooksList = usedBooksService.UsedBooksList(book_category);
-		} else {
+		}
+		else {
 			map.put("searchNum", searchNum);
 			map.put("searchKeyword", searchKeyword);
 
 			usedBooksList = usedBooksService.UsedBooksSearchList(map);
 		}
+
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -79,7 +87,7 @@ public class UsedBooksController {
 
 		totalCount = usedBooksList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "booksList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "usedBooksList");
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -98,6 +106,7 @@ public class UsedBooksController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("usedBooksCount", usedBooksList.size());
+		mv.addObject("checkResult",checkResult);
 		mv.setViewName("usedBooksList");
 
 		return mv;
@@ -127,6 +136,10 @@ public class UsedBooksController {
 	// 2. 중고 서적 등록 form
 	@RequestMapping(value = "/books/usedBookWriteForm.do", method = RequestMethod.GET)
 	public ModelAndView usedBookWriteForm() throws Exception {
+	
+		List<Map<String, Object>> top2 = new ArrayList<Map<String,Object>>();
+		top2 = booksService.top2().subList(0, 3);
+		mv.addObject("top2", top2);
 		mv.setViewName("usedBooksWriteForm");
 
 		return mv;

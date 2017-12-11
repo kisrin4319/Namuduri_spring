@@ -61,7 +61,7 @@
 				<div class="col-md-2 col-sm-6 col-xs-6">
 					<div class="header-logo">
 						<a href="<%=cp%>/main.do">
-							<img src="${pageContext.request.contextPath}/img/Logo.png" alt="">
+							<img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -94,75 +94,28 @@
 											<a href="<%=cp%>/member/logOut.do"> SIGN OUT </a>
 										</c:if>
 									</div>
+									<c:if test="${empty member_id}">
 									<div class="cart-checkout">
-										<a href="checkout.html">
+										<a href="<%=cp%>/member/memberInfo.do">
 											Sign Up
 											<i class="fa fa-chevron-right"></i>
 										</a>
 									</div>
+									</c:if>
+									<c:if test="${not empty member_id && member_id eq 'admin'}">
+										<div class="cart-checkout">
+										<a href="<%=cp%>/admin/main.do">
+											Admin Main
+											<i class="fa fa-chevron-right"></i>
+										</a>
+									</div>
+									</c:if>
 								</div>
 							</li>
 							<li class="shoping-cart">
 								<a href="<%=cp%>/basket/basketList.do">
 									<i class="flaticon-shop"></i>
-									<span>2</span>
 								</a>
-								<div class="add-to-cart-product">
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html">
-												<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span>
-												x
-												<a href="single-product.html">East of eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a>
-											<span class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html">
-												<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span>
-												x
-												<a href="single-product.html">East of eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a>
-											<span class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="total-cart-price">
-										<div class="cart-product-line fast-line">
-											<span>Shipping</span>
-											<span class="free-shiping">$10.50</span>
-										</div>
-										<div class="cart-product-line">
-											<span>Total</span>
-											<span class="total">$ 140.00</span>
-										</div>
-									</div>
-									<div class="cart-checkout">
-										<a href="checkout.html">
-											Check out
-											<i class="fa fa-chevron-right"></i>
-										</a>
-									</div>
-								</div>
 							</li>
 						</ul>
 					</div>
@@ -241,75 +194,28 @@
 											<a href="<%=cp%>/member/logOut.do"> Sign Out </a>
 										</c:if>
 									</div>
+									<c:if test="${empty member_id}">
 									<div class="cart-checkout">
 										<a href="<%=cp%>/member/memberInfo.do">
 											Sign Up
 											<i class="fa fa-chevron-right"></i>
 										</a>
 									</div>
+									</c:if>
+									<c:if test="${not empty member_id && member_id eq 'admin'}">
+										<div class="cart-checkout">
+										<a href="<%=cp%>/admin/main.do">
+											Admin Main
+											<i class="fa fa-chevron-right"></i>
+										</a>
+									</div>
+									</c:if>
 								</div>
 							</li>
 							<li class="shoping-cart">
 								<a href="<%=cp%>/basket/basketList.do">
 									<i class="flaticon-shop"></i>
-									<span>2</span>
 								</a>
-								<div class="add-to-cart-product">
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html">
-												<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span>
-												x
-												<a href="single-product.html">East of eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a>
-											<span class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="cart-product">
-										<div class="cart-product-image">
-											<a href="single-product.html">
-												<img src="${pageContext.request.contextPath}/bootstrap/img/shop/1.jpg" alt="">
-											</a>
-										</div>
-										<div class="cart-product-info">
-											<p>
-												<span>1</span>
-												x
-												<a href="single-product.html">East of eden</a>
-											</p>
-											<a href="single-product.html">S, Orange</a>
-											<span class="cart-price">$ 140.00</span>
-										</div>
-										<div class="cart-product-remove">
-											<i class="fa fa-times"></i>
-										</div>
-									</div>
-									<div class="total-cart-price">
-										<div class="cart-product-line fast-line">
-											<span>Shipping</span>
-											<span class="free-shiping">$10.50</span>
-										</div>
-										<div class="cart-product-line">
-											<span>Total</span>
-											<span class="total">$ 140.00</span>
-										</div>
-									</div>
-									<div class="cart-checkout">
-										<a href="checkout.html">
-											Check out
-											<i class="fa fa-chevron-right"></i>
-										</a>
-									</div>
-								</div>
 							</li>
 						</ul>
 					</div>

@@ -9,7 +9,7 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>ORDERLIST</title>
 <meta name="description" content="">
-<meta name="viewport" cotent="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <%-- <link href="<%=cp%>/css/default_ink_ssl.css" rel="stylesheet" type="text/css" />
 <link href="<%=cp%>/css/layout_ssl.css" rel="stylesheet" type="text/css" />
 <link href="<%=cp%>/css/myroom.css" rel="stylesheet" type="text/css" />

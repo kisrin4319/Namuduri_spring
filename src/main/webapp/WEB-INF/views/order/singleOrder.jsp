@@ -67,7 +67,7 @@
 													<p>Register with us for future convenience:</p>
 													<p>Fast and easy check out</p>
 													<p>Easy access to your order history and status</p>
-													<button class="btn btn-default btn-checkout">CONTINUE</button>
+													<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseTwo" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 												</div>
 											</div>
 										</div>
@@ -135,12 +135,7 @@
 												</p>
 											</div>
 											<div class="col-md-12">
-												<label class="checbox-info">
-													<input type="checkbox" id="cbox">
-													Create an account?
-												</label>
 												<div id="cbox_info">
-													<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
 													<p class="form-row form-row-phone">
 														<label>
 															Phone
@@ -185,19 +180,19 @@
 								</div>
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 									<div class="panel-body no-padding">
-										<div class="payment-met">
-											<ul class="form-list">
+										<div class="payment-met" style="padding-top: 20px; padding-bottom: 20px;">
+											<ul class="form-list" style="margin-left: 5px; padding-bottom: 20px;">
 												<li class="control">
-													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo">
+													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo" style="float: left; margin-right:10px;">
 													<label for="p_method_checkmo"> Check / Money order </label>
 												</li>
 												<li class="control">
-													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave">
+													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
 													<label for="p_method_ccsave">Credit Card (saved) </label>
 												</li>
 											</ul>
 											<div class="buttons-set">
-												<button class="btn btn-default">CONTINUE</button>
+												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 											</div>
 										</div>
 									</div>
@@ -216,8 +211,7 @@
 									<div class="panel-body no-padding">
 										<div class="order-review" id="checkout-review">
 											<div class="table-responsive" id="checkout-review-table-wrapper">
-												<table class="data-table" id="checkout-review-table">
-													<thead>
+												<table class="data-table" id="checkout-review-table">												<thead>
 														<tr>
 															<th colspan="1" style="width: 20%;">Image</th>
 															<th rowspan="2">Product Name</th>
@@ -277,6 +271,14 @@
 																</span>
 															</td>
 														</tr>
+															<tr>
+															<td colspan="4">Point(${memberModel.member_point}P)</td>															
+															<td>
+																<span class="check-price">
+																	- <input type="text" size="2" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
+																</span>
+															</td>
+														</tr>
 														<tr>
 															<td colspan="4">
 																<strong>Grand Total</strong>
@@ -284,7 +286,7 @@
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<fmt:formatNumber value="${sumMoney}" pattern="###,###,###" />원
+																		<input type="text" name="grandTotal"  id="grandTotal" size="3"  value="${sumMoney}" style="text-align: end;" readonly>원
 																	</span>
 																</strong>
 															</td>
@@ -298,7 +300,7 @@
 														Forgot an Item?
 														<a href="#">Edit Your Cart</a>
 													</p>
-													<button type="button" title="Place Order" class="btn btn-default" onclick="payment_Proc(this.form);">
+													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt()">
 														<span>Place Order</span>
 													</button>
 												</div>
@@ -411,7 +413,6 @@ var mobile = "${memberModel.member_mobile}";
    		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
   }
 	function payment_Proc() {
-	  
 	  	var check = eval("document.orderform");
 	  	alert(check.value);
 	  	var url ='<%=cp%>/payment.jsp?sumMoney='+${sumMoney}+'&';
@@ -420,6 +421,24 @@ var mobile = "${memberModel.member_mobile}";
 	  	check.target="post";
 	  	check.submit();
   }
+	
+	function usePoint() {
+		var use = confirm("포인트를 사용하시겠습니까?")
+		var point = document.getElementById("point").value;
+		var grandtotal = document.getElementById("grandTotal").value;
+		if(use==true) {
+			grandTotal.value = grandtotal-point;
+			fn_format(grandTotal);
+		} else {
+			return false;
+		}
+
+	}
+	
+	 function fn_format(obj) {
+	      var x = obj.value.replace(/[^0-9]/g, '');
+	      obj.value = x.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+	  }
 </script>
 </body>
 </html>

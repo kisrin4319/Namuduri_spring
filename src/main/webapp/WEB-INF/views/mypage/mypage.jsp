@@ -62,6 +62,11 @@
 												<p class="text-left">회원 탈퇴</p>
 											</a>
 										</li>
+										<li>
+											<a href="<%=cp%>/eFeelogView.do">
+												<p class="text-left">eFeelog</p>
+											</a>
+										</li>
 									</ul> 
 								</aside>
 							</div>
@@ -144,6 +149,13 @@
 								<c:if test="${ fn:length(orderModel) == '0' }">
 									<tr align="center">
 										<td colspan="8">주문 내역이 없습니다.</td>
+										<td>
+											<%-- <select class="selectpicker">
+												<c:forEach var="list" items="${ item }">
+													<option value="${ list.seq }">${ list.name }</option>
+												</c:forEach>
+											</select> --%>
+										</td>
 									</tr>
 								</c:if>
 							</tbody>
