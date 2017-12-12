@@ -54,15 +54,8 @@
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
-<!--c3 JavaScript -->
-<script src="<%=cp%>/adminBootStrap/js/d3.min.js"></script>
-<script src="<%=cp%>/adminBootStrap/js/c3.min.js"></script>
 <!-- Chart JS -->
-<script src="<%=cp%>adminBootStrap/js/dashboard1.js"></script>
-<!-- chartist chart -->
-<script src="<%=cp%>adminBootStrap/js/chartist.min.js"></script>
-<script src="<%=cp%>adminBootStrap/js/chartist-plugin-tooltip.min.js"></script>
-
+<script src="<%=cp%>adminBootStrap/js/dashboard.js"></script>
 <!-- datepicker -->
 <link rel="stylesheet" href="<%=cp%>/adminBootStrap/css/datepicker.css">
 <script src="<%=cp%>/adminBootStrap/js/bootstrap-datepicker.js"></script>

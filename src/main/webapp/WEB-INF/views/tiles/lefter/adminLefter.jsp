@@ -133,7 +133,7 @@
 								 <i class="mdi mdi-access-point-network"></i> <span class="nav-dropdown-item">방문자 통계</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
 								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
 							</li>
 							<li>

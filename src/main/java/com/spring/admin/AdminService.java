@@ -161,5 +161,13 @@ public class AdminService implements AdminDao {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("order.deleteOrder", order_trade_num);
 	}
+
+	/* ----------------------------------------------------------------------------------- */
+	
+	@Override
+	public List<ChartModel> chartM() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.chartM");
+	}
 	
 }

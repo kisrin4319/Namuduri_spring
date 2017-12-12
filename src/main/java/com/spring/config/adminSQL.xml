@@ -201,4 +201,20 @@
 		WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0
 	</select> -->
 	
+	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<select id="chartM" resultType="ChartModel">
+		select count(*) Item_C, trunc(member_join_date) DayNo 
+		from member group by trunc(member_join_date) order by DayNo desc
+	</select>
+	
+	<select id="chartNewM">
+		<![CDATA[select b.*, to_char(dayno,'day') day 
+		from (
+			select count(*) NewNo, trunc(member_join_date) DayNo 
+			from member group by trunc(member_join_date) order by DayNo desc
+			) b where dayno<=trunc(sysdate) and dayno>trunc(sysdate)-7]]>
+	</select>
+	
+	
 </mapper>

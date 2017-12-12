@@ -8,7 +8,7 @@
 	<typeAlias type="com.spring.member.ZipcodeModel" alias="ZipcodeModel"/>
 	
 	<!-- Admin -->
-	
+	<typeAlias type="com.spring.admin.ChartModel" alias="ChartModel" />
 	
 	
 	<!-- Basket -->	

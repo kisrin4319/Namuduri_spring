@@ -678,4 +678,14 @@ public class AdminController {
 	}
 
 	/////////////////////////////////////////////////////////////////
+	
+	@RequestMapping("/admin/chart/member.do")
+	public ModelAndView chartM() {
+		List<ChartModel> listAll = adminService.chartM();
+		
+		mv.addObject("list", listAll);
+		mv.setViewName("adminChart");
+		
+		return mv;
+	}
 }

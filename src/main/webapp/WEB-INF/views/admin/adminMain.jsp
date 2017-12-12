@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자 페이지</title>
 </head>
 <body>
 	<div class="container-fluid">
