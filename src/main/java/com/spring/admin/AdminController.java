@@ -12,6 +12,9 @@ import javax.annotation.Resource;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.book.ReviewModel;
@@ -681,10 +685,38 @@ public class AdminController {
 	
 	@RequestMapping("/admin/chart/member.do")
 	public ModelAndView chartM() {
-		List<ChartModel> listAll = adminService.chartM();
 		
-		mv.addObject("list", listAll);
-		mv.setViewName("adminChart");
+		JSONObject data = new JSONObject();
+		JSONObject cols1 = new JSONObject();
+		JSONObject cols2 = new JSONObject();
+		JsonArray colsData = new JSONArray();
+		
+		cols1.put("type", "string");
+		cols2.put("type", "number");
+		colsData.add(element);
+		
+		/*ChartModel chartModel = null;
+		List<ChartModel> listAll = adminService.chartM();
+		JSONObject jobj = new JSONObject();
+		JSONArray jlist = new JSONArray(listAll);*/
+		
+		/*for(int i=0; i<listAll.size(); i++) {
+			chartModel = listAll.get(i);
+			
+			JSONObject obj = new JSONObject();
+			obj.put("dayNo", chartModel.getDayNo());
+			obj.put("item",chartModel.getItem());
+			obj.put("item_C", chartModel.getItem_C());
+			
+			jlist.put(obj);
+			
+		}*/
+		
+		/*System.out.println(jlist);*/
+		
+		/*mv.addObject("list", jlist);
+		mv.addObject("title", "insert json...");
+		mv.setViewName("adminChart");*/
 		
 		return mv;
 	}
