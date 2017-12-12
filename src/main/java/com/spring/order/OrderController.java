@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -122,6 +123,7 @@ public class OrderController {
 		String order_receive_memo = request.getParameter("order_receive_memo");
 		int point = Integer.parseInt(request.getParameter("point"));
 		int sum = orderModel.getOrder_receive_moneysum();
+		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
 		
 		// 데이터베이스에 주문 정보 넣기
 		orderModel.setOrder_trade_num(book_num + simple.format(day));
@@ -158,7 +160,7 @@ public class OrderController {
 			orderService.updateStock(book);
 		}
 		
-		// 사용시 차감 & 포인트적립
+		// 포인트 사용시 차감 & 포인트 적립
 		if(point != 0) {
 			MemberModel member = memberService.SelectOne(session_id);
 			int member_point = member.getMember_point();
@@ -167,7 +169,7 @@ public class OrderController {
 			orderService.point(member);
 		}
 		MemberModel member = memberService.SelectOne(session_id);
-		int saving = (int)((orderDetailModel.getOrder_book_count()*orderDetailModel.getOrder_book_price()) *0.05);
+		int saving = (int)(bookMoney * 0.05);
 		int current = member.getMember_point();
 		int now = saving + current;
 		member.setMember_point(now);
@@ -213,9 +215,12 @@ public class OrderController {
 
 	// 전체 주문 완료
 	@RequestMapping(value = "/order/totalOrder.do", method = RequestMethod.POST)
-	public ModelAndView totalOrder(@ModelAttribute OrderModel orderModel, HttpSession session) {
+	public ModelAndView totalOrder(@ModelAttribute OrderModel orderModel, HttpSession session, ServletRequest request) {
 
 		session_id = (String) session.getAttribute("member_id");
+		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
+		int point = Integer.parseInt(request.getParameter("point"));
+		int sum = orderModel.getOrder_receive_moneysum();
 		Calendar today = Calendar.getInstance();
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
@@ -232,6 +237,7 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_receive_moneysum(sum-point);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기 + 재고관리
@@ -244,10 +250,7 @@ public class OrderController {
 			detail.setOrder_book_price(bas.getBasket_book_price());
 			detail.setOrder_book_count(bas.getBasket_book_count());
 			orderService.orderDetailIn(detail);
-			/*
-			 * -----------------------------------------------------------------------------
-			 * -
-			 */
+
 			BooksModel book = booksService.bookOne(bas.getBasket_book_num());
 			int current_count = book.getBook_current_count() - bas.getBasket_book_count();
 			int sell_count = book.getBook_sell_count() + bas.getBasket_book_count();
@@ -267,6 +270,21 @@ public class OrderController {
 		mv.addObject("order_book_name", order_book_name);
 		mv.addObject("order", getOrder);
 		mv.setViewName("multiOrderComplete");
+		
+		// 포인트 사용시 차감 & 포인트 적립
+		if(point != 0) {
+			MemberModel member = memberService.SelectOne(session_id);
+			int member_point = member.getMember_point();
+			int update = member_point-point;
+			member.setMember_point(update);
+			orderService.point(member);
+		}
+		MemberModel member = memberService.SelectOne(session_id);
+		int saving = (int)(bookMoney * 0.05);
+		int current = member.getMember_point();
+		int now = saving + current;
+		member.setMember_point(now);
+		orderService.point(member);
 
 		return mv;
 	}
@@ -313,6 +331,9 @@ public class OrderController {
 	ModelAndView selectOrder(@ModelAttribute OrderModel orderModel, HttpServletRequest request, HttpSession session) {
 
 		session_id = (String) session.getAttribute("member_id");
+		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
+		int point = Integer.parseInt(request.getParameter("point"));
+		int sum = orderModel.getOrder_receive_moneysum();
 		Calendar today = Calendar.getInstance();
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
@@ -334,6 +355,7 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_receive_moneysum(sum-point);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기 + 장바구니 삭제 + 재고관리
@@ -348,15 +370,9 @@ public class OrderController {
 			detail.setOrder_book_price(basketModel.getBasket_book_price());
 			detail.setOrder_book_count(basketModel.getBasket_book_count());
 			orderService.orderDetailIn(detail);
-			/*
-			 * -----------------------------------------------------------------------------
-			 * -
-			 */
+			
 			orderService.delBasket(basketModel.getBasket_num());
-			/*
-			 * -----------------------------------------------------------------------------
-			 * -
-			 */
+
 			BooksModel book = booksService.bookOne(basketModel.getBasket_book_num());
 			int current_count = book.getBook_current_count() - basketModel.getBasket_book_count();
 			int sell_count = book.getBook_sell_count() + basketModel.getBasket_book_count();
@@ -372,6 +388,21 @@ public class OrderController {
 		mv.addObject("order_book_name", basketModel.getBasket_book_name());
 		mv.setViewName("multiOrderComplete");
 
+		// 포인트 사용시 차감 & 포인트 적립
+		if(point != 0) {
+			MemberModel member = memberService.SelectOne(session_id);
+			int member_point = member.getMember_point();
+			int update = member_point-point;
+			member.setMember_point(update);
+			orderService.point(member);
+		}
+		MemberModel member = memberService.SelectOne(session_id);
+		int saving = (int)(bookMoney * 0.05);
+		int current = member.getMember_point();
+		int now = saving + current;
+		member.setMember_point(now);
+		orderService.point(member);
+		
 		return mv;
 	}
 
