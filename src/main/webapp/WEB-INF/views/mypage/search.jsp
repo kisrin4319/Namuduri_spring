@@ -18,9 +18,10 @@
 		document.bookForm.submit();
 	}
 	
-	function parentDataSend(image){
+	function parentDataSend(image, book_num){
 		var image = "<%=cp%>/upload/"+image;
 		$("img#book_img", opener.document).attr("src",image);
+		$("#book_num", opener.document).val(book_num);
 		window.close();
 	}
 </script>
@@ -51,10 +52,8 @@
 		            	<div class="thumbnail-wrapper">
 							<div class="thumbnail">
 								<c:forEach items="${ eFeelogList }" var="list">
-									<img src="<%=cp%>/upload/${ list.book_image }" onclick="parentDataSend('${list.book_image}')">
-									<tr>
-										<td><input type="hidden" value="${ list.book_num }"></td>
-									</tr>
+									<img src="<%=cp%>/upload/${ list.book_image }" onclick="parentDataSend('${list.book_image}','${ list.book_num }')">
+									
 								</c:forEach>
 							</div>
 						</div>
