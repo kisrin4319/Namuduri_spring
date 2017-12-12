@@ -289,11 +289,12 @@ located in SOUTH KOREA for the resolution of any disputes.
 var idCheck = 0;
 //아이디 체크하여 가입버튼 비활성화, 중복확인.
 function checkId() {
-	
- var inputed = $('.member_id').val();
+	            //input[name=member_id]
+ var inputed = $('input[name=member_id]').val();
+
  $.ajax({
      data : {
-       id : inputed
+       member_id : inputed
      },
      url : "idCheck.do",
      success : function(data) {
@@ -308,10 +309,10 @@ function checkId() {
          if(inputed=="" && data=='0') {
              $(".signupbtn").prop("disabled", true);
              $(".signupbtn").css("background-color", "#aaaaaa");
-             $("#member_id").css("background-color", "#FFCECE");
+             $("#name=member_id").css("background-color", "#FFCECE");
              idCheck = 0;
          } else if (data == '0') {
-             $("#member_id").css("background-color", "#B0F6AC");
+             $("#name=member_id").css("background-color", "#B0F6AC");
              idCheck = 1;
              if(idCheck==1 && pwdCheck == 1) {
                  $(".signupbtn").prop("disabled", false);
@@ -321,7 +322,7 @@ function checkId() {
          } else if (data == '1') {
              $(".signupbtn").prop("disabled", true);
              $(".signupbtn").css("background-color", "#aaaaaa");
-             $("#member_id").css("background-color", "#FFCECE");
+             $("#name=member_id").css("background-color", "#FFCECE");
              idCheck = 0;
          }
      }
