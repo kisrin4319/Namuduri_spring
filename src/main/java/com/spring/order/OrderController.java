@@ -301,7 +301,7 @@ public class OrderController {
 		String[] basket_num = request.getParameterValues("RowCheck");
 		String coupon_code = "";
 		int coupon_price = 0;
-		if(request.getParameter("c_code")!=null || !request.getParameter("c_code").equals("")) {
+		if(request.getParameter("c_code")!=null && !request.getParameter("c_code").equals("")) {
 			coupon_code = request.getParameter("c_code");
 			coupon_price = couponService.CouponUse(coupon_code);
 		}

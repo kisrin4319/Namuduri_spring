@@ -46,10 +46,12 @@
 													<h4 class="collapse-sub-title">Register with us for future convenience:</h4>
 													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="deldata();" /> <label>직접입력</label>
+														<input type="radio" name="choice" onclick="deldata();" />
+														<label>Direct input</label>
 													</div>
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="senddata();" /> <label>주문자 정보와 동일</label>
+														<input type="radio" name="choice" onclick="senddata();" />
+														<label>Same As Member</label>
 													</div>
 													<p>Register and save time!</p>
 													<p>Register with us for future convenience:</p>
@@ -109,7 +111,7 @@
 											</div>
 											<div class="col-md-6">
 												<p class="form-row">
-													<input type="text" name="order_email" value="${memberModel.member_email }" placeholder="Email Address *">
+													<input type="text" name="order_email" value="" placeholder="Email Address *">
 												</p>
 											</div>
 											<div class="col-md-6">
@@ -118,13 +120,10 @@
 												</p>
 											</div>
 											<div class="col-md-12">
-												<label class="checbox-info"> <input type="checkbox" id="cbox"> Create an account?
-												</label>
 												<div id="cbox_info">
-													<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
 													<p class="form-row form-row-phone">
-														<label> Phone <span class="required">*</span>
-														</label> <input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Phone">
+														<label> Mobile <span class="required">*</span>
+														</label> <input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
 													</p>
 												</div>
 											</div>
@@ -160,9 +159,15 @@
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 									<div class="panel-body no-padding">
 										<div class="payment-met">
-											<ul class="form-list">
-												<li class="control"><input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo"> <label for="p_method_checkmo"> Check / Money order </label></li>
-												<li class="control"><input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave"> <label for="p_method_ccsave">Credit Card (saved) </label></li>
+											<ul class="form-list" style="margin-left: 5px; padding-bottom: 20px;">
+												<li class="control">
+													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo" style="float: left; margin-right:10px;">
+													<label for="p_method_checkmo"> Check / Money order </label>
+												</li>
+												<li class="control">
+													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
+													<label for="p_method_ccsave">Credit Card (saved) </label>
+												</li>
 											</ul>
 											<div class="buttons-set">
 												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
@@ -326,6 +331,7 @@ var mobile = "${memberModel.member_mobile}";
       orderform.order_receive_addr2.value = "${memberModel.member_addr2}";
       orderform.order_receive_phone.value = "${memberModel.member_phone}";
       orderform.order_receive_mobile.value = "${memberModel.member_mobile}";
+      orderform.order_email.value="${memberModel.member_email }";
    }
 
    function deldata() {
@@ -337,6 +343,7 @@ var mobile = "${memberModel.member_mobile}";
       orderform.order_receive_addr2.value = "";
       orderform.order_receive_phone.value = "";
       orderform.order_receive_mobile.value = "";
+      orderform.order_email.value="";
    }
 
    function orderzipCheck() {

@@ -12,6 +12,7 @@
 <title>Checkout || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 </head>
 <body>
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
@@ -58,11 +59,11 @@
 													<input type="hidden" name="bookMoney" value="${bookMoney}" />
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="deldata();" />
-														<label>직접입력</label>
+														<label>Direct input</label>
 													</div>
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="senddata();" />
-														<label>주문자 정보와 동일</label>
+														<label>Same As Member</label>
 													</div>
 													<p>Register and save time!</p>
 													<p>Register with us for future convenience:</p>
@@ -139,10 +140,10 @@
 												<div id="cbox_info">
 													<p class="form-row form-row-phone">
 														<label>
-															Phone
+															Mobile
 															<span class="required">*</span>
 														</label>
-														<input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Phone">
+														<input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
 													</p>
 												</div>
 											</div>
@@ -188,8 +189,12 @@
 													<label for="p_method_checkmo"> Check / Money order </label>
 												</li>
 												<li class="control">
-													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
-													<label for="p_method_ccsave">Credit Card (saved) </label>
+												
+													<button type="button" class ="btn btn-default" onclick="proc()">PayMent</button>
+													
+													<!-- <input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
+													<label for="p_method_ccsave">Credit Card (saved) </label> -->
+												
 												</li>
 											</ul>
 											<div class="buttons-set">
@@ -349,7 +354,7 @@
 		</div>
 	</div>
 	<!-- Check Out Area End -->
-	<script type="text/javascript">
+<script type="text/javascript">
 var name = "${memberModel.member_name}";
 var zipcode ="${memberModel.member_zipcode}";
 var addr1 = "${memberModel.member_addr1}";
@@ -379,13 +384,12 @@ var mobile = "${memberModel.member_mobile}";
 			alert("수취인 상세주소를 입력하세요");
 			orderform.order_receive_addr2.focus();
 			return false;
-		} else {
-		  	payment_Proc();
-		  	
+		} else {		  	
 			orderform.action = "<%=cp%>/order/singleOrder.do";
 			orderform.submit();
 		}
 	}
+	
 	function senddata() {
 		var orderform = document.getElementById("orderform");
 		
@@ -413,34 +417,53 @@ var mobile = "${memberModel.member_mobile}";
 	function orderzipCheck() {
 		var url = '<%=cp%>/order/zipCheck.do';
    		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
-  }
-	function payment_Proc() {
-	  	var check = eval("document.orderform");
-	  	alert(check.value);
-	  	var url ='<%=cp%>/payment.jsp?sumMoney='+${sumMoney}+'&';
-	  	window.open(url,"post","toolbar=no,width=605,heigth=400,directoris=no,status=yes,scrollbars=yes,menubar=no")
-	  	
-	  	check.target="post";
-	  	check.submit();
-  }
-	
+   		}		 
 	function usePoint() {
-		var use = confirm("포인트를 사용하시겠습니까?")
-		var point = document.getElementById("point").value;
-		var grandtotal = document.getElementById("grandTotal").value;
-		if(use==true) {
-			grandTotal.value = grandtotal-point;
-			fn_format(grandTotal);
+	  var use = confirm("포인트를 사용하시겠습니까?")
+	  var point = document.getElementById("point").value;
+	  var grandtotal = document.getElementById("grandTotal").value;
+	  if(use==true) {
+		grandTotal.value = grandtotal-point;
+		fn_format(grandTotal);
 		} else {
-			return false;
-		}
-
-	}
+		  return false;
+		  }
+	  }
 	
 	 function fn_format(obj) {
 	      var x = obj.value.replace(/[^0-9]/g, '');
 	      obj.value = x.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 	  }
+	 
+	 function proc() {
+	   var IMP = window.IMP; // 생략가능
+	 	IMP.init('imp19784906');  // 가맹점 식별 코드
+	 	IMP.request_pay({
+	 	  pg : 'kakao', // 결제방식
+	 	  pay_method : 'card',	// 결제 수단
+	 	  merchant_uid : 'merchant_' + new Date().getTime(),
+	 	  name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+	 	  amount : '${sumMoney}',	// 결제 금액
+	 	  buyer_email : '${memberModel.member_email}',	// 구매자 email
+	 	  buyer_name :  '${memberModel.member_name}',	// 구매자 이름
+	 	  buyer_tel :  '${memberModel.member_mobile}',	// 구매자 전화번호
+	 	  buyer_addr :  '${memberModel.member_addr1}'+'${memberModel.member_addr2}', // 구매자 주소
+	 	  buyer_postcode :  '${memberModel.member_zipcode}', // 구매자 우편번호
+	 	  m_redirect_url : '<%=cp%>/order/singleOrder.do'
+	 	  }, function(rsp) {
+	 	    if ( rsp.success ) { // 성공시
+	 	      var msg = '결제가 완료되었습니다.';
+	 	    msg += '고유ID : ' + rsp.imp_uid;
+	 	    msg += '상점 거래ID : ' + rsp.merchant_uid;
+	 	    msg += '결제 금액 : ' + rsp.amount;
+	 	    msg += '카드 승인번호 : ' + 123123123;
+	 	    } else { // 실패시
+	 	      var msg = '결제에 실패하였습니다.';
+	 	    msg += '에러내용 : ' + rsp.error_msg;
+	 	    }
+	 	    });
+    
+  }
 </script>
 </body>
 </html>
