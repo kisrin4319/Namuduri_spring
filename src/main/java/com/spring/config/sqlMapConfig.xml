@@ -35,6 +35,8 @@
 	<!-- EFeelog -->
 	<typeAlias type="com.spring.efeelog.EFeelogModel" alias="EFeelogModel"/>
 	
+	<!-- Coupon -->
+	<typeAlias type="com.spring.coupon.CouponModel" alias="CouponModel"/>
 	</typeAliases>
 	
 	<mappers>	
@@ -47,7 +49,7 @@
  		<mapper resource="com/spring/config/boardSQL.xml" />
  		<mapper resource="com/spring/config/wishlistSQL.xml" />
  		<mapper resource="com/spring/config/efeelogSQL.xml"/>
+ 		<mapper resource="com/spring/config/couponSQL.xml"/>
  		<mapper resource="com/spring/config/faqSQL.xml"/>
- 		
 	</mappers>
 </configuration>
