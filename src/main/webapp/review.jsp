@@ -15,7 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
-<script src ="<%=cp%>/review.js"></script>
+<script src ="<%=cp%>/bootstrap/js/review.js"></script>
 <style type="text/css">
  .animated {
     -webkit-transition: height 0.2s;
