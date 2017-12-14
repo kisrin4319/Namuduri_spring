@@ -16,22 +16,22 @@ public class BoardService implements BoardDao {
 	// 게시판 목록
 	@Override
 	public List<BoardModel> boardList() {
-		return sqlSessionTemplate.selectList("board.boardList");
+		return sqlSessionTemplate.selectList("board.boardList");   	//전체 목록
 	}
 		
 	@Override
 	public List<BoardModel> adminBoardList() {
-		return sqlSessionTemplate.selectList("board.adminBoardList");
+		return sqlSessionTemplate.selectList("board.adminBoardList");	//공지사항 목록
 	}
 	
 	@Override
 	public List<BoardModel> normalBoardList() {
-		return sqlSessionTemplate.selectList("board.normalBoardList");
+		return sqlSessionTemplate.selectList("board.normalBoardList");	//일반게시판 목록
 	}
 	
 	@Override
 	public List<BoardModel> secretBoardList() {
-		return sqlSessionTemplate.selectList("board.secretBoardList");
+		return sqlSessionTemplate.selectList("board.secretBoardList");	//비밀글 목록
 	}
 	
 	

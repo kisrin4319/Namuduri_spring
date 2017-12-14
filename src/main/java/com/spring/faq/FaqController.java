@@ -40,6 +40,9 @@ public class FaqController {
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
+
+
+	
 	
 	// 1. faq 목록
 	@RequestMapping(value = "/faq/faqList.do")
@@ -47,9 +50,16 @@ public class FaqController {
 		mv = new ModelAndView();
 		
 		List<FaqModel> faqList = new ArrayList<FaqModel>();
+		List<FaqModel> AfaqList = new ArrayList<FaqModel>();
+		List<FaqModel> BfaqList = new ArrayList<FaqModel>();
+		List<FaqModel> CfaqList = new ArrayList<FaqModel>();
 
-		faqList = faqService.faqList();
-
+		faqList.addAll(faqService.faqList());
+		AfaqList = faqService.faqList();
+		BfaqList = faqService.faqList();
+		CfaqList = faqService.faqList();
+		
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -66,8 +76,13 @@ public class FaqController {
 		if (paging.getEndCount() < totalCount)
 			lastCount = paging.getEndCount() + 1;
 		faqList = faqList.subList(paging.getStartCount(), lastCount);
-
+		
+		totalCount = faqList.size();
+		
 		mv.addObject("faqList", faqList);
+		mv.addObject("AfaqList", AfaqList);
+		mv.addObject("BfaqList", BfaqList);
+		mv.addObject("CfaqList", CfaqList);
 		mv.addObject("listCount", faqList.size());
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -81,10 +96,18 @@ public class FaqController {
 	public ModelAndView faqDetail(HttpServletRequest request, HttpSession session) {
 
 		mv = new ModelAndView();
+		System.out.println(request.getParameter("faq_num"));
+		Map<String, Object> map = new HashMap<String, Object>();
 		int faq_num = Integer.parseInt(request.getParameter("faq_num"));
-		faqService.faqDetail(faq_num);
+		
+		
 		FaqModel faqModel = faqService.faqDetail(faq_num);
 
+		map.put("readcount", faqModel.getReadcount());
+		map.put("faq_num", faq_num);
+		
+		
+		faqService.updateReadcount(map);
 		session_id = (String) session.getAttribute("member_id");
 
 		mv.addObject("faq_num", faq_num);
@@ -94,6 +117,7 @@ public class FaqController {
 
 		return mv;
 	}
+	
 	
 	//3. faq 작성
 	@RequestMapping(value = "/faq/faqWrite.do", method = RequestMethod.GET)

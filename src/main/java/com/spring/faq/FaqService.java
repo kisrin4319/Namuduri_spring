@@ -1,6 +1,7 @@
 package com.spring.faq;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,8 +17,24 @@ public class FaqService implements FaqDao{
 	// faq 목록
 	@Override
 	public List<FaqModel> faqList(){
-		return sqlSessionTemplate.selectList("faq.faqList");
+		return sqlSessionTemplate.selectList("faq.faqList"); //전체 목록
 	}
+	
+	@Override
+	public List<FaqModel> AfaqList(){
+		return sqlSessionTemplate.selectList("faq.AfaqList"); //배송 문의
+	}
+	
+	@Override
+	public List<FaqModel> BfaqList(){
+		return sqlSessionTemplate.selectList("faq.BfaqList"); //도서 문의
+	}
+	
+	@Override
+	public List<FaqModel> CfaqList(){
+		return sqlSessionTemplate.selectList("faq.CfaqList"); //기타 문의
+	}
+	
 	
 	// faq 내용 보기
 	@Override
@@ -43,4 +60,12 @@ public class FaqService implements FaqDao{
 	public void faqDelete(int faq_num) {
 		sqlSessionTemplate.delete("faq.faqDelete", faq_num);
 	}
+	
+	// faq 조회수
+	@Override
+	public void updateReadcount(Map<String, Object> map) {
+		sqlSessionTemplate.update("faq.updateReadcount", map);
+	}
+
+
 }

@@ -45,7 +45,7 @@
 </head>
 <body>
 	<h2 class="cscenter_h2">고객센터</h2>
-	<h3 class="bul_green">질문답변 게시판</h3>
+	<h3 class="bul_green">FAQ 게시판</h3>
 	<c:choose>
 		<c:when test="${faqModel.faq_num == null}">
 			<form action="faqWrite.do" name="regForm" method="post" onsubmit="return validation();">
@@ -66,19 +66,20 @@
 			</td>
 		</tr>
 		<tr style="height: 30px;">
+			<th>카테고리</th>
+				<td>
+					<select name="faq_category">
+						<option value="1">배송 문의</option>
+						<option value="2">도서 문의</option>
+						<option value="3">기타 문의</option>
+					</select>
+				</td>
 			<th>
 				<font color="#FF0000">*</font>
 				이름
 			</th>
 			<td>
 				<input type="text" name="member_id" id="member" value="${member_id}" style="width: 150px; height: 18px;" maxlength="20" />
-			</td>
-			<th>
-				<font color="#FF0000">*</font>
-				비밀번호
-			</th>
-			<td>
-				<input type="text" name="faq_pw" id="passwd" value="${faqModel.faq_pw}" style="width: 150px; height: 18px;" maxlength="20" />
 			</td>
 		</tr>
 		<tr>

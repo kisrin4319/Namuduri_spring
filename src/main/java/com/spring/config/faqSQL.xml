@@ -14,8 +14,30 @@
 	</sql>
 	
 	<!-- faq 목록 -->
+	<!-- 전체 문의 -->
 	<select id="faqList" resultType="FaqModel"> 
 	  		<include refid="select-FaqAll" /> order by faq_regdate DESC
+	</select>		<!-- faq_category = '0' -->
+	
+	<!-- 배송 문의 -->
+	<select id="AfaqList" resultType="FaqModel"> 
+	  		<include refid="select-FaqAll" /> 
+	  		where faq_category = '1'
+	  		order by faq_regdate DESC
+	</select>
+	
+	<!-- 도서 문의 -->
+	<select id="BfaqList" resultType="FaqModel"> 
+	  		<include refid="select-FaqAll" /> 
+	  		where faq_category = '2'
+	  		order by faq_regdate DESC
+	</select>
+	
+	<!-- 기타 문의 -->
+	<select id="CfaqList" resultType="FaqModel"> 
+	  		<include refid="select-FaqAll" /> 
+	  		where faq_category = '3'
+	  		order by faq_regdate DESC
 	</select>
 	
 	<!-- faq 내용 -->
@@ -26,7 +48,7 @@
 	
 	<!-- faq 작성 -->
 	<insert id="faqWrite" parameterType="FaqModel"> 
-		INSERT INTO faq( FAQ_NUM, FAQ_TITLE, MEMBER_ID, FAQ_CONTENT, FAQ_CATEGORY, FAQ_REGDATE, READCOUNT)
+		INSERT INTO faq( FAQ_NUM, FAQ_TITLE, MEMBER_ID, FAQ_CONTENT, FAQ_category, FAQ_REGDATE, readcount)
 		VALUES( FAQ_NUM_SEQ.NEXTVAL, #{faq_title}, #{member_id}, #{faq_content}, #{faq_category}, sysdate, #{readcount})
     </insert>
 	
@@ -38,8 +60,17 @@
 	</update>
 	
 	<!-- faq 삭제 -->
- 	<delete id="faqdDelete" parameterType="int">
+ 	<delete id="faqDelete" parameterType="int">
   		DELETE FROM faq WHERE faq_num = #{faq_num}
  	</delete>
+ 	
+ 	<!-- 조회수 -->
+ 	<update id="updateReadcount" parameterType="map"> 
+		<![CDATA[
+		UPDATE Faq set
+			 	readcount = #{readcount} + 1 	
+		where faq_num = #{faq_num}
+		]]> 
+	</update>
 		
 </mapper>	
