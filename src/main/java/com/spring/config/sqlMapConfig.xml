@@ -26,6 +26,9 @@
 	<!-- Board -->
 	<typeAlias type="com.spring.board.BoardModel" alias="BoardModel"/>
 	
+	<!-- Faq -->
+	<typeAlias type="com.spring.faq.FaqModel" alias="FaqModel"/>
+	
 	<!-- WishList -->
 	<typeAlias type="com.spring.wishlist.WishModel" alias="WishModel" />
 	
@@ -47,5 +50,6 @@
  		<mapper resource="com/spring/config/wishlistSQL.xml" />
  		<mapper resource="com/spring/config/efeelogSQL.xml"/>
  		<mapper resource="com/spring/config/couponSQL.xml"/>
+ 		<mapper resource="com/spring/config/faqSQL.xml"/>
 	</mappers>
 </configuration>
