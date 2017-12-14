@@ -689,11 +689,18 @@ public class AdminController {
 		JSONObject data = new JSONObject();
 		JSONObject cols1 = new JSONObject();
 		JSONObject cols2 = new JSONObject();
-		JsonArray colsData = new JSONArray();
+		JSONArray colsData = new JSONArray();
 		
 		cols1.put("type", "string");
 		cols2.put("type", "number");
-		colsData.add(element);
+		colsData.put(cols1);
+		colsData.put(cols2);
+		
+		System.out.println(colsData);
+		/*{"type": "string"}, {"type": "number"}*/
+		
+		
+		
 		
 		/*ChartModel chartModel = null;
 		List<ChartModel> listAll = adminService.chartM();
