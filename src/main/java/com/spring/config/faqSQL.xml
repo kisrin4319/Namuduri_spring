@@ -46,6 +46,19 @@
 		<include refid="where-FaqNo" />
 	</select>
 	
+	<!-- 검색 -->
+	<!-- 제목 검색 -->
+	<select id="Search1" resultType="FaqModel" parameterType="String">
+		SELECT * FROM faq WHERE faq_title like #{faq_title}
+		ORDER BY faq_regdate DESC
+	</select>
+	
+	<!-- 내용검색 -->
+	<select id="Search2" resultType="FaqModel" parameterType="String">
+		SELECT * FROM faq WHERE faq_content like #{faq_content}
+		ORDER BY faq_regdate DESC
+	</select>
+	
 	<!-- faq 작성 -->
 	<insert id="faqWrite" parameterType="FaqModel"> 
 		INSERT INTO faq( FAQ_NUM, FAQ_TITLE, MEMBER_ID, FAQ_CONTENT, FAQ_category, FAQ_REGDATE, readcount)

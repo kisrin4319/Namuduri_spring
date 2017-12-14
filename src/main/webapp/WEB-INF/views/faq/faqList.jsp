@@ -318,7 +318,6 @@
 			<td id="search">
 				<form>
 					<select name="searchNum">
-						<option value="0">글쓴이</option>
 						<option value="1">제목</option>
 						<option value="2">내용</option>
 					</select> 

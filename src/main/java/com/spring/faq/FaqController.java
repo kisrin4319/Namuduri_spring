@@ -34,6 +34,9 @@ public class FaqController {
 	ModelAndView mv = new ModelAndView();
 	String session_id;
 	
+	private int searchNum;
+	private String isSearch;
+	
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 10;
@@ -41,9 +44,6 @@ public class FaqController {
 	private String pagingHtml;
 	private Paging paging;
 
-
-	
-	
 	// 1. faq 목록
 	@RequestMapping(value = "/faq/faqList.do")
 	public ModelAndView FaqList(HttpServletRequest request) throws Exception {
@@ -54,31 +54,46 @@ public class FaqController {
 		List<FaqModel> BfaqList = new ArrayList<FaqModel>();
 		List<FaqModel> CfaqList = new ArrayList<FaqModel>();
 
+		AfaqList = faqService.AfaqList();
+		BfaqList = faqService.BfaqList();
+		CfaqList = faqService.CfaqList();
+		
 		faqList.addAll(faqService.faqList());
-		AfaqList = faqService.faqList();
-		BfaqList = faqService.faqList();
-		CfaqList = faqService.faqList();
-		
-		
+				
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		
+		isSearch = request.getParameter("isSearch");
+		
+		if (isSearch != null) {
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+
+			if (searchNum == 1)
+				faqList = faqService.Search1(isSearch);
+			else if (searchNum == 2)
+				faqList = faqService.Search2(isSearch);
+					
+			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "faqList", searchNum, isSearch);
+			pagingHtml = paging.getPagingHtml().toString();
+		} else {
+			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "faqList");
+			pagingHtml = paging.getPagingHtml().toString();
+		}
+		
 		totalCount = faqList.size();
 	
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "faqList");
-		pagingHtml = paging.getPagingHtml().toString();
-
 		int lastCount = totalCount;
 			
 		if (paging.getEndCount() < totalCount)
 			lastCount = paging.getEndCount() + 1;
 		faqList = faqList.subList(paging.getStartCount(), lastCount);
 		
-		totalCount = faqList.size();
-		
+		mv.addObject("isSearch", isSearch);
+		mv.addObject("searchNum", searchNum);
 		mv.addObject("faqList", faqList);
 		mv.addObject("AfaqList", AfaqList);
 		mv.addObject("BfaqList", BfaqList);

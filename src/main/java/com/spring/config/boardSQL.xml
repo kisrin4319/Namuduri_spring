@@ -44,8 +44,7 @@
 	  		order by ref desc, re_step asc, board_regdate DESC
 	</select>
 	
-	
-	
+		
 	<!-- 게시글 내용 보기 -->
 	<select id="selectBoardOne" resultType="BoardModel">
 		<include refid="select-BoardAll" />

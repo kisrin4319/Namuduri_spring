@@ -41,7 +41,18 @@ public class FaqService implements FaqDao{
 	public FaqModel faqDetail(int faq_num) {
 		return sqlSessionTemplate.selectOne("faq.selectFaqOne", faq_num);
 	}
-		
+	
+	// faq 검색
+	@Override
+	public List<FaqModel> Search1(String search) {
+		return sqlSessionTemplate.selectList("faq.Search1", "%" + search + "%");
+	}
+
+	@Override
+	public List<FaqModel> Search2(String search) {
+		return sqlSessionTemplate.selectList("faq.Search2", "%" + search + "%");
+	}
+	
 	// faq 작성
 	@Override
 	public boolean faqWrite(FaqModel faqModel) {
