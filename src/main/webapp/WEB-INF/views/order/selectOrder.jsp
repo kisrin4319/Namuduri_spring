@@ -12,12 +12,17 @@
 <title>Checkout || Witter Multipage Responsive Template</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 </head>
 <body>
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-		<li><a title="Return to Home" href="<%=cp%>/main.do">Home</a></li>
-		<li><a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a></li>
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+		</li>
+		<li>
+			<a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a>
+		</li>
 	</ul>
 	<hr>
 	<!-- Check Out Area Start -->
@@ -25,15 +30,17 @@
 		<div class="container">
 			<div class="row">
 				<form name="orderform" id="orderform" method="post">
-				<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
-				<input type="hidden" name="bookMoney" value="${bookMoney}" />
-				<input type ="hidden" name ="c_code" value ="${coupon_code }" />
+					<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
+					<input type="hidden" name="bookMoney" value="${bookMoney}" />
+					<input type="hidden" name="c_code" value="${coupon_code }" />
 					<div class="col-md-8">
 						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
 									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <span>1</span> Checkout Method
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											<span>1</span>
+											Checkout Method
 										</a>
 									</h4>
 								</div>
@@ -57,7 +64,7 @@
 													<p>Register with us for future convenience:</p>
 													<p>Fast and easy check out</p>
 													<p>Easy access to your order history and status</p>
-														<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseTwo" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
+													<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseTwo" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
 												</div>
 											</div>
 										</div>
@@ -67,7 +74,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <span>2</span> Billing Information
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+											<span>2</span>
+											Billing Information
 										</a>
 									</h4>
 								</div>
@@ -76,8 +85,11 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="shop-select">
-													<label> Country <span class="required">*</span>
-													</label> <select>
+													<label>
+														Country
+														<span class="required">*</span>
+													</label>
+													<select>
 														<option value="volvo">SOUTH KOREA</option>
 														<option value="saab">Algeria</option>
 														<option value="mercedes">Afghanistan</option>
@@ -91,7 +103,8 @@
 											</div>
 											<div class="col-md-6">
 												<p class="form-row">
-													<input type="text" name="order_receive_name" value="" placeholder="First Name *"> <input type="hidden" name="order_trade_payer" value="name" />
+													<input type="text" name="order_receive_name" value="" placeholder="First Name *">
+													<input type="hidden" name="order_trade_payer" value="name" />
 												</p>
 											</div>
 											<div class="col-md-12">
@@ -122,19 +135,25 @@
 											<div class="col-md-12">
 												<div id="cbox_info">
 													<p class="form-row form-row-phone">
-														<label> Mobile <span class="required">*</span>
-														</label> <input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
+														<label>
+															Mobile
+															<span class="required">*</span>
+														</label>
+														<input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
 													</p>
 												</div>
 											</div>
 										</div>
+										<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseThree" data-parent="#accordion" aria-expanded="false" style="margin-top: 15px;">CONTINUE</button>
 									</div>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingThree">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> <span>3</span> Shopping Method
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+											<span>3</span>
+											Shopping Method
 										</a>
 									</h4>
 								</div>
@@ -146,44 +165,22 @@
 												<textarea placeholder="Notes about your order, e.g. special notes for delivery." rows="10" cols="30" name="order_receive_memo"></textarea>
 											</div>
 										</div>
+										<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseFour" data-parent="#accordion" aria-expanded="false" style="margin-top: 5px;">CONTINUE</button>
 									</div>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingFour">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> <span>4</span> Payment Information
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+											<span>4</span>
+											Payment Information
+											<span>4</span>
+											Order Review
 										</a>
 									</h4>
 								</div>
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-									<div class="panel-body no-padding">
-										<div class="payment-met">
-											<ul class="form-list" style="margin-left: 5px; padding-bottom: 20px;">
-												<li class="control">
-													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo" style="float: left; margin-right:10px;">
-													<label for="p_method_checkmo"> Check / Money order </label>
-												</li>
-												<li class="control">
-													<input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
-													<label for="p_method_ccsave">Credit Card (saved) </label>
-												</li>
-											</ul>
-											<div class="buttons-set">
-												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingFive">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive"> <span>5</span> Order Review
-										</a>
-									</h4>
-								</div>
-								<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
 									<div class="panel-body no-padding">
 										<div class="order-review" id="checkout-review">
 											<div class="table-responsive" id="checkout-review-table-wrapper">
@@ -198,54 +195,85 @@
 														</tr>
 													</thead>
 													<tbody>
-														
 														<c:forEach var="check" items="${selectList}">
-														<tr>	
+															<tr>
 																<input type="hidden" name="basket_num" value="${check.basket_num}" />
-																<td style="text-align: center;"><span class="cart-price"> <span class="check-price"> <img src="<%=cp%>/upload/${check.basket_book_image}" width="40" alt="${check.basket_book_name}" title="${check.basket_book_name}" />
+																<td style="text-align: center;">
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<img src="<%=cp%>/upload/${check.basket_book_image}" width="40" alt="${check.basket_book_name}" title="${check.basket_book_name}" />
+																		</span>
 																	</span>
-																</span></td>
+																</td>
 																<td>
 																	<h3 class="product-name">${check.basket_book_name}</h3>
 																</td>
-																<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${check.basket_book_price}" pattern="###,###,###" /> 원
+																<td>
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<fmt:formatNumber value="${check.basket_book_price}" pattern="###,###,###" />
+																			원
+																		</span>
 																	</span>
-																</span></td>
+																</td>
 																<td>${check.basket_book_count}</td>
 																<!-- sub total starts here -->
-																<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${check.basket_book_price * check.basket_book_count}" pattern="###,###,###" /> 원
+																<td>
+																	<span class="cart-price">
+																		<span class="check-price">
+																			<fmt:formatNumber value="${check.basket_book_price * check.basket_book_count}" pattern="###,###,###" />
+																			원
+																		</span>
 																	</span>
-																</span></td>
-														</tr>
+																</td>
+															</tr>
 														</c:forEach>
 													</tbody>
 													<tfoot>
 														<tr>
 															<td colspan="4">Subtotal</td>
-															<td><span class="check-price"> <fmt:formatNumber value="${bookMoney}" pattern="###,###,###" /> 원
-															</span></td>
-														</tr>
-														<tr>
-															<td colspan="4">Fee</td>
-															<td><span class="check-price"> <fmt:formatNumber value="${deliveryFee}" pattern="#,###" /> 원
-															</span></td>
-														</tr>
-														<tr>
-															<td colspan="4">Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)</td>															
 															<td>
 																<span class="check-price">
-																	- <input type="text" size="1" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
+																	<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
+																	원
 																</span>
 															</td>
 														</tr>
 														<tr>
-															<td colspan="4"><strong>Grand Total</strong></td>
+															<td colspan="4">Fee</td>
 															<td>
-															<strong> 
-															<span class="check-price">
-															<input type="text" name="grandTotal"  id="grandTotal" size="3"  value="${sumMoney}" style="text-align: end;" readonly>원
-															</span>
-															</strong></td>
+																<span class="check-price">
+																	<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
+																	원
+																</span>
+															</td>
+														</tr>
+														<tr>
+															<td colspan="4">
+																Point(
+																<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />
+																P)
+															</td>
+															<td>
+																<span class="check-price">
+																	-
+																	<input type="text" size="1" name="point" id="point" value="0" style="text-align: end;">
+																	<input type="button" value="USE" onclick="usePoint();">
+																</span>
+															</td>
+														</tr>
+														<tr>
+															<td colspan="4">
+																<strong>Grand Total</strong>
+															</td>
+															<td>
+																<strong>
+																	<span class="check-price">
+																		<input type="text" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly>
+																		원
+																	</span>
+																</strong>
+															</td>
 														</tr>
 													</tfoot>
 												</table>
@@ -253,7 +281,8 @@
 											<div id="checkout-review-submit">
 												<div class="cart-btn-3" id="review-buttons-container">
 													<p class="left">
-														Forgot an Item? <a href="#">Edit Your Cart</a>
+														Forgot an Item?
+														<a href="#">Edit Your Cart</a>
 													</p>
 													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt()">
 														<span>Place Order</span>
@@ -271,14 +300,30 @@
 					<div class="checkout-widget">
 						<h2 class="widget-title">YOUR CHECKOUT PROGRESS</h2>
 						<ul>
-							<li><a href="#"> <i class="fa fa-minus"></i> Billing Address
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Address
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Method
-							</a></li>
-							<li><a href="#"> <i class="fa fa-minus"></i> Payment Method
-							</a></li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Billing Address
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Shipping Address
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Shipping Method
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-minus"></i>
+									Payment Method
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -286,7 +331,7 @@
 		</div>
 	</div>
 	<!-- Check Out Area End -->
-<script type="text/javascript">
+	<script type="text/javascript">
 
 var name = "${memberModel.member_name}";
 var zipcode ="${memberModel.member_zipcode}";
@@ -318,8 +363,7 @@ var mobile = "${memberModel.member_mobile}";
          orderform.order_receive_addr2.focus();
          return false;
       } else {
-         orderform.action = "<%=cp%>/order/selectOrder.do";
-         orderform.submit();
+        	proc();
       }
    }
    function senddata() {
@@ -348,26 +392,58 @@ var mobile = "${memberModel.member_mobile}";
 
    function orderzipCheck() {
       var url = '<%=cp%>/order/zipCheck.do';
-      window.open(url,"post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
-		}
-   
-   function usePoint() {
-		var use = confirm("포인트를 사용하시겠습니까?")
-		var point = document.getElementById("point").value;
-		var grandtotal = document.getElementById("grandTotal").value;
-		if(use==true) {
-			grandTotal.value = grandtotal-point;
-			fn_format(grandTotal);
-		} else {
-			return false;
-		}
+      window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
+    }
 
-	}
-	
-	 function fn_format(obj) {
-	      var x = obj.value.replace(/[^0-9]/g, '');
-	      obj.value = x.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-	  }
+    function usePoint() {
+      var use = confirm("포인트를 사용하시겠습니까?")
+      var point = document.getElementById("point").value;
+      var grandtotal = document.getElementById("grandTotal").value;
+      if (use == true) {
+        grandTotal.value = grandtotal - point;
+        fn_format(grandTotal);
+      } else {
+        return false;
+      }
+
+    }
+
+    function fn_format(obj) {
+      var x = obj.value.replace(/[^0-9]/g, '');
+      obj.value = x.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    }
+
+    function proc() {
+      var orderform = document.getElementById("orderform");
+      var IMP = window.IMP; // 생략가능
+      IMP.init('imp19784906'); // 가맹점 식별 코드
+      IMP.request_pay({
+      pg : 'kakao', // 결제방식
+      pay_method : 'card', // 결제 수단
+      merchant_uid : 'merchant_' + new Date().getTime(),
+      name : '주문명: 결제 테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
+      amount : '${sumMoney}', // 결제 금액
+      buyer_email : '${memberModel.member_email}', // 구매자 email
+      buyer_name : '${memberModel.member_name}', // 구매자 이름
+      buyer_tel : '${memberModel.member_mobile}', // 구매자 전화번호
+      buyer_addr : '${memberModel.member_addr1}' + '${memberModel.member_addr2}', // 구매자 주소
+      buyer_postcode : '${memberModel.member_zipcode}', // 구매자 우편번호
+      }, function(rsp) {
+        if (rsp.success) { // 성공시
+          var msg = '결제가 완료되었습니다.';
+          msg += '고유ID : ' + rsp.imp_uid;
+          msg += '상점 거래ID : ' + rsp.merchant_uid;
+          msg += '결제 금액 : ' + rsp.amount;
+          msg += '카드 승인번호 : ' + 123123123;
+
+        } else { // 실패시
+          var msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+          orderform.action = "<%=cp%>/order/selectOrder.do";
+          orderform.submit();
+        }
+      });       
+    }
 	</script>
 </body>
 </html>

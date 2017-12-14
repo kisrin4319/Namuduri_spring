@@ -55,7 +55,7 @@
 													<input type="hidden" name="order_book_price" value="${book.book_price}" />
 													<input type="hidden" name="order_book_count" value="${order_book_count}" />
 													<input type="hidden" name="basket_num" value="${basket_num}" />
-													<input type ="hidden" name="used_book_num" value="${used_book_num }" />
+													<input type="hidden" name="used_book_num" value="${used_book_num }" />
 													<input type="hidden" name="bookMoney" value="${bookMoney}" />
 													<div class="check-register">
 														<input type="radio" name="choice" onclick="deldata();" />
@@ -148,6 +148,7 @@
 												</div>
 											</div>
 										</div>
+										<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseThree" data-parent="#accordion" aria-expanded="false" style="margin-top: 15px;">CONTINUE</button>
 									</div>
 								</div>
 							</div>
@@ -168,7 +169,8 @@
 												<textarea placeholder="Notes about your order, e.g. special notes for delivery." rows="10" cols="30" id="order_receive_memo" name="order_receive_memo"></textarea>
 											</div>
 										</div>
-									</div>
+										<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseFour" data-parent="#accordion" aria-expanded="false" style="margin-top: 5px;">CONTINUE</button>
+									</div>									
 								</div>
 							</div>
 							<div class="panel panel-default">
@@ -176,49 +178,16 @@
 									<h4 class="panel-title">
 										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 											<span>4</span>
-											Payment Information
+											Order Review
 										</a>
 									</h4>
 								</div>
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 									<div class="panel-body no-padding">
-										<div class="payment-met" style="padding-top: 20px; padding-bottom: 20px;">
-											<ul class="form-list" style="margin-left: 5px; padding-bottom: 20px;">
-												<li class="control">
-													<input type="radio" class="radio" title="Check / Money order" name="payment[method]" id="p_method_checkmo" style="float: left; margin-right:10px;">
-													<label for="p_method_checkmo"> Check / Money order </label>
-												</li>
-												<li class="control">
-												
-													<button type="button" class ="btn btn-default" onclick="proc()">PayMent</button>
-													
-													<!-- <input type="radio" class="radio" title="Credit Card (saved)" name="payment[method]" id="p_method_ccsave" style="float: left; margin-right:10px;">
-													<label for="p_method_ccsave">Credit Card (saved) </label> -->
-												
-												</li>
-											</ul>
-											<div class="buttons-set">
-												<button class="btn btn-default" data-toggle="collapse" href="#collapseFive" data-parent="#accordion" aria-expanded="false">CONTINUE</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingFive">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-											<span>5</span>
-											Order Review
-										</a>
-									</h4>
-								</div>
-								<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-									<div class="panel-body no-padding">
 										<div class="order-review" id="checkout-review">
 											<div class="table-responsive" id="checkout-review-table-wrapper">
-												<table class="data-table" id="checkout-review-table">												
-												<thead>
+												<table class="data-table" id="checkout-review-table">
+													<thead>
 														<tr>
 															<th colspan="1" style="width: 20%;">Image</th>
 															<th rowspan="2">Product Name</th>
@@ -279,10 +248,14 @@
 															</td>
 														</tr>
 														<tr>
-															<td colspan="4">Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)</td>															
+															<td colspan="4">
+																Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)
+															</td>
 															<td>
 																<span class="check-price">
-																	- <input type="text" size="1" name="point" id="point" value="0" style="text-align: end;"><input type="button" value="USE" onclick="usePoint();">
+																	-
+																	<input type="text" size="1" name="point" id="point" value="0" style="text-align: end;">
+																	<input type="button" value="USE" onclick="usePoint();">
 																</span>
 															</td>
 														</tr>
@@ -293,7 +266,8 @@
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<input type="text" name="grandTotal"  id="grandTotal" size="3"  value="${sumMoney}" style="text-align: end;" readonly>원
+																		<input type="text" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly>
+																		원
 																	</span>
 																</strong>
 															</td>
@@ -354,13 +328,13 @@
 		</div>
 	</div>
 	<!-- Check Out Area End -->
-<script type="text/javascript">
-var name = "${memberModel.member_name}";
-var zipcode ="${memberModel.member_zipcode}";
-var addr1 = "${memberModel.member_addr1}";
-var addr2 = "${memberModel.member_addr2}";
-var phone = "${memberModel.member_phone}";
-var mobile = "${memberModel.member_mobile}";
+	<script type="text/javascript">
+	var name = "${memberModel.member_name}";
+	var zipcode ="${memberModel.member_zipcode}";
+	var addr1 = "${memberModel.member_addr1}";
+	var addr2 = "${memberModel.member_addr2}";
+	var phone = "${memberModel.member_phone}";
+	var mobile = "${memberModel.member_mobile}";
 
 	function checkIt() {
 	var orderform = document.getElementById("orderform");
@@ -385,8 +359,7 @@ var mobile = "${memberModel.member_mobile}";
 			orderform.order_receive_addr2.focus();
 			return false;
 		} else {		  	
-			orderform.action = "<%=cp%>/order/singleOrder.do";
-			orderform.submit();
+		  proc();
 		}
 	}
 	
@@ -436,6 +409,7 @@ var mobile = "${memberModel.member_mobile}";
 	  }
 	 
 	 function proc() {
+	   var orderform = document.getElementById("orderform");
 	   var IMP = window.IMP; // 생략가능
 	 	IMP.init('imp19784906');  // 가맹점 식별 코드
 	 	IMP.request_pay({
@@ -449,21 +423,22 @@ var mobile = "${memberModel.member_mobile}";
 	 	  buyer_tel :  '${memberModel.member_mobile}',	// 구매자 전화번호
 	 	  buyer_addr :  '${memberModel.member_addr1}'+'${memberModel.member_addr2}', // 구매자 주소
 	 	  buyer_postcode :  '${memberModel.member_zipcode}', // 구매자 우편번호
-	 	  m_redirect_url : '<%=cp%>/order/singleOrder.do'
-	 	  }, function(rsp) {
-	 	    if ( rsp.success ) { // 성공시
-	 	      var msg = '결제가 완료되었습니다.';
-	 	    msg += '고유ID : ' + rsp.imp_uid;
-	 	    msg += '상점 거래ID : ' + rsp.merchant_uid;
-	 	    msg += '결제 금액 : ' + rsp.amount;
-	 	    msg += '카드 승인번호 : ' + 123123123;
-	 	    } else { // 실패시
-	 	      var msg = '결제에 실패하였습니다.';
-	 	    msg += '에러내용 : ' + rsp.error_msg;
-	 	    }
-	 	    });
-    
-  }
-</script>
+      }, function(rsp) {	
+        if (rsp.success) { // 성공시
+          var msg = '결제가 완료되었습니다.';
+          msg += '고유ID : ' + rsp.imp_uid;
+          msg += '상점 거래ID : ' + rsp.merchant_uid;
+          msg += '결제 금액 : ' + rsp.amount;
+          msg += '카드 승인번호 : ' + 123123123;
+          
+        } else { // 실패시
+          var msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+          orderform.action = "<%=cp%>/order/singleOrder.do";
+          orderform.submit();
+        }
+      });       
+    }
+  </script>
 </body>
 </html>
