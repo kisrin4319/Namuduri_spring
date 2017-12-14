@@ -164,7 +164,7 @@ public class BooksController {
 	// 리뷰 쓰기
 	@RequestMapping(value = "/books/review.do", method = RequestMethod.POST)
 	public ModelAndView writeReview(@RequestParam int book_num, @RequestParam String review_pw,
-			@RequestParam String review_content, @RequestParam int star_point, HttpSession session) {
+			@RequestParam String review_content, @RequestParam int rating, HttpSession session) {
 
 		ReviewModel writeReview = new ReviewModel();
 
@@ -174,7 +174,7 @@ public class BooksController {
 		writeReview.setMember_id(session_id);
 		writeReview.setReview_pw(review_pw);
 		writeReview.setReview_content(review_content);
-		writeReview.setStar_point(star_point);
+		writeReview.setStar_point(rating);
 
 		booksService.reviewWrite(writeReview);
 

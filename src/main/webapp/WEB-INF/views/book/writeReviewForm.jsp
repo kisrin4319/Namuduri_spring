@@ -15,19 +15,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
-<script src ="<%=cp%>/bootstrap/js/review.js"></script>
+<script src="<%=cp%>/bootstrap/js/review.js"></script>
 <style type="text/css">
- .animated {
-    -webkit-transition: height 0.2s;
-    -moz-transition: height 0.2s;
-    transition: height 0.2s;
+.animated {
+	-webkit-transition: height 0.2s;
+	-moz-transition: height 0.2s;
+	transition: height 0.2s;
 }
 
-.stars
-{
-    margin: 20px 0;
-    font-size: 24px;
-    color: #d17581;
+.stars {
+	margin: 20px 0;
+	font-size: 24px;
+	color: #d17581;
 }
 </style>
 </head>
@@ -52,26 +51,27 @@
 													<input type="text" name="member_id" class="text" title="작성자 입력" />
 												</c:when>
 												<c:otherwise>
-													<input type="text" name="member_id" value="${member_id}" class="text" title="작성자 입력" />
+												<p>
+													<input type="text" name="member_id" value="${member_id}" class="form-control animated" title="작성자 입력" />
+												</p>
 												</c:otherwise>
 											</c:choose></td>
 									</tr>
-									<br/>
 									<tr>
 										<th>비밀번호</th>
-										<td><input type="password" name="review_pw" class="text" title="비밀번호 입력" /></td>
+										<td>
+											<p>
+										<input type="password" name="review_pw" class="form-control animated" title="비밀번호 입력" />
+										</p>
+										</td>
 									</tr>
 								</tbody>
-								<br/>
-								<input id="ratings-hidden" name="rating" type="hidden">
-								<textarea class="form-control animated" cols="20" id="new-review" name="comment" placeholder="Enter your review here..." rows="1"></textarea>
+								<br /> <input id="ratings-hidden" name="rating" type="hidden">
+								<textarea class="form-control animated" cols="20" id="new-review" name="review_content" placeholder="Enter your review here..." rows="1"></textarea>
 								<div class="text-right">
 									<div class="stars starrr" data-rating="0"></div>
-									<a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display: none; margin-right: 10px;">
-										<span class="glyphicon glyphicon-remove"></span>
-										Cancel
-									</a>
-									<button class="btn btn-success btn-lg" type="submit">Save</button>
+										<button type="button" class="btn btn-danger" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">CANCEL</button>
+										<button type="submit" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">SAVE</button>
 								</div>
 							</form>
 						</div>
