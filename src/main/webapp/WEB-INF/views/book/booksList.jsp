@@ -213,7 +213,7 @@ img.soldout {
 													<option value="3">출판사</option>
 												</select>
 												<input type="text" name="searchKeyword" size="8">
-												<button type="submit" style="height: 26px;">
+												<button type="submit" style="height: 26px;" class="btn btn-info">
 													<i class="fa fa-search"></i>
 												</button>
 											</form>
