@@ -19,7 +19,6 @@
 			alert("제목을 입력해주세요.");
 			return false;
 		}
-
 		else if (frm.member_id.value == "") {
 			alert("이름을 입력해주세요.");
 			return false;
@@ -29,7 +28,6 @@
 			alert("비밀번호를 입력해주세요.");
 			return false;
 		}
-
 		else if (frm.board_content.value == "") {
 			alert("내용을 입력해주세요.");
 			return false;
@@ -49,7 +47,7 @@
 <body>
 	<h2 class="cscenter_h2">고객센터</h2>
 	<h3 class="bul_green">질문답변 게시판</h3>
-	<form action="<%=cp%>/board/BoardReply.do" method="post" name="regform" id="regform">
+	<form action="<%=cp%>/board/BoardReply.do" method="post" name="regform" id="regform" onsubmit="return validation();">
 		<input type="hidden" name="board_num" value="${boardModel.board_num}" />
 		<input type="hidden" name="currentPage" value="${currentPage}" />
 		<input type="hidden" name="id" value="${session_member_id}" />
@@ -111,7 +109,7 @@
 			</tr>
 		</table>
 		<div id="Bbutton">
-			<input name="button" type="submit" value="작성완료" class="Bbutton" onclick="validation()" />
+			<input name="submit" type="submit" value="작성완료" class="Bbutton" />
 			<input name="list" type="button" value="목록" class="Bbutton" onclick="javascript:location.href='boardList.do'" />
 		</div>
 	</form>

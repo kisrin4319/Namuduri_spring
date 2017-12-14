@@ -60,7 +60,7 @@
 	<!-- 도서 상세보기 -->
 	<select id="selectBookOne" resultType="UsedBooksModel">
 		<include refid="select-bookall" />
-		<include refid="where-booknum" />
+		WHERE USED_BOOK_NUM = #{used_book_num}
 	</select>
 	<select id="selectNewest" resultType="UsedBooksModel">
 		select BOOK_NUM,

@@ -6,7 +6,14 @@ public interface BoardDao {
 
 	// 게시판 목록
 	public List<BoardModel> boardList();
+	
+	public List<BoardModel> adminBoardList();
+	
+	public List<BoardModel> normalBoardList();
+	
+	public List<BoardModel> secretBoardList();
 
+	
 	// 게시글 내용 보기
 	public BoardModel boardDetail(int board_num);
 
@@ -21,6 +28,9 @@ public interface BoardDao {
 
 	// 게시글 삭제
 	public void BoardDelete(int board_num);
+	
+	// 게시글 원문삭제
+	public void BoardAllDelete(int board_num);
 
 	// 게시판 검색
 	List<BoardModel> Search0(String search);

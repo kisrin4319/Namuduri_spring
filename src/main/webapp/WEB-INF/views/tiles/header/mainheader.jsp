@@ -153,7 +153,7 @@
 											<a href="<%=cp%>/board/boardList.do">Q&A</a>
 										</li>
 										<li>
-											<a href="#">FAQ</a>
+											<a href="<%=cp%>/faq/faqList.do">FAQ</a>
 										</li>
 									</ul>
 								<li>

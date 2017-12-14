@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="coupon">
+
+	<sql id="select-couponAll">
+		SELECT * FROM COUPON
+	</sql>
+
+	
+	<!-- 쿠폰 리스트 -->
+	<select id="couponList" resultType="CouponModel">
+		<include refid="select-couponAll" />
+		ORDER BY COUPON_DATE DESC
+	</select>
+
+	<!-- 쿠폰 생성 -->
+	<insert id="writeCoupon" parameterType="CouponModel"> 
+		<![CDATA[
+		BEGIN
+			FOR i IN 0..20
+			LOOP
+			INSERT INTO COUPON(COUPON_NUM,COUPON_CODE,COUPON_PRICE,COUPON_DATE) VALUES(COUPON_NUM_SEQ.NEXTVAL,SELECT DBMS_RANDOM.STRING('X', 20) STR FROM DUAL,SELECT DBMS_RANDOM.VALUE(2000,10000) RANDOM FROM DUAL,sysdate+7);
+			END LOOP;
+		END;
+		/
+		]]>
+	</insert>
+	
+	<!-- 쿠폰 조회 -->
+	<select id="couponSelectOne" resultType="int">
+		select count(*) from coupon where coupon_code = #{coupon_code}
+	</select>
+	
+	<select id="couponUse" resultType="int">
+		select coupon_price from coupon where coupon_code =#{coupon_code}
+	</select>
+	<!-- 쿠폰 삭제 -->
+	<delete id="deleteCoupon"> 
+		DELETE FROM COUPON WHERE COUPON_CODE = #{COUPON_CODE} 
+	</delete>
+	
+	<!-- 만료 쿠폰 삭제 -->
+	<delete id="deleteCouponAll">
+		<![CDATA[ 
+		DELETE FROM COUPON WHERE COUPON_DATE < sysdate
+		]]>
+	</delete>
+	
+	
+</mapper>

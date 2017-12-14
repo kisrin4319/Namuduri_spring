@@ -16,15 +16,31 @@ public class BoardService implements BoardDao {
 	// 게시판 목록
 	@Override
 	public List<BoardModel> boardList() {
-		return sqlSessionTemplate.selectList("board.boardList");
+		return sqlSessionTemplate.selectList("board.boardList");   	//전체 목록
 	}
-
+		
+	@Override
+	public List<BoardModel> adminBoardList() {
+		return sqlSessionTemplate.selectList("board.adminBoardList");	//공지사항 목록
+	}
+	
+	@Override
+	public List<BoardModel> normalBoardList() {
+		return sqlSessionTemplate.selectList("board.normalBoardList");	//일반게시판 목록
+	}
+	
+	@Override
+	public List<BoardModel> secretBoardList() {
+		return sqlSessionTemplate.selectList("board.secretBoardList");	//비밀글 목록
+	}
+	
+	
 	// 게시글 내용 보기
 	@Override
 	public BoardModel boardDetail(int board_num) {
 		return sqlSessionTemplate.selectOne("board.selectBoardOne", board_num);
 	}
-
+	
 	// 게시판 검색
 	@Override
 	public List<BoardModel> Search0(String search) {
@@ -64,6 +80,12 @@ public class BoardService implements BoardDao {
 	@Override
 	public void BoardDelete(int board_num) {
 		sqlSessionTemplate.delete("board.BoardDelete", board_num);
+	}
+	
+	// 게시글 원문삭제
+	@Override
+	public void BoardAllDelete(int board_num) {
+		sqlSessionTemplate.delete("board.BoardAllDelete", board_num);
 	}
 
 }
