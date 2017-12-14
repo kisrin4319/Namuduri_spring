@@ -23,6 +23,7 @@
 				<form action="checkAction.do" method="post">
 					<input type="hidden" name="board_num" value="${board_num}" />
 					<input type="hidden" name="currentPage" value="${currentPage}" />
+					<input type="hidden" name="ref" value ="${ref }" />
 					<tbody>
 						<tr>
 							<td width="100" bgcolor="#F4F4F4">

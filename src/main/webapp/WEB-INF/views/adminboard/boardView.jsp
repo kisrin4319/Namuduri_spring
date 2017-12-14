@@ -14,7 +14,6 @@
 	function open_win_noresizable(url, member_id)
 	{
 		var oWin = window.open(url, member_id, "scrollbars=no, status=no, resizable=no, width=500, height=200");
-		
 	}
 </script>
 </head>
@@ -24,29 +23,19 @@
 	<br />
 	<table class="boardView" width="770" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<th width="100">
-				<b>번호</b>
-			</th>
+			<th width="100"><b>번호</b></th>
 			<td style="height: 38px;">${boardModel.board_num}</td>
-			<th width="100">
-				<b>글쓴이</b>
-			</th>
+			<th width="100"><b>글쓴이</b></th>
 			<td style="height: 38px;">${boardModel.member_id}</td>
-			<th width="100">
-				<b>날짜</b>
-			</th>
+			<th width="100"><b>날짜</b></th>
 			<td style="height: 25px;">${boardModel.board_regdate}</td>
 		</tr>
 		<tr>
-			<th width="100">
-				<b>제목</b>
-			</th>
+			<th width="100"><b>제목</b></th>
 			<td colspan="5" width="770" style="height: 38px;">${boardModel.board_title}</td>
 		</tr>
 		<tr>
-			<th width="100">
-				<b>내용</b>
-			</th>
+			<th width="100"><b>내용</b></th>
 			<td colspan="5" width="770" style="height: 70px;">${boardModel.board_content }</td>
 		</tr>
 	</table>
@@ -57,10 +46,11 @@
 		<c:url var="deleteURL" value="/board/boardDelete.do">
 			<c:param name="board_num" value="board_num" />
 		</c:url>
+		
 		<!-- 0번 비공개,1번 일반글,2번 공지사항 -->
 		<c:if test="${ boardModel.board_type == 2}">
 			<c:if test="${member_id eq 'admin'}">
-				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">
+				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','modify')">
 				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
 				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 			</c:if>
@@ -69,9 +59,17 @@
 			</c:if>
 		</c:if>
 		<c:if test="${boardModel.board_type != 2}">
+			<c:choose>
+				<c:when test="${boardModel.re_step == 1 }">
+					<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
+				</c:when>
+				<c:when test="${boardModel.re_step != 1 }">
+					<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','DeleteAll')">
+				</c:when>
+			</c:choose>				
 			<input name="list" type="button" value="답변달기" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/replyForm.do?board_num=${boardModel.board_num}&ref=${boardModel.ref }&re_step=${boardModel.re_step }'">
-			<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}','modify')">
-			<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')">
+			<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','modify')">
+			<%-- <input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','Delete')"> --%>
 			<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/board/boardList.do?currentPage=${currentPage}'">
 		</c:if>
 	</div>
