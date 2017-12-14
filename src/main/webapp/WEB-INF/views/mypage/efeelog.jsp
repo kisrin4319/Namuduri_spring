@@ -15,10 +15,7 @@
 <script language="javascript">
 	function bookSearch() {
 		var searchUrl = 'http://localhost:8080/namuduri/efeelogSearchView.do';
-		window.open(
-				searchUrl,
-				"confirm",
-				"toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
+		window.open(searchUrl,"confirm", "toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
 	}
 	
 	function goPage(){
@@ -53,12 +50,11 @@
 										</tr>
 									</thead>							
 								</table><br><br>
-								<div class="btn-toolbar">
-									<button type="button" class="btn btn-default btn-lg" onclick="javascript:bookSearch(this.form)"><span class="glyphicon glyphicon-book"></span>Search</button>
-									
-								</div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary btn-block" onclick="javascript:bookSearch(this.form)"><span class="glyphicon glyphicon-book"></span>Search</button>
+								</div><br>
 								<div class="form-group">
-								<img src="" id="book_img">
+								<img src="" id="book_img" class="img-responsive center-block">
 								<input type="hidden" name="book_num" id="book_num">
 								<table>
 									<thead>
@@ -70,13 +66,8 @@
 									</thead>
 								</table><br><br>								
 								</div>
-								<div>
-									<input type="button" class="btn-default" value="게시글 올리기" onclick="goPage()">
-										<!-- <span>
-											<i class="fa fa-user"></i>
-											게시글 올리기
-										</span> -->
-									
+								<div class="text-center">
+									<input type="button" class="btn btn-primary btn-block" value="게시글 올리기" onclick="goPage()">						
 								</div>																
 							</div>
 						</form>						
@@ -89,7 +80,7 @@
 								<table>							
 									<thead>
 										<tr>
-											<th><div class="user_name">${ session_id }님</div></th>										
+											<th><div class="user_name">${ item.member_id }님</div></th>										
 										</tr>
 									</thead>							
 								</table><br>
@@ -99,34 +90,24 @@
 											<td><div class="write_date">${ item.efeelog_regdate }</div></td>
 										</tr>
 									</thead>
-								</table>
+								</table><br>
 								<div class="form-group">
 								<table>
 									<thead>
 										<tr>
-											<td align="center">${ item.book_name }</td>
-										</tr><br>
+											<p class="text-center"><span class="text-primary">${ item.book_name }</span></p>
+										</tr>
 									</thead>
 								</table>								
-								<img src="<%=cp%>/upload/${ item.book_image }" id="book_img">
+								<img src="<%=cp%>/upload/${ item.book_image }" class="img-responsive center-block">
 								</div>
 								<table>
 									<thead>
 										<td>
 											<textarea class="form-control" rows="3" cols="30" name="memo">${ item.efeelog_memo }</textarea>
-										</td>
-										<%-- <tr>
-											<td align="center">${ item.efeelog_memo }</td>
-										</tr> --%>
+										</td>										
 									</thead>
-								</table>
-								<!-- <table>
-									<thead>
-										<tr>
-											<td align="center"></td>
-										</tr>
-									</thead>
-								</table> -->														
+								</table>																				
 							</div>
 						</form>
 					</div>

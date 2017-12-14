@@ -40,9 +40,4 @@
 		ORDER BY EFEELOG_REGDATE DESC
 	</select>
 	
-	<select id="efeelogData" resultType="BooksModel">
-		SELECT * FROM BOOK
-		WHERE BOOK_NUM = #{book_num}
-	</select>
-	
 </mapper>

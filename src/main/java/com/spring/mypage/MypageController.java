@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +38,9 @@ public class MypageController {
 	private OrderService orderService;
 	@Resource
 	private BooksService booksService;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	ModelAndView mv;
 	String session_id;
@@ -243,6 +248,14 @@ public class MypageController {
 		memberModel.setMember_phone(request.getParameter("member_phone"));
 		memberModel.setMember_email(request.getParameter("member_email"));
 		memberModel.setMember_email_get(request.getParameter("member_email_get"));
+		
+		System.out.println("=========================================");
+		
+		String password = memberModel.getMember_pw();
+		String encryptPassword = passwordEncoder.encode(password);
+		System.out.println(encryptPassword);
+		
+		memberModel.setMember_pw(encryptPassword);
 		
 		int member = mypageService.memberModify(memberModel);
 		

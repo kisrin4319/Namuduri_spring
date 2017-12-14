@@ -85,12 +85,17 @@
 												<p class="text-left">회원 탈퇴</p>											
 											</a>
 										</li>
+										<li>
+											<a href="<%=cp%>/eFeelogView.do">
+												<p class="text-left">eFeelog</p>
+											</a>
+										</li>
 									</ul>
 								</aside>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-9 col-sm-12 hidden-xs">
+					<div class="col-md-9 col-sm-12">
 						<div class="mainmenu text-center">
 						<table class="table">
 							<thead>
@@ -169,7 +174,7 @@
 								<td colspan="8">${pagingHtml}</td>
 							</tr>
 						</table>
-						<table class="table">
+						<!-- <table class="table">
 							<thead>
 								<tr>
 									<th>주문/배송 안내</th>
@@ -192,7 +197,7 @@
 							<li>배송완료 : 주문하신 상품이 고객님께 전달된 상태입니다.</li>
 						</ol>
 					</div>
-					<!-- .hide_text-->
+					.hide_text
 
 					<ul class="list_normal">
 						<li><span class="font_blue02">주문취소는 주문/배송 조회 목록 및
@@ -209,7 +214,7 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 						</div>
 					</div>
 				</div>

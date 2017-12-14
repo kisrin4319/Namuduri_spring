@@ -62,7 +62,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-9 col-sm-12 hidden-xs">
+					<div class="col-md-9 col-sm-12">
                         <div class="mainmenu text-center">
 						<table class="table">
 							<thead>
