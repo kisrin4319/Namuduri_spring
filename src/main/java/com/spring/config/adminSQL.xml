@@ -204,8 +204,8 @@
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	
 	<select id="chartM" resultType="ChartModel">
-		select count(*) Item_C, trunc(member_join_date) DayNo 
-		from member group by trunc(member_join_date) order by DayNo desc
+		select count(*) Item_C, to_char(member_join_date,'mm.dd') DayNo 
+		from member group by to_char(member_join_date,'mm.dd') order by DayNo desc
 	</select>
 	
 	<select id="chartNewM">

@@ -2,11 +2,13 @@ package com.spring.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.Session;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -687,43 +690,63 @@ public class AdminController {
 	public ModelAndView chartM() {
 		
 		JSONObject data = new JSONObject();
+		
+		JSONArray colsData = new JSONArray();
 		JSONObject cols1 = new JSONObject();
 		JSONObject cols2 = new JSONObject();
-		JSONArray colsData = new JSONArray();
 		
-		cols1.put("type", "string");
+		cols1.put("id", "dayNo");
+		cols1.put("label", "날짜");
+		cols1.put("type", "Date");
+		
+		cols2.put("id", "item_C");
+		cols2.put("label", "회원 수");
 		cols2.put("type", "number");
+		
 		colsData.put(cols1);
 		colsData.put(cols2);
 		
 		System.out.println(colsData);
-		/*{"type": "string"}, {"type": "number"}*/
+		/*[{"id":"dayNo","label":"날짜","type":"String"},{"id":"item_C","label":"회원 수","type":"number"}]*/
 		
 		
+		JSONArray rowsData = new JSONArray(); //rows 리스트
+		JSONObject rowData = new JSONObject(); //{"c":한 행의 object값들을 담은 JSONArray}
+		JSONArray row = new JSONArray(); //한 행에 필요한 JSONObject들을 담기 위한 JSONArray
+		JSONObject row1 = new JSONObject(); //"property":value의 한 쌍
+		JSONObject row2 = new JSONObject();
 		
+		List<ChartModel> list = adminService.chartM();
+		System.out.println(list);
 		
-		/*ChartModel chartModel = null;
-		List<ChartModel> listAll = adminService.chartM();
-		JSONObject jobj = new JSONObject();
-		JSONArray jlist = new JSONArray(listAll);*/
-		
-		/*for(int i=0; i<listAll.size(); i++) {
-			chartModel = listAll.get(i);
+		/*rowData를 list의 행만큼 만들어서 rowsData안에 넣기!*/
+		for(int i=0; i<list.size(); i++) {
 			
-			JSONObject obj = new JSONObject();
-			obj.put("dayNo", chartModel.getDayNo());
-			obj.put("item",chartModel.getItem());
-			obj.put("item_C", chartModel.getItem_C());
+			ChartModel chartModel = list.get(i);
 			
-			jlist.put(obj);
-			
-		}*/
+				row1.put("v", chartModel.getDayNo());
+				row.put(row1);
+				
+				row2.put("v", chartModel.getItem_C());
+				row.put(row2);
+				
+				rowData.put("c", row);
+				
+				
+		}
 		
-		/*System.out.println(jlist);*/
+		rowsData.put(rowData);
 		
-		/*mv.addObject("list", jlist);
-		mv.addObject("title", "insert json...");
-		mv.setViewName("adminChart");*/
+		data.put("cols", colsData);
+		data.put("rows", rowsData);
+		
+		
+		System.out.println(data);
+	
+		
+		/*mv.addObject("data", data);*/
+		mv.addObject("list", list);
+		mv.setViewName("adminChart");
 		
 		return mv;
 	}

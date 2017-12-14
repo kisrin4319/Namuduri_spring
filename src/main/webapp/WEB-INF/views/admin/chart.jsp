@@ -1,70 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String cp = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript">
 
-      /* function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+var list = "${list}"
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+function drawChart() {
+  
+  var data = google.visualization.DataTable(
+		  {
+			  "cols": [
+			        {"id":"","label":"Topping","pattern":"","type":"string"},
+			        {"id":"","label":"Slices","pattern":"","type":"number"}
+			      ],
+			  "rows": [
+			        {"c":[{"v":"Mushrooms","f":null},{"v":3,"f":null}]},
+			        {"c":[{"v":"Onions","f":null},{"v":1,"f":null}]},
+			        {"c":[{"v":"Olives","f":null},{"v":1,"f":null}]},
+			        {"c":[{"v":"Zucchini","f":null},{"v":1,"f":null}]},
+			        {"c":[{"v":"Pepperoni","f":null},{"v":2,"f":null}]}
+			      ]
+			}
+  );
+  var options = {
+          title: "제목옵션",
+          width: 900, // 넓이 옵션
+          height: 300, // 높이 옵션
+  };
+  
+  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, options);
-      } */
-      
-      function drawChart() {
-    	  var list = '${list}';
-    	  var data = new google.visualization.DataTable(
-    		{
-    			cols: [{id: 'task', label: 'Employee Name', type: 'string'},
-    		       		{id: 'startDate', label: 'Start Date', type: 'date'}],
-    			rows: [
-    					//리스트를 이런식으로....
-    					{c:[{v: 'Mike'}, {v: new Date(2008, 1, 28), f:'February 28, 2008'}]},
-    		            {c:[{v: 'Bob'}, {v: new Date(2007, 5, 1)}]},
-    		            {c:[{v: 'Alice'}, {v: new Date(2006, 7, 16)}]},
-    		            {c:[{v: 'Frank'}, {v: new Date(2007, 11, 28)}]},
-    		            {c:[{v: 'Floyd'}, {v: new Date(2005, 3, 13)}]},
-    		            {c:[{v: 'Fritz'}, {v: new Date(2011, 6, 1)}]}
-    		           ]
-    		}
-    	  );
-    	  
-    	  var options = {
-    	          title: "${title}",
-    	          curveType: 'function',
-    	          legend: { position: 'bottom' }
-    	        };
-    	  
-    	  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-    	  
-    	  chart.draw(data, options);
-      }
-      
-    </script>
+  chart.draw(data, options);
+}
+document.write(list);
+
+</script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row page-titles">
 			<div class="col-md-5 col-8 align-self-center">
-				<h3 class="text-themecolor">Dashboard</h3>
+				<h3 class="text-themecolor">CHART</h3>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
 					<li class="breadcrumb-item active">Dashboard</li>
@@ -72,7 +56,7 @@
 			</div>
 		</div>
 
-		<div id="curve_chart" style="width: 900px; height: 500px"></div>
+		<div id="curve_chart"></div>
 
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
 
