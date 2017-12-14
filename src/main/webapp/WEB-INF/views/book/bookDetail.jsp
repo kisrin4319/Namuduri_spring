@@ -265,6 +265,12 @@ img.soldout {
 									</c:choose>
 								</tbody>
 							</table>
+							<ul class="pager" style="text-align: right;">
+ 								 <li><a href="bookDetail.do?currentPage=${currentPage-1}&book_num=${view.book_num}">＜</a></li>
+  								${pagingHtml}
+  								<li><a href="bookDetail.do?currentPage=${currentPage+1}&book_num=${view.book_num}">＞</a></li>
+							</ul>
+
 						</div>
 					</div>
 					<div class="col-md-9">
