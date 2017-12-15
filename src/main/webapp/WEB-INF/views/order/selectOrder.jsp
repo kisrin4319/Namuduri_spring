@@ -18,10 +18,10 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
 		<li>
-			<a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a>
+			<a href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
 		</li>
 	</ul>
 	<hr>
@@ -104,7 +104,6 @@
 											<div class="col-md-6">
 												<p class="form-row">
 													<input type="text" name="order_receive_name" value="" placeholder="First Name *">
-													<input type="hidden" name="order_trade_payer" value="name" />
 												</p>
 											</div>
 											<div class="col-md-12">
@@ -173,8 +172,6 @@
 								<div class="panel-heading" role="tab" id="headingFour">
 									<h4 class="panel-title">
 										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-											<span>4</span>
-											Payment Information
 											<span>4</span>
 											Order Review
 										</a>

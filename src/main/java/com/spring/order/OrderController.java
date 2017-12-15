@@ -136,8 +136,8 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
-		orderModel.setOrder_receive_memo(order_receive_memo);
 		orderModel.setOrder_trade_payer(session_id);
+		orderModel.setOrder_receive_memo(order_receive_memo);
 		orderModel.setOrder_receive_moneysum(sum-point);
 		orderService.orderIn(orderModel);
 
@@ -225,6 +225,7 @@ public class OrderController {
 		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
 		int point = Integer.parseInt(request.getParameter("point"));
 		int sum = orderModel.getOrder_receive_moneysum();
+		String order_receive_memo = request.getParameter("order_receive_memo");
 		Calendar today = Calendar.getInstance();
 		Date day = today.getTime();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMddmmss");
@@ -241,7 +242,9 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_trade_payer(session_id);
 		orderModel.setOrder_receive_moneysum(sum-point);
+		orderModel.setOrder_receive_memo(order_receive_memo);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기 + 재고관리
@@ -345,6 +348,7 @@ public class OrderController {
 		int bookMoney = Integer.parseInt(request.getParameter("bookMoney"));
 		int point = Integer.parseInt(request.getParameter("point"));
 		int sum = orderModel.getOrder_receive_moneysum();
+		String order_receive_memo = request.getParameter("order_receive_memo");
 		
 		String coupon_code = "";
 		if(request.getParameter("c_code")!=null || !request.getParameter("c_code").equals("")) {
@@ -374,7 +378,9 @@ public class OrderController {
 		orderModel.setOrder_bank_name("국민은행 (주)나무두리");
 		orderModel.setOrder_bank_num("147963-01-794613");
 		orderModel.setMember_id(session_id);
+		orderModel.setOrder_trade_payer(session_id);
 		orderModel.setOrder_receive_moneysum(sum-point);
+		orderModel.setOrder_receive_memo(order_receive_memo);
 		orderService.orderIn(orderModel);
 
 		// 데이터베이스에 도서 정보 넣기 + 장바구니 삭제 + 재고관리
