@@ -14,6 +14,7 @@ img.resize {
 	width: 270px;
 	height: 280px;
 }
+
 img.Newresize {
 	width: 370px;
 	height: 300px;
@@ -99,23 +100,16 @@ img.Newresize {
 								</c:url>
 								<a href="${viewURL}" class="single-banner-image-wrapper">
 									<img class="Newresize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
 								</a>
 								<div class="product-description">
 									<div class="functional-buttons">
-										<a href="javascript:isBasket(${list.book_num})">
+										<a href="javascript:isBasket(${list.book_num})" style="padding-top: 11px;">
 											<i class="fa fa-shopping-cart"></i>
 										</a>
-										<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist">
+										<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 											<i class="fa fa-heart-o"></i>
 										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 											<i class="fa fa-compress"></i>
 										</a>
 									</div>
@@ -209,22 +203,59 @@ img.Newresize {
 												<a href="${viewURL}" class="single-banner-image-wrapper">
 													<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${booksDateList[stat.index].book_image}" />
 													<div class="rating-icon">
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<c:if test="${booksDateList[stat.index].star_point == 0}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index].star_point == 1}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index].star_point == 2}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index].star_point == 3}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index].star_point == 4}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index].star_point == 5}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+														</c:if>
 													</div>
 												</a>
 												<div class="product-description">
 													<div class="functional-buttons">
-														<a href="javascript:isBasket(${booksDateList[stat.index].book_num})">
+														<a href="javascript:isBasket(${booksDateList[stat.index].book_num})" style="padding-top: 11px;">
 															<i class="fa fa-shopping-cart"></i>
 														</a>
-														<a href="javascript:isWish(${booksDateList[stat.index].book_num})" title="Add to Wishlist">
+														<a href="javascript:isWish(${booksDateList[stat.index].book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 															<i class="fa fa-heart-o"></i>
 														</a>
-														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 															<i class="fa fa-compress"></i>
 														</a>
 													</div>
@@ -247,22 +278,59 @@ img.Newresize {
 												<a href="${viewURL}" class="single-banner-image-wrapper">
 													<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${booksDateList[stat.index+6].book_image}">
 													<div class="rating-icon">
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<c:if test="${booksDateList[stat.index+6].star_point == 0}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index+6].star_point == 1}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index+6].star_point == 2}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index+6].star_point == 3}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index+6].star_point == 4}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${booksDateList[stat.index+6].star_point == 5}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+														</c:if>
 													</div>
 												</a>
 												<div class="product-description">
 													<div class="functional-buttons">
-														<a href="javascript:isBasket(${booksDateList[stat.index+6].book_num})">
+														<a href="javascript:isBasket(${booksDateList[stat.index+6].book_num})" style="padding-top: 11px;">
 															<i class="fa fa-shopping-cart"></i>
 														</a>
-														<a href="javascript:isWish(${booksDateList[stat.index+6].book_num})" title="Add to Wishlist">
+														<a href="javascript:isWish(${booksDateList[stat.index+6].book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 															<i class="fa fa-heart-o"></i>
 														</a>
-														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 															<i class="fa fa-compress"></i>
 														</a>
 													</div>
@@ -293,22 +361,59 @@ img.Newresize {
 												<a href="${viewURL}" class="single-banner-image-wrapper">
 													<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${bestSellerList[stat.index].book_image}" />
 													<div class="rating-icon">
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<c:if test="${bestSellerList[stat.index].star_point == 0}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index].star_point == 1}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index].star_point == 2}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index].star_point == 3}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index].star_point == 4}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index].star_point == 5}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+														</c:if>
 													</div>
 												</a>
 												<div class="product-description">
 													<div class="functional-buttons">
-														<a href="javascript:isBasket(${bestSellerList[stat.index].book_num})">
+														<a href="javascript:isBasket(${bestSellerList[stat.index].book_num})" style="padding-top: 11px;">
 															<i class="fa fa-shopping-cart"></i>
 														</a>
-														<a href="javascript:isWish(${bestSellerList[stat.index].book_num})" title="Add to Wishlist">
+														<a href="javascript:isWish(${bestSellerList[stat.index].book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 															<i class="fa fa-heart-o"></i>
 														</a>
-														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 															<i class="fa fa-compress"></i>
 														</a>
 													</div>
@@ -331,22 +436,59 @@ img.Newresize {
 												<a href="${viewURL}" class="single-banner-image-wrapper">
 													<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${bestSellerList[stat.index+6].book_image}">
 													<div class="rating-icon">
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star icolor"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 0}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 1}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 2}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 3}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 4}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${bestSellerList[stat.index+6].star_point == 5}">
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+															<i class="fa fa-star icolor"></i>
+														</c:if>
 													</div>
 												</a>
 												<div class="product-description">
 													<div class="functional-buttons">
-														<a href="javascript:isBasket(${bestSellerList[stat.index+6].book_num})">
+														<a href="javascript:isBasket(${bestSellerList[stat.index+6].book_num})" style="padding-top: 11px;">
 															<i class="fa fa-shopping-cart"></i>
 														</a>
-														<a href="javascript:isWish(${bestSellerList[stat.index+6].book_num})" title="Add to Wishlist">
+														<a href="javascript:isWish(${bestSellerList[stat.index+6].book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 															<i class="fa fa-heart-o"></i>
 														</a>
-														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+														<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 															<i class="fa fa-compress"></i>
 														</a>
 													</div>

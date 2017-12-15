@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.common.Paging;
+import com.spring.usedbook.UsedBooksModel;
+import com.spring.usedbook.UsedBooksService;
 
 @Controller
 public class BooksController {
@@ -25,6 +27,8 @@ public class BooksController {
 
 	@Resource
 	private BooksService booksService;
+	@Resource
+	private UsedBooksService usedBooksService;
 
 	ModelAndView mv = new ModelAndView();
 	String session_id;
@@ -41,7 +45,7 @@ public class BooksController {
 	public ModelAndView booksList(HttpServletRequest request) throws Exception {
 
 		List<Map<String, Object>> booksList = new ArrayList<Map<String, Object>>();
-
+		
 		String book_category = request.getParameter("book_category");
 		String searchKeyword = request.getParameter("searchKeyword");
 		int searchNum = 0;
@@ -125,7 +129,12 @@ public class BooksController {
 		}
 
 		review = review.subList(paging.getStartCount(), lastCount);
+		List<UsedBooksModel> used = usedBooksService.NewList(num);
+		if(used.size() > 6) {
+			used = used.subList(0, 6);
+		}
 
+		mv.addObject("used", used);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("view", view);
 		mv.addObject("review", review);

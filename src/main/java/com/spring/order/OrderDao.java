@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.basket.BasketModel;
 import com.spring.book.BooksModel;
+import com.spring.member.MemberModel;
 
 public interface OrderDao {
 
@@ -34,4 +35,6 @@ public interface OrderDao {
 	// 9. 주문 후 재고 관리
 	public void updateStock(BooksModel book);
 
+	// 10. 포인트 사용 후 차감 처리
+	public void point(MemberModel memberModel);
 }

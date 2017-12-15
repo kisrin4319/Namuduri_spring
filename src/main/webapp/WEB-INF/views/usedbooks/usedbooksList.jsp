@@ -48,43 +48,43 @@ img.top2 {
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu" style="text-align: left;">
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=단편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=단편소설">
 												<i class="fa fa-angle-double-right"></i>
 												short story
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=장편소설">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=장편소설">
 												<i class="fa fa-angle-double-right"></i>
 												feature novel
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=자기계발">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=자기계발">
 												<i class="fa fa-angle-double-right"></i>
 												self-development
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=시/에세이">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=시/에세이">
 												<i class="fa fa-angle-double-right"></i>
 												poem & essay
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=어린이(초등)">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=어린이(초등)">
 												<i class="fa fa-angle-double-right"></i>
 												kids & schoolchild
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=중/고등참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=중/고등참고서">
 												<i class="fa fa-angle-double-right"></i>
 												teenager
 											</a>
 										</li>
 										<li style="margin-left: 35px;">
-											<a href="<%=cp%>/books/booksList.do?book_category=취업/참고서">
+											<a href="<%=cp%>/books/usedBooksList.do?book_category=취업/참고서">
 												<i class="fa fa-angle-double-right"></i>
 												job applicants
 											</a>
@@ -231,11 +231,41 @@ img.top2 {
 														<a class="single-banner-image-wrapper">
 															<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
 															<div class="rating-icon">
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star icolor"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
+																<c:if test="${list.used_book_status eq '최상' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '상' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '중' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '하' }">
+																	<i class="fa fa-star icolor"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
+																<c:if test="${list.used_book_status eq '최하' }">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</c:if>
 															</div>
 														</a>
 													</div>
@@ -267,8 +297,46 @@ img.top2 {
 												</div>
 												<div class="col-xs-12 col-sm-7 col-md-8">
 													<div class="deal-product-content">
-														<h4>${list.book_name}</h4>
-														<div class="product-price">
+														<h4 style="margin-bottom: 7px;">${list.book_name}</h4>
+														<div class="list-rating-icon" style="margin-bottom: 7px;">
+															보관상태 : 														
+															<c:if test="${list.used_book_status eq '최상' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '상' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '중' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '하' }">
+																<i class="fa fa-star icolor"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+															<c:if test="${list.used_book_status eq '최하' }">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</c:if>
+														</div>
+														<div class="product-price" style="margin-bottom: 7px;">
 															<span class="new-price">
 																<fmt:formatNumber value="${list.book_new_price}" pattern="###,###,###" />
 																원
@@ -278,33 +346,23 @@ img.top2 {
 																원
 															</span>
 														</div>
-														<div class="list-rating-icon">
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star icolor"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-														<p>${list.book_auth}</p>
-														<p>${list.company_id}</p>
-														<p>책의 상태 설명 : ${list.used_book_status }</p>
-														<p>
-															등록자 : ${list.member_id }&nbsp; 등록일 :[
-															<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />
-															]
+														<h5 style="margin-bottom: 7px;">P <fmt:formatNumber pattern="#,###" value="${list.book_price * 0.05}"/> (5% 적립)</h5>
+														<p style="margin-bottom: 7px;">${list.book_auth}(${list.company_id})</p>
+														<p style="margin-bottom: 7px;">등록자 : ${list.member_id }</p>
+														<p style="margin-bottom: 7px;">등록일 : [<fmt:formatDate value="${list.used_book_regdate}" pattern="yy/MM/dd" />]
 														</p>
-														<div class="availability">
+														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important; margin-bottom: 7px;">
 															<c:if test="${list.member_id eq member_id }">
 																<span>
-																	<a href="javascript:fn_Modify(${list.used_book_num});">Modify</a>
-																</span>
+																	<a href="javascript:fn_Modify(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">Modify</a>
+																</span><br/>
 																<span>
-																	<a href="javascript:fn_Delete(${list.used_book_num});">Delete</a>
+																	<a href="javascript:fn_Delete(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 23px; height: 35px;">Delete</a>
 																</span>
 															</c:if>
 															<c:if test="${list.member_id ne member_id }">
 																<span>
-																	<a href="javascript:fn_Buy(${list.used_book_num});">BUY NOW</a>
+																	<a href="javascript:fn_Buy(${list.used_book_num});" class="right-shoping-cart" style="margin-bottom: 5px; margin-top: 17px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">BUY NOW</a>
 																</span>
 															</c:if>
 														</div>
@@ -314,11 +372,13 @@ img.top2 {
 										</c:forEach>
 									</div>
 								</div>
+								<c:if test="${checkResult >=100000 }">
 								<div class="shopingcart-bottom-area">
 									<div class="shopingcart-bottom-area pull-right">
 										<a class="right-shoping-cart" href="javascript:;" onclick="fn_writeBook()">Enrollment Book</a>
 									</div>
 								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

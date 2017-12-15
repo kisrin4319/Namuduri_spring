@@ -25,6 +25,11 @@ public class BasketService implements BasketDao {
 		return sqlSessionTemplate.selectOne("basket.basketSelectOne",basketModel);
 	}	
 	
+	@Override
+	public BasketModel basketDetail(int basket_num) {
+		return sqlSessionTemplate.selectOne("basket.basketDetail",basket_num);
+	}
+	
 	//3. 장바구니 추가
 	@Override
 	public void BasketInsert(BasketModel basketModel) {
@@ -61,5 +66,4 @@ public class BasketService implements BasketDao {
 		sqlSessionTemplate.delete("basket.basketDeleteAll",member_id);
 	}
 
-	
 }

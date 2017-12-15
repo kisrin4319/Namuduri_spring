@@ -24,6 +24,11 @@ img.top2 {
 	width: 104px;
 	height: 104px;
 }
+
+img.soldout {
+	width: 100px;
+	height: 60px;
+}
 </style>
 </head>
 <body>
@@ -207,7 +212,7 @@ img.top2 {
 													<option value="2">저자</option>
 													<option value="3">출판사</option>
 												</select>
-												<input type="text" placeholder="Enter your book keyword here" name="searchKeyword" size="25">
+												<input type="text" name="searchKeyword" size="8">
 												<button type="submit" style="height: 26px;">
 													<i class="fa fa-search"></i>
 												</button>
@@ -282,6 +287,13 @@ img.top2 {
 														</a>
 														<div class="product-description">
 															<div class="functional-buttons">
+																<c:choose>
+																<c:when test="${list.book_current_count == 0}">
+																	<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
+																	<i class="fa fa-compress"></i>
+																</a>
+																</c:when>
+																<c:otherwise>
 																<a href="javascript:isBasket(${list.book_num})" style="padding-top: 11px;">
 																	<i class="fa fa-shopping-cart"></i>
 																</a>
@@ -291,6 +303,8 @@ img.top2 {
 																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
 																	<i class="fa fa-compress"></i>
 																</a>
+																</c:otherwise>
+																</c:choose>
 															</div>
 														</div>
 													</div>
@@ -312,7 +326,7 @@ img.top2 {
 											<c:url var="viewURL" value="/books/bookDetail.do">
 												<c:param name="book_num" value="${list.book_num}" />
 											</c:url>
-											<div class="single-shop-product">
+											<div class="single-shop-product" style="height: 280px;">
 												<div class="col-xs-12 col-sm-5 col-md-4">
 													<div class="left-item">
 														<a href="${viewURL}">
@@ -325,14 +339,7 @@ img.top2 {
 														<h4>
 															<a href="${viewURL}">${list.book_name}</a>
 														</h4>
-														<div class="product-price" style="margin-bottom: 5px;">
-															<span class="new-price">
-																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" />
-																원
-															</span>
-															<span class="old-price"></span>
-														</div>
-														<div class="list-rating-icon">
+														<div class="list-rating-icon" style="margin-bottom: 5px;">
 															<c:if test="${list.star_point == 0}">
 																<i class="fa fa-star"></i>
 																<i class="fa fa-star"></i>
@@ -376,12 +383,27 @@ img.top2 {
 																<i class="fa fa-star icolor"></i>
 															</c:if>
 														</div>
-														<p>${list.book_auth}</p>
-														<p>${list.company_id}[${list.book_publish_date}]</p>
-														<p>
+														<div class="product-price" style="margin-bottom: 5px;">
+															<span class="new-price">
+																<fmt:formatNumber value="${list.book_price}" pattern="###,###,###" /> 원 
+															</span>
+														</div>
+														<h5 style="margin-bottom: 5px;">P <fmt:formatNumber pattern="#,###" value="${list.book_price * 0.05}"/> (5% 적립)</h5>
+														<p style="margin-bottom: 5px;">${list.book_auth}</p>
+														<p style="margin-bottom: 5px;">${list.company_id}[${list.book_publish_date}]</p>
+														<c:if test="${list.book_current_count != 0}">
+														<p style="margin-bottom: 5px;">
 															<a href="javascript:isWish(${list.book_num})">♡ WISH LIST</a>
 														</p>
+														</c:if>
 														<div class="shopingcart-bottom-area wishlist-bottom-area pull-right" style="float: left !important;">
+															<c:choose>
+															<c:when test="${list.book_current_count == 0}">
+															<span>
+																<img alt="" src="<%=cp%>/img/6-2-sold-out-png-hd.png" class="soldout" style="margin-top: 15px;">
+															</span>
+															</c:when>
+															<c:otherwise>
 															<span>
 																<a href="javascript:isBasket(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 18px; padding-right: 18px; height: 35px;">ADD TO CART</a>
 															</span>
@@ -389,6 +411,8 @@ img.top2 {
 															<span>
 																<a href="javascript:isBuy(${list.book_num});" class="right-shoping-cart" style="margin-bottom: 5px; font-size: small; font-style: oblique; margin-left: 0px; padding-bottom: 10px; padding-left: 30px; padding-right: 30px; height: 35px;">BUY NOW</a>
 															</span>
+															</c:otherwise>
+															</c:choose>
 														</div>
 													</div>
 												</div>
@@ -439,12 +463,47 @@ function fn_slider() {
  	 location.href = '<%=cp%>/books/bookSlider.do?price='+price;
   }
 }
-function upScroll() {
-	document.documentElement.scrollTop = 0;
+
+function resizeImg(osrc) 
+{
+	var bdiv =document.createElement('DIV');
+	document.body.appendChild(bdiv);
+	bdiv.setAttribute("id", "bdiv");
+	bdiv.style.position = 'absolute';
+	bdiv.style.top = 0;
+	bdiv.style.left = 0;
+	bdiv.style.zIndex = 0;
+	bdiv.style.width = document.body.scrollWidth;
+	bdiv.style.height = document.body.scrollHeight;
+	bdiv.style.background = 'pink';
+	bdiv.style.filter = "alpha(opacity=50)";
+	var odiv = document.createElement('DIV');
+	document.body.appendChild(odiv);
+	odiv.style.zIndex = 1;
+	odiv.setAttribute("id", "odiv");
+	odiv.innerHTML = "<a href='javascript:void(closeImg())'><img id='oimg' src='"+osrc+"' border='0' /></a>";
+	var img = document.all['oimg'];
+	var owidth = (document.body.clientWidth)/2 - (img.width)/2;
+	var oheight = (document.body.clientHeight)/2 - (img.height)/2;
+	odiv.style.position = 'absolute';
+	odiv.style.top = oheight + document.body.scrollTop;
+	odiv.style.left = owidth;
+	scrollImg(); 
 }
-function downScroll() {
-	document.documentElement.scrollTop = document.body.scrollHeight;
-}
+	function scrollImg()
+	{
+		var odiv = document.all['odiv'];
+		var img = document.all['oimg'];
+		var oheight = (document.body.clientHeight)/2 - (img.height)/2 + document.body.scrollTop;
+		odiv.style.top = oheight;
+		settime = setTimeout(scrollImg, 100);
+	}
+	function closeImg()
+	{
+		document.body.removeChild(odiv);
+		document.body.removeChild(bdiv);
+		clearTimeout(settime);
+	} 
 </script>
 </body>
 </html>

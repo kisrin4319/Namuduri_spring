@@ -17,6 +17,16 @@ img.resize {
 	width: 270px;
 	height: 370px;
 }
+
+img.used {
+	width: 270px;
+	height: 280px;
+	}
+	
+img.soldout {
+	width: 120px;
+	height: 80px;
+}
 </style>
 </head>
 <body>
@@ -38,7 +48,7 @@ img.resize {
 				<input type="hidden" name="book_name" value="${view.book_name}" />
 				<input type="hidden" name="book_price" value="${view.book_price}" />
 				<input type="hidden" name="book_image" value="${view.book_image}" />
-				<div class="row">
+				<div class="row" style="margin-left: 0px; margin-right: 0px;">
 					<div class="col-md-6 col-sm-7" style="width: 370px;">
 						<div class="single-product-image-inner">
 							<!-- Tab panes -->
@@ -53,68 +63,71 @@ img.resize {
 					</div>
 					<div class="col-md-6 col-sm-5">
 						<div class="single-product-details">
-							<div class="list-pro-rating">
+							<h2 style="margin-bottom: 5px;">${view.book_name}</h2>
+							<div class="list-pro-rating" style="margin-bottom: 5px;">
 								<c:if test="${view.star_point == 0}">
-									<i class="fa fa-star"></i>
+									&nbsp;<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 1}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 2}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 3}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 4}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star"></i>
 								</c:if>
 								<c:if test="${view.star_point == 5}">
-									<i class="fa fa-star icolor"></i>
+									&nbsp;<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 									<i class="fa fa-star icolor"></i>
 								</c:if>
 							</div>
-							<h2>${view.book_name}</h2>
 							<p style="margin-bottom: 5px;">${view.book_auth}/${view.company_id}</p>
 							<div class="single-product-price" style="height: 60px;">
-								<h2>
-									<fmt:formatNumber value="${view.book_price}" pattern="###,###,###" />
-									원
-								</h2>
+								<h3><fmt:formatNumber value="${view.book_price}" pattern="###,###,###" /> 원</h3>
+								<h5 style="font-style: inherit;">P <fmt:formatNumber pattern="#,###" value="${view.book_price * 0.05}"/> (5% 적립)</h5>
 							</div>
 							<div class="product-attributes clearfix">
 								<span class="pull-left" id="quantity-wanted-p">
 									<span class="dec qtybutton">-</span>
-									<input type="text" value="1" class="cart-plus-minus-box" name="amount" maxlength="3" />
+									<input type="text" value="1" class="cart-plus-minus-box" name="amount" maxlength="3" min="1" max="99" />
 									<span class="inc qtybutton">+</span>
 									<br />
 								</span>
 							</div>
 							<div class="product-attributes clearfix">
 								<span>
+									<c:choose>
+									<c:when test="${view.book_current_count == 0}">
+									<img alt="" src="<%=cp%>/img/6-2-sold-out-png-hd.png" class="soldout" style="margin-top: 15px;">
+									</c:when>
+									<c:otherwise>
 									<a class="cart-btn btn-default" href="javascript:javascript:isBuy(${view.book_num});">
 										<i class="flaticon-shop"></i>
 										BUY NOW
@@ -124,18 +137,27 @@ img.resize {
 										<i class="flaticon-shop"></i>
 										ADD TO CART
 									</a>
+									</c:otherwise>
+									</c:choose>
 								</span>
 							</div>
 							<div class="add-to-wishlist">
+								<c:if test="${view.book_current_count != 0}">
 								<a class="wish-btn" href="javascript:isWish(${view.book_num})">
 									<i class="fa fa-heart-o"></i>
 									ADD TO WISHLIST
 								</a>
+								<br />
+								<a class="wish-btn" href="javascript:openMap()">
+									→   배송 거리 확인
+								</a>
+								</c:if>
+							</div>				
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-left: 0px;">
 					<div class="col-md-9">
 						<div class="p-details-tab-content">
 							<div class="p-details-tab">
@@ -371,15 +393,12 @@ img.resize {
 		<div class="container">
 			<div class="row">
 				<div class="related-product indicator-style">
+					<c:forEach var="used" items="${used}">
 					<div class="col-md-3">
 						<div class="single-banner">
 							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/1.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
+								<a href="<%=cp%>/books/usedBooksList.do?used_book_num=${used.used_book_num}" class="single-banner-image-wrapper">
+									<img alt="" src="${pageContext.request.contextPath}/upload/${used.book_image}" class="used">
 									<div class="rating-icon">
 										<i class="fa fa-star icolor"></i>
 										<i class="fa fa-star icolor"></i>
@@ -388,205 +407,13 @@ img.resize {
 										<i class="fa fa-star"></i>
 									</div>
 								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick View">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
 							</div>
 							<div class="banner-bottom text-center">
-								<a href="#">People of the book</a>
+								<a href="#"><fmt:formatNumber pattern="###,###,###" value="${used.book_new_price}" /> 원</a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<div class="single-banner">
-							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/2.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">East of eden</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="single-banner">
-							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/3.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">Lone some dove</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="single-banner">
-							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/4.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">The secret garden</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="single-banner">
-							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/5.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">Twilight</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="single-banner">
-							<div class="product-wrapper">
-								<a href="#" class="single-banner-image-wrapper">
-									<img alt="" src="${pageContext.request.contextPath}/bootstrap/img/featured/6.jpg">
-									<div class="price">
-										<span>$</span>
-										160
-									</div>
-									<div class="rating-icon">
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star icolor"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</a>
-								<div class="product-description">
-									<div class="functional-buttons">
-										<a href="#" title="Add to Cart">
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<a href="#" title="Add to Wishlist">
-											<i class="fa fa-heart-o"></i>
-										</a>
-										<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
-											<i class="fa fa-compress"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="banner-bottom text-center">
-								<a href="#">Cold mountain</a>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -609,8 +436,13 @@ img.resize {
 		      }
 		   }
 	   function isBuy(book_num) {
-		      var isbuy = confirm("구매하시겠습니까?");
 		      var amount = document.detailForm.amount.value;
+		      var stock = ${view.book_current_count};
+		      if(amount > stock) {
+		    	  alert("현재 재고는 " + stock + "권입니다");
+		    	  return false;
+		      }
+		      var isbuy = confirm("구매하시겠습니까?");
 		      if (isbuy == true) {
 		         window.location.href = '<%=cp%>/order/singleOrder.do?book_num='+ book_num + '&order_book_count=' + amount;
 				} else {
@@ -623,6 +455,10 @@ img.resize {
 			 if (comment == null) return false;
 				 window.location.href='<%=cp%>/wish/wishInsert.do?wish_book_num='+book_num+'&wish_book_count='+amount+'&wish_comment='+comment;
 		}
+	   function openMap() {
+		var url = '<%=cp%>/common/openMap.do';
+		window.open(url,"openMap","toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800")
+	}
 	</script>
 </body>
 </html>

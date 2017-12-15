@@ -22,7 +22,7 @@
 	</ul>
 	<!-- Map Area Start -->
 	<div class="map-area">
-		<div id="googleMap" style="width: 100%; height: 445px;"></div>
+		<div id="map" style="width: 100%; height: 445px;"></div>
 	</div>
 	<!-- Map Area End -->
 	<!-- Address Information Area Start -->
@@ -87,7 +87,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<form action="<%=cp %>/mail/mailSending.do" method="POST">
+					<form action="<%=cp %>/common/mailSending.do" method="POST">
 						<div class="row">
 							<div class="col-md-5">
 								<div class="contact-form-left">
@@ -288,21 +288,26 @@
 		</div>
 	</footer>
 	<!-- Footer Area End -->
-	<!-- Google Map js -->
+	<!-- Daum Map js -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f795c8c60a133cd29eafa0c36afed33"></script>
 	<script>
-      function initMap() {
-        var uluru = {lat: 37.498793, lng: 127.032867};
-        var map = new google.maps.Map(document.getElementById('googleMap'), {
-          zoom: 19,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPZcFFMWeb06l6P50zDK_MwZJnjV0vjMY&callback=initMap">
-    </script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(37.4989567,127.03283520000002),
+			level: 1
+		};
+
+		var map = new daum.maps.Map(container, options);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new daum.maps.LatLng(37.4989567,127.03283520000002); 
+
+		// 마커를 생성합니다
+		var marker = new daum.maps.Marker({
+		    position: markerPosition
+		});
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+	</script>
 </body>
 </html>

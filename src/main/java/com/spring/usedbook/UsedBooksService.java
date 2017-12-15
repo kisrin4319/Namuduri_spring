@@ -19,7 +19,7 @@ public class UsedBooksService implements UsedBooksDao {
 	//1.중고 서적 목록
 	@Override
 	public List<UsedBooksModel> UsedBooksList(String book_category) {
-		return sqlSessionTemplate.selectList("usedbook.selectBooksAll",book_category);
+		return sqlSessionTemplate.selectList("usedbook.selectBookList",book_category);
 	}
 
 	//2. 중고 서적 검색 목록
@@ -54,6 +54,22 @@ public class UsedBooksService implements UsedBooksDao {
 	@Override
 	public List<UsedBooksModel> SliderBookList(Map<String, Object> map) {
 		return sqlSessionTemplate.selectList("usedbook.SliderBookList",map);
+	}
+
+	//7. NEW BOOKS에 중고상품 띄우기
+	@Override
+	public List<UsedBooksModel> NewList(int book_num) {
+		return sqlSessionTemplate.selectList("usedbook.newList", book_num);
+	}
+
+	@Override
+	public List<UsedBooksModel> selectUsed(int used_book_num) {
+		return sqlSessionTemplate.selectList("usedbook.selectUsed", used_book_num);
+	}
+
+	@Override
+	public int checkResult(String member_id) {
+		return sqlSessionTemplate.selectOne("usedbook.checkResult",member_id);
 	}
 
 }

@@ -187,8 +187,10 @@ img.top2 {
 								<tbody>
 									<c:choose>
 										<c:when test="${wishList.size() == 0}">
-											<tr>
-												<h4>등록된 위시리스트가 없습니다.</h4>
+											<tr align="center">
+												<td></td>
+												<td style="margin-top: 2px;"><h4>등록된 위시리스트가 없습니다.</h4></td>
+												<td/><td/>
 											</tr>
 										</c:when>
 										<c:otherwise>
@@ -208,12 +210,12 @@ img.top2 {
 															원
 														</h5>
 														<input type="text" placeholder="Please Enter Your Comment" size="40" value="${wish.wish_comment}" id="${wish.wish_num }">
-														<input type="button" value="EDIT" onclick="Modify(${wish.wish_book_num },${wish.wish_num });">
+														<input type="button" value="EDIT" onclick="Modify(${wish.wish_book_num },${wish.wish_num });" class="btn btn-warning" style="height:27px; width: 46px; border-left-width: 0px; adding-left: 5px; padding-right: 5px; border-right-width: 0px; padding-top: 3px; border-top-width: 0px; padding-left: 5px; padding-bottom: 3px;">
 													</td>
 													<td class="product-cart">
 														<div class="product-cart-details" style="margin-bottom: 10px; margin-top: 10px;">
-															<input name="amount" id="count_${wish.wish_num }" type="number" value="${wish.wish_book_count}">
-															<input type="button" value="ADD TO CART" onclick="isBasket(${wish.wish_book_num},count_${wish.wish_num })">
+															<input name="amount" id="count_${wish.wish_num }" type="number" value="${wish.wish_book_count}" min="1" max="99">
+															<input type="button" value="ADD TO CART" onclick="isBasket(${wish.wish_book_num},count_${wish.wish_num })" class="btn btn-warning" style="margin-top: 5px; width: 106px; border-left-width: 0px; border-right-width: 0px; padding-left: 8px;]">
 														</div>
 													</td>
 													<td class="product-remove">
@@ -245,8 +247,8 @@ img.top2 {
 	</div>
 	<!-- Shop Area End -->
 	<script type="text/javascript">
-	function isBasket(book_num,wish_num) {
-		 var is=confirm("장바구니에 담으시겠습니까?");
+	function isBasket(book_num,wish_num) { 
+		var is=confirm("장바구니에 담으시겠습니까?");
 		 
 		 var count=wish_num.value;
 		 if(is==true) {
@@ -265,7 +267,7 @@ img.top2 {
 		 }
 		}
 	   function allBasket() {
-		      var all = confirm("장바구니에 담으시겠습니까?");
+		   	var all = confirm("장바구니에 담으시겠습니까?");
 		      var product = eval("document.wishform");
 		      if (all == true) {
 		         document.wishform.action='<%=cp%>/basket/basketInsert.do';
@@ -284,6 +286,7 @@ img.top2 {
 			  return false;
 			 }
 			}
+
 	</script>
 </body>
 </html>
