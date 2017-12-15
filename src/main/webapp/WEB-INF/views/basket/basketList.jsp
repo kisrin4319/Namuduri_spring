@@ -153,7 +153,7 @@
 							<h2>
 								SUBTOTAL
 								<span>
-									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>
@@ -163,7 +163,7 @@
 							<h2>
 								GRAND TOTAL
 								<span>
-									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>

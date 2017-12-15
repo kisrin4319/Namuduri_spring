@@ -78,7 +78,20 @@ function getContextPath(){
     var basket_num = basket_num;
     
     if (confirm("주문 하시겠습니까?")) {
-     location.href = getContextPath()+'/order/singleOrder.do?book_num='+num+'&order_book_count='+amount+'&basket_num='+basket_num;
+      $.ajax({
+        data : {
+          book_num : num
+        },
+        url : getContextPath()+"/basket/stockCheck.do",
+        success : function(data) {
+          if(parseInt(data) < amount){
+            alert("주문 수량이 재고 수량 보다 많습니다.");
+            alert("현재 수량은 "+data+"권 입니다.");
+          } else{
+            location.href = getContextPath()+'/order/singleOrder.do?book_num='+num+'&order_book_count='+amount+'&basket_num='+basket_num;
+          }
+        }
+      });     
     } else {
        alert("취소되었습니다");
        return false;
@@ -88,9 +101,11 @@ function getContextPath(){
   function fn_selectOrder() {
     var RowCheck = document.getElementsByName('RowCheck');
     var Count = 0;
-    
+    var arr = new Array();
     for(var i=0; i<RowCheck.length;i++){
-      if(RowCheck[i].checked){ Count++; }
+      if(RowCheck[i].checked){ Count++;
+        arr.push(RowCheck[i].value);
+      }
       }
     
     if(!Count){
@@ -98,13 +113,38 @@ function getContextPath(){
       return false;
       }
     else {
-     basketform.action = getContextPath()+'/order/selectOrderForm.do';
-         basketform.submit();
+      jQuery.ajaxSettings.traditional = true;
+      $.ajax({
+        url : getContextPath()+"/basket/SelectstockCheck.do",
+        method :'post',
+        data :{
+          RowCheck : arr
+        },
+        success : function(map) {
+          if(map.size == 0 ){
+          basketform.action = getContextPath()+'/order/selectOrderForm.do';
+          basketform.submit();
+          }
+          else {
+            alert(map.name+"항목의 현재 수량은 "+map.orderCount+"권 입니다.");
+          }
+        }
+      });    
       }
   }
   
   function fn_totalOrder() {
-    location.href=getContextPath()+'/order/totalOrder.do'
+    $.ajax({
+      url : getContextPath()+"/basket/totalstockCheck.do",
+      success : function(map) {
+        if(map.size !=0){
+          alert("주문 수량이 재고 수량 보다 많습니다.");
+          alert(map.name+"의 현재 재고는 "+map.stock+"권 입니다.");
+        } else{
+          location.href=getContextPath()+'/order/totalOrder.do'
+        }
+      }
+    });
     }
   
     function fn_checkSum() {
