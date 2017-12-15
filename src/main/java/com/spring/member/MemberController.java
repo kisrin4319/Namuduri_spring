@@ -2,6 +2,7 @@ package com.spring.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -93,6 +99,66 @@ public class MemberController {
 		}
 
 	}
+
+	
+	@RequestMapping(value = "/member/googleSignIn", method = RequestMethod.POST)
+	public void doGoogleSignInActionPage(HttpServletResponse response) {
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+		//System.out.println("/member/googleSignIn, url : " + url);
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.write(url);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		
+	}
+	
+	@RequestMapping("/member/googleSignInCallback")
+	public String doSessionAssignActionPage(HttpServletRequest request){
+		System.out.println("/member/googleSignInCallback");
+		String code = request.getParameter("code");
+		
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(), null);
+		
+		String accessToken = accessGrant.getAccessToken();
+		Long expireTime = accessGrant.getExpireTime();
+		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+			accessToken = accessGrant.getRefreshToken();
+			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+		}
+		org.springframework.social.connect.Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
+		
+		PlusOperations plusOperations = google.plusOperations();
+		Person person = plusOperations.getGoogleProfile();
+		
+		MemberModel memberModel = new MemberModel();
+		memberModel.setMember_name(person.getDisplayName());
+		memberModel.setAuth("USR");
+
+		HttpSession session = request.getSession();
+		session.setAttribute("_MEMBER_", memberModel );
+		
+		System.out.println(person.getDisplayName());
+		
+		return "redirect:/";
+		/*System.out.println(person.getAccountEmail());
+		System.out.println(person.getAboutMe());
+		System.out.println(person.getDisplayName());
+		System.out.println(person.getEtag());
+		System.out.println(person.getFamilyName());
+		System.out.println(person.getGender());
+		*/
+		
+	}
+
 
 	// 로그아웃
 	@RequestMapping("/member/logOut.do")
