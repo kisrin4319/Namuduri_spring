@@ -1,6 +1,9 @@
 package com.spring.basket;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.book.BooksModel;
@@ -178,4 +182,56 @@ public class BasketController {
 		return mv;
 	}
 	
+	//7. 단일 주문 재고 확인
+	@RequestMapping("/basket/stockCheck.do")
+	public @ResponseBody int stockCheck(@RequestParam int book_num) {
+		BooksModel booksModel = booksService.bookOne(book_num);
+		return booksModel.getBook_current_count();
+	}
+	
+	//8. 선택 주문 재고 validation
+	@RequestMapping("/basket/SelectstockCheck.do")
+	public @ResponseBody Object stockCheck(HttpServletRequest request) {
+		String[] basket_num = request.getParameterValues("RowCheck");
+		BooksModel booksModel = new BooksModel();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(int i =0 ; i<basket_num.length;i++) {
+			BasketModel basketModel = basketService.basketDetail(Integer.parseInt(basket_num[i]));
+			int orderCount = basketService.basketDetail(Integer.parseInt(basket_num[i])).getBasket_book_count();
+			booksModel = booksService.bookOne(basketModel.getBasket_book_num());
+			
+			if(booksModel.getBook_current_count() < orderCount ) {
+				map.put("name", booksModel.getBook_name());
+				map.put("orderCount", orderCount );
+				map.put("size", map.size());
+				return map;
+			}
+		}
+		map.put("size", map.size());
+		return map;
+	}
+	
+	//9. 전체 주문 재고 validation
+	@RequestMapping("/basket/totalstockCheck.do")
+	public @ResponseBody Object stockCheck(HttpSession session) {
+		BooksModel booksModel = new BooksModel();
+		BasketModel basketModel = new BasketModel();
+		Map<String, Object> map = new HashMap<String, Object>();
+		session_id = (String) session.getAttribute("member_id");
+		basketModel.setMember_id(session_id);
+
+		List<BasketModel> basketList = basketService.basketList(basketModel);
+		
+		for(int i =0; i<basketList.size();i++) {
+			booksModel = booksService.bookOne(basketList.get(i).getBasket_book_num());
+			if(booksModel.getBook_current_count() < basketList.get(i).getBasket_book_count()) {
+				map.put("name", booksModel.getBook_name());
+				map.put("stock", booksModel.getBook_current_count());
+				map.put("size", map.size());
+				return map;
+			}
+		}
+		map.put("size", map.size());
+		return map;
+	}
 }

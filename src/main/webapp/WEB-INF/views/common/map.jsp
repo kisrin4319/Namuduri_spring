@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>선의 거리 계산하기</title>
+<title>배송지 까지의 거리 계산하기</title>
 <style>
 .dot {
 	overflow: hidden;
