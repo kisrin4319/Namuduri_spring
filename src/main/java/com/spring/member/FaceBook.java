@@ -5,15 +5,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class FaceBook {
 
 	private static String App_ID = "271410833383842";
-	private static String Redirect_URL = "http://192.168.30.126:8080/namuduri/Namuduri2";
+	private static String Redirect_URL = "http://localhost:8080/namuduri/member/loginForm.do";
 	private static String Client_secret = "fb541183fab27d93ae95af1762bb2daf";
 	
 	public static String loginPage() {
@@ -89,5 +96,26 @@ public class FaceBook {
 		}
 		
 		return null;
+	}
+	
+	public static Map<String, String> JsonStringMap(String data){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			map = mapper.readValue(data, new TypeReference<HashMap<String, String>>(){
+				
+			});
+			System.out.println("map :" +map);
+		} catch(JsonParseException e) {
+			e.printStackTrace();
+		} catch(JsonMappingException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return map;
 	}
 }
