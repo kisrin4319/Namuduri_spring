@@ -16,9 +16,9 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">Contact Us</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
-		<li>Contact Us</li>
+		<li style="font-style: oblique;">Contact Us</li>
 	</ul>
 	<!-- Map Area Start -->
 	<div class="map-area">
