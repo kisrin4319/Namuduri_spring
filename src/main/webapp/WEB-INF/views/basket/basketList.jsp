@@ -21,9 +21,11 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING CART</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
-		<li>Shopping Cart</li>
+		<li>
+			<a title="Go to Wishlist" href="<%=cp%>/wish/wishList.do" style="font-style: oblique;">Wishlist</a>
+		</li>
 	</ul>
 	<!-- Cart Area Start -->
 	<div class="shopping-cart-area section-padding" style="padding-top: 20px;">

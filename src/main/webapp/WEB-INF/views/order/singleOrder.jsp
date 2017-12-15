@@ -18,10 +18,10 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
 		<li>
-			<a title="Go to Basket" href="<%=cp%>/books/booksList.do">Shopping</a>
+			<a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
 		</li>
 	</ul>
 	<hr>
