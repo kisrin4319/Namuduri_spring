@@ -31,7 +31,7 @@
 						 <i class="mdi mdi-human-greeting"></i> <span class="hide-menu">회원 관리</span></a>
 						<ul class="nav-dropdown-items">
 							<li>
-								<a href="<%=cp%>/admin/memberList.do" aria-expanded="false">
+								<a href="<%=cp%>/admin/memberList/all.do" aria-expanded="false">
 								 <i class="mdi mdi-account-check"></i> <span class="nav-dropdown-item">회원 통합 리스트</span></a>
 							</li>
 							<li>
@@ -39,7 +39,7 @@
 								 <i class="mdi mdi-account-star-variant"></i> <span class="nav-dropdown-item">회원 등급 관리</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/memberList/Bck.do" aria-expanded="false">
 								 <i class="mdi mdi-account-off"></i> <span class="nav-dropdown-item">차단 회원 관리</span></a>
 							</li>
 						</ul>

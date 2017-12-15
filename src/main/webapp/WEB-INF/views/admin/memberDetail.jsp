@@ -230,6 +230,22 @@ function deleteCheck2(path) {
 										class="form-control form-control-line">
 								</div>
 							</div>
+							<div class="form-group"></div>
+							<div class="form-group">
+								<div class="row col-md-12">
+										<label class="col-md-3">차단 여부</label>
+										<div class="col-md-8 p-2">
+											 <input type="radio" name="member_use_yn"
+												id="member_use_yn" value="0"
+												${view.member_use_yn == '0' ? 'checked="checked"' : '' }>활성화
+											&nbsp;
+											<input type="radio" name="member_use_yn"
+												id="member_email_get" value="1"
+												${view.member_use_yn == '1' ? 'checked="checked"' : '' }>차단됨
+									</div>
+								</div>
+							</div>
+							
 							<div class="form-group">
 								<input type="hidden" name="currentPage" value="${currentPage}">
 								<%-- <input type="hidden" name="member_id" value="${view.member_id}"> --%>

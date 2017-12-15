@@ -202,13 +202,14 @@
 	</select> -->
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->
 	
-	<select id="chartM" resultType="ChartModel">
-		select count(*) Item_C, to_char(member_join_date,'mm.dd') DayNo 
-		from member group by to_char(member_join_date,'mm.dd') order by DayNo desc
+	<select id="chartAllM"> <!-- 날짜별 누적 회원수 -->
+		select trunc(member_join_date) 날짜, sum(count(*)) OVER (ORDER BY trunc(member_join_date)) 누적회원수 
+		from member group by trunc(member_join_date)
 	</select>
 	
-	<select id="chartNewM">
+	<select id="chartNewM"> <!-- 최근 일주일 동안 가입한 회원 수 통계 -->
 		<![CDATA[select b.*, to_char(dayno,'day') day 
 		from (
 			select count(*) NewNo, trunc(member_join_date) DayNo 
@@ -216,5 +217,134 @@
 			) b where dayno<=trunc(sysdate) and dayno>trunc(sysdate)-7]]>
 	</select>
 	
+	<select id="memberGender"><!-- 전체 회원 기준 성별 구분 파이 차트 -->
+		select count(*), to_number(substr(to_char(member_jumin2),1,1)) 성별구분
+		 from member group by to_number(substr(to_char(member_jumin2),1,1))
+	</select>
+	
+	<select id="newMemberGender"><!-- 최근 일주일 신규 회원 성별 구분 -->
+		<![CDATA[select count(*), to_number(substr(to_char(member_jumin2),1,1)) 성별구분 
+		from member where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 
+		group by to_number(substr(to_char(member_jumin2),1,1))]]>
+	</select>
+	
+	<select id="memberAge"><!-- 전체 회원 기준 연령 구분 파이 차트 -->
+		select count(*), to_number(substr(to_char(member_jumin1),1,1)) 연령구분 
+		from member group by to_number(substr(to_char(member_jumin1),1,1))
+	</select>
+	
+	<select id="newMemberAge"><!-- 최근 일주일 신규 회원 연령 구분 -->
+		<![CDATA[select count(*), to_number(substr(to_char(member_jumin1),1,1)) 연령구분 
+			from member where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 
+			group by to_number(substr(to_char(member_jumin1),1,1))]]>
+	</select>
+	
+	<select id="memberRegion"><!-- 전체 회원 지역 구분 파이 차트 -->
+		select count(*), substr(member_addr1,1,2) from member group by substr(member_addr1,1,2)
+	</select>
+	
+	<select id="newMemberRegion"><!-- 최근 일주일 신규 회원 지역 구분 -->
+		<![CDATA[select count(*), substr(member_addr1,1,2) from member 
+		where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 group by substr(member_addr1,1,2)]]>
+	</select>
+	
+	<!-- //////////////////////////////////////// -->
+	<!-- 카테고리 관리 기능 구현 시 카테고리 판매량 분석 추가. -->
+	<!-- 기간 지정 가능하도록 구현하기. -->
+	
+	<select id="bookSelling"><!-- 전체 기간 기준 가장 많이 팔인 책 8권 -->
+		<![CDATA[select a.* from (select book_category, book_name, book_sell_count 
+		from book order by book_sell_count desc) a where rownum>=1 and rownum<=8]]>
+	</select>
+	
+	<select id="monthBookSelling"><!-- 저번 달의 판매량 순위 -->
+		<![CDATA[
+			select c.* from (
+  				select order_book_name, sum(order_book_count) sellCount from (
+    				select a.order_trade_num, a.order_regdate, b.book_num, b.order_book_name, order_book_count 
+    				from order_book a inner join order_detail b on a.ORDER_TRADE_NUM = b.ORDER_TRADE_NUM where a.order_use_yn = 1) 
+ 	 			where extract(month from order_regdate)=extract(month from sysdate)-1 group by order_book_name order by sellCount desc) c 
+			where rownum>=1 and rownum<=8;
+		]]>
+	</select>
+	
+	<select id="weekBookSelling"><!-- 최근 7일 판매량 순위 -->
+		<![CDATA[
+			select c.* from (
+  				select order_book_name, sum(order_book_count) sellCount from (
+    				select a.order_trade_num, a.order_regdate, b.book_num, b.order_book_name, order_book_count 
+    				from order_book a inner join order_detail b on a.ORDER_TRADE_NUM = b.ORDER_TRADE_NUM where a.order_use_yn = 1) 
+  				where order_regdate<=trunc(sysdate) and order_regdate>trunc(sysdate)-7 group by order_book_name order by sellCount desc) c 
+			where rownum>=1 and rownum<=8
+		]]>
+	</select>
+	
+	<!-- //////////////////////////////////////// -->
+	<!-- 차트 구현 후 기간 지정 가능 종합 통계 구현하기 --><!-- 매출 분석 순이익 필요? 매출 분석 시 결제 상태와 배송 상태 고려 -->
+	
+	<select id="monthOrderNum"><!-- 달별 주문량 조회 -->
+		<![CDATA[select count(*), extract(month from order_regdate) from order_book group by extract(month from order_regdate)]]>
+	</select>
+	
+	<select id="monthSales"><!-- 달별 판매량 조회 -->
+		select sum(ORDER_RECEIVE_MONEYSUM) sales,extract(month from order_regdate) month from order_book group by extract(month from order_regdate)
+	</select>
+	
+	<select id="weekOrderNum"><!-- 최근 7일 날짜별 주문량 조회 -->
+		<![CDATA[select count(*), trunc(order_regdate) day from order_book where trunc(order_regdate)<=trunc(sysdate) and trunc(order_regdate)>trunc(sysdate)-7
+		group by trunc(order_regdate) order by day desc]]>
+	</select>
+	
+	<select id="weekSales"><!-- 최근 7일 날짜별 판매량 -->
+		<![CDATA[select sum(ORDER_RECEIVE_MONEYSUM) sales, trunc(order_regdate) day from order_book where trunc(order_regdate)<=trunc(sysdate) and trunc(order_regdate)>trunc(sysdate)-7
+		group by trunc(order_regdate) order by day desc]]>
+	</select>
+	
+	<select id="monthOrderGender">
+		select count(*), to_number(substr(to_char(member_jumin2),1,1)) gender, extract(month from order_regdate) month from (
+			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+			from order_book a inner join member b on a.member_id=b.member_id)
+		group by to_number(substr(to_char(member_jumin2),1,1)), extract(month from order_regdate) order by month
+	</select>
+	
+	<select id="weekOrderGender"><!-- 최근 7일 주문 성별 통계 -->
+		<![CDATA[
+			select count(*), to_number(substr(to_char(member_jumin2),1,1)) 성별구분 from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+			group by to_number(substr(to_char(member_jumin2),1,1))
+		]]>
+	</select>
+	
+	<select id="monthOrderAge"><!-- 달별 연령 구분 -->
+		select count(*), to_number(substr(to_char(member_jumin1),1,1)) age, extract(month from order_regdate) month from (
+			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+			from order_book a inner join member b on a.member_id=b.member_id)
+		group by to_number(substr(to_char(member_jumin1),1,1)), extract(month from order_regdate) order by month
+	</select>
+	
+	<select id="weekOrderAge"><!-- 최근 7일 주문 연령별 통계 -->
+		<![CDATA[
+			select count(*), to_number(substr(to_char(member_jumin1),1,1)) 연령구분 from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+			group by to_number(substr(to_char(member_jumin1),1,1))
+		]]>
+	</select>
+	
+	<select id="monthOrderRegion">
+		select count(*), substr(member_addr1,1,2) region, extract(month from order_regdate) month from (
+			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+			from order_book a inner join member b on a.member_id=b.member_id)
+		group by substr(member_addr1,1,2), extract(month from order_regdate) order by month
+	</select>
+	
+	<select id="weekOrderRegion"><!-- 최근 7일 주문 지역별 통계 -->
+		<![CDATA[
+			select count(*), substr(member_addr1,1,2) 지역구분 from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+			group by substr(member_addr1,1,2)]]>
+	</select>
 	
 </mapper>

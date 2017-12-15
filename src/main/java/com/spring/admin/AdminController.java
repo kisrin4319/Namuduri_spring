@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,10 +77,10 @@ public class AdminController {
 
 	////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value="/admin/memberList.do", method=RequestMethod.GET) // 회원 조회
-	public ModelAndView memberList(HttpServletRequest request)
+	@RequestMapping(value="/admin/memberList/{status}.do", method=RequestMethod.GET) // 회원 조회
+	public ModelAndView memberList(@PathVariable("status") String status, HttpServletRequest request)
 			throws Exception {
-
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -88,7 +89,12 @@ public class AdminController {
 		}
 		
 		List<MemberModel> memberList = new ArrayList<MemberModel>();
-		memberList = adminService.memberListAll();
+		
+		if(status.equals("all")) {
+			memberList = adminService.memberListAll();
+		}else if(status.equals("Bck")){
+			memberList = adminService.memberListBck();
+		}
 		
 		totalCount = memberList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
@@ -101,7 +107,8 @@ public class AdminController {
 		}
 
 		memberList = memberList.subList(paging.getStartCount(), lastCount);
-
+		
+		mv.addObject("status", status);
 		mv.addObject("memberList", memberList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -113,7 +120,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/memberList.do", method=RequestMethod.POST) // 회원 검색
+	@RequestMapping(value="/admin/memberList/{status}.do", method=RequestMethod.POST) // 회원 검색
 	public ModelAndView memberSearch(HttpServletRequest request) {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
