@@ -205,8 +205,8 @@ img.top2 {
 													<option value="2">저자</option>
 													<option value="3">출판사</option>
 												</select>
-												<input type="text" placeholder="Enter your book keyword here" name="searchKeyword" size="25">
-												<button type="submit" style="height: 26px;">
+												<input type="text" name="searchKeyword" size="8">
+												<button type="submit" style="height: 26px;" class="btn btn-info">
 													<i class="fa fa-search"></i>
 												</button>
 											</form>
@@ -375,7 +375,7 @@ img.top2 {
 								<c:if test="${checkResult >=100000 }">
 								<div class="shopingcart-bottom-area">
 									<div class="shopingcart-bottom-area pull-right">
-										<a class="right-shoping-cart" href="javascript:;" onclick="fn_writeBook()">Enrollment Book</a>
+										<a class="right-shoping-cart" href="javascript:;" onclick="fn_writeBook()" style="margin-top: 20px; margin-right: 0px;">Enrollment Book</a>
 									</div>
 								</div>
 								</c:if>

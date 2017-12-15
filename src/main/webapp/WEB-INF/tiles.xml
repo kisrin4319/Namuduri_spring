@@ -12,15 +12,6 @@
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body3.jsp" />
-		<!-- <put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" /> -->
-		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
-	</definition>
-
-	<definition name="member" template="/WEB-INF/views/tiles/layout1.jsp">
-		<put-attribute name="title" value="회원" />
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body2.jsp" />
-		<put-attribute name="lefter" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
 	</definition>
 
@@ -142,8 +133,10 @@
 	<definition name="findPw" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
 	</definition>
-
+	
+	
 	<!-- ========================BOARD======================== -->
+		
 	<!-- 질문답변 게시판 -->
 	<!-- 질문답변 게시판 리스트 -->
 	<definition name="boardList" extends="main">
@@ -180,7 +173,33 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
 	</definition>
 	
-
+	<!-- ========================FAQ======================== -->
+	
+	<!-- FAQ 리스트 -->
+	<definition name="faqList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqList.jsp" />
+	</definition>
+	
+	<!-- FAQ 작성하기 --> 
+	<definition name="faqWrite" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqWrite.jsp" />
+	</definition> 
+	
+	<!-- FAQ 글 읽기 -->
+	<definition name="faqDetail" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqDetail.jsp" />
+	</definition>
+	
+	<!-- FAQ 수정 -->
+	<definition name="faqModify" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqWrite.jsp" />
+	</definition> 
+	
+	<!-- FAQ 삭제 -->
+	<definition name="faqDelete" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqList.jsp" />
+	</definition>   
+		
 	<!-- ========================BASKET======================== -->
 	 <definition name="basketList" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/basket/basketList.jsp" />

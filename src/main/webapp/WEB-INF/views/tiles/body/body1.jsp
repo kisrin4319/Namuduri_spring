@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -13,11 +16,6 @@
 img.resize {
 	width: 270px;
 	height: 280px;
-}
-
-img.Newresize {
-	width: 370px;
-	height: 300px;
 }
 </style>
 </head>
@@ -93,13 +91,13 @@ img.Newresize {
 			<div class="row">
 				<div class="banner-list">
 					<c:forEach var="list" items="${newBookList }">
-						<div class="col-md-4 col-sm-6">
+						<div class="col-md-4 col-sm-6" style="width: 230px;height: 280px; margin-bottom: 45px;">
 							<div class="single-banner">
 								<c:url var="viewURL" value="/books/bookDetail.do">
 									<c:param name="book_num" value="${list.book_num}" />
 								</c:url>
 								<a href="${viewURL}" class="single-banner-image-wrapper">
-									<img class="Newresize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
+									<img class="resize" alt="" src="${pageContext.request.contextPath}/upload/${list.book_image}" />
 								</a>
 								<div class="product-description">
 									<div class="functional-buttons">
@@ -569,9 +567,9 @@ img.Newresize {
 						<p>Subscribe here with your email us and get up to date.</p>
 					</div>
 					<div class="letter-box">
-						<form action="#" method="post" class="search-box">
+						<form action="<%=cp %>/common/subScribe.do" method="post" class="search-box">
 							<div>
-								<input type="text" placeholder="Subscribe us">
+								<input type="text" placeholder="Subscribe us" name ="subscribe">
 								<button type="submit" class="btn btn-search">
 									SUBSCRIBE
 									<span>
