@@ -45,6 +45,8 @@
 <!-- responsive css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/order.css">
+
 <!-- modernizr css -->
 <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -151,7 +153,7 @@
 											<a href="<%=cp%>/board/boardList.do">Q&A</a>
 										</li>
 										<li>
-											<a href="#">FAQ</a>
+											<a href="<%=cp%>/faq/faqList.do">FAQ</a>
 										</li>
 									</ul>
 								<li>

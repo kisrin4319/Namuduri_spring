@@ -67,25 +67,31 @@
 								<aside class="widget widget-categories">
 									<h2 class="sidebar-title text-center">CATEGORY</h2>
 									<ul class="sidebar-menu">
-										<li>
-											<a href="<%=cp%>/mypage.do">
-												<!-- <i class="fa fa-angle-double-right"></i> -->
-												<p class="text-left">MY PAGE</p>
-											</a>
-										</li>
-										<li>
-											<a href="<%=cp%>/member/memberModifyView.do">
-												<!-- <i class="fa fa-angle-double-right"></i> -->
-												<p class="text-left">회원 정보수정</p>
-											</a>
-										</li>
-										<li>
-											<a href="<%=cp%>/member/memberDeleteView.do">
-												<!-- <i class="fa fa-angle-double-right"></i> -->
-												<p class="text-left">회원 탈퇴</p>											
-											</a>
-										</li>
-									</ul>
+									<li>
+										<a href="<%=cp%>/order/orderListCheckView.do">
+											<i class="fa fa-angle-double-right"></i>
+											주문/배송 조회
+										</a>
+									</li>
+									<li>
+										<a href="<%=cp%>/member/memberModifyView.do">
+											<i class="fa fa-angle-double-right"></i>
+											회원 정보수정
+										</a>
+									</li>
+									<li>
+										<a href="<%=cp%>/member/memberDeleteView.do">
+											<i class="fa fa-angle-double-right"></i>
+											회원 탈퇴
+										</a>
+									</li>
+									<li>
+										<a href="<%=cp%>/eFeelogView.do">
+											<i class="fa fa-angle-double-right"></i>
+											eFeelog
+										</a>
+									</li>
+								</ul>
 								</aside>
 							</div>
 						</div>
