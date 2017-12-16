@@ -5,12 +5,12 @@
 
 	<beans:bean id="googleConnectionFactory"
 		class="org.springframework.social.google.connect.GoogleConnectionFactory">
-		<beans:constructor-arg value="235842342476-e0o44hgn028o77gjchap4blm06089gdc.apps.googleusercontent.com" />
-		<beans:constructor-arg value="z8BCFKywZALlt9NHtTOQnJ49" />
+		<beans:constructor-arg value="430288509925-7ka216494n4nm9j4coqt7m8dr06n8ar6.apps.googleusercontent.com" />
+		<beans:constructor-arg value="4Pf6mKYtUtf79BCCQEw9NNeQ" />
 	</beans:bean>
 
 	<beans:bean id="googleOAuth2Parameters"	class="org.springframework.social.oauth2.OAuth2Parameters">
 		<beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" />
-		<beans:property name="redirectUri" value="http://localhost:8080/namuduri/member/googleSignIn" />
+		<beans:property name="redirectUri" value="http://localhost:8080/namuduri/member/oauth2callback.do" />
 	</beans:bean>
 </beans:beans>

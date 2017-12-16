@@ -63,7 +63,7 @@
 				<div class="col-md-2 col-sm-6 col-xs-6">
 					<div class="header-logo">
 						<a href="<%=cp%>/main.do">
-							<img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+							<img src="${pageContext.request.contextPath}/img/headerLogo.png" alt="">
 						</a>
 					</div>
 				</div>
