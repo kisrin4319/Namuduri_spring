@@ -1,8 +1,5 @@
 package com.spring.member;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.plus.Person;
@@ -100,65 +98,48 @@ public class MemberController {
 
 	}
 
-	
-	@RequestMapping(value = "/member/googleSignIn", method = RequestMethod.POST)
-	public void doGoogleSignInActionPage(HttpServletResponse response) {
+	@RequestMapping(value = "/member/googleSignIn.do")
+	public ModelAndView doGoogleSignInActionPage(HttpServletResponse response) {
+		mv = new ModelAndView();
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-		//System.out.println("/member/googleSignIn, url : " + url);
-		
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.write(url);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		
+		mv.addObject("url", url);
+		mv.setViewName("login/googleLogin");
+		return mv;
 	}
-	
-	@RequestMapping("/member/googleSignInCallback")
-	public String doSessionAssignActionPage(HttpServletRequest request){
+
+	@RequestMapping("/member/oauth2callback.do")
+	public ModelAndView doSessionAssignActionPage(HttpServletRequest request) {
+		mv = new ModelAndView();
 		System.out.println("/member/googleSignInCallback");
 		String code = request.getParameter("code");
-		
+			
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(), null);
-		
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
+				null);
 		String accessToken = accessGrant.getAccessToken();
 		Long expireTime = accessGrant.getExpireTime();
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
-			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
-		org.springframework.social.connect.Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
-		
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
-		
-		MemberModel memberModel = new MemberModel();
-		memberModel.setMember_name(person.getDisplayName());
-		memberModel.setAuth("USR");
 
+		MemberModel memberModel = new MemberModel();
+		
+		memberModel.setMember_id(person.getDisplayName());
+		memberModel.setMember_name(person.getFamilyName()+person.getGivenName());
+		memberModel.setMember_email(person.getAccountEmail());
+		
 		HttpSession session = request.getSession();
-		session.setAttribute("_MEMBER_", memberModel );
+		session.setAttribute("member_id", memberModel.getMember_id());
 		
-		System.out.println(person.getDisplayName());
-		
-		return "redirect:/";
-		/*System.out.println(person.getAccountEmail());
-		System.out.println(person.getAboutMe());
-		System.out.println(person.getDisplayName());
-		System.out.println(person.getEtag());
-		System.out.println(person.getFamilyName());
-		System.out.println(person.getGender());
-		*/
+		mv.setViewName("redirect:/main.do");
+		return mv;
 		
 	}
-
 
 	// 로그아웃
 	@RequestMapping("/member/logOut.do")
@@ -184,8 +165,8 @@ public class MemberController {
 
 	}
 
-	//회원가입 폼
-	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.GET)
+	// 회원가입 폼
+	@RequestMapping(value = "/member/memberInfo.do", method = RequestMethod.GET)
 	public ModelAndView memberJoin() {
 
 		mv = new ModelAndView();
@@ -193,41 +174,42 @@ public class MemberController {
 		mv.setViewName("memberInfo");
 		return mv;
 	}
-	//회원가입
-	@RequestMapping(value="/member/memberInfo.do", method=RequestMethod.POST)
-	public ModelAndView memberJoin2(@ModelAttribute("member") MemberModel memberModel, BindingResult result, HttpServletRequest request) {
-		
+
+	// 회원가입
+	@RequestMapping(value = "/member/memberInfo.do", method = RequestMethod.POST)
+	public ModelAndView memberJoin2(@ModelAttribute("member") MemberModel memberModel, BindingResult result,
+			HttpServletRequest request) {
+
 		// validation binding
 		new MemberValidator().validate(memberModel, result);
-		
-		
-		//회원가입 에러시 회원가입폼으로 이동
-		if(result.hasErrors()) {
+
+		// 회원가입 에러시 회원가입폼으로 이동
+		if (result.hasErrors()) {
 			mv = new ModelAndView();
 
 			mv.setViewName("memberInfo");
 			return mv;
-		} else {			
-			 passwordEncoder = new BCryptPasswordEncoder();
-	         
-	         System.out.println("=============================================================");
-	         
-	         String password = memberModel.getMember_pw();
-	         String encryptPassword = passwordEncoder.encode(password);
-	         System.out.println(encryptPassword);
-	         
-	         memberModel.setMember_pw(encryptPassword);
-	         
-	         memberService.insertMember(memberModel);
-	         
-	         mv.addObject("memberModel", memberModel);
-	         mv.setViewName("loginForm");
-	         return mv;   
-	      }	
+		} else {
+			passwordEncoder = new BCryptPasswordEncoder();
+
+			System.out.println("=============================================================");
+
+			String password = memberModel.getMember_pw();
+			String encryptPassword = passwordEncoder.encode(password);
+			System.out.println(encryptPassword);
+
+			memberModel.setMember_pw(encryptPassword);
+
+			memberService.insertMember(memberModel);
+
+			mv.addObject("memberModel", memberModel);
+			mv.setViewName("loginForm");
+			return mv;
+		}
 	}
 
 	// 아이디 중복확인
-	@RequestMapping(value="/member/idCheck.do",method = { RequestMethod.GET, RequestMethod.POST})	
+	@RequestMapping(value = "/member/idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody int idCheck(HttpServletRequest request) {
 		int count = memberService.idCheck(request.getParameter("member_id"));
 		return count;
