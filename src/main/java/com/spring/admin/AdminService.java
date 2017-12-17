@@ -1,5 +1,6 @@
 package com.spring.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,7 +168,7 @@ public class AdminService implements AdminDao {
 	@Override
 	public List<ChartModel> chartM() {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("admin.chartM");
+		return sqlSessionTemplate.selectList("admin.chartAllM");
 	}
 	
 }

@@ -133,7 +133,7 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="btn-group">
-									<button type="button" id="customBtn" class="btn btn-danger"><i class="customGPlusSignIn"></i>Sign in with GooglePlus</button>
+									<button type="button" id="customBtn" class="btn btn-danger" onclick="javascript:location.href='<%=cp%>/member/googleSignIn.do'"><i class="customGPlusSignIn"></i>Sign in with GooglePlus</button>
 								</div>
 							</div>
 							<div class="col-sm-4">
@@ -205,50 +205,7 @@
 	</div>
 	<!-- Loging Area End -->
 	<script type="text/javascript">
-	
-	
-	
-/* 	var googleUser = {};
-	  var startApp = function() {
-	    gapi.load('auth2', function(){
-	      // Retrieve the singleton for the GoogleAuth library and set up the client.
-	      auth2 = gapi.auth2.init({
-	        client_id: '235842342476-e0o44hgn028o77gjchap4blm06089gdc.apps.googleusercontent.com',
-	        cookiepolicy: 'single_host_origin',
-	        // Request scopes in addition to ‘profile’ and ’email’
-	        scope: 'profile email'
-	      });
-	      attachSignin(document.getElementById('customBtn'));
-	    });
-	  };
-	  function attachSignin(element) {
-	    auth2.attachClickHandler(element, {},
-	        function(googleUser) {
-	           $.ajax({
-	              type:"post",
-	           dataType:"json",
-	              url:"loginForm.do",
-	              data : {
-	                 "email":googleUser.getBasicProfile().getEmail(),
-	                 "id":googleUser.getBasicProfile().getId(),
-	                 "nickname":googleUser.getBasicProfile().getName(),
-	              },
-	              success:function(data){
-	               if(data.login == "success"){
-	                 alert("로그인되었습니다");
-	                     location.href="/";
-	              },
-	              error:function(data){
-	                 alert('error:'+data.result);
-	              }
-	           });
-	        }, function(error) {
-	            alert(JSON.stringify(error, undefined, 2));
-	        });
-	  }
-	 */
-
-	
+		
 		function check() {
 
 			var d = document.login;

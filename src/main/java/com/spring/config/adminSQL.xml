@@ -204,13 +204,16 @@
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->
 	
-	<select id="chartAllM"> <!-- 날짜별 누적 회원수 -->
-		select trunc(member_join_date) 날짜, sum(count(*)) OVER (ORDER BY trunc(member_join_date)) 누적회원수 
+	<select id="chartAllM" resultType="ChartModel"> <!-- 날짜별 누적 회원수 -->
+		<![CDATA[
+		select trunc(member_join_date) key, sum(count(*)) OVER (ORDER BY trunc(member_join_date)) value 
 		from member group by trunc(member_join_date)
+		]]>
 	</select>
 	
 	<select id="chartNewM"> <!-- 최근 일주일 동안 가입한 회원 수 통계 -->
-		<![CDATA[select b.*, to_char(dayno,'day') day 
+		<![CDATA[
+		select b.*, to_char(dayno,'day') day 
 		from (
 			select count(*) NewNo, trunc(member_join_date) DayNo 
 			from member group by trunc(member_join_date) order by DayNo desc

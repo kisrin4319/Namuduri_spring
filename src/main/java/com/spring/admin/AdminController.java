@@ -2,16 +2,13 @@ package com.spring.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -44,6 +41,8 @@ import com.spring.order.OrderService;
 @Controller
 public class AdminController {
 
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource
 	private AdminService adminService;
 
@@ -731,10 +730,10 @@ public class AdminController {
 			
 			ChartModel chartModel = list.get(i);
 			
-				row1.put("v", chartModel.getDayNo());
+				//row1.put("v", chartModel.getDayNo());
 				row.put(row1);
 				
-				row2.put("v", chartModel.getItem_C());
+				//row2.put("v", chartModel.getItem_C());
 				row.put(row2);
 				
 				rowData.put("c", row);
@@ -757,4 +756,19 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="/coding.do")
+	public ModelAndView coding() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("admin/googleChart");
+		return mv;
+	}
+	
+	@RequestMapping(value="/chartData.do", method=RequestMethod.POST)
+    public @ResponseBody List<ChartModel> chartData() {
+        List<ChartModel> lists = new ArrayList<ChartModel>();
+        lists = adminService.chartM();
+        return lists;
+    }
 }
