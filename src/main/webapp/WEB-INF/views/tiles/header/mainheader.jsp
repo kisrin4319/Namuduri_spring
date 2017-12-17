@@ -46,7 +46,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/order.css">
-
 <!-- modernizr css -->
 <script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
 
