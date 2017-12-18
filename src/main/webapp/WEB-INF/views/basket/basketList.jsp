@@ -21,9 +21,11 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING CART</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
-		<li>Shopping Cart</li>
+		<li>
+			<a title="Go to Wishlist" href="<%=cp%>/wish/wishList.do" style="font-style: oblique;">Wishlist</a>
+		</li>
 	</ul>
 	<!-- Cart Area Start -->
 	<div class="shopping-cart-area section-padding" style="padding-top: 20px;">
@@ -86,9 +88,9 @@
 													<p>${row.book_category }</p>
 												</td>
 												<td class="product-quantity product-cart-details">
-													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
-													<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
-														<em>수정</em>
+													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled; ' />
+													<button type="button" class="btn-info" onclick="fn_basketModify(${row.basket_num})" style="background-color:#32b5f3;">
+														<em>EDIT</em>
 													</button>
 												</td>
 												<td class="product-quantity">
@@ -153,7 +155,7 @@
 							<h2>
 								SUBTOTAL
 								<span>
-									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>
@@ -163,7 +165,7 @@
 							<h2>
 								GRAND TOTAL
 								<span>
-									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>

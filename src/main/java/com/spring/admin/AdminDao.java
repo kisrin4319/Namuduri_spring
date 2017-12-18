@@ -93,4 +93,8 @@ public interface AdminDao {
 	//주문 정보 삭제
 	public void deleteOrder(String order_trade_num);
 	
+	/*-------------------------------------------------------------------------------------*/
+	
+	public List<ChartModel> chartM();
+	
 }

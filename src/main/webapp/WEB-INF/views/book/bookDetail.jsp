@@ -252,7 +252,7 @@ img.soldout {
 													<td style="text-align: center;">
 														<span>
 															<a href="javascript:void(0)" class="js-btn-view">${review.review_content}</a>
-															<img src="images/common/icon_board_new.png" />
+															<img src="<%=cp%>/img/icon_board_new.png" />
 														</span>
 													</td>
 													<td>${review.member_id}</td>
@@ -265,6 +265,12 @@ img.soldout {
 									</c:choose>
 								</tbody>
 							</table>
+							<ul class="pager" style="text-align: right;">
+ 								 <li><a href="bookDetail.do?currentPage=${currentPage-1}&book_num=${view.book_num}">＜</a></li>
+  								${pagingHtml}
+  								<li><a href="bookDetail.do?currentPage=${currentPage+1}&book_num=${view.book_num}">＞</a></li>
+							</ul>
+
 						</div>
 					</div>
 					<div class="col-md-9">

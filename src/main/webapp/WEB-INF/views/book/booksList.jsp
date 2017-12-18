@@ -35,10 +35,10 @@ img.soldout {
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING BOOK PAGE</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
 		<li>
-			<a title="Go to Basket" href="<%=cp%>/basket/basketList.do">Basket</a>
+			<a title="Go to Basket" href="<%=cp%>/basket/basketList.do" style="font-style: oblique;">BASKET</a>
 		</li>
 	</ul>
 	<!-- Shop Area Start -->
@@ -213,7 +213,7 @@ img.soldout {
 													<option value="3">출판사</option>
 												</select>
 												<input type="text" name="searchKeyword" size="8">
-												<button type="submit" style="height: 26px;">
+												<button type="submit" style="height: 26px;" class="btn btn-info">
 													<i class="fa fa-search"></i>
 												</button>
 											</form>

@@ -40,7 +40,7 @@ public class MainController {
 		bestSellerList = booksService.bestSellerList();
 		newBookList = booksService.newBookList();
 		
-		newBookList=newBookList.subList(0, 3);
+		newBookList=newBookList.subList(0, 5);
 		
 		//쿠폰 생성 영역
 		// 매월 1일 일때만 쿠폰 생성

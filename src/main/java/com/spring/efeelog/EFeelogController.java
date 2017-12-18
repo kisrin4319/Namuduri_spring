@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
-import com.spring.member.MemberModel;
 import com.spring.mypage.MypageService;
 
 @Controller
