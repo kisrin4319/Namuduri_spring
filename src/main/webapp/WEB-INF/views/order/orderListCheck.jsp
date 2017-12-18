@@ -186,23 +186,32 @@
 										<c:if test="${ item.order_trans_status == 'ST03' }">
 										<span class="label label-success">배송 완료</span>
 									</c:if>
-								</td>
-								<td align="center">
-									<input type="button" value="주문취소" align="middle" onclick="check(${item.order_trade_num});" />
-								</td>
-							</tr>
+									</li>
+									<li data-label="주문 날짜"><fmt:formatDate value="${ item.order_regdate }" pattern="yyyy/MM/dd"/></li>
+									<li data-label="결제 상태">
+										<c:if test="${ item.payment_status =='PS01' }">
+										결제 대기중
+									</c:if>
+										<c:if test="${ item.payment_status =='PS02' }">
+										결제 완료
+									</c:if>
+									</li>
+									<li data-label="주문 취소">
+										<p>
+											<input type="button" class="btn btn-danger" value="주문취소" onclick="check(${item.order_trade_num});" />
+										</p>
+									</li>
+								</ul>
 							</c:forEach>
-							</c:if>
-							<c:if test="${ fn:length(orderModel) == '0' }">
+						</c:if>
+						<c:if test="${ fn:length(orderModel) == '0' }">
 							<tr align="center">
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
-							</c:if>
-							</tbody>
-							<tr align="center">
-								<td colspan="8">${pagingHtml}</td>
-							</tr>
-						</table>
+						</c:if>
+						<div class="paging" style ="text-align: center">
+						${pagingHtml}
+						</div>						
 					</div>
 				</div>
 			</div>
