@@ -12,6 +12,5 @@ public interface EFeelogDao {
 	public void EFeelogInsert(Map<String, Object> map);
 	
 	public List<EFeelogModel> efeelogList(Map<String, Object> map);
-	
-	public List<BooksModel> EFeelogDate(List<BooksModel> booksModel);
+
 }

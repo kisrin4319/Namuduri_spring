@@ -88,13 +88,6 @@ public class EFeelogController {
 			
 			session_id = (String) session.getAttribute("member_id");
 			
-			/*List<BooksModel> booksList = eFeelogService.EFeelogDate(booksModel);
-			for(int i=0; i<booksList.size(); i++) {
-				BooksModel model = booksList.get(i);
-				int bookNum = model.getBook_num();
-					
-			}*/
-			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("book_num", book_num);
 			map.put("memo", memo);
@@ -105,35 +98,6 @@ public class EFeelogController {
 			return mv;
 		}	
 			
-			/*mv = new ModelAndView();
-			BooksModel booksModel = new BooksModel();
-			EFeelogModel eFeelogModel = new EFeelogModel();
-			
-			session_id = (String) session.getAttribute("member_id");
-			
-			booksModel.setBook_image(request.getParameter("book_image"));
-			booksModel.setBook_name(request.getParameter("book_name"));
-			
-			eFeelogService.EFeelogDate(booksModel);
-			
-			eFeelogModel.setBook_memo(request.getParameter("book_memo"));
-			eFeelogModel.setMember_id(request.getParameter("member_id"));
-			
-			eFeelogService.EFeelogInsert(eFeelogModel);
-			mv.setViewName("redirect:/eFeelogView.do");
-			return mv;*/
-			
-			/*mv = new ModelAndView();
-			EFeelogModel eFeelogModel = new EFeelogModel();
-			
-			session_id = (String) session.getAttribute("member_id");
-			
-			eFeelogModel.setBook_memo(request.getParameter("book_memo"));
-			
-			//EFeelogModel EFeelogInsert = eFeelogService.EFeelogInsert(eFeelogModel);
-			eFeelogService.EFeelogInsert(eFeelogModel);
-			mv.setViewName("redirect:/eFeelogView.do");
-			return mv;*/
 }
 			
 			

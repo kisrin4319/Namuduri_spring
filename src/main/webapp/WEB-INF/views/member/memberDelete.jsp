@@ -68,17 +68,17 @@
 		<div class="login-account section-padding">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
+					<div class="col-lg-12 col-md-12 col-sm-12">
 						<form class="create-account-form" name="memberform" id="memberform">
 							<h2 class="heading-title">
 								DELETE MEMBER
 							</h2>
-							<div class="form-group">
-								<label for="usr" class="form-row">ID:</label>
+							<div class="col-sm-12 form-group">
+								<label for="usr" class="form-row">ID</label>
 								<input type="text" class="form-contorl" id="usr" name="member_id">
 							</div>
-							<div class="form-group">
-								<label for="usr" class="form-row">PW:</label>
+							<div class="col-sm-12 form-group">
+								<label for="usr" class="form-row">PW</label>
 								<input type="password" name="member_pw">
 							</div>
 							<div>
