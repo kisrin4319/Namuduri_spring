@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.util.HashMap"%>
-<%
-	String cp = request.getContextPath();
-%>
+<%	String cp = request.getContextPath(); %>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -62,8 +60,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-9 col-sm-12 hidden-xs">
-					<div class="mainmenu text-center">
+				<div class="col-md-9 col-sm-12">
+                        <div class="mainmenu text-center">
+						<table class="table">
+							<thead>
+								<tr>
+									<th><div class="user_name">${ member_id } 님 안녕하세요.</div></th>
+								</tr>
+							</thead>
+						</table>
 						<input type="hidden" id="order_trade_num" name="order_trade_num" />
 						<table class="table table-striped">
 							<thead>

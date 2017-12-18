@@ -33,11 +33,5 @@ public class EFeelogService implements EFeelogDao {
 	public List<EFeelogModel> efeelogList(Map<String, Object> map) {
 		return sqlSessionTemplate.selectList("efeelog.efeelogList", map);
 	}
-	
-	//efeelog 작성
-	@Override
-	public List<BooksModel> EFeelogDate(List<BooksModel> booksModel) {
-		return sqlSessionTemplate.selectList("efeelog.efeelogData", booksModel);
-	}
 
 }
