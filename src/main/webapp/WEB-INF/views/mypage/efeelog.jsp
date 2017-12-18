@@ -23,6 +23,17 @@
 		//f.action = "eFeelogList.do";
 		f.submit();
 	}
+	
+	/* $(document).ready(function) {
+		$('#src').click(function() {
+			var state = $('#book_image').css('display');
+			if(state == 'none') {
+				$('#book_image').show();
+			} else {
+				$('#book_image').hide();
+			}
+		});
+	} */
 </script>
 </head>
 <body>
@@ -103,8 +114,8 @@
 								</div>
 								<table>
 									<thead>
-										<td>
-											<textarea class="form-control" rows="3" cols="30" name="memo">${ item.efeelog_memo }</textarea>
+										<td>${ item.efeelog_memo }
+											<%-- <textarea class="form-control" rows="3" cols="30" name="memo">${ item.efeelog_memo }</textarea>	 --%>									
 										</td>										
 									</thead>
 								</table>																				

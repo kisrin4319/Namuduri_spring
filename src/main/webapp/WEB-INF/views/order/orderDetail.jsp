@@ -32,9 +32,9 @@
 		</ul>
 		
 		<div class="shopping-area section-padding">
-			<div class="container">
-				<div class="col-md-9 col-sm-12 hidden-xs">
-					<div class="mainmenu text-center">
+			<div class="container center-block">
+				<div class="col-md-12 col-sm-12 .col-xs-12 center-block">
+					<!-- <div class="mainmenu text-center"> -->
 						<table class="table">
 							<thead>
 								<tr>
@@ -118,13 +118,15 @@
 							</tr>
 						</thead>
 						</table>
-						<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:location.href='http://localhost:8080/namuduri/order/orderListCheckView.do'">
+						
+					</div>
+					<div class="center-block" style="text-align:center;">
+					<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:location.href='http://localhost:8080/namuduri/order/orderListCheckView.do'">
 							<span> 
 								<i class="fa fa-user left"></i> 
 								CLOSE
 							</span>
 						</button>
-					</div>
 				</div>
 			</div>
 		</div>

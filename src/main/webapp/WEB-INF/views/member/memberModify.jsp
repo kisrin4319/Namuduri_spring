@@ -278,9 +278,10 @@
 								</table>				
 							</form>
 						</div>
-					</div>
-					
-					<div>
+					</div>	
+				</div>
+					<div class="center-block" style="text-align:center;">
+
 						<button name="submitcreate" id="submitcreate" class="btn-default" onclick="check()">
 							<span>
 								<i class="fa fa-user left"></i>
@@ -293,8 +294,7 @@
 								CLOSE
 							</span>
 						</button>
-					</div>
-				</div>
+					</div>		
 			</div>
 		</div>
 </body>

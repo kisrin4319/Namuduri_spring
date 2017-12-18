@@ -59,7 +59,8 @@
 							</aside>
 						</div>
 					</div>
-					<div class="col-md-9 col-sm-12">
+				</div>
+				<div class="col-md-9 col-sm-12">
                         <div class="mainmenu text-center">
 						<table class="table">
 							<thead>
@@ -68,10 +69,6 @@
 								</tr>
 							</thead>
 						</table>
-						<!-- <input type="hidden" id="order_trade_num" name="order_trade_num"/> -->
-						</div>
-				<div class="col-md-9 col-sm-12">
-					<div class="mainmenu text-center">
 						<input type="hidden" id="order_trade_num" name="order_trade_num" />
 						<table class="table table-striped">
 							<thead>
