@@ -95,7 +95,7 @@
 					제목
 				</th>
 				<td colspan="5" width="770" bgcolor="#FFFFFF">
-					<input type="text" name="board_title" id="title" value="⇒ ≫ ⇒ └→[답변]${boardModel.board_title}" style="width: 600px; height: 20px;" maxlength="50" />
+					<input type="text" name="board_title" id="title" value="[답변]${boardModel.board_title}" style="width: 600px; height: 20px;" maxlength="50" />
 				</td>
 			</tr>
 			<tr>
