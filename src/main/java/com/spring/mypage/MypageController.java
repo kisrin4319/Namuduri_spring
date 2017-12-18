@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -149,21 +150,41 @@ public class MypageController {
 	@ResponseBody
 	public Map<String, Object> memberPwFind(HttpServletRequest request, HttpSession session) throws Exception {
 		
+		StringBuffer buffer = new StringBuffer();
+		Random random = new Random();
+		String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9".split(",");
+
 		Map<String, Object> object = new HashMap<String, Object>();
 		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
-		
-		memberModel.setMember_id(session_id);
 
 		memberModel.setMember_id(request.getParameter("member_id"));
 		memberModel.setMember_email(request.getParameter("member_email"));
 		
 		MemberModel member = mypageService.memberPwFind(memberModel);
 		if(member != null) {
-			if(memberModel.getMember_id().equals(member.getMember_id()) && memberModel.getMember_email().equals(member.getMember_email())) {
+			for (int i = 0; i < 10; i++) {
+				buffer.append(chars[random.nextInt(chars.length)]);
+				System.out.println(buffer);
+			}
+			memberModel.setMember_pw(String.valueOf(buffer));
+			
+			//암호화 해서 맵으로 넘김
+			//buffer의 임시비밀번호를 memberModel의 pw 에 셋을 해주고 이걸 다시 불러와서 암호화를 한다
+			//암호화 한걸 member_id와 같이 map으로 넘겨서 해당 id에 password를 update해준다
+			passwordEncoder = new BCryptPasswordEncoder();
+			String password = passwordEncoder.encode(buffer);
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("member_id", memberModel.getMember_id());
+			param.put("member_pw", password);
+			
+			int result = mypageService.memberPwUpdate(param);
+			
+			if(memberModel.getMember_id().equals(member.getMember_id()) && memberModel.getMember_email().equals(member.getMember_email())) {				
 				object.put("returnVal", "1");
-				object.put("member_pw", member.getMember_pw());
+				object.put("member_pw", memberModel.getMember_pw());
 			} else {
 				object.put("returnVal", "0");
 			}
@@ -187,22 +208,32 @@ public class MypageController {
 	@ResponseBody
 	public Map<String, Object> memberDelete(HttpServletRequest request, HttpSession session) throws Exception {
 		
+		passwordEncoder = new BCryptPasswordEncoder();
 		Map<String, Object> object = new HashMap<String, Object>();
 		
 		mv = new ModelAndView();
 		MemberModel memberModel = new MemberModel();
 		
-		memberModel.setMember_id(session_id);
-		memberModel.setMember_id(request.getParameter("member_id"));
-		memberModel.setMember_pw(request.getParameter("member_pw"));
+		String member_id = request.getParameter("member_id");
+		memberModel = memberService.SelectOne(member_id);
 		
-		int member = mypageService.memberDelete(memberModel);
+		String password = request.getParameter("member_pw");
+		String encryptPassword = passwordEncoder.encode(password);
 		
-		if(member > 0) {
-			object.put("returnVal", "1");
+		if(passwordEncoder.matches(password, encryptPassword)) {
+			memberModel.setMember_id(member_id);
+			memberModel.setMember_pw(memberModel.getMember_pw());
+			int member = mypageService.memberDelete(memberModel);
+			
+			if(member > 0) {
+				object.put("returnVal", "1");
+			}else {
+				object.put("returnVal", "0");
+			}
 		}else {
 			object.put("returnVal", "0");
 		}
+		
 		return object;
 	}
 	
@@ -321,11 +352,13 @@ public class MypageController {
 		
 		mv = new ModelAndView();
 		
+		List<Map<String, Object>> memberOrderDetail = new ArrayList<Map<String, Object>>();
+		
 		String session_id = (String) session.getAttribute("member_id");
 		
 		MemberModel memberInfo = memberService.SelectOne(session_id);
 		
-		Map<String, Object> memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
+		memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
 		mv.addObject("memberInfo", memberInfo);

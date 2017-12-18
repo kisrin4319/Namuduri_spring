@@ -59,6 +59,7 @@
 							</tr>
 						</thead>
 						</table>
+						<c:forEach var="item" items="${ memberOrderDetail }">
 						<table class="table">
 							<thead>
 								<tr>
@@ -80,23 +81,23 @@
 									<th scope="col"><p class="text-center">금액</p></th>
 								</tr>
 								<tr align="center">
-									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.BOOK_NUM }</p></th>
-									<td width="100" height="50"><img src="<%=cp%>/upload/${ memberOrderDetail.BOOK_IMAGE }"/></td>
+									<th style="vertical-align: middle"><p class="text-center">${ item.BOOK_NUM }</p></th>
+									<td width="100" height="50"><img src="<%=cp%>/upload/${ item.BOOK_IMAGE }"/></td>
 									<th style="vertical-align: middle"><p class="text-left">
-										주문 번호 : ${ memberOrderDetail.ORDER_TRADE_NUM }<br><br> 
-										도 서 명 : ${ memberOrderDetail.ORDER_BOOK_NAME }<br><br> 
+										주문 번호 : ${ item.ORDER_TRADE_NUM }<br><br> 
+										도 서 명 : ${ item.ORDER_BOOK_NAME }<br><br> 
 										주문 상태 : 
-										<c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST01' }">
+										<c:if test="${ item.ORDER_TRANS_STATUS == 'ST01' }">
 										배송 준비중
-										</c:if> <c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST02' }">
+										</c:if> <c:if test="${ item.ORDER_TRANS_STATUS == 'ST02' }">
 										배송 중
-										</c:if> <c:if test="${ memberOrderDetail.ORDER_TRANS_STATUS == 'ST03' }">
+										</c:if> <c:if test="${ item.ORDER_TRANS_STATUS == 'ST03' }">
 										배송 완료
 										</c:if> <br><br> 
-										주문 날짜 : ${ memberOrderDetail.ORDER_REGDATE }</p><br><br>
+										주문 날짜 : ${ item.ORDER_REGDATE }</p><br><br>
 									</th>
-									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.ORDER_BOOK_COUNT }권</p></th><br>
-									<th style="vertical-align: middle"><p class="text-center">${ memberOrderDetail.ORDER_BOOK_COUNT * memberOrderDetail.ORDER_BOOK_PRICE }원</p></th>
+									<th style="vertical-align: middle"><p class="text-center">${ item.ORDER_BOOK_COUNT }권</p></th><br>
+									<th style="vertical-align: middle"><p class="text-center">${ item.ORDER_BOOK_COUNT * item.ORDER_BOOK_PRICE }원</p></th>
 								</tr>
 							</thead>
 						</table>
@@ -104,20 +105,21 @@
 							<thead>
 							<tr>
 								<th width="100">받으실 분</th>
-								<th colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_NAME }</th>
+								<th colspan="3" width="500">${ item.ORDER_RECEIVE_NAME }</th>
 							</tr>
 							<tr>
 								<th width="40">휴대폰번호</th>
-								<th width="80">${ memberOrderDetail.ORDER_RECEIVE_PHONE }</th>
+								<th width="80">${ item.ORDER_RECEIVE_PHONE }</th>
 								<th width="40">전화번호</th>
-								<th width="80">${ memberOrderDetail.ORDER_RECEIVE_MOBILE }</th>
+								<th width="80">${ item.ORDER_RECEIVE_MOBILE }</th>
 							</tr>
 							<tr>
 								<th width="100">주 소</th>
-								<th colspan="3" width="500">${ memberOrderDetail.ORDER_RECEIVE_ADDR1 }&nbsp;</th>
+								<th colspan="3" width="500">${ item.ORDER_RECEIVE_ADDR1 }&nbsp;</th>
 							</tr>
 						</thead>
 						</table>
+						</c:forEach>
 						
 					</div>
 					<div class="center-block" style="text-align:center;">
