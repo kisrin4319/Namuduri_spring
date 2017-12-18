@@ -12,15 +12,6 @@
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body3.jsp" />
-		<!-- <put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/lefter.jsp" /> -->
-		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
-	</definition>
-
-	<definition name="member" template="/WEB-INF/views/tiles/layout1.jsp">
-		<put-attribute name="title" value="회원" />
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header/header1.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/tiles/body/body2.jsp" />
-		<put-attribute name="lefter" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
 	</definition>
 
@@ -37,6 +28,14 @@
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header/mainheader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- Admin 페이지 -->
+	<definition name="admin" template="/WEB-INF/views/tiles/layout4.jsp">
+		<put-attribute name="title" value="관리자페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminMain.jsp" />
+		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/adminLefter.jsp"/>
 	</definition>
 	
 	<!-- ========================ORDER======================== -->
@@ -134,8 +133,10 @@
 	<definition name="findPw" extends="mypage2">
 		<put-attribute name="body" value="/WEB-INF/views/memberfind/findPwForm.jsp" />
 	</definition>
-
+	
+	
 	<!-- ========================BOARD======================== -->
+		
 	<!-- 질문답변 게시판 -->
 	<!-- 질문답변 게시판 리스트 -->
 	<definition name="boardList" extends="main">
@@ -172,7 +173,33 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardList.jsp" />
 	</definition>
 	
-
+	<!-- ========================FAQ======================== -->
+	
+	<!-- FAQ 리스트 -->
+	<definition name="faqList" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqList.jsp" />
+	</definition>
+	
+	<!-- FAQ 작성하기 --> 
+	<definition name="faqWrite" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqWrite.jsp" />
+	</definition> 
+	
+	<!-- FAQ 글 읽기 -->
+	<definition name="faqDetail" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqDetail.jsp" />
+	</definition>
+	
+	<!-- FAQ 수정 -->
+	<definition name="faqModify" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqWrite.jsp" />
+	</definition> 
+	
+	<!-- FAQ 삭제 -->
+	<definition name="faqDelete" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/faq/faqList.jsp" />
+	</definition>   
+		
 	<!-- ========================BASKET======================== -->
 	 <definition name="basketList" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/basket/basketList.jsp" />
@@ -210,15 +237,7 @@
 	<definition name="usedBooksModifyForm" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/usedbooks/usedbookModify.jsp" />
 	</definition>
-	<!-- ================================================== -->
 
-	<!-- Admin 페이지 -->
-	<definition name="admin" template="/WEB-INF/views/tiles/layout4.jsp">
-		<put-attribute name="title" value="관리자페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header/adminheader.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/admin/adminMain.jsp" />
-		<put-attribute name="lefter" value="/WEB-INF/views/tiles/lefter/adminLefter.jsp"/>
-	</definition>
 	
 	<!-- ========================관리자 회원관리 페이지======================== -->
 	
@@ -243,13 +262,8 @@
 	<definition name="adminBookDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/bookDetail.jsp" />
 	</definition>
-	<!-- 관리자 상품 등록 페이지 -->
-	<definition name="adminBookWrite" extends="admin">
-		<put-attribute name="body" value="/WEB-INF/views/admin/bookWrite.jsp" />
-	</definition>
 
-
-	<!-- =======================관리자 주문관리 페이지====================== -->
+	<!-- ========================관리자 주문관리 페이지======================= -->
 	
 	<!-- 관리자 상품 주문 리스트 -->
 	<definition name="adminOrderList" extends="admin">
@@ -259,6 +273,12 @@
 	<!-- 관리자 상품 정보 조회 -->
 	<definition name="adminOrderDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/orderDetail.jsp" />
+	</definition>
+	
+	<!-- ========================관리자 통계관련 페이지======================= -->
+	
+	<definition name="adminChart" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/chart.jsp"/>
 	</definition>
 
 	<!--============================= etc ============================= -->

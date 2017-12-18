@@ -21,9 +21,11 @@
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">SHOPPING CART</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
 		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do">Home</a>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
 		</li>
-		<li>Shopping Cart</li>
+		<li>
+			<a title="Go to Wishlist" href="<%=cp%>/wish/wishList.do" style="font-style: oblique;">Wishlist</a>
+		</li>
 	</ul>
 	<!-- Cart Area Start -->
 	<div class="shopping-cart-area section-padding" style="padding-top: 20px;">
@@ -56,6 +58,7 @@
 										<c:forEach var="row" items="${basketList }" varStatus="i">
 											<input type="hidden" id="basket_num" name="basket_num" value="${row.basket_num }" />
 											<input type="hidden" id="basket_book_num" name="basket_book_num" value="${row.basket_book_num}" />
+											<input type ="hidden" id="c_code" name="c_code" value="" />
 											<tr>
 												<td class="product-edit">
 													<div class="checkbox checkbox-primary">
@@ -85,9 +88,9 @@
 													<p>${row.book_category }</p>
 												</td>
 												<td class="product-quantity product-cart-details">
-													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled;' />
-													<button type="button" class="normal-btn small1 js-goods-cnt-change" onclick="fn_basketModify(${row.basket_num})">
-														<em>수정</em>
+													<input type="text" name="book_count" maxlength="2" id="${row.basket_num }" value="${row.basket_book_count}" size="1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode: disabled; ' />
+													<button type="button" class="btn-info" onclick="fn_basketModify(${row.basket_num})" style="background-color:#32b5f3;">
+														<em>EDIT</em>
 													</button>
 												</td>
 												<td class="product-quantity">
@@ -141,8 +144,8 @@
 							<p>Enter your coupon code if have one</p>
 						</div>
 						<div class="discount-middle">
-							<input type="text" placeholder="">
-							<a class="" href="#">APPLY COUPON</a>
+							<input type="text" placeholder="" id="coupon_code" name="coupon_code">
+							<a class="" href="javscript:;" onclick="couponCheck(); this.onclick='';">APPLY COUPON</a>
 						</div>
 					</div>
 				</div>
@@ -152,7 +155,7 @@
 							<h2>
 								SUBTOTAL
 								<span>
-									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="SubTotal" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>
@@ -162,7 +165,7 @@
 							<h2>
 								GRAND TOTAL
 								<span>
-									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="10" readOnly />
+									<input type="text" id="sum" value="0" style="border: 0; font-size: x-large; text-align: center; vertical-align: baseline; font-weight: unset;" size="6" readOnly />
 									원
 								</span>
 							</h2>
@@ -177,5 +180,42 @@
 	</div>
 	<!-- Discount Area End -->
 	<script src="<%=cp%>/bootstrap/js/custom.js"></script>
+	<script type="text/javascript">
+	function couponCheck() {
+    
+	  var inputed = $("#coupon_code").val();
+	  c_code.value = inputed;
+	  $.ajax({
+	    data : {
+	      coupon_code : inputed
+	    },
+	    url : "<%=cp%>/coupon/couponCheck.do",
+	    success : function(data){
+	      if(data != "0"){
+	        couponUse();
+	      }
+	    }
+	  });
+  }
+	function couponUse() {
+    	var inputed = $("#coupon_code").val();
+    	$.ajax({
+    	  data :{
+    	    coupon_code : inputed
+    	  },
+    	  url : "<%=cp%>/coupon/couponUse.do",
+    	  success : function(data) {
+          if(sum.value-data < 0){
+            alert("할인 쿠폰을 적용할수 없습니다.");
+          } else{
+            var x = sum.value.replace(/,/g,'');
+            
+            sum.value = parseInt(x)-data;
+            fn_format(sum);
+          }
+        }
+    	});
+  }
+	</script>
 </body>
 </html>

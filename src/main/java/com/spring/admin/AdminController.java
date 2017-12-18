@@ -11,16 +11,22 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.book.ReviewModel;
@@ -35,6 +41,8 @@ import com.spring.order.OrderService;
 @Controller
 public class AdminController {
 
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource
 	private AdminService adminService;
 
@@ -55,7 +63,7 @@ public class AdminController {
 
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 15;
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
@@ -68,33 +76,92 @@ public class AdminController {
 
 	////////////////////////////////////////////////////////////////////
 
-	@RequestMapping("/admin/memberList.do") // 회원 조회
-	public ModelAndView memberList(HttpServletRequest request, @ModelAttribute MemberModel memberModel)
+	@RequestMapping(value="/admin/memberList/{status}.do", method=RequestMethod.GET) // 회원 조회
+	public ModelAndView memberList(@PathVariable("status") String status, HttpServletRequest request)
 			throws Exception {
-
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
-		String searchNum = request.getParameter("searchNum");
-		String searchKeyword = request.getParameter("searchKeyword");
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		
 		List<MemberModel> memberList = new ArrayList<MemberModel>();
+		
+		if(status.equals("all")) {
+			memberList = adminService.memberListAll();
+		}else if(status.equals("Bck")){
+			memberList = adminService.memberListBck();
+		}
+		
+		totalCount = memberList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
+		pagingHtml = paging.getPagingHtml().toString();
 
-		if ((searchNum == null || searchNum.trim().isEmpty() || searchNum.equals("0"))
-				&& (searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-			memberList = memberService.memberList();
-		} else {
-			map.put("searchNum", searchNum);
-			map.put("searchKeyword", searchKeyword);
+		int lastCount = totalCount;
 
-			memberList = adminService.searchMember(map);
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
 		}
 
+		memberList = memberList.subList(paging.getStartCount(), lastCount);
+		
+		mv.addObject("status", status);
+		mv.addObject("memberList", memberList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", memberList.size());
+
+		mv.setViewName("adminMemberList");
+
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/memberList/{status}.do", method=RequestMethod.POST) // 회원 검색
+	public ModelAndView memberSearch(HttpServletRequest request) {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<MemberModel> memberList = new ArrayList<MemberModel>();
+		
+		int searchNum = Integer.parseInt(request.getParameter("searchNum"));
+		String searchKeyword = request.getParameter("searchKeyword");
+		String date_min = request.getParameter("date_min");
+		String date_max = request.getParameter("date_max");
+		int active = Integer.parseInt(request.getParameter("active"));
+		
+		if(searchKeyword.trim().isEmpty()) {
+			searchKeyword = null;
+		}
+		
+		if(date_min.trim().isEmpty()) {
+			date_min = null;
+		}
+		
+		if(date_max.trim().isEmpty()) {
+			date_max = null;
+		}
+		
+		map.put("searchNum", searchNum);
+		map.put("searchKeyword", searchKeyword);
+		map.put("date_min", date_min);
+		map.put("date_max", date_max);
+		map.put("active", active);
+		
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0) {
+			memberList = adminService.memberListAll();
+		}else {
+			memberList = adminService.searchMember(map);
+		}
+		
 		totalCount = memberList.size();
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
 		pagingHtml = paging.getPagingHtml().toString();
@@ -114,7 +181,7 @@ public class AdminController {
 		mv.addObject("listCount", memberList.size());
 
 		mv.setViewName("adminMemberList");
-
+		
 		return mv;
 	}
 
@@ -186,7 +253,7 @@ public class AdminController {
 
 	//////////////////////////////////////////////////////////////////
 
-	@RequestMapping("/admin/bookList.do") // 도서 리스트
+	@RequestMapping(value="/admin/bookList.do", method=RequestMethod.GET) // 도서 리스트
 	public ModelAndView bookList(HttpServletRequest request) throws Exception {
 		// 전체 책 리스트, 메인에 보여지는 것만. 메인에 보여지지 않는 것만. //한 페이지 내에서 다른 세개의 리스트를 출력가능할까..?
 		// 카테고리 관리 기능 추가
@@ -236,6 +303,72 @@ public class AdminController {
 
 		mv.setViewName("adminBookList");
 
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/bookList.do", method=RequestMethod.POST) // 도서 검색
+	public ModelAndView bookSearch(HttpServletRequest request) {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BooksModel> booksList = new ArrayList<BooksModel>();
+		
+		int searchNum = Integer.parseInt(request.getParameter("searchNum"));
+		String searchKeyword = request.getParameter("searchKeyword");
+		String date_min = request.getParameter("date_min");
+		String date_max = request.getParameter("date_max");
+		int active = Integer.parseInt(request.getParameter("active"));
+		
+		if(searchKeyword.trim().isEmpty()) {
+			searchKeyword = null;
+		}
+		
+		if(date_min.trim().isEmpty()) {
+			date_min = null;
+		}
+		
+		if(date_max.trim().isEmpty()) {
+			date_max = null;
+		}
+		
+		map.put("searchNum", searchNum);
+		map.put("searchKeyword", searchKeyword);
+		map.put("date_min", date_min);
+		map.put("date_max", date_max);
+		map.put("active", active);
+		
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0) {
+			booksList = adminService.bookListAll();
+		}else {
+			booksList = adminService.searchBook(map);
+		}
+		
+		totalCount = booksList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		booksList = booksList.subList(paging.getStartCount(), lastCount);
+
+		mv.addObject("booksList", booksList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", booksList.size());
+
+		mv.setViewName("adminBookList");
+		
 		return mv;
 	}
 
@@ -405,9 +538,9 @@ public class AdminController {
 
 	/////////////////////////////////////////////////////////////////
 
-	@RequestMapping("/admin/orderList.do") // 주문 조회하기
+	@RequestMapping(value="/admin/orderList.do", method=RequestMethod.GET) // 주문 조회하기
 	public ModelAndView orderList(HttpServletRequest request) throws Exception {
-
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -415,22 +548,11 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		String searchNum = request.getParameter("searchNum");
-		String searchKeyword = request.getParameter("searchKeyword");
+		/*String searchNum = request.getParameter("searchNum");
+		String searchKeyword = request.getParameter("searchKeyword");*/
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<OrderModel> orderList = new ArrayList<OrderModel>();
-
-		if ((searchNum == null || searchNum.trim().isEmpty() || searchNum.equals("0"))
-				&& (searchKeyword == null || searchKeyword.trim().isEmpty() || searchKeyword.equals("0"))) {
-			orderList = adminService.selectOrderAll();
-		} else {
-			map.put("searchNum", searchNum);
-			map.put("searchKeyword", searchKeyword);
-
-			orderList = adminService.searchOrder(map);
-		}
-
+		
+		List<OrderModel> orderList = adminService.selectOrderAll();
 		totalCount = orderList.size();
 
 		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
@@ -452,6 +574,76 @@ public class AdminController {
 
 		mv.setViewName("adminOrderList");
 
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/orderList.do", method=RequestMethod.POST) // 주문 검색
+	public ModelAndView orderSearch(HttpServletRequest request) {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<OrderModel> orderList = new ArrayList<OrderModel>();
+		
+		int searchNum = Integer.parseInt(request.getParameter("searchNum"));
+		String searchKeyword = request.getParameter("searchKeyword");
+		String date_min = request.getParameter("date_min");
+		String date_max = request.getParameter("date_max");
+		int active = Integer.parseInt(request.getParameter("active"));
+		int pay_s = Integer.parseInt(request.getParameter("payment_status"));
+		int trans_s = Integer.parseInt(request.getParameter("order_trans_status"));
+		
+		if(searchKeyword.trim().isEmpty()) {
+			searchKeyword = null;
+		}
+		
+		if(date_min.trim().isEmpty()) {
+			date_min = null;
+		}
+		
+		if(date_max.trim().isEmpty()) {
+			date_max = null;
+		}
+		
+		map.put("searchNum", searchNum);
+		map.put("searchKeyword", searchKeyword);
+		map.put("date_min", date_min);
+		map.put("date_max", date_max);
+		map.put("active", active);
+		map.put("pay_s", pay_s);
+		map.put("trans_s", trans_s);
+		
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0 && pay_s==0 && trans_s==0) {
+			orderList = adminService.selectOrderAll();
+		}else {
+			orderList = adminService.searchOrder(map);
+		}
+		
+		totalCount = orderList.size();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
+		pagingHtml = paging.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
+		}
+
+		orderList = orderList.subList(paging.getStartCount(), lastCount);
+
+		mv.addObject("orderList", orderList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("listCount", orderList.size());
+
+		mv.setViewName("adminOrderList");
+		
 		return mv;
 	}
 
@@ -499,4 +691,84 @@ public class AdminController {
 	}
 
 	/////////////////////////////////////////////////////////////////
+	
+	@RequestMapping("/admin/chart/member.do")
+	public ModelAndView chartM() {
+		
+		JSONObject data = new JSONObject();
+		
+		JSONArray colsData = new JSONArray();
+		JSONObject cols1 = new JSONObject();
+		JSONObject cols2 = new JSONObject();
+		
+		cols1.put("id", "dayNo");
+		cols1.put("label", "날짜");
+		cols1.put("type", "Date");
+		
+		cols2.put("id", "item_C");
+		cols2.put("label", "회원 수");
+		cols2.put("type", "number");
+		
+		colsData.put(cols1);
+		colsData.put(cols2);
+		
+		System.out.println(colsData);
+		/*[{"id":"dayNo","label":"날짜","type":"String"},{"id":"item_C","label":"회원 수","type":"number"}]*/
+		
+		
+		JSONArray rowsData = new JSONArray(); //rows 리스트
+		JSONObject rowData = new JSONObject(); //{"c":한 행의 object값들을 담은 JSONArray}
+		JSONArray row = new JSONArray(); //한 행에 필요한 JSONObject들을 담기 위한 JSONArray
+		JSONObject row1 = new JSONObject(); //"property":value의 한 쌍
+		JSONObject row2 = new JSONObject();
+		
+		List<ChartModel> list = adminService.chartM();
+		System.out.println(list);
+		
+		/*rowData를 list의 행만큼 만들어서 rowsData안에 넣기!*/
+		for(int i=0; i<list.size(); i++) {
+			
+			ChartModel chartModel = list.get(i);
+			
+				//row1.put("v", chartModel.getDayNo());
+				row.put(row1);
+				
+				//row2.put("v", chartModel.getItem_C());
+				row.put(row2);
+				
+				rowData.put("c", row);
+				
+				
+		}
+		
+		rowsData.put(rowData);
+		
+		data.put("cols", colsData);
+		data.put("rows", rowsData);
+		
+		
+		System.out.println(data);
+	
+		
+		/*mv.addObject("data", data);*/
+		mv.addObject("list", list);
+		mv.setViewName("adminChart");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/coding.do")
+	public ModelAndView coding() {
+		mv = new ModelAndView();
+		
+		mv.setViewName("admin/googleChart");
+		return mv;
+	}
+	
+	@RequestMapping(value="/chartData.do", method=RequestMethod.POST)
+    public @ResponseBody List<ChartModel> chartData() {
+        List<ChartModel> lists = new ArrayList<ChartModel>();
+        lists = adminService.chartM();
+        return lists;
+    }
 }

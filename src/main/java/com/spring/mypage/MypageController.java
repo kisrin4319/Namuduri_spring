@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.common.Paging;
 import com.spring.member.MemberModel;

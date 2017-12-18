@@ -145,9 +145,7 @@ located in SOUTH KOREA for the resolution of any disputes.
 								<input type="text" placeholder="ID" id="member_id" name="member_id" maxlength="15" oninput="checkId()">
 							</span>
 							<div id="checkMsg"></div>
-							<span>
-								<input type="button" name="idChk" value="중복확인" onclick="javascript:openIdCheck(this.form)" class="btn-default" style="height: 20px; margin-top: 5px; margin-left: 10px;" />
-							</span>
+							<br>
 							<!-- 비밀번호============================================================================== -->
 							<p class="form-row" style="margin-top: 6px;">
 								<input type="password" id="member_pw" name="member_pw" maxlength="16" placeholder="PASSWORD">

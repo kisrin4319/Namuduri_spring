@@ -8,7 +8,7 @@
 	<typeAlias type="com.spring.member.ZipcodeModel" alias="ZipcodeModel"/>
 	
 	<!-- Admin -->
-	
+	<typeAlias type="com.spring.admin.ChartModel" alias="ChartModel" />
 	
 	
 	<!-- Basket -->	
@@ -26,12 +26,17 @@
 	<!-- Board -->
 	<typeAlias type="com.spring.board.BoardModel" alias="BoardModel"/>
 	
+	<!-- Faq -->
+	<typeAlias type="com.spring.faq.FaqModel" alias="FaqModel"/>
+	
 	<!-- WishList -->
 	<typeAlias type="com.spring.wishlist.WishModel" alias="WishModel" />
 	
 	<!-- EFeelog -->
 	<typeAlias type="com.spring.efeelog.EFeelogModel" alias="EFeelogModel"/>
 	
+	<!-- Coupon -->
+	<typeAlias type="com.spring.coupon.CouponModel" alias="CouponModel"/>
 	</typeAliases>
 	
 	<mappers>	
@@ -44,5 +49,7 @@
  		<mapper resource="com/spring/config/boardSQL.xml" />
  		<mapper resource="com/spring/config/wishlistSQL.xml" />
  		<mapper resource="com/spring/config/efeelogSQL.xml"/>
+ 		<mapper resource="com/spring/config/couponSQL.xml"/>
+ 		<mapper resource="com/spring/config/faqSQL.xml"/>
 	</mappers>
 </configuration>

@@ -1,5 +1,6 @@
 package com.spring.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,7 @@ public class AdminService implements AdminDao {
 	@Override //도서 검색
 	public List<BooksModel> searchBook(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("book.adminSearchList", map);
+		return sqlSessionTemplate.selectList("admin.searchBook", map);
 	}
 	
 	@Override //신규 도서 조회
@@ -135,7 +136,7 @@ public class AdminService implements AdminDao {
 	@Override //주문 검색
 	public List<OrderModel> searchOrder (Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("order.selectSearchList", map);
+		return sqlSessionTemplate.selectList("admin.searchOrder", map);
 	}
 
 	@Override //개별 주문 조회
@@ -160,6 +161,14 @@ public class AdminService implements AdminDao {
 	public void deleteOrder(String order_trade_num) {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("order.deleteOrder", order_trade_num);
+	}
+
+	/* ----------------------------------------------------------------------------------- */
+	
+	@Override
+	public List<ChartModel> chartM() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.chartAllM");
 	}
 	
 }
