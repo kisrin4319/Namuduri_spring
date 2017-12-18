@@ -87,9 +87,9 @@ public class BoardController {
 			totalCount = boardList.size();
 			int lastCount = totalCount;
 
-			if (paging.getEndCount() < totalCount)
+			if (paging.getEndCount() < totalCount) {
 				lastCount = paging.getEndCount() + 1;
-
+			}
 			boardList = boardList.subList(paging.getStartCount(), lastCount);
 
 			mv.addObject("isSearch", isSearch);

@@ -86,8 +86,10 @@ public class FaqController {
 	
 		int lastCount = totalCount;
 			
-		if (paging.getEndCount() < totalCount)
+		if (paging.getEndCount() < totalCount) {
 			lastCount = paging.getEndCount() + 1;
+		}
+		
 		faqList = faqList.subList(paging.getStartCount(), lastCount);
 		
 		mv.addObject("isSearch", isSearch);
