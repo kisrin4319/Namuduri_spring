@@ -8,4 +8,8 @@ public class ChartModel {
 	private String key;
 	private int value;
 	
+	@Override
+	public String toString() {
+		return "[key"+key+", value="+value+"]";
+	}
 }

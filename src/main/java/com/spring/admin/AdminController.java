@@ -2,11 +2,14 @@ package com.spring.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
@@ -695,80 +699,29 @@ public class AdminController {
 	@RequestMapping("/admin/chart/member.do")
 	public ModelAndView chartM() {
 		
-		JSONObject data = new JSONObject();
+		List<ChartModel> list = adminService.chartAllM();
 		
-		JSONArray colsData = new JSONArray();
-		JSONObject cols1 = new JSONObject();
-		JSONObject cols2 = new JSONObject();
+		GoogleChartDTO go = new GoogleChartDTO();
 		
-		cols1.put("id", "dayNo");
-		cols1.put("label", "날짜");
-		cols1.put("type", "Date");
+		go.addColumn("day", "string");
+		go.addColumn("number", "number");
 		
-		cols2.put("id", "item_C");
-		cols2.put("label", "회원 수");
-		cols2.put("type", "number");
+		go.createRows(list.size());
 		
-		colsData.put(cols1);
-		colsData.put(cols2);
-		
-		System.out.println(colsData);
-		/*[{"id":"dayNo","label":"날짜","type":"String"},{"id":"item_C","label":"회원 수","type":"number"}]*/
-		
-		
-		JSONArray rowsData = new JSONArray(); //rows 리스트
-		JSONObject rowData = new JSONObject(); //{"c":한 행의 object값들을 담은 JSONArray}
-		JSONArray row = new JSONArray(); //한 행에 필요한 JSONObject들을 담기 위한 JSONArray
-		JSONObject row1 = new JSONObject(); //"property":value의 한 쌍
-		JSONObject row2 = new JSONObject();
-		
-		List<ChartModel> list = adminService.chartM();
-		System.out.println(list);
-		
-		/*rowData를 list의 행만큼 만들어서 rowsData안에 넣기!*/
 		for(int i=0; i<list.size(); i++) {
-			
-			ChartModel chartModel = list.get(i);
-			
-				//row1.put("v", chartModel.getDayNo());
-				row.put(row1);
-				
-				//row2.put("v", chartModel.getItem_C());
-				row.put(row2);
-				
-				rowData.put("c", row);
-				
-				
+			go.addCell(i, list.get(i).getKey()+"월");
+			go.addCell(i, list.get(i).getValue());
 		}
 		
-		rowsData.put(rowData);
+		Gson gson = new Gson();
+		String json = gson.toJson(go.getResult());
 		
-		data.put("cols", colsData);
-		data.put("rows", rowsData);
+		System.out.println(json);
 		
-		
-		System.out.println(data);
-	
-		
-		/*mv.addObject("data", data);*/
-		mv.addObject("list", list);
+		mv.addObject("json", json);
 		mv.setViewName("adminChart");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/coding.do")
-	public ModelAndView coding() {
-		mv = new ModelAndView();
-		
-		mv.setViewName("admin/googleChart");
-		return mv;
-	}
-	
-	@RequestMapping(value="/chartData.do", method=RequestMethod.POST)
-    public @ResponseBody List<ChartModel> chartData() {
-        List<ChartModel> lists = new ArrayList<ChartModel>();
-        lists = adminService.chartM();
-        return lists;
-    }
 }
