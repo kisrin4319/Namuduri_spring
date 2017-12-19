@@ -18,27 +18,31 @@
 <body>
  <div class="form-gap"></div>
 <div class="container">
-	<div class="row" style="text-align: center;">
+	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="text-center">
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
-                  <h2 class="text-center">PASSWORD</h2>
+                  <h2 class="text-center">Forgot Password?</h2>
+                  <p>You can reset your password here.</p>
                   <div class="panel-body">
-					 <form action="checkAction.do" method="post">
-						<input type="hidden" name="board_num" value="${board_num}" />
-						<input type="hidden" name="currentPage" value="${currentPage}" />
-						<input type="hidden" name="ref" value ="${ref }" />
-						<tbody>
-								<td width="270">
-									&nbsp;&nbsp;
-									<input type="text" name="board_pw" maxlength="40" style="text-align: center; margin-right: 20px;"><br/>
-									<button type="submit" class="btn btn-info" style="background: white; color: black; font-style: oblique; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px; text-align: center; margin-top: 5px;">ENTER</button>
-								</td>
-							</tr>
-						</tbody>
-				</form>
+    
+                    <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+    
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                          <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                      </div>
+                      
+                      <input type="hidden" class="hide" name="token" id="token" value=""> 
+                    </form>
+    
                   </div>
                 </div>
               </div>
