@@ -6,6 +6,7 @@ import lombok.Data;
 public class ChartModel {
 	
 	private String key;
+	private String item;
 	private int value;
 	
 	@Override

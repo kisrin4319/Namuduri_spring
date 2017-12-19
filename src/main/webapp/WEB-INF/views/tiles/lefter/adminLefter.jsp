@@ -141,7 +141,7 @@
 								 <i class="mdi mdi-library-books"></i> <span class="nav-dropdown-item">상품 통계</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/chart/order.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-plus"></i> <span class="nav-dropdown-item">주문 통계</span></a>
 							</li>
 						</ul>
