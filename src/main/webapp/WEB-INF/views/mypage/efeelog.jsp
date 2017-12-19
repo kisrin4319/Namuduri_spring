@@ -65,7 +65,7 @@
 									<button type="button" class="btn btn-primary btn-block" onclick="javascript:bookSearch(this.form)"><span class="glyphicon glyphicon-book"></span>Search</button>
 								</div><br>
 								<div class="form-group">
-								<img src="" id="book_img" class="img-responsive center-block">
+								<img src=" " id="book_img" class="img-responsive center-block">
 								<input type="hidden" name="book_num" id="book_num">
 								<table>
 									<thead>
