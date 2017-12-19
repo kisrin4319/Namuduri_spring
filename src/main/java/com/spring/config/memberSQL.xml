@@ -24,7 +24,7 @@
 	</select>
 	
 	<!-- 회원 탈퇴 -->
-	<delete id="memberDelete">
+	<delete id="memberDelete" parameterType="MemberModel">
 		DELETE FROM MEMBER
 		WHERE MEMBER_ID = #{member_id} AND MEMBER_PW = #{member_pw}
 	</delete>
@@ -45,6 +45,8 @@
 		   	MEMBER_EMAIL_GET = #{member_email_get, jdbcType=VARCHAR} 
 		WHERE MEMBER_ID = #{member_id}
 	</update>
+	
+	
 	<!-- 2. 우편번호검색 -->
 	<select id="zipCheck"  resultType="ZipcodeModel">
 		select * from zipcode where area3 like '%'||#{area3}|| '%'
@@ -104,6 +106,10 @@
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
 
-	
+	<update id="memberPwUpdate" parameterType="map">
+		UPDATE MEMBER
+			SET MEMBER_PW = #{member_pw}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 
 </mapper>

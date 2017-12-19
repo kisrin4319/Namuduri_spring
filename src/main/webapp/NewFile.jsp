@@ -12,645 +12,254 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Bootstrap Photo Gallery Demo</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<link href="jquery.bsPhotoGallery.css" rel="stylesheet">
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="jquery.bsPhotoGallery.js"></script>
-<script>
-      $(document).ready(function(){
-        $('ul.first').bsPhotoGallery({
-          "classes" : "col-lg-2 col-md-4 col-sm-3 col-xs-4 col-xxs-12",
-          "hasModal" : true,
-          // "fullHeight" : false
-        });
-      });
-      
-      function bookSearch() {
-        var searchUrl = 'http://localhost:8080/namuduri/efeelogSearchView.do';
-        window.open(searchUrl, "confirm", "toolbar=no, location=no, status=no, scrollbars=no, resizable=no, width=350, height=350");
-      }
-
-      function goPage() {
-        var f = $('form#efeelog');
-        f.submit();
-      }
-    </script>
-</head>
-<style>
-@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
-
-body {
-	background: #ebebeb;
-}
-
-ul {
-	padding: 0 0 0 0;
-	margin: 0 0 40px 0;
-}
-
-ul li {
-	list-style: none;
-	margin-bottom: 10px;
-}
-
-.text {
-	/*font-family: 'Bree Serif';*/
-	color: #666;
-	font-size: 11px;
-	margin-bottom: 10px;
-	padding: 12px;
-	background: #fff;
-}
-
-#bsPhotoGalleryModal .modal-content {
-	border-radius: 0;
-}
-
-#bsPhotoGalleryModal .modal-dialog img {
-	text-align: center;
-	margin: 0 auto;
-	width: 100%;
-}
-
-#bsPhotoGalleryModal .modal-body {
-	padding: 0px !important;
-}
-
-#bsPhotoGalleryModal .bsp-close {
-	position: absolute;
-	right: -14px;
-	top: -11px;
-	font-size: 30px;
-	color: #fff;
-	text-shadow: 1px 1px 18px #000;
-}
-
-#bsPhotoGalleryModal .bsp-close:hover {
-	cursor: pointer;
-	opacity: .6;
-	text-shadow: none;
-}
-
-.bspHasModal {
-	cursor: pointer;
-}
-
-.bspHasModal .text {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.imgWrapper {
-	overflow: hidden;
-	max-height: 99px;
-}
-
-a.bsp-controls, a.bsp-controls:visited, a.bsp-controls:active {
-	position: absolute;
-	top: 44%;
-	font-size: 26px;
-	color: #fff;
-	text-shadow: 1px 1px 18px #000;
-}
-
-a.bsp-controls.next {
-	right: -10px;
-}
-
-a.bsp-controls.previous {
-	left: -10px;
-}
-
-a.bsp-controls:hover {
-	opacity: .6;
-	text-shadow: none;
-}
-
-.bsp-text-container {
-	clear: both;
-	display: block;
-	padding-bottom: 5px;
-}
-
-#bsPhotoGalleryModal h6 {
-	margin-bottom: 0;
-	font-weight: bold;
-	color: #000;
-	font-size: 14px;
-	padding-left: 12px;
-	padding-right: 12px;
-	margin-bottom: 5px;
-}
-
-#bsPhotoGalleryModal .pText {
-	font-size: 11px;
-	margin-bottom: 0px;
-	padding: 0 12px 5px;
-}
-
-@media screen and (max-width: 380px) {
-	.col-xxs-12 {
-		width: 100%;
-	}
-	.col-xxs-12 img {
-		width: 100%;
-	}
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.ico">
+<!-- Place favicon.ico in the root directory -->
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- all css here -->
+<!-- bootstrap v3.3.6 css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+<!-- animate css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/animate.css">
+<!-- jquery-ui.min css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/jquery-ui.min.css">
+<!-- meanmenu css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/meanmenu.min.css">
+<!-- Font-Awesome css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css">
+<!-- pe-icon-7-stroke css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/pe-icon-7-stroke.css">
+<!-- Flaticon css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/flaticon.css">
+<!-- venobox css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/venobox/venobox.css" type="text/css" media="screen" />
+<!-- nivo slider css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/lib/css/nivo-slider.css" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/lib/css/preview.css" type="text/css" media="screen" />
+<!-- owl.carousel css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/owl.carousel.css">
+<!-- style css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/style.css">
+<!-- responsive css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/responsive.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/checkBox.css">
+<!-- modernizr css -->
+<script src="<%=cp%>/bootstrap/js/vendor/modernizr-2.8.3.min.js"></script>
+<style type="text/css">
+.form-inline .form-group {
+	margin-left: 0;
+	margin-right: 0;
 }
 </style>
 <body>
-	<h2 style="text-align: -webkit-center; padding-top: 30px;">eFeelog</h2>
-	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-		<li>
-			<a title="Go to Main" href="<%=cp%>/main.do">MAIN</a>
-		</li>
-		<li>
-			<a title="Go to MY PAGE" href="<%=cp%>/mypage.do">MY PAGE</a>
-		</li>
-	</ul>
 	<div class="container">
-		<div class="row" style="text-align: center; border-bottom: 1px dashed #ccc; padding: 0 0 20px 0; margin-bottom: 40px;">
-			<div class="col-md-2 col-sm-3 col-xs-12">
-				<div class="shop-widget">
-					<div class="shop-widget-top">
-						<aside class="widget widget-categories">
-							<h2 class="sidebar-title text-center">CATEGORY</h2>
-							<ul class="sidebar-menu">
-								<li>
-									<a href="<%=cp%>/order/orderListCheckView.do">
-										<i class="fa fa-angle-double-right"></i>
-										주문/배송 조회
-									</a>
-								</li>
-								<li>
-									<a href="<%=cp%>/member/memberModifyView.do">
-										<i class="fa fa-angle-double-right"></i>
-										회원 정보수정
-									</a>
-								</li>
-								<li>
-									<a href="<%=cp%>/member/memberDeleteView.do">
-										<i class="fa fa-angle-double-right"></i>
-										회원 탈퇴
-									</a>
-								</li>
-								<li>
-									<a href="<%=cp%>/eFeelogView.do">
-										<i class="fa fa-angle-double-right"></i>
-										eFeelog
-									</a>
-								</li>
-							</ul>
-						</aside>
+		<form class="form-horizontal">
+			<fieldset>
+				<!-- Form Name -->
+				<legend>회원 정보를 수정 할 수 있는 페이지입니다.</legend>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="f_name">
+						아이디
+						<font size="2" color="#ff3f3f">*</font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_id" id="member_id" maxlength="16" value="${memberInfo.member_id }" />
+						<font class="text-center" size="2" color="#ff3f3f">(영문소문자/숫자, 4~16자)</font>
 					</div>
 				</div>
-			</div>
-			<h3 style="font-family: 'Bree Serif', arial; font-weight: bold; font-size: 30px;">
-				<a style="text-decoration: none; color: #666;" href="http://michaelsoriano.com/create-a-responsive-photo-gallery-with-bootstrap-framework/">
-					Bootstrap Photo Gallery jQuery plugin
-					<span style="color: red;">Demo</span>
-				</a>
-			</h3>
-			<p>
-				Resize your browser and watch the gallery adapt to the view port size. Clicking on an image will activate the Modal. Click
-				<strong>
-					<a style="color: red" href="http://michaelsoriano.com/create-a-responsive-photo-gallery-with-bootstrap-framework/">Here</a>
-				</strong>
-				to go back to the tutorial
-			</p>
+				<!-- Prepended text-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="f_income">
+						비밀번호
+						<font size="2" color="#ff3f3f">*</font>
+					</label>
+					<div class="col-md-6">
+						<div class="input-group">
+							<input type="password" class="form-control" name="member_pw" id="password" />
+							<font class="text-center" size="2" color="#ff3f3f">(영문소문자/숫자, 4~16자)</font>
+						</div>
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="m_name">
+						비밀번호 확인
+						<font size="2" color="#ff3f3f">*</font>
+					</label>
+					<div class="col-md-6">
+						<input type="password" class="form-control" id="passwordCheck" onkeyup="passWorkCheck();" />
+						<span id="passwordCheckText"></span>
+					</div>
+				</div>
+				<!-- Prepended text-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="m_income">
+						이름
+						<font size="2" color="#ff3f3f">*</font>
+					</label>
+					<div class="col-md-6">
+						<div class="input-group">
+							<input type="text" class="form-control" name="member_name" value="${memberInfo.member_name }" />
+						</div>
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="dob">
+						주민등록번호
+						<font size="2" color="#ff3f3f">*</font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_jumin1" maxlength="6" value="${memberInfo.member_jumin1 }" />
+						-
+						<input type="text" class="form-control" name="member_jumin2" maxlength="7" value="${memberInfo.member_jumin2 }" />
+					</div>
+				</div>
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="pwd">
+						우편 번호
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_zipcode" value="${memberInfo.member_zipcode }" />
+					</div>
+					<span>
+						<input type="button" class="btn" name="zipcode" value="우편번호" onclick="openZipCheck()" />
+					</span>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="pwd">
+						기본 주소
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_addr1" value="${memberInfo.member_addr1 }" />
+					</div>
+					<label class="col-md-4 control-label" for="pwd">
+						상세 주소
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_addr2" value="${memberInfo.member_addr2 }" />
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="per_ph">일반전화</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_phone" value="${memberInfo.member_phone }" />
+						<span>
+							<font size="2" color="#ff3f3f"> (일반전화가 없을 시 휴대전화를 기재해주세요.) </font>
+						</span>
+					</div>
+				</div>
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="categoy">
+						휴대전화
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_mobile" value="${memberInfo.member_mobile }" />
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="religion">
+						이메일
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_email" value="${memberInfo.member_email }" />
+						<input type="checkbox" name="member_email_get" value="YES" />
+						동의함 &nbsp;
+						<font size="1">배송현황 및 쇼핑정보를 받으시겠습니까?</font>
+					</div>
+				</div>
+				<br />
+				<legend>선택 입력 사항</legend>
+				<div class="form-group">
+					<label for="regno" class="col-md-4 control-label"> 환불 계좌 정보 </label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_bankname" value="${memberInfo.member_bankname }" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="religion">환불 계좌</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_refund_account" value="${memberInfo.member_refund_account }" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="religion">환불주</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_account_holder" value="${memberInfo.member_account_holder }" />
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="religion">
+						보유 마일리지
+						<font size="2" color="#ff3f3f"> * </font>
+					</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="member_point" value="${memberInfo.member_point }" readonly="readonly" style="" />
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<div>
+			<button name="submitcreate" id="submitcreate" class="btn-default" onclick="check()">
+				<span>
+					<i class="fa fa-user left"></i>
+					SING IN
+				</span>
+			</button>
+			<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:history.back(-1);">
+				<span>
+					<i class="fa fa-user left"></i>
+					CLOSE
+				</span>
+			</button>
 		</div>
-		<ul class="row first">
-			<li>
-				<img alt="Rocking the night away" src="http://demo.michaelsoriano.com/images/photodune-174908-rocking-the-night-away-xs.jpg">
-				<div class="text">Consectetur adipiscing elit</div>
-			</li>
-			<li>
-				<img alt="Yellow sign" src="http://demo.michaelsoriano.com/images/photodune-287182-blah-blah-blah-yellow-road-sign-xs.jpg">
-				<div class="text">Lorem ipsum dolor sit amet, labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Colors" src="http://demo.michaelsoriano.com/images/photodune-460760-colors-xs.jpg">
-				<div class="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
-			</li>
-			<li>
-				<img alt="Retro party" src="http://demo.michaelsoriano.com/images/photodune-461673-retro-party-xs.jpg">
-				<div class="text">Lorem, do eiusmod tempor incid Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Technology soup" src="http://demo.michaelsoriano.com/images/photodune-514834-touchscreen-technology-xs.jpg">
-				<div class="text">Do eiusmod tempor</div>
-			</li>
-			<li>
-				<img alt="Legal docs" src="http://demo.michaelsoriano.com/images/photodune-916206-legal-xs.jpg" data-bsp-large-src="http://demo.michaelsoriano.com/images/photodune-916206-legal-large.jpg">
-				<div class="text">Eiusmod tempor enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Nature shot" src="http://demo.michaelsoriano.com/images/photodune-1062948-nature-xs.jpg">
-				<div class="text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Kid with camera" src="http://demo.michaelsoriano.com/images/photodune-1471528-insant-camera-kid-xs.jpg" data-bsp-large-src="http://demo.michaelsoriano.com/images/photodune-1471528-insant-camera-kid-large.jpg">
-				<div class="text">Lorem ipsum dolor sit amet, labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Relax and Chill" src="http://demo.michaelsoriano.com/images/photodune-2255072-relaxed-man-xs.jpg">
-				<div class="text">Eiusmod tempor enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Cool colors" src="http://demo.michaelsoriano.com/images/photodune-2360379-colors-xs.jpg">
-				<div class="text">Consectetur adipiscing elit</div>
-			</li>
-			<li>
-				<img alt="Jump over" src="http://demo.michaelsoriano.com/images/photodune-2360571-jump-xs.jpg">
-				<div class="text">Lorem ipsum dolor sit amet, labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Culture business" src="http://demo.michaelsoriano.com/images/photodune-2361384-culture-for-business-xs.jpg">
-				<div class="text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Spaghetti bitch" src="http://demo.michaelsoriano.com/images/photodune-2441670-spaghetti-with-tuna-fish-and-parsley-s.jpg">
-				<div class="text">Lorem ipsum dolor sit amet, labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Budget this" src="http://demo.michaelsoriano.com/images/photodune-2943363-budget-xs.jpg">
-				<div class="text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Street art" src="http://demo.michaelsoriano.com/images/photodune-3444921-street-art-xs.jpg">
-				<div class="text">Consectetur adipiscing elit, re magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Insurance and stuff" src="http://demo.michaelsoriano.com/images/photodune-3552322-insurance-xs.jpg">
-				<div class="text">Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Food Explosion" src="http://demo.michaelsoriano.com/images/photodune-3807845-food-s.jpg">
-				<div class="text">Eiusmod tempor enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Office worker sad" src="http://demo.michaelsoriano.com/images/photodune-3835655-down-office-worker-xs.jpg">
-				<div class="text">Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="" src="http://demo.michaelsoriano.com/images/photodune-4619216-ui-control-knob-regulators-xs.jpg">
-				<div class="text">Do eiusmod tempor</div>
-			</li>
-			<li>
-				<img alt="Health" src="http://demo.michaelsoriano.com/images/photodune-5771958-health-xs.jpg">
-				<div class="text">Lorem ipsum dolor sit amet, labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Constant consecutuir" src="http://demo.michaelsoriano.com/images/photodune-268693-businesswoman-using-laptop-outdoors-xs.jpg">
-				<!--no alt tag-->
-				<div class="text">Consectetur adipiscing elit, re magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Search code" src="http://demo.michaelsoriano.com/images/photodune-352207-search-of-code-s.jpg">
-				<div class="text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Pountac" src="http://demo.michaelsoriano.com/images/photodune-247190-secret-email-xs.jpg">
-				<!--no alt tag, no text-->
-				<div class="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
-			</li>
-			<li>
-				<img alt="Budget again" src="http://demo.michaelsoriano.com/images/photodune-2943363-budget-xs.jpg">
-				<div class="text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Some alt tag" src="http://demo.michaelsoriano.com/images/photodune-3444921-street-art-xs.jpg">
-				<!--no alt-->
-				<div class="text">Consectetur adipiscing elit, re magna aliqua. Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Insurance boy" src="http://demo.michaelsoriano.com/images/photodune-3552322-insurance-xs.jpg">
-				<div class="text">Ut enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Food service" src="http://demo.michaelsoriano.com/images/photodune-3807845-food-s.jpg">
-				<div class="text">Eiusmod tempor enim ad minim veniam</div>
-			</li>
-			<li>
-				<img alt="Dopamine high" src="http://demo.michaelsoriano.com/images/photodune-3835655-down-office-worker-xs.jpg">
-				<div class="text">Ut enim ad minim veniam</div>
-			</li>
-		</ul>
 	</div>
-	<!-- /container -->
-	<script type="text/javascript">
-	(function($) {
-	  "use strict";
-	  $.fn.bsPhotoGallery = function(options) {
-
-	      var settings = $.extend({}, $.fn.bsPhotoGallery.defaults, options);
-	      var id = generateId();
-	      var classesString = settings.classes;
-	      var classesArray = classesString.split(" ");
-	      var clicked = {};
-
-	      function getCurrentUl(){
-	        return 'ul[data-bsp-ul-id="'+clicked.ulId+'"][data-bsp-ul-index="'+clicked.ulIndex+'"]';
-	      }
-	      function generateId() {
-	        //http://fiznool.com/blog/2014/11/16/short-id-generation-in-javascript/
-	        var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	        var ID_LENGTH = 4;
-	        var out = '';
-	        for (var i = 0; i < ID_LENGTH; i++) {
-	          out += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
-	        }
-	        return 'bsp-'+out;
-	      }
-	      function createModalWrap(){
-
-	        if($('#bsPhotoGalleryModal').length !== 0){
-	          return false;
-	        }
-
-	        var modal = '';
-	        modal += '<div class="modal fade" id="bsPhotoGalleryModal" tabindex="-1" role="dialog"';
-	        modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
-	        modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-	        modal += '<div class="modal-body"></div></div></div></div>';
-	        $('body').append(modal);
-
-	      }
-	      function showHideControls(){
-	    		var total = $(getCurrentUl()+' li[data-bsp-li-index]').length;
-
-	    		if(total === clicked.nextImg){
-	    			$('a.next').hide();
-	    		}else{
-	    			$('a.next').show()
-	    		}
-	    		if(clicked.prevImg === -1){
-	    			$('a.previous').hide();
-	    		}else{
-	    			$('a.previous').show()
-	    		}
-	    	}
-	      function showModal(){
-
-	          var src = $(this).find('img').attr('src');
-	          var largeImg = $(this).find('img').attr('data-bsp-large-src');
-	          if(typeof largeImg === 'string'){
-	                src = largeImg;
-	          }
-	          var index = $(this).attr('data-bsp-li-index');
-	          var ulIndex = $(this).parent('ul').attr('data-bsp-ul-index');
-	          var ulId = $(this).parent('ul').attr('data-bsp-ul-id');
-	          var theImg = $(this).find('img');
-	          var pText = $(this).find('.text').html();        
-	          var modalText = typeof pText !== 'undefined' ? pText : 'undefined';
-	          var alt =  typeof theImg.attr('alt') == 'string' ? theImg.attr('alt') : null;
-	          
-	          clicked.img = src;
-	          clicked.prevImg = parseInt(index) - parseInt(1);
-	      		clicked.nextImg = parseInt(index) + parseInt(1);
-	          clicked.ulIndex = ulIndex;
-	          clicked.ulId = ulId;
-
-
-	          $('#bsPhotoGalleryModal').modal();
-
-	          var html = '';
-	          var img = '<img src="' + clicked.img + '" class="img-responsive"/>';
-
-	          html += img;
-	          html += '<span class="' + settings.iconClose + ' bsp-close"></span>';
-	          html += '<div class="bsp-text-container">';
-	          
-	          if(alt !== null){
-	            html += '<h6>'+alt+'</h6>'
-	          }
-	          if(typeof pText !== 'undefined'){
-	            html += '<p class="pText">'+pText+'</p>'
-	          }        
-	          html += '</div>';
-	        
-				    if(settings.showControl){
-	            html += '<a class="bsp-controls next" data-bsp-id="'+clicked.ulId+'" href="'+ (clicked.nextImg) + '"><span class="' + settings.iconRight + '"></span></a>';
-	            html += '<a class="bsp-controls previous" data-bsp-id="'+clicked.ulId+'" href="' + (clicked.prevImg) + '"><span class="' + settings.iconLeft + '"></span></a>';
-	          }
-	          $('#bsPhotoGalleryModal .modal-body').html(html);
-	          $('.bsp-close').on('click', closeModal);
-	          showHideControls();
-	      }
-
-	      function closeModal(){
-	        $('#bsPhotoGalleryModal').modal('hide');
-	      }
-
-	      function nextPrevHandler(){
-
-	          var ul = $(getCurrentUl());
-	          var index = $(this).attr('href');
-
-	          var src = ul.find('li[data-bsp-li-index="'+index+'"] img').attr('src');
-	          var largeImg = ul.find('li[data-bsp-li-index="'+index+'"] img').attr('data-bsp-large-src');
-	          if(typeof largeImg === 'string'){
-	                src = largeImg;
-	          } 
-	          
-	          var pText = ul.find('li[data-bsp-li-index="'+index+'"] .text').html();        
-	          var modalText = typeof pText !== 'undefined' ? pText : 'undefined';
-	          var theImg = ul.find('li[data-bsp-li-index="'+index+'"] img');
-	          var alt =  typeof theImg.attr('alt') == 'string' ? theImg.attr('alt') : null;
-	           
-	          $('#bsPhotoGalleryModal .modal-body img').attr('src', src);
-	          var txt = '';
-	          if(alt !== null){
-	            txt += '<h6>'+alt+'</h6>'
-	          }
-	          if(typeof pText !== 'undefined'){
-	            txt += '<p class="pText">'+pText+'</p>'
-	          }        
-	          
-	          $('.bsp-text-container').html(txt); 
-
-	          clicked.prevImg = parseInt(index) - 1;
-	          clicked.nextImg = parseInt(clicked.prevImg) + 2;
-
-	          if($(this).hasClass('previous')){
-	              $(this).attr('href', clicked.prevImg);
-	              $('a.next').attr('href', clicked.nextImg);
-	          }else{
-	              $(this).attr('href', clicked.nextImg);
-	              $('a.previous').attr('href', clicked.prevImg);
-	          }
-	          // console.log(clicked);
-	        showHideControls();
-	        return false;
-	      }
-	      function clearModalContent(){
-	        $('#bsPhotoGalleryModal .modal-body').html('');
-	        clicked = {};
-	      }
-	      function insertClearFix(el,x){
-	        var index = (x+1);
-	        $.each(classesArray,function(e){
-	           switch(classesArray[e]){
-	             //large
-	             case "col-lg-1":
-	                  if($(el).next('li.clearfix').length == 0){
-	                    $(el).after('<li class="clearfix visible-lg-block"></li>');
-	                  }
-	              break;
-	             case "col-lg-2":
-	                if(index%6 === 0){
-	                  $(el).after('<li class="clearfix visible-lg-block"></li>');
-	                }
-	              break;
-	             case "col-lg-3":
-	              if(index%4 === 0){
-	                $(el).after('<li class="clearfix visible-lg-block"></li>');
-	              }
-	             break;
-	             case "col-lg-4":
-	              if(index%3 === 0){
-	                $(el).after('<li class="clearfix visible-lg-block"></li>');
-	              }
-	             break;
-	             case "col-lg-5":
-	             case "col-lg-6":
-	              if(index%2 === 0){
-	                $(el).after('<li class="clearfix visible-lg-block"></li>');
-	              }
-	             break;
-	             //medium
-	             case "col-md-1":
-	                  if($(el).next('li.clearfix').length == 0){
-	                    $(el).after('<li class="clearfix visible-md-block"></li>');
-	                  }
-	              break;
-	             case "col-md-2":
-	                if(index%6 === 0){
-	                  $(el).after('<li class="clearfix visible-md-block"></li>');
-	                }
-	              break;
-	             case "col-md-3":
-	              if(index%4 === 0){
-	                $(el).after('<li class="clearfix visible-md-block"></li>');
-	              }
-	             break;
-	             case "col-md-4":
-	              if(index%3 === 0){
-	                $(el).after('<li class="clearfix visible-md-block"></li>');
-	              }
-	             break;
-	             case "col-md-5":
-	             case "col-md-6":
-	              if(index%2 === 0){
-	                $(el).after('<li class="clearfix visible-md-block"></li>');
-	              }
-	             break;
-	             //small
-	             case "col-sm-1":
-	                  if($(el).next('li.clearfix').length == 0){
-	                    $(el).after('<li class="clearfix visible-sm-block"></li>');
-	                  }
-	              break;
-	             case "col-sm-2":
-	                if(index%6 === 0){
-	                  $(el).after('<li class="clearfix visible-sm-block"></li>');
-	                }
-	              break;
-	             case "col-sm-3":
-	              if(index%4 === 0){
-	                $(el).after('<li class="clearfix visible-sm-block"></li>');
-	              }
-	             break;
-	             case "col-sm-4":
-	              if(index%3 === 0){
-	                $(el).after('<li class="clearfix visible-sm-block"></li>');
-	              }
-	             break;
-	             case "col-sm-5":
-	             case "col-sm-6":
-	              if(index%2 === 0){
-	                $(el).after('<li class="clearfix visible-sm-block"></li>');
-	              }
-	             break;
-	             //x-small
-	             case "col-xs-1":
-	                  if($(el).next('li.clearfix').length == 0){
-	                    $(el).after('<li class="clearfix visible-xs-block"></li>');
-	                  }
-	              break;
-	             case "col-xs-2":
-	                if(index%6 === 0){
-	                  $(el).after('<li class="clearfix visible-xs-block"></li>');
-	                }
-	              break;
-	             case "col-xs-3":
-	              if(index%4 === 0){
-	                $(el).after('<li class="clearfix visible-xs-block"></li>');
-	              }
-	             break;
-	             case "col-xs-4":
-	              if(index%3 === 0){
-	                $(el).after('<li class="clearfix visible-xs-block"></li>');
-	              }
-	             break;
-	             case "col-xs-5":
-	             case "col-xs-6":
-	              if(index%2 === 0){
-	                $(el).after('<li class="clearfix visible-xs-block"></li>');
-	              }
-	             break;
-	           }
-	        });
-	      }
-
-
-	      this.each(function(i){
-	        //ul
-	        var items = $(this).find('li');
-	        $(this).attr('data-bsp-ul-id', id);
-	        $(this).attr('data-bsp-ul-index', i);
-
-	        items.each(function(x){
-	          var theImg = $(this).find('img'); 
-	          insertClearFix(this,x);
-	          $(this).addClass(classesString);
-	          $(this).attr('data-bsp-li-index', x);
-	          theImg.addClass('img-responsive');
-	          if(settings.fullHeight){
-	            theImg.wrap('<div class="imgWrapper"></div>')
-	          }
-	          if(settings.hasModal === true){
-	            $(this).addClass('bspHasModal');
-	            $(this).on('click', showModal);
-	          }
-	        });
-	      })
-
-	      if(settings.hasModal === true){
-	        //this is for the next / previous buttons
-	        $(document).on('click', 'a.bsp-controls[data-bsp-id="'+id+'"]', nextPrevHandler);
-	        $(document).on('hidden.bs.modal', '#bsPhotoGalleryModal', clearModalContent);
-	        //start init methods
-	        createModalWrap();
-	      }
-
-	      return this;
-	  };
-	  /*defaults*/
-	  $.fn.bsPhotoGallery.defaults = {
-	    'classes' : 'col-lg-2 col-md-2 col-sm-3 col-xs-4',
-	    'showControl' : true,
-	    'hasModal' : true, 
-	    'fullHeight' : true,
-	    'iconClose' : 'glyphicon glyphicon-remove-circle',
-	    'iconLeft' : 'glyphicon glyphicon-chevron-left',
-	    'iconRight' : 'glyphicon glyphicon-chevron-right'
-	  }
-
-
-	}(jQuery));
-	</script>
+	<!-- Footer Area End -->
+	<!-- all js here -->
+	<!-- jquery latest version -->
+	<script src="<%=cp%>/bootstrap/js/vendor/jquery-1.12.0.min.js"></script>
+	<!-- bootstrap js -->
+	<script src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
+	<!-- owl.carousel js -->
+	<script src="<%=cp%>/bootstrap/js/owl.carousel.min.js"></script>
+	<!-- jquery-ui js -->
+	<script src="<%=cp%>/bootstrap/js/jquery-ui.min.js"></script>
+	<!-- jquery Counterup js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.counterup.min.js"></script>
+	<script src="<%=cp%>/bootstrap/js/waypoints.min.js"></script>
+	<!-- jquery countdown js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.countdown.min.js"></script>
+	<!-- jquery countdown js -->
+	<script type="text/javascript" src="<%=cp%>/bootstrap/venobox/venobox.min.js"></script>
+	<!-- jquery Meanmenu js -->
+	<script src="<%=cp%>/bootstrap/js/jquery.meanmenu.js"></script>
+	<!-- wow js -->
+	<script src="<%=cp%>/bootstrap/js/wow.min.js"></script>
+	<script>
+    new WOW().init();
+  </script>
+	<!-- scrollUp JS -->
+	<script src="<%=cp%>/bootstrap/js/jquery.scrollUp.min.js"></script>
+	<!-- plugins js -->
+	<script src="<%=cp%>/bootstrap/js/plugins.js"></script>
+	<!-- Nivo slider js -->
+	<script src="<%=cp%>/bootstrap/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+	<script src="<%=cp%>/bootstrap/lib/home.js" type="text/javascript"></script>
+	<!-- main js -->
+	<script src="<%=cp%>/bootstrap/js/main.js?ver=1"></script>
 </body>
 </html>
