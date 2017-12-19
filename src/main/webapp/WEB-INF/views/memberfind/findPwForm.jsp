@@ -59,36 +59,38 @@ function check() {
 		<div class="login-account section-padding">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
+					<div class="col-lg-12 col-md-12 col-sm-12">
 						<form class="create-account-form" name="findpwform" id="findpwform">
 							<h2 class="heading-title">
 								Find PW
 							</h2>
-							<div class="form-group">
-							<!-- <p class="form-row"><h5>ID</h5> -->
-								<label for="usr" class="form-row">ID:</label>
-								<input type="text" name="member_id">
-							<!-- </p> -->
+							<div class="col-sm-6 form-group">						
+								<label>ID</label>
+								<input type="text" class="form-control" name="member_id">							
 							</div>
-							<!-- <p class="form-row"><h5>E-MAIL</h5> -->
-							<div class="form-group">
-								<label for="usr" class="form-row">E-MAIL:</label>
-								<input type="text" name="member_email">
+							
+							<div class="col-sm-6 form-group">
+								<label>E-MAIL</label>
+								<input type="text" class="form-control" name="member_email">
 							</div>
-							<!-- </p> -->
-							<div>					
+							
+							<br><br><br><br><br><br><br>
+							
+							<div class="row">
+								<div class="col-sm-12 text-center">					
                                 <button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 SING IN
                                     </span>
                                 </button>
-                                <button name="submitcreate" id="submitcreate" class="btn-default">
+                                <!-- <button name="submitcreate" id="submitcreate" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 CLOSE
                                     </span>
-                                </button>
+                                </button> -->
+                                </div>
                             </div>
 						</form>
 					</div>
