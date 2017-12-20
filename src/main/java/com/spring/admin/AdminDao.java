@@ -104,9 +104,9 @@ public interface AdminDao {
 	public List<ChartModel> memberRegion();
 	public List<ChartModel> newMemberRegion();
 	
-	public List<ChartModel> bookSelling();
-	public List<ChartModel> monthBookSelling();
-	public List<ChartModel> weekBookSelling();
+	public List<BooksModel> bookSelling();
+	public List<BooksModel> monthBookSelling();
+	public List<BooksModel> weekBookSelling();
 	
 	public List<ChartModel> monthOrderNum();
 	public List<ChartModel> monthSales();

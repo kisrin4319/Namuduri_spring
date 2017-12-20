@@ -9,111 +9,78 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
-	getLineChart1();
-	getLineChart2();
-	getSalesChart1();
-	getSalesChart2();
-	getPieChart1();
-	getPieChart2();
-	getPieChart3();
-	getPieChart4();
-	getPieChart5();
-	getPieChart6();
-});
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawLineChart1);
+google.charts.setOnLoadCallback(drawLineChart2);
+google.charts.setOnLoadCallback(drawLineChart3);
+google.charts.setOnLoadCallback(drawLineChart4);
+google.charts.setOnLoadCallback(drawPieChart1);
+google.charts.setOnLoadCallback(drawPieChart2);
+google.charts.setOnLoadCallback(drawPieChart3);
+google.charts.setOnLoadCallback(drawPieChart4);
+google.charts.setOnLoadCallback(drawPieChart5);
+google.charts.setOnLoadCallback(drawPieChart6);
 
-function getLineChart1(){
-	
-	var json = ${jsonNew};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
+var request = ${request}
 
-	function drawChart() {
+function drawLineChart1() {
+		var json = ${jsonNew};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
-	        legend: 'none'
+			title:'날짜별 조회'
 	      };
 
 		var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getLineChart2(){
-	
-	var json = ${jsonAll};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawLineChart2() {
+		var json = ${jsonAll};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
-	        legend: 'none'
+			title:'달별 조회'
 	      };
 
 		var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getSalesChart1(){
-	
-	var json = ${salesNew};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawLineChart3() {
+		var json = ${salesNew};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
-	        legend: 'none'
+			title:'날짜별 판매 금액 조회 (단위 : k(천 원))'
 	      };
 
 		var chart = new google.visualization.LineChart(document.getElementById('sales_chart1'));
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getSalesChart2(){
-	
-	var json = ${salesAll};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawLineChart4() {
+		var json = ${salesAll};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
-	        legend: 'none'
+			title:'달별 판매 금액 조회 (단위 : M(백만 원))'
 	      };
 
 		var chart = new google.visualization.LineChart(document.getElementById('sales_chart2'));
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getPieChart1(){
-	
-	var json = ${newGenderPie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart1() {
+		var json = ${newGenderPie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -127,17 +94,10 @@ function getPieChart1(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getPieChart2(){
-	
-	var json = ${newAgePie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart2() {
+		var json = ${newAgePie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -151,17 +111,10 @@ function getPieChart2(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getPieChart3(){
-	
-	var json = ${newRegionPie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart3() {
+		var json = ${newRegionPie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -175,17 +128,10 @@ function getPieChart3(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getPieChart4(){
-	
-	var json = ${genderPie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart4() {
+		var json = ${genderPie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -199,18 +145,11 @@ function getPieChart4(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
 
-function getPieChart5(){
-	
-	var json = ${agePie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart5() {
+		var json = ${agePie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -224,17 +163,10 @@ function getPieChart5(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
-function getPieChart6(){
-	
-	var json = ${regionPie};
-	
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
+function drawPieChart6() {
+		var json = ${regionPie};
 		var data = new google.visualization.DataTable(json)
 		
 		var options = {
@@ -248,7 +180,6 @@ function getPieChart6(){
 		
 		chart.draw(data, options);
 		window.addEventListener('resize', function() { chart.draw(data, options); }, false);
-	}
 }
 
 </script>
@@ -260,7 +191,14 @@ function getPieChart6(){
 				<h3 class="text-themecolor">CHART</h3>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-					<li class="breadcrumb-item active">Dashboard</li>
+					<c:choose>
+						<c:when test="${request==1}">
+							<li class="breadcrumb-item active">Member Chart</li>	
+						</c:when>
+						<c:otherwise>
+							<li class="breadcrumb-item active">Order Chart</li>	
+						</c:otherwise>
+					</c:choose>
 				</ol>
 			</div>
 		</div>
@@ -271,14 +209,17 @@ function getPieChart6(){
 					<div class="table-responsive">
 						<div id="new">
 								<div class="card-block">
-									<c:if test="${request==1}">
-										<label class="h4">신규 가입 회원</label>
-									</c:if>
-									<c:if test="${request==2}">
-										<label class="h4">최근 7일 주문 조회</label>
-									</c:if>
-									<div id="curve_chart"></div>
-									<div id="sales_chart1"></div>
+									<c:choose>
+										<c:when test="${request==1}">
+											<label class="h4">신규 가입 회원</label>
+											<div id="curve_chart" class="jsonNew"></div>
+										</c:when>
+										<c:otherwise>
+											<label class="h4">최근 7일 주문 조회</label>
+											<div id="curve_chart"></div>
+											<div id="sales_chart1"></div>
+										</c:otherwise>
+									</c:choose>
 									<div class="form-group"></div>
 									<div class="row">
 										<div class="col-md-4"><div id="pie_chart1"></div></div>
@@ -289,14 +230,17 @@ function getPieChart6(){
 						</div>
 						<div id="all">
 								<div class="card-block">
-									<c:if test="${request==1}">
-										<label class="h4">전체 회원</label>
-									</c:if>
-									<c:if test="${request==2}">
-										<label class="h4">달별 주문 조회</label>
-									</c:if>
-									<div id="curve_chart2"></div>
-									<div id="sales_chart2"></div>
+									<c:choose>
+										<c:when test="${request==1}">
+											<label class="h4">전체 회원</label>
+											<div id="curve_chart2" class="jsonAll"></div>
+										</c:when>
+										<c:otherwise>
+											<label class="h4">달별 주문 조회</label>
+											<div id="curve_chart2"></div>
+											<div id="sales_chart2"></div>
+										</c:otherwise>
+									</c:choose>
 									<div class="form-group"></div>
 									<div class="row">
 										<div class="col-md-4"><div id="pie_chart4"></div></div>
@@ -305,8 +249,6 @@ function getPieChart6(){
 									</div>
 								</div>
 						</div>
-						
-						
 					</div>
 				</div>
 			</div>

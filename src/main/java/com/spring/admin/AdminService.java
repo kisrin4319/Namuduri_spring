@@ -215,19 +215,19 @@ public class AdminService implements AdminDao {
 	/* ----------------------------------------------------------------------------------- */
 
 	@Override
-	public List<ChartModel> bookSelling() {
+	public List<BooksModel> bookSelling() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.bookSelling");
 	}
 
 	@Override
-	public List<ChartModel> monthBookSelling() {
+	public List<BooksModel> monthBookSelling() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.monthBookSelling");
 	}
 
 	@Override
-	public List<ChartModel> weekBookSelling() {
+	public List<BooksModel> weekBookSelling() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.weekBookSelling");
 	}

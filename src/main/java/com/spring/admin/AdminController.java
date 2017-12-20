@@ -1,6 +1,5 @@
 package com.spring.admin;
 
-import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -700,8 +699,8 @@ public class AdminController {
 		
 		GoogleChartDTO goNew = new GoogleChartDTO();
 		
-		goNew.addColumn("MEMBER", "string");
-		goNew.addColumn("number", "number");
+		goNew.addColumn("DAY", "string");
+		goNew.addColumn("신규 회원수", "number");
 		goNew.createRows(listNew.size());
 		
 		for(int i=0; i<listNew.size(); i++) {
@@ -716,8 +715,8 @@ public class AdminController {
 		
 		GoogleChartDTO goAll = new GoogleChartDTO();
 		
-		goAll.addColumn("MEMBER", "string");
-		goAll.addColumn("number", "number");
+		goAll.addColumn("DAY", "string");
+		goAll.addColumn("전체 회원수", "number");
 		goAll.createRows(listAll.size());
 		
 		for(int i=0; i<listAll.size(); i++) {
@@ -842,7 +841,7 @@ public class AdminController {
 		GoogleChartDTO line1 = new GoogleChartDTO();
 		
 		line1.addColumn("day", "string");
-		line1.addColumn("number", "number");
+		line1.addColumn("주문수", "number");
 		line1.createRows(weekOrderNum.size());
 		
 		for(int i=0; i<weekOrderNum.size(); i++) {
@@ -857,12 +856,12 @@ public class AdminController {
 		GoogleChartDTO sales1 = new GoogleChartDTO();
 		
 		sales1.addColumn("day", "string");
-		sales1.addColumn("number", "number");
+		sales1.addColumn("판매금액", "number");
 		sales1.createRows(weekSales.size());
 		
 		for(int i=0; i<weekSales.size(); i++) {
 			sales1.addCell(i, weekSales.get(i).getKey());
-			sales1.addCell(i, weekSales.get(i).getValue()+"만 원");
+			sales1.addCell(i, weekSales.get(i).getPrice());
 		}
 		String salesNew = gson.toJson(sales1.getResult());
 		mv.addObject("salesNew", salesNew);
@@ -919,7 +918,7 @@ public class AdminController {
 		GoogleChartDTO line2 = new GoogleChartDTO();
 		
 		line2.addColumn("day", "string");
-		line2.addColumn("number", "number");
+		line2.addColumn("주문수", "number");
 		line2.createRows(monthOrderNum.size());
 		
 		for(int i=0; i<monthOrderNum.size(); i++) {
@@ -934,12 +933,12 @@ public class AdminController {
 		GoogleChartDTO sales2 = new GoogleChartDTO();
 		
 		sales2.addColumn("day", "string");
-		sales2.addColumn("number", "number");
+		sales2.addColumn("판매 금액", "number");
 		sales2.createRows(monthSales.size());
 		
 		for(int i=0; i<monthSales.size(); i++) {
 			sales2.addCell(i, monthSales.get(i).getKey());
-			sales2.addCell(i, monthSales.get(i).getValue()+"만 원");
+			sales2.addCell(i, monthSales.get(i).getPrice());
 		}
 		String salesAll = gson.toJson(sales2.getResult());
 		mv.addObject("salesAll", salesAll);
@@ -948,14 +947,12 @@ public class AdminController {
 		List<ChartModel> monthOrderGender = adminService.monthOrderGender();
 		GoogleChartDTO pie4 = new GoogleChartDTO();
 		
-		pie4.addColumn("MONTH", "string");
 		pie4.addColumn("항목", "string");
 		pie4.addColumn("값", "number");
 		pie4.createRows(monthOrderGender.size());
 		
 		for(int i=0; i<monthOrderGender.size(); i++) {
-			pie4.addCell(i, monthOrderGender.get(i).getKey());
-			pie4.addCell(i, Integer.parseInt(monthOrderGender.get(i).getItem())==1?"남자":"여자");
+			pie4.addCell(i, Integer.parseInt(monthOrderGender.get(i).getKey())==1?"남자":"여자");
 			pie4.addCell(i, monthOrderGender.get(i).getValue());
 		}
 		String genderPie = gson.toJson(pie4.getResult());
@@ -965,14 +962,12 @@ public class AdminController {
 		List<ChartModel> monthOrderAge = adminService.monthOrderAge();
 		GoogleChartDTO pie5 = new GoogleChartDTO();
 		
-		pie5.addColumn("MONTH", "string");
 		pie5.addColumn("항목", "spring");
 		pie5.addColumn("값", "number");
 		pie5.createRows(monthOrderAge.size());
 		
 		for(int i=0; i<monthOrderAge.size(); i++) {
-			pie5.addCell(i, monthOrderAge.get(i).getKey());
-			pie5.addCell(i, monthOrderAge.get(i).getItem()+"0 년대");
+			pie5.addCell(i, monthOrderAge.get(i).getKey()+"0 년대");
 			pie5.addCell(i, monthOrderAge.get(i).getValue());
 		}
 		String agePie = gson.toJson(pie5.getResult());
@@ -982,14 +977,12 @@ public class AdminController {
 		List<ChartModel> monthOrderRegion = adminService.monthOrderRegion();
 		GoogleChartDTO pie6 = new GoogleChartDTO();
 		
-		pie6.addColumn("MONTH", "string");
 		pie6.addColumn("항목", "spring");
 		pie6.addColumn("값", "number");
 		pie6.createRows(monthOrderRegion.size());
 		
 		for(int i=0; i<monthOrderRegion.size(); i++) {
 			pie6.addCell(i, monthOrderRegion.get(i).getKey());
-			pie6.addCell(i, monthOrderRegion.get(i).getItem());
 			pie6.addCell(i, monthOrderRegion.get(i).getValue());
 		}
 		String regionPie = gson.toJson(pie6.getResult());
@@ -999,6 +992,20 @@ public class AdminController {
 		mv.setViewName("adminChart");
 		return mv;
 		
+	}
+	
+	@RequestMapping("/admin/chart/book.do")
+	public ModelAndView chartB() {
+		
+		List<BooksModel> bookSelling =  adminService.bookSelling();
+		List<BooksModel> monthBookSelling = adminService.monthBookSelling();
+		List<BooksModel> weekBookSelling = adminService.weekBookSelling();
+		
+		mv.addObject("bookSelling", bookSelling);
+		mv.addObject("monthBookSelling", monthBookSelling);
+		mv.addObject("weekBookSelling", weekBookSelling);
+		mv.setViewName("adminChartBook");
+		return mv;
 	}
 	
 }

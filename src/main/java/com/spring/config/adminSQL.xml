@@ -213,7 +213,7 @@
 		<![CDATA[
 		select to_char(member_join_date,'mm.dd') key, count(*) value from member 
 		where trunc(member_join_date)<=trunc(sysdate) and trunc(member_join_date)>trunc(sysdate)-7
-		group by to_char(member_join_date,'mm.dd') order by key desc]]>
+		group by to_char(member_join_date,'mm.dd') order by key asc]]>
 	</select>
 	
 	<select id="memberGender" resultType="ChartModel"><!-- 전체 회원 기준 성별 구분 파이 차트 -->
@@ -251,31 +251,29 @@
 	<!-- 카테고리 관리 기능 구현 시 카테고리 판매량 분석 추가. -->
 	<!-- 기간 지정 가능하도록 구현하기. -->
 	
-	<select id="bookSelling"><!-- 전체 기간 기준 가장 많이 팔인 책 8권 -->
-		<![CDATA[select a.* from (select book_category, book_name, book_sell_count 
+	<select id="bookSelling" resultType="BooksModel"><!-- 전체 기간 기준 가장 많이 팔인 책 8권 -->
+		<![CDATA[select a.* from (select book_category, book_num, book_name, book_sell_count, book_image
 		from book order by book_sell_count desc) a where rownum>=1 and rownum<=8]]>
 	</select>
 	
-	<select id="monthBookSelling"><!-- 저번 달의 판매량 순위 -->
-		<![CDATA[
-			select c.* from (
-  				select order_book_name, sum(order_book_count) sellCount from (
-    				select a.order_trade_num, a.order_regdate, b.book_num, b.order_book_name, order_book_count 
-    				from order_book a inner join order_detail b on a.ORDER_TRADE_NUM = b.ORDER_TRADE_NUM where a.order_use_yn = 1) 
- 	 			where extract(month from order_regdate)=extract(month from sysdate)-1 group by order_book_name order by sellCount desc) c 
-			where rownum>=1 and rownum<=8;
-		]]>
+	<select id="monthBookSelling" resultType="BooksModel"><!-- 저번 달의 판매량 순위 -->
+		<![CDATA[select * from (
+					select book_num, order_book_name book_name, book_image, sum(order_book_count) book_sell_count from(
+						select c.*, b.book_image from (select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name, od.order_book_count 
+						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM where o.order_use_yn = 1) c 
+					inner join book b on c.book_num = b.book_num where extract(month from order_regdate)=extract(month from sysdate)-1) 
+					group by order_book_name, book_image, book_num order by book_sell_count desc) 
+				where rownum>=1 and rownum<=8]]>
 	</select>
 	
-	<select id="weekBookSelling"><!-- 최근 7일 판매량 순위 -->
-		<![CDATA[
-			select c.* from (
-  				select order_book_name, sum(order_book_count) sellCount from (
-    				select a.order_trade_num, a.order_regdate, b.book_num, b.order_book_name, order_book_count 
-    				from order_book a inner join order_detail b on a.ORDER_TRADE_NUM = b.ORDER_TRADE_NUM where a.order_use_yn = 1) 
-  				where order_regdate<=trunc(sysdate) and order_regdate>trunc(sysdate)-7 group by order_book_name order by sellCount desc) c 
-			where rownum>=1 and rownum<=8
-		]]>
+	<select id="weekBookSelling" resultType="BooksModel"><!-- 최근 7일 판매량 순위 -->
+		<![CDATA[select * from (
+					select book_num, order_book_name book_name, book_image, sum(order_book_count) book_sell_count from(
+						select c.*, b.book_image from (select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name, od.order_book_count 
+						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM where o.order_use_yn = 1) c 
+					inner join book b on c.book_num = b.book_num where order_regdate<=trunc(sysdate) and order_regdate>trunc(sysdate)-7) 
+					group by order_book_name, book_image, book_num order by book_sell_count desc) 
+				where rownum>=1 and rownum<=8]]>
 	</select>
 	
 	<!-- //////////////////////////////////////// -->
@@ -287,8 +285,8 @@
 	</select>
 	
 	<select id="monthSales" resultType="ChartModel"><!-- 달별 판매량 조회 -->
-		select to_char(order_regdate,'yy/mm') key, sum(ORDER_RECEIVE_MONEYSUM) value
-		from order_book group by to_char(order_regdate,'yy/mm')
+		select to_char(order_regdate,'yy/mm') key, trunc(sum(ORDER_RECEIVE_MONEYSUM/1000000),2) price
+		from order_book group by to_char(order_regdate,'yy/mm') order by key
 	</select>
 	
 	<select id="weekOrderNum" resultType="ChartModel"><!-- 최근 7일 날짜별 주문량 조회 -->
@@ -297,16 +295,16 @@
 	</select>
 	
 	<select id="weekSales" resultType="ChartModel"><!-- 최근 7일 날짜별 판매량 -->
-		<![CDATA[select to_char(order_regdate,'mm.dd') key, sum(ORDER_RECEIVE_MONEYSUM) value 
+		<![CDATA[select to_char(order_regdate,'mm.dd') key, trunc(sum(ORDER_RECEIVE_MONEYSUM/1000)) price
 		from order_book where trunc(order_regdate)<=trunc(sysdate) and trunc(order_regdate)>trunc(sysdate)-7
 		group by to_char(order_regdate,'mm.dd') order by key desc]]>
 	</select>
 	
 	<select id="monthOrderGender" resultType="ChartModel"><!-- 달별 성별 구분 -->
-		select to_char(order_regdate,'yy/mm') key, to_number(substr(to_char(member_jumin2),1,1)) item, count(*) value from (
+		select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from (
 			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
 			from order_book a inner join member b on a.member_id=b.member_id)
-		group by to_number(substr(to_char(member_jumin2),1,1)), to_char(order_regdate,'yy/mm') order by key
+		group by to_number(substr(to_char(member_jumin2),1,1)) order by key
 	</select>
 	
 	<select id="weekOrderGender" resultType="ChartModel"><!-- 최근 7일 주문 성별 통계 -->
@@ -320,10 +318,10 @@
 	</select>
 	
 	<select id="monthOrderAge" resultType="ChartModel"><!-- 달별 연령 구분 -->
-		select to_char(order_regdate,'yy/mm') key, to_number(substr(to_char(member_jumin1),1,1)) item, count(*) value from (
+		select to_number(substr(to_char(member_jumin1),1,1)) key, count(*) value from (
 			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
 			from order_book a inner join member b on a.member_id=b.member_id)
-		group by to_number(substr(to_char(member_jumin1),1,1)), to_char(order_regdate,'yy/mm') order by key
+		group by to_number(substr(to_char(member_jumin1),1,1)) order by key
 	</select>
 	
 	<select id="weekOrderAge" resultType="ChartModel"><!-- 최근 7일 주문 연령별 통계 -->
