@@ -218,13 +218,12 @@ public class MypageController {
 		memberModel = memberService.SelectOne(member_id);
 		
 		String password = request.getParameter("member_pw");
-		String encryptPassword = passwordEncoder.encode(password);
 		
-		if(passwordEncoder.matches(password, encryptPassword)) {
+		if(passwordEncoder.matches(password, memberModel.getMember_pw())) {
 			memberModel.setMember_id(member_id);
 			memberModel.setMember_pw(memberModel.getMember_pw());
 			int member = mypageService.memberDelete(memberModel);
-			
+			System.out.println(member);
 			if(member > 0) {
 				object.put("returnVal", "1");
 			}else {
