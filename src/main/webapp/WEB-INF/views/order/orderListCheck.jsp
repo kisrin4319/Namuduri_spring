@@ -113,7 +113,7 @@
 			<a title="Go to Main" href="<%=cp%>/main.do">MAIN</a>
 		</li>
 		<li>
-			<a title="Go to Books" href="<%=cp%>/books/booksList.do">BOOKS</a>
+			<a title="Go to Books" href="<%=cp%>/mypage.do">MY PAGE</a>
 		</li>
 	</ul>
 	<div class="shopping-area section-padding">

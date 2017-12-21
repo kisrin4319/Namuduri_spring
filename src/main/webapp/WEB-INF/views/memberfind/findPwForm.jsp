@@ -29,7 +29,8 @@ function check() {
             async:false,
             success:function(result){
             	if(result.returnVal == '1'){
-            		alert('당신의 비밀번호는' + result.member_pw + '입니다.');
+            		//alert('당신의 비밀번호는' + result.member_pw + '입니다.');
+            		alert('임시비밀번호가 입력하신 이메일로 발송되었습니다.')
             		return false;
             	}else {
             		alert('아이디 또는 이메일이 바르지 않습니다.');
@@ -59,36 +60,38 @@ function check() {
 		<div class="login-account section-padding">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
+					<div class="col-lg-12 col-md-12 col-sm-12">
 						<form class="create-account-form" name="findpwform" id="findpwform">
 							<h2 class="heading-title">
 								Find PW
 							</h2>
-							<div class="form-group">
-							<!-- <p class="form-row"><h5>ID</h5> -->
-								<label for="usr" class="form-row">ID:</label>
-								<input type="text" name="member_id">
-							<!-- </p> -->
+							<div class="col-sm-6 form-group">						
+								<label>ID</label>
+								<input type="text" class="form-control" name="member_id">							
 							</div>
-							<!-- <p class="form-row"><h5>E-MAIL</h5> -->
-							<div class="form-group">
-								<label for="usr" class="form-row">E-MAIL:</label>
-								<input type="text" name="member_email">
+							
+							<div class="col-sm-6 form-group">
+								<label>E-MAIL</label>
+								<input type="text" class="form-control" name="member_email">
 							</div>
-							<!-- </p> -->
-							<div>					
+							
+							<br><br><br><br><br><br><br>
+							
+							<div class="row">
+								<div class="col-sm-12 text-center">					
                                 <button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 SING IN
                                     </span>
                                 </button>
-                                <button name="submitcreate" id="submitcreate" class="btn-default">
+                                <!-- <button name="submitcreate" id="submitcreate" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                        	 CLOSE
                                     </span>
-                                </button>
+                                </button> -->
+                                </div>
                             </div>
 						</form>
 					</div>
@@ -96,40 +99,4 @@ function check() {
 			</div>
 		</div>
 </body>
-<%-- <body scroll="" style ="overflow-x:hidden">
-	<div id ="popup_type01" style ="width:600px;">
-		<div class ="popup_shadow">
-			<div class ="popup_wrap">
-				<div class ="tit">
-					<h1 class ="title_h_cartlist">비밀번호 찾기</h1>
-				</div>				
-				<div class ="popup_container">
-					<form action="memberPwFind.do" id="findpwform" name="findpwform" method="post">
-					<table width="500" border="0" cellpadding="0" cellspacing="0" class="zip">
-				<tr>
-					<td align="left"><h4>아이디</h4> 
-						<input type="text" name="member_id" maxlength="10">
-					</td>
-				</tr>
-				<br />
-				<tr>
-					<td align="left"><h4>E-mail</h4> 
-						<input type="text" name="member_email">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<a href ="javascript: submit();"><img src="<%=cp%>/img/member/btn_ok.gif" value="회원가입" class="button"/></a>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href = "javascript:window.close();"><img src="<%=cp%>/img/member/btn_cancel.gif" value="가입취소" class="button" /></a>
-					<br>
-					</td>
-				</tr>
-					</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</body> --%>
 </html>

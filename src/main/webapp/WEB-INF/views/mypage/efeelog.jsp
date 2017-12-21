@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -26,13 +26,14 @@
   }
 </script>
 <style type="text/css">
-.text-primary{
+.text-primary {
 	color: #333333 !important;
-	}
+}
+
 .create-account-form {
-	height : 450px;
+	height: 450px;
 	border-radius: 10px;
-	padding-top:  10px;
+	padding-top: 10px;
 }
 </style>
 </head>
@@ -82,7 +83,7 @@
 								</ul>
 							</aside>
 						</div>
-						<form class="create-account-form" name="efeelog" id="efeelog" action="eFeelogList.do" method="post" style="padding-top:10px;margin-top: 30px;height: 498px;">
+						<form class="create-account-form" name="efeelog" id="efeelog" action="eFeelogList.do" method="post" style="padding-top: 10px; margin-top: 30px; height: 498px;">
 							<div class="form-group">
 								<table>
 									<thead>
@@ -90,8 +91,7 @@
 											<th>
 												<div class="user_name">${ member_id }님&nbsp;안녕하세요.</div>
 												<br />
-												<p>eFeelog
-												당신의 Feel을 공유해보세요.</p>
+												<p>eFeelog 당신의 Feel을 공유해보세요.</p>
 											</th>
 										</tr>
 									</thead>
@@ -104,7 +104,7 @@
 								</div>
 								<br>
 								<div class="form-group">
-									<img src=" " id="book_img" class="img-responsive center-block" style="width: 176px;margin-bottom: 5px;height: 200px;">
+									<img src=" " id="book_img" class="img-responsive center-block" style="width: 176px; margin-bottom: 5px; height: 200px;">
 									<input type="hidden" name="book_num" id="book_num">
 									<table>
 										<thead>
@@ -141,7 +141,9 @@
 									<thead>
 										<tr>
 											<td>
-												<div class="write_date"><fmt:formatDate value="${ item.efeelog_regdate }" pattern="yyyy-MM-dd"/></div>
+												<div class="write_date">
+													<fmt:formatDate value="${ item.efeelog_regdate }" pattern="yyyy-MM-dd" />
+												</div>
 											</td>
 										</tr>
 									</thead>
@@ -157,7 +159,7 @@
 											</tr>
 										</thead>
 									</table>
-									<img src="<%=cp%>/upload/${ item.book_image }" class="img-responsive center-block" style="width: 176px;	">
+									<img src="<%=cp%>/upload/${ item.book_image }" class="img-responsive center-block" style="width: 176px;">
 								</div>
 								<table>
 									<thead>

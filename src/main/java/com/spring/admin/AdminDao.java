@@ -95,6 +95,28 @@ public interface AdminDao {
 	
 	/*-------------------------------------------------------------------------------------*/
 	
-	public List<ChartModel> chartM();
+	public List<ChartModel> chartAllM();
+	public List<ChartModel> chartNewM();
+	public List<ChartModel> memberGender();
+	public List<ChartModel> newMemberGender();
+	public List<ChartModel> memberAge();
+	public List<ChartModel> newMemberAge();
+	public List<ChartModel> memberRegion();
+	public List<ChartModel> newMemberRegion();
+	
+	public List<BooksModel> bookSelling();
+	public List<BooksModel> monthBookSelling();
+	public List<BooksModel> weekBookSelling();
+	
+	public List<ChartModel> monthOrderNum();
+	public List<ChartModel> monthSales();
+	public List<ChartModel> weekOrderNum();
+	public List<ChartModel> weekSales();
+	public List<ChartModel> monthOrderGender();
+	public List<ChartModel> weekOrderGender();
+	public List<ChartModel> monthOrderAge();
+	public List<ChartModel> weekOrderAge();
+	public List<ChartModel> monthOrderRegion();
+	public List<ChartModel> weekOrderRegion();
 	
 }

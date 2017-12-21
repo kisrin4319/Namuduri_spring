@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.book.BooksService;
+import com.spring.common.CommonController;
 import com.spring.common.Paging;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
@@ -38,6 +41,8 @@ public class MypageController {
 	private OrderService orderService;
 	@Resource
 	private BooksService booksService;
+	@Resource
+	private CommonController commonController;
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -168,6 +173,7 @@ public class MypageController {
 				buffer.append(chars[random.nextInt(chars.length)]);
 				System.out.println(buffer);
 			}
+			String temppw = String.valueOf(buffer);
 			memberModel.setMember_pw(String.valueOf(buffer));
 			
 			//암호화 해서 맵으로 넘김
@@ -181,6 +187,28 @@ public class MypageController {
 			param.put("member_pw", password);
 			
 			int result = mypageService.memberPwUpdate(param);
+			
+			
+			try {
+				SimpleEmail email = new SimpleEmail();
+				memberModel.setMember_email(request.getParameter("member_email"));
+				//String member_email = memberModel.getMember_email();
+				
+				email.setCharset("UTF-8");
+				email.setHostName("smtp.gmail.com");
+				email.setSmtpPort(587);
+				email.setSSL(true);
+				email.setAuthentication("kisrin4319","aaudlfdnutzkthsi");
+				
+				email.addTo(request.getParameter("member_email"), request.getParameter("member_email"));
+				email.setFrom("khiclass@gmail.com", "khiclass@gmail.com");
+				email.setSubject("khiclass 님이 보낸 메일입니다.");
+				email.setContent("귀하의 임시비밀번호는" + temppw + "입니다." + "로그인 후 비밀번호를 변경해 주시기 바랍니다.", "text/plain; charset=euc-kr");
+				email.send();
+				
+			} catch(EmailException e) {
+				e.printStackTrace();
+			}
 			
 			if(memberModel.getMember_id().equals(member.getMember_id()) && memberModel.getMember_email().equals(member.getMember_email())) {				
 				object.put("returnVal", "1");
@@ -218,13 +246,12 @@ public class MypageController {
 		memberModel = memberService.SelectOne(member_id);
 		
 		String password = request.getParameter("member_pw");
-		String encryptPassword = passwordEncoder.encode(password);
 		
-		if(passwordEncoder.matches(password, encryptPassword)) {
+		if(passwordEncoder.matches(password, memberModel.getMember_pw())) {
 			memberModel.setMember_id(member_id);
 			memberModel.setMember_pw(memberModel.getMember_pw());
 			int member = mypageService.memberDelete(memberModel);
-			
+			System.out.println(member);
 			if(member > 0) {
 				object.put("returnVal", "1");
 			}else {
