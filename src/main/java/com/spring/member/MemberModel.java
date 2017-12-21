@@ -27,6 +27,8 @@ public class MemberModel {
 	private String member_account_holder; //예금주
 	private int member_use_yn; //차단여부
 	private int member_point; // 포인트점수
+	private int member_order_count;
+	private int member_moneysum;
 	
 	public void addAttribute(String string, String url) {
 		// TODO Auto-generated method stub

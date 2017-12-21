@@ -39,16 +39,42 @@ public class AdminService implements AdminDao {
 		return sqlSessionTemplate.selectList("admin.memberListBck");
 	}
 	
+	@Override //회원 등급 조회
+	public List<MemberModel> memberListRank(){
+		return sqlSessionTemplate.selectList("admin.memberListRank");
+	}
+	
 	@Override //회원 검색
 	public List<MemberModel> searchMember(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.searchMember", map);
 	}
 	
+	@Override //회원 등급 검색
+	public List<MemberModel> searchMemberRank(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.searchMemberRank", map);
+	}
+	
 	@Override //개별 회원 조회
 	public MemberModel memberView(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("admin.memberView", member_id);
+	}
+	
+	@Override //주문 내역이 존재하는 회원 조회
+	public MemberModel memberViewOrder(String member_id) {
+		return sqlSessionTemplate.selectOne("admin.memberViewOrder", member_id);
+	}
+	
+	@Override //회원 주문 내역 조회
+	public List<OrderModel> memberOrderList(String member_id) {
+		return sqlSessionTemplate.selectList("admin.memberOrderList", member_id);
+	}
+	
+	@Override //회원 취소 주문 내역 조회
+	public List<OrderModel> memberOrderListBck(String member_id) {
+		return sqlSessionTemplate.selectList("admin.memberOrderListBck", member_id);
 	}
 	
 	@Override //회원 정보 수정

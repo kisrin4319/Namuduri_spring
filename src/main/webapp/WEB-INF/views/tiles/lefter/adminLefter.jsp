@@ -35,7 +35,7 @@
 								 <i class="mdi mdi-account-check"></i> <span class="nav-dropdown-item">회원 통합 리스트</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/memberList/rank.do" aria-expanded="false">
 								 <i class="mdi mdi-account-star-variant"></i> <span class="nav-dropdown-item">회원 등급 관리</span></a>
 							</li>
 							<li>
@@ -128,10 +128,10 @@
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-chart-bar"></i> <span class="hide-menu">통계</span></a>
 						<ul class="nav-dropdown-items">
-							<li>
+							<!-- <li>
 								<a href="#" aria-expanded="false">
 								 <i class="mdi mdi-access-point-network"></i> <span class="nav-dropdown-item">방문자 통계</span></a>
-							</li>
+							</li> -->
 							<li>
 								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
 								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>

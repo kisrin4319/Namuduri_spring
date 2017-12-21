@@ -90,6 +90,8 @@ public class AdminController {
 			memberList = adminService.memberListAll();
 		}else if(status.equals("Bck")){
 			memberList = adminService.memberListBck();
+		}else if(status.equals("rank")) {
+			memberList = adminService.memberListRank();
 		}
 		
 		totalCount = memberList.size();
@@ -117,7 +119,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/memberList/{status}.do", method=RequestMethod.POST) // 회원 검색
-	public ModelAndView memberSearch(HttpServletRequest request) {
+	public ModelAndView memberSearch(@PathVariable("status") String status, HttpServletRequest request) {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -126,6 +128,8 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<MemberModel> memberList = new ArrayList<MemberModel>();
 		
@@ -133,7 +137,13 @@ public class AdminController {
 		String searchKeyword = request.getParameter("searchKeyword");
 		String date_min = request.getParameter("date_min");
 		String date_max = request.getParameter("date_max");
-		int active = Integer.parseInt(request.getParameter("active"));
+		int active = 0;
+		
+		if(status.equals("all")) {
+			active = Integer.parseInt(request.getParameter("active"));
+		}else if(status.equals("Bck")){
+			active = 2;
+		}
 		
 		if(searchKeyword.trim().isEmpty()) {
 			searchKeyword = null;
@@ -153,10 +163,22 @@ public class AdminController {
 		map.put("date_max", date_max);
 		map.put("active", active);
 		
-		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0) {
-			memberList = adminService.memberListAll();
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null) {
+			if(status.equals("all") && active==0) {
+				memberList = adminService.memberListAll();
+			}else if(status.equals("Bck")){
+				memberList = adminService.memberListBck();
+			}else if(status.equals("rank")) {
+				memberList = adminService.memberListRank();
+			}
 		}else {
-			memberList = adminService.searchMember(map);
+			if(status.equals("all")) {
+				memberList = adminService.searchMember(map);
+			}else if(status.equals("Bck")){
+				memberList = adminService.searchMember(map);
+			}else if(status.equals("rank")) {
+				memberList = adminService.searchMemberRank(map);
+			}
 		}
 		
 		totalCount = memberList.size();
@@ -194,11 +216,19 @@ public class AdminController {
 		}
 
 		MemberModel view = adminService.memberView(member_id);
-		List<OrderModel> orderList = mypageService.getOrderTradeNumList(member_id);
+		List<OrderModel> orderList = adminService.memberOrderList(member_id);
+		System.out.println(orderList.size());
+		if(orderList.size()!=0) {
+			view = adminService.memberViewOrder(member_id);
+		}
+		
+		List<OrderModel> orderListBck = adminService.memberOrderListBck(member_id);
 
 		mv.addObject("view", view);
 		mv.addObject("orderList", orderList);
 		mv.addObject("listCount", orderList.size());
+		mv.addObject("orderListBck", orderListBck);
+		mv.addObject("listCountBck", orderListBck.size());
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
 
@@ -770,8 +800,6 @@ public class AdminController {
 			pie3.addCell(i, newMemberRegion.get(i).getValue());
 		}
 		String newRegionPie = gson.toJson(pie3.getResult());
-		System.out.println(newRegionPie);
-		
 		mv.addObject("newRegionPie", newRegionPie);
 		
 		//전체 회원 성별 통계
@@ -787,7 +815,6 @@ public class AdminController {
 			pie4.addCell(i, memberGender.get(i).getValue());
 		}
 		String genderPie = gson.toJson(pie4.getResult());
-		
 		mv.addObject("genderPie", genderPie);
 		
 		//전체 회원 나이 통계
@@ -803,7 +830,6 @@ public class AdminController {
 			pie5.addCell(i, memberAge.get(i).getValue());
 		}
 		String agePie = gson.toJson(pie5.getResult());
-		
 		mv.addObject("agePie", agePie);
 		
 		//전체 회원 지역 통계
@@ -819,8 +845,6 @@ public class AdminController {
 			pie6.addCell(i, memberRegion.get(i).getValue());
 		}
 		String regionPie = gson.toJson(pie6.getResult());
-		System.out.println(regionPie);
-		
 		mv.addObject("regionPie", regionPie);
 		
 		mv.addObject("jsonAll", jsonAll);
@@ -956,13 +980,14 @@ public class AdminController {
 			pie4.addCell(i, monthOrderGender.get(i).getValue());
 		}
 		String genderPie = gson.toJson(pie4.getResult());
+		System.out.println(genderPie);
 		mv.addObject("genderPie", genderPie);
 		
 		//달별 연령 구분
 		List<ChartModel> monthOrderAge = adminService.monthOrderAge();
 		GoogleChartDTO pie5 = new GoogleChartDTO();
 		
-		pie5.addColumn("항목", "spring");
+		pie5.addColumn("항목", "string");
 		pie5.addColumn("값", "number");
 		pie5.createRows(monthOrderAge.size());
 		
@@ -977,7 +1002,7 @@ public class AdminController {
 		List<ChartModel> monthOrderRegion = adminService.monthOrderRegion();
 		GoogleChartDTO pie6 = new GoogleChartDTO();
 		
-		pie6.addColumn("항목", "spring");
+		pie6.addColumn("항목", "string");
 		pie6.addColumn("값", "number");
 		pie6.createRows(monthOrderRegion.size());
 		

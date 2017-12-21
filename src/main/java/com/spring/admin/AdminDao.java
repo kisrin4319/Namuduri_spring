@@ -24,15 +24,20 @@ public interface AdminDao {
 	public List<MemberModel> memberListAct();
 	public List<MemberModel> memberListBck();
 	
+	//회원 등급 조회
+	public List<MemberModel> memberListRank();
+	
 	//검색 기능 구현.. 일단 검색 폼의 데이터는 모델로 넘어올텐데.. 기간 검색과 사용 여부에 대한 조건도 추가하기. 
 	//이메일 수신 여부를 통해서 일괄 이메일 작성하는 기능이... 필요할까? //이건 진짜 나중에
 	//일단 기본 검색폼은 넣어둘까? 대표적 자료가 아닌 다른 자료로 검색을 할 경우..?
 	//탭 내부 검색과 외부 검색의 분리 필요성에 대해
 	public List<MemberModel> searchMember(Map<String, Object> map);
-	
+	public List<MemberModel> searchMemberRank(Map<String, Object> map);
 	//회원 아이디로 회원 정보 조회
 	public MemberModel memberView(String member_id);
-	
+	public MemberModel memberViewOrder(String member_id);
+	public List<OrderModel> memberOrderList(String member_id);
+	public List<OrderModel> memberOrderListBck(String member_id);
 	//회원 수정하기 //여기서 차단 여부도 변경 가능
 	public void memberModify(MemberModel memberModel);
 	
