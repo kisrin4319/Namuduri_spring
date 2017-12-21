@@ -231,12 +231,12 @@
 
 		function openConfirmId(loginform) {
 			var url = 'http://localhost:8080/namuduri/member/memberIdFindView.do';
-			window.open(url,"confirm","toolbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=610, height=210");
+			window.open(url,"confirm","toolbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no");
 		}
 
 		function openConfirmPw(loginform) {
 			var url = 'http://localhost:8080/namuduri/member/memberPwFindView.do';
-			window.open(url,"confirm","tollbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=605, height=195");
+			window.open(url,"confirm","tollbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no");
 		}
 		
 		$(document).ready(function(){

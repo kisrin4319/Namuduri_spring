@@ -59,14 +59,18 @@ public class MypageService implements MypageDao {
 	}
 	
 	@Override
-	public Map<String, Object> memberOrderDetail(String order_trade_num) {
-		return sqlSessionTemplate.selectOne("order.memberOrderDetail", order_trade_num);
+	public List<Map<String, Object>> memberOrderDetail(String order_trade_num) {
+		return sqlSessionTemplate.selectList("order.memberOrderDetail", order_trade_num);
 	}
 	
 	//6. 주문내역 취소
 	@Override
 	public int memberOrderCancel(String order_trade_num) {
 		return sqlSessionTemplate.update("order.orderCancel", order_trade_num);
+	}
+
+	public int memberPwUpdate(Map<String, Object> param) {
+		return sqlSessionTemplate.update("member.memberPwUpdate", param);
 	}
 	
 }

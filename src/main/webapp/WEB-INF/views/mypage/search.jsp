@@ -29,7 +29,7 @@
 <body>
 	<div class="container">
 		<div class="center">
-			<div class="col-md-3">
+			<%-- <div class="col-md-3">
 				<form class="create-account-form" name="bookForm">
 					<div class="thumbnail-wrapper">
 						<div class="thumbnail">
@@ -40,7 +40,7 @@
 			</div>
 			<div class="row">
 		        
-    		</div>
+    		</div> --%>
 		    <div class="row">
 		        <div class="col-md-4 col-md-offset-3">
 		            <form action="<%=cp%>/efeelogSearch.do" class="search-form">
@@ -52,8 +52,7 @@
 		            	<div class="thumbnail-wrapper">
 							<div class="thumbnail">
 								<c:forEach items="${ eFeelogList }" var="list">
-									<img src="<%=cp%>/upload/${ list.book_image }" onclick="parentDataSend('${list.book_image}','${ list.book_num }')">
-									
+									<img src="<%=cp%>/upload/${ list.book_image }" onclick="parentDataSend('${list.book_image}','${ list.book_num }')">	
 								</c:forEach>
 							</div>
 						</div>
