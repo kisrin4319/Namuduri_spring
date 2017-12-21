@@ -279,6 +279,10 @@
 	<definition name="adminChart" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/chart.jsp"/>
 	</definition>
+	
+	<definition name="adminChartBook" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/chart_book.jsp"/>
+	</definition>
 
 	<!--============================= etc ============================= -->
 	<definition name="contact" extends="main">

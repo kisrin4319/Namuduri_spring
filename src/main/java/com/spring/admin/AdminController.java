@@ -12,8 +12,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,12 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonArray;
+import com.google.gson.Gson;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.book.ReviewModel;
@@ -695,80 +692,320 @@ public class AdminController {
 	@RequestMapping("/admin/chart/member.do")
 	public ModelAndView chartM() {
 		
-		JSONObject data = new JSONObject();
+		Gson gson = new Gson();
 		
-		JSONArray colsData = new JSONArray();
-		JSONObject cols1 = new JSONObject();
-		JSONObject cols2 = new JSONObject();
+		//신규 회원 통계
+		List<ChartModel> listNew = adminService.chartNewM();
 		
-		cols1.put("id", "dayNo");
-		cols1.put("label", "날짜");
-		cols1.put("type", "Date");
+		GoogleChartDTO goNew = new GoogleChartDTO();
 		
-		cols2.put("id", "item_C");
-		cols2.put("label", "회원 수");
-		cols2.put("type", "number");
+		goNew.addColumn("DAY", "string");
+		goNew.addColumn("신규 회원수", "number");
+		goNew.createRows(listNew.size());
 		
-		colsData.put(cols1);
-		colsData.put(cols2);
-		
-		System.out.println(colsData);
-		/*[{"id":"dayNo","label":"날짜","type":"String"},{"id":"item_C","label":"회원 수","type":"number"}]*/
-		
-		
-		JSONArray rowsData = new JSONArray(); //rows 리스트
-		JSONObject rowData = new JSONObject(); //{"c":한 행의 object값들을 담은 JSONArray}
-		JSONArray row = new JSONArray(); //한 행에 필요한 JSONObject들을 담기 위한 JSONArray
-		JSONObject row1 = new JSONObject(); //"property":value의 한 쌍
-		JSONObject row2 = new JSONObject();
-		
-		List<ChartModel> list = adminService.chartM();
-		System.out.println(list);
-		
-		/*rowData를 list의 행만큼 만들어서 rowsData안에 넣기!*/
-		for(int i=0; i<list.size(); i++) {
-			
-			ChartModel chartModel = list.get(i);
-			
-				//row1.put("v", chartModel.getDayNo());
-				row.put(row1);
-				
-				//row2.put("v", chartModel.getItem_C());
-				row.put(row2);
-				
-				rowData.put("c", row);
-				
-				
+		for(int i=0; i<listNew.size(); i++) {
+			goNew.addCell(i, listNew.get(i).getKey()+"(일)");
+			goNew.addCell(i, listNew.get(i).getValue());
 		}
 		
-		rowsData.put(rowData);
+		String jsonNew = gson.toJson(goNew.getResult());
 		
-		data.put("cols", colsData);
-		data.put("rows", rowsData);
+		//전체 회원 통계
+		List<ChartModel> listAll = adminService.chartAllM();
 		
+		GoogleChartDTO goAll = new GoogleChartDTO();
 		
-		System.out.println(data);
-	
+		goAll.addColumn("DAY", "string");
+		goAll.addColumn("전체 회원수", "number");
+		goAll.createRows(listAll.size());
 		
-		/*mv.addObject("data", data);*/
-		mv.addObject("list", list);
+		for(int i=0; i<listAll.size(); i++) {
+			goAll.addCell(i, listAll.get(i).getKey()+"(월)");
+			goAll.addCell(i, listAll.get(i).getValue());
+		}
+		
+		String jsonAll = gson.toJson(goAll.getResult());
+		System.out.println(jsonAll);
+		
+		//신규회원 성별 통계
+		List<ChartModel> newMemberGender = adminService.newMemberGender();
+		GoogleChartDTO pie1 = new GoogleChartDTO();
+		
+		pie1.addColumn("성별", "string");
+		pie1.addColumn("number", "number");
+		pie1.createRows(newMemberGender.size());
+		
+		for(int i=0; i<newMemberGender.size(); i++) {
+			pie1.addCell(i, Integer.parseInt(newMemberGender.get(i).getKey())==1?"남자":"여자");
+			pie1.addCell(i, newMemberGender.get(i).getValue());
+		}
+		String newGenderPie = gson.toJson(pie1.getResult());
+		mv.addObject("newGenderPie", newGenderPie);
+		
+		//신규회원 연령 통계
+		List<ChartModel> newMemberAge = adminService.newMemberAge();
+		GoogleChartDTO pie2 = new GoogleChartDTO();
+		
+		pie2.addColumn("연령대", "string");
+		pie2.addColumn("number", "number");
+		pie2.createRows(newMemberAge.size());
+		
+		for(int i=0; i<newMemberAge.size(); i++) {
+			pie2.addCell(i, newMemberAge.get(i).getKey()+"0 년대");
+			pie2.addCell(i, newMemberAge.get(i).getValue());
+		}
+		String newAgePie = gson.toJson(pie2.getResult());
+		mv.addObject("newAgePie", newAgePie);
+		
+		//신규회원 지역 통계
+		List<ChartModel> newMemberRegion = adminService.newMemberRegion();
+		GoogleChartDTO pie3 = new GoogleChartDTO();
+		
+		pie3.addColumn("지역", "string");
+		pie3.addColumn("number", "number");
+		pie3.createRows(newMemberRegion.size());
+		
+		for(int i=0; i<newMemberRegion.size(); i++) {
+			pie3.addCell(i, newMemberRegion.get(i).getKey());
+			pie3.addCell(i, newMemberRegion.get(i).getValue());
+		}
+		String newRegionPie = gson.toJson(pie3.getResult());
+		System.out.println(newRegionPie);
+		
+		mv.addObject("newRegionPie", newRegionPie);
+		
+		//전체 회원 성별 통계
+		List<ChartModel> memberGender = adminService.memberGender();
+		GoogleChartDTO pie4 = new GoogleChartDTO();
+		
+		pie4.addColumn("성별", "string");
+		pie4.addColumn("number", "number");
+		pie4.createRows(memberGender.size());
+		
+		for(int i=0; i<memberGender.size(); i++) {
+			pie4.addCell(i, Integer.parseInt(memberGender.get(i).getKey())==1?"남자":"여자");
+			pie4.addCell(i, memberGender.get(i).getValue());
+		}
+		String genderPie = gson.toJson(pie4.getResult());
+		
+		mv.addObject("genderPie", genderPie);
+		
+		//전체 회원 나이 통계
+		List<ChartModel> memberAge = adminService.memberAge();
+		GoogleChartDTO pie5 = new GoogleChartDTO();
+		
+		pie5.addColumn("연령대", "string");
+		pie5.addColumn("number", "number");
+		pie5.createRows(memberAge.size());
+		
+		for(int i=0; i<memberAge.size(); i++) {
+			pie5.addCell(i, memberAge.get(i).getKey()+"0 년대");
+			pie5.addCell(i, memberAge.get(i).getValue());
+		}
+		String agePie = gson.toJson(pie5.getResult());
+		
+		mv.addObject("agePie", agePie);
+		
+		//전체 회원 지역 통계
+		List<ChartModel> memberRegion = adminService.memberRegion();
+		GoogleChartDTO pie6 = new GoogleChartDTO();
+		
+		pie6.addColumn("지역", "string");
+		pie6.addColumn("number", "number");
+		pie6.createRows(memberRegion.size());
+		
+		for(int i=0; i<memberRegion.size(); i++) {
+			pie6.addCell(i, memberRegion.get(i).getKey());
+			pie6.addCell(i, memberRegion.get(i).getValue());
+		}
+		String regionPie = gson.toJson(pie6.getResult());
+		System.out.println(regionPie);
+		
+		mv.addObject("regionPie", regionPie);
+		
+		mv.addObject("jsonAll", jsonAll);
+		mv.addObject("jsonNew", jsonNew);
+		mv.addObject("request", 1);
 		mv.setViewName("adminChart");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/coding.do")
-	public ModelAndView coding() {
-		mv = new ModelAndView();
+	@RequestMapping("/admin/chart/order.do")
+	public ModelAndView chartO() {
 		
-		mv.setViewName("admin/googleChart");
+		Gson gson = new Gson();
+		
+		//최근 7일 날짜별 주문량 조회
+		List<ChartModel> weekOrderNum = adminService.weekOrderNum();
+		GoogleChartDTO line1 = new GoogleChartDTO();
+		
+		line1.addColumn("day", "string");
+		line1.addColumn("주문수", "number");
+		line1.createRows(weekOrderNum.size());
+		
+		for(int i=0; i<weekOrderNum.size(); i++) {
+			line1.addCell(i, weekOrderNum.get(i).getKey());
+			line1.addCell(i, weekOrderNum.get(i).getValue());
+		}
+		String jsonNew = gson.toJson(line1.getResult());
+		mv.addObject("jsonNew", jsonNew);
+		
+		//최근 7일 날짜별 판매량 조회
+		List<ChartModel> weekSales = adminService.weekSales();
+		GoogleChartDTO sales1 = new GoogleChartDTO();
+		
+		sales1.addColumn("day", "string");
+		sales1.addColumn("판매금액", "number");
+		sales1.createRows(weekSales.size());
+		
+		for(int i=0; i<weekSales.size(); i++) {
+			sales1.addCell(i, weekSales.get(i).getKey());
+			sales1.addCell(i, weekSales.get(i).getPrice());
+		}
+		String salesNew = gson.toJson(sales1.getResult());
+		mv.addObject("salesNew", salesNew);
+		
+		//주간 성별 구분
+		List<ChartModel> weekOrderGender = adminService.weekOrderGender();
+		GoogleChartDTO pie1 = new GoogleChartDTO();
+		
+		pie1.addColumn("성별", "string");
+		pie1.addColumn("number", "number");
+		pie1.createRows(weekOrderGender.size());
+		
+		for(int i=0; i<weekOrderGender.size(); i++) {
+			pie1.addCell(i, Integer.parseInt(weekOrderGender.get(i).getKey())==1?"남자":"여자");
+			pie1.addCell(i, weekOrderGender.get(i).getValue());
+		}
+		String newGenderPie = gson.toJson(pie1.getResult());
+		mv.addObject("newGenderPie", newGenderPie);
+		
+		//주간 연령 구분
+		List<ChartModel> weekOrderAge = adminService.weekOrderAge();
+		GoogleChartDTO pie2 = new GoogleChartDTO();
+		
+		pie2.addColumn("연령대", "string");
+		pie2.addColumn("number", "number");
+		pie2.createRows(weekOrderAge.size());
+		
+		for(int i=0; i<weekOrderAge.size(); i++) {
+			pie2.addCell(i, weekOrderAge.get(i).getKey()+"0 년대");
+			pie2.addCell(i, weekOrderAge.get(i).getValue());
+		}
+		String newAgePie = gson.toJson(pie2.getResult());
+		mv.addObject("newAgePie", newAgePie);
+		
+		//주간 지역 구분
+		List<ChartModel> weekOrderRegion = adminService.weekOrderRegion();
+		GoogleChartDTO pie3 = new GoogleChartDTO();
+		
+		pie3.addColumn("지역", "string");
+		pie3.addColumn("number", "number");
+		pie3.createRows(weekOrderRegion.size());
+		
+		for(int i=0; i<weekOrderRegion.size(); i++) {
+			pie3.addCell(i, weekOrderRegion.get(i).getKey());
+			pie3.addCell(i, weekOrderRegion.get(i).getValue());
+		}
+		String newRegionPie = gson.toJson(pie3.getResult());
+		System.out.println(newRegionPie);
+		
+		mv.addObject("newRegionPie", newRegionPie);
+		
+		//달별 주문량
+		List<ChartModel> monthOrderNum = adminService.monthOrderNum();
+		GoogleChartDTO line2 = new GoogleChartDTO();
+		
+		line2.addColumn("day", "string");
+		line2.addColumn("주문수", "number");
+		line2.createRows(monthOrderNum.size());
+		
+		for(int i=0; i<monthOrderNum.size(); i++) {
+			line2.addCell(i, monthOrderNum.get(i).getKey());
+			line2.addCell(i, monthOrderNum.get(i).getValue());
+		}
+		String jsonAll = gson.toJson(line2.getResult());
+		mv.addObject("jsonAll", jsonAll);
+		
+		//달별 판매량
+		List<ChartModel> monthSales = adminService.monthSales();
+		GoogleChartDTO sales2 = new GoogleChartDTO();
+		
+		sales2.addColumn("day", "string");
+		sales2.addColumn("판매 금액", "number");
+		sales2.createRows(monthSales.size());
+		
+		for(int i=0; i<monthSales.size(); i++) {
+			sales2.addCell(i, monthSales.get(i).getKey());
+			sales2.addCell(i, monthSales.get(i).getPrice());
+		}
+		String salesAll = gson.toJson(sales2.getResult());
+		mv.addObject("salesAll", salesAll);
+		
+		//달별 성별 구분
+		List<ChartModel> monthOrderGender = adminService.monthOrderGender();
+		GoogleChartDTO pie4 = new GoogleChartDTO();
+		
+		pie4.addColumn("항목", "string");
+		pie4.addColumn("값", "number");
+		pie4.createRows(monthOrderGender.size());
+		
+		for(int i=0; i<monthOrderGender.size(); i++) {
+			pie4.addCell(i, Integer.parseInt(monthOrderGender.get(i).getKey())==1?"남자":"여자");
+			pie4.addCell(i, monthOrderGender.get(i).getValue());
+		}
+		String genderPie = gson.toJson(pie4.getResult());
+		mv.addObject("genderPie", genderPie);
+		
+		//달별 연령 구분
+		List<ChartModel> monthOrderAge = adminService.monthOrderAge();
+		GoogleChartDTO pie5 = new GoogleChartDTO();
+		
+		pie5.addColumn("항목", "spring");
+		pie5.addColumn("값", "number");
+		pie5.createRows(monthOrderAge.size());
+		
+		for(int i=0; i<monthOrderAge.size(); i++) {
+			pie5.addCell(i, monthOrderAge.get(i).getKey()+"0 년대");
+			pie5.addCell(i, monthOrderAge.get(i).getValue());
+		}
+		String agePie = gson.toJson(pie5.getResult());
+		mv.addObject("agePie", agePie);
+		
+		//달별 지역 구분
+		List<ChartModel> monthOrderRegion = adminService.monthOrderRegion();
+		GoogleChartDTO pie6 = new GoogleChartDTO();
+		
+		pie6.addColumn("항목", "spring");
+		pie6.addColumn("값", "number");
+		pie6.createRows(monthOrderRegion.size());
+		
+		for(int i=0; i<monthOrderRegion.size(); i++) {
+			pie6.addCell(i, monthOrderRegion.get(i).getKey());
+			pie6.addCell(i, monthOrderRegion.get(i).getValue());
+		}
+		String regionPie = gson.toJson(pie6.getResult());
+		mv.addObject("regionPie", regionPie);
+		
+		mv.addObject("request", 2);
+		mv.setViewName("adminChart");
+		return mv;
+		
+	}
+	
+	@RequestMapping("/admin/chart/book.do")
+	public ModelAndView chartB() {
+		
+		List<BooksModel> bookSelling =  adminService.bookSelling();
+		List<BooksModel> monthBookSelling = adminService.monthBookSelling();
+		List<BooksModel> weekBookSelling = adminService.weekBookSelling();
+		
+		mv.addObject("bookSelling", bookSelling);
+		mv.addObject("monthBookSelling", monthBookSelling);
+		mv.addObject("weekBookSelling", weekBookSelling);
+		mv.setViewName("adminChartBook");
 		return mv;
 	}
 	
-	@RequestMapping(value="/chartData.do", method=RequestMethod.POST)
-    public @ResponseBody List<ChartModel> chartData() {
-        List<ChartModel> lists = new ArrayList<ChartModel>();
-        lists = adminService.chartM();
-        return lists;
-    }
 }
