@@ -209,7 +209,7 @@ img.top2 {
 															<fmt:formatNumber pattern="###,###,###" value="${wish.wish_book_price}" />
 															원
 														</h5>
-														<input type="text" placeholder="Please Enter Your Comment" size="40" value="${wish.wish_comment}" id="${wish.wish_num }">
+														<input type="text" placeholder="Please Enter Your Comment" size="35" value="${wish.wish_comment}" id="${wish.wish_num }">
 														<input type="button" value="EDIT" onclick="Modify(${wish.wish_book_num },${wish.wish_num });" class="btn btn-warning" style="height:27px; width: 46px; border-left-width: 0px; adding-left: 5px; padding-right: 5px; border-right-width: 0px; padding-top: 3px; border-top-width: 0px; padding-left: 5px; padding-bottom: 3px;">
 													</td>
 													<td class="product-cart">

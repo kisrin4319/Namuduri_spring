@@ -1,57 +1,145 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String cp = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>질문답변 게시판</title>
-<link rel="stylesheet" href="<%=cp %>/css/board.css" type="text/css" />
+<style type="text/css">
+
+/* Font ROBOTO */
+.roboto {
+	font-family: 'Roboto', sans-serif !important;
+}
+
+/* custom background for panel  */
+.container {
+	padding-top: 50px !important;
+}
+
+/* custom background header panel */
+.custom-header-panel {
+	background-color: lightcoral !important;
+	color: white;
+}
+
+.no-margin-form-group {
+	margin: 0 !important;
+}
+
+.requerido {
+	color: red;
+}
+
+.btn-orange-md {
+	color: black;
+}
+
+.btn-orange-md:hover {
+	color: black !important;
+}
+
+.btn-default {
+	background: lightcoral none repeat scroll 0 0;\
+	border: 1px solid lightcoral;
+}
+</style>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+<title>Insert title here</title>
 </head>
 <body>
-	<h2 class="cscenter_h2">고객센터</h2>
-	<h3 class="bul_green">FAQ 게시판</h3>
-	<br />
-	<table class="faqView" width="770" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<th width="100"><b>번호</b></th>
-			<td style="height: 38px;">${faqModel.faq_num}</td>
-			<th width="100"><b>글쓴이</b></th>
-			<td style="height: 38px;">${faqModel.member_id}</td>
-			<th width="100"><b>조회수</b></th>
-			<td style="height: 30px;">${faqModel.readcount}</td>
-			<th width="100"><b>날짜</b></th>
-			<td style="height: 25px;">${faqModel.faq_regdate}</td>
-		</tr>
-		<tr>
-			<th width="100"><b>제목</b></th>
-			<td colspan="5" width="770" style="height: 38px;">${faqModel.faq_title}</td>
-		</tr>
-		<tr>
-			<th width="100"><b>내용</b></th>
-			<td colspan="5" width="770" style="height: 70px;">${faqModel.faq_content }</td>
-		</tr>
-	</table>
-	<div id="Bbutton">
-		<c:url var="modifyURL" value="modifyForm">
-			<c:param name="faq_num" value="faq_num" />
-		</c:url>
-		<c:url var="deleteURL" value="/faq/faqDelete.do">
-			<c:param name="faq_num" value="faq_num" />
-		</c:url>
-		
-			<c:if test="${member_id eq 'admin'}">
-				<input name="list" type="button" value="수정" class="Bbutton" onClick="javascript:location.href='<%=cp%>/faq/faqModify.do?faq_num=${faq_num}&currentPage=${currentPage}'">
-				<input name="list" type="button" value="삭제" class="Bbutton" onClick="javascript:location.href='<%=cp%>/faq/faqDelete.do?faq_num=${faq_num}&currentPage=${currentPage}'">
-				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/faq/faqList.do?currentPage=${currentPage}'">
-			</c:if>
-			<c:if test="${member_id ne 'admin'}">
-				<input name="list" type="button" value="목록" class="Bbutton" onClick="javascript:location.href='<%=cp%>/faq/faqList.do?currentPage=${currentPage}'">
-			</c:if>
-		
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<h2 style="text-align: -webkit-center; padding-top: 30px;">FAQ</h2>
+				<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+					<li style="margin-bottom: 25px;">
+						<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
+					</li>
+					<li style="margin-bottom: 25px;">
+						<a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
+					</li>
+				</ul>
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-heading custom-header-panel" style="margin-bottom: 20px; background-color: lightcoral; ">
+							<h3 class="panel-title roboto"></h3>
+						</div>
+						<form class="form-horizontal">
+							<fieldset>
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="requestid">NUM</label>
+									<div class="col-md-10" style="text-align: center;">
+										<input type="text" name="num" value="${faqModel.faq_num}" class="form-control input-md" readonly style="text-align: center; background: border-box;">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="requestid">VIEWS</label>
+									<div class="col-md-10" style="text-align: center;">
+										<input type="text" name="views" value="${faqModel.readcount}" class="form-control input-md" readonly style="text-align: center; background: border-box;">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="requestid">NAME</label>
+									<div class="col-md-10" style="text-align: center;">
+										<input type="text" name="id" value="${faqModel.member_id}" class="form-control input-md" readonly style="text-align: center; background: border-box;">
+									</div>
+								</div>
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="date">DATE</label>
+									<div class="col-md-10">
+										<input type="text" name="date" value="<fmt:formatDate value="${faqModel.faq_regdate}" pattern="yy-MM-dd" />" class="form-control input-md" readonly style="text-align: center; background: border-box;">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="date">TITLE</label>
+									<div class="col-md-10">
+										<input type="text" name="title" value="${faqModel.faq_title}" class="form-control input-md" readonly style="text-align: center; background: border-box;">
+									</div>
+								</div>
+								<!-- Textarea -->
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="dis">CONTENTS</label>
+									<div class="col-md-10">
+										<textarea class="form-control" id="dis" name="dis" rows="3" readonly style="background: border-box;">${faqModel.faq_content}</textarea>
+									</div>
+								</div>
+								<!-- Button -->
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="submit"></label>
+									<div class="col-md-10">
+										<div class="form-group text-center" style="text-align: right; margin-right: 20px;">
+											<c:url var="modifyURL" value="modifyForm">
+												<c:param name="faq_num" value="faq_num" />
+											</c:url>
+											<c:url var="deleteURL" value="/faq/faqDelete.do">
+												<c:param name="faq_num" value="faq_num" />
+											</c:url>
+											<c:if test="${member_id eq 'admin'}">
+												<button type="button" id="list" class="btn btn-default" style="margin-right: 2px; margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px; border: lightcoral;" onClick="javascript:location.href='<%=cp%>/faq/faqList.do?currentPage=${currentPage}'">LIST</button>
+												<button type="button" id="modify" onClick="javascript:location.href='<%=cp%>/faq/faqModify.do?faq_num=${faq_num}&currentPage=${currentPage}'" class="btn btn-default" style="margin-right: 2px; margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px; border: lightcoral;">
+													<img src="<%=cp%>/img/modi.png" width="18">
+												</button>
+												<button type="button" id="delete" class="btn btn-default" style="margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px; border: lightcoral;" onClick="javascript:location.href='<%=cp%>/faq/faqDelete.do?faq_num=${faq_num}&currentPage=${currentPage}'">
+													<img src="<%=cp%>/img/trash.png" width="18">
+												</button>
+											</c:if>
+											<c:if test="${member_id ne 'admin'}">
+												<button type="button" id="list" class="btn btn-default" style="margin-right: 2px; border: lightcoral; margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px;" onClick="javascript:location.href='<%=cp%>/faq/faqList.do?currentPage=${currentPage}'">LIST</button>
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

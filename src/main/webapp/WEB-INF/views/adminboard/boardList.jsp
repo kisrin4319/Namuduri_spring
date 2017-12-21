@@ -4,11 +4,13 @@
 <%
    String cp = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html class="no-js" lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
 .points_table thead {
    width: 100%;
@@ -99,11 +101,6 @@
 
 .clearfix:after {
    clear: both;
-}
-
-body {
-   font-family: sans-serif;
-   background: #f6f9fa;
 }
 
 h1 {
@@ -204,9 +201,10 @@ keyframes fadeInScale { 0% {
    transform: scale(0.9);
    opacity: 0;
 }
-100% {
+100%
+{
 transform : scale(1);
-opacity : 1;
+opacity 1;
 }
 }
 </style>
@@ -232,368 +230,380 @@ opacity : 1;
                <a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
             </li>
          </ul>
-            <hr>
-            <div class="tab_container">
-               <input id="tab1" type="radio" name="tabs" checked>
-               <label for="tab1">
-                  <i class="fa fa-folder-open-o"></i>
-                  <span>ALL</span>
-               </label>
-               <input id="tab2" type="radio" name="tabs">
-               <label for="tab2">
-                  <i class="fa fa-folder-open-o"></i>
-                  <span>NOTICE</span>
-               </label>
-               <input id="tab3" type="radio" name="tabs">
-               <label for="tab3">
-                  <i class="fa fa-folder-open-o"></i>
-                  <span>BOARD</span>
-               </label>
-               <input id="tab4" type="radio" name="tabs">
-               <label for="tab4">
-                  <i class="fa fa-folder-open-o"></i>
-                  <span>SECRET</span>
-               </label>
-               <input id="tab5" type="radio" name="tabs">
-               <label for="tab5" onclick="javascript:location.href='<%=cp%>/board/boardWrite.do'">
-                  <i class="fa fa-pencil-square-o"></i>
-                  <span style="color: #5bc0de;">WRITE</span>
-               </label>
-               <section id="content1" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
-               <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                  <table class="points_table">
-                     <tbody class="points_table_scrollbar" style="height: 500px;">
-                           <tr style="background-color: #5bc0de;">
-                           <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
-                           <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-                           <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
-                           <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
-                           <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
-                        </tr>
-                        <c:choose>
-                           <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
-                           <c:otherwise>
-                          
-                              <form name="boardform" id="boardform">
-                                 <c:forEach var="list" items="${boardList}" varStatus="stat">
-                                    <c:url var="viewURL" value="/board/boardDetail.do">
-                                       <c:param name="board_num" value="${list.board_num}" />
-                                    </c:url>
-                                    <a href="${viewURL }"></a>
-                                    <c:if test="${stat.index % 2 ==0}">
-                                       <tr class="odd">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                             <c:if test="${list.board_type == 0}">문의</c:if>
-                                             <c:if test="${list.board_type == 1}">
-                                                <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
-                                             </c:if>
-                                             <c:if test="${list.board_type == 2}">공지</c:if>
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                             <c:choose>
-                                                <c:when test="${list.board_type ==1}">
-                                                   <input type="hidden" id="board_num" value="${list.board_num }" />
-                                                   <c:if test="${session.member_id=='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="${viewURL}">${list.board_title}</a>
+         <hr>
+         <div class="tab_container">
+            <input id="tab1" type="radio" name="tabs" checked>
+            <label for="tab1">
+               <i class="fa fa-folder-open-o"></i>
+               <span>ALL</span>
+            </label>
+            <input id="tab2" type="radio" name="tabs">
+            <label for="tab2">
+               <i class="fa fa-folder-open-o"></i>
+               <span>NOTICE</span>
+            </label>
+            <input id="tab3" type="radio" name="tabs">
+            <label for="tab3">
+               <i class="fa fa-folder-open-o"></i>
+               <span>BOARD</span>
+            </label>
+            <input id="tab4" type="radio" name="tabs">
+            <label for="tab4">
+               <i class="fa fa-folder-open-o"></i>
+               <span>SECRET</span>
+            </label>
+            <input id="tab5" type="radio" name="tabs">
+            <label for="tab5" onclick="javascript:location.href='<%=cp%>/board/boardWrite.do'">
+               <i class="fa fa-pencil-square-o"></i>
+               <span style="color: #5bc0de;">WRITE</span>
+            </label>
+            <section id="content1" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+               <table class="points_table" style="width :100%">
+                  <tbody class="points_table_scrollbar" style="height: 500px;">
+                     <tr style="background-color: #5bc0de; width :100%">
+                        <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
+                        <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
+                        <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
+                        <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
+                        <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+                     </tr>
+                     <c:choose>
+                        <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+                        <c:otherwise>
+                           <form name="boardform" id="boardform">
+                              <c:forEach var="list" items="${boardList}" varStatus="stat">
+                                 <c:url var="viewURL" value="/board/boardDetail.do">
+                                    <c:param name="board_num" value="${list.board_num}" />
+                                 </c:url>
+                                 <a href="${viewURL }"></a>
+                                 <c:if test="${stat.index % 2 ==0}">
+                                    <tr class="odd">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">
+                                          <c:if test="${list.board_type == 0}">문의</c:if>
+                                          <c:if test="${list.board_type == 1}">
+                                             <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
+                                          </c:if>
+                                          <c:if test="${list.board_type == 2}">공지</c:if>
+                                       </td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <c:choose>
+                                             <c:when test="${list.board_type ==1}">
+                                                <input type="hidden" id="board_num" value="${list.board_num }" />
+                                                <c:if test="${session.member_id=='admin'}">
+                                                   <c:if test="${list.re_step != 0}">
+                                                      <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
                                                    </c:if>
-                                                   <c:if test="${session.member_id!='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="javascript:checkForm(${list.board_num})">
-                                                         <font color='gray'> *비공개 글 입니다</font>
-                                                      </a>
-                                                   </c:if>
-                                                </c:when>
-                                                <c:otherwise>
                                                    <a href="${viewURL}">${list.board_title}</a>
-                                                </c:otherwise>
-                                             </c:choose>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                    <c:if test="${stat.index % 2 ==1}">
-                                       <tr class="even">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                             <c:if test="${list.board_type == 0}">문의</c:if>
-                                             <c:if test="${list.board_type == 1}">
-                                                <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
-                                             </c:if>
-                                             <c:if test="${list.board_type == 2}">공지</c:if>
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                             <c:choose>
-                                                <c:when test="${list.board_type ==1}">
-                                                   <input type="hidden" id="board_num" value="${list.board_num }" />
-                                                   <c:if test="${session.member_id=='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                      	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="${viewURL}">${list.board_title}</a>
+                                                </c:if>
+                                                <c:if test="${session.member_id!='admin'}">
+                                                   <c:if test="${list.re_step != 0}">
+                                                      <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
                                                    </c:if>
-                                                   <c:if test="${session.member_id!='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                      	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="javascript:checkForm(${list.board_num})">
-                                                         <font color='gray'> *비공개 글 입니다</font>
-                                                      </a>
+                                                   <a href="javascript:checkForm(${list.board_num})">
+                                                      <font color='gray'> *비공개 글 입니다</font>
+                                                   </a>
+                                                </c:if>
+                                             </c:when>
+                                             <c:otherwise>
+                                                <c:if test="${list.re_step != 0}">
+                                                   <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                                </c:if>
+                                                <a href="${viewURL}">${list.board_title}</a>
+                                             </c:otherwise>
+                                          </c:choose>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                                 <c:if test="${stat.index % 2 ==1}">
+                                    <tr class="even">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">
+                                          <c:if test="${list.board_type == 0}">문의</c:if>
+                                          <c:if test="${list.board_type == 1}">
+                                             <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
+                                          </c:if>
+                                          <c:if test="${list.board_type == 2}">공지</c:if>
+                                       </td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <c:choose>
+                                             <c:when test="${list.board_type ==1}">
+                                                <input type="hidden" id="board_num" value="${list.board_num }" />
+                                                <c:if test="${session.member_id=='admin'}">
+                                                   <c:if test="${list.re_step != 0}">
+                                                      <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
                                                    </c:if>
-                                                </c:when>
-                                                <c:otherwise>
                                                    <a href="${viewURL}">${list.board_title}</a>
-                                                </c:otherwise>
-                                             </c:choose>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                 </c:forEach>
-                              </form>
-                           </c:otherwise>
-                        </c:choose>
-                     </tbody>
-                  </table>
-               </div>
-               <p style="text-align: center;">${pagingHtml}</p>
-               </section>
-               <!-- NOTICE TAB START  -->
-			<section id="content2" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
-               <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                  <table class="points_table">
-                     <tbody class="points_table_scrollbar" style="height: 500px;">
-                           <tr style="background-color: #5bc0de;">
-                           <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
-                           <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-                           <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
-                           <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
-                           <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
-                        </tr>
-                        <c:choose>
-                           <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
-                           <c:otherwise>
-                              <form name="boardform" id="boardform">
-                                 <c:forEach var="list" items="${adminBoardList}" varStatus="stat">
-                                    <c:url var="viewURL" value="/board/boardDetail.do">
-                                       <c:param name="board_num" value="${list.board_num}" />
-                                    </c:url>
-                                    <a href="${viewURL }"></a>
-                                    <c:if test="${stat.index % 2 ==0}">
-                                       <tr class="odd">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                            	공지
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                               <a href="${viewURL}">${list.board_title}</a>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                    <c:if test="${stat.index % 2 ==1}">
-                                       <tr class="even">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                            	공지
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                               <a href="${viewURL}">${list.board_title}</a>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                 </c:forEach>
-                              </form>
-                           </c:otherwise>
-                        </c:choose>
-                     </tbody>
-                  </table>
-               </div>
-               </section>
-               <!-- NOTICE TAB END -->
-               <!-- NORMAL TAB START -->
-				<section id="content3" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
-               <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                  <table class="points_table">
-                     <tbody class="points_table_scrollbar" style="height: 500px;">
-                           <tr style="background-color: #5bc0de;">
-                           <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
-                           <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-                           <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
-                           <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
-                           <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
-                        </tr>
-                        <c:choose>
-                           <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
-                           <c:otherwise>
-                              <form name="boardform" id="boardform">
-                                 <c:forEach var="list" items="${normalBoardList}" varStatus="stat">
-                                    <c:url var="viewURL" value="/board/boardDetail.do">
-                                       <c:param name="board_num" value="${list.board_num}" />
-                                    </c:url>
-                                    <a href="${viewURL }"></a>
-                                    <c:if test="${stat.index % 2 ==0}">
-                                       <tr class="odd">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                             	문의
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                            <c:if test="${list.board_type ==0}">
-                                                 <c:if test="${list.re_step != 0}">
-                                                	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                 </c:if>
-												<a href="${viewURL}">${list.board_title}</a>
-											</c:if>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                    <c:if test="${stat.index % 2 ==1}">
-                                       <tr class="even">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                             	문의
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                            <c:if test="${list.board_type ==0}">
-                                                 <c:if test="${list.re_step != 0}">
-                                                 	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                 </c:if>
-												<a href="${viewURL}">${list.board_title}</a>
-											</c:if>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                 </c:forEach>
-                              </form>
-                           </c:otherwise>
-                        </c:choose>
-                     </tbody>
-                  </table>
-               </div>
-               </section>
-               <!-- NORMAL BOARD END  -->
-               <!-- SECRET BOARD START -->
- 				<section id="content4" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
-               <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                  <table class="points_table">
-                     <tbody class="points_table_scrollbar" style="height: 500px;">
-                           <tr style="background-color: #5bc0de;">
-                           <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
-                           <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-                           <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
-                           <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
-                           <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
-                        </tr>
-                        <c:choose>
-                           <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
-                           <c:otherwise>
-                              <form name="boardform" id="boardform">
-                                 <c:forEach var="list" items="${secretBoardList}" varStatus="stat">
-                                    <c:url var="viewURL" value="/board/boardDetail.do">
-                                       <c:param name="board_num" value="${list.board_num}" />
-                                    </c:url>
-                                    <a href="${viewURL }"></a>
-                                    <c:if test="${stat.index % 2 ==0}">
-                                       <tr class="odd">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                                <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                                   <input type="hidden" id="board_num" value="${list.board_num }" />
-                                                   <c:if test="${session.member_id=='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="${viewURL}">${list.board_title}</a>
+                                                </c:if>
+                                                <c:if test="${session.member_id!='admin'}">
+                                                   <c:if test="${list.re_step != 0}">
+                                                      <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
                                                    </c:if>
-                                                   <c:if test="${session.member_id!='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="javascript:checkForm(${list.board_num})">
-                                                         <font color='gray'> *비공개 글 입니다</font>
-                                                      </a>
-                                                   </c:if>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                    <c:if test="${stat.index % 2 ==1}">
-                                       <tr class="even">
-                                          <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-                                          <td class="col-md-2 col-sm-2 col-xs-3">
-                                                <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
-                                          </td>
-                                          <td class="col-md-4 col-sm-4 col-xs-6">
-                                                   <input type="hidden" id="board_num" value="${list.board_num }" />
-                                                   <c:if test="${session.member_id=='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="${viewURL}">${list.board_title}</a>
-                                                   </c:if>
-                                                   <c:if test="${session.member_id!='admin'}">
-                                                      <c:if test="${list.re_step != 0}">
-                                                         <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
-                                                      </c:if>
-                                                      <a href="javascript:checkForm(${list.board_num})">
-                                                         <font color='gray'> *비공개 글 입니다</font>
-                                                      </a>
-                                                   </c:if>
-                                          </td>
-                                          <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-                                          <td class="col-md-3 col-sm-3 hidden-xs">
-                                             <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
-                                          </td>
-                                       </tr>
-                                    </c:if>
-                                 </c:forEach>
-                              </form>
-                           </c:otherwise>
-                        </c:choose>
-                     </tbody>
-                  </table>
-               </div>
-               </section>
-               <!-- SECRET BOARD END  -->
-               <section id="content5" class="tab-content" style="padding-right: 0px; padding-left: 0px; height: 630px;">
-				</section>
-               
+                                                   <a href="javascript:checkForm(${list.board_num})">
+                                                      <font color='gray'> *비공개 글 입니다</font>
+                                                   </a>
+                                                </c:if>
+                                             </c:when>
+                                             <c:otherwise>
+                                                <c:if test="${list.re_step != 0}">
+                                                   <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                                </c:if>
+                                                <a href="${viewURL}">${list.board_title}</a>
+                                             </c:otherwise>
+                                          </c:choose>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                              </c:forEach>
+                           </form>
+                        </c:otherwise>
+                     </c:choose>
+                  </tbody>
+               </table>
             </div>
+            <p style="text-align: center;">${pagingHtml}</p>
+            </section>
+            <!-- NOTICE TAB START  -->
+            <section id="content2" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+               <table class="points_table">
+                  <tbody class="points_table_scrollbar" style="height: 500px;">
+                     <tr style="background-color: #5bc0de;">
+                        <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
+                        <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
+                        <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
+                        <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
+                        <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+                     </tr>
+                     <c:choose>
+                        <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+                        <c:otherwise>
+                           <form name="boardform" id="boardform">
+                              <c:forEach var="list" items="${adminBoardList}" varStatus="stat">
+                                 <c:url var="viewURL" value="/board/boardDetail.do">
+                                    <c:param name="board_num" value="${list.board_num}" />
+                                 </c:url>
+                                 <a href="${viewURL }"></a>
+                                 <c:if test="${stat.index % 2 ==0}">
+                                    <tr class="odd">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">공지</td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <a href="${viewURL}">${list.board_title}</a>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                                 <c:if test="${stat.index % 2 ==1}">
+                                    <tr class="even">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">공지</td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <a href="${viewURL}">${list.board_title}</a>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                              </c:forEach>
+                           </form>
+                        </c:otherwise>
+                     </c:choose>
+                  </tbody>
+               </table>
+            </div>
+                        <p style="text-align: center;">${pagingHtml1}</p>
+            </section>
+            <!-- NOTICE TAB END -->
+            <!-- NORMAL TAB START -->
+            <section id="content3" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+               <table class="points_table">
+                  <tbody class="points_table_scrollbar" style="height: 500px;">
+                     <tr style="background-color: #5bc0de;">
+                        <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
+                        <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
+                        <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
+                        <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
+                        <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+                     </tr>
+                     <c:choose>
+                        <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+                        <c:otherwise>
+                           <form name="boardform" id="boardform">
+                              <c:forEach var="list" items="${normalBoardList}" varStatus="stat">
+                                 <c:url var="viewURL" value="/board/boardDetail.do">
+                                    <c:param name="board_num" value="${list.board_num}" />
+                                 </c:url>
+                                 <a href="${viewURL }"></a>
+                                 <c:if test="${stat.index % 2 ==0}">
+                                    <tr class="odd">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">문의</td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <c:if test="${list.board_type ==0}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="${viewURL}">${list.board_title}</a>
+                                          </c:if>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                                 <c:if test="${stat.index % 2 ==1}">
+                                    <tr class="even">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">문의</td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <c:if test="${list.board_type ==0}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="${viewURL}">${list.board_title}</a>
+                                          </c:if>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                              </c:forEach>
+                           </form>
+                        </c:otherwise>
+                     </c:choose>
+                  </tbody>
+               </table>
+            </div>
+                        <p style="text-align: center;">${pagingHtml2}</p>
+            </section>
+            <!-- NORMAL BOARD END  -->
+            <!-- SECRET BOARD START -->
+            <section id="content4" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+               <table class="points_table" style="width: auto;">
+                  <tbody class="points_table_scrollbar" style="height: 500px;">
+                     <tr style="background-color: #5bc0de;">
+                        <td class="col-md-2 col-sm-2 hidden-xs" style="color: white;">#</td>
+                        <td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
+                        <td class="col-md-4 col-sm-4 col-xs-6" style="color: white;">TITLE</td>
+                        <td class="col-md-1 col-sm-1 col-xs-1" style="color: white;">NAME</td>
+                        <td class="col-md-3 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+                     </tr>
+                     <c:choose>
+                        <c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+                        <c:otherwise>
+                           <form name="boardform" id="boardform">
+                              <c:forEach var="list" items="${secretBoardList}" varStatus="stat">
+                                 <c:url var="viewURL" value="/board/boardDetail.do">
+                                    <c:param name="board_num" value="${list.board_num}" />
+                                 </c:url>
+                                 <a href="${viewURL }"></a>
+                                 <c:if test="${stat.index % 2 ==0}">
+                                    <tr class="odd">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">
+                                          <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
+                                       </td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <input type="hidden" id="board_num" value="${list.board_num }" />
+                                          <c:if test="${session.member_id=='admin'}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="${viewURL}">${list.board_title}</a>
+                                          </c:if>
+                                          <c:if test="${session.member_id!='admin'}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="javascript:checkForm(${list.board_num})">
+                                                <font color='gray'> *비공개 글 입니다</font>
+                                             </a>
+                                          </c:if>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                                 <c:if test="${stat.index % 2 ==1}">
+                                    <tr class="even">
+                                       <td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+                                       <td class="col-md-2 col-sm-2 col-xs-3">
+                                          <img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
+                                       </td>
+                                       <td class="col-md-4 col-sm-4 col-xs-6">
+                                          <input type="hidden" id="board_num" value="${list.board_num }" />
+                                          <c:if test="${session.member_id=='admin'}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="${viewURL}">${list.board_title}</a>
+                                          </c:if>
+                                          <c:if test="${session.member_id!='admin'}">
+                                             <c:if test="${list.re_step != 0}">
+                                                <img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
+                                             </c:if>
+                                             <a href="javascript:checkForm(${list.board_num})">
+                                                <font color='gray'> *비공개 글 입니다</font>
+                                             </a>
+                                          </c:if>
+                                       </td>
+                                       <td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
+                                       <td class="col-md-3 col-sm-3 hidden-xs">
+                                          <fmt:formatDate value="${list.board_regdate}" pattern="yy-MM-dd" />
+                                       </td>
+                                    </tr>
+                                 </c:if>
+                              </c:forEach>
+                           </form>
+                        </c:otherwise>
+                     </c:choose>
+                  </tbody>
+               </table>
+            </div>
+                        <p style="text-align: center;">${pagingHtml3}</p>
+            </section>
+            <!-- SECRET BOARD END  -->
+            <section id="content5" class="tab-content" style="padding-right: 0px; padding-left: 0px; height: 630px;"> </section>
          </div>
-         <br />
-         <br />
       </div>
+      <br />
+      <form>
+      <div class="col-md-8 col-sm-8 col-xs-12 input-group" style="margin-left: auto; margin-right: auto;">         
+         <div class="input-group-btn search-panel" style="padding-bottom: 10px;">
+            <select class="form-control" name="searchNum" style="width: 80px; padding-left: 0px; padding-right: 0px;">
+               <option value="0">작성자</option>
+               <option value="1">제목</option>
+               <option value="2">내용</option>
+            </select>
+         </div>
+         <input type="text" class="form-control" name="isSearch" placeholder="Search.." id="isSearch" value="">
+         <span class="input-group-btn" style="padding-bottom: 10px;">
+            <button class="btn btn-info" type="submit">  Search  </button>
+         </span>
+      </div>
+      </form>
+   </div>
 </body>
 </html>

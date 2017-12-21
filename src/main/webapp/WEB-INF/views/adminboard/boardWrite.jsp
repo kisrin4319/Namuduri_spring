@@ -46,6 +46,15 @@
 <body>
 	<div class="container">
 		<div class="row">
+		<h2 style="text-align: -webkit-center; padding-top: 30px;">Q&A</h2>
+         <ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+            <li style="margin-bottom: 25px;">
+               <a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
+            </li>
+            <li style="margin-bottom: 25px;">
+               <a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
+            </li>
+         </ul>
 			<div class="col-md-12">
 				<c:choose>
 					<c:when test="${boardModel.board_num == null}">
@@ -123,7 +132,7 @@
 								</div>
 								<!--Fin datos personales-->
 								<div class="form-group text-center" style="text-align: center;">
-									<button type="button" id="cancel" class="btn btn-orange-md roboto" style="background: #f44336; margin-right: 5px; margin-top: 5px;" onclick="javascript:location.href='boardList.do'">CANCEL</button>
+									<button type="button" id="cancel" class="btn btn-orange-md roboto" style="background: lightcoral; margin-right: 5px; margin-top: 5px;" onclick="javascript:location.href='boardList.do'">CANCEL</button>
 									<button type="submit" id="write" class="btn btn-orange-md roboto" style="background: #5bc0de; margin-top: 5px;">WRITE</button>
 								</div>
 							</div>

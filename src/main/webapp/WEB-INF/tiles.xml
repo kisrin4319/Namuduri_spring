@@ -152,14 +152,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardView.jsp" />
 	</definition>
 		
+	<!-- 게시판 답변 달기 -->
+	<definition name="boardReply" extends="main">
+		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardReply.jsp" />
+	</definition>
+		
 	<!-- 게시판 비밀번호 체크 -->
 	<definition name="PasswdCheckForm" extends="main">
 		<put-attribute name="body" value="/WEB-INF/views/adminboard/passwordCheck.jsp" />
-	</definition>
-
-	<!-- 질문답변 게시판 답변글쓰기 -->
-	<definition name="replyForm" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/adminboard/boardWrite.jsp" />
 	</definition>
 
 	<!-- 질문답변 게시판 수정 -->

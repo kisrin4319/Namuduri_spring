@@ -37,6 +37,14 @@ public class BoardController {
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
+	private String pagingHtml1;
+	private Paging paging1;
+	private String pagingHtml2;
+	private Paging paging2;
+	private String pagingHtml3;
+	private Paging paging3;
+	
+	
 
 	// 1. 게시판 목록
 	@RequestMapping(value = "/board/boardList.do")
@@ -82,15 +90,41 @@ public class BoardController {
 		} else {
 			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
 			pagingHtml = paging.getPagingHtml().toString();
+			paging1 = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", "tab1", 1);
+			pagingHtml1 = paging1.getPagingHtml().toString();
+			paging2 = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", "tab2", 2);
+			pagingHtml2 = paging2.getPagingHtml().toString();
+			paging3 = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", "tab3", 3);
+			pagingHtml3 = paging3.getPagingHtml().toString();
 		}
 			
 			totalCount = boardList.size();
 			int lastCount = totalCount;
-
 			if (paging.getEndCount() < totalCount) {
 				lastCount = paging.getEndCount() + 1;
 			}
 			boardList = boardList.subList(paging.getStartCount(), lastCount);
+			
+			int totalCount1 = adminBoardList.size();
+			int lastCount1 = totalCount1;
+			if (paging1.getEndCount() < totalCount1) {
+				lastCount1 = paging1.getEndCount() + 1;
+			}
+			adminBoardList = adminBoardList.subList(paging1.getStartCount(), lastCount1);
+			
+			int totalCount2 = normalBoardList.size();
+			int lastCount2 = totalCount2;
+			if (paging2.getEndCount() < totalCount2) {
+				lastCount2 = paging2.getEndCount() + 1;
+			}
+			normalBoardList = normalBoardList.subList(paging2.getStartCount(), lastCount2);
+			
+			int totalCount3 = secretBoardList.size();
+			int lastCount3 = totalCount3;
+			if (paging3.getEndCount() < totalCount3) {
+				lastCount3 = paging3.getEndCount() + 1;
+			}
+			 secretBoardList =  secretBoardList.subList(paging3.getStartCount(), lastCount3);
 
 			mv.addObject("isSearch", isSearch);
 			mv.addObject("searchNum", searchNum);
@@ -101,6 +135,9 @@ public class BoardController {
 			mv.addObject("listCount", boardList.size());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("pagingHtml", pagingHtml1);
+			mv.addObject("pagingHtml", pagingHtml2);
+			mv.addObject("pagingHtml", pagingHtml3);
 			mv.setViewName("boardList");
 
 			return mv;
@@ -161,7 +198,7 @@ public class BoardController {
 		boardModel.setBoard_content(content);
 		boardModel.setRe_step(1);
 		mv.addObject("boardModel", boardModel);
-		mv.setViewName("/adminboard/BoardReply");
+		mv.setViewName("boardReply");
 		return mv;
 	}
 

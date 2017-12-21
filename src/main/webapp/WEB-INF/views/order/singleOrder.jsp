@@ -266,7 +266,8 @@
 															<td>
 																<strong>
 																	<span class="check-price">
-																		<input type="text" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly>
+																		<input type="hidden" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}">
+																		<input type="text" name="tempTotal" id="tempTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly>
 																		원
 																	</span>
 																</strong>
@@ -395,9 +396,10 @@
 	  var use = confirm("포인트를 사용하시겠습니까?")
 	  var point = document.getElementById("point").value;
 	  var grandtotal = document.getElementById("grandTotal").value;
+	  var temptotal = document.getElementById("tempTotal").value;
 	  if(use==true) {
-		grandTotal.value = grandtotal-point;
-		fn_format(grandTotal);
+		tempTotal.value = grandtotal-point;
+		fn_format(tempTotal)
 		} else {
 		  return false;
 		  }
