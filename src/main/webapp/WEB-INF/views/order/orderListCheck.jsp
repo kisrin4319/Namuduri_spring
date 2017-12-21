@@ -119,7 +119,7 @@
 	<div class="shopping-area section-padding">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-3 col-xs-12">
+				<div class="col-md-3 col-sm-3 col-xs-12">
 					<div class="shop-widget">
 						<div class="shop-widget-top">
 							<aside class="widget widget-categories">
@@ -187,7 +187,7 @@
 										<span class="label label-success">배송 완료</span>
 									</c:if>
 									</li>
-									<li data-label="주문 날짜"><fmt:formatDate value="${ item.order_regdate }" pattern="yyyy/MM/dd"/></li>
+									<li data-label="주문 날짜"><fmt:formatDate value="${ item.order_regdate }" pattern="yyyy-MM-dd"/></li>
 									<li data-label="결제 상태">
 										<c:if test="${ item.payment_status =='PS01' }">
 										결제 대기중
