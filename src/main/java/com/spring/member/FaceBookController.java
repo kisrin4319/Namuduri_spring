@@ -31,28 +31,29 @@ public class FaceBookController {
 		
 		//access_token 받기
 		String access_token = (String)FaceBook.getAcessToken(code);
-		System.out.println("access_token : "+access_token);
+		//System.out.println("access_token : "+access_token);
 		
 		String parsingAccess_token = FaceBook.accessTokenParsing(access_token);
-		System.out.println("parsingAccess_token :" +parsingAccess_token);
+		//System.out.println("parsingAccess_token :" +parsingAccess_token);
 		
 		String UserData = (String)FaceBook.getUser(parsingAccess_token);
-		System.out.println("UserData :" +UserData);
+		//System.out.println("UserData :" +UserData);
 		
 		JSONObject jsonObject = FaceBook.UserDataParsing(UserData);
-		System.out.println("jsonObject: "+jsonObject);
-		System.out.println("id :"+(String)jsonObject.get("id"));
+		//System.out.println("jsonObject: "+jsonObject);
+		//System.out.println("id :"+(String)jsonObject.get("id"));
 		
 		JSONObject jsonObject2 = FaceBook.UserDataParsing((String)jsonObject.get("picture").toString());
-		System.out.println("jsonObject2 :" +jsonObject2);
+		//System.out.println("jsonObject2 :" +jsonObject2);
 		Map<String, String> map = FaceBook.JsonStringMap(jsonObject2.get("data").toString());
-		System.out.println("is_silhouette :" +(String)map.get("is_silhouette"));
-		System.out.println("url:"+(String)map.get("url"));
+		//System.out.println("is_silhouette :" +(String)map.get("is_silhouette"));
+		//System.out.println("url:"+(String)map.get("url"));
 		
 		return "main.do";
 	}
 	
-	/*@Inject
+	/*//갱그리
+	@Inject
 	public FaceBookController(Facebook facebook, ConnectionRepository connectionRepository) {
 		this.facebook = facebook;
 		this.connectionRepository = connectionRepository;
@@ -64,6 +65,11 @@ public class FaceBookController {
 			memberModel.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
 		}
 		
-		return "main.do";
+		return "index";
+	}
+	
+	@RequestMapping(value="/login")
+	public String Login(MemberModel memberModel) {
+		return "login";
 	}*/
 }

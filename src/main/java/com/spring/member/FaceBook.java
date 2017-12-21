@@ -26,14 +26,14 @@ public class FaceBook {
 	public static String loginPage() {
 		return "https://www.facebook.com/dialog/oauth?client_id="+App_ID
 				+"&redirect_uri="+Redirect_URL
-				+"&scope=user_about_me,email";
+				+"&scope=public_profile,email";
 				
 	}
 	
 	public static String getAcessToken(String code) {
 		return getHtml("https://graph.facebook.com/v2.3/oauth/access_token?cloent_id="+App_ID
 				+"&redirect_uri="+Redirect_URL
-				+"&client_secre="+Client_secret
+				+"&client_secret="+Client_secret
 				+"&code="+code, "GET", null);
 	}
 	

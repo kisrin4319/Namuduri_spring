@@ -29,6 +29,15 @@
 				 }); 
 			};
 
+				function getUserData(){
+					FB.api('/me', {fields: 'name,email'}, function(response) {
+				        console.log(JSON.stringify(response));
+				        $("#member_name").text("이름 : "+response.name);
+				        $("#member_email").text("이메일 : "+response.email);
+				        $("#member_id").text("아이디 : "+response.id);
+				    });
+				}
+			
 				 (function(d){
 
 				    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
@@ -41,8 +50,38 @@
 
 				  }(document));   //기본적으로 페이스북과 연동하는 세팅 입니다. 같이 써주면 됩니다.
 				  
+				  FB.getLoginStatus(function(response){
+					  
+					  console.log('statusChangeCallback');
+					  console.log(response);
+					  
+					  if(response.status == 'connected'){
+						  $("#result").append("status : connected");
+						  
+						  getUserData();
+					  } else {
+						  $("#result").append(response);
+					  }
+				  });
 				  
-				  var fabceloginChk = 0;
+				  function loginFb(){
+					  FB.login(function(response){
+						  var fbname;
+						  var accessToken = response.authResponse.accessToken;
+						  FB.api('/me?fields=id,name,age_range,bithday,gender,email', function(response){
+							  var fb_data = jQuery.parseJSON(JSON.stringify(response));
+							  var data = "<br/>fb_id : " +fb_data.id;
+							  data += "<br/>email : " +fb_data.email;
+							  data += "<br/>name : " +fb_data.name;
+							  
+							  $("#result").append(data);
+						  });
+					  }, {scope : "public_profile,email"});
+				  }
+				  
+				  
+				  //첫번쨰
+				  /* var fabceloginChk = 0;
 
 				  function loginFB(){
 					  
@@ -57,11 +96,11 @@
 				  			fabceloginChk  = 0;
 				        	}
 				    	}
-				   		, {scope: "user_about_me,publish_stream,read_friendlists,offline_access,email,user_birthday"} 
+				   		, {scope: "user_about_me,email"} 
 				  		);
 				  	}
 
-				  }
+				  } */
 			
 
 </script>
@@ -144,7 +183,7 @@
 						</div>	
 						
 						<!-- Facebook login -->
-						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true"></div>
 						<div id="fb-root"></div>
 						<script>
 						(function(d, s, id) {
@@ -155,49 +194,14 @@
   							fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));
 						</script>
-						
-						
 					
-						<%-- <div class="container">
-
-      <h3>페이스북 버튼 출력 </h3>
-
-      <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
-
-      </div>
-     
-      <div id="fb-root"></div>
-
-      <fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button>
-      <hr/>
-
-      <h3>사용자정보 출력</h3>
-
-      <div align="left">
-
-          <h4>페이스북 로그인 검사</h4>
-
-          <div id="response"></div>
-
-	       <h4>페이스북 response Data</h4>
-
-          <div id="meResponse"></div>
-
-          <h4>페이스북 연동정보</h4>
-
-          <img id="image"/>
-
-          <div id="name"></div>
-
-          <div id="locale"></div>
-
-          <div id="link"></div>
-
-      </div>
-
-    </div>
-
-    <div class="codeReview"><code></code></div> --%>
+					
+					</form>
+					
+					<form id="LoginFrm" method="post">
+							<a class="btn btn-block btn-social btn-facebook">
+								<span class="fa fa-facebook"></span>Facebook 계정으로 로그인하기
+							</a>
 					</form>
 				</div>
 			</div>
@@ -234,6 +238,13 @@
 			var url = 'http://localhost:8080/namuduri/member/memberPwFindView.do';
 			window.open(url,"confirm","tollbar=no, location=no, status=no, menubar=no," + "scrollbars=no, resizable=no, width=605, height=195");
 		}
+		
+		$(document).ready(function(){
+			$(".btn-facebook").click(function(){
+				$("#LoginFrm").attr('action','/connect/facebook');
+				$("#LoginFrm").submit();
+			});
+		});
 	</script>
 	  <script language="javascript" src="http://connect.facebook.net/ko_KR/all.js"></script>
 	
