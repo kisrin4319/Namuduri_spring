@@ -83,15 +83,15 @@ div.col-xs-8 {
 					</div>
 				</div>
 			</div>
-			<div class="col-md-9 col-sm-9 col-xs-12 center-block">
+			<h3 style="margin-left: 15px;">주문자 정보</h3>
+			<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="border-width: 1px;border-style: solid;border-color: rgb(221, 221, 221); border-image: initial;">
 				<div class="form-group">
-					<h2>주문 상세내역 페이지</h2>
-					<br />
-					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> 주문자 ID : </label>
+					
+					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> ID : </label>
 					<div class="col-sm-2 col-md-2 col-xs-6">${memberInfo.member_id }</div>
-					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> 주문자 핸드폰 : </label>
+					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> 핸드폰 : </label>
 					<div class="col-sm-2 col-md-2 col-xs-6">${memberInfo.member_mobile }</div>
-					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> 주문자 전화번호 : </label>
+					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> 전화번호 : </label>
 					<div class="col-sm-2 col-md-2 col-xs-6">${memberInfo.member_phone }</div>
 				</div>
 			</div>
@@ -106,32 +106,32 @@ div.col-xs-8 {
 							</div>
 							<div class="col-sm-9 col-md-9 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 번호 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 번호 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<input type="text" class="form-control" value="${ item.ORDER_TRADE_NUM }" style="border-style: none;" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 도서명 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 도서명 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<input type="text" class="form-control" value="${ item.ORDER_BOOK_NAME }" style="border-style: none;" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 수량 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 수량 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<input type="text" class="form-control" value="${ item.ORDER_BOOK_COUNT }권" style="border-style: none;" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 가격 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 가격 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<input type="text" class="form-control" value="${ item.ORDER_BOOK_COUNT * item.ORDER_BOOK_PRICE }원" style="border-style: none;" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 상태 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px;"> 주문 상태 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<c:if test="${ item.ORDER_TRANS_STATUS == 'ST01' }">
 											<input type="text" class="form-control" value="배송 준비 중" style="border-style: none;" />
 										</c:if>
@@ -144,8 +144,8 @@ div.col-xs-8 {
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px; border-style: none;"> 주문 날짜 : </label>
-									<div class="col-sm-10 col-md-10 col-xs-8">
+									<label class="col-sm-3 col-md-2 col-xs-4 control-label" for="f_name" style="top: 5px; border-style: none;"> 주문 날짜 : </label>
+									<div class="col-sm-9 col-md-10 col-xs-8">
 										<input type="text" class="form-control" value="<fmt:formatDate value="${ item.ORDER_REGDATE }" pattern="yyyy-MM-dd" />" style="border-style: none;" />
 									</div>
 								</div>
@@ -153,7 +153,8 @@ div.col-xs-8 {
 						</a>
 					</div>
 				</c:forEach>
-				<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="margin-top: 5px; padding-left: 0px;">
+				<h3>수취인 정보</h3>
+				<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="margin-top: 5px; padding-left: 0px; border-width: 1px;border-style: solid;border-color: rgb(221, 221, 221); border-image: initial; float: initial; width: -webkit-fill-available; text-align: -webkit-center;">
 					<div class="form-group">
 						<label class="col-sm-2 col-md-2 col-xs-6" for="f_name"> 받으실 분 : </label>
 						<div class="col-sm-2 col-md-2">${orderModel.order_receive_name }</div>
@@ -163,11 +164,11 @@ div.col-xs-8 {
 						<div class="col-sm-2 col-md-2">${orderModel.order_receive_mobile }</div>
 					</div>
 				</div>
-				<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="padding-left: 0px; padding-right: 0px;">
+				<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="padding-left: 0px; padding-right: 0px; border-width: 1px;border-style: solid;border-color: rgb(221, 221, 221); border-image: initial; text-align: -webkit-center; width: -webkit-fill-available;">
 					<div class="form-group">
 						<label class="col-sm-2 col-md-2 col-xs-12" for="f_name"> 주 소 : </label>
-						<div class="col-sm-10 col-md-10 col-xs-12">${orderModel.order_receive_addr1 }</div>
-						<div class="col-sm-10 col-md-10 col-xs-12">${orderModel.order_receive_addr2 }</div>
+						<div class="col-sm-5 col-md-5 col-xs-12" style="padding-left: 0px; padding-right: 0px;">${orderModel.order_receive_addr1 }</div>
+						<div class="col-sm-5 col-md-5 col-xs-12" style="padding-left: 0px; padding-right: 0px;">${orderModel.order_receive_addr2 }</div>
 					</div>
 				</div>
 			</div>

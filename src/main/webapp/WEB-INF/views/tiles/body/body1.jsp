@@ -67,8 +67,8 @@ img.resize {
 				</div>
 				<!-- layer 4 -->
 				<div class="layer-4">
-					<form action="#" class="title-4">
-						<input type="text" placeholder="Enter your book title here">
+					<form action="books/booksList.do" class="title-4">
+						<input type="text" name="searchKeyword" placeholder="Enter your book keyword here">
 						<button type="submit">
 							<i class="fa fa-search"></i>
 						</button>

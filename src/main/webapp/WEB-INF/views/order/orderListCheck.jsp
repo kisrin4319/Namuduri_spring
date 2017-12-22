@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -156,7 +156,7 @@
 				</div>
 				<div class="col-md-9 col-sm-9 col-xs-12" style="padding-left: 0px;">
 					<p style="padding-left: 15px;">주문/배송 내역을 조회 할수 있는 페이지입니다.</p>
-					<div class="list" style="width: 110%;">
+					<div class="list" style="width: 100%;">
 						<ul>
 							<li>주문 번호</li>
 							<li>배송 번호</li>
@@ -177,17 +177,19 @@
 									</li>
 									<li data-label="배송 번호">${item.order_trans_num}</li>
 									<li data-label="배송 상태">
-									<c:if test="${ item.order_trans_status == 'ST01' }">
-										<span class="label label-primary">배송 준비중</span>										
-									</c:if>
+										<c:if test="${ item.order_trans_status == 'ST01' }">
+											<span class="label label-primary">배송 준비중</span>
+										</c:if>
 										<c:if test="${ item.order_trans_status == 'ST02' }">
-										<span class="label label-warning">배송 중</span>
-									</c:if>
+											<span class="label label-warning">배송 중</span>
+										</c:if>
 										<c:if test="${ item.order_trans_status == 'ST03' }">
-										<span class="label label-success">배송 완료</span>
-									</c:if>
+											<span class="label label-success">배송 완료</span>
+										</c:if>
 									</li>
-									<li data-label="주문 날짜"><fmt:formatDate value="${ item.order_regdate }" pattern="yyyy-MM-dd"/></li>
+									<li data-label="주문 날짜">
+										<fmt:formatDate value="${ item.order_regdate }" pattern="yyyy-MM-dd" />
+									</li>
 									<li data-label="결제 상태">
 										<c:if test="${ item.payment_status =='PS01' }">
 										결제 대기중
@@ -209,10 +211,8 @@
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
 						</c:if>
-						<div class="paging" style ="text-align: center">
-						${pagingHtml}
-						</div>						
 					</div>
+					<div class="paging" style="text-align: center">${pagingHtml}</div>
 				</div>
 			</div>
 		</div>

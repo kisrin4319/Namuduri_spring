@@ -170,9 +170,10 @@
 								</span>
 							</h2>
 						</div>
-						<a href="javascript:;" onclick="fn_selectOrder()">SELECTED CHECKOUT</a>
-						<a href="javascript:;" onclick="fn_totalOrder()">CHECKOUT</a>
-						<p>Checkout With Multiple Addresses</p>
+						<c:if test="${basketList.size() ne 0 }">
+							<a href="javascript:;" onclick="fn_selectOrder()">SELECTED CHECKOUT</a>
+							<a href="javascript:;" onclick="fn_totalOrder()">CHECKOUT</a>
+						</c:if>
 					</div>
 				</div>
 			</div>

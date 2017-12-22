@@ -300,7 +300,7 @@ img.soldout {
 																<a href="javascript:isWish(${list.book_num})" title="Add to Wishlist" style="padding-top: 11px;">
 																	<i class="fa fa-heart-o"></i>
 																</a>
-																<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
+																<a class="venobox" href="<%=cp%>/upload/${list.book_image}" data-gall="gallery" style="padding-top: 11px;">
 																	<i class="fa fa-compress"></i>
 																</a>
 																</c:otherwise>
