@@ -10,6 +10,8 @@
 <script type="text/javascript">
 
 google.charts.load('current', {'packages':['corechart']});
+
+
 google.charts.setOnLoadCallback(drawLineChart1);
 google.charts.setOnLoadCallback(drawLineChart2);
 google.charts.setOnLoadCallback(drawLineChart3);

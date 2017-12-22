@@ -26,79 +26,37 @@
 					<div class="table-responsive">
 						<div class="card-block">
 							<label class="h4">최근 7일 판매량 기준 도서 판매 순위</label>
-							<div class="row">
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${weekBookSelling}" varStatus="stat" begin="0" end="3" step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> 
-														<img src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
+							<div class="row col-lg-10">
+								<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
+									<div class="thumbnail-wrappper card-block col-lg-3 col-sm-6">
+											<span class="icon_rank rank">${stat.count}</span>
+											<div class="thumbnail">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">
+												<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}"></a>
 											</div>
+											<div class="thumbnail-name">
+												${list.book_name}</div>
+											${list.book_auth} | ${list.company_id}
+											<br>${list.book_price}
 										</div>
-									</c:forEach>
-								</div>
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${weekBookSelling}" varStatus="stat" begin="4" end="7" step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> <img alt=""
-														src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="card-block">
 							<label class="h4">저번 달 판매량 기준 도서 판매 순위</label>
 							<div class="row">
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${monthBookSelling}" varStatus="stat" begin="0" end="3"
-										step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> <img alt=""
-														src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
+								<div class="row col-lg-10">
+									<c:forEach var="list" items="${monthBookSelling}" varStatus="stat">
+										<div class="thumbnail-wrappper card-block col-lg-3 col-sm-6">
+											<span class="icon_rank rank">${stat.count}</span>
+											<div class="thumbnail">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">
+												<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}"></a>
 											</div>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${monthBookSelling}" varStatus="stat" begin="4" end="7"
-										step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> <img alt=""
-														src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
-											</div>
+											<div class="thumbnail-name">
+												${list.book_name}</div>
+											${list.book_auth} | ${list.company_id}
+											<br>${list.book_price}
 										</div>
 									</c:forEach>
 								</div>
@@ -107,39 +65,18 @@
 						<div class="card-block">
 							<label class="h4">전체 판매량 기준 도서 판매 순위</label>
 							<div class="row">
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${bookSelling}" varStatus="stat" begin="0" end="3"
-										step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> <img alt=""
-														src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
+								<div class="row col-lg-10">
+									<c:forEach var="list" items="${bookSelling}" varStatus="stat">
+										<div class="thumbnail-wrappper card-block col-lg-3 col-sm-6">
+											<span class="icon_rank rank">${stat.count}</span>
+											<div class="thumbnail">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">
+												<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}"></a>
 											</div>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="row col-lg-12">
-									<c:forEach var="list" items="${bookSelling}" varStatus="stat" begin="4" end="7"
-										step="1">
-										<div class="col col-lg-3">
-											<div class="single-banner">
-												<div class="product-wrapper">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"
-														class="single-banner-image-wrapper"> <img alt=""
-														src="<%=cp%>/upload/${list.book_image}">
-													</a>
-												</div>
-												<div class="banner-bottom text-center">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}">${list.book_name} </a>
-												</div>
-											</div>
+											<div class="thumbnail-name">
+												${list.book_name}</div>
+											${list.book_auth} | ${list.company_id}
+											<br>${list.book_price}
 										</div>
 									</c:forEach>
 								</div>

@@ -14,33 +14,21 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap Core CSS -->
-<link href="<%=cp%>/adminBootStrap/css/bootstrap.min.css"
+<link href="<%=cp%>/adminBootStrap/bootstrap/css/bootstrap.min.css?ver=1"
 	rel="stylesheet">
-<!--This page css - Morris CSS -->
-<link href="<%=cp%>/adminBootStrap/css/c3.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="<%=cp%>/adminBootStrap/css/style.css" rel="stylesheet">
 <!-- You can change the theme colors from here -->
-<link href="<%=cp%>/adminBootStrap/css/blue.css?ver=1" id="theme"
+<link href="<%=cp%>/adminBootStrap/css/colors/blue.css?ver=1" id="theme"
 	rel="stylesheet">
-<!-- chartist CSS -->
-<link href="<%=cp%>/adminBootStrap/css/chartist.min.css"
-	rel="stylesheet">
-<link href="<%=cp%>/adminBootStrap/css/chartist-init.css"
-	rel="stylesheet">
-<link href="<%=cp%>/adminBootStrap/css/chartist-plugin-tooltip.css"
-	rel="stylesheet">
-
-<%-- <link href="<%=cp%>/css/adminPage.css?ver=1" rel="stylesheet"
-	type="text/css" /> --%>
 
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
 <script src="<%=cp%>/adminBootStrap/js/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="<%=cp%>/adminBootStrap/js/tether.min.js"></script>
-<script src="<%=cp%>/adminBootStrap/js/bootstrap.min.js"></script>
+<script src="<%=cp%>/adminBootStrap/bootstrap/js/tether.min.js"></script>
+<script src="<%=cp%>/adminBootStrap/bootstrap/js/bootstrap.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
 <script src="<%=cp%>/adminBootStrap/js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
@@ -48,7 +36,7 @@
 <!--Menu sidebar -->
 <script src="<%=cp%>/adminBootStrap/js/sidebarmenu.js"></script>
 <!--stickey kit -->
-<script src="<%=cp%>/adminBootStrap/js/sticky-kit.min.js"></script>
+<script src="<%=cp%>/adminBootStrap/bootstrap/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!--Custom JavaScript -->
 <script src="<%=cp%>/adminBootStrap/js/custom.min.js"></script>
 <!-- ============================================================== -->
