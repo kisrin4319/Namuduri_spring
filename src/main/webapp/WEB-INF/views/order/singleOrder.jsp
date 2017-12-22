@@ -17,12 +17,8 @@
 <body>
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">ORDER</h2>
 	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-		<li>
-			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
-		</li>
-		<li>
-			<a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
-		</li>
+		<li><a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a></li>
+		<li><a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a></li>
 	</ul>
 	<hr>
 	<!-- Check Out Area Start -->
@@ -35,9 +31,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
 									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-											<span>1</span>
-											Checkout Method
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <span>1</span> Checkout Method
 										</a>
 									</h4>
 								</div>
@@ -48,22 +42,12 @@
 												<div class="checkout-collapse-inner">
 													<h2 class="collapse-title">CHECKOUT AS A GUEST OR REGISTER</h2>
 													<h4 class="collapse-sub-title">Register with us for future convenience:</h4>
-													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" />
-													<input type="hidden" name="order_book_count" value="${order_book_count}" />
-													<input type="hidden" name="book_num" value="${book.book_num}" />
-													<input type="hidden" name="order_book_name" value="${book.book_name}" />
-													<input type="hidden" name="order_book_price" value="${book.book_price}" />
-													<input type="hidden" name="order_book_count" value="${order_book_count}" />
-													<input type="hidden" name="basket_num" value="${basket_num}" />
-													<input type="hidden" name="used_book_num" value="${used_book_num }" />
-													<input type="hidden" name="bookMoney" value="${bookMoney}" />
+													<input type="hidden" name="order_receive_moneysum" value="${sumMoney}" /> <input type="hidden" name="order_book_count" value="${order_book_count}" /> <input type="hidden" name="book_num" value="${book.book_num}" /> <input type="hidden" name="order_book_name" value="${book.book_name}" /> <input type="hidden" name="order_book_price" value="${book.book_price}" /> <input type="hidden" name="order_book_count" value="${order_book_count}" /> <input type="hidden" name="basket_num" value="${basket_num}" /> <input type="hidden" name="used_book_num" value="${used_book_num }" /> <input type="hidden" name="bookMoney" value="${bookMoney}" />
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="deldata();" />
-														<label>Direct input</label>
+														<input type="radio" name="choice" onclick="deldata();" /> <label>Direct input</label>
 													</div>
 													<div class="check-register">
-														<input type="radio" name="choice" onclick="senddata();" />
-														<label>Same As Member</label>
+														<input type="radio" name="choice" onclick="senddata();" /> <label>Same As Member</label>
 													</div>
 													<p>Register and save time!</p>
 													<p>Register with us for future convenience:</p>
@@ -79,9 +63,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-											<span>2</span>
-											Billing Information
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <span>2</span> Billing Information
 										</a>
 									</h4>
 								</div>
@@ -90,11 +72,8 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="shop-select">
-													<label>
-														Country
-														<span class="required">*</span>
-													</label>
-													<select>
+													<label> Country <span class="required">*</span>
+													</label> <select>
 														<option value="volvo">SOUTH KOREA</option>
 														<option value="saab">Algeria</option>
 														<option value="mercedes">Afghanistan</option>
@@ -139,11 +118,8 @@
 											<div class="col-md-12">
 												<div id="cbox_info">
 													<p class="form-row form-row-phone">
-														<label>
-															Mobile
-															<span class="required">*</span>
-														</label>
-														<input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
+														<label> Mobile <span class="required">*</span>
+														</label> <input type="text" id="order_receive_mobile" name="order_receive_mobile" value="" placeholder="Mobile *">
 													</p>
 												</div>
 											</div>
@@ -155,9 +131,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingThree">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-											<span>3</span>
-											Shopping Method
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> <span>3</span> Shopping Method
 										</a>
 									</h4>
 								</div>
@@ -170,15 +144,13 @@
 											</div>
 										</div>
 										<button class="btn btn-default btn-checkout" data-toggle="collapse" href="#collapseFour" data-parent="#accordion" aria-expanded="false" style="margin-top: 5px;">CONTINUE</button>
-									</div>									
+									</div>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingFour">
 									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-											<span>4</span>
-											Order Review
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> <span>4</span> Order Review
 										</a>
 									</h4>
 								</div>
@@ -198,80 +170,45 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: center;">
-																<span class="cart-price">
-																	<span class="check-price">
-																		<img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" />
-																	</span>
+															<td style="text-align: center;"><span class="cart-price"> <span class="check-price"> <img src="<%=cp%>/upload/${book.book_image}" width="40" alt="${book.book_name}" title="${book.book_name}" />
 																</span>
-															</td>
+															</span></td>
 															<td>
 																<h3 class="product-name">${book.book_name}</h3>
 															</td>
-															<td>
-																<span class="cart-price">
-																	<span class="check-price">
-																		<fmt:formatNumber value="${book.book_price}" pattern="###,###,###" />
-																		원
-																	</span>
+															<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${book.book_price}" pattern="###,###,###" /> 원
 																</span>
-															</td>
+															</span></td>
 															<td>${order_book_count}</td>
 															<!-- sub total starts here -->
-															<td>
-																<span class="cart-price">
-																	<span class="check-price">
-																		<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
-																		원
-																	</span>
+															<td><span class="cart-price"> <span class="check-price"> <fmt:formatNumber value="${bookMoney}" pattern="###,###,###" /> 원
 																</span>
-															</td>
+															</span></td>
 														</tr>
 													</tbody>
 													<tfoot>
 														<tr>
 															<td colspan="4">Subtotal</td>
-															<td>
-																<span class="check-price">
-																	<fmt:formatNumber value="${bookMoney}" pattern="###,###,###" />
-																	원
-																</span>
-															</td>
+															<td><span class="check-price"> <fmt:formatNumber value="${bookMoney}" pattern="###,###,###" /> 원
+															</span></td>
 														</tr>
 														<tr>
 															<td colspan="4">Fee</td>
-															<td>
-																<span class="check-price">
-																	<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
-																	원
-																</span>
-															</td>
+															<td><span class="check-price"> <fmt:formatNumber value="${deliveryFee}" pattern="#,###" /> 원
+															</span></td>
 														</tr>
 														<tr>
-															<td colspan="4">
-																Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)
+															<td colspan="4">Point(<fmt:formatNumber pattern="#,###" value="${memberModel.member_point}" />P)
 															</td>
-															<td>
-																<span class="check-price">
-																	-
-																	<input type="text" size="1" name="point" id="point" value="0" style="text-align: end;">
-																	<input type="button" value="USE" onclick="usePoint();">
-																</span>
-															</td>
+															<td><span class="check-price"> - <input type="text" size="1" name="point" id="point" value="0" style="text-align: end;"> 
+															<input type="button" value="USE" onclick="usePoint();" style="background-color: #32B5F3;border: #32B5F3;height: 26px;color: white;">
+															</span></td>
 														</tr>
 														<tr>
-															<td colspan="4">
-																<strong>Grand Total</strong>
-															</td>
-															<td>
-																<strong>
-																	<span class="check-price">
-																		<input type="hidden" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}">
-																		<input type="text" name="tempTotal" id="tempTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly>
-																		원
-																	</span>
-																</strong>
-															</td>
+															<td colspan="4"><strong>Grand Total</strong></td>
+															<td><strong> <span class="check-price"> <input type="hidden" name="grandTotal" id="grandTotal" size="3" value="${sumMoney}"> <input type="text" name="tempTotal" id="tempTotal" size="3" value="${sumMoney}" style="text-align: end;" readonly> 원
+																</span>
+															</strong></td>
 														</tr>
 													</tfoot>
 												</table>
@@ -279,8 +216,7 @@
 											<div id="checkout-review-submit">
 												<div class="cart-btn-3" id="review-buttons-container">
 													<p class="left">
-														Forgot an Item?
-														<a href="#">Edit Your Cart</a>
+														Forgot an Item? <a href="#">Edit Your Cart</a>
 													</p>
 													<button type="button" title="Place Order" class="btn btn-default" onclick="checkIt()">
 														<span>Place Order</span>
@@ -298,30 +234,14 @@
 					<div class="checkout-widget">
 						<h2 class="widget-title">YOUR CHECKOUT PROGRESS</h2>
 						<ul>
-							<li>
-								<a href="#">
-									<i class="fa fa-minus"></i>
-									Billing Address
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-minus"></i>
-									Shipping Address
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-minus"></i>
-									Shipping Method
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-minus"></i>
-									Payment Method
-								</a>
-							</li>
+							<li><a href="#"> <i class="fa fa-minus"></i> Billing Address
+							</a></li>
+							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Address
+							</a></li>
+							<li><a href="#"> <i class="fa fa-minus"></i> Shipping Method
+							</a></li>
+							<li><a href="#"> <i class="fa fa-minus"></i> Payment Method
+							</a></li>
 						</ul>
 					</div>
 				</div>
@@ -393,13 +313,20 @@
    		window.open(url, "post", "toolbar=no,width=605,height=247,directoris=no,status=yes,scrollbars=yes,menubar=no");
    		}		 
 	function usePoint() {
-	  var use = confirm("포인트를 사용하시겠습니까?")
+	  var use = confirm("포인트를 사용하시겠습니까?");
 	  var point = document.getElementById("point").value;
 	  var grandtotal = document.getElementById("grandTotal").value;
 	  var temptotal = document.getElementById("tempTotal").value;
+	  var member_point = "${memberModel.member_point}";
 	  if(use==true) {
+		  if(member_point < point) {
+			  alert("포인트가 부족합니다");
+			  return false;
+		  } else if(point > grandtotal) {
+			 alert("포인트 사용량이 주문 금액보다 클 수 없습니다");
+		  }else{
 		tempTotal.value = grandtotal-point;
-		fn_format(tempTotal)
+		fn_format(tempTotal);}
 		} else {
 		  return false;
 		  }
@@ -437,10 +364,10 @@
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
           orderform.action = "<%=cp%>/order/singleOrder.do";
-          orderform.submit();
-        }
-      });       
-    }
-  </script>
+			orderform.submit();
+				}
+			});
+		}
+	</script>
 </body>
 </html>

@@ -255,7 +255,7 @@
 																<span class="check-price">
 																	-
 																	<input type="text" size="1" name="point" id="point" value="0" style="text-align: end;">
-																	<input type="button" value="USE" onclick="usePoint();">
+																	<input type="button" value="USE" onclick="usePoint();" style="background-color: #32B5F3;border: #32B5F3;height: 26px;color: white;">
 																</span>
 															</td>
 														</tr>
@@ -394,13 +394,20 @@ var mobile = "${memberModel.member_mobile}";
     }
 
 	function usePoint() {
-		  var use = confirm("포인트를 사용하시겠습니까?")
+		  var use = confirm("포인트를 사용하시겠습니까?");
 		  var point = document.getElementById("point").value;
 		  var grandtotal = document.getElementById("grandTotal").value;
 		  var temptotal = document.getElementById("tempTotal").value;
+		  var member_point = "${memberModel.member_point}";
 		  if(use==true) {
+			  if(member_point < point) {
+				  alert("포인트가 부족합니다");
+				  return false;
+			  } else if(point > grandtotal) {
+				 alert("포인트 사용량이 주문 금액보다 클 수 없습니다");
+			  }else{
 			tempTotal.value = grandtotal-point;
-			fn_format(tempTotal)
+			fn_format(tempTotal);}
 			} else {
 			  return false;
 			  }
