@@ -45,6 +45,7 @@ var page = ${currentPage};
 				<div class="card-block">
 					<div class="table-responsive">
 						<!-- 검색창 영역 -->
+						<c:if test="${status eq 'all' || status eq 'bck'}">
 						<form class="form-inline" method="POST">
 							<table class="table">
 								<tr>
@@ -56,7 +57,8 @@ var page = ${currentPage};
 									</td>
 									<th>가격별 검색 :</th>
 									<td style="text-align: left;" colspan=2>
-										<input type="range" name="price">
+										<input type="text" class="form-control" name="price_min" placeholder="부터">
+										~ <input type="text" class="form-control" name="price_max" placeholder="까지">
 									</td>
 								</tr>
 								<tr>
@@ -74,15 +76,18 @@ var page = ${currentPage};
 											<button class="fa fa-search" style="padding-left: 10px;"></button>
 										</div>
 									</td>
+									<c:if test="${status eq 'all'}">
 									<th>도서 구분 :</th>
 									<td>
 										<input type="radio" name="active" checked="checked" value="0">전체 &nbsp; <input
 											type="radio" name="active" value="1">사용 도서 &nbsp; <input type="radio"
 											name="active" value="2">비사용 도서
 									</td>
+									</c:if>
 								</tr>
 							</table>
 						</form>
+						</c:if>
 						<div class="form-group"></div>
 						<table class="list-items table table-hover table-striped">
 							<thead class="list-header">
@@ -128,8 +133,9 @@ var page = ${currentPage};
 												</td>
 												<td>
 													<a class="mdi mdi-grease-pencil" title="Modify"
-														href="javascript:update('${list.book_num}')"></a> <a class="mdi mdi-delete"
-														title="Delete" href="javascript:deleteCheck('${list.book_num}')"></a>
+														href="javascript:update('${list.book_num}')"></a> 
+														<a class="mdi mdi-delete" title="Delete" 
+														href="javascript:deleteCheck('${list.book_num}')"></a>
 												</td>
 											</tr>
 										</c:forEach>

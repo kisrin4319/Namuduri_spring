@@ -34,6 +34,7 @@ $(function() {
 				<div class="card-block">
 					<div class="table-responsive">
 						<!-- 검색창 영역 -->
+						<c:if test="${status eq 'all' || status eq 'bck'}">
 						<form class="form-inline" method="POST">
 							<table class="table">
 								<tr>
@@ -42,10 +43,13 @@ $(function() {
 										<input type="text" class="form-control" name="date_min" id="datepicker" placeholder="부터">
 										~ <input type="text" class="form-control" name="date_max" id="datepicker2" placeholder="까지">
 									</td>
+									<c:if test="${status eq 'all'}">
+									<th>주문 상태 : </th>
 									<td>
 										<input type="radio" name="active" checked="checked" value="0">전체 &nbsp;
 										<input type="radio" name="active" value="1">취소됨 &nbsp;
 									</td>
+									</c:if>
 								</tr>
 								<tr>
 									<th>항목별 검색 :</th>
@@ -63,7 +67,8 @@ $(function() {
 											<button class="fa fa-search" style="padding-left: 10px;"></button>
 										</div>
 									</td>
-									<td>
+									<c:if test="${status eq 'all'}">
+									<td colspan=2>
 										<select class="form-control" name="payment_status">
 											<option value="0">결제상태</option>
 											<option value="1">PS01</option>
@@ -76,9 +81,11 @@ $(function() {
 											<option value="3">ST03</option>
 										</select>
 									</td>
+									</c:if>
 								</tr>
 							</table>
 						</form>
+						</c:if>
 						<table class="list-items table table-hover table-striped">
 							<thead class="list-header">
 								<tr>
@@ -88,8 +95,13 @@ $(function() {
 									<th>배송번호</th>
 									<th>수취인</th>
 									<th>수취인 번호</th>
-									<th>결제상태</th>
-									<th>배송상태</th>
+									<c:if test="${status eq 'all'}">
+										<th>결제상태</th>
+										<th>배송상태</th>
+									</c:if>
+									<c:if test="${status ne 'all'}">
+										<th>주문상태</th>
+									</c:if>
 									<th>주문날짜</th>
 								</tr>
 							</thead>
@@ -116,8 +128,15 @@ $(function() {
 												<td>${list.order_trans_num}</td>
 												<td>${list.order_receive_name}</td>
 												<td>${list.order_receive_mobile}</td>
-												<td>${list.payment_status}</td>
-												<td>${list.order_trans_status}</td>
+												<c:if test="${status eq 'all'}">
+													<td>${list.payment_status}</td>
+													<td>${list.order_trans_status}</td>
+												</c:if>
+												<c:if test="${status eq 'trade'}"><td>결제미완료</td></c:if>
+												<c:if test="${status eq 'trans'}">
+													<td>${list.order_trans_status eq 'ST01'? '배송 준비중' : '배송중'}</td>
+												</c:if>
+												<c:if test="${status eq 'bck'}"><td>취소됨</td></c:if>
 												<td>${list.order_regdate}</td>
 											</tr>
 										</c:forEach>

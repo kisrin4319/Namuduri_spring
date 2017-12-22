@@ -144,17 +144,22 @@ public class AdminService implements AdminDao {
 	/* ----------------------------------------------------------------------------------- */
 
 	@Override //전체 주문 조회
-	public List<OrderModel> selectOrderAll(){
+	public List<OrderModel> orderListAll(){
 		return sqlSessionTemplate.selectList("admin.orderListAll");
 	}
 	
-	@Override //처리된 주문
-	public List<OrderModel> selectOrderAct(){
-		return sqlSessionTemplate.selectList("admin.orderListAct");
+	@Override //결제 미완료 주문
+	public List<OrderModel> orderListTrade(){
+		return sqlSessionTemplate.selectList("admin.orderListTrade");
+	}
+	
+	@Override //배송 미완료 주문
+	public List<OrderModel> orderListTrans(){
+		return sqlSessionTemplate.selectList("admin.orderListTrans");
 	}
 	
 	@Override //취소된 주문
-	public List<OrderModel> selectOrderBck(){
+	public List<OrderModel> orderListBck(){
 		return sqlSessionTemplate.selectList("admin.orderListBck");
 	}
 	

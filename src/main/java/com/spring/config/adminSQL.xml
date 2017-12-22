@@ -133,11 +133,11 @@
 	</select>
 	<!-- 사용 도서 조회 -->
 	<select id="bookListAct" resultType="BooksModel">
-		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 1 ORDER BY BOOK_DATE DESC
+		SELECT * FROM BOOK WHERE BOOK_USE_YN = 1 ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 비사용 도서 조회 -->
 	<select id="bookListBck" resultType="BooksModel">
-		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
+		SELECT * FROM BOOK WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="searchBook" parameterType="map" resultType="BooksModel">
@@ -159,19 +159,11 @@
 			</if>
 			<if test="date_min!=null"><![CDATA[AND BOOK_DATE >= #{date_min}]]></if>
 			<if test="date_max!=null"><![CDATA[AND BOOK_DATE <= #{date_max}]]></if>
+			<if test="price_min!=null"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
+			<if test="price_max!=null"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
 		</where>
 		ORDER BY BOOK_DATE DESC
 	</select>
-	
-	<!-- <select id="searchBook" resultType="BooksModel">
-		SELECT * FROM BOOK WHERE BOOK_NAME like '%'||#{book_name}||'%'
-								AND BOOK_CATEGORY like '%'||#{book_category}||'%'
-								AND BOOK_AUTH like '%'||#{book_auth}||'%'
-								AND BOOK_COMPANY like '%'||#{book_company}||'%'
-		ORDER BY BOOK_DATE DESC -->
-		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
-		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
-	<!-- </select> -->
 	
 	<!-- 가장 최근의 도서 정보 조회 -->
 	<select id="selectNewest" resultType="BooksModel">
@@ -192,10 +184,17 @@
  	<select id="orderListAll" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE
 	</select>
-	<!-- 처리완료(배송까지 완료) 주문 -->
-	<select id="orderListAct" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 ORDER BY ORDER_REGDATE
+	
+	<!-- 결제 미완료 -->
+	<select id="orderListTrade" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
 	</select>
+	
+	<!-- 배송 미완료 -->
+	<select id="orderListTrans" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE
+	</select>
+	
 	<!-- 취소된 주문 -->
 	<select id="orderListBck" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE
@@ -229,20 +228,6 @@
 		</where>
 		ORDER BY ORDER_REGDATE DESC
 	</select>
-	<!-- <select id="searchOrder" resultType="OrderModel">
-		SELECT * FROM BOOK WHERE ORDER_TRADE_NUM like '%'||#{order_trade_num}||'%'
-								AND MEMBER_ID like '%'||#{member_id}||'%'
-								AND ORDER_TRADE_PAYER like '%'||#{order_trade_payer}||'%'
-								AND ORDER_TRANS_NUM like '%'||#{order_trans_num}||'%'
-								AND ORDER_RECEIVE_NAME like '%'||#{order_receive_name}||'%'
-								AND ORDER_RECEIVE_PHONE like '%'||#{order_receive_phone}||'%'
-								AND ORDER_RECEIVE_MOBILE like '%'||#{order_receive_phone}||'%'
-								AND PAYMENT_STATUS = #{payment_status}
-								AND ORDER_TRANS_STATUS = #{order_trans_status}
-		ORDER BY BOOK_DATE DESC
-		WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max}
-		WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0
-	</select> -->
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->

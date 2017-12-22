@@ -95,7 +95,7 @@ public class AdminController {
 		}
 		
 		totalCount = memberList.size();
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -182,7 +182,7 @@ public class AdminController {
 		}
 		
 		totalCount = memberList.size();
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "memberList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -280,38 +280,31 @@ public class AdminController {
 
 	//////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value="/admin/bookList.do", method=RequestMethod.GET) // 도서 리스트
-	public ModelAndView bookList(HttpServletRequest request) throws Exception {
+	@RequestMapping(value="/admin/bookList/{status}.do", method=RequestMethod.GET) // 도서 리스트
+	public ModelAndView bookList(@PathVariable("status") String status, HttpServletRequest request) throws Exception {
 		// 전체 책 리스트, 메인에 보여지는 것만. 메인에 보여지지 않는 것만. //한 페이지 내에서 다른 세개의 리스트를 출력가능할까..?
 		// 카테고리 관리 기능 추가
-
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		
+		List<BooksModel> booksList = new ArrayList<BooksModel>();
 
-		/*
-		 * String searchNum = request.getParameter("searchNum"); String searchKeyword =
-		 * request.getParameter("searchKeyword");
-		 * 
-		 * Map<String, Object> map = new HashMap<String, Object>();
-		 */
-		List<BooksModel> booksList = adminService.bookListAll();
-
-		/*
-		 * if((searchNum==null || searchNum.trim().isEmpty() || searchNum.equals("0"))
-		 * && (searchKeyword==null || searchKeyword.trim().isEmpty() ||
-		 * searchKeyword.equals("0"))) { booksList = adminService.booksListAll(); } else
-		 * { map.put("searchNum", searchNum); map.put("searchKeyword", searchKeyword);
-		 * 
-		 * booksList = adminService.searchBook(map); }
-		 */
-
+		if(status.equals("all")) {
+			booksList = adminService.bookListAll();
+		}else if(status.equals("act")){
+			booksList = adminService.bookListAct();
+		}else if(status.equals("bck")) {
+			booksList = adminService.bookListBck();
+		}
+		
 		totalCount = booksList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -322,6 +315,7 @@ public class AdminController {
 
 		booksList = booksList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("booksList", booksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -333,8 +327,8 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/bookList.do", method=RequestMethod.POST) // 도서 검색
-	public ModelAndView bookSearch(HttpServletRequest request) {
+	@RequestMapping(value="/admin/bookList/{status}.do", method=RequestMethod.POST) // 도서 검색
+	public ModelAndView bookSearch(@PathVariable("status") String status, HttpServletRequest request) {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -350,7 +344,17 @@ public class AdminController {
 		String searchKeyword = request.getParameter("searchKeyword");
 		String date_min = request.getParameter("date_min");
 		String date_max = request.getParameter("date_max");
-		int active = Integer.parseInt(request.getParameter("active"));
+		int price_min = Integer.parseInt(request.getParameter("price_min"));
+		int price_max = Integer.parseInt(request.getParameter("price_max"));
+		int active = 0;
+		
+		if(status.equals("all")) {
+			active = Integer.parseInt(request.getParameter("active"));
+		}else if(status.equals("act")){
+			active = 1;
+		}else if(status.equals("bck")) {
+			active = 0;
+		}
 		
 		if(searchKeyword.trim().isEmpty()) {
 			searchKeyword = null;
@@ -368,16 +372,18 @@ public class AdminController {
 		map.put("searchKeyword", searchKeyword);
 		map.put("date_min", date_min);
 		map.put("date_max", date_max);
+		map.put("price_min", price_min);
+		map.put("price_max", price_max);
 		map.put("active", active);
 		
-		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0) {
+		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && price_min==0 && price_max==0 && active==0) {
 			booksList = adminService.bookListAll();
 		}else {
 			booksList = adminService.searchBook(map);
 		}
 		
 		totalCount = booksList.size();
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "bookList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -388,6 +394,7 @@ public class AdminController {
 
 		booksList = booksList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("booksList", booksList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -399,7 +406,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping("/admin/bookDetail.do") // 도서 상세보기
+	@RequestMapping(value="/admin/bookDetail.do", method=RequestMethod.GET) // 도서 상세보기
 	public ModelAndView bookDetail(HttpServletRequest request) throws Exception {
 
 		int num = Integer.parseInt(request.getParameter("book_num"));
@@ -476,7 +483,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookWrite.do", method = RequestMethod.POST) // 도서 등록하기
-	public ModelAndView bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,
+	public String bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,
 			BindingResult result) throws Exception {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -492,28 +499,13 @@ public class AdminController {
 
 		adminService.insertBook(booksModel);
 		BooksModel view = adminService.selectNewest();
-
-		mv.addObject("currentPage", 1);
-		mv.addObject("view", view);
-		mv.setViewName("adminBookDetail");
-
-		return mv;
+		int book_num = view.getBook_num();
+		
+		return "redirect:/admin/bookDetail.do?book_num="+book_num;
 
 	}
-
-	@RequestMapping(value = "/admin/bookModify.do", method = RequestMethod.GET)
-	public ModelAndView bookModifyForm(@RequestParam int book_num, @RequestParam int currentPage) throws Exception {
-
-		BooksModel view = adminService.bookDetail(book_num);
-
-		mv.addObject("view", view);
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("adminBookDetail");
-
-		return mv;
-	}
-
-	@RequestMapping(value = "/admin/bookModify.do", method = RequestMethod.POST) // 도서 수정하기
+	
+	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.POST) // 도서 수정하기
 	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,
 			int currentPage) throws Exception {
 
@@ -542,31 +534,23 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/bookDelete.do") // 도서 삭제하기
-	public ModelAndView bookDelete(@RequestParam int book_num, @RequestParam int currentPage) throws Exception {
+	public String bookDelete(@RequestParam int book_num, @RequestParam int currentPage, HttpServletRequest request) throws Exception {
 
 		adminService.deleteBook(book_num);
-
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("redirect:/admin/bookList.do");
-
-		return mv;
+		return "redirect:/admin/bookList.do?currentPage="+currentPage;
 	}
 
 	@RequestMapping("/admin/reviewDelete.do") // 리뷰 삭제하기
-	public ModelAndView reviewDelete(@RequestParam int review_num, @RequestParam int book_num) throws Exception {
+	public String reviewDelete(@RequestParam int review_num, @RequestParam int book_num) throws Exception {
 
 		adminService.deleteReview(review_num);
-
-		mv.addObject("book_num", book_num);
-		mv.setViewName("redirect:/admin/bookDetail.do");
-
-		return mv;
+		return "redirect:/admin/bookDetail.do?book_num="+book_num;
 	}
 
 	/////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value="/admin/orderList.do", method=RequestMethod.GET) // 주문 조회하기
-	public ModelAndView orderList(HttpServletRequest request) throws Exception {
+	@RequestMapping(value="/admin/orderList/{status}.do", method=RequestMethod.GET) // 주문 조회하기
+	public ModelAndView orderList(@PathVariable("status") String status, HttpServletRequest request) throws Exception {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -575,14 +559,21 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		/*String searchNum = request.getParameter("searchNum");
-		String searchKeyword = request.getParameter("searchKeyword");*/
-
+		List<OrderModel> orderList = new ArrayList<OrderModel>();
 		
-		List<OrderModel> orderList = adminService.selectOrderAll();
+		if(status.equals("all")) {
+			orderList = adminService.orderListAll();
+		}else if(status.equals("trade")){
+			orderList = adminService.orderListTrade();
+		}else if(status.equals("trans")) {
+			orderList = adminService.orderListTrans();
+		}else if(status.equals("bck")) {
+			orderList = adminService.orderListBck();
+		}
+		
 		totalCount = orderList.size();
 
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -593,6 +584,7 @@ public class AdminController {
 
 		orderList = orderList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -604,8 +596,8 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/orderList.do", method=RequestMethod.POST) // 주문 검색
-	public ModelAndView orderSearch(HttpServletRequest request) {
+	@RequestMapping(value="/admin/orderList/{status}.do", method=RequestMethod.POST) // 주문 검색
+	public ModelAndView orderSearch(@PathVariable("status") String status, HttpServletRequest request) {
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -621,9 +613,15 @@ public class AdminController {
 		String searchKeyword = request.getParameter("searchKeyword");
 		String date_min = request.getParameter("date_min");
 		String date_max = request.getParameter("date_max");
-		int active = Integer.parseInt(request.getParameter("active"));
+		int active = 0;
 		int pay_s = Integer.parseInt(request.getParameter("payment_status"));
 		int trans_s = Integer.parseInt(request.getParameter("order_trans_status"));
+		
+		if(status.equals("all")) {
+			active = Integer.parseInt(request.getParameter("active"));
+		}else if(status.equals("bck")) {
+			active = 1;
+		}
 		
 		if(searchKeyword.trim().isEmpty()) {
 			searchKeyword = null;
@@ -646,13 +644,13 @@ public class AdminController {
 		map.put("trans_s", trans_s);
 		
 		if(searchNum==0 && searchKeyword==null && date_min==null && date_max==null && active==0 && pay_s==0 && trans_s==0) {
-			orderList = adminService.selectOrderAll();
+			orderList = adminService.orderListAll();
 		}else {
 			orderList = adminService.searchOrder(map);
 		}
 		
 		totalCount = orderList.size();
-		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, status);
 		pagingHtml = paging.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -663,6 +661,7 @@ public class AdminController {
 
 		orderList = orderList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);

@@ -77,9 +77,10 @@ public interface AdminDao {
 	
 	//주문 취소된 주문을 별개로 리스트 출력. //결제 중인 것과 배송 중인 것 구분. //결제 여부는 카드와 무통장 여부에 달라짐.
 	//주문 시 기본값 활성화로 설정 //일단 여기는 리스트 네개 필요한가? 
-	public List<OrderModel> selectOrderAll();
-	public List<OrderModel> selectOrderAct();
-	public List<OrderModel> selectOrderBck();
+	public List<OrderModel> orderListAll();
+	public List<OrderModel> orderListTrade();
+	public List<OrderModel> orderListTrans();
+	public List<OrderModel> orderListBck();
 	
 	//검색 폼으로 데이터 조회. 주문 기간별 조회. 상태별 조회. //처리가 끝났다면 배송 기간 별로도 조회.. 
 	//배송 완료 데이터를 추가할까? 주문은 사용 여부 기본값을 넣지 말고 취소됨과 처리됨으로 구분할까?
