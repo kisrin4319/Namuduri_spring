@@ -34,7 +34,11 @@ public class FaqService implements FaqDao{
 	public List<FaqModel> CfaqList(){
 		return sqlSessionTemplate.selectList("faq.CfaqList"); //기타 문의
 	}
-	
+
+	@Override
+	public List<FaqModel> DfaqList(){
+		return sqlSessionTemplate.selectList("faq.DfaqList"); //멤버 문의
+	}
 	
 	// faq 내용 보기
 	@Override

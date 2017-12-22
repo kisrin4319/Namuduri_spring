@@ -39,6 +39,13 @@
 	  		where faq_category = '3'
 	  		order by faq_regdate DESC
 	</select>
+
+	<!-- 멤버 문의 -->
+	<select id="DfaqList" resultType="FaqModel"> 
+	  		<include refid="select-FaqAll" /> 
+	  		where faq_category = '4'
+	  		order by faq_regdate DESC
+	</select>
 	
 	<!-- faq 내용 -->
 	<select id="selectFaqOne" resultType="FaqModel">

@@ -30,7 +30,6 @@ public class BoardController {
 
 	private int searchNum;
 	private String isSearch;
-
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 10;
@@ -86,7 +85,6 @@ public class BoardController {
 			
 			totalCount = boardList.size();
 			int lastCount = totalCount;
-
 			if (paging.getEndCount() < totalCount) {
 				lastCount = paging.getEndCount() + 1;
 			}
@@ -161,7 +159,7 @@ public class BoardController {
 		boardModel.setBoard_content(content);
 		boardModel.setRe_step(1);
 		mv.addObject("boardModel", boardModel);
-		mv.setViewName("/adminboard/BoardReply");
+		mv.setViewName("boardReply");
 		return mv;
 	}
 
