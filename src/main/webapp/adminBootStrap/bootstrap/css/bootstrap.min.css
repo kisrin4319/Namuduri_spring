@@ -5,8 +5,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 html {
-	font-family: sans-serif;
+	font-family: 'NanumGothic', 'sans-serif';
 	line-height: 1.15;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
@@ -108,35 +110,51 @@ audio, video {
 audio
 
 
+
+
 :not
 
+
  
+
 
 (
 [
 controls
 ]
 
+
  
+
 
 ){
 display
 
 
+
+
 :
+
 
  
 
+
 none
+
+
 
 
 ;
 height
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -147,24 +165,36 @@ img {
 svg
 
 
+
+
 :not
 
+
  
+
 
 (
 :root
 
+
  
+
 
 ){
 overflow
 
 
+
+
 :
+
 
  
 
+
 hidden
+
+
 
 
 
@@ -359,9 +389,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 	font-size: 150%;
-    padding: 0.5rem 0;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,.15);
+	padding: 0.5rem 0;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid rgba(0, 0, 0, .15);
 }
 
 p {
@@ -414,49 +444,71 @@ a:focus, a:hover {
 a
 
 
+
+
 :not
 
+
  
+
 
 (
 [
 href
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 tabindex
 ]
 
+
  
+
 
 ){
 color
 
 
+
+
 :
+
 
  
 
+
 inherit
+
+
 
 
 ;
 text-decoration
 
 
+
+
 :
+
 
  
 
+
 none
+
+
 
 
 
@@ -576,7 +628,7 @@ output {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	padding-botton:20px;
+	padding-botton: 20px;
 	font-family: inherit;
 	font-weight: 500;
 	line-height: 1.1;
@@ -670,25 +722,37 @@ hr {
 .list-inline-item
 
 
+
+
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 margin-right
 
 
+
+
 :
+
 
  
 
+
 5
 px
+
+
 
 
 
@@ -732,19 +796,60 @@ px
 	content: "\00A0 \2014"
 }
 
-.img-fluid {
-	max-width: 100%;
-	height: auto
+.thumbnail-wrappper {
+	
+}
+
+.thumbnail {
+	/* position: relative; 
+	padding-top: 100%;
+	padding-bottom: 50%;
+	overflow: hidden;  */
+	
 }
 
 .img-thumbnail {
+	position: relative;
+	margin: 0 auto;
 	padding: .25rem;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: .25rem;
+	background-color: #fff; border : 1px solid #ddd; border-radius : .25rem;
 	-webkit-transition: all .2s ease-in-out;
 	-o-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
+	max-width: 200px;
+	width: 100%;
+	height: auto;
+	border: 1px solid #ddd;
+	border-radius: .25rem;
+}
+
+.thumbnail-name {
+	position: relative;
+    padding-top: 5%;
+    font-weight: bold;
+    color: black;
+}
+
+.icon_rank {
+	position: absolute;
+	/* left: 0;
+	top: -5px; */
+	width: 36px;
+	height: 40px;
+	padding-top: 10px;
+	padding-right: 2px;
+	background:
+		url(http://image.kyobobook.co.kr/dwas/images/division/bg_rank.png) 0 0
+		no-repeat;
+	text-align: center;
+	font-family: 'Verdana';
+	font-size: 15px;
+	color: #ffffff;
+	font-weight: bold;
+	z-index: 6;
+}
+
+.img-fluid {
 	max-width: 100%;
 	height: auto
 }
@@ -2362,7 +2467,6 @@ table.list-items td.num {
 	
 }
 
-
 .form-control {
 	display: block;
 	width: 100%;
@@ -2431,41 +2535,59 @@ table.list-items td.num {
 select
 
 
+
+
 .form-control
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 multiple
 ]
 
+
  
+
 
 ){
 height
 
 
+
+
 :
+
 
  
 
+
 calc
+
+
 
 
 (2
@@ -2473,6 +2595,8 @@ calc
 +
 2
 px
+
+
 
 
 )
@@ -2543,24 +2667,34 @@ select.form-control:focus::-ms-value {
 select
 
 
+
+
 .btn
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
@@ -2568,39 +2702,53 @@ multiple
 ]
 
 
+
 	
+
 
 ),
 .input-group-sm
 >
 select
+
+
 
 
 .form-control
 
 
+
+
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 multiple
 ]
 
+
  
+
 
 ),
 .input-group-sm
@@ -2608,24 +2756,34 @@ multiple
 select
 
 
+
+
 .input-group-addon
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
@@ -2633,48 +2791,68 @@ multiple
 ]
 
 
+
 	
+
 
 ),
 select
 
 
+
+
 .form-control-sm
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 multiple
 ]
 
+
  
+
 
 ){
 height
 
 
+
+
 :
+
 
  
 
+
 1
 .8125rem
+
+
 
 
 
@@ -2694,24 +2872,34 @@ height
 select
 
 
+
+
 .btn
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
@@ -2719,39 +2907,53 @@ multiple
 ]
 
 
+
 	
+
 
 ),
 .input-group-lg
 >
 select
+
+
 
 
 .form-control
 
 
+
+
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 multiple
 ]
 
+
  
+
 
 ),
 .input-group-lg
@@ -2759,24 +2961,34 @@ multiple
 select
 
 
+
+
 .input-group-addon
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
@@ -2784,48 +2996,68 @@ multiple
 ]
 
 
+
 	
+
 
 ),
 select
 
 
+
+
 .form-control-lg
+
+
 
 
 :not
 
+
  
+
 
 (
 [
 size
 ]
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 [
 multiple
 ]
 
+
  
+
 
 ){
 height
 
 
+
+
 :
+
 
  
 
+
 3
 .166667rem
+
+
 
 
 
@@ -3746,43 +3978,61 @@ tbody.collapse.show {
 .btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 .dropdown-toggle
 
 
+
 	
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3795,43 +4045,63 @@ border-radius
 .btn
 
 
+
+
 :first-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 .dropdown-toggle
 
+
  
+
 
 ){
 border-bottom-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-right-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3840,17 +4110,25 @@ border-top-right-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ),
 .btn-group
@@ -3858,31 +4136,45 @@ border-top-right-radius
 .dropdown-toggle
 
 
+
+
 :not
+
 
 
 	
 
+
 (
 :first-child
 
+
  
+
 
 ){
 border-bottom-left-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3966,32 +4258,46 @@ border-top-left-radius
 .btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -4000,33 +4306,49 @@ border-radius
 .btn
 
 
+
+
 :first-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-bottom-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-bottom-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -4035,33 +4357,49 @@ border-bottom-left-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ){
 border-top-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -4134,83 +4472,119 @@ border-top-left-radius
 
 .input-group
 
+
  
+
 
 .form-control
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ),
 .input-group-addon
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ),
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -4265,67 +4639,97 @@ border-radius
 .input-group-addon
 
 
+
+
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-right
 
 
+
+
 :
 
+
  
+
 
 0
 }
 .input-group
 
+
  
+
 
 .form-control
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ),
 .input-group-addon
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
 
+
 	
+
 
 ),
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )>
 .btn
@@ -4333,15 +4737,21 @@ border-right
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
 
+
 	
+
 
 )>
 .btn-group
@@ -4351,14 +4761,20 @@ border-right
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )>
 .dropdown-toggle
@@ -4366,27 +4782,39 @@ border-right
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )>
 .btn-group
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )>
 .btn
@@ -4394,43 +4822,63 @@ border-right
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )>
 .btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ){
 border-bottom-left-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -4439,22 +4887,32 @@ border-top-left-radius
 .input-group-addon
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ){
 border-left
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -5540,65 +5998,93 @@ border-left
 	}
 	.card-deck
 	
+	
 	 
+	
 	
 	.card
 	
 	
+	
+	
 	:not
 	
+	
 	 
+	
 	
 	(
 	:first-child
 	
+	
 	 
+	
 	
 	){
 	margin-left
 	
 	
+	
+	
 	:
 	
+	
 	 
+	
 	
 	15
 	px
 	
 	
 	
+	
+
 
 }
 
 .card-deck
 
+
  
+
 
 .card
 
 
+
+
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 margin-right
 
 
+
+
 :
 
+
  
+
 
 15
 px
 
 
+
 	
+
 
 }
 }
@@ -5644,37 +6130,53 @@ px
 	}
 	.card-group
 	
+	
 	 
+	
 	
 	.card
 	
 	
+	
+	
 	:not
 	
+	
 	 
+	
 	
 	(
 	:first-child
 	
+	
 	 
+	
 	
 	)
 	:not
 	
+	
 	 
+	
 	
 	(
 	:last-child
 	
+	
 	 
+	
 	
 	){
 	border-radius
 	
 	
+	
+	
 	:
 	
+	
 	 
+	
 	
 	0
 }
@@ -6516,22 +7018,32 @@ button.close {
 >
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ){
 margin-left
 
 
+
+
 :
+
 
  
 
+
 .25rem
+
+
 
 
 
@@ -6541,22 +7053,32 @@ margin-left
 >
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 margin-right
 
 
+
+
 :
+
 
  
 
+
 .25rem
+
+
 
 
 
@@ -6591,7 +7113,7 @@ margin-right
 	z-index: 1070;
 	display: block;
 	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-		Roboto, "Helvetica Neue", Arial, sans-serif;
+		Roboto, "Helvetica Neue", Arial, sans-serif, 'NanumGothic';
 	font-style: normal;
 	font-weight: 400;
 	letter-spacing: normal;

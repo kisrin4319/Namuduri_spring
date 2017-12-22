@@ -58,10 +58,13 @@ function update(id){
 								<td style="text-align:left;">
 								<input type="text" class="form-control" name="date_min" id="datepicker" placeholder="부터"> ~ 
 								<input type="text" class="form-control" name="date_max" id="datepicker2" placeholder="까지"></td>
-								<td><label style="float:left;">회원 구분 : </label>
-								<input type="radio" name="active" checked="checked" value="0">전체 &nbsp;
-								<input type="radio" name="active" value="1">활성화 회원 &nbsp;
-								<input type="radio" name="active" value="2">차단된 회원</td>
+								<c:if test="${status eq 'all'}">
+									<td><label style="float:left;">회원 구분 : </label>
+									<input type="radio" name="active" checked="checked" value="0">전체 &nbsp;
+									<input type="radio" name="active" value="1">활성화 회원 &nbsp;
+									<input type="radio" name="active" value="2">차단된 회원</td>
+								</c:if>
+								
 							</tr>
 							<tr>
 								<th>항목별 검색 : </th>
@@ -88,33 +91,22 @@ function update(id){
 									<th>#</th>
 									<th>ID</th>
 									<th>NAME</th>
-									<th>주민번호</th>
-									<th>전화번호</th>
-									<th>EMAIL</th>
+									<c:if test="${status ne 'rank'}">
+										<th>주민번호</th>
+										<th>전화번호</th>
+										<th>EMAIL</th>
+									</c:if>
+									<c:if test="${status eq 'rank'}">
+										<th>주문 횟수</th>
+										<th>주문 금액</th>
+										<th>보유 포인트</th>
+										<th>상태</th>
+									</c:if>
 									<th>JOIN</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<!-- <tr class="list-search">
-									<td></td>
-									<td><input class="form-control" type="text"
-										name="member_id" value="" /></td>
-									<td><input class="form-control" type="text"
-										name="member_name" value="" /></td>
-									<td><input class="form-control" type="text"
-										name="member_jumin1" value="" /></td>
-									<td><input class="form-control" type="text"
-										name="member_phone" value="" /></td>
-									<td><input class="form-control" type="text"
-										name="member_email" value="" /></td>
-									<td class="actions" colspan=2 style="vertical-align: middle;">
-										<a class="fa fa-refresh" href="#" title="Reset"></a>
-										<button type="submit" style="font-size: 20px;"
-											class="fa fa-search" title="Search"></button>
-									</td>
-								</tr> -->
-
 								<c:choose>
 									<c:when test="${listCount==0}">
 										<tr align=center>
@@ -128,14 +120,35 @@ function update(id){
 												<c:param name="member_id" value="${list.member_id}" />
 												<c:param name="currentPage" value="${currentPage}" />
 											</c:url>
-
 											<tr>
 												<td>${list.member_num}</td>
 												<td><a href="${viewURL}">${list.member_id}</a></td>
 												<td>${list.member_name}</td>
-												<td>${list.member_jumin1}-${list.member_jumin2}</td>
-												<td>${list.member_mobile}</td>
-												<td>${list.member_email}</td>
+												<c:if test="${status ne 'rank'}">
+													<td>${list.member_jumin1}-${list.member_jumin2}</td>
+													<td>${list.member_mobile}</td>
+													<td>${list.member_email}</td>
+												</c:if>
+												<c:if test="${status eq 'rank'}">
+													<td>${list.member_order_count}</td>
+													<td>${list.member_moneysum}</td>
+													<td>${list.member_point}</td>
+													<td>
+														<c:choose>
+															<c:when test="${list.member_use_yn==1}">
+																차단된 회원
+															</c:when>
+															<c:otherwise>
+																<c:if test="${list.member_moneysum>=100000}">
+																	우수회원
+																</c:if>
+																<c:if test="${list.member_moneysum<100000}">
+																	일반 회원
+																</c:if>
+															</c:otherwise>
+														</c:choose>
+													</td>
+												</c:if>
 												<td>${list.member_join_date}</td>
 												<td><a class="mdi mdi-grease-pencil" title="Modify"
 													href="javascript:update('${list.member_id}')"></a> <a

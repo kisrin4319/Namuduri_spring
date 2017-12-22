@@ -100,6 +100,7 @@ function deleteCheck2(path) {
 					<div class="card-block">
 						<form class="form-horizontal form-material" method="post" 
 							id="memberModel" onsubmit="return updateCheck()">
+							<div class="col-md-2"><h4><b>회원 기본 정보 ▽</b></h4></div>
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-6">
@@ -203,7 +204,9 @@ function deleteCheck2(path) {
 								</div>
 							</div>
 							<div class="form-group"></div>
-							<label class="col-md-12 h4"><b>환불 정보</b></label>
+							<div class="form-group"></div>
+							<div class="col-md-2"><h4><b>환불 관련 정보 ▽</b></h4></div>
+							<div class="form-group"></div>
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-6">
@@ -220,7 +223,6 @@ function deleteCheck2(path) {
 												class="form-control form-control-line">
 										</div>
 									</div>
-
 								</div>
 								<div class="form-group"></div>
 
@@ -230,31 +232,26 @@ function deleteCheck2(path) {
 										class="form-control form-control-line">
 								</div>
 							</div>
-							<div class="form-group"></div>
-							<div class="form-group">
-								<div class="row col-md-12">
-										<label class="col-md-3">차단 여부</label>
-										<div class="col-md-8 p-2">
-											 <input type="radio" name="member_use_yn"
-												id="member_use_yn" value="0"
-												${view.member_use_yn == '0' ? 'checked="checked"' : '' }>활성화
-											&nbsp;
-											<input type="radio" name="member_use_yn"
-												id="member_email_get" value="1"
-												${view.member_use_yn == '1' ? 'checked="checked"' : '' }>차단됨
-									</div>
-								</div>
-							</div>
-							
 							<div class="form-group">
 								<input type="hidden" name="currentPage" value="${currentPage}">
 								<%-- <input type="hidden" name="member_id" value="${view.member_id}"> --%>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-12">
-									<button class="btn btn-warning">Update Profile</button>
-									&nbsp;
-									<a class="btn btn-danger" onclick="deleteCheck()">Delete Profile</a>
+								<div class="row col-md-12">
+									<label class="col-md-2">차단 여부</label>
+									<div class="col-md-5 p-2">
+										<input type="radio" name="member_use_yn"
+											id="member_use_yn" value="0"
+											${view.member_use_yn == '0' ? 'checked="checked"' : '' }>활성화
+										&nbsp;
+										<input type="radio" name="member_use_yn"
+											id="member_email_get" value="1"
+											${view.member_use_yn == '1' ? 'checked="checked"' : '' }>차단됨
+									</div>
+									<div class="col-sm-5">
+										<button class="btn btn-warning">Update Profile</button>
+										&nbsp;<a class="btn btn-danger" onclick="deleteCheck()">Delete Profile</a>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -269,61 +266,41 @@ function deleteCheck2(path) {
 				</h4>
 				<div class="card">
 					<div class="card-block">
+						<div class="row col-md-12">
+							<div class="row col-md-4">
+								<div class="row col-md-4"><b>보유 포인트</b></div>
+								<div class="col-md-8">${view.member_point}</div>
+							</div>
+							<div class="row col-md-4">
+								<div class="row col-md-4"><b>주문 횟수</b></div>
+								<div class="col-md-8">${view.member_order_count}</div>
+							</div>
+							<div class="row col-md-4">
+								<div class="row col-md-4"><b>총 구매 금액</b></div>
+								<div class="col-md-8">${view.member_moneysum}</div>
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="card">
+					<div class="card-block">
 						<div class="table-responsive">
-							<nav class="main-navbar">
-								<form class="form-inline" method="POST"
-									action="/admin/default/jqadm/search/product?lang=en">
-									<input class="csrf-token" type="hidden" name="_token"
-										value="l5mVyaZRPdp53vmVVmSSuP02irvG7LuQi76Q86Xe" /> <i
-										class="fa more"></i>
-
-									<div class="input-group">
-										<select class="custom-select filter-key" name="filter[key][0]">
-											<option value="product.label" data-type="string">
-						Label					</option>
-										</select> <select class="custom-select filter-operator"
-											name="filter[op][0]">
-											<option value="=~">
-					=~&nbsp;&nbsp;starts with				</option>
-										</select> <input type="text" class="form-control filter-value"
-											name="filter[val][0]" value="">
-										<button class="input-group-addon btn btn-primary fa fa-search"></button>
-									</div>
-
-								</form>
-							</nav>
+							<form class="form-inline" method="POST">
+									
+							</form>
 							<div class="col-lg-12">
-								<!-- 검색창 영역 -->
-								<!-- <div class="searcharea">
-				<form>
-					<div class="search_input">
-						<select name="searchNum" class="searchNum">
-							<option value="0">ID</option>
-							<option value="1">이름</option>
-							<option value="2">EMAIL</option>
-							<option value="3">전화번호</option>
-							<option value="4">휴대폰번호</option>
-							<option value="5">주민번호 앞자리</option>
-						</select> <input class="searchKeyword" type="text" name="searchKeyword">
-						<input class="searchbutton" name="submit" type="submit" value="검색">
-					</div>
-				</form>
-			</div> -->
-
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs profile-tab" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#home" role="tab">전체</a></li>
+										data-toggle="tab" href="#home" role="tab">주문 내역</a></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#profile" role="tab">주문 취소</a></li>
+										href="#profile" role="tab">취소된 주문</a></li>
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<!-- first tab -->
 									<div class="tab-pane active" id="home" role="tabpanel">
 										<div class="card-block">
-
-											<form class="list list-product" method="POST">
 												<table class="list-items table table-hover table-striped">
 													<thead class="list-header">
 														<tr>
@@ -338,37 +315,6 @@ function deleteCheck2(path) {
 														</tr>
 													</thead>
 													<tbody>
-														<tr class="list-search">
-															<td><input class="form-control" type="text"
-																name="member_id" value="" /></td>
-															<td><input class="form-control" type="text"
-																name="member_name" value="" /></td>
-															<td><input class="form-control" type="text"
-																name="member_jumin" value="" /></td>
-															<td><input class="form-control" type="text"
-																name="member_phone" value="" /></td>
-															<td><input class="form-control" type="text"
-																name="member_emial" value="" /></td>
-															<td><select class="form-control"
-																name="payment_status">
-																	<option value="">All</option>
-																	<option value="0">PS01</option>
-																	<option value="1">PS02</option>
-															</select></td>
-															<td><select class="form-control"
-																name="payment_status">
-																	<option value="">All</option>
-																	<option value="0">ST01</option>
-																	<option value="1">ST02</option>
-																	<option value="2">ST03</option>
-															</select></td>
-															<td colspan=2 class="actions" style="vertical-align: middle;">
-																<!-- <a class="fa fa-refresh" href="#" title="Reset"></a> -->
-																<button type="submit" style="font-size: 20px;"
-																	class="fa fa-search" title="Search"></button>
-															</td>
-														</tr>
-
 														<c:choose>
 															<c:when test="${listCount==0}">
 																<tr align=center>
@@ -404,16 +350,60 @@ function deleteCheck2(path) {
 														</c:choose>
 													</tbody>
 												</table>
-											</form>
 										</div>
 									</div>
 									<!--second tab-->
 									<div class="tab-pane" id="profile" role="tabpanel">
-										<div class="card-block"></div>
-									</div>
-									<!-- third tab -->
-									<div class="tab-pane" id="settings" role="tabpanel">
-										<div class="card-block"></div>
+										<div class="card-block">
+											<table class="list-items table table-hover table-striped">
+													<thead class="list-header">
+														<tr>
+															<th>주문번호</th>
+															<th>결제인</th>
+															<th>배송번호</th>
+															<th>수취인</th>
+															<th>수취인 번호</th>
+															<th>결제상태</th>
+															<th>주문상태</th>
+															<th>주문날짜</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:choose>
+															<c:when test="${listCountBck==0}">
+																<tr align=center>
+																	<td colspan=8>주문 내역이 없습니다.</td>
+																</tr>
+															</c:when>
+															<c:otherwise>
+																<c:forEach var="list" items="${orderListBck}" varStatus="stat">
+																	<!-- 주문번호와 연결되는 URL -->
+																	<c:url var="viewOrderURL" value="/admin/orderDetail.do">
+																		<c:param name="order_trade_num"
+																			value="${list.order_trade_num}" />
+																		<c:param name="currentPage" value="currentPage" />
+																	</c:url>
+																	<tr>
+																		<td><a href="${viewOrderURL}">${list.order_trade_num}</a></td>
+																		<td>${list.order_trade_payer}</td>
+																		<td>${list.order_trans_num}</td>
+																		<td>${list.order_receive_name}</td>
+																		<td>${list.order_receive_mobile}</td>
+																		<td>${list.payment_status}</td>
+																		<td><c:if test="${list.order_use_yn==0}">취소됨</c:if></td>
+																		<td>${list.order_regdate}</td>
+																		<td><a class="mdi mdi-grease-pencil"
+																			title="Modify"
+																			href="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${list.member_id}&currentPage=${currentPage}'"></a>
+																			<a class="mdi mdi-delete" title="Delete"
+																			href="deleteCheck('${list.member_id}')"></a></td>
+																	</tr>
+																</c:forEach>
+															</c:otherwise>
+														</c:choose>
+													</tbody>
+												</table>
+										</div>
 									</div>
 								</div>
 							</div>

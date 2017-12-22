@@ -24,15 +24,20 @@ public interface AdminDao {
 	public List<MemberModel> memberListAct();
 	public List<MemberModel> memberListBck();
 	
+	//회원 등급 조회
+	public List<MemberModel> memberListRank();
+	
 	//검색 기능 구현.. 일단 검색 폼의 데이터는 모델로 넘어올텐데.. 기간 검색과 사용 여부에 대한 조건도 추가하기. 
 	//이메일 수신 여부를 통해서 일괄 이메일 작성하는 기능이... 필요할까? //이건 진짜 나중에
 	//일단 기본 검색폼은 넣어둘까? 대표적 자료가 아닌 다른 자료로 검색을 할 경우..?
 	//탭 내부 검색과 외부 검색의 분리 필요성에 대해
 	public List<MemberModel> searchMember(Map<String, Object> map);
-	
+	public List<MemberModel> searchMemberRank(Map<String, Object> map);
 	//회원 아이디로 회원 정보 조회
 	public MemberModel memberView(String member_id);
-	
+	public MemberModel memberViewOrder(String member_id);
+	public List<OrderModel> memberOrderList(String member_id);
+	public List<OrderModel> memberOrderListBck(String member_id);
 	//회원 수정하기 //여기서 차단 여부도 변경 가능
 	public void memberModify(MemberModel memberModel);
 	
@@ -72,9 +77,10 @@ public interface AdminDao {
 	
 	//주문 취소된 주문을 별개로 리스트 출력. //결제 중인 것과 배송 중인 것 구분. //결제 여부는 카드와 무통장 여부에 달라짐.
 	//주문 시 기본값 활성화로 설정 //일단 여기는 리스트 네개 필요한가? 
-	public List<OrderModel> selectOrderAll();
-	public List<OrderModel> selectOrderAct();
-	public List<OrderModel> selectOrderBck();
+	public List<OrderModel> orderListAll();
+	public List<OrderModel> orderListTrade();
+	public List<OrderModel> orderListTrans();
+	public List<OrderModel> orderListBck();
 	
 	//검색 폼으로 데이터 조회. 주문 기간별 조회. 상태별 조회. //처리가 끝났다면 배송 기간 별로도 조회.. 
 	//배송 완료 데이터를 추가할까? 주문은 사용 여부 기본값을 넣지 말고 취소됨과 처리됨으로 구분할까?

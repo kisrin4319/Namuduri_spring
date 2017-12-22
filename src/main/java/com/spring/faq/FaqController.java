@@ -51,10 +51,12 @@ public class FaqController {
 		List<FaqModel> AfaqList = new ArrayList<FaqModel>();
 		List<FaqModel> BfaqList = new ArrayList<FaqModel>();
 		List<FaqModel> CfaqList = new ArrayList<FaqModel>();
+		List<FaqModel> DfaqList = new ArrayList<FaqModel>();
 
 		AfaqList = faqService.AfaqList();
 		BfaqList = faqService.BfaqList();
 		CfaqList = faqService.CfaqList();
+		DfaqList = faqService.DfaqList();
 		
 		faqList.addAll(faqService.faqList());
 				
@@ -98,6 +100,7 @@ public class FaqController {
 		mv.addObject("AfaqList", AfaqList);
 		mv.addObject("BfaqList", BfaqList);
 		mv.addObject("CfaqList", CfaqList);
+		mv.addObject("DfaqList", DfaqList);
 		mv.addObject("listCount", faqList.size());
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);

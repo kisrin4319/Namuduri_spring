@@ -18,6 +18,13 @@
 		SELECT * FROM MEMBER WHERE MEMBER_USE_YN = 1 ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
 	
+	<select id="memberListRank" resultType="MemberModel">
+		select * from (
+			select member_id, count(*) member_order_count, sum(order_receive_moneysum) member_moneysum 
+			from order_book where order_use_yn = 1 group by member_id) a
+		inner join member b on a.member_id = b.member_id order by a.member_moneysum desc
+	</select>
+	
 	<!-- 회원 검색 목록 -->
 	<select id="searchMember" parameterType="map" resultType="MemberModel">
 		SELECT * FROM MEMBER
@@ -44,21 +51,57 @@
 		</where>
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
-	<!-- POST 전송 검색 폼 데이터로 검색 --><!-- 기간 조건 추가.. -->
-	<!-- <select id="searchMember" resultType="MemberModel">
-		SELECT * FROM MEMBER WHERE MEMBER_ID like '%'||#{member_id}||'%'
-								AND MEMBER_NAME like '%'||#{member_name}||'%'
-								AND MEMBER_JUMIN1 like '%'||#{member_jumin1}||'%'
-								AND MEMBER_JUMIN2 like '%'||#{member_jumin1}||'%'
-								AND MEMBER_PHONE like '%'||#{member_phone}||'%'
-								AND MEMBER_MOBILE like '%'||#{member_phone}||'%'
-								AND MEMBER_EMIAL like '%'||#{member_email}||'%'
+	
+	<select id="searchMemberRank" parameterType="map" resultType="MemberModel">
+		SELECT * FROM (
+			select a.member_order_count, a.member_moneysum, b.* from (
+				select member_id, count(*) member_order_count, sum(order_receive_moneysum) member_moneysum 
+				from order_book where order_use_yn = 1 group by member_id) a
+			inner join member b on a.member_id = b.member_id order by a.member_moneysum desc)
+		<where>
+			<if test="searchNum!=0">
+				<if test="searchNum == 1">AND MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 2">AND MEMBER_NAME like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 3">AND MEMBER_EMAIL like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 4">AND MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
+					AND MEMBER_MOBILE like '%'||#{searchKeyword}||'%'</if>
+				<if test="searchNum == 5">AND MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
+					AND MEMBER_JUMIN2 like '%'||#{searchKeyword}||'%'</if>
+			</if>
+			<if test="active!=0">
+					<if test="active==1">
+						AND MEMBER_USE_YN = 0
+					</if>
+					<if test="active==2">
+						AND MEMBER_USE_YN = 1
+					</if>
+			</if>
+			<if test="date_min!=null"><![CDATA[AND MEMBER_JOIN_DATE >= #{date_min}]]></if>
+			<if test="date_max!=null"><![CDATA[AND MEMBER_JOIN_DATE <= #{date_max}]]></if>
+		</where>
 		ORDER BY MEMBER_JOIN_DATE DESC
-	</select> -->
+	</select>
+	
 	
 	<!-- 회원 정보 조회 -->
 	<select id="memberView" resultType="MemberModel">
 		SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 회원 등급 상태 조회 -->
+	<select id="memberViewOrder" resultType="MemberModel">
+		SELECT * FROM (select a.member_order_count, a.member_moneysum, b.* from (
+				select member_id, count(*) member_order_count, sum(order_receive_moneysum) member_moneysum 
+				from order_book where order_use_yn = 1 group by member_id) a
+			inner join member b on a.member_id = b.member_id order by a.member_moneysum desc) WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<select id="memberOrderList" parameterType="String" resultType="OrderModel">
+		select * from ORDER_BOOK where member_id = #{member_id} AND ORDER_USE_YN = 1
+	</select>
+	
+	<select id="memberOrderListBck" parameterType="String" resultType="OrderModel">
+		select * from ORDER_BOOK where member_id = #{member_id} AND ORDER_USE_YN = 0
 	</select>
 	
 	<!-- 회원 정보 수정 -->
@@ -90,11 +133,11 @@
 	</select>
 	<!-- 사용 도서 조회 -->
 	<select id="bookListAct" resultType="BooksModel">
-		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 1 ORDER BY BOOK_DATE DESC
+		SELECT * FROM BOOK WHERE BOOK_USE_YN = 1 ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 비사용 도서 조회 -->
 	<select id="bookListBck" resultType="BooksModel">
-		SELECT * FROM MEMBER WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
+		SELECT * FROM BOOK WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
 	</select>
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="searchBook" parameterType="map" resultType="BooksModel">
@@ -116,19 +159,11 @@
 			</if>
 			<if test="date_min!=null"><![CDATA[AND BOOK_DATE >= #{date_min}]]></if>
 			<if test="date_max!=null"><![CDATA[AND BOOK_DATE <= #{date_max}]]></if>
+			<if test="price_min!=null"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
+			<if test="price_max!=null"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
 		</where>
 		ORDER BY BOOK_DATE DESC
 	</select>
-	
-	<!-- <select id="searchBook" resultType="BooksModel">
-		SELECT * FROM BOOK WHERE BOOK_NAME like '%'||#{book_name}||'%'
-								AND BOOK_CATEGORY like '%'||#{book_category}||'%'
-								AND BOOK_AUTH like '%'||#{book_auth}||'%'
-								AND BOOK_COMPANY like '%'||#{book_company}||'%'
-		ORDER BY BOOK_DATE DESC -->
-		<!-- WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max} -->
-		<!-- WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0 -->
-	<!-- </select> -->
 	
 	<!-- 가장 최근의 도서 정보 조회 -->
 	<select id="selectNewest" resultType="BooksModel">
@@ -149,10 +184,17 @@
  	<select id="orderListAll" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE
 	</select>
-	<!-- 처리완료(배송까지 완료) 주문 -->
-	<select id="orderListAct" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 ORDER BY ORDER_REGDATE
+	
+	<!-- 결제 미완료 -->
+	<select id="orderListTrade" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
 	</select>
+	
+	<!-- 배송 미완료 -->
+	<select id="orderListTrans" resultType="OrderModel">
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE
+	</select>
+	
 	<!-- 취소된 주문 -->
 	<select id="orderListBck" resultType="OrderModel">
 		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE
@@ -186,20 +228,6 @@
 		</where>
 		ORDER BY ORDER_REGDATE DESC
 	</select>
-	<!-- <select id="searchOrder" resultType="OrderModel">
-		SELECT * FROM BOOK WHERE ORDER_TRADE_NUM like '%'||#{order_trade_num}||'%'
-								AND MEMBER_ID like '%'||#{member_id}||'%'
-								AND ORDER_TRADE_PAYER like '%'||#{order_trade_payer}||'%'
-								AND ORDER_TRANS_NUM like '%'||#{order_trans_num}||'%'
-								AND ORDER_RECEIVE_NAME like '%'||#{order_receive_name}||'%'
-								AND ORDER_RECEIVE_PHONE like '%'||#{order_receive_phone}||'%'
-								AND ORDER_RECEIVE_MOBILE like '%'||#{order_receive_phone}||'%'
-								AND PAYMENT_STATUS = #{payment_status}
-								AND ORDER_TRANS_STATUS = #{order_trans_status}
-		ORDER BY BOOK_DATE DESC
-		WHERE BOOK_DATE >= #{date_min} AND BOOK_DATE <= #{date_max}
-		WHERE BOOK_USE_YN = 1 OR BOOK_USE_YN = 0
-	</select> -->
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->
@@ -212,7 +240,7 @@
 	<select id="chartNewM" resultType="ChartModel"> <!-- 최근 일주일 동안 가입한 회원 수 통계 -->
 		<![CDATA[
 		select to_char(member_join_date,'mm.dd') key, count(*) value from member 
-		where trunc(member_join_date)<=trunc(sysdate) and trunc(member_join_date)>trunc(sysdate)-7
+		where member_join_date<trunc(sysdate)+1 and member_join_date>=trunc(sysdate)-6
 		group by to_char(member_join_date,'mm.dd') order by key asc]]>
 	</select>
 	
@@ -223,7 +251,7 @@
 	
 	<select id="newMemberGender" resultType="ChartModel"><!-- 최근 일주일 신규 회원 성별 구분 -->
 		<![CDATA[select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value
-		from member where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 
+		from member where member_join_date<trunc(sysdate)+1 and member_join_date>=trunc(sysdate)-6
 		group by to_number(substr(to_char(member_jumin2),1,1))]]>
 	</select>
 	
@@ -234,7 +262,7 @@
 	
 	<select id="newMemberAge" resultType="ChartModel"><!-- 최근 일주일 신규 회원 연령 구분 -->
 		<![CDATA[select to_number(substr(to_char(member_jumin1),1,1)) key, count(*) value
-			from member where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 
+			from member where member_join_date<trunc(sysdate)+1 and member_join_date>=trunc(sysdate)-6
 			group by to_number(substr(to_char(member_jumin1),1,1))]]>
 	</select>
 	
@@ -244,7 +272,7 @@
 	
 	<select id="newMemberRegion" resultType="ChartModel"><!-- 최근 일주일 신규 회원 지역 구분 -->
 		<![CDATA[select substr(member_addr1,1,2) key, count(*) value from member 
-		where trunc(member_join_date) <= trunc(sysdate) and trunc(member_join_date) > trunc(sysdate)-7 group by substr(member_addr1,1,2)]]>
+		where member_join_date<trunc(sysdate)+1 and member_join_date>=trunc(sysdate)-6 group by substr(member_addr1,1,2)]]>
 	</select>
 	
 	<!-- //////////////////////////////////////// -->
@@ -252,27 +280,27 @@
 	<!-- 기간 지정 가능하도록 구현하기. -->
 	
 	<select id="bookSelling" resultType="BooksModel"><!-- 전체 기간 기준 가장 많이 팔인 책 8권 -->
-		<![CDATA[select a.* from (select book_category, book_num, book_name, book_sell_count, book_image
+		<![CDATA[select a.* from (select book_category, book_num, book_name, book_sell_count, book_image, book_auth, book_price
 		from book order by book_sell_count desc) a where rownum>=1 and rownum<=8]]>
 	</select>
 	
 	<select id="monthBookSelling" resultType="BooksModel"><!-- 저번 달의 판매량 순위 -->
-		<![CDATA[select * from (
-					select book_num, order_book_name book_name, book_image, sum(order_book_count) book_sell_count from(
-						select c.*, b.book_image from (select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name, od.order_book_count 
-						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM where o.order_use_yn = 1) c 
-					inner join book b on c.book_num = b.book_num where extract(month from order_regdate)=extract(month from sysdate)-1) 
-					group by order_book_name, book_image, book_num order by book_sell_count desc) 
+		<![CDATA[select c.*, b.book_auth, b.book_image, b.book_price, b.company_id from (
+					select book_name, book_num, sum(order_book_count) book_sell_count from (
+  						select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name book_name, od.order_book_count 
+  						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM 
+  						where o.order_use_yn = 1 and extract(month from order_regdate)=extract(month from sysdate)-1 )
+					group by book_name, book_num order by book_sell_count desc) c inner join book b on c.book_num = b.book_num 
 				where rownum>=1 and rownum<=8]]>
 	</select>
 	
 	<select id="weekBookSelling" resultType="BooksModel"><!-- 최근 7일 판매량 순위 -->
-		<![CDATA[select * from (
-					select book_num, order_book_name book_name, book_image, sum(order_book_count) book_sell_count from(
-						select c.*, b.book_image from (select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name, od.order_book_count 
-						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM where o.order_use_yn = 1) c 
-					inner join book b on c.book_num = b.book_num where order_regdate<=trunc(sysdate) and order_regdate>trunc(sysdate)-7) 
-					group by order_book_name, book_image, book_num order by book_sell_count desc) 
+		<![CDATA[select c.*, b.book_auth, b.book_image, b.book_price, b.company_id from (
+					select book_name, book_num, sum(order_book_count) book_sell_count from (
+  						select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name book_name, od.order_book_count 
+  						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM 
+ 						where o.order_use_yn = 1 and order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6)
+					group by book_name, book_num order by book_sell_count desc) c inner join book b on c.book_num = b.book_num 
 				where rownum>=1 and rownum<=8]]>
 	</select>
 	
@@ -290,14 +318,15 @@
 	</select>
 	
 	<select id="weekOrderNum" resultType="ChartModel"><!-- 최근 7일 날짜별 주문량 조회 -->
-		<![CDATA[select to_char(order_regdate,'mm.dd') key, count(*) value from order_book where trunc(order_regdate)<=trunc(sysdate) and trunc(order_regdate)>trunc(sysdate)-7
-		group by to_char(order_regdate,'mm.dd') order by key desc]]>
+		<![CDATA[select to_char(order_regdate,'mm.dd') key, count(*) value from order_book 
+		where order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6
+		group by to_char(order_regdate,'mm.dd') order by key]]>
 	</select>
 	
 	<select id="weekSales" resultType="ChartModel"><!-- 최근 7일 날짜별 판매량 -->
 		<![CDATA[select to_char(order_regdate,'mm.dd') key, trunc(sum(ORDER_RECEIVE_MONEYSUM/1000)) price
-		from order_book where trunc(order_regdate)<=trunc(sysdate) and trunc(order_regdate)>trunc(sysdate)-7
-		group by to_char(order_regdate,'mm.dd') order by key desc]]>
+		from order_book where order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6
+		group by to_char(order_regdate,'mm.dd') order by key]]>
 	</select>
 	
 	<select id="monthOrderGender" resultType="ChartModel"><!-- 달별 성별 구분 -->
@@ -312,7 +341,7 @@
 			select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from (
 				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
 				from order_book a inner join member b on a.member_id=b.member_id 
-        		where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+        		where order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6)
 			group by to_number(substr(to_char(member_jumin2),1,1))
 		]]>
 	</select>
@@ -329,23 +358,24 @@
 			select substr(to_char(member_jumin1),1,1) key, count(*) value from (
 				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
 				from order_book a inner join member b on a.member_id=b.member_id 
-				where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+				where order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6)
 			group by substr(to_char(member_jumin1),1,1)
 		]]>
 	</select>
 	
 	<select id="monthOrderRegion" resultType="ChartModel"><!-- 달별 지역 구분 -->
-		select to_char(order_regdate,'yy/mm') key, substr(member_addr1,1,2) item, count(*) value from (
+		select substr(member_addr1,1,2) key, count(*) value from (
 			select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
 			from order_book a inner join member b on a.member_id=b.member_id)
-		group by substr(member_addr1,1,2), to_char(order_regdate,'yy/mm') order by key
+		group by substr(member_addr1,1,2) order by key
 	</select>
 	
 	<select id="weekOrderRegion" resultType="ChartModel"><!-- 최근 7일 주문 지역별 통계 -->
 		<![CDATA[
 			select substr(member_addr1,1,2) key, count(*) value from (
 				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
-				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate) <= trunc(sysdate) and trunc(order_regdate) > trunc(sysdate)-7)
+				from order_book a inner join member b on a.member_id=b.member_id 
+				where order_regdate<=trunc(sysdate)+1 and order_regdate>=trunc(sysdate)-6)
 			group by substr(member_addr1,1,2)]]>
 	</select>
 	

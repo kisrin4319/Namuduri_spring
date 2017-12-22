@@ -14,6 +14,8 @@ public interface FaqDao {
 	
 	public List<FaqModel> CfaqList();
 	
+	public List<FaqModel> DfaqList();
+	
 	// faq 내용 보기
 	public FaqModel faqDetail(int faq_num);
 	
