@@ -1,8 +1,8 @@
 package com.spring.board;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,6 +41,8 @@ public class BoardController {
 	@RequestMapping(value = "/board/boardList.do")
 	public ModelAndView BoardList(HttpServletRequest request) throws Exception {
 		mv = new ModelAndView();
+
+		Date today = new Date ();
 		
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
 		List<BoardModel> adminBoardList = new ArrayList<BoardModel>();
@@ -99,6 +101,7 @@ public class BoardController {
 			mv.addObject("listCount", boardList.size());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("pagingHtml", pagingHtml);
+			mv.addObject("today",today);
 			mv.setViewName("boardList");
 
 			return mv;

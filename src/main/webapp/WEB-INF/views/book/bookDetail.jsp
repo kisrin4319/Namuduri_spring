@@ -54,7 +54,7 @@ img.soldout {
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="one">
-									<a class="venobox" href="${pageContext.request.contextPath}/bootstrap/img/single-product/bg-1.jpg" data-gall="gallery" title="">
+									<a class="venobox" href="<%=cp%>/upload/${view.book_image}" data-gall="gallery" title="">
 										<img class="resize" src="<%=cp%>/upload/${view.book_image}" alt="${view.book_name}" alt="">
 									</a>
 								</div>

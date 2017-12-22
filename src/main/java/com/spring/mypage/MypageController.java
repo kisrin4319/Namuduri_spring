@@ -386,8 +386,12 @@ public class MypageController {
 		MemberModel memberInfo = memberService.SelectOne(session_id);
 		
 		memberOrderDetail = mypageService.memberOrderDetail(order_trade_num);
+		OrderModel orderModel = new OrderModel();
+		orderModel.setOrder_trade_num(order_trade_num);
+		orderModel = orderService.getOrder(orderModel);
 		
 		mv.addObject("memberOrderDetail", memberOrderDetail);
+		mv.addObject("orderModel",orderModel);
 		mv.addObject("memberInfo", memberInfo);
 		mv.setViewName("orderDetail");
 		return mv;

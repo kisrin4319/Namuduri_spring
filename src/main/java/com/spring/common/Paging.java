@@ -137,13 +137,13 @@ public class Paging {
          if (i == currentPage) {
             pagingHtml.append("<strong>");
             pagingHtml.append(i);
-            pagingHtml.append("</strong>");
+            pagingHtml.append("</strong>&nbsp;&nbsp;");
          } else {
             pagingHtml.append("<a class='page' href=" + viewName + ".do?book_num="+book_num+"&currentPage=");
             pagingHtml.append(i);
             pagingHtml.append("#review>");
             pagingHtml.append(i);
-            pagingHtml.append("</a>");
+            pagingHtml.append("</a>&nbsp;&nbsp;");
          }
       }
 
@@ -204,7 +204,7 @@ public class Paging {
          if(i == currentPage){
             pagingHtml.append("<strong>");
             pagingHtml.append(i);
-            pagingHtml.append("</strong>");
+            pagingHtml.append("</strong>&nbsp;&nbsp;");
          }
          else{
             pagingHtml.append("<a class='page' href=" + viewName + ".do?currentPage=" + i);
@@ -212,7 +212,7 @@ public class Paging {
                pagingHtml.append("&isSearch=" + isSearch+"&searchNum="+searchNum);
             pagingHtml.append(">");
             pagingHtml.append(i);
-            pagingHtml.append("</a>");
+            pagingHtml.append("</a>&nbsp;&nbsp;");
          }
       }
       // 다음 block 페이지

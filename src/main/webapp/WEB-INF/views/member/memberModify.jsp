@@ -285,7 +285,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="religion">환불주</label>
+								<label class="col-md-2 control-label" for="religion">계좌주</label>
 								<div class="col-md-6">
 									<p class="form-row">
 										<input type="text" class="form-control" name="member_account_holder" value="${memberInfo.member_account_holder }" />
@@ -310,7 +310,7 @@
 						<button name="submitcreate" id="submitcreate" class="btn-default" onclick="check()">
 							<span>
 								<i class="fa fa-user left"></i>
-								SING IN
+								Confirm
 							</span>
 						</button>
 						<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:history.back(-1);">

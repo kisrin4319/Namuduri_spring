@@ -94,7 +94,7 @@
 							<p>Consectetur adipisicing elit se do eiusm od tempor incididunt ut labore et dolore magnas aliqua.</p>
 							<form action="#" method="post">
 								<div>
-									<input type="text" placeholder="email address">
+									<input type="text" placeholder="email address" style="display: block;padding-top: 0px;">
 								</div>
 								<button class="btn btn-search btn-small" type="submit">SUBSCRIBE</button>
 								<i class="flaticon-networking"></i>

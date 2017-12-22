@@ -14,56 +14,41 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>로그인폼</title>
-<script type="text/javascript"> 
-	
-			
-			window.fbAsyncInit = function() {   //페이지 로딩시 기본적으로 fb 세팅을 하는겁니다
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1989435997997041',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.11'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
 
-				  FB.init({   //기본 init 
-				   appId  : '271410833383842',
-				   status : true, // check login status
-				   cookie : true, // enable cookies to allow the server to access the session
-				   xfbml  : true, // parse XFBML
-				   oauth  : true // enable OAuth 2.0   기본세팅입니다. 그냥 따라 쓰면 됩니다. 
-				  
-				 }); 
-			};
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  
 
-				 (function(d){
+  FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+  });  
 
-				    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-
-				    js = d.createElement('script'); 
-				    js.id = id; 
-				    js.async = true;
-				    js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=271410833383842';
-				    d.getElementsByTagName('head')[0].appendChild(js);
-
-				  }(document));   //기본적으로 페이스북과 연동하는 세팅 입니다. 같이 써주면 됩니다.
-				  
-				  
-				  var fabceloginChk = 0;
-
-				  function loginFB(){
-					  
-				  	if(fabceloginChk == 0){
-				  
-				  		FB.login(function(response) {
-				  	
-				  			if (response.authResponse) {
-				   				fabceloginChk  = 1;
-				  			} else {   
-				  			alert('로그인에 실패했습니다.');
-				  			fabceloginChk  = 0;
-				        	}
-				    	}
-				   		, {scope: "user_about_me,publish_stream,read_friendlists,offline_access,email,user_birthday"} 
-				  		);
-				  	}
-
-				  }
-			
-
+  {
+      status: 'connected',
+      authResponse: {
+          accessToken: '...',
+          expiresIn:'...',
+          signedRequest:'...',
+          userID:'...'
+      }
+  }
 </script>
 </head>
 <body>
