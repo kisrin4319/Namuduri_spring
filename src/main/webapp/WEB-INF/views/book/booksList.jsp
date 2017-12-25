@@ -289,9 +289,9 @@ img.soldout {
 															<div class="functional-buttons">
 																<c:choose>
 																<c:when test="${list.book_current_count == 0}">
-																	<a href="#" title="Quick view" data-toggle="modal" data-target="#productModal" style="padding-top: 11px;">
-																	<i class="fa fa-compress"></i>
-																</a>
+																	<a class="venobox" href="<%=cp%>/upload/${list.book_image}" data-gall="gallery" style="padding-top: 11px;">
+																		<i class="fa fa-compress"></i>
+																	</a>
 																</c:when>
 																<c:otherwise>
 																<a href="javascript:isBasket(${list.book_num})" style="padding-top: 11px;">
