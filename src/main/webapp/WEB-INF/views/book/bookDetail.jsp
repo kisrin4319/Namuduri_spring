@@ -27,6 +27,11 @@ img.soldout {
 	width: 120px;
 	height: 80px;
 }
+
+img.star {
+	width: 18px;
+	height: 18px;
+}
 </style>
 </head>
 <body>
@@ -49,6 +54,7 @@ img.soldout {
 				<input type="hidden" name="book_price" value="${view.book_price}" />
 				<input type="hidden" name="book_image" value="${view.book_image}" />
 				<div class="row" style="margin-left: 0px; margin-right: 0px;">
+				<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" var="toDay"/>	
 					<div class="col-md-6 col-sm-7" style="width: 370px;">
 						<div class="single-product-image-inner">
 							<!-- Tab panes -->
@@ -144,12 +150,13 @@ img.soldout {
 							<div class="add-to-wishlist">
 								<c:if test="${view.book_current_count != 0}">
 								<a class="wish-btn" href="javascript:isWish(${view.book_num})">
-									<i class="fa fa-heart-o"></i>
-									ADD TO WISHLIST
+									&nbsp;<i class="fa fa-heart-o"></i>&nbsp;
+									 ADD TO WISHLIST
 								</a>
 								<br />
 								<a class="wish-btn" href="javascript:openMap()">
-									→   배송 거리 확인
+									<img src="<%=cp%>/img/location.png" style="width: 18px; height: 18px;">
+									   배송 거리 확인
 								</a>
 								</c:if>
 							</div>				
@@ -213,7 +220,7 @@ img.soldout {
 										<th style="text-align: center;">작성일</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody>								
 									<ul class="comments-advices">
 										<li>
 											<a href="javascript:openWriteForm()" class="open-comment-form">리뷰쓰기</a>
@@ -228,35 +235,63 @@ img.soldout {
 										</c:when>
 										<c:otherwise>
 											<c:forEach var="review" items="${review}" varStatus="stat">
+												<fmt:formatDate value="${review.review_regdate}" pattern="yyyy-MM-dd" var ="RegDay"/>
 												<tr class="even">
 													<td style="text-align: center;">
 														<c:if test="${review.star_point == 5}">
-															<img src="<%=cp%>/img/star5-88x15.png" border="0" />
+															<img src="<%=cp%>/img/yellow.png" class="star" />
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															
 														</c:if>
 														<c:if test="${review.star_point == 4}">
-															<img src="<%=cp%>/img/star4-88x15.png" border="0" />
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
 														</c:if>
 														<c:if test="${review.star_point == 3}">
-															<img src="<%=cp%>/img/star3-88x15.png" border="0" />
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
 														</c:if>
 														<c:if test="${review.star_point == 2}">
-															<img src="<%=cp%>/img/star2-88x15.png" border="0" />
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
 														</c:if>
 														<c:if test="${review.star_point == 1}">
-															<img src="<%=cp%>/img/star1b.jpg" border="0" />
+															<img src="<%=cp%>/img/yellow.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
 														</c:if>
 														<c:if test="${review.star_point == 0}">
-															<img src="<%=cp%>/img/star0-88x15.png" border="0" />
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
+															<img src="<%=cp%>/img/gray.png" class="star"/>
 														</c:if>
 													</td>
 													<td style="text-align: center;">
 														<span>
 															<a href="javascript:void(0)" class="js-btn-view">${review.review_content}</a>
-															<img src="<%=cp%>/img/icon_board_new.png" />
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;" />
+															</c:if>
 														</span>
 													</td>
-													<td>${review.member_id}</td>
-													<td>
+													<td style="text-align: center;">${review.member_id}</td>
+													<td style="text-align: center;">
 														<fmt:formatDate value="${review.review_regdate }" pattern="yy.MM.dd" />
 													</td>
 												</tr>
