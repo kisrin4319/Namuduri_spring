@@ -1,6 +1,7 @@
 package com.spring.faq;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,7 @@ public class FaqController {
 	@RequestMapping(value = "/faq/faqList.do")
 	public ModelAndView FaqList(HttpServletRequest request) throws Exception {
 		mv = new ModelAndView();
+		Date today = new Date ();
 		
 		List<FaqModel> faqList = new ArrayList<FaqModel>();
 		List<FaqModel> AfaqList = new ArrayList<FaqModel>();
@@ -104,6 +106,7 @@ public class FaqController {
 		mv.addObject("listCount", faqList.size());
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("today",today);
 		mv.setViewName("faqList");
 
 		return mv;

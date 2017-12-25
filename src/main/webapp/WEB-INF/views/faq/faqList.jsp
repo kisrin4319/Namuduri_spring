@@ -243,7 +243,7 @@ border: lightcoral;
 					<span>ALL</span>
 				</label>
 				<input id="tab2" type="radio" name="tabs">
-				<label for="tab2">
+				<label for="tab2" style="padding-left: 0px; padding-right: 0px;">
 					<i class="fa fa-folder-open-o" style="color: lightcoral; margin-right: 0px;"></i>
 					<span>DELIVERY</span>
 				</label>
@@ -257,8 +257,13 @@ border: lightcoral;
 					<i class="fa fa-folder-open-o" style="color: lightcoral;"></i>
 					<span>ETC</span>
 				</label>
-				<input id="tab5" type="radio" name="tabs">
-				<label for="tab5">
+				<c:if test="${member_id eq 'admin'}">
+					<input id="tab5" type="radio" name="tabs" onclick="javascript:location.href='<%=cp%>/faq/faqWrite.do'">
+				</c:if>
+				<c:if test="${member_id ne 'admin'}">
+					<input id="tab5" type="radio" name="tabs">
+				</c:if>
+				<label for="tab5" style="padding-left: 0px; padding-right: 0px;">
 					<c:if test="${member_id eq 'admin'}">
 						<i class="fa fa-pencil-square-o" style="color: lightcoral;"></i>
 						<span style="color: lightcoral;">WRITE</span>
@@ -268,17 +273,18 @@ border: lightcoral;
 						<span>MEMBER</span>
 					</c:if>
 				</label>
+				<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" var="toDay"/>
 				<section id="content1" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
 				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
 					<table class="points_table" style="width: 100%;">
 						<tbody class="points_table_scrollbar" style="height: 500px;">
 							<tr style="background-color: lightcoral; width: 100%;">
-								<td class="col-md-1 col-sm-1 hidden-xs" align="center" style="color: white;">#</td>
-								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white;">TITLE</td>
-								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white;">NAME</td>
-								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white;">VIEWS</td>
-								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+								<td class="col-md-1 col-sm-1 hidden-xs" align="center" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
 							</tr>
 							<c:choose>
 								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
@@ -288,40 +294,47 @@ border: lightcoral;
 											<c:url var="viewURL" value="/faq/faqDetail.do">
 												<c:param name="faq_num" value="${list.faq_num}" />
 											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 											<a href="${viewURL }"></a>
 											<c:if test="${stat.index % 2 ==0}">
 												<tr class="odd">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">
 														<c:if test="${list.faq_category == 1}">배송</c:if>
 														<c:if test="${list.faq_category == 2}">도서</c:if>
 														<c:if test="${list.faq_category == 3}">기타</c:if>
 														<c:if test="${list.faq_category == 4}">회원</c:if>
 													</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
 											</c:if>
 											<c:if test="${stat.index % 2 ==1}">
 												<tr class="even">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">
 														<c:if test="${list.faq_category == 1}">배송</c:if>
 														<c:if test="${list.faq_category == 2}">도서</c:if>
 														<c:if test="${list.faq_category == 3}">기타</c:if>
 													</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
@@ -340,12 +353,12 @@ border: lightcoral;
 					<table class="points_table">
 						<tbody class="points_table_scrollbar" style="height: 500px;">
 							<tr style="background-color: lightcoral;">
-								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white;">#</td>
-								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white;">TITLE</td>
-								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white;">NAME</td>
-								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white;">VIEWS</td>
-								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
 							</tr>
 							<c:choose>
 								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
@@ -355,31 +368,38 @@ border: lightcoral;
 											<c:url var="viewURL" value="/faq/faqDetail.do">
 												<c:param name="faq_num" value="${list.faq_num}" />
 											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 											<a href="${viewURL }"></a>
 											<c:if test="${stat.index % 2 ==0}">
 												<tr class="odd">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">배송</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">배송</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
 											</c:if>
 											<c:if test="${stat.index % 2 ==1}">
 												<tr class="even">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">배송</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">배송</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
@@ -392,19 +412,17 @@ border: lightcoral;
 					</table>
 				</div>
 				</section>
-				<!-- NOTICE TAB END -->
-				<!-- NORMAL TAB START -->
 				<section id="content3" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
 				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
 					<table class="points_table">
 						<tbody class="points_table_scrollbar" style="height: 500px;">
 							<tr style="background-color: lightcoral;">
-								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white;">#</td>
-								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white;">TITLE</td>
-								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white;">NAME</td>
-								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white;">VIEWS</td>
-								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
 							</tr>
 							<c:choose>
 								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
@@ -414,31 +432,38 @@ border: lightcoral;
 											<c:url var="viewURL" value="/faq/faqDetail.do">
 												<c:param name="faq_num" value="${list.faq_num}" />
 											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 											<a href="${viewURL }"></a>
 											<c:if test="${stat.index % 2 ==0}">
 												<tr class="odd">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">도서</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">도서</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>															
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
 											</c:if>
 											<c:if test="${stat.index % 2 ==1}">
 												<tr class="even">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">도서</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">도서</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
@@ -456,12 +481,12 @@ border: lightcoral;
 					<table class="points_table">
 						<tbody class="points_table_scrollbar" style="height: 500px;">
 							<tr style="background-color: lightcoral;">
-								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white;">#</td>
-								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white;">TITLE</td>
-								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white;">NAME</td>
-								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white;">VIEWS</td>
-								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
 							</tr>
 							<c:choose>
 								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
@@ -471,31 +496,38 @@ border: lightcoral;
 											<c:url var="viewURL" value="/faq/faqDetail.do">
 												<c:param name="faq_num" value="${list.faq_num}" />
 											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 											<a href="${viewURL }"></a>
 											<c:if test="${stat.index % 2 ==0}">
 												<tr class="odd">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">기타</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
 											</c:if>
 											<c:if test="${stat.index % 2 ==1}">
 												<tr class="even">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">기타</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
@@ -510,15 +542,16 @@ border: lightcoral;
 				</section>
 				<section id="content5" class="tab-content" style="padding-right: 0px; padding-left: 0px; height: 630px;">
 				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<c:if test="${member_id ne 'admin'}">
 					<table class="points_table" style="width: 100%;">
 						<tbody class="points_table_scrollbar" style="height: 500px;">
 							<tr style="background-color: lightcoral;" style="width: 100%;">
-								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white;">#</td>
-								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white;">TYPE</td>
-								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white;">TITLE</td>
-								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white;">NAME</td>
-								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white;">VIEWS</td>
-								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white;">DATE</td>
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
 							</tr>
 							<c:choose>
 								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
@@ -528,31 +561,38 @@ border: lightcoral;
 											<c:url var="viewURL" value="/faq/faqDetail.do">
 												<c:param name="faq_num" value="${list.faq_num}" />
 											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 											<a href="${viewURL }"></a>
 											<c:if test="${stat.index % 2 ==0}">
 												<tr class="odd">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">기타</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
 											</c:if>
 											<c:if test="${stat.index % 2 ==1}">
 												<tr class="even">
-													<td class="col-md-1 col-sm-1 hidden-xs">${list.faq_num}</td>
-													<td class="col-md-2 col-sm-2 col-xs-3">기타</td>
-													<td class="col-md-4 col-sm-4 col-xs-5">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
 														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
 													</td>
-													<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
-													<td class="col-md-2 col-sm-1 hidden-xs">${list.readcount}</td>
-													<td class="col-md-2 col-sm-3 hidden-xs">
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
 														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
 													</td>
 												</tr>
@@ -563,6 +603,7 @@ border: lightcoral;
 							</c:choose>
 						</tbody>
 					</table>
+					</c:if>
 				</div>
 				</section>
 			</div>

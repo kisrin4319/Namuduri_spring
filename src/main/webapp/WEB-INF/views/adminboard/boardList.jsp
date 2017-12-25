@@ -231,7 +231,7 @@ opacity 1;
 				</li>
 			</ul>
 			<hr>
-			<div class="tab_container">
+			<div class="tab_container" style="padding-top: 30px;">
 				<input id="tab1" type="radio" name="tabs" checked>
 				<label for="tab1">
 					<i class="fa fa-folder-open-o"></i>
@@ -282,7 +282,14 @@ opacity 1;
 												<c:if test="${stat.index % 2 ==0}">
 													<tr class="odd">
 														<td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+														<c:choose>
+														<c:when test="${list.board_type == 2}">
+														<td class="col-md-2 col-sm-2 col-xs-3" style="color: lightcoral; font-weight: 600;">
+														</c:when>
+														<c:otherwise>
 														<td class="col-md-2 col-sm-2 col-xs-3">
+														</c:otherwise>
+														</c:choose>
 															<c:if test="${list.board_type == 0}">문의</c:if>
 															<c:if test="${list.board_type == 1}">
 																<img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
@@ -298,6 +305,9 @@ opacity 1;
 																			<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																		</c:if>
 																		<a href="${viewURL}">${list.board_title}</a>
+																			<c:if test="${toDay eq RegDay }">
+																				<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																			</c:if>																		
 																	</c:if>
 																	<c:if test="${session.member_id!='admin'}">
 																		<c:if test="${list.re_step != 0}">
@@ -305,6 +315,9 @@ opacity 1;
 																		</c:if>
 																		<a href="javascript:checkForm(${list.board_num})">
 																			<font color='gray'> *비공개 글 입니다</font>
+																			<c:if test="${toDay eq RegDay }">
+																				<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																			</c:if>																								
 																		</a>
 																	</c:if>
 																</c:when>
@@ -313,7 +326,9 @@ opacity 1;
 																		<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																	</c:if>
 																	<a href="${viewURL}">${list.board_title}</a>
-																	<c:if test="${toDay eq RegDay }"> new</c:if>
+																	<c:if test="${toDay eq RegDay }">
+																		<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																	</c:if>
 																</c:otherwise>
 															</c:choose>
 														</td>
@@ -326,7 +341,14 @@ opacity 1;
 												<c:if test="${stat.index % 2 ==1}">
 													<tr class="even">
 														<td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
+														<c:choose>
+														<c:when test="${list.board_type == 2}">
+														<td class="col-md-2 col-sm-2 col-xs-3" style="color: lightcoral; font-weight: 600;">
+														</c:when>
+														<c:otherwise>
 														<td class="col-md-2 col-sm-2 col-xs-3">
+														</c:otherwise>
+														</c:choose>
 															<c:if test="${list.board_type == 0}">문의</c:if>
 															<c:if test="${list.board_type == 1}">
 																<img src="<%=cp%>/img/secret.gif" style="margin-top: 10px;" />
@@ -342,6 +364,9 @@ opacity 1;
 																			<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																		</c:if>
 																		<a href="${viewURL}">${list.board_title}</a>
+																			<c:if test="${toDay eq RegDay }">
+																				<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																			</c:if>																							
 																	</c:if>
 																	<c:if test="${session.member_id!='admin'}">
 																		<c:if test="${list.re_step != 0}">
@@ -349,6 +374,9 @@ opacity 1;
 																		</c:if>
 																		<a href="javascript:checkForm(${list.board_num})">
 																			<font color='gray'> *비공개 글 입니다</font>
+																			<c:if test="${toDay eq RegDay }">
+																				<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																			</c:if>																								
 																		</a>
 																	</c:if>
 																</c:when>
@@ -357,7 +385,9 @@ opacity 1;
 																		<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																	</c:if>
 																	<a href="${viewURL}">${list.board_title}</a>
-																	<c:if test="${toDay eq RegDay }"> new</c:if>
+																	<c:if test="${toDay eq RegDay }"> 
+																	 	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																	</c:if>
 																</c:otherwise>
 															</c:choose>
 														</td>
@@ -396,13 +426,17 @@ opacity 1;
 												<c:url var="viewURL" value="/board/boardDetail.do">
 													<c:param name="board_num" value="${list.board_num}" />
 												</c:url>
+												<fmt:formatDate value="${list.board_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 												<a href="${viewURL }"></a>
 												<c:if test="${stat.index % 2 ==0}">
 													<tr class="odd">
 														<td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-														<td class="col-md-2 col-sm-2 col-xs-3">공지</td>
+														<td class="col-md-2 col-sm-2 col-xs-3" style="color: lightcoral; font-weight: 600;">공지</td>
 														<td class="col-md-4 col-sm-4 col-xs-6">
 															<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																
 														</td>
 														<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
 														<td class="col-md-3 col-sm-3 hidden-xs">
@@ -413,9 +447,12 @@ opacity 1;
 												<c:if test="${stat.index % 2 ==1}">
 													<tr class="even">
 														<td class="col-md-2 col-sm-2 hidden-xs">${list.board_num}</td>
-														<td class="col-md-2 col-sm-2 col-xs-3">공지</td>
+														<td class="col-md-2 col-sm-2 col-xs-3" style="color: lightcoral; font-weight: 600;">공지</td>
 														<td class="col-md-4 col-sm-4 col-xs-6">
 															<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																
 														</td>
 														<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
 														<td class="col-md-3 col-sm-3 hidden-xs">
@@ -453,6 +490,7 @@ opacity 1;
 												<c:url var="viewURL" value="/board/boardDetail.do">
 													<c:param name="board_num" value="${list.board_num}" />
 												</c:url>
+												<fmt:formatDate value="${list.board_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 												<a href="${viewURL }"></a>
 												<c:if test="${stat.index % 2 ==0}">
 													<tr class="odd">
@@ -464,6 +502,9 @@ opacity 1;
 																	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																</c:if>
 																<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																	
 															</c:if>
 														</td>
 														<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
@@ -482,6 +523,9 @@ opacity 1;
 																	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																</c:if>
 																<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																	
 															</c:if>
 														</td>
 														<td class="col-md-1 col-sm-1 col-xs-1">${list.member_id}</td>
@@ -520,6 +564,7 @@ opacity 1;
 												<c:url var="viewURL" value="/board/boardDetail.do">
 													<c:param name="board_num" value="${list.board_num}" />
 												</c:url>
+												<fmt:formatDate value="${list.board_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
 												<a href="${viewURL }"></a>
 												<c:if test="${stat.index % 2 ==0}">
 													<tr class="odd">
@@ -534,6 +579,9 @@ opacity 1;
 																	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																</c:if>
 																<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																	
 															</c:if>
 															<c:if test="${session.member_id!='admin'}">
 																<c:if test="${list.re_step != 0}">
@@ -541,6 +589,9 @@ opacity 1;
 																</c:if>
 																<a href="javascript:checkForm(${list.board_num})">
 																	<font color='gray'> *비공개 글 입니다</font>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																		
 																</a>
 															</c:if>
 														</td>
@@ -563,6 +614,9 @@ opacity 1;
 																	<img src="<%=cp%>/img/reply.png" style="width: 20px; height: 17px; padding-bottom: 5px;">
 																</c:if>
 																<a href="${viewURL}">${list.board_title}</a>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																	
 															</c:if>
 															<c:if test="${session.member_id!='admin'}">
 																<c:if test="${list.re_step != 0}">
@@ -570,6 +624,9 @@ opacity 1;
 																</c:if>
 																<a href="javascript:checkForm(${list.board_num})">
 																	<font color='gray'> *비공개 글 입니다</font>
+																<c:if test="${toDay eq RegDay }">
+																	<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+																</c:if>																		
 																</a>
 															</c:if>
 														</td>
