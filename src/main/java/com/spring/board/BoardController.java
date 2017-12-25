@@ -32,7 +32,7 @@ public class BoardController {
 	private String isSearch;
 	private int currentPage = 1;
 	private int totalCount;
-	private int blockCount = 10;
+	private int blockCount = 9;
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
@@ -42,20 +42,31 @@ public class BoardController {
 	public ModelAndView BoardList(HttpServletRequest request) throws Exception {
 		mv = new ModelAndView();
 
-		Date today = new Date ();
-		
+		Date today = new Date();
+		isSearch = request.getParameter("isSearch");
+
 		List<BoardModel> boardList = new ArrayList<BoardModel>();
 		List<BoardModel> adminBoardList = new ArrayList<BoardModel>();
 		List<BoardModel> normalBoardList = new ArrayList<BoardModel>();
 		List<BoardModel> secretBoardList = new ArrayList<BoardModel>();
 
-		adminBoardList = boardService.adminBoardList(); 	/*=>>>select * from board where board_type ='2';*/
-		normalBoardList = boardService.normalBoardList();	/*=>>>select * from board where board_type ='1';*/
-		secretBoardList = boardService.secretBoardList();	/*=>>>select * from board where board_type ='0';*/
+		adminBoardList = boardService.adminBoardList(); /* =>>>select * from board where board_type ='2'; */
+		normalBoardList = boardService.normalBoardList(); /* =>>>select * from board where board_type ='1'; */
+		secretBoardList = boardService.secretBoardList(); /* =>>>select * from board where board_type ='0'; */
 
-		boardList.addAll(boardService.adminBoardList());
-		boardList.addAll(boardService.boardList());
-		
+		if (isSearch != null) {
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			if (searchNum == 0)
+				boardList = boardService.Search0(isSearch);
+			else if (searchNum == 1)
+				boardList = boardService.Search1(isSearch);
+			else if (searchNum == 2)
+				boardList = boardService.Search2(isSearch);
+		} else {
+
+			boardList.addAll(boardService.adminBoardList());
+			boardList.addAll(boardService.boardList());
+		}
 		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -66,45 +77,29 @@ public class BoardController {
 
 		
 
-		isSearch = request.getParameter("isSearch");
-
-		if (isSearch != null) {
-			searchNum = Integer.parseInt(request.getParameter("searchNum"));
-
-			if (searchNum == 0)
-				boardList = boardService.Search0(isSearch);
-			else if (searchNum == 1)
-				boardList = boardService.Search1(isSearch);
-			else if (searchNum == 2)
-				boardList = boardService.Search2(isSearch);
+		totalCount = boardList.size();
 		
-			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList", searchNum, isSearch);
-			pagingHtml = paging.getPagingHtml().toString();
-		} else {
-			paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
-			pagingHtml = paging.getPagingHtml().toString();
+		paging = new Paging(currentPage, totalCount, blockCount, blockPage, "boardList");
+		pagingHtml = paging.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		if (paging.getEndCount() < totalCount) {
+			lastCount = paging.getEndCount() + 1;
 		}
-			
-			totalCount = boardList.size();
-			int lastCount = totalCount;
-			if (paging.getEndCount() < totalCount) {
-				lastCount = paging.getEndCount() + 1;
-			}
-			boardList = boardList.subList(paging.getStartCount(), lastCount);
+		boardList = boardList.subList(paging.getStartCount(), lastCount);
 
-			mv.addObject("isSearch", isSearch);
-			mv.addObject("searchNum", searchNum);
-			mv.addObject("boardList", boardList);
-			mv.addObject("adminBoardList", adminBoardList);
-			mv.addObject("normalBoardList", normalBoardList);
-			mv.addObject("secretBoardList", secretBoardList);
-			mv.addObject("listCount", boardList.size());
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("pagingHtml", pagingHtml);
-			mv.addObject("today",today);
-			mv.setViewName("boardList");
-
-			return mv;
+		mv.addObject("isSearch", isSearch);
+		mv.addObject("searchNum", searchNum);
+		mv.addObject("boardList", boardList);
+		mv.addObject("adminBoardList", adminBoardList);
+		mv.addObject("normalBoardList", normalBoardList);
+		mv.addObject("secretBoardList", secretBoardList);
+		mv.addObject("listCount", boardList.size());
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pagingHtml", pagingHtml);
+		mv.addObject("today", today);
+		mv.setViewName("boardList");
+		return mv;
 	}
 
 	// 2. 게시판 내용 보기
@@ -194,10 +189,11 @@ public class BoardController {
 		mv = new ModelAndView();
 		String board_num = request.getParameter("board_num");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		
+
 		int ref = 0;
-		
-		if (!(request.getParameter("ref") == null || request.getParameter("ref").trim().isEmpty()|| request.getParameter("ref").equals("0"))) {
+
+		if (!(request.getParameter("ref") == null || request.getParameter("ref").trim().isEmpty()
+				|| request.getParameter("ref").equals("0"))) {
 			ref = Integer.parseInt(request.getParameter("ref"));
 		}
 
@@ -287,21 +283,21 @@ public class BoardController {
 
 		return mv;
 	}
-	
+
 	// 게시글 원문삭제
 	@RequestMapping(value = "/board/BoardAllDelete.do")
-	public ModelAndView boardAllDelete(@RequestParam int board_num, @RequestParam int ref, @RequestParam int currentPage)
-			throws Exception {
-		
+	public ModelAndView boardAllDelete(@RequestParam int board_num, @RequestParam int ref,
+			@RequestParam int currentPage) throws Exception {
+
 		mv = new ModelAndView();
-		
+
 		boardService.BoardAllDelete(board_num);
-		
+
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/board/boardList.do");
 
 		return mv;
-	
+
 	}
 
 }
