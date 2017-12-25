@@ -2,6 +2,7 @@ package com.spring.member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.social.connect.Connection;
@@ -29,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.common.FaceBook;
+import com.spring.common.kakao;
 
 @Controller
 public class MemberController {
@@ -113,7 +118,7 @@ public class MemberController {
 		mv = new ModelAndView();
 		System.out.println("/member/googleSignInCallback");
 		String code = request.getParameter("code");
-			
+
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
 				null);
@@ -128,17 +133,103 @@ public class MemberController {
 		Person person = plusOperations.getGoogleProfile();
 
 		MemberModel memberModel = new MemberModel();
-		
+
 		memberModel.setMember_id(person.getDisplayName());
-		memberModel.setMember_name(person.getFamilyName()+person.getGivenName());
-		memberModel.setMember_email(person.getAccountEmail());
+		memberModel.setMember_name(person.getDisplayName());
+
+		HttpSession session = request.getSession();
+		session.setAttribute("member_id", memberModel.getMember_id());
+
+		mv.setViewName("redirect:/main.do");
+		return mv;
+
+	}
+
+	@RequestMapping(value = "/member/facebook.do", method = RequestMethod.GET)
+	public String facebookStart() {
+
+		return "redirect:" + FaceBook.loginPage();
+	}
+
+	@RequestMapping(value = "/member/facebookCallback.do", method = RequestMethod.GET)
+	public ModelAndView facebookResult(@RequestParam("code") String code, HttpServletRequest request) {
+		mv = new ModelAndView();
+		System.out.println("code :" + code);
+
+		// access_token 받기
+		/*
+		 * String parsingAccess_token =
+		 * FaceBook.accessTokenParsing((String)FaceBook.getAcessToken(code));
+		 * System.out.println("parsingAccess_token :"+ parsingAccess_token);
+		 */
+
+		String UserData = (String) FaceBook.getUser(FaceBook.accessTokenParsing((String) FaceBook.getAcessToken(code)));
+		System.out.println("UserData :" + UserData);
+
+		JSONObject jsonObject = FaceBook.UserDataParsing(UserData);
+		System.out.println("jsonObject : " + jsonObject);
+		System.out.println("id :" + jsonObject.get("id"));
+		System.out.println("gender :" + jsonObject.get("gender"));
+		System.out.println("name :" + jsonObject.get("name"));
+		System.out.println("email : " + jsonObject.get("email"));
+
+		MemberModel memberModel = new MemberModel();
+
+		memberModel.setMember_id((String)jsonObject.get("email"));
+		memberModel.setMember_name((String)jsonObject.get("name"));
+		memberModel.setMember_email((String)jsonObject.get("email"));
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("member_id", memberModel.getMember_id());
+
+		mv.setViewName("redirect:/main.do");
+		
+		return mv;
+	}
+
+	
+	@RequestMapping(value="/member/kakao.do",method=RequestMethod.GET)
+	public String kakao() {
+		kakao kakao = new kakao();
+		System.out.println("kakao.getCode() :"+kakao.getCode() );
+		return "redirect:"+kakao.getCode();
+	}
+	@RequestMapping(value="/member/kakaoCallback.do",method=RequestMethod.GET)
+	public ModelAndView kakaoLogin(@RequestParam("code") String code,HttpServletRequest request) {
+		mv = new ModelAndView();
+		System.out.println("code :" + code);
+		
+		String data = (String)kakao.getHtml((kakao.getAccesToken(code)));
+		
+		System.out.println("data :"+ data);
+		
+		Map<String, String> map = kakao.JsonStringMap(data);
+		System.out.println("map :" +map);
+		System.out.println("access_token :" +map.get("access_token"));
+		System.out.println("refresh_token :" +map.get("refresh_token"));
+		System.out.println("scope :" +map.get("scope"));
+		System.out.println("token_type :" +map.get("token_type"));
+		System.out.println("expires_in :" +map.get("expires_in"));
+		
+		//사용자 전체 정보 받아오기를 시작하겠습니다.
+		String list = kakao.getAllList(map.get("access_token"));
+		System.out.println("list : "+list);
+		
+		Map<String, String> getAllListMap  = kakao.JsonStringMap(list);
+		System.out.println("getAllListMap :"+getAllListMap);
+		System.out.println("nickName : "+getAllListMap.get("nickName"));
+
+		MemberModel memberModel = new MemberModel();
+
+		memberModel.setMember_id(getAllListMap.get("nickName"));
+		memberModel.setMember_name(getAllListMap.get("nickName"));
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("member_id", memberModel.getMember_id());
 		
 		mv.setViewName("redirect:/main.do");
-		return mv;
 		
+		return mv;
 	}
 
 	// 로그아웃
