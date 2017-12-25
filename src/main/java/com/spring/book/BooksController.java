@@ -1,6 +1,7 @@
 package com.spring.book;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,9 @@ public class BooksController {
 	public ModelAndView bookDetail(HttpServletRequest request) {
 
 		int num = Integer.parseInt(request.getParameter("book_num"));
-
+		
+		Date today = new Date ();
+		
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
 			currentPage = 1;
@@ -140,6 +143,7 @@ public class BooksController {
 		mv.addObject("review", review);
 		mv.addObject("pagingHtml", pagingHtml);
 		mv.addObject("totalCount", totalCount);
+		mv.addObject("today",today);
 		mv.setViewName("bookDetail");
 
 		return mv;

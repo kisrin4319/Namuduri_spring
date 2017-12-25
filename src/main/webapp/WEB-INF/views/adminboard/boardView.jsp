@@ -118,7 +118,7 @@
 													<button type="button" id="modify" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','modify')" class="btn btn-default" style="margin-right: 2px; margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px;">
 														<img src="<%=cp%>/img/modi.png" width="18">
 													</button>
-													<button type="button" id="delete" class="btn btn-default" style="margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px;">
+													<button type="button" id="delete" class="btn btn-default" style="margin-top: 3px; padding-left: 2px; padding-right: 2px; width: 50px;" onClick="javascript:open_win_noresizable('<%=cp%>/board/checkForm.do?board_num=${boardModel.board_num}&currentPage=${currentPage}&ref=${boardModel.ref }','DeleteAll')">
 														<img src="<%=cp%>/img/trash.png" width="18">
 													</button>
 												</c:if>
