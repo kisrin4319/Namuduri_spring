@@ -124,6 +124,10 @@
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	
+	<!-- 회원 삭제 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE MEMBER WHERE MEMBER_ID = #{member_id}
+	</delete>
 	
 <!-- //////////////////////////////////////////////////////////////////////////////////// -->
 

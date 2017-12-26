@@ -42,7 +42,7 @@ public interface AdminDao {
 	public void memberModify(MemberModel memberModel);
 	
 	//회원 정보 삭제하기
-	//mypage memberDelete 사용 public void memberDelete(String member_id);
+	public void memberDelete(String member_id);
 	
 	/*-------------------------------------------------------------------------------------*/
 	

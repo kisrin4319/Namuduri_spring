@@ -83,6 +83,11 @@ public class AdminService implements AdminDao {
 		sqlSessionTemplate.update("admin.memberModify", memberModel);
 	}
 	
+	@Override //회원 정보 삭제
+	public void memberDelete(String member_id) {
+		sqlSessionTemplate.delete("admin.memberDelete", member_id);
+	}
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override //전체 도서 조회

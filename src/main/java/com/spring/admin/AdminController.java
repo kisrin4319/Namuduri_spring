@@ -266,16 +266,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		MemberModel memberModel = new MemberModel();
-		memberModel.setMember_id(member_id);
-
-		mypageService.memberDelete(memberModel);
+		adminService.memberDelete(member_id);
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("redirect:/admin/memberList.do");
-
-		return mv;
+		return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;
 	}
 
 	//////////////////////////////////////////////////////////////////
