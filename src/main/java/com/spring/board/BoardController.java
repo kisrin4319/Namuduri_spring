@@ -153,7 +153,7 @@ public class BoardController {
 		mv = new ModelAndView();
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		boardModel = boardService.boardDetail(board_num);
-		String content = boardModel.getBoard_content().replaceAll("<br />", "\r\n");
+		String content = boardModel.getBoard_content().replaceAll("\r\n","<br />");
 		boardModel.setBoard_content(content);
 		boardModel.setRe_step(1);
 		mv.addObject("boardModel", boardModel);
@@ -173,7 +173,7 @@ public class BoardController {
 
 		/* boardModel.setBoard_pw("admin"); */
 
-		String content = boardModel.getBoard_content().replaceAll("\r\n", "<br />");
+		String content = boardModel.getBoard_content().replaceAll("\r\n","<br />");
 		boardModel.setBoard_content(content);
 		boardService.BoardReply(boardModel);
 
