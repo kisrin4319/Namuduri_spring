@@ -91,7 +91,7 @@
 					<div class="col-md-3 col-sm-8">
 						<div class="single-footer footer-newsletter">
 							<h2 class="footer-title">Our Newsletter</h2>
-							<p>Consectetur adipisicing elit se do eiusm od tempor incididunt ut labore et dolore magnas aliqua.</p>
+							<p>The newsletter will provide you with many benefits and book information.</p>
 							<form action="#" method="post">
 								<div>
 									<input type="text" placeholder="email address" style="display: block;padding-top: 0px;">

@@ -143,5 +143,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="point">
 	update member set member_point = #{member_point} where member_id = #{member_id}
 	</update>
+	
+	<!-- 주문번호로 주문 상세 내역 가져오기 -->
+	<select id="orderDetailList" parameterType="String" resultType="OrderDetailModel">
+		select * from ORDER_DETAIL where ORDER_TRADE_NUM= #{order_trade_num}
+	</select>
 
 </mapper>
