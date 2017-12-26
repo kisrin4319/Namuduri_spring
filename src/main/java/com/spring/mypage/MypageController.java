@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.common.CommonController;
 import com.spring.common.Paging;
 import com.spring.member.MemberModel;
 import com.spring.member.MemberService;
+import com.spring.order.OrderDetailModel;
 import com.spring.order.OrderModel;
 import com.spring.order.OrderService;
 
@@ -305,6 +307,9 @@ public class MypageController {
 		memberModel.setMember_phone(request.getParameter("member_phone"));
 		memberModel.setMember_email(request.getParameter("member_email"));
 		memberModel.setMember_email_get(request.getParameter("member_email_get"));
+		memberModel.setMember_bankname(request.getParameter("member_bankname"));
+		memberModel.setMember_refund_account(request.getParameter("member_refund_account"));
+		memberModel.setMember_account_holder(request.getParameter("member_account_holder"));		
 		
 		System.out.println("=========================================");
 		
@@ -403,8 +408,22 @@ public class MypageController {
 	public String memberOrderCancel(OrderModel orderModel, HttpServletRequest request, HttpSession session, String order_trade_num) {
 		
 		String returnVal = "";
-
-		int result = mypageService.memberOrderCancel(order_trade_num);
+		
+		List<Map<String, Object>> bookNumIn = new ArrayList<Map<String, Object>>();
+		
+		bookNumIn = mypageService.bookNumIn(order_trade_num);
+		
+		OrderDetailModel orderDetailModel = new OrderDetailModel();
+		BooksModel booksModel = new BooksModel();
+		
+		booksModel.setBook_current_count(Integer.parseInt(request.getParameter("book_current_count")));
+		booksModel.setBook_sell_count(Integer.parseInt(request.getParameter("book_sell_count")));
+		orderDetailModel.setBook_num(Integer.parseInt(request.getParameter("book_num")));
+		orderDetailModel.setOrder_book_count(Integer.parseInt(request.getParameter("order_book_count")));
+		
+		
+		
+		int result = mypageService.memberOrderCancel(order_trade_num);		
 		
 		if(result > 0) {
 			returnVal = "1";

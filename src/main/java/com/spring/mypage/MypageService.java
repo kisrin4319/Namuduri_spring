@@ -73,4 +73,8 @@ public class MypageService implements MypageDao {
 		return sqlSessionTemplate.update("member.memberPwUpdate", param);
 	}
 	
+	public List<Map<String, Object>> bookNumIn(String order_trade_num) {
+		return sqlSessionTemplate.selectList("order.bookNumIn", order_trade_num);
+	}
+	
 }
