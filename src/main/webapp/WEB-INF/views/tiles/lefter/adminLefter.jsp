@@ -35,7 +35,7 @@
 								 <i class="mdi mdi-account-check"></i> <span class="nav-dropdown-item">회원 통합 리스트</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/memberList/rank.do" aria-expanded="false">
 								 <i class="mdi mdi-account-star-variant"></i> <span class="nav-dropdown-item">회원 등급 관리</span></a>
 							</li>
 							<li>
@@ -48,24 +48,24 @@
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-book-open-page-variant"></i> <span class="hide-menu">도서 관리</span></a>
 						<ul class="nav-dropdown-items">
-							<li>
+							<!-- <li>
 								<a href="#" aria-expanded="false">
 								 <i class="mdi mdi-bookmark-check"></i> <span class="nav-dropdown-item">카테고리 관리</span></a>
-							</li>
+							</li> -->
 							<li>
 								<a href="<%=cp%>/admin/bookWrite.do" aria-expanded="false">
 								 <i class="mdi mdi-book-plus"></i> <span class="nav-dropdown-item">도서 등록</span></a>
 							</li>
 							<li>
-								<a href="<%=cp%>/admin/bookList.do" aria-expanded="false">
+								<a href="<%=cp%>/admin/bookList/all.do" aria-expanded="false">
 								 <i class="mdi mdi-book-multiple"></i> <span class="nav-dropdown-item">도서 통합 리스트</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/bookList/act.do" aria-expanded="false">
 								 <i class="mdi mdi-book"></i> <span class="nav-dropdown-item">사용 도서 관리</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/bookList/bck.do" aria-expanded="false">
 								 <i class="mdi mdi-book-minus"></i> <span class="nav-dropdown-item">비사용 도서 관리</span></a>
 							</li>
 						</ul>
@@ -75,25 +75,25 @@
 						 <i class="mdi mdi-cart"></i> <span class="hide-menu">주문 관리</span></a>
 						<ul class="nav-dropdown-items">
 							<li>
-								<a href="<%=cp%>/admin/orderList.do" aria-expanded="false">
+								<a href="<%=cp%>/admin/orderList/all.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-multiple"></i> <span class="nav-dropdown-item">주문 통합 리스트</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/orderList/trade.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card"></i> <span class="nav-dropdown-item">결제 상태 관리</span></a>
 							</li>
 							<li>
-								<a href="map-google.html" aria-expanded="false">
+								<a href="<%=cp%>/admin/orderList/trans.do" aria-expanded="false">
 								 <i class="mdi mdi-truck-delivery"></i> <span class="nav-dropdown-item">배송 상태 관리</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/orderList/bck.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-off"></i> <span class="nav-dropdown-item">주문 취소 내역</span></a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="#" aria-expanded="false">
 								 <i class="mdi mdi-coin"></i> <span class="nav-dropdown-item">환불 상태 관리</span></a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li>
@@ -128,20 +128,20 @@
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-chart-bar"></i> <span class="hide-menu">통계</span></a>
 						<ul class="nav-dropdown-items">
-							<li>
+							<!-- <li>
 								<a href="#" aria-expanded="false">
 								 <i class="mdi mdi-access-point-network"></i> <span class="nav-dropdown-item">방문자 통계</span></a>
-							</li>
+							</li> -->
 							<li>
 								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
 								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/chart/book.do" aria-expanded="false">
 								 <i class="mdi mdi-library-books"></i> <span class="nav-dropdown-item">상품 통계</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/chart/order.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-plus"></i> <span class="nav-dropdown-item">주문 통계</span></a>
 							</li>
 						</ul>

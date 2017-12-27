@@ -28,9 +28,10 @@
             <div class="col-md-12">
                <p>
         		 <img class="img-responsive" alt="iamgurdeeposahan" src="${pageContext.request.contextPath}/img/checkmark.png" style="width: 71px; border-radius: 43px; margin-left: auto;margin-right: auto;display: block;">
-      			 <h2>주문이 정상적으로 접수되었습니다</h2>
+      			 <h4>주문이 정상적으로 접수되었습니다</h4>
       			</p>
             </div>
+           </div>
             <div class="col-md-6" style="margin-top: 100px;float: inherit;display:  block;margin-left:  auto;margin-right:  auto;padding-top: 60px;">
                 <div class="pricing-table">
                     <div class="panel panel-primary" style="border: none;text-align:  unset;float: unset;">
@@ -56,7 +57,7 @@
 											<td style="text-align: left;">주문상품: ${order_book_name}</td>
 										</c:when>
 										<c:otherwise>
-											<td style="text-align: left;">주문상품: ${order_book_name}&nbsp;외${size-1}권</td>
+											<td style="text-align: left;">주문상품: ${order_book_name}&nbsp;외 ${size-1}권</td>
 										</c:otherwise>
 									</c:choose>
                                 </tr>
@@ -85,14 +86,13 @@
                                 </tr>                                     
                             </table>
                         </div>
-                        <div class="panel-footer panel-footer-landing">
+                        <div class="panel-footer panel-footer-landing" style="text-align:  -webkit-center;">
                             <a href="<%=cp%>/main.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MAIN</button></a>
-							<a href="<%=cp%>/mypage.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MY PAGE</button></a>
+							<a href="<%=cp%>/order/orderListCheckView.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MY PAGE</button></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 </body>

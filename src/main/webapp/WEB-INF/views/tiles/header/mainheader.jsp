@@ -134,10 +134,10 @@
 									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
 								</li>
 								<li>
-									<a href="<%=cp%>/mypage.do">MY PAGE</a>
+									<a href="<%=cp%>/order/orderListCheckView.do">MY PAGE</a>
 									<ul class="sub-menu">
 										<li>
-											<a href="<%=cp%>/member/memberModifyView.do">MANAGE ACCOUNT</a>
+											<a href="<%=cp%>/member/memberModifyView.do">MY ACCOUNT</a>
 										</li>
 										<li>
 											<a href="<%=cp%>/order/orderListCheckView.do">ORDER STATUS</a>
@@ -183,10 +183,6 @@
 										<c:if test="${empty member_id }">
 											<a href="<%=cp%>/member/loginForm.do">
 												Sign In
-												<i class="fa fa-chevron-right"></i>
-											</a>
-											<a href="javascript:;" onclick="startApp()">
-												GOOGLE LOGIN
 												<i class="fa fa-chevron-right"></i>
 											</a>
 										</c:if>
@@ -239,6 +235,9 @@
 									<li>
 										<a href="<%=cp%>/member/loginForm.do">SIGN IN</a>
 									</li>
+									<li>
+										<a href="<%=cp%>/member/memberInfo.do">SIGN UP</a>
+									</li>
 								</c:if>
 								<c:if test="${member_id!=null }">
 									<a href="<%=cp%>/member/loginOut.do">SIGN OUT</a>
@@ -253,13 +252,24 @@
 									<a href="<%=cp%>/wish/wishList.do">WISH LIST</a>
 								</li>
 								<li>
-									<a href="<%=cp%>/mypage.do">MY PAGE</a>
+									<a href="<%=cp%>/order/orderListCheckView.do">MY PAGE</a>
 									<ul>
 										<li>
-											<a href="<%=cp%>/basket/basketList.do">Basket</a>
+											<a href="<%=cp%>/order/orderListCheckView.do">Order Status</a>
 										</li>
 										<li>
 											<a href="/member/memberModifyView.do">My Account</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="<%=cp %>/board/boardList.do">Service Center</a>
+									<ul>
+										<li>
+											<a href="<%=cp %>/board/boardList.do">Q & A</a>
+										</li>
+										<li>
+											<a href="<%=cp %>/faq/faqList.do">FAQ</a>
 										</li>
 									</ul>
 								</li>

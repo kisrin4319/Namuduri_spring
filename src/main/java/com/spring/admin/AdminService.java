@@ -1,6 +1,5 @@
 package com.spring.admin;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,16 +39,42 @@ public class AdminService implements AdminDao {
 		return sqlSessionTemplate.selectList("admin.memberListBck");
 	}
 	
+	@Override //회원 등급 조회
+	public List<MemberModel> memberListRank(){
+		return sqlSessionTemplate.selectList("admin.memberListRank");
+	}
+	
 	@Override //회원 검색
 	public List<MemberModel> searchMember(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.searchMember", map);
 	}
 	
+	@Override //회원 등급 검색
+	public List<MemberModel> searchMemberRank(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.searchMemberRank", map);
+	}
+	
 	@Override //개별 회원 조회
 	public MemberModel memberView(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("admin.memberView", member_id);
+	}
+	
+	@Override //주문 내역이 존재하는 회원 조회
+	public MemberModel memberViewOrder(String member_id) {
+		return sqlSessionTemplate.selectOne("admin.memberViewOrder", member_id);
+	}
+	
+	@Override //회원 주문 내역 조회
+	public List<OrderModel> memberOrderList(String member_id) {
+		return sqlSessionTemplate.selectList("admin.memberOrderList", member_id);
+	}
+	
+	@Override //회원 취소 주문 내역 조회
+	public List<OrderModel> memberOrderListBck(String member_id) {
+		return sqlSessionTemplate.selectList("admin.memberOrderListBck", member_id);
 	}
 	
 	@Override //회원 정보 수정
@@ -119,17 +144,22 @@ public class AdminService implements AdminDao {
 	/* ----------------------------------------------------------------------------------- */
 
 	@Override //전체 주문 조회
-	public List<OrderModel> selectOrderAll(){
+	public List<OrderModel> orderListAll(){
 		return sqlSessionTemplate.selectList("admin.orderListAll");
 	}
 	
-	@Override //처리된 주문
-	public List<OrderModel> selectOrderAct(){
-		return sqlSessionTemplate.selectList("admin.orderListAct");
+	@Override //결제 미완료 주문
+	public List<OrderModel> orderListTrade(){
+		return sqlSessionTemplate.selectList("admin.orderListTrade");
+	}
+	
+	@Override //배송 미완료 주문
+	public List<OrderModel> orderListTrans(){
+		return sqlSessionTemplate.selectList("admin.orderListTrans");
 	}
 	
 	@Override //취소된 주문
-	public List<OrderModel> selectOrderBck(){
+	public List<OrderModel> orderListBck(){
 		return sqlSessionTemplate.selectList("admin.orderListBck");
 	}
 	
@@ -166,9 +196,135 @@ public class AdminService implements AdminDao {
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override
-	public List<ChartModel> chartM() {
+	public List<ChartModel> chartAllM() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("admin.chartAllM");
 	}
+
+	@Override
+	public List<ChartModel> chartNewM() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.chartNewM");
+	}
+
+	@Override
+	public List<ChartModel> memberGender() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.memberGender");
+	}
+
+	@Override
+	public List<ChartModel> newMemberGender() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.newMemberGender");
+	}
+
+	@Override
+	public List<ChartModel> memberAge() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.memberAge");
+	}
+
+	@Override
+	public List<ChartModel> newMemberAge() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.newMemberAge");
+	}
+
+	@Override
+	public List<ChartModel> memberRegion() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.memberRegion");
+	}
+
+	@Override
+	public List<ChartModel> newMemberRegion() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.newMemberRegion");
+	}
+	
+	/* ----------------------------------------------------------------------------------- */
+
+	@Override
+	public List<BooksModel> bookSelling() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.bookSelling");
+	}
+
+	@Override
+	public List<BooksModel> monthBookSelling() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthBookSelling");
+	}
+
+	@Override
+	public List<BooksModel> weekBookSelling() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekBookSelling");
+	}
+
+	/* ----------------------------------------------------------------------------------- */
+	
+	@Override
+	public List<ChartModel> monthOrderNum() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthOrderNum");
+	}
+
+	@Override
+	public List<ChartModel> monthSales() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthSales");
+	}
+
+	@Override
+	public List<ChartModel> weekOrderNum() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekOrderNum");
+	}
+
+	@Override
+	public List<ChartModel> weekSales() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekSales");
+	}
+
+	@Override
+	public List<ChartModel> monthOrderGender() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthOrderGender");
+	}
+
+	@Override
+	public List<ChartModel> weekOrderGender() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekOrderGender");
+	}
+
+	@Override
+	public List<ChartModel> monthOrderAge() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthOrderAge");
+	}
+
+	@Override
+	public List<ChartModel> weekOrderAge() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekOrderAge");
+	}
+
+	@Override
+	public List<ChartModel> monthOrderRegion() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.monthOrderRegion");
+	}
+
+	@Override
+	public List<ChartModel> weekOrderRegion() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("admin.weekOrderRegion");
+	}
+	
+	
 	
 }

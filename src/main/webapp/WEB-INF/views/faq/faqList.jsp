@@ -4,302 +4,626 @@
 <%
 	String cp = request.getContextPath();
 %>
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Shop || Witter Multipage Responsive Template</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google Fonts -->
-<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <style type="text/css">
-.content_accordion {
-	margin: 20px;
+.points_table thead {
+	width: 100%;
+}
+
+.points_table tbody {
+	height: 562px;
+	overflow-y: auto;
+	width: 100%;
+}
+
+.points_table thead tr {
+	width: 99%;
+}
+
+.points_table tr {
+	width: 100%;
+}
+
+.points_table thead, .points_table tbody, .points_table tr,
+	.points_table td, .points_table th {
+	display: inline-block;
+}
+
+.points_table thead {
+	background: #5bc0de;
+	color: #fff;
+}
+
+.points_table tbody td, .points_table thead>tr>th {
+	float: left;
+	border-bottom-width: 0;
+}
+
+.points_table>tbody>tr>td, .points_table>tbody>tr>th, .points_table>tfoot>tr>td,
+	.points_table>tfoot>tr>th, .points_table>thead>tr>td, .points_table>thead>tr>th
+	{
+	height: 50px;
+	text-align: center;
+	line-height: 32px;
+}
+
+.odd {
+	background: #ffffff;
+	color: #000;
+}
+
+.even {
+	background: #efefef;
+	color: #000;
+}
+
+.points_table_scrollbar {
+	height: 612px;
+	width: 873px;
+	overflow-y: scroll;
+}
+
+.points_table_scrollbar::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);
+	border-radius: 10px;
+	background-color: #444444;
+}
+
+.points_table_scrollbar::-webkit-scrollbar {
+	width: 1%;
+	min-width: 5px;
+	background-color: lightcoral;
+}
+
+.points_table_scrollbar::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: lightcoral;
+	background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4)
+		50%, transparent, transparent)
+}
+
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+h1 {
+	color: #ccc;
+	text-align: center;
+}
+
+/*Fun begins*/
+.tab_container {
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 70px;
+	position: relative;
+}
+
+input, section {
+	clear: both;
+	padding-top: 10px;
+	display: none;
+}
+
+label {
+	font-weight: 700;
+	font-size: 18px;
+	display: block;
+	float: left;
+	width: 20%;
+	padding: 1.5em;
+	color: #757575;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	background: #f0f0f0;
+}
+
+#tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~
+	#content3, #tab4:checked ~ #content4, #tab5:checked ~ #content5 {
+	display: block;
+	padding: 20px;
+	background: #fff;
+	color: #999;
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.tab_container .tab-content p, .tab_container .tab-content h3 {
+	-webkit-animation: fadeInScale 0.7s ease-in-out;
+	-moz-animation: fadeInScale 0.7s ease-in-out;
+	animation: fadeInScale 0.7s ease-in-out;
+}
+
+.tab_container .tab-content h3 {
+	text-align: center;
+}
+
+.tab_container [id^="tab"]:checked+label {
+	background: #fff;
+	box-shadow: inset 0 3px lightcoral;;
+}
+
+.tab_container [id^="tab"]:checked+label .fa {
+	color: #0CE;
+}
+label .fa {
+	font-size: 1.3em;
+	margin: 0 0.4em 0 0;
+}
+
+/*Media query*/
+@media only screen and (max-width: 930px) {
+	label span {
+		font-size: 14px;
+	}
+	label .fa {
+		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	label span {
+		display: none;
+	}
+	label .fa {
+		font-size: 16px;
+	}
+	.tab_container {
+		width: 98%;
+	}
+}
+
+table {
+	table-layout: fixed;
+}
+
+/*Content Animation*/
+@
+keyframes fadeInScale { 0% {
+	transform: scale(0.9);
+	opacity: 0;
+}
+100%
+{
+transform
+:scale(1)
+;
+
+
+opacity
+:
+1;
+
+
+}
+}
+
+.btn-info {
+background-color: lightcoral;
+border: lightcoral;
+}
+.btn-info:hover {
+background-color: lightcoral;
+border: lightcoral;
 }
 </style>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">
-					FAQ 게시판
-					<!--small>Statistics Overview</small-->
-				</h1>
-				<ul id="myTab" class="nav nav-tabs">
-					<li class="active">
-						<a href="#home" data-toggle="tab">전체</a>
-					</li>
-					<li>
-						<a href="#a" data-toggle="tab">배송 문의</a>
-					</li>
-					<li>
-						<a href="#b" data-toggle="tab">도서 문의</a>
-					</li>
-					<li>
-						<a href="#c" data-toggle="tab">기타 문의</a>
-					</li>
-				</ul>
-				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade in active" id="home">
-						<div class="content_accordion">
-							<div class="panel-group" id="accordion">
-								<div class="container">
-									<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
-										<colgroup>
-											<col width="86px" />
-											<col width="*" />
-											<col width="126px" />
-											<col width="126px" />
-										</colgroup>
-										<tbody>
-											<tr>
-												<th>번호</th>
-												<th>제목</th>
-												<th>글쓴이</th>
-												<th>조회수</th>
-												<th>날 짜</th>
-											</tr>
-											<c:choose>
-												<c:when test="${listCount==0 }">
-												등록된 게시글이 없습니다.
-											</c:when>
-												<c:otherwise>
-													<form name="faqform" id="faqform">
-														<c:forEach var="list" items="${faqList }" varStatus="stat">
-															<c:url var="viewURL" value="/faq/faqDetail.do">
-																<c:param name="faq_num" value="${list.faq_num}" />
-															</c:url>
-															<a href="${viewURL }"></a>
-															<tr>
-																<td class="td_line_none">${list.faq_num}</td>
-																<td class="td_line_none align_left">
-																	<c:if test="${list.faq_category == 1}">
-																		<font size='2' color='black'>
-																			<b>[배송]</b>
-																			<a href="${viewURL}">${list.faq_title}</a>
-																		</font>
-																	</c:if>
-																	<c:if test="${list.faq_category == 2}">
-																		<font size='2' color='black'>
-																			<b>[도서]</b>
-																			<a href="${viewURL}">${list.faq_title}</a>
-																		</font>
-																	</c:if>
-																	<c:if test="${list.faq_category == 3}">
-																		<font size='2' color='black'>
-																			<b>[기타]</b>
-																			<a href="${viewURL}">${list.faq_title}</a>
-																		</font>
-																	</c:if>
-																</td>
-																<td class="td_line_none">${list.member_id}</td>
-																<td class="td_line_none">${list.readcount}</td>
-																<td class="td_line_none">${list.faq_regdate}</td>
-															</tr>
-														</c:forEach>
-													</form>
-												</c:otherwise>
-											</c:choose>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!--accordion end-->
-					</div>
-					<div class="tab-pane fade" id="a">
-						<div class="content_accordion">
-							<div class="panel-group" id="ga">
-								<div class="container">
-									<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
-										<colgroup>
-											<col width="86px" />
-											<col width="*" />
-											<col width="126px" />
-											<col width="126px" />
-										</colgroup>
-										<tbody>
-											<tr>
-												<th>번호</th>
-												<th>제목</th>
-												<th>글쓴이</th>
-												<th>조회수</th>
-												<th>날 짜</th>
-											</tr>
-											<c:choose>
-												<c:when test="${listCount==0 }">
-												등록된 게시글이 없습니다.
-											</c:when>
-												<c:otherwise>
-													<form name="faqform" id="faqform">
-														<c:forEach var="list" items="${AfaqList }" varStatus="stat">
-															<c:url var="viewURL" value="/faq/faqDetail.do">
-																<c:param name="faq_num" value="${list.faq_num}" />
-															</c:url>
-															<a href="${viewURL }"></a>
-															<tr>
-																<td class="td_line_none">${list.faq_num}</td>
-																<td class="td_line_none align_left">
-																	<c:if test="${list.faq_category == 1}">
-																		<font size='2' color='black'>
-																			<b>[배송]</b>
-																			<a href="${viewURL}">${list.faq_title}</a>
-																		</font>
-																	</c:if>
-																</td>
-																<td class="td_line_none">${list.member_id}</td>
-																<td class="td_line_none">${list.readcount}</td>
-																<td class="td_line_none">${list.faq_regdate}</td>
-															</tr>
-														</c:forEach>
-													</form>
-												</c:otherwise>
-											</c:choose>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!--accordion end-->
-					</div>
-					<div class="tab-pane fade" id="b">
-						<div class="content_accordion">
-							<div class="panel-group" id="gb">
-								<div class="container">
-									<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
-										<colgroup>
-											<col width="86px" />
-											<col width="*" />
-											<col width="126px" />
-											<col width="126px" />
-										</colgroup>
-										<tbody>
-											<tr>
-												<th>번호</th>
-												<th>제목</th>
-												<th>글쓴이</th>
-												<th>조회수</th>
-												<th>날 짜</th>
-											</tr>
-											<c:choose>
-												<c:when test="${listCount==0 }">
-												등록된 게시글이 없습니다.
-											</c:when>
-												<c:otherwise>
-													<form name="faqform" id="faqform">
-														<c:forEach var="list" items="${BfaqList }" varStatus="stat">
-															<c:url var="viewURL" value="/faq/faqDetail.do">
-																<c:param name="faq_num" value="${list.faq_num}" />
-															</c:url>
-															<a href="${viewURL }"></a>
-															<tr>
-																<td class="td_line_none">${list.faq_num}</td>
-																<td class="td_line_none align_left">
-																	<c:if test="${list.faq_category == 2}">
-																		<font size='2' color='black'>
-																			<b>[도서]</b>
-																			<a href="${viewURL}">${list.faq_title}</a>
-																		</font>
-																	</c:if>
-																</td>
-																<td class="td_line_none">${list.member_id}</td>
-																<td class="td_line_none">${list.readcount}</td>
-																<td class="td_line_none">${list.faq_regdate}</td>
-															</tr>
-														</c:forEach>
-													</form>
-												</c:otherwise>
-											</c:choose>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!--accordion end-->
-					</div>
-					<div class="tab-pane fade" id="c">
-						<div class="content_accordion">
-							<div class="panel-group" id="gc">
-								<table class="table table-hover" cellspacing="0" cellpadding="0" border="0">
-									<colgroup>
-										<col width="86px" />
-										<col width="*" />
-										<col width="126px" />
-										<col width="126px" />
-									</colgroup>
-									<tbody>
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>글쓴이</th>
-											<th>조회수</th>
-											<th>날 짜</th>
-										</tr>
-										<c:choose>
-											<c:when test="${listCount==0 }">
-												등록된 게시글이 없습니다.
-											</c:when>
-											<c:otherwise>
-												<form name="faqform" id="faqform">
-													<c:forEach var="list" items="${CfaqList }" varStatus="stat">
-														<c:url var="viewURL" value="/faq/faqDetail.do">
-															<c:param name="faq_num" value="${list.faq_num}" />
-														</c:url>
-														<a href="${viewURL }"></a>
-														<tr>
-															<td class="td_line_none">${list.faq_num}</td>
-															<td class="td_line_none align_left">
-																<c:if test="${list.faq_category == 3}">
-																	<font size='2' color='black'>
-																		<b>[기타]</b>
-																		<a href="${viewURL}">${list.faq_title}</a>
-																	</font>
-																</c:if>
-															</td>
-															<td class="td_line_none">${list.member_id}</td>
-															<td class="td_line_none">${list.readcount}</td>
-															<td class="td_line_none">${list.faq_regdate}</td>
-														</tr>
-													</c:forEach>
-												</form>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!--accordion end-->
+			<h2 style="text-align: -webkit-center; padding-top: 30px;">FAQ</h2>
+			<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+				<li>
+					<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
+				</li>
+				<li>
+					<a title="Go to Shopping" href="<%=cp%>/books/booksList.do" style="font-style: oblique;">SHOP</a>
+				</li>
+			</ul>
+			<hr>
+			<div class="tab_container" style="padding-top: 30px;">
+				<input id="tab1" type="radio" name="tabs" checked>
+				<label for="tab1">
+					<i class="fa fa-folder-open-o" style="color: lightcoral;"></i>
+					<span>ALL</span>
+				</label>
+				<input id="tab2" type="radio" name="tabs">
+				<label for="tab2" style="padding-left: 0px; padding-right: 0px;">
+					<i class="fa fa-folder-open-o" style="color: lightcoral; margin-right: 0px;"></i>
+					<span>DELIVERY</span>
+				</label>
+				<input id="tab3" type="radio" name="tabs">
+				<label for="tab3">
+					<i class="fa fa-folder-open-o" style="color: lightcoral;"></i>
+					<span>BOOK</span>
+				</label>
+				<input id="tab4" type="radio" name="tabs">
+				<label for="tab4">
+					<i class="fa fa-folder-open-o" style="color: lightcoral;"></i>
+					<span>ETC</span>
+				</label>
+				<c:if test="${member_id eq 'admin'}">
+					<input id="tab5" type="radio" name="tabs" onclick="javascript:location.href='<%=cp%>/faq/faqWrite.do'">
+				</c:if>
+				<c:if test="${member_id ne 'admin'}">
+					<input id="tab5" type="radio" name="tabs">
+				</c:if>
+				<label for="tab5" style="padding-left: 0px; padding-right: 0px;">
+					<c:if test="${member_id eq 'admin'}">
+						<i class="fa fa-pencil-square-o" style="color: lightcoral;"></i>
+						<span style="color: lightcoral;">WRITE</span>
+					</c:if>
+					<c:if test="${member_id ne 'admin'}">
+						<i class="fa fa-folder-open-o" style="color: lightcoral;"></i>
+						<span>MEMBER</span>
+					</c:if>
+				</label>
+				<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" var="toDay"/>
+				<section id="content1" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<table class="points_table" style="width: 100%;">
+						<tbody class="points_table_scrollbar" style="height: 500px;">
+							<tr style="background-color: lightcoral; width: 100%;">
+								<td class="col-md-1 col-sm-1 hidden-xs" align="center" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
+							</tr>
+							<c:choose>
+								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+								<c:otherwise>
+									<form name="faqform1" id="faqform1">
+										<c:forEach var="list" items="${faqList}" varStatus="stat">
+											<c:url var="viewURL" value="/faq/faqDetail.do">
+												<c:param name="faq_num" value="${list.faq_num}" />
+											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
+											<a href="${viewURL }"></a>
+											<c:if test="${stat.index % 2 ==0}">
+												<tr class="odd">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">
+														<c:if test="${list.faq_category == 1}">배송</c:if>
+														<c:if test="${list.faq_category == 2}">도서</c:if>
+														<c:if test="${list.faq_category == 3}">기타</c:if>
+														<c:if test="${list.faq_category == 4}">회원</c:if>
+													</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+											<c:if test="${stat.index % 2 ==1}">
+												<tr class="even">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">
+														<c:if test="${list.faq_category == 1}">배송</c:if>
+														<c:if test="${list.faq_category == 2}">도서</c:if>
+														<c:if test="${list.faq_category == 3}">기타</c:if>
+													</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</form>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
 				</div>
+				<p style="text-align: center;">${pagingHtml}</p>
+				</section>
+				<section id="content2" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<table class="points_table">
+						<tbody class="points_table_scrollbar" style="height: 500px;">
+							<tr style="background-color: lightcoral;">
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
+							</tr>
+							<c:choose>
+								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+								<c:otherwise>
+									<form name="faqform2" id="faqform2">
+										<c:forEach var="list" items="${AfaqList}" varStatus="stat">
+											<c:url var="viewURL" value="/faq/faqDetail.do">
+												<c:param name="faq_num" value="${list.faq_num}" />
+											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
+											<a href="${viewURL }"></a>
+											<c:if test="${stat.index % 2 ==0}">
+												<tr class="odd">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">배송</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+											<c:if test="${stat.index % 2 ==1}">
+												<tr class="even">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">배송</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</form>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+				</section>
+				<section id="content3" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<table class="points_table">
+						<tbody class="points_table_scrollbar" style="height: 500px;">
+							<tr style="background-color: lightcoral;">
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
+							</tr>
+							<c:choose>
+								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+								<c:otherwise>
+									<form name="faqform3" id="faqform3">
+										<c:forEach var="list" items="${BfaqList}" varStatus="stat">
+											<c:url var="viewURL" value="/faq/faqDetail.do">
+												<c:param name="faq_num" value="${list.faq_num}" />
+											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
+											<a href="${viewURL }"></a>
+											<c:if test="${stat.index % 2 ==0}">
+												<tr class="odd">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">도서</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>															
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+											<c:if test="${stat.index % 2 ==1}">
+												<tr class="even">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">도서</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</form>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+				</section>
+				<section id="content4" class="tab-content" style="padding-right: 0px; padding-left: 0px;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<table class="points_table">
+						<tbody class="points_table_scrollbar" style="height: 500px;">
+							<tr style="background-color: lightcoral;">
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
+							</tr>
+							<c:choose>
+								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+								<c:otherwise>
+									<form name="faqform4" id="faqform4">
+										<c:forEach var="list" items="${CfaqList}" varStatus="stat">
+											<c:url var="viewURL" value="/faq/faqDetail.do">
+												<c:param name="faq_num" value="${list.faq_num}" />
+											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
+											<a href="${viewURL }"></a>
+											<c:if test="${stat.index % 2 ==0}">
+												<tr class="odd">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+											<c:if test="${stat.index % 2 ==1}">
+												<tr class="even">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</form>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+				</section>
+				<section id="content5" class="tab-content" style="padding-right: 0px; padding-left: 0px; height: 630px;">
+				<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 0px;">
+					<c:if test="${member_id ne 'admin'}">
+					<table class="points_table" style="width: 100%;">
+						<tbody class="points_table_scrollbar" style="height: 500px;">
+							<tr style="background-color: lightcoral;" style="width: 100%;">
+								<td class="col-md-1 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">#</td>
+								<td class="col-md-2 col-sm-2 col-xs-3" style="color: white; padding-top: 10px;">TYPE</td>
+								<td class="col-md-4 col-sm-4 col-xs-5" style="color: white; padding-top: 10px;">TITLE</td>
+								<td class="col-md-1 col-sm-1 col-xs-2" style="color: white; padding-top: 10px;">NAME</td>
+								<td class="col-md-2 col-sm-1 hidden-xs" style="color: white; padding-top: 10px;">VIEWS</td>
+								<td class="col-md-2 col-sm-3 hidden-xs" style="color: white; padding-top: 10px;">DATE</td>
+							</tr>
+							<c:choose>
+								<c:when test="${listCount==0 }">등록된 게시글이 없습니다.</c:when>
+								<c:otherwise>
+									<form name="faqform5" id="faqform5">
+										<c:forEach var="list" items="${DfaqList}" varStatus="stat">
+											<c:url var="viewURL" value="/faq/faqDetail.do">
+												<c:param name="faq_num" value="${list.faq_num}" />
+											</c:url>
+											<fmt:formatDate value="${list.faq_regdate }" pattern="yyyy-MM-dd" var ="RegDay"/>
+											<a href="${viewURL }"></a>
+											<c:if test="${stat.index % 2 ==0}">
+												<tr class="odd">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+											<c:if test="${stat.index % 2 ==1}">
+												<tr class="even">
+													<td class="col-md-1 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.faq_num}</td>
+													<td class="col-md-2 col-sm-2 col-xs-3" style="padding-top: 10px;">기타</td>
+													<td class="col-md-4 col-sm-4 col-xs-5" style="padding-top: 10px;">
+														<a href="${viewURL}">${list.faq_title}</a>
+															<c:if test="${toDay eq RegDay }">
+																<img src="<%=cp%>/img/icon_board_new.png" style="margin-bottom: 3px;">
+															</c:if>														
+													</td>
+													<td class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 10px;">${list.member_id}</td>
+													<td class="col-md-2 col-sm-1 hidden-xs" style="padding-top: 10px;">${list.readcount}</td>
+													<td class="col-md-2 col-sm-3 hidden-xs" style="padding-top: 10px;">
+														<fmt:formatDate value="${list.faq_regdate}" pattern="yy-MM-dd" />
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</form>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+					</c:if>
+				</div>
+				</section>
 			</div>
 		</div>
-		<!-- /.row -->
-	</div>
-	<!-- /.container-fluid -->
-	<table class="table_style03" cellspacing="0" cellpadding="0" border="0">
-		<tr>
-			<td id="search">
-				<form>
-					<select name="searchNum">
+		<br />
+		<form>
+			<div class="col-md-8 col-sm-8 col-xs-12 input-group" style="margin-left: auto; margin-right: auto;">
+				<div class="input-group-btn search-panel" style="padding-bottom: 10px;">
+					<select class="form-control" name="searchNum" style="width: 80px; padding-left: 0px; padding-right: 0px;">
+						<option value="0">작성자</option>
 						<option value="1">제목</option>
 						<option value="2">내용</option>
 					</select>
-					<input class="text" type="text" name="isSearch" />
-					<input name="submit" type="submit" value="검색" class="Bsearch" />
-				</form>
-			</td>
-			<c:if test="${member_id eq 'admin' }">
-				<button class="btn btn-primary" onclick="location.href='<%=cp%>/faq/faqWrite.do'">글쓰기</button>
-			</c:if>
-		</tr>
-		<tr>
-			<td colspan="5" align="center">
-				<div class="paging">${pagingHtml}</div>
-			</td>
-		</tr>
-	</table>
+				</div>
+				<input type="text" class="form-control" name="isSearch" placeholder="Search.." id="isSearch" value="">
+				<span class="input-group-btn" style="padding-bottom: 10px;">
+					<button class="btn btn-info" type="submit">  Search  </button>
+				</span>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

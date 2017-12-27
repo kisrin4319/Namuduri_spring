@@ -103,7 +103,7 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<label for="usr" class="form-row">PW:</label>
+							<label for="usr" class="form-row">Password:</label>
 							<p class="form-row">
 								<input type="password" name="member_pw">
 							<p class="form-row">
