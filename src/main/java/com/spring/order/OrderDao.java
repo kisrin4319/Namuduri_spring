@@ -37,4 +37,7 @@ public interface OrderDao {
 
 	// 10. 포인트 사용 후 차감 처리
 	public void point(MemberModel memberModel);
+	
+	// 11. 주문번호로 주문 상세 내역 가져오기
+	public List<OrderDetailModel> orderDetailList(String order_trade_num);
 }

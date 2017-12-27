@@ -11,8 +11,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function updateCheck(){
+	var page = ${currentPage};
 	if(confirm("변경 사항을 저장하시겠습니까?")){
-		document.bookForm.submit();
+		var frm = document.bookForm;
+		frm.action = "<%=cp%>/admin/bookDetail.do?currentPage="+page;
+		frm.submit();
 	}else{
 		return false;
 	}
@@ -63,10 +66,11 @@ function deleteCheck2(id) {
 				<div class="card">
 					<div class="card-block">
 						<form class="form-horizontal form-material" name="bookForm" method="POST" onsubmit="return updateCheck()" enctype="multipart/form-data">
+							<input type="hidden" name="book_num" value="${view.book_num }" />
 							<div class="row">
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
 									<img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" />
-									<input type="file" class="fileinput" name="book_image"/>
+									<input type="file" class="fileinput" name="file"/>
 									<c:choose>
 										<c:when test="${view.book_num==0}">
 											<input type="hidden" name="book_image" value="">

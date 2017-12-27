@@ -31,11 +31,11 @@ img.resize {
 			<div id="slider-direction-1" class="text-center slider-direction">
 				<!-- layer 1 -->
 				<div class="layer-1">
-					<h2 class="title-1">LET'S Look Around The Site.</h2>
+					<h2 class="title-1">Look around the Namuduri.</h2>
 				</div>
 				<!-- layer 2 -->
 				<div class="layer-2">
-					<p class="title-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p class="title-2">The Namuduri is the biggest big store and the biggest books library in the world that has a lot of the popular and the most top category books presented here.</p>
 				</div>
 				<!-- layer 3 -->
 				<div class="layer-3">
@@ -55,11 +55,11 @@ img.resize {
 			<div id="slider-direction-2" class="slider-direction">
 				<!-- layer 1 -->
 				<div class="layer-1">
-					<h2 class="title-1">LET’S WRITE IMAGINE</h2>
+					<h2 class="title-1">Look around the Namuduri.</h2>
 				</div>
 				<!-- layer 2 -->
 				<div class="layer-2">
-					<p class="title-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p class="title-2">The Namuduri is the biggest big store and the biggest books library in the world that has a lot of the popular and the most top category books presented here.</p>
 				</div>
 				<!-- layer 3 -->
 				<div class="layer-3">
@@ -136,8 +136,8 @@ img.resize {
 							<i class="flaticon-transport"></i>
 						</div>
 						<div class="shop-info-content">
-							<h2>FREE SHIPPING</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+							<h2>Fast Delivery</h2>
+							<p>The delivery of the book begins immediately after you place an order, so you can receive it in a short time.</p>
 						</div>
 					</div>
 				</div>
@@ -148,7 +148,7 @@ img.resize {
 						</div>
 						<div class="shop-info-content">
 							<h2>FREE SHIPPING</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+							<p>Delivery cost is free if you order more than 100,000 won.</p>
 						</div>
 					</div>
 				</div>
@@ -158,8 +158,8 @@ img.resize {
 							<i class="flaticon-school"></i>
 						</div>
 						<div class="shop-info-content">
-							<h2>FREE SHIPPING</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+							<h2>Periodic Update</h2>
+							<p>Periodic updates make it possible to check out new books right away.</p>
 						</div>
 					</div>
 				</div>
