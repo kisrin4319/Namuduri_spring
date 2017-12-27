@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -460,7 +461,7 @@ public class AdminController {
 		// !fileType.equals("gif") {Validation 이미지 파일만 업로드 가능합니다}
 
 		String fileName = "textbook_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + '.' + fileType;
-		String filePath = request.getSession().getServletContext().getRealPath("/") + "upload";
+		String filePath = "C:\\Java\\SpringApp\\SpringNamuduri\\namuduri\\src\\main\\webapp\\upload";
 
 		multipartFile.transferTo(new File(filePath + File.separator + fileName));
 
@@ -481,7 +482,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookWrite.do", method = RequestMethod.POST) // 도서 등록하기
-	public String bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel, BindingResult result) throws Exception {
+	public String bookWrite(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,
+			BindingResult result) throws Exception {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile multipartFile = multipartRequest.getFile("book_image");
@@ -493,8 +495,9 @@ public class AdminController {
 		}
 
 		booksModel.setBook_image(book_image);
-		String content = booksModel.getBook_content().replaceAll("<br />", "\r\n");
+		String content = booksModel.getBook_content().replaceAll("\r\n","<br />");
 		booksModel.setBook_content(content);
+		
 		adminService.insertBook(booksModel);
 		BooksModel view = adminService.selectNewest();
 		int book_num = view.getBook_num();
@@ -504,21 +507,30 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.POST) // 도서 수정하기
-	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage) {
-		try {
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile multipartFile = multipartRequest.getFile("book_image");
-		String book_image = null;
-		
-		if (multipartFile.isEmpty() == false) // 파일이 존재할 때
-		{
-			book_image = getFile(request, multipartFile);
-			booksModel.setBook_image(book_image);
-		}
-		
-		String content = booksModel.getBook_content().replaceAll("<br />", "\r\n");
-		booksModel.setBook_content(content);
+	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage) throws Exception {
 
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		Iterator<String> iterator = multipartRequest.getFileNames();
+		MultipartFile multipartFile = null;
+		String book_image = null;
+		int book_num = Integer.parseInt(request.getParameter("book_num"));
+		while (iterator.hasNext()) {
+			multipartFile = multipartRequest.getFile(iterator.next());
+			if (multipartFile.isEmpty() == false) {
+				log.debug("------------- file start -------------");
+				log.debug("name : " + multipartFile.getName());
+				log.debug("filename : " + multipartFile.getOriginalFilename());
+				log.debug("size : " + multipartFile.getSize());
+				log.debug("-------------- file end --------------\n");
+				book_image = getFile(request, multipartFile);
+			} else {
+				book_image = request.getParameter("book_image");
+			}
+		}
+		booksModel.setBook_num(book_num);
+		booksModel.setBook_image(book_image);
+		String content = booksModel.getBook_content().replaceAll("\r\n","<br />");
+		booksModel.setBook_content(content);
 		adminService.modifyBook(booksModel);
 
 		BooksModel view = booksService.bookOne(booksModel.getBook_num());
@@ -526,10 +538,7 @@ public class AdminController {
 		mv.addObject("view", view);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminBookDetail");
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+
 		return mv;
 	}
 
