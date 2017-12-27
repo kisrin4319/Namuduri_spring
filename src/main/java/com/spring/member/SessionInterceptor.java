@@ -24,7 +24,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			}
 			
 		} else { //아이디가 없을 떄 
-			if(request.getRequestURI().indexOf("basket")>0 || request.getRequestURI().indexOf("order")>0 || request.getRequestURI().indexOf("mypage")>0 || request.getRequestURI().indexOf("wish")>0 || request.getRequestURI().indexOf("review")>0 || request.getRequestURI().toLowerCase().indexOf("modify") >0 || request.getRequestURI().toLowerCase().indexOf("delete") >0) {
+			if(request.getRequestURI().indexOf("admin")>0 || request.getRequestURI().indexOf("basket")>0 || request.getRequestURI().indexOf("order")>0 || request.getRequestURI().indexOf("mypage")>0 || request.getRequestURI().indexOf("wish")>0 || request.getRequestURI().indexOf("review")>0 || request.getRequestURI().toLowerCase().indexOf("modify") >0 || request.getRequestURI().toLowerCase().indexOf("delete") >0) {
 				
 				response.sendRedirect(request.getContextPath() + "/member/loginForm.do");
 				
