@@ -12,23 +12,16 @@
 </head>
 <body>
 	<!-- Breadcrumbs Area Start -->
-	<div class="breadcrumbs-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="breadcrumbs">
-						<h2>JOIN</h2>
-						<ul class="breadcrumbs-list">
-							<li>
-								<a title="Return to Home" href="index.html">Home</a>
-							</li>
-							<li>JOIN</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	<h2 style="text-align: -webkit-center; padding-top: 30px;">&nbsp;SIGN UP PAGE</h2>
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Return to Home" href="<%=cp%>/main.do" style="font-style: oblique;">HOME</a>
+		</li>
+		<li>
+			<a title="Go to Login" href="<%=cp%>/member/loginForm.do" style="font-style: oblique;">LOGIN</a>
+		</li>
+	</ul>
 	<!-- Breadcrumbs Area Start -->
 	<!-- Loging Area Start -->
 	<div class="login-account section-padding">
@@ -132,14 +125,15 @@ located in SOUTH KOREA for the resolution of any disputes.
 						</p>
 						<br>
 						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							
 							<input type="checkbox" name="cb2" checked="checked" disabled="disabled" />
-							&nbsp;개인정보 취급방침에 동의합니다. AGREE
+							&nbsp;I agree to the privacy policy.
 							<br>
 							<br>
 						</p>
 						<p align="center">
-						<div class="col-pjh-1 col-sm-6">
+						<h4 class="h4_member margin_top15" style="margin-top: 25px;">Required Fields</h4>
+						<div>
 							<!-- 아이디============================================================================== -->
 							<span class="form-row">
 								<input type="text" placeholder="ID" id="member_id" name="member_id" maxlength="15" oninput="checkId()">
@@ -151,7 +145,7 @@ located in SOUTH KOREA for the resolution of any disputes.
 								<input type="password" id="member_pw" name="member_pw" maxlength="16" placeholder="PASSWORD">
 							</p>
 							<!-- 비밀번호 확인============================================================================== -->
-							<p class="form-row">
+							<p class="form-row" style="margin-bottom: 15px;">
 								<input type="password" id="passwordCheck" maxlength="16" placeholder="PASSWORD CONFIRM" onkeyup="passWorkCheck();" />
 								&nbsp;
 								<span id="passwordCheckText"></span>
@@ -161,20 +155,22 @@ located in SOUTH KOREA for the resolution of any disputes.
 								<input type="text" name="member_name" placeholder="NAME">
 							</p>
 							<!-- 주민등록번호============================================================================== -->
-							<p class="form-row">
+							<p class="col-sm-6 col-md-6 col-xs-6 form-row" style="padding-left: 5px;padding-right: 5px;right: 5px;">
 								<span class="form-row">
 									<input type="text" maxlength="6" name="member_jumin1" placeholder="REGISTRATION NUMBER">
 								</span>
-								-
-								<span class="form-row">
-									<input type="password" maxlength="7" name="member_jumin2" placeholder="REGISTRATION NUMBER2">
+							</p>
+							<div style="margin-bottom: 0px; margin-top: 0px; padding-top: 8px; height: 8px;">-</div>
+							<p>							
+								<span class="col-sm-6 col-md-6 col-xs-6 form-row" style="padding-left: 7px;padding-right: 6px;bottom: 8px;left: 6px;">
+									<input type="password" maxlength="7" name="member_jumin2" placeholder="REGISTRATION NUMBER">
 								</span>
 							</p>
 							<!-- 우편번호============================================================================== -->
 							<p class="form-row" style="margin-bottom: 0px;">
 								<input type="text" name="member_zipcode" placeholder="ZIP CODE" readonly>
 							</p>
-							<input type="button" name="zipcode" value="우편번호" onclick="javascript:openZipCheck(this.form)" class="btn-default" style="height: 20px; margin-top: 5px; margin-left: 10px;" />
+							<input type="button" name="zipcode" value="ZIP CODE" onclick="javascript:openZipCheck(this.form)" class="btn-default" style="height: 20px; margin-top: 5px;" />
 							<!-- 주소============================================================================== -->
 							<p class="form-row" style="margin-top: 6px;">
 								<input type="text" name="member_addr1" placeholder="ADDRESS">
@@ -192,22 +188,39 @@ located in SOUTH KOREA for the resolution of any disputes.
 								<input type="text" name="member_mobile" maxlength="11" placeholder="MOBILE NUMBER">
 							</p>
 							<!-- 이메일============================================================================== -->
-							<p class="form-row" style="margin-bottom: 0px;">
+							<!-- <p class="form-row" style="margin-bottom: 0px;">
 								<input type="text" id="member_email" name="member_email" placeholder="E-MAIL">
+							</p> -->
+							<p class="col-sm-5 col-md-5 col-xs-5 form-row" style="padding-left: 0px; padding-right: 5px; margin-bottom: 0px;">
+								<span class="form-row">
+									<input type="text" id="member_email" name="member_email" placeholder="E-MAIL">
+								</span>
 							</p>
+							<div style="margin-bottom: 0px; margin-top: 0px; padding-top: 8px; height: 8px;">@</div>
+							<p class="col-sm-7 col-md-7 col-xs-7 form-row" style="padding-left: 5px;padding-right: 15px;left: 15px;bottom: 8px; margin-bottom: 0px;">
+								<span class="form-row">
+									<input type="text" id="member_email1" name="member_email1" placeholder="The reamining E-MAIL">
+								</span>
+							</p>
+							<!-- 이메일 체크박스========================================================================= -->
+							<div>
 							<input type="checkbox" name="member_email_get" value="on" style="margin-top: 5px; margin-left: 10px;" />
-							동의함 YES, AGREE
-							<font size="1">배송현황 및 쇼핑정보를 받으시겠습니까?AGREE?</font>
-						</div>
-						<h4 class="h4_member margin_top15" style="margin-top: 25px;">Optional Inputs</h4>
-						<div>
+							I agree
+							<font size="1">
+							Would you like to receive shipping status and shopping information?</font>
+							</div>
+							</div>
+							
+							<h4 class="h4_member margin_top15" style="margin-top: 25px;">Optional Inputs</h4>
+						
+							<div >
 							<!-- 은행명============================================================================== -->
 							<p class="form-row">
-								<input type="text" name="member_bankname" placeholder="BANKNAME ( 환불용 계좌 )">
+								<input type="text" name="member_bankname" placeholder="BANKNAME ( Refund Account )">
 							</p>
 							<!-- 환불계좌============================================================================== -->
 							<p class="form-row">
-								<input type="text" name="member_refund_account" placeholder="REFUND ACCOUNT (  - 빼고 입력하세요 )">
+								<input type="text" name="member_refund_account" placeholder="REFUND ACCOUNT ">
 							</p>
 							<!-- 예금주============================================================================== -->
 							<p class="form-row">
@@ -218,7 +231,7 @@ located in SOUTH KOREA for the resolution of any disputes.
 						<br />
 						<div class="subtotal-main-area">
 							<a href="javascript:" onclick="window.location='loginForm.do';">CANCLE</a>
-							<a href="javascript:check();">CREATE AN ACCOUNT</a>
+							<a href="javascript:check();">SIGN UP</a>
 						</div>
 						<br />
 					</form>
@@ -278,6 +291,11 @@ function check() {
       f.member_pw.focus();
       
    }
+   else if(f.passwordCheck.value == ""){
+	  alert("비밀번호를 입력해주십시오.");
+	  f.passwordCheck.focus();
+	      
+   }
    else if(f.member_name.value == ""){
       alert("이름을 입력해주십시오.");
       f.member_name.focus();
@@ -307,7 +325,12 @@ function check() {
 	  alert("이메일을 입력해주십시오.");
 	  f.member_email.focus();
 	      
-	}
+   }
+   else if(f.member_email1.value == ""){
+	  alert("이메일을 입력해주십시오.");
+	  f.member_email1.focus();
+   }
+   
    
    else {
    alert("회원가입 되었습니다.")
@@ -324,9 +347,9 @@ function passWorkCheck(){
    if(passwordCheck == ""){
       document.getElementById("passwordCheckText").innerHTML = ""
    } else if (password != passwordCheck) {
-      document.getElementById("passwordCheckText").innerHTML = "<b><font color=red size=2pt> 비밀번호가 틀립니다. </font></b>"
+      document.getElementById("passwordCheckText").innerHTML = "<b><font color=red size=2pt> Wrong password. </font></b>"
    } else {
-      document.getElementById("passwordCheckText").innerHTML = "<b><font color=blue size=2pt> 비밀번호가 일치합니다. </font></b>"
+      document.getElementById("passwordCheckText").innerHTML = "<b><font color=blue size=2pt> Passwords match. </font></b>"
    }
 }
 
@@ -347,7 +370,7 @@ function openIdCheck(){
 function openZipCheck() {  
    
    var zipUrl = '<%=cp%>/member/zipCheckForm.do';
-		window.open(zipUrl,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=603, height=236");
+		window.open(zipUrl,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=603, height=322");
 	}
 
 	function validate(element, min, max) {
