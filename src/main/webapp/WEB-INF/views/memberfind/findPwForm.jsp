@@ -30,10 +30,12 @@ function check() {
             success:function(result){
             	if(result.returnVal == '1'){
             		//alert('당신의 비밀번호는' + result.member_pw + '입니다.');
-            		alert('임시비밀번호가 입력하신 이메일로 발송되었습니다.')
+            		alert('임시비밀번호가 입력하신 이메일로 발송되었습니다.');
+            		window.close();
             		return false;
             	}else {
             		alert('아이디 또는 이메일이 바르지 않습니다.');
+            		window.close();
             		return false;
             	}
             },
@@ -45,58 +47,51 @@ function check() {
 </script>
 </head>
 <body>
-
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">FIND PW MEMBER PAGE</h2>
-		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-			<li>
-				<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
-			</li>
-			<li>
-				<a title="Go to Find Id" href="<%=cp%>/member/memberIdFindView.do">Find ID</a>
-			</li>
-		</ul>
-		
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
+		</li>
+		<li>
+			<a title="Go to Find Id" href="<%=cp%>/member/memberIdFindView.do">Find ID</a>
+		</li>
+	</ul>
 	<!-- Find PW Area Start -->
-		<div class="login-account section-padding">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form class="create-account-form" name="findpwform" id="findpwform">
-							<h2 class="heading-title">
-								Find PW
-							</h2>
-							<div class="col-sm-6 form-group">						
-								<label>ID</label>
-								<input type="text" class="form-control" name="member_id">							
+	<div class="login-account section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<form class="create-account-form" name="findpwform" id="findpwform">
+						<h2 class="heading-title">Find PW</h2>
+						<div class="col-sm-6 form-group">
+							<label>ID</label>
+							<input type="text" class="form-control" name="member_id">
+						</div>
+						<div class="col-sm-6 form-group">
+							<label>E-MAIL</label>
+							<input type="text" class="form-control" name="member_email">
+						</div>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
+									<span>
+										<i class="fa fa-user left"></i>
+										SING IN
+									</span>
+								</button>
 							</div>
-							
-							<div class="col-sm-6 form-group">
-								<label>E-MAIL</label>
-								<input type="text" class="form-control" name="member_email">
-							</div>
-							
-							<br><br><br><br><br><br><br>
-							
-							<div class="row">
-								<div class="col-sm-12 text-center">					
-                                <button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
-                                    <span>
-                                        <i class="fa fa-user left"></i>
-                                       	 SING IN
-                                    </span>
-                                </button>
-                                <!-- <button name="submitcreate" id="submitcreate" class="btn-default">
-                                    <span>
-                                        <i class="fa fa-user left"></i>
-                                       	 CLOSE
-                                    </span>
-                                </button> -->
-                                </div>
-                            </div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
