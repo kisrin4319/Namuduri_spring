@@ -139,7 +139,7 @@ img.star {
 										BUY NOW
 									</a>
 									<br />
-									<a class="cart-btn btn-default" href="javascript:isBasket(${view.book_num});">
+									<a class="cart-btn btn-default" href="javascript:isBasket(${view.book_num});" style="margin-top: 5px;">
 										<i class="flaticon-shop"></i>
 										ADD TO CART
 									</a>
@@ -339,15 +339,15 @@ img.star {
 										<td>
 											<strong>
 												마이룸 &gt; 주문관리 &gt; 주문/배송내역 &gt; 주문조회 &gt;
-												<a href="qnaList.do">반품/교환신청</a>
+												<a href="<%=cp%>/board/boardList.do">반품/교환신청</a>
 												,
 												<br />
-												<a href="qnaList.do">[1:1상담&gt;반품/교환/환불]</a>
+												<a href="<%=cp%>/board/boardList.do">[1:1상담&gt;반품/교환/환불]</a>
 												또는 고객센터 (1544-1900)
 											</strong>
 											<br />
 											※ 오픈마켓, 해외배송주문, 기프트 주문시
-											<a href="boardList.do">[1:1상담&gt;반품/교환/환불]</a>
+											<a href="<%=cp%>/board/boardList.do">[1:1상담&gt;반품/교환/환불]</a>
 											또는 고객센터 (1544-1900)
 										</td>
 									</tr>
