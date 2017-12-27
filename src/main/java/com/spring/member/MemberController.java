@@ -71,6 +71,11 @@ public class MemberController {
 		MemberModel memberModel = new MemberModel();
 
 		memberModel = memberService.SelectOne(member_id);
+		if(memberModel==null) {
+			mv.setViewName("member/loginError");
+			return mv;
+		}
+		
 		passwordEncoder = new BCryptPasswordEncoder();
 
 		System.out.println("=============================================================");
