@@ -84,7 +84,7 @@ div.col-xs-8 {
 				</div>
 			</div>
 			<h3 style="margin-left: 15px;">주문자 정보</h3>
-			<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="border-width: 1px;border-style: solid;border-color: rgb(221, 221, 221); border-image: initial;">
+			<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="border-width: 1px;border-style: solid;border-color: rgb(221, 221, 221); border-image: initial; ">
 				<div class="form-group">
 					
 					<label class="col-sm-2 col-md-2 col-xs-6" for="f_name" style="margin-bottom: 0px;"> ID : </label>
@@ -95,7 +95,7 @@ div.col-xs-8 {
 					<div class="col-sm-2 col-md-2 col-xs-6">${memberInfo.member_phone }</div>
 				</div>
 			</div>
-			<div class="col-md-9 col-sm-9 col-xs-12 center-block">
+			<div class="col-md-9 col-sm-9 col-xs-12 center-block" style="margin-bottom: 5px;"> 
 				<c:forEach var="item" items="${ memberOrderDetail }">
 					<div class="list-group"">
 						<a href="#" class="list-group-item">
