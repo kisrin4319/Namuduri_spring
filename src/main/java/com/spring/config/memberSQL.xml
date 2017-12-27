@@ -42,7 +42,10 @@
 		    MEMBER_MOBILE = #{member_mobile},
 		    MEMBER_PHONE = #{member_phone}, 
 		    MEMBER_EMAIL = #{member_email},
-		   	MEMBER_EMAIL_GET = #{member_email_get, jdbcType=VARCHAR} 
+		   	MEMBER_EMAIL_GET = #{member_email_get, jdbcType=VARCHAR}, 
+		   	MEMBER_BANKNAME = #{member_bankname},
+		   	MEMBER_REFUND_ACCOUNT = #{member_refund_account},
+		   	MEMBER_ACCOUNT_HOLDER = #{member_account_holder}	   
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	

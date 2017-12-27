@@ -316,7 +316,10 @@ public class MypageController {
 		memberModel.setMember_phone(request.getParameter("member_phone"));
 		memberModel.setMember_email(request.getParameter("member_email"));
 		memberModel.setMember_email_get(request.getParameter("member_email_get"));
-
+		memberModel.setMember_bankname(request.getParameter("member_bankname"));
+		memberModel.setMember_refund_account(request.getParameter("member_refund_account"));
+		memberModel.setMember_account_holder(request.getParameter("member_account_holder"));		
+    
 		System.out.println("=========================================");
 
 		String password = memberModel.getMember_pw();

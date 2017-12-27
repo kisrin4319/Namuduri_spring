@@ -139,6 +139,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE ORDER_TRADE_NUM = #{order_trade_num}
 	</update>
 	
+	<select id="bookNumIn" resultType="java.util.Map" parameterType="int">
+		SELECT bk.book_current_count, bk.book_sell_count, od.order_book_count, bk.book_num
+		FROM BOOK bk JOIN ORDER_DETAIL od ON
+		bk.book_num = od.book_num WHERE od.order_trade_num = #{order_trade_num}	
+	</select>
+	
+	<!-- <update id="countAdd">
+		UPDATE BOOK SET BOOK_CURRENT_COUNT = #{book_current_count} + #{order_book_count}, 
+			   			BOOK_SELL_COUNT = #{book_sell_count} - #{order_book_count}
+		WHERE BOOK_NUM = #{book_num}
+	</update> -->
+	
 	<!-- 포인트 사용시 차감처리 -->
 	<update id="point">
 	update member set member_point = #{member_point} where member_id = #{member_id}
