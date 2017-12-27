@@ -33,9 +33,11 @@ function check() {
             success:function(result){
             	if(result.returnVal == '1'){
             		alert('당신의 아이디는' + result.member_id + '입니다.');
+            		window.close();
             		return false;
             	}else {
             		alert('아이디가 존재하지 않습니다. 가입 후 이용해 주세요.');
+            		window.close();
             		return false;
             	}
             },
@@ -47,68 +49,56 @@ function check() {
 </script>
 </head>
 <body>
-
 	<h2 style="text-align: -webkit-center; padding-top: 30px;">FIND ID MEMBER PAGE</h2>
-		<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
-			<li>
-				<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
-			</li>
-			<li>
-				<a title="Go to Find Pw" href="<%=cp%>/member/memberPwFindView.do">Find PW</a>
-			</li>
-		</ul>
-		
-	 <!-- Find ID Area Start -->
-        <div class="login-account section-padding">
-        	<div class="container">
-        		<div class="row">
-        			<div class="col-lg-12 col-md-12 col-sm-12">       				
-        				<form class="create-account-form" name ="findidform" id="findidform">
-        					<h2 class="heading-title">
-        						Find ID
-        					</h2>
-        					<div class="col-sm-6 form-group">
-        					<!-- <p class="form-row"><h5>NAME</h5> -->
-        						<label>NAME</label>
-                                <input type="text" class="form-control" name="member_name" id="member_id">                        
-                           
-                            </div>
-                            
-                            <div class="col-sm-3 col-md-3 form-group">                           
-                            	<label>JUMIN NUMBER</label>
-                                <input type="text" class="form-control" name="member_jumin1" size="6" maxlength="6">                        
-                            </div>
-                            
-                            <div class="col-sm-3 col-md-1 hidden-xs" style="margin-left:-17px; margin-top:31px; margin-bottom:-27px;">-</div>
-                            
-                            <div class="col-sm-3 col-md-3 form-group">
-                            	<input type="text" class="form-control" name="member_jumin2" size="7" maxlength="7">
-                            </div>
-                            
-                            
-                            <br><br><br><br><br><br><br>
-                                                                     
-                            <div class="row">
-                            	<div class="col-sm-12 text-center">					
-                                <button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
-                                    <span>
-                                        <i class="fa fa-user left" ></i>                                      
-                                       	 SING IN
-                                    </span>
-                                </button>
-                                <!-- <button name="submitcreate" id="submitcreate" class="btn-default">
-                                    <span>
-                                        <i class="fa fa-user left"></i>                                       
-                                       	 CLOSE
-                                    </span>
-                                </button> -->
-                                </div>
-                            </div>
-        				</form>
-        			</div>
-        		</div>
-        	</div>
-        </div>
-		
+	<ul class="breadcrumbs-list" style="text-align: -webkit-center;">
+		<li>
+			<a title="Go to Login" href="<%=cp%>/member/loginForm.do">Login</a>
+		</li>
+		<li>
+			<a title="Go to Find Pw" href="<%=cp%>/member/memberPwFindView.do">Find PW</a>
+		</li>
+	</ul>
+	<!-- Find ID Area Start -->
+	<div class="login-account section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<form class="create-account-form" name="findidform" id="findidform">
+						<h2 class="heading-title">Find ID</h2>
+						<div class="col-sm-6 form-group">
+							<!-- <p class="form-row"><h5>NAME</h5> -->
+							<label>NAME</label>
+							<input type="text" class="form-control" name="member_name" id="member_id">
+						</div>
+						<div class="col-sm-3 col-md-3 form-group">
+							<label>JUMIN NUMBER</label>
+							<input type="text" class="form-control" name="member_jumin1" size="6" maxlength="6">
+						</div>
+						<div class="col-sm-3 col-md-1 hidden-xs" style="margin-left: -17px; margin-top: 31px; margin-bottom: -27px;">-</div>
+						<div class="col-sm-3 col-md-3 form-group">
+							<input type="text" class="form-control" name="member_jumin2" size="7" maxlength="7">
+						</div>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<button name="submitcreate" id="submitcreate" class="btn-default" onclick="javascript:check()">
+									<span>
+										<i class="fa fa-user left"></i>
+										SING IN
+									</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

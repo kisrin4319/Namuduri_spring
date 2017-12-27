@@ -55,8 +55,8 @@
 							</div>
 							<div class="info">
 								<h3>ADDRESS</h3>
-								<p>Mhilara Street 205,</p>
-								<p>Roitan city, USA.</p>
+								<p>Gangnam,Seoul</p>
+								<p>Yeoksam, Korea.</p>
 							</div>
 						</div>
 					</div>
@@ -69,8 +69,8 @@
 							</div>
 							<div class="info">
 								<h3>E-MAIL</h3>
-								<p>info123@gmail.com</p>
-								<p>www.companyweb.com</p>
+								<p>khiclass@gmail.com</p>
+								<p>www.namuduri.com</p>
 							</div>
 						</div>
 					</div>
