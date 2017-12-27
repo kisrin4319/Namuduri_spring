@@ -83,6 +83,11 @@ public class AdminService implements AdminDao {
 		sqlSessionTemplate.update("admin.memberModify", memberModel);
 	}
 	
+	@Override //회원 정보 삭제
+	public void memberDelete(String member_id) {
+		sqlSessionTemplate.delete("admin.memberDelete", member_id);
+	}
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override //전체 도서 조회
@@ -98,6 +103,16 @@ public class AdminService implements AdminDao {
 	@Override //비사용 도서 조회
 	public List<BooksModel> bookListBck(){
 		return sqlSessionTemplate.selectList("admin.bookListBck");
+	}
+	
+	@Override //재고 조회
+	public List<BooksModel> stockList() {
+		return sqlSessionTemplate.selectList("admin.stockList");
+	}
+	
+	@Override //품절 상품 조회
+	public List<BooksModel> soldOutList() {
+		return sqlSessionTemplate.selectList("admin.soldOutList");
 	}
 	
 	@Override //도서 검색

@@ -414,6 +414,5 @@ function deleteCheck2(path) {
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

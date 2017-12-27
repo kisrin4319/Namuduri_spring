@@ -69,16 +69,15 @@ function deleteCheck2(id) {
 							<input type="hidden" name="book_num" value="${view.book_num }" />
 							<div class="row">
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
-									<img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" />
-									<input type="file" class="fileinput" name="file"/>
-									<c:choose>
-										<c:when test="${view.book_num==0}">
-											<input type="hidden" name="book_image" value="">
-										</c:when>
-										<c:otherwise>
-											<input type="hidden" name="book_image" value="${view.book_image}">
-										</c:otherwise>
-									</c:choose>
+									<c:if test="${view.book_num==0}">
+										<input type="file" class="fileinput" name="file"/>
+										<input type="hidden" name="book_image" value="">
+									</c:if>
+									<c:if test="${view.book_num!=0}">
+										<div class="col-sm-10"><img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" /></div>
+										<input type="hidden" name="book_image" value="${view.book_image}">
+										<div class="col-sm-2"><input type="file" class="fileinput" name="file"/></div>
+									</c:if>
 								</div>
 								<div class="col-lg-8">
 									<div class="form-group"></div>
@@ -264,13 +263,5 @@ function deleteCheck2(id) {
 		</div>
 		</c:if>
 	</div>
-	<!-- ============================================================== -->
-	<!-- footer -->
-	<!-- ============================================================== -->
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
-	<!-- ============================================================== -->
-	<!-- End footer -->
-	<!-- ============================================================== -->
 </body>
 </html>

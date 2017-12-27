@@ -42,7 +42,7 @@ public interface AdminDao {
 	public void memberModify(MemberModel memberModel);
 	
 	//회원 정보 삭제하기
-	//mypage memberDelete 사용 public void memberDelete(String member_id);
+	public void memberDelete(String member_id);
 	
 	/*-------------------------------------------------------------------------------------*/
 	
@@ -51,6 +51,8 @@ public interface AdminDao {
 	public List<BooksModel> bookListAll();
 	public List<BooksModel> bookListAct();
 	public List<BooksModel> bookListBck();
+	public List<BooksModel> stockList();
+	public List<BooksModel> soldOutList();
 	
 	//검색 폼으로 데이터 조회. 등록된 기간별 조회. 출판 기간별 조회. 사용 여부별 조회. 
 	public List<BooksModel> searchBook (Map<String, Object> map);

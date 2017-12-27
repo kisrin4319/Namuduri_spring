@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.spring.board.BoardModel;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.book.ReviewModel;
@@ -155,6 +157,7 @@ public class AdminController {
 			date_max = null;
 		}
 
+		map.put("status", status);
 		map.put("searchNum", searchNum);
 		map.put("searchKeyword", searchKeyword);
 		map.put("date_min", date_min);
@@ -175,7 +178,7 @@ public class AdminController {
 			} else if (status.equals("Bck")) {
 				memberList = adminService.searchMember(map);
 			} else if (status.equals("rank")) {
-				memberList = adminService.searchMemberRank(map);
+				memberList = adminService.searchMember(map);
 			}
 		}
 
@@ -191,6 +194,7 @@ public class AdminController {
 
 		memberList = memberList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("memberList", memberList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -255,7 +259,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/memberDelete.do") // 회원 정보 삭제
-	public ModelAndView memberDelete(@RequestParam String member_id, HttpServletRequest request) throws Exception {
+	public void memberDelete(@RequestParam String member_id, @RequestParam String status, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -263,17 +267,13 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
-		MemberModel memberModel = new MemberModel();
-		memberModel.setMember_id(member_id);
-
-		mypageService.memberDelete(memberModel);
+		
+		System.out.println(status);
+		
+		/*adminService.memberDelete(member_id);*/
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("redirect:/admin/memberList.do");
-
-		return mv;
+		/*return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;*/
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -298,6 +298,10 @@ public class AdminController {
 			booksList = adminService.bookListAct();
 		} else if (status.equals("bck")) {
 			booksList = adminService.bookListBck();
+		} else if(status.equals("stockMgt")) {
+			booksList = adminService.stockList();
+		} else if(status.equals("soldOut")) {
+			booksList = adminService.soldOutList();
 		}
 
 		totalCount = booksList.size();
@@ -350,8 +354,6 @@ public class AdminController {
 			active = Integer.parseInt(request.getParameter("active"));
 		} else if (status.equals("act")) {
 			active = 1;
-		} else if (status.equals("bck")) {
-			active = 0;
 		}
 
 		if (searchKeyword.trim().isEmpty()) {
@@ -366,6 +368,7 @@ public class AdminController {
 			date_max = null;
 		}
 
+		map.put("status", status);
 		map.put("searchNum", searchNum);
 		map.put("searchKeyword", searchKeyword);
 		map.put("date_min", date_min);
@@ -727,6 +730,7 @@ public class AdminController {
 		return mv;
 	}
 
+	
 	/////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/admin/chart/member.do")

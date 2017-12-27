@@ -12,17 +12,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 var page = ${currentPage};
+var status = ${status};
+
 function deleteCheck(id) {
 	if(confirm("정말 삭제하시겠습니까?")==true){
 		document.location.href=
-			"<%=cp%>/admin/memberDelete.do?member_id=" + id + "&currentPage=" + page;
+			"<%=cp%>/admin/memberDelete.do?member_id="+id+"&currentPage="+page+"&status="+status;
 	}else{
 		return false;
 	}
 }
+
 function update(id){
 	document.location.href=
-		"<%=cp%>/admin/memberInfo.do?member_id=" + id+ "&currentPage=" + page;
+		"<%=cp%>/admin/memberInfo.do?member_id="+id+"&currentPage="+page;
 	}
 
 	$(function() {
@@ -117,6 +120,7 @@ function update(id){
 										<c:forEach var="list" items="${memberList}" varStatus="stat">
 											<!-- 아이디와 연결되는 URL -->
 											<c:url var="viewURL" value="/admin/memberInfo.do">
+												<c:param name="status" value="${status}" />
 												<c:param name="member_id" value="${list.member_id}" />
 												<c:param name="currentPage" value="${currentPage}" />
 											</c:url>
@@ -151,8 +155,8 @@ function update(id){
 												</c:if>
 												<td>${list.member_join_date}</td>
 												<td><a class="mdi mdi-grease-pencil" title="Modify"
-													href="javascript:update('${list.member_id}')"></a> <a
-													class="mdi mdi-delete" title="Delete"
+													href="javascript:update('${list.member_id}')"></a> 
+													<a class="mdi mdi-delete" title="Delete"
 													href="javascript:deleteCheck('${list.member_id}')"></a></td>
 											</tr>
 										</c:forEach>
@@ -170,7 +174,5 @@ function update(id){
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
 </body>
 </html>
