@@ -234,6 +234,33 @@
 	</select>
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<!-- dashboard -->
+	
+	<!-- 결제 미완료 -->
+	<select id="countTrade" resultType="OrderModel">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
+	</select>
+	<!-- 배송 준비중 -->
+	<select id="countTrans" resultType="OrderModel">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01' ORDER BY ORDER_REGDATE
+	</select>
+	<!-- 배송 중 -->
+	<select id="countTrans2" resultType="OrderModel">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE
+	</select>
+	
+	<!-- 답변 대기 중인 질문 -->
+	<select id="countQuestion" resultType="OrderModel">
+		SELECT count(*) FROM BOARD <!-- ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE -->
+	</select>
+	
+	<!-- 금일 주문 건수와 주문 금액 그리고 pie통계 -->
+	
+	<!-- 금일 가입 신규 회원 수와 pie통계 -->
+	
+	
+	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->
 	
 	<select id="chartAllM" resultType="ChartModel"> <!-- 날짜별 누적 회원수 -->

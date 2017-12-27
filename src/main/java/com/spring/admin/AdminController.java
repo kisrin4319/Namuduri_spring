@@ -257,7 +257,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/memberDelete.do") // 회원 정보 삭제
-	public ModelAndView memberDelete(@RequestParam String member_id, HttpServletRequest request) throws Exception {
+	public String memberDelete(@RequestParam String member_id, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -265,11 +265,11 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
+		
 		adminService.memberDelete(member_id);
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;
+		return "redirect:/admin/memberList.do?currentPage="+currentPage;
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -456,7 +456,7 @@ public class AdminController {
 		// !fileType.equals("gif") {Validation 이미지 파일만 업로드 가능합니다}
 
 		String fileName = "textbook_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + '.' + fileType;
-		String filePath = request.getSession().getServletContext().getRealPath("/") + "upload";
+		String filePath = request.getContextPath() + "/upload";
 
 		multipartFile.transferTo(new File(filePath + File.separator + fileName));
 
