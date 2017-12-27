@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -29,11 +28,11 @@ function deleteCheck2(id) {
 	var page = ${reviewPage};
 	var num = ${view.book_num}
 	if(confirm("정말 삭제하시겠습니까?")){
-		document.location.href="<%=cp%>/admin/reviewDelete.do?review_num="+id+"&book_num="+num+"&currentPage="+page;
-	}else{
-		return false;
-	}
-}
+		document.location.href="<%=cp%>/admin/reviewDelete.do?review_num=" + id + "&book_num=" + num + "&currentPage=" + page;
+    } else {
+      return false;
+    }
+  }
 </script>
 </head>
 <body>
@@ -43,9 +42,12 @@ function deleteCheck2(id) {
 			<div class="col-md-5 col-8 align-self-center">
 				<h3 class="text-themecolor">Book Detail</h3>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="<%=cp%>/admin/main.do">Home</a></li>
-					<li class="breadcrumb-item"><a
-						href="<%=cp%>/admin/bookList.do">Book List</a></li>
+					<li class="breadcrumb-item">
+						<a href="<%=cp%>/admin/main.do">Home</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a href="<%=cp%>/admin/bookList.do">Book List</a>
+					</li>
 					<c:choose>
 						<c:when test="${view.book_num==0}">
 							<li class="breadcrumb-item active">Book Write</li>
@@ -66,7 +68,7 @@ function deleteCheck2(id) {
 							<div class="row">
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
 									<img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" />
-									<input type="file" class="fileinput" name="book_image"/>
+									<input type="file" class="fileinput" name="book_image" />
 									<c:choose>
 										<c:when test="${view.book_num==0}">
 											<input type="hidden" name="book_image" value="">
@@ -82,10 +84,12 @@ function deleteCheck2(id) {
 										<div class="col-md-12">
 											<div class="row">
 												<div class="col-md-4">
-													<b>#</b> ${view.book_num}
+													<b>#</b>
+													${view.book_num}
 												</div>
 												<div class="col-md-8">
-													${view.book_date} <b>등록</b>
+													${view.book_date}
+													<b>등록</b>
 												</div>
 											</div>
 										</div>
@@ -93,8 +97,7 @@ function deleteCheck2(id) {
 									<div class="form-group">
 										<label class="col-md-12">Book Name</label>
 										<div class="col-md-12">
-											<input type="text" name="book_name" class="form-control form-control-line"
-												value="${view.book_name}">
+											<input type="text" name="book_name" class="form-control form-control-line" value="${view.book_name}">
 										</div>
 									</div>
 									<div class="form-group">
@@ -102,15 +105,13 @@ function deleteCheck2(id) {
 											<div class="col-md-6">
 												<label class="col-md-6">Category</label>
 												<div class="col-md-12">
-													<input type="text" name="book_category" value="${view.book_category}"
-														class="form-control form-control-line">
+													<input type="text" name="book_category" value="${view.book_category}" class="form-control form-control-line">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<label class="col-md-6">Author</label>
 												<div class="col-md-12">
-													<input type="text" name="book_auth" value="${view.book_auth}"
-														class="form-control form-control-line">
+													<input type="text" name="book_auth" value="${view.book_auth}" class="form-control form-control-line">
 												</div>
 											</div>
 										</div>
@@ -120,15 +121,13 @@ function deleteCheck2(id) {
 											<div class="col-md-6">
 												<label class="col-md-6">Company</label>
 												<div class="col-md-12">
-													<input type="text" name="company_id" value="${view.company_id}"
-														class="form-control form-control-line">
+													<input type="text" name="company_id" value="${view.company_id}" class="form-control form-control-line">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<label class="col-md-6">Publish Date</label>
 												<div class="col-md-12">
-													<input type="text" name="book_publish_date" value="${view.book_publish_date}"
-														class="form-control form-control-line">
+													<input type="text" name="book_publish_date" value="${view.book_publish_date}" class="form-control form-control-line">
 												</div>
 											</div>
 										</div>
@@ -138,29 +137,31 @@ function deleteCheck2(id) {
 											<div class="col-md-3">
 												<label class="col-md-12">Price</label>
 												<div class="col-md-12">
-													<input type="text" name="book_price" value="${view.book_price}"
-														class="form-control form-control-line">
+													<input type="text" name="book_price" value="${view.book_price}" class="form-control form-control-line">
 												</div>
 											</div>
 											<div class="col-md-3">
-												<label class="col-md-12"><b>판매량</b></label>
+												<label class="col-md-12">
+													<b>판매량</b>
+												</label>
 												<div class="col-md-12">
-													<input type="text" name="book_sell_count" value="${view.book_sell_count}"
-														class="form-control form-control-line">
+													<input type="text" name="book_sell_count" value="${view.book_sell_count}" class="form-control form-control-line">
 												</div>
 											</div>
 											<div class="col-md-3">
-												<label class="col-md-12"><b>현재 재고</b></label>
+												<label class="col-md-12">
+													<b>현재 재고</b>
+												</label>
 												<div class="col-md-12">
-													<input type="text" name="book_current_count" value="${view.book_current_count}"
-														class="form-control form-control-line">
+													<input type="text" name="book_current_count" value="${view.book_current_count}" class="form-control form-control-line">
 												</div>
 											</div>
 											<div class="col-md-3">
-												<label class="col-md-12"><b>기초 재고</b></label>
+												<label class="col-md-12">
+													<b>기초 재고</b>
+												</label>
 												<div class="col-md-12">
-													<input type="text" name="book_base_count" value="${view.book_base_count}"
-														class="form-control form-control-line">
+													<input type="text" name="book_base_count" value="${view.book_base_count}" class="form-control form-control-line">
 												</div>
 											</div>
 										</div>
@@ -177,17 +178,16 @@ function deleteCheck2(id) {
 							<div class="form-group">
 								<div class="col-sm-12" style="text-align: center;">
 									<div class="row">
-										<label class="col-sm-4"><b>활성화 여부</b></label>
+										<label class="col-sm-4">
+											<b>활성화 여부</b>
+										</label>
 										<div class="col-sm-8">
-											<input type="radio" name="book_use_yn" id="book_use_yn"
-												value="1"
-												${view.book_use_yn == '1' ? 'checked="checked"' : '' }>사용
-											<input type="radio" name="book_use_yn" id="book_use_yn"
-												value="0"
-												${view.book_use_yn == '0' ? 'checked="checked"' : '' }>비사용
+											<input type="radio" name="book_use_yn" id="book_use_yn" value="1" ${view.book_use_yn == '1' ? 'checked="checked"' : '' }>
+											사용
+											<input type="radio" name="book_use_yn" id="book_use_yn" value="0" ${view.book_use_yn == '0' ? 'checked="checked"' : '' }>
+											비사용
 										</div>
 									</div>
-
 								</div>
 							</div>
 							<div class="form-group"></div>
@@ -200,8 +200,7 @@ function deleteCheck2(id) {
 										<c:otherwise>
 											<button class="btn btn-warning">Update</button>
 											&nbsp;
-											<a class="btn btn-danger"
-												href="javascript:deleteCheck(${view.book_num})">Delete</a>
+											<a class="btn btn-danger" href="javascript:deleteCheck(${view.book_num})">Delete</a>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -212,59 +211,60 @@ function deleteCheck2(id) {
 			</div>
 		</div>
 		<c:if test="${view.book_num!=0}">
-		<div class="col-lg-12">
-			<h3>Book Review</h3>
-			<div class="card">
-				<div class="card-block">
-					<div class="table-responsive">
-						<table class="table list-items review">
-							<c:choose>
-								<c:when test="${totalCount==0}">
-									<tr>
-										<td colspan=4>등록된 댓글이 없습니다.</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="list" items="${review}" varStatus="stat">
-										<c:url var="viewURL" value="/admin/memberDetail.do">
-											<c:param name="member_id" value="${list.member_id}" />
-										</c:url>
+			<div class="col-lg-12">
+				<h3>Book Review</h3>
+				<div class="card">
+					<div class="card-block">
+						<div class="table-responsive">
+							<table class="table list-items review">
+								<c:choose>
+									<c:when test="${totalCount==0}">
 										<tr>
-											<td>${list.review_num}</td>
-											<td>
-												<!-- member_name review에서 조인하기.. --> (<a href="${viewURL}">${list.member_id}</a>)
-											</td>
-											<td>${list.review_pw}</td>
-											<td>${list.review_regdate}</td>
-											<td rowspan="2"><a class="mdi mdi-delete" title="Delete"
-												href="javascript:deleteCheck2(${list.review_num})"></a></td>
+											<td colspan=4>등록된 댓글이 없습니다.</td>
 										</tr>
-
-										<tr>
-											<td colspan=3 style="width: 400px;">${list.review_content}</td>
-											<td>${list.star_point}</td>
-										</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</table>
-
-						<table class="paging">
-							<tr>
-								<td align=center colspan=8>${pagingHtml}</td>
-							</tr>
-						</table>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="list" items="${review}" varStatus="stat">
+											<c:url var="viewURL" value="/admin/memberDetail.do">
+												<c:param name="member_id" value="${list.member_id}" />
+											</c:url>
+											<tr>
+												<td>${list.review_num}</td>
+												<td>
+													<!-- member_name review에서 조인하기.. -->
+													(
+													<a href="${viewURL}">${list.member_id}</a>
+													)
+												</td>
+												<td>${list.review_pw}</td>
+												<td>${list.review_regdate}</td>
+												<td rowspan="2">
+													<a class="mdi mdi-delete" title="Delete" href="javascript:deleteCheck2(${list.review_num})"></a>
+												</td>
+											</tr>
+											<tr>
+												<td colspan=3 style="width: 400px;">${list.review_content}</td>
+												<td>${list.star_point}</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</table>
+							<table class="paging">
+								<tr>
+									<td align=center colspan=8>${pagingHtml}</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</c:if>
 	</div>
 	<!-- ============================================================== -->
 	<!-- footer -->
 	<!-- ============================================================== -->
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
+	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 	<!-- ============================================================== -->
 	<!-- End footer -->
 	<!-- ============================================================== -->
