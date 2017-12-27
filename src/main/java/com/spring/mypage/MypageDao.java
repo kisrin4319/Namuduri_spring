@@ -34,4 +34,7 @@ public interface MypageDao {
 	public int memberOrderCancel(String order_trade_num);
 	
 	public int memberPwUpdate(Map<String, Object> param);
+	
+	public List<Map<String, Object>> bookNumIn(String order_trade_num);
+
 }
