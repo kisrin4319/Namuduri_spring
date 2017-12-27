@@ -340,6 +340,7 @@ public class MemberController {
 		}
 	}
 
+	// 중복확인
 	// 아이디 중복확인
 	@RequestMapping(value = "/member/idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody int idCheck(HttpServletRequest request) {
