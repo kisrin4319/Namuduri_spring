@@ -2,6 +2,10 @@ package com.spring.member;
 
 import java.util.Date;
 
+import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
+
 import lombok.Data;
 
 @Data
@@ -30,12 +34,7 @@ public class MemberModel {
 	private int member_order_count;
 	private int member_moneysum;
 	
-	public void addAttribute(String string, String url) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setAuth(String string) {
+	public void addAttribute(String string, FacebookProfile facebookProfile) {
 		// TODO Auto-generated method stub
 		
 	}
