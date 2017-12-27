@@ -88,7 +88,7 @@
                         </div>
                         <div class="panel-footer panel-footer-landing" style="text-align:  -webkit-center;">
                             <a href="<%=cp%>/main.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MAIN</button></a>
-							<a href="<%=cp%>/mypage.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MY PAGE</button></a>
+							<a href="<%=cp%>/order/orderListCheckView.do"><button type="button" class="btn btn-info" style="font-style: oblique; border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px; width: 80px; height: 30px;">MY PAGE</button></a>
                         </div>
                     </div>
                 </div>

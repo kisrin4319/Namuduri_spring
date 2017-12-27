@@ -76,4 +76,10 @@ public class OrderService implements OrderDao {
 	public void point(MemberModel memberModel) {
 		sqlSessionTemplate.update("order.point", memberModel);
 	}
+	
+	// 11. 주문 번호로 주문 상세 내역 가져오기
+	public List<OrderDetailModel> orderDetailList(String order_trade_num) {
+		return sqlSessionTemplate.selectList("order.orderDetailList",order_trade_num);
+		
+	}
 }

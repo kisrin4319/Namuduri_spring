@@ -45,7 +45,6 @@ var page = ${currentPage};
 				<div class="card-block">
 					<div class="table-responsive">
 						<!-- 검색창 영역 -->
-						<c:if test="${status eq 'all' || status eq 'bck'}">
 						<form class="form-inline" method="POST">
 							<table class="table">
 								<tr>
@@ -87,7 +86,6 @@ var page = ${currentPage};
 								</tr>
 							</table>
 						</form>
-						</c:if>
 						<div class="form-group"></div>
 						<table class="list-items table table-hover table-striped">
 							<thead class="list-header">
@@ -100,6 +98,7 @@ var page = ${currentPage};
 									<th>COMPANY</th>
 									<th>가격</th>
 									<th>재고</th>
+									<th>도서상태</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -128,9 +127,8 @@ var page = ${currentPage};
 												<td>${list.book_auth}</td>
 												<td>${list.company_id}</td>
 												<td>${list.book_price}</td>
-												<td>
-													<b>${list.book_current_count}</b>/${list.book_base_count}
-												</td>
+												<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
+												<td>${list.book_use_yn == '1' ? '사용' : '비사용' }</td>
 												<td>
 													<a class="mdi mdi-grease-pencil" title="Modify"
 														href="javascript:update('${list.book_num}')"></a> 
@@ -153,6 +151,5 @@ var page = ${currentPage};
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

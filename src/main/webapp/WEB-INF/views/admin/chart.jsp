@@ -8,22 +8,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-
+var request = ${request}
 google.charts.load('current', {'packages':['corechart']});
-
 
 google.charts.setOnLoadCallback(drawLineChart1);
 google.charts.setOnLoadCallback(drawLineChart2);
-google.charts.setOnLoadCallback(drawLineChart3);
-google.charts.setOnLoadCallback(drawLineChart4);
+if(request==1){
+	google.charts.setOnLoadCallback(drawLineChart3);
+	google.charts.setOnLoadCallback(drawLineChart4);
+}
 google.charts.setOnLoadCallback(drawPieChart1);
 google.charts.setOnLoadCallback(drawPieChart2);
 google.charts.setOnLoadCallback(drawPieChart3);
 google.charts.setOnLoadCallback(drawPieChart4);
 google.charts.setOnLoadCallback(drawPieChart5);
 google.charts.setOnLoadCallback(drawPieChart6);
-
-var request = ${request}
 
 function drawLineChart1() {
 		var json = ${jsonNew};
@@ -259,6 +258,5 @@ function drawPieChart6() {
 		<!-- ////////////////////////////////////////body 내용/////////////////////////////////// -->
 
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

@@ -105,6 +105,16 @@ public class AdminService implements AdminDao {
 		return sqlSessionTemplate.selectList("admin.bookListBck");
 	}
 	
+	@Override //재고 조회
+	public List<BooksModel> stockList() {
+		return sqlSessionTemplate.selectList("admin.stockList");
+	}
+	
+	@Override //품절 상품 조회
+	public List<BooksModel> soldOutList() {
+		return sqlSessionTemplate.selectList("admin.soldOutList");
+	}
+	
 	@Override //도서 검색
 	public List<BooksModel> searchBook(Map<String, Object> map) {
 		// TODO Auto-generated method stub
