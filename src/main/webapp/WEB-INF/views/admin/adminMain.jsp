@@ -240,6 +240,11 @@
 					<div class="card-block">
 						<div class="row">
 							<div class="col-sm-12 col-lg-9">
+								<div class="p-5">
+									<div class="callout">
+										<strong class="h4">금일 신규 회원 통계</strong>
+									</div>
+								</div>
 								<div class="row col-sm-6 col-lg-12">
 									<div class="col-lg-4">
 										<div id="pie_chart1"></div>
@@ -249,6 +254,11 @@
 									</div>
 									<div class="col-lg-4">
 										<div id="pie_chart3"></div>
+									</div>
+								</div>
+								<div class="p-5">
+									<div class="callout">
+										<strong class="h4">금일 신규 주문 통계</strong>
 									</div>
 								</div>
 								<div class="row col-sm-6 col-lg-12">
@@ -264,12 +274,8 @@
 								</div>
 							</div>
 							<div class="col-sm-6 col-lg-3">
-								<div>
-									<div class="callout">
-										<!-- <small class="text-muted">Today Sold</small>
-                            <br> -->
-										<strong class="h4">금일 도서 판매 순위</strong>
-									</div>
+								<div class="callout">
+									<strong class="h4">금일 도서 판매 순위</strong>
 								</div>
 								<hr class="mt-0">
 								<c:choose>
@@ -293,7 +299,6 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-								<hr class="mt-0">
 								<div class="divider text-center">
 									<button type="button" class="text-center btn btn-sm btn-link text-muted"
 										onclick="window.location.href='<%=cp%>/admin/chart/book.do'" data-toggle="tooltip"

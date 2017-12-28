@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 var page = ${currentPage};
-var status = '${status}';
+var stat = '${status}';
 
 function updateCheck(){
 	if(confirm("변경 사항을 저장하시겠습니까?")){
@@ -24,7 +24,7 @@ function updateCheck(){
 }
 function deleteCheck(id) {
 	if(confirm("정말 삭제하시겠습니까?")){
-		document.location.href="<%=cp%>/admin/bookDelete.do?status="+status+"&book_num="+id+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/bookDelete.do?status="+stat+"&book_num="+id+"&currentPage="+page;
 	}else{
 		return false;
 	}
@@ -33,7 +33,7 @@ function deleteCheck2(id) {
 	var page2 = ${reviewPage};
 	var num = ${view.book_num}
 	if(confirm("정말 삭제하시겠습니까?")){
-		document.location.href="<%=cp%>/admin/reviewDelete.do?status="+status+"&review_num="+id+"&book_num="+num+"&currentPage="+page2;
+		document.location.href="<%=cp%>/admin/reviewDelete.do?status="+stat+"&review_num="+id+"&book_num="+num+"&currentPage="+page2;
 	}else{
 		return false;
 	}
