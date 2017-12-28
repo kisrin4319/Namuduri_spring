@@ -9901,7 +9901,6 @@ input[type=checkbox]:not (:disabled ) ~ .lever:active:after, input[type=checkbox
   }
   .icons-list li {
     position: relative;
-    height: 60px;
     vertical-align: middle; }
     .icons-list li i {
       display: block;

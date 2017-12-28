@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap Core CSS -->
-<link href="<%=cp%>/adminBootStrap/bootstrap/css/bootstrap.min.css"
+<link href="<%=cp%>/adminBootStrap/bootstrap/css/bootstrap.min.css?ver=1"
 	rel="stylesheet">
 <!-- Custom CSS -->
 <link href="<%=cp%>/adminBootStrap/css/style.css?ver=1" rel="stylesheet">

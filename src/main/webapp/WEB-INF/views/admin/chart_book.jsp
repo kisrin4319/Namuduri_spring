@@ -50,13 +50,17 @@
 									<hr class="mt-0">
 									<ul class="icons-list">
 										<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
-										<li class="row"><div class="list-img col-lg-2">
-											<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
-											<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}" height="50px"></div>
-											<div class="desc">
+										<li>
+										<div class="row">
+											<div class="list-img col-lg-4">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}" height="50px">
+											</div>
+											<div class="desc col-lg-8">
 												<div class="title">${list.book_name}</div></a>
 												<small><b>판매량 : </b>${list.book_sell_count}</small>
 											</div>
+										</div>
 										</li>
 										<hr class="mt-0">
 										</c:forEach>

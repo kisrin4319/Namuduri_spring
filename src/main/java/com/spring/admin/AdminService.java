@@ -22,6 +22,48 @@ public class AdminService implements AdminDao {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public int countTrade() {
+		return sqlSessionTemplate.selectOne("admin.countTrade");
+	}
+	public int countTrans() {
+		return sqlSessionTemplate.selectOne("admin.countTrans");
+	}
+	public int countTrans2() {
+		return sqlSessionTemplate.selectOne("admin.countTrans2");
+	}
+	public int todayMember() {
+		return sqlSessionTemplate.selectOne("admin.todayMember");
+	}
+	public int todayOrder() {
+		return sqlSessionTemplate.selectOne("admin.todayOrder");
+	}
+	public int todaySalesM() {
+		return sqlSessionTemplate.selectOne("admin.todaySalesM");
+	}
+	
+	public List<BooksModel> todaySalesBook() {
+		return sqlSessionTemplate.selectList("admin.todaySalesBook");
+	}
+	
+	public List<ChartModel> todayMemberGender() {
+		return sqlSessionTemplate.selectList("admin.todayMemberGender");
+	}
+	public List<ChartModel> todayMemberAge() {
+		return sqlSessionTemplate.selectList("admin.todayMemberAge");
+	}
+	public List<ChartModel> todayMemberRegion() {
+		return sqlSessionTemplate.selectList("admin.todayMemberRegion");
+	}
+	public List<ChartModel> todayOrderGender() {
+		return sqlSessionTemplate.selectList("admin.todayOrderGender");
+	}
+	public List<ChartModel> todayOrderAge() {
+		return sqlSessionTemplate.selectList("admin.todayOrderAge");
+	}
+	public List<ChartModel> todayOrderRegion() {
+		return sqlSessionTemplate.selectList("admin.todayOrderRegion");
+	}
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override //전체 회원 조회

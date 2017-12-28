@@ -818,9 +818,9 @@ px
 	-webkit-transition: all .2s ease-in-out;
 	-o-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
-	max-width: 200px;
+	/* max-width: 200px;
 	width: 100%;
-	height: auto;
+	height: auto; */
 	border: 1px solid #ddd;
 	border-radius: .25rem;
 }
