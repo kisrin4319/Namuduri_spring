@@ -9894,68 +9894,6 @@ input[type=checkbox]:not (:disabled ) ~ .lever:active:after, input[type=checkbox
   .callout-dark h4 {
     color: #29363d; }
 
-.icons-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  }
-  .icons-list li {
-    position: relative;
-    height: 60px;
-    vertical-align: middle; }
-    .icons-list li i {
-      display: block;
-      float: left;
-      width: 35px !important;
-      height: 35px !important;
-      margin: 2px;
-      line-height: 35px !important;
-      text-align: center; }
-    .icons-list li .desc {
-      height: 50px;
-      margin-left: 10px;
-      /* border-bottom: 1px solid #c2cfd6; */ }
-      .icons-list li .desc .title {
-        padding: 2px 0px 3px 0px;
-        margin: 0; 
-        color: #6174c8;
-        font-weight: bold;}
-      .icons-list li .desc small {
-        display: block;
-        margin-top: -4px;
-        color: #536c79; }
-    .icons-list li .value {
-      position: absolute;
-      top: 2px;
-      right: 45px;
-      text-align: right; }
-      .icons-list li .value strong {
-        display: block;
-        margin-top: -3px; }
-    .icons-list li .actions {
-      position: absolute;
-      top: -4px;
-      right: 10px;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center; }
-      .icons-list li .actions i {
-        float: none;
-        width: auto;
-        height: auto;
-        padding: 0;
-        margin: 0;
-        line-height: normal; }
-    .icons-list li.divider {
-      height: 40px; }
-      .icons-list li.divider i {
-        width: auto;
-        height: auto;
-        margin: 2px 0 0;
-        font-size: 18px; }
-
-
 .card {
 	margin-bottom: 1.5rem;
 }

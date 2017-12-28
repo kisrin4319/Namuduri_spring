@@ -70,13 +70,13 @@ function deleteCheck2(id) {
 							<div class="row">
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
 									<c:if test="${view.book_num==0}">
-										<input type="file" class="fileinput" name="file"/>
+										<input type="file" class="fileinput" name="book_image"/>
 										<input type="hidden" name="book_image" value="">
 									</c:if>
 									<c:if test="${view.book_num!=0}">
 										<div class="col-sm-10"><img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" /></div>
 										<input type="hidden" name="book_image" value="${view.book_image}">
-										<div class="col-sm-2"><input type="file" class="fileinput" name="file"/></div>
+										<div class="col-sm-2"><input type="file" class="fileinput" name="book_image"/></div>
 									</c:if>
 								</div>
 								<div class="col-lg-8">

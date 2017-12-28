@@ -11,6 +11,7 @@
 <script>
 var page = ${currentPage};
 var id = ${view.member_id};
+var status = '${status}';
 
 function updateCheck(id){
 	if(confirm("정말 수정하시겠습니까?")){
