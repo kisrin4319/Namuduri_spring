@@ -36,7 +36,7 @@
                 <div class="pricing-table">
                     <div class="panel panel-primary" style="border: none;text-align:  unset;float: unset;">
                         <div class="controle-header panel-heading panel-heading-landing">
-                            <h1 class="panel-title panel-title-landing">
+                            <h1 class="panel-title panel-title-landing" style="text-align: center;">
                                 THANK YOU
                             </h1>
                         </div>
