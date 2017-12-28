@@ -93,7 +93,6 @@ public class AdminController {
 			pie1.addCell(i, todayMemberGender.get(i).getValue());
 		}
 		String memberGenderPie = gson.toJson(pie1.getResult());
-		System.out.println("//////////////////////////////////////////"+memberGenderPie);
 		mv.addObject("memberGenderPie", memberGenderPie);
 		
 		
@@ -109,7 +108,6 @@ public class AdminController {
 			pie2.addCell(i, todayMemberAge.get(i).getValue());
 		}
 		String memberAgePie = gson.toJson(pie2.getResult());
-		System.out.println("//////////////////////////////////////////"+memberAgePie);
 		mv.addObject("memberAgePie", memberAgePie);
 		
 		
@@ -125,7 +123,6 @@ public class AdminController {
 			pie3.addCell(i, todayMemberRegion.get(i).getValue());
 		}
 		String memberRegionPie = gson.toJson(pie3.getResult());
-		System.out.println("//////////////////////////////////////////"+memberRegionPie);
 		mv.addObject("memberRegionPie", memberRegionPie);
 		
 		
@@ -141,7 +138,6 @@ public class AdminController {
 			pie4.addCell(i, todayOrderGender.get(i).getValue());
 		}
 		String orderGenderPie = gson.toJson(pie4.getResult());
-		System.out.println("//////////////////////////////////////////"+orderGenderPie);
 		mv.addObject("orderGenderPie", orderGenderPie);
 		
 		
@@ -157,7 +153,6 @@ public class AdminController {
 			pie5.addCell(i, todayOrderAge.get(i).getValue());
 		}
 		String orderAgePie = gson.toJson(pie5.getResult());
-		System.out.println("//////////////////////////////////////////"+orderAgePie);
 		mv.addObject("orderAgePie", orderAgePie);
 		
 		
@@ -173,7 +168,6 @@ public class AdminController {
 			pie6.addCell(i, todayOrderRegion.get(i).getValue());
 		}
 		String orderRegionPie = gson.toJson(pie6.getResult());
-		System.out.println("//////////////////////////////////////////"+orderRegionPie);
 		mv.addObject("orderRegionPie", orderRegionPie);
 		
 		
