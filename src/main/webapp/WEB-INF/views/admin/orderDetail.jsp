@@ -18,7 +18,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="<%=cp%>/admin/main.do">Home</a></li>
 					<li class="breadcrumb-item"><a
-						href="<%=cp%>/admin/orderList.do">Order List</a></li>
+						href="<%=cp%>/admin/orderList/${status}.do">Order List</a></li>
 					<li class="breadcrumb-item active">Order Detail</li>
 				</ol>
 			</div>
@@ -35,7 +35,7 @@
 						<input type="hidden" name="currentPage" value="${currentPage}" />
 						<input type="hidden" name="status" value="${status}" />
 						<table class="table order">
-							<c:url var="viewMemberURL" value="/admin/memberDetail.do">
+							<c:url var="viewMemberURL" value="/admin/memberInfo.do">
 								<c:param name="status" value="all"/>
 								<c:param name="member_id" value="${view.member_id}" />
 							</c:url>
@@ -137,9 +137,7 @@
 								<th>배송번호</th>
 								<td>${view.order_trans_num}</td>
 								<th>배송 상태</th>
-								<td><select class="form-control"
-									style="width: auto;" class="form-control"
-									name="order_trans_status">
+								<td><select class="form-control" style="width: auto;" class="form-control" name="order_trans_status">
 										<c:choose>
 											<c:when test="${view.order_trans_status == 'ST01'}">
 												<option value="ST01" selected="selected">배송 준비중</option>
@@ -183,7 +181,7 @@
 								<td colspan=3>${view.order_receive_memo}</td>
 							</tr>
 							<tr>
-								<td colspan=5><a class="btn btn-danger" href="<%=cp%>/admin/orderDelete.do?status=${status}&order_trade_num=${order_trade_num}&currnetPage=${currentPage}">Delete</a></td>
+								<td colspan=5><a class="btn btn-danger" href="<%=cp%>/admin/orderDelete.do?status=${status}&order_trade_num=${view.order_trade_num}&currnetPage=${currentPage}">Delete</a></td>
 							</tr>
 						</table>
 						</form>
