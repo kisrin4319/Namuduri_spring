@@ -222,30 +222,84 @@
 	</select>
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-	
 	<!-- dashboard -->
 	
-	<!-- 결제 미완료 -->
-	<select id="countTrade" resultType="OrderModel">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
+	<!-- 결제 대기중 -->
+	<select id="countTrade" resultType="ChartModel">
+		SELECT count(*) value FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
 	</select>
 	<!-- 배송 준비중 -->
-	<select id="countTrans" resultType="OrderModel">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01' ORDER BY ORDER_REGDATE
+	<select id="countTrans" resultType="ChartModel">
+		SELECT count(*) value FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01' ORDER BY ORDER_REGDATE
 	</select>
 	<!-- 배송 중 -->
-	<select id="countTrans2" resultType="OrderModel">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE
+	<select id="countTrans2" resultType="ChartModel">
+		SELECT count(*) value FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE
 	</select>
 	
-	<!-- 답변 대기 중인 질문 -->
-	<select id="countQuestion" resultType="OrderModel">
-		SELECT count(*) FROM BOARD <!-- ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE -->
+	<!-- 금일 신규 가입 회원 -->
+	<select id="todayMember" resultType="ChartModel">
+		select count(*) value from member where trunc(member_join_date) = trunc(sysdate) and member_use_yn = 0
+	</select>
+	<!-- 금일 주문 건수 -->
+	<select id="todayOrder" resultType="ChartModel">
+		select count(*) value from order_book where trunc(order_regdate) = trunc(order_regdate) and order_use_yn = 1
+	</select>
+	<!-- 금일 주문 금액 -->
+	<select id="todaySalesM" resultType="ChartModel">
+		select sum(order_moneysum) value from order_book where trunc(order_regdate) = trunc(order_regdate) and order_use_yn = 1
+	</select>
+
+	<!-- 오늘 팔린 도서 순위 -->
+	<select id="todaySalesM" resultType="BooksModel">
+		select c.*, b.book_auth, b.book_image, b.book_price, b.company_id 
+			from ( select book_name, book_num, sum(order_book_count) book_sell_count 
+				from ( select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name book_name, od.order_book_count 
+				from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM where o.order_use_yn = 1 and trunc(order_regdate) =trunc(sysdate) 
+				group by book_name, book_num order by book_sell_count desc) c inner join book b on c.book_num = b.book_num 
+			where rownum>=1 and rownum<=8
 	</select>
 	
-	<!-- 금일 주문 건수와 주문 금액 그리고 pie통계 -->
+	<!-- 금일 가입 회원 통계-->
+	<select id="newMemberGender" resultType="ChartModel"><!-- 최근 일주일 신규 회원 성별 구분 -->
+		<![CDATA[select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from member 
+		where trunc(member_join_date)=trunc(sysdate) group by to_number(substr(to_char(member_jumin2),1,1))]]>
+	</select>
 	
-	<!-- 금일 가입 신규 회원 수와 pie통계 -->
+	<select id="newMemberAge" resultType="ChartModel"><!-- 최근 일주일 신규 회원 연령 구분 -->
+		<![CDATA[select to_number(substr(to_char(member_jumin1),1,1)) key, count(*) value from member 
+			where trunc(member_join_date)=trunc(sysdate) group by to_number(substr(to_char(member_jumin1),1,1))]]>
+	</select>
+	
+	<select id="newMemberRegion" resultType="ChartModel"><!-- 최근 일주일 신규 회원 지역 구분 -->
+		<![CDATA[select substr(member_addr1,1,2) key, count(*) value from member 
+		where trunc(member_join_date)=trunc(sysdate) group by substr(member_addr1,1,2)]]>
+	</select>
+	
+	<!-- 금일 주문 통계-->
+	<select id="weekOrderGender" resultType="ChartModel"><!-- 최근 7일 주문 성별 통계 -->
+		<![CDATA[
+			select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by to_number(substr(to_char(member_jumin2),1,1))
+		]]>
+	</select>
+	<select id="weekOrderAge" resultType="ChartModel"><!-- 최근 7일 주문 연령별 통계 -->
+		<![CDATA[
+			select substr(to_char(member_jumin1),1,1) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by substr(to_char(member_jumin1),1,1)
+		]]>
+	</select>
+	<select id="weekOrderRegion" resultType="ChartModel"><!-- 최근 7일 주문 지역별 통계 -->
+		<![CDATA[
+			select substr(member_addr1,1,2) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by substr(member_addr1,1,2)]]>
+	</select>
 	
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->

@@ -10,17 +10,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 var page = ${currentPage};
+var status = '${status}';
+
 	function deleteCheck(id) {
 		if(confirm("정말 삭제하시겠습니까?")){
 			document.location.href=
-				"<%=cp%>/admin/bookDelete.do?book_num=" + id + "&currentPage=" + page;
+				"<%=cp%>/admin/bookDelete.do?status="+status+"&book_num=" + id + "&currentPage=" + page;
 		}else{
 			return false;
 		}
 	}
 	function update(id){
 		document.location.href=
-			"<%=cp%>/admin/bookDetail.do?book_num=" + id+ "&currentPage=" + page;
+			"<%=cp%>/admin/bookDetail.do?status="+status+"&book_num=" + id+ "&currentPage=" + page;
 	}
 
 	$(function() {
@@ -112,6 +114,7 @@ var page = ${currentPage};
 									<c:otherwise>
 										<c:forEach var="list" items="${booksList}" varStatus="stat">
 											<c:url var="viewURL" value="/admin/bookDetail.do">
+												<c:param name="status" value="${status}"/>
 												<c:param name="book_num" value="${list.book_num}" />
 												<c:param name="currentPage" value="${currentPage}" />
 											</c:url>

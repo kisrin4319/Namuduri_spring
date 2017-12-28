@@ -116,6 +116,7 @@ $(function() {
 										<c:forEach var="list" items="${orderList}" varStatus="stat">
 											<!-- 주문번호와 연결되는 URL -->
 											<c:url var="viewOrderURL" value="/admin/orderDetail.do">
+												<c:param name="status" value="${status}"/>
 												<c:param name="order_trade_num" value="${list.order_trade_num}" />
 												<c:param name="currentPage" value="${currentPage}" />
 											</c:url>
