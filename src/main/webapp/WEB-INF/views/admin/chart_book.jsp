@@ -26,21 +26,6 @@
 					<div class="table-responsive">
 						<div class="booksales-wrapper col-lg-12">
 							<div class="row">
-								<%-- <div class="col-sm-12 col-lg-9">
-									<div class="thumbnail-wrappper">
-										<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
-											<div class="col-lg-3 col-sm-6">
-												<span class="icon_rank rank">${stat.count}</span>
-												<div class="thumbnail">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> <img
-														class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}"></a>
-												</div>
-												<div class="thumbnail-name">${list.book_name}</div>
-												${list.book_auth} | ${list.company_id} <br>${list.book_price}
-											</div>
-										</c:forEach>
-									</div>
-								</div> --%>
 								<div class="col-sm-6 col-lg-3">
 									<div>
 										<div class="callout">
@@ -48,23 +33,20 @@
 										</div>
 									</div>
 									<hr class="mt-0">
-									<ul class="icons-list">
-										<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
-										<li>
+									<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
 										<div class="row">
-											<div class="list-img col-lg-4">
+											<div class="pl-2 col-lg-3">
 												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
-												<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}" height="50px">
+												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
+												</a>
 											</div>
-											<div class="desc col-lg-8">
-												<div class="title">${list.book_name}</div></a>
-												<small><b>판매량 : </b>${list.book_sell_count}</small>
+											<div class="col-lg-8">
+												<p style="font-weight: bold; color: #2692c5;">${list.book_name}</p>
+												<small>판매량 : ${list.book_sell_count}</small>
 											</div>
 										</div>
-										</li>
 										<hr class="mt-0">
-										</c:forEach>
-									</ul>
+									</c:forEach>
 								</div>
 								<hr class="pl-0">
 								<div class="col-sm-6 col-lg-3">
@@ -74,19 +56,20 @@
 										</div>
 									</div>
 									<hr class="mt-0">
-									<ul class="icons-list">
-										<c:forEach var="list" items="${monthBookSelling}" varStatus="stat">
-										<li class="row"><div class="list-img col-lg-2">
-											<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
-											<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}" height="50px"></div>
-											<div class="desc">
-												<div class="title">${list.book_name}</div></a>
-												<small><b>판매량 : </b>${list.book_sell_count}</small>
+									<c:forEach var="list" items="${monthBookSelling}" varStatus="stat">
+										<div class="row">
+											<div class="col-lg-3">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
+												</a>
 											</div>
-										</li>
+											<div class="col-lg-8">
+												<p style="font-weight: bold; color: #2692c5;">${list.book_name}</p>
+												<small>판매량 : ${list.book_sell_count}</small>
+											</div>
+										</div>
 										<hr class="mt-0">
-										</c:forEach>
-									</ul>
+									</c:forEach>
 								</div>
 								<hr class="pl-0">
 								<div class="col-sm-6 col-lg-3">
@@ -96,19 +79,20 @@
 										</div>
 									</div>
 									<hr class="mt-0">
-									<ul class="icons-list">
 										<c:forEach var="list" items="${bookSelling}" varStatus="stat">
-										<li class="row"><div class="list-img col-lg-2">
-											<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
-											<img class="img-thumbnail" src="<%=cp%>/upload/${list.book_image}" height="50px"></div>
-											<div class="desc">
-												<div class="title">${list.book_name}</div></a>
-												<small><b>판매량 : </b>${list.book_sell_count}</small>
+										<div class="row">
+											<div class="col-lg-3">
+												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
+												</a>
 											</div>
-										</li>
+											<div class="col-lg-8">
+												<p style="font-weight: bold; color: #2692c5;">${list.book_name}</p>
+												<small>판매량 : ${list.book_sell_count}</small>
+											</div>
+										</div>
 										<hr class="mt-0">
-										</c:forEach>
-									</ul>
+									</c:forEach>
 								</div>
 							</div>
 						</div>

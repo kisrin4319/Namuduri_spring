@@ -183,7 +183,7 @@
 								<td colspan=3>${view.order_receive_memo}</td>
 							</tr>
 							<tr>
-								<a class="btn btn-danger" href="<%=cp%>/admin/orderDelete.do?status=${status}&order_trade_num=${order_trade_num}&currnetPage=${currentPage}"/>
+								<td colspan=5><a class="btn btn-danger" href="<%=cp%>/admin/orderDelete.do?status=${status}&order_trade_num=${order_trade_num}&currnetPage=${currentPage}">Delete</a></td>
 							</tr>
 						</table>
 						</form>

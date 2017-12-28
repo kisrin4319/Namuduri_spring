@@ -133,16 +133,17 @@
 								 <i class="mdi mdi-access-point-network"></i> <span class="nav-dropdown-item">방문자 통계</span></a>
 							</li> -->
 							<li>
-								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
-								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
-							</li>
-							<li>
 								<a href="<%=cp%>/admin/chart/book.do" aria-expanded="false">
 								 <i class="mdi mdi-library-books"></i> <span class="nav-dropdown-item">상품 통계</span></a>
 							</li>
 							<li>
 								<a href="<%=cp%>/admin/chart/order.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-plus"></i> <span class="nav-dropdown-item">주문 통계</span></a>
+							</li>
+							
+							<li>
+								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
+								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
 							</li>
 						</ul>
 					</li>

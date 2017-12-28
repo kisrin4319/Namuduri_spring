@@ -247,7 +247,7 @@ public class AdminService implements AdminDao {
 	@Override //주문 정보 삭제
 	public void deleteOrder(String order_trade_num) {
 		// TODO Auto-generated method stub
-		sqlSessionTemplate.delete("order.deleteOrder", order_trade_num);
+		sqlSessionTemplate.delete("admin.deleteOrder", order_trade_num);
 	}
 
 	/* ----------------------------------------------------------------------------------- */

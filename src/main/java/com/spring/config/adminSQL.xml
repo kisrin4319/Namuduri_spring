@@ -148,8 +148,8 @@
 			</if>
 			<if test="date_min!=null"><![CDATA[AND BOOK_DATE >= #{date_min}]]></if>
 			<if test="date_max!=null"><![CDATA[AND BOOK_DATE <= #{date_max}]]></if>
-			<if test="price_min!=null"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
-			<if test="price_max!=null"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
+			<if test="price_min!=0"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
+			<if test="price_max!=0"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
 			<if test='status=="stockMgt"'>AND book_current_count != 0</if>
 			<if test='status=="soldOut"'>AND book_current_count = 0</if>
 		</where>
@@ -174,22 +174,22 @@
 
 	<!-- 전체 주문 리스트 가져오기 -->
  	<select id="orderListAll" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 결제 미완료 -->
 	<select id="orderListTrade" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 배송 미완료 -->
 	<select id="orderListTrans" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 취소된 주문 -->
 	<select id="orderListBck" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE DESC
 	</select>
 
 	<!-- 관리자 주문 검색 목록 -->
@@ -221,20 +221,24 @@
 		ORDER BY ORDER_REGDATE DESC
 	</select>
 	
+	<delete id="deleteOrder" parameterType="String">
+		DELETE ORDER_BOOK WHERE order_trade_num = #{order_trade_num}
+	</delete>
+	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- dashboard -->
 	
 	<!-- 결제 대기중 -->
 	<select id="countTrade" resultType="int">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01'
 	</select>
 	<!-- 배송 준비중 -->
 	<select id="countTrans" resultType="int">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01' ORDER BY ORDER_REGDATE
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01'
 	</select>
 	<!-- 배송 중 -->
 	<select id="countTrans2" resultType="int">
-		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02' ORDER BY ORDER_REGDATE
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02'
 	</select>
 	
 	<!-- 금일 신규 가입 회원 -->

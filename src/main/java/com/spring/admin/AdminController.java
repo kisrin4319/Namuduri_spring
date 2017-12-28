@@ -381,10 +381,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		adminService.memberDelete(member_id);
+		/*adminService.memberDelete(member_id);*/
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;
+		return /*"redirect:/admin/memberList/"+status+".do?currentPage="+currentPage*/"";
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -487,6 +487,10 @@ public class AdminController {
 		map.put("price_min", price_min);
 		map.put("price_max", price_max);
 		map.put("active", active);
+		
+		System.out.println(searchKeyword);
+		System.out.println(date_min);
+		System.out.println(date_max);
 
 		if (searchNum == 0 && searchKeyword == null && date_min == null && date_max == null && price_min == 0
 				&& price_max == 0 && active == 0) {
@@ -860,7 +864,7 @@ public class AdminController {
 		}
 		
 		adminService.deleteOrder(order_trade_num);
-		return "redirect:/admin/orderList/"+status+".do&currentPage="+currentPage;
+		return "redirect:/admin/orderList/"+status+".do?currentPage="+currentPage;
 	}
 
 	
