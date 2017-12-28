@@ -207,7 +207,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/memberInfo.do", method = RequestMethod.GET) // 회원 상세보기
-	public ModelAndView memberDetail(@RequestParam(required = true) String member_id, HttpServletRequest request)
+	public ModelAndView memberDetail(@RequestParam(required = true) String member_id, @RequestParam(required = true) String status, HttpServletRequest request)
 			throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -226,6 +226,7 @@ public class AdminController {
 
 		List<OrderModel> orderListBck = adminService.memberOrderListBck(member_id);
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("orderList", orderList);
 		mv.addObject("listCount", orderList.size());
@@ -239,7 +240,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/memberInfo.do", method = RequestMethod.POST) // 회원 정보 수정
 	public ModelAndView memberModify(@ModelAttribute MemberModel memberModel, BindingResult result,
-			HttpServletRequest request) throws Exception {
+			HttpServletRequest request, @RequestParam(required = true) String status) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -251,6 +252,7 @@ public class AdminController {
 		adminService.memberModify(memberModel);
 		MemberModel view = adminService.memberView(request.getParameter("member_id"));
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
@@ -259,7 +261,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/memberDelete.do") // 회원 정보 삭제
-	public void memberDelete(@RequestParam String member_id, @RequestParam String status, HttpServletRequest request) throws Exception {
+	public String memberDelete(@RequestParam String member_id, @RequestParam String status, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -268,12 +270,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		System.out.println(status);
-		
-		/*adminService.memberDelete(member_id);*/
+		adminService.memberDelete(member_id);
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		/*return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;*/
+		return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -409,7 +409,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.GET) // 도서 상세보기
-	public ModelAndView bookDetail(HttpServletRequest request) throws Exception {
+	public ModelAndView bookDetail(HttpServletRequest request, @RequestParam(required = true) String status) throws Exception {
 
 		int num = Integer.parseInt(request.getParameter("book_num"));
 
@@ -437,6 +437,7 @@ public class AdminController {
 
 		review = review.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("reviewPage", reviewPage);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("view", view);
@@ -505,12 +506,13 @@ public class AdminController {
 		BooksModel view = adminService.selectNewest();
 		int book_num = view.getBook_num();
 
-		return "redirect:/admin/bookDetail.do?book_num=" + book_num;
+		return "redirect:/admin/bookDetail.do?status=all&book_num="+book_num;
 
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.POST) // 도서 수정하기
-	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage) throws Exception {
+	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage, 
+			@RequestParam(required = true) String status) throws Exception {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();
@@ -530,6 +532,7 @@ public class AdminController {
 				book_image = request.getParameter("book_image");
 			}
 		}
+		
 		booksModel.setBook_num(book_num);
 		booksModel.setBook_image(book_image);
 		String content = booksModel.getBook_content().replaceAll("\r\n","<br />");
@@ -538,6 +541,7 @@ public class AdminController {
 
 		BooksModel view = booksService.bookOne(booksModel.getBook_num());
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminBookDetail");
@@ -546,18 +550,18 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/bookDelete.do") // 도서 삭제하기
-	public String bookDelete(@RequestParam int book_num, @RequestParam int currentPage, HttpServletRequest request)
-			throws Exception {
+	public String bookDelete(@RequestParam int book_num, @RequestParam int currentPage, HttpServletRequest request,
+			@RequestParam(required = true) String status) throws Exception {
 
 		adminService.deleteBook(book_num);
-		return "redirect:/admin/bookList.do?currentPage=" + currentPage;
+		return "redirect:/admin/bookList/"+status+".do?currentPage=" + currentPage;
 	}
 
 	@RequestMapping("/admin/reviewDelete.do") // 리뷰 삭제하기
-	public String reviewDelete(@RequestParam int review_num, @RequestParam int book_num) throws Exception {
+	public String reviewDelete(@RequestParam int review_num, @RequestParam int book_num, @RequestParam(required = true) String status) throws Exception {
 
 		adminService.deleteReview(review_num);
-		return "redirect:/admin/bookDetail.do?book_num=" + book_num;
+		return "redirect:/admin/bookDetail.do?status="+status+"&book_num=" + book_num;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -688,7 +692,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/orderDetail.do", method = RequestMethod.GET) // 주문 상세보기
-	public ModelAndView orderDetail(@RequestParam String order_trade_num, HttpServletRequest request) throws Exception {
+	public ModelAndView orderDetail(@RequestParam String order_trade_num, @RequestParam String status, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -701,6 +705,7 @@ public class AdminController {
 		List<OrderDetailModel> orderDetailList = adminService.selectOrderDetail(order_trade_num);
 		MemberModel viewMember = memberService.SelectOne(view.getMember_id());
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("viewM", viewMember);
 		mv.addObject("orderDetailList", orderDetailList);
@@ -721,13 +726,30 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
+		String status = request.getParameter("status");
 		adminService.modifyOrder(orderModel);
 
+		mv.addObject("status", status);
 		mv.addObject("order_trade_num", orderModel.getOrder_trade_num());
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/admin/orderDetail.do");
 
 		return mv;
+	}
+	
+	@RequestMappng("/admin/orderDelete.do")
+	public String orderDelete(@RequestParam String order_trade_num, @RequestParam String status, 
+			HttpServletRequest request) throws Exception {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		adminService.deleteOrder(order_trade_num);
+		return "redirect:/admin/orderList/"+status+".do&currentPage="+currentPage;
 	}
 
 	

@@ -12,12 +12,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 var page = ${currentPage};
-var status = ${status};
+var status = '${status}';
 
 function deleteCheck(id) {
 	if(confirm("정말 삭제하시겠습니까?")==true){
 		document.location.href=
-			"<%=cp%>/admin/memberDelete.do?member_id="+id+"&currentPage="+page+"&status="+status;
+			"<%=cp%>/admin/memberDelete.do?status="+status+"&member_id="+id+"&currentPage="+page;
 	}else{
 		return false;
 	}
@@ -25,7 +25,7 @@ function deleteCheck(id) {
 
 function update(id){
 	document.location.href=
-		"<%=cp%>/admin/memberInfo.do?member_id="+id+"&currentPage="+page;
+		"<%=cp%>/admin/memberInfo.do?status="+status+"&member_id="+id+"&currentPage="+page;
 	}
 
 	$(function() {
