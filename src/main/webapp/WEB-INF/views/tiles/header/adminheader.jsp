@@ -14,12 +14,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap Core CSS -->
-<link href="<%=cp%>/adminBootStrap/bootstrap/css/bootstrap.min.css?ver=1"
+<link href="<%=cp%>/adminBootStrap/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Custom CSS -->
 <link href="<%=cp%>/adminBootStrap/css/style.css" rel="stylesheet">
 <!-- You can change the theme colors from here -->
-<link href="<%=cp%>/adminBootStrap/css/colors/blue.css?ver=1" id="theme"
+<link href="<%=cp%>/adminBootStrap/css/colors/blue.css" id="theme"
 	rel="stylesheet">
 
 <!-- ============================================================== -->
@@ -59,12 +59,13 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="<%=cp%>/main.do"> 
 				<!-- Logo icon -->
-					<i class="wi wi-sunset"></i>
-					<!-- <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" /> -->
+					<!-- <i class="wi wi-sunset"></i> -->
+					<img src="/namuduri/img/Logo-icon.png" height="40px" style="margin-bottom: 5%;">
 				<!-- Logo text --> 
 					<span> 
 						<!-- <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> -->
-						<font>NAMUDURI</font>
+						<!-- <img src="/namuduri/img/Logo-grey.png" height="30px"> -->
+						<font style="color: white; font-weight: bold; font-size: 27px;">NAMUDURI</font>
 					</span>
 				</a>
 			</div>

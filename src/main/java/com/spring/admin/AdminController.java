@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.spring.board.BoardModel;
 import com.spring.book.BooksModel;
 import com.spring.book.BooksService;
 import com.spring.book.ReviewModel;
@@ -65,9 +67,120 @@ public class AdminController {
 	private int blockPage = 5;
 	private String pagingHtml;
 	private Paging paging;
+	
+	Gson gson = new Gson();
 
 	@RequestMapping("/admin/main.do") // 관리자 페이지
 	public ModelAndView adminMain() throws Exception {
+		
+		int countTrade = adminService.countTrade();
+		int countTrans = adminService.countTrans();
+		int countTrans2 = adminService.countTrans2();
+		int todayMember = adminService.todayMember();
+		int todayOrder = adminService.todayOrder();
+		int todaySalesM = adminService.todaySalesM();
+		
+		List<BooksModel> todaySalesBook = adminService.todaySalesBook();
+		
+		List<ChartModel> todayMemberGender = adminService.todayMemberGender();
+		GoogleChartDTO pie1 = new GoogleChartDTO();
+
+		pie1.addColumn("성별", "string");
+		pie1.addColumn("number", "number");
+		pie1.createRows(todayMemberGender.size());
+
+		for (int i = 0; i < todayMemberGender.size(); i++) {
+			pie1.addCell(i, Integer.parseInt(todayMemberGender.get(i).getKey()) == 1 ? "남자" : "여자");
+			pie1.addCell(i, todayMemberGender.get(i).getValue());
+		}
+		String memberGenderPie = gson.toJson(pie1.getResult());
+		mv.addObject("memberGenderPie", memberGenderPie);
+		
+		
+		List<ChartModel> todayMemberAge = adminService.todayMemberAge();
+		GoogleChartDTO pie2 = new GoogleChartDTO();
+
+		pie2.addColumn("연령대", "string");
+		pie2.addColumn("number", "number");
+		pie2.createRows(todayMemberAge.size());
+
+		for (int i = 0; i < todayMemberAge.size(); i++) {
+			pie2.addCell(i, todayMemberAge.get(i).getKey() + "0 년대");
+			pie2.addCell(i, todayMemberAge.get(i).getValue());
+		}
+		String memberAgePie = gson.toJson(pie2.getResult());
+		mv.addObject("memberAgePie", memberAgePie);
+		
+		
+		List<ChartModel> todayMemberRegion = adminService.todayMemberRegion();
+		GoogleChartDTO pie3 = new GoogleChartDTO();
+
+		pie3.addColumn("지역", "string");
+		pie3.addColumn("number", "number");
+		pie3.createRows(todayMemberRegion.size());
+
+		for (int i = 0; i < todayMemberRegion.size(); i++) {
+			pie3.addCell(i, todayMemberRegion.get(i).getKey());
+			pie3.addCell(i, todayMemberRegion.get(i).getValue());
+		}
+		String memberRegionPie = gson.toJson(pie3.getResult());
+		mv.addObject("memberRegionPie", memberRegionPie);
+		
+		
+		List<ChartModel> todayOrderGender = adminService.todayOrderGender();
+		GoogleChartDTO pie4 = new GoogleChartDTO();
+
+		pie4.addColumn("성별", "string");
+		pie4.addColumn("number", "number");
+		pie4.createRows(todayOrderGender.size());
+
+		for (int i = 0; i < todayOrderGender.size(); i++) {
+			pie4.addCell(i, Integer.parseInt(todayOrderGender.get(i).getKey()) == 1 ? "남자" : "여자");
+			pie4.addCell(i, todayOrderGender.get(i).getValue());
+		}
+		String orderGenderPie = gson.toJson(pie1.getResult());
+		mv.addObject("orderGenderPie", orderGenderPie);
+		
+		
+		List<ChartModel> todayOrderAge = adminService.todayOrderAge();
+		GoogleChartDTO pie5 = new GoogleChartDTO();
+
+		pie5.addColumn("연령대", "string");
+		pie5.addColumn("number", "number");
+		pie5.createRows(todayOrderAge.size());
+
+		for (int i = 0; i < todayOrderAge.size(); i++) {
+			pie5.addCell(i, todayOrderAge.get(i).getKey() + "0 년대");
+			pie5.addCell(i, todayOrderAge.get(i).getValue());
+		}
+		String orderAgePie = gson.toJson(pie2.getResult());
+		mv.addObject("orderAgePie", orderAgePie);
+		
+		
+		List<ChartModel> todayOrderRegion = adminService.todayOrderRegion();
+		GoogleChartDTO pie6 = new GoogleChartDTO();
+
+		pie6.addColumn("지역", "string");
+		pie6.addColumn("number", "number");
+		pie6.createRows(todayOrderRegion.size());
+
+		for (int i = 0; i < todayOrderRegion.size(); i++) {
+			pie6.addCell(i, todayOrderRegion.get(i).getKey());
+			pie6.addCell(i, todayOrderRegion.get(i).getValue());
+		}
+		String orderRegionPie = gson.toJson(pie3.getResult());
+		mv.addObject("orderRegionPie", orderRegionPie);
+		
+		
+		mv.addObject("countTrade", countTrade);
+		mv.addObject("countTrans", countTrans);
+		mv.addObject("countTrans2", countTrans2);
+		mv.addObject("todayMember", todayMember);
+		mv.addObject("todayOrder", todayOrder);
+		mv.addObject("todaySalesM", todaySalesM);
+		mv.addObject("todaySalesBook", todaySalesBook);
+		mv.addObject("todayBookC", todaySalesBook.size());
+		
 		mv.setViewName("admin");
 		return mv;
 	}
@@ -155,6 +268,7 @@ public class AdminController {
 			date_max = null;
 		}
 
+		map.put("status", status);
 		map.put("searchNum", searchNum);
 		map.put("searchKeyword", searchKeyword);
 		map.put("date_min", date_min);
@@ -175,7 +289,7 @@ public class AdminController {
 			} else if (status.equals("Bck")) {
 				memberList = adminService.searchMember(map);
 			} else if (status.equals("rank")) {
-				memberList = adminService.searchMemberRank(map);
+				memberList = adminService.searchMember(map);
 			}
 		}
 
@@ -191,6 +305,7 @@ public class AdminController {
 
 		memberList = memberList.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("memberList", memberList);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("pagingHtml", pagingHtml);
@@ -203,7 +318,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/memberInfo.do", method = RequestMethod.GET) // 회원 상세보기
-	public ModelAndView memberDetail(@RequestParam(required = true) String member_id, HttpServletRequest request)
+	public ModelAndView memberDetail(@RequestParam(required = true) String member_id, @RequestParam(required = true) String status, HttpServletRequest request)
 			throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -222,6 +337,7 @@ public class AdminController {
 
 		List<OrderModel> orderListBck = adminService.memberOrderListBck(member_id);
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("orderList", orderList);
 		mv.addObject("listCount", orderList.size());
@@ -235,7 +351,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/memberInfo.do", method = RequestMethod.POST) // 회원 정보 수정
 	public ModelAndView memberModify(@ModelAttribute MemberModel memberModel, BindingResult result,
-			HttpServletRequest request) throws Exception {
+			HttpServletRequest request, @RequestParam(required = true) String status) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -247,6 +363,7 @@ public class AdminController {
 		adminService.memberModify(memberModel);
 		MemberModel view = adminService.memberView(request.getParameter("member_id"));
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminMemberDetail");
@@ -255,7 +372,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/memberDelete.do") // 회원 정보 삭제
-	public ModelAndView memberDelete(@RequestParam String member_id, HttpServletRequest request) throws Exception {
+	public String memberDelete(@RequestParam String member_id, @RequestParam String status, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -263,17 +380,11 @@ public class AdminController {
 		} else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
-		MemberModel memberModel = new MemberModel();
-		memberModel.setMember_id(member_id);
-
-		mypageService.memberDelete(memberModel);
+		
+		/*adminService.memberDelete(member_id);*/
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		mv.addObject("currentPage", currentPage);
-		mv.setViewName("redirect:/admin/memberList.do");
-
-		return mv;
+		return /*"redirect:/admin/memberList/"+status+".do?currentPage="+currentPage*/"";
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -298,6 +409,10 @@ public class AdminController {
 			booksList = adminService.bookListAct();
 		} else if (status.equals("bck")) {
 			booksList = adminService.bookListBck();
+		} else if(status.equals("stockMgt")) {
+			booksList = adminService.stockList();
+		} else if(status.equals("soldOut")) {
+			booksList = adminService.soldOutList();
 		}
 
 		totalCount = booksList.size();
@@ -350,8 +465,6 @@ public class AdminController {
 			active = Integer.parseInt(request.getParameter("active"));
 		} else if (status.equals("act")) {
 			active = 1;
-		} else if (status.equals("bck")) {
-			active = 0;
 		}
 
 		if (searchKeyword.trim().isEmpty()) {
@@ -366,6 +479,7 @@ public class AdminController {
 			date_max = null;
 		}
 
+		map.put("status", status);
 		map.put("searchNum", searchNum);
 		map.put("searchKeyword", searchKeyword);
 		map.put("date_min", date_min);
@@ -373,6 +487,10 @@ public class AdminController {
 		map.put("price_min", price_min);
 		map.put("price_max", price_max);
 		map.put("active", active);
+		
+		System.out.println(searchKeyword);
+		System.out.println(date_min);
+		System.out.println(date_max);
 
 		if (searchNum == 0 && searchKeyword == null && date_min == null && date_max == null && price_min == 0
 				&& price_max == 0 && active == 0) {
@@ -406,7 +524,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.GET) // 도서 상세보기
-	public ModelAndView bookDetail(HttpServletRequest request) throws Exception {
+	public ModelAndView bookDetail(HttpServletRequest request, @RequestParam(required = true) String status) throws Exception {
 
 		int num = Integer.parseInt(request.getParameter("book_num"));
 
@@ -434,6 +552,7 @@ public class AdminController {
 
 		review = review.subList(paging.getStartCount(), lastCount);
 
+		mv.addObject("status", status);
 		mv.addObject("reviewPage", reviewPage);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("view", view);
@@ -502,12 +621,13 @@ public class AdminController {
 		BooksModel view = adminService.selectNewest();
 		int book_num = view.getBook_num();
 
-		return "redirect:/admin/bookDetail.do?book_num=" + book_num;
+		return "redirect:/admin/bookDetail.do?status=all&book_num="+book_num;
 
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.POST) // 도서 수정하기
-	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage) throws Exception {
+	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage, 
+			@RequestParam(required = true) String status) throws Exception {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();
@@ -527,6 +647,7 @@ public class AdminController {
 				book_image = request.getParameter("book_image");
 			}
 		}
+		
 		booksModel.setBook_num(book_num);
 		booksModel.setBook_image(book_image);
 		String content = booksModel.getBook_content().replaceAll("\r\n","<br />");
@@ -535,6 +656,7 @@ public class AdminController {
 
 		BooksModel view = booksService.bookOne(booksModel.getBook_num());
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("adminBookDetail");
@@ -543,18 +665,18 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/bookDelete.do") // 도서 삭제하기
-	public String bookDelete(@RequestParam int book_num, @RequestParam int currentPage, HttpServletRequest request)
-			throws Exception {
+	public String bookDelete(@RequestParam int book_num, @RequestParam int currentPage, HttpServletRequest request,
+			@RequestParam(required = true) String status) throws Exception {
 
 		adminService.deleteBook(book_num);
-		return "redirect:/admin/bookList.do?currentPage=" + currentPage;
+		return "redirect:/admin/bookList/"+status+".do?currentPage=" + currentPage;
 	}
 
 	@RequestMapping("/admin/reviewDelete.do") // 리뷰 삭제하기
-	public String reviewDelete(@RequestParam int review_num, @RequestParam int book_num) throws Exception {
+	public String reviewDelete(@RequestParam int review_num, @RequestParam int book_num, @RequestParam(required = true) String status) throws Exception {
 
 		adminService.deleteReview(review_num);
-		return "redirect:/admin/bookDetail.do?book_num=" + book_num;
+		return "redirect:/admin/bookDetail.do?status="+status+"&book_num=" + book_num;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -685,7 +807,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/orderDetail.do", method = RequestMethod.GET) // 주문 상세보기
-	public ModelAndView orderDetail(@RequestParam String order_trade_num, HttpServletRequest request) throws Exception {
+	public ModelAndView orderDetail(@RequestParam String order_trade_num, @RequestParam String status, HttpServletRequest request) throws Exception {
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")) {
@@ -698,6 +820,7 @@ public class AdminController {
 		List<OrderDetailModel> orderDetailList = adminService.selectOrderDetail(order_trade_num);
 		MemberModel viewMember = memberService.SelectOne(view.getMember_id());
 
+		mv.addObject("status", status);
 		mv.addObject("view", view);
 		mv.addObject("viewM", viewMember);
 		mv.addObject("orderDetailList", orderDetailList);
@@ -718,21 +841,37 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
+		String status = request.getParameter("status");
 		adminService.modifyOrder(orderModel);
 
+		mv.addObject("status", status);
 		mv.addObject("order_trade_num", orderModel.getOrder_trade_num());
 		mv.addObject("currentPage", currentPage);
 		mv.setViewName("redirect:/admin/orderDetail.do");
 
 		return mv;
 	}
+	
+	@RequestMapping("/admin/orderDelete.do")
+	public String orderDelete(@RequestParam String order_trade_num, @RequestParam String status, 
+			HttpServletRequest request) throws Exception {
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		adminService.deleteOrder(order_trade_num);
+		return "redirect:/admin/orderList/"+status+".do?currentPage="+currentPage;
+	}
 
+	
 	/////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/admin/chart/member.do")
 	public ModelAndView chartM() {
-
-		Gson gson = new Gson();
 
 		// 신규 회원 통계
 		List<ChartModel> listNew = adminService.chartNewM();

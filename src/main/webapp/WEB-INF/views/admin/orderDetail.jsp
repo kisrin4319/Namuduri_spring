@@ -33,8 +33,10 @@
 					<div class="table-responsive">
 					<form method="POST">
 						<input type="hidden" name="currentPage" value="${currentPage}" />
+						<input type="hidden" name="status" value="${status}" />
 						<table class="table order">
 							<c:url var="viewMemberURL" value="/admin/memberDetail.do">
+								<c:param name="status" value="all"/>
 								<c:param name="member_id" value="${view.member_id}" />
 							</c:url>
 							<tr>
@@ -113,6 +115,7 @@
 
 							<c:forEach var="list" items="${orderDetailList}" varStatus="stat">
 								<c:url var="viewBookURL" value="/admin/bookDetail.do">
+									<c:param name="status" value="all"/>
 									<c:param name="book_num" value="${list.book_num}" />
 								</c:url>
 
@@ -179,6 +182,9 @@
 								<th>요청 사항</th>
 								<td colspan=3>${view.order_receive_memo}</td>
 							</tr>
+							<tr>
+								<td colspan=5><a class="btn btn-danger" href="<%=cp%>/admin/orderDelete.do?status=${status}&order_trade_num=${order_trade_num}&currnetPage=${currentPage}">Delete</a></td>
+							</tr>
 						</table>
 						</form>
 					</div>
@@ -186,7 +192,5 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
 </body>
 </html>

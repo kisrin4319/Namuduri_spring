@@ -16,6 +16,22 @@ public interface AdminDao {
 	//주문과 배송 탭 나누기. 취소된 주문은 배송 탭에서 보이지 않도록 하기. 
 	//회원 등급. 마일리지..
 
+	public int countTrade();
+	public int countTrans();
+	public int countTrans2();
+	public int todayMember();
+	public int todayOrder();
+	public int todaySalesM();
+	
+	public List<BooksModel> todaySalesBook();
+	
+	public List<ChartModel> todayMemberGender();
+	public List<ChartModel> todayMemberAge();
+	public List<ChartModel> todayMemberRegion();
+	public List<ChartModel> todayOrderGender();
+	public List<ChartModel> todayOrderAge();
+	public List<ChartModel> todayOrderRegion();
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	//차단 회원과 활동 회원으로 각각 두개의 리스트 리턴, 후에 두개를 합친 것까지 세개의 리스트 반환.
@@ -42,7 +58,7 @@ public interface AdminDao {
 	public void memberModify(MemberModel memberModel);
 	
 	//회원 정보 삭제하기
-	//mypage memberDelete 사용 public void memberDelete(String member_id);
+	public void memberDelete(String member_id);
 	
 	/*-------------------------------------------------------------------------------------*/
 	
@@ -51,6 +67,8 @@ public interface AdminDao {
 	public List<BooksModel> bookListAll();
 	public List<BooksModel> bookListAct();
 	public List<BooksModel> bookListBck();
+	public List<BooksModel> stockList();
+	public List<BooksModel> soldOutList();
 	
 	//검색 폼으로 데이터 조회. 등록된 기간별 조회. 출판 기간별 조회. 사용 여부별 조회. 
 	public List<BooksModel> searchBook (Map<String, Object> map);

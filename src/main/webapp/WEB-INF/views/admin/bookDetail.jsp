@@ -10,8 +10,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+var page = ${currentPage};
+var status = '${status}';
+
 function updateCheck(){
-	var page = ${currentPage};
 	if(confirm("변경 사항을 저장하시겠습니까?")){
 		var frm = document.bookForm;
 		frm.action = "<%=cp%>/admin/bookDetail.do?currentPage="+page;
@@ -21,18 +23,17 @@ function updateCheck(){
 	}
 }
 function deleteCheck(id) {
-	var page = ${currentPage};
 	if(confirm("정말 삭제하시겠습니까?")){
-		document.location.href="<%=cp%>/admin/bookDelete.do?book_num="+id+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/bookDelete.do?status="+status+"&book_num="+id+"&currentPage="+page;
 	}else{
 		return false;
 	}
 }
 function deleteCheck2(id) {
-	var page = ${reviewPage};
+	var page2 = ${reviewPage};
 	var num = ${view.book_num}
 	if(confirm("정말 삭제하시겠습니까?")){
-		document.location.href="<%=cp%>/admin/reviewDelete.do?review_num="+id+"&book_num="+num+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/reviewDelete.do?status="+status+"&review_num="+id+"&book_num="+num+"&currentPage="+page2;
 	}else{
 		return false;
 	}
@@ -47,13 +48,12 @@ function deleteCheck2(id) {
 				<h3 class="text-themecolor">Book Detail</h3>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="<%=cp%>/admin/main.do">Home</a></li>
-					<li class="breadcrumb-item"><a
-						href="<%=cp%>/admin/bookList.do">Book List</a></li>
 					<c:choose>
 						<c:when test="${view.book_num==0}">
 							<li class="breadcrumb-item active">Book Write</li>
 						</c:when>
 						<c:otherwise>
+							<li class="breadcrumb-item"><a href="<%=cp%>/admin/bookList/${status}.do">Book List</a></li>
 							<li class="breadcrumb-item active">Book Detail</li>
 						</c:otherwise>
 					</c:choose>
@@ -69,16 +69,15 @@ function deleteCheck2(id) {
 							<input type="hidden" name="book_num" value="${view.book_num }" />
 							<div class="row">
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
-									<img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" />
-									<input type="file" class="fileinput" name="file"/>
-									<c:choose>
-										<c:when test="${view.book_num==0}">
-											<input type="hidden" name="book_image" value="">
-										</c:when>
-										<c:otherwise>
-											<input type="hidden" name="book_image" value="${view.book_image}">
-										</c:otherwise>
-									</c:choose>
+									<c:if test="${view.book_num==0}">
+										<input type="file" class="fileinput" name="book_image"/>
+										<input type="hidden" name="book_image" value="">
+									</c:if>
+									<c:if test="${view.book_num!=0}">
+										<div class="col-sm-10"><img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" /></div>
+										<input type="hidden" name="book_image" value="${view.book_image}">
+										<div class="col-sm-2"><input type="file" class="fileinput" name="book_image"/></div>
+									</c:if>
 								</div>
 								<div class="col-lg-8">
 									<div class="form-group"></div>
@@ -231,6 +230,7 @@ function deleteCheck2(id) {
 								<c:otherwise>
 									<c:forEach var="list" items="${review}" varStatus="stat">
 										<c:url var="viewURL" value="/admin/memberDetail.do">
+											<c:param name="status" value="all"/>
 											<c:param name="member_id" value="${list.member_id}" />
 										</c:url>
 										<tr>
@@ -264,13 +264,5 @@ function deleteCheck2(id) {
 		</div>
 		</c:if>
 	</div>
-	<!-- ============================================================== -->
-	<!-- footer -->
-	<!-- ============================================================== -->
-	<footer class="footer"> © 2017 Material Pro Admin by
-		wrappixel.com </footer>
-	<!-- ============================================================== -->
-	<!-- End footer -->
-	<!-- ============================================================== -->
 </body>
 </html>

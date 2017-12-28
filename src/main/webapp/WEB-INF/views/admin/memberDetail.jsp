@@ -11,6 +11,7 @@
 <script>
 var page = ${currentPage};
 var id = ${view.member_id};
+var status = '${status}';
 
 function updateCheck(id){
 	if(confirm("정말 수정하시겠습니까?")){
@@ -21,24 +22,9 @@ function updateCheck(id){
 }
 function deleteCheck(path) {
 	if(confirm("정말 삭제하시겠습니까?")==true){
-		document.location.href="<%=cp%>/admin/memberDelete.do?member_id="+id+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/memberDelete.do?status="+status+"&member_id="+id+"&currentPage="+page;
 	}else{
 		return false;
-	}
-}
-
-function updateCheck2(id){
-	if(confirm("정말 수정하시겠습니까?")==true){
-		document.location.href="<%=cp%>/admin/"+path+"?member_id="+id+"&currentPage="+page;
-	}else{
-		return;
-	}	
-}
-function deleteCheck2(path) {
-	if(confirm("정말 삭제하시겠습니까?")==true){
-		document.location.href="<%=cp%>/admin/"+path+"?member_id="+id+"&currentPage="+page;
-	}else{
-		return;
 	}
 }
 </script>
@@ -53,7 +39,7 @@ function deleteCheck2(path) {
 						<a href="<%=cp%>/admin/main.do">Home</a>
 					</li>
 					<li class="breadcrumb-item">
-						<a href="<%=cp%>/admin/memberList.do">Member List</a>
+						<a href="<%=cp%>/admin/memberList/${status}.do">Member List</a>
 					</li>
 					<li class="breadcrumb-item active">Member Detail</li>
 				</ol>
@@ -325,8 +311,9 @@ function deleteCheck2(path) {
 															<c:forEach var="list" items="${orderList}" varStatus="stat">
 																<!-- 주문번호와 연결되는 URL -->
 																<c:url var="viewOrderURL" value="/admin/orderDetail.do">
+																	<c:param name="status" value="${status}"/>
 																	<c:param name="order_trade_num" value="${list.order_trade_num}" />
-																	<c:param name="currentPage" value="currentPage" />
+																	<c:param name="currentPage" value="${currentPage}" />
 																</c:url>
 																<tr>
 																	<td>
@@ -339,10 +326,6 @@ function deleteCheck2(path) {
 																	<td>${list.payment_status}</td>
 																	<td>${list.order_trans_status}</td>
 																	<td>${list.order_regdate}</td>
-																	<td>
-																		<a class="mdi mdi-grease-pencil" title="Modify" href="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${list.member_id}&currentPage=${currentPage}'"></a>
-																		<a class="mdi mdi-delete" title="Delete" href="deleteCheck('${list.member_id}')"></a>
-																	</td>
 																</tr>
 															</c:forEach>
 														</c:otherwise>
@@ -378,6 +361,7 @@ function deleteCheck2(path) {
 															<c:forEach var="list" items="${orderListBck}" varStatus="stat">
 																<!-- 주문번호와 연결되는 URL -->
 																<c:url var="viewOrderURL" value="/admin/orderDetail.do">
+																	<c:param name="status" value="all"/>
 																	<c:param name="order_trade_num" value="${list.order_trade_num}" />
 																	<c:param name="currentPage" value="currentPage" />
 																</c:url>
@@ -394,10 +378,6 @@ function deleteCheck2(path) {
 																		<c:if test="${list.order_use_yn==0}">취소됨</c:if>
 																	</td>
 																	<td>${list.order_regdate}</td>
-																	<td>
-																		<a class="mdi mdi-grease-pencil" title="Modify" href="javascript:location.href='<%=cp%>/admin/memberModify.do?member_id=${list.member_id}&currentPage=${currentPage}'"></a>
-																		<a class="mdi mdi-delete" title="Delete" href="deleteCheck('${list.member_id}')"></a>
-																	</td>
 																</tr>
 															</c:forEach>
 														</c:otherwise>
@@ -414,6 +394,5 @@ function deleteCheck2(path) {
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

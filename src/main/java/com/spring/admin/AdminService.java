@@ -22,6 +22,48 @@ public class AdminService implements AdminDao {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public int countTrade() {
+		return sqlSessionTemplate.selectOne("admin.countTrade");
+	}
+	public int countTrans() {
+		return sqlSessionTemplate.selectOne("admin.countTrans");
+	}
+	public int countTrans2() {
+		return sqlSessionTemplate.selectOne("admin.countTrans2");
+	}
+	public int todayMember() {
+		return sqlSessionTemplate.selectOne("admin.todayMember");
+	}
+	public int todayOrder() {
+		return sqlSessionTemplate.selectOne("admin.todayOrder");
+	}
+	public int todaySalesM() {
+		return sqlSessionTemplate.selectOne("admin.todaySalesM");
+	}
+	
+	public List<BooksModel> todaySalesBook() {
+		return sqlSessionTemplate.selectList("admin.todaySalesBook");
+	}
+	
+	public List<ChartModel> todayMemberGender() {
+		return sqlSessionTemplate.selectList("admin.todayMemberGender");
+	}
+	public List<ChartModel> todayMemberAge() {
+		return sqlSessionTemplate.selectList("admin.todayMemberAge");
+	}
+	public List<ChartModel> todayMemberRegion() {
+		return sqlSessionTemplate.selectList("admin.todayMemberRegion");
+	}
+	public List<ChartModel> todayOrderGender() {
+		return sqlSessionTemplate.selectList("admin.todayOrderGender");
+	}
+	public List<ChartModel> todayOrderAge() {
+		return sqlSessionTemplate.selectList("admin.todayOrderAge");
+	}
+	public List<ChartModel> todayOrderRegion() {
+		return sqlSessionTemplate.selectList("admin.todayOrderRegion");
+	}
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override //전체 회원 조회
@@ -83,6 +125,11 @@ public class AdminService implements AdminDao {
 		sqlSessionTemplate.update("admin.memberModify", memberModel);
 	}
 	
+	@Override //회원 정보 삭제
+	public void memberDelete(String member_id) {
+		sqlSessionTemplate.delete("admin.memberDelete", member_id);
+	}
+	
 	/* ----------------------------------------------------------------------------------- */
 	
 	@Override //전체 도서 조회
@@ -98,6 +145,16 @@ public class AdminService implements AdminDao {
 	@Override //비사용 도서 조회
 	public List<BooksModel> bookListBck(){
 		return sqlSessionTemplate.selectList("admin.bookListBck");
+	}
+	
+	@Override //재고 조회
+	public List<BooksModel> stockList() {
+		return sqlSessionTemplate.selectList("admin.stockList");
+	}
+	
+	@Override //품절 상품 조회
+	public List<BooksModel> soldOutList() {
+		return sqlSessionTemplate.selectList("admin.soldOutList");
 	}
 	
 	@Override //도서 검색
@@ -190,7 +247,7 @@ public class AdminService implements AdminDao {
 	@Override //주문 정보 삭제
 	public void deleteOrder(String order_trade_num) {
 		// TODO Auto-generated method stub
-		sqlSessionTemplate.delete("order.deleteOrder", order_trade_num);
+		sqlSessionTemplate.delete("admin.deleteOrder", order_trade_num);
 	}
 
 	/* ----------------------------------------------------------------------------------- */

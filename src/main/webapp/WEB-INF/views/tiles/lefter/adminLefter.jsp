@@ -72,6 +72,20 @@
 					</li>
 					<li>
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
+						 <i class="mdi mdi-table"></i> <span class="hide-menu">재고 관리</span></a>
+						<ul class="nav-dropdown-items">
+							<li>
+								<a href="<%=cp%>/admin/bookList/stockMgt.do" aria-expanded="false">
+								 <i class="mdi mdi-table-column-plus-after"></i> <span class="nav-dropdown-item">현재 재고 조회</span></a>
+							</li>
+							<li>
+								<a href="<%=cp%>/admin/bookList/soldOut.do" aria-expanded="false">
+								 <i class="mdi mdi-table-column-remove"></i> <span class="nav-dropdown-item">품절 상품 관리</span></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-cart"></i> <span class="hide-menu">주문 관리</span></a>
 						<ul class="nav-dropdown-items">
 							<li>
@@ -96,34 +110,20 @@
 							</li> -->
 						</ul>
 					</li>
-					<li>
-						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
-						 <i class="mdi mdi-table"></i> <span class="hide-menu">재고 관리</span></a>
-						<ul class="nav-dropdown-items">
-							<li>
-								<a href="#" aria-expanded="false">
-								 <i class="mdi mdi-table-column-plus-after"></i> <span class="nav-dropdown-item">현재 재고 조회</span></a>
-							</li>
-							<li>
-								<a href="#" aria-expanded="false">
-								 <i class="mdi mdi-table-column-remove"></i> <span class="nav-dropdown-item">품절 상품 관리</span></a>
-							</li>
-						</ul>
-					</li>
-					<li>
+					<%-- <li>
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-emoticon"></i> <span class="hide-menu">고객센터</span></a>
 						<ul class="nav-dropdown-items">
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/notice.do" aria-expanded="false">
 								 <i class="mdi mdi-information-outline"></i> <span class="nav-dropdown-item">공지사항 관리</span></a>
 							</li>
 							<li>
-								<a href="#" aria-expanded="false">
+								<a href="<%=cp%>/admin/support.do" aria-expanded="false">
 								 <i class="mdi mdi-help-circle-outline"></i> <span class="nav-dropdown-item">문의 답변 관리</span></a>
 							</li>
 						</ul>
-					</li>
+					</li> --%>
 					<li>
 						<a class="waves-effect waves-dark" href="#" aria-expanded="false">
 						 <i class="mdi mdi-chart-bar"></i> <span class="hide-menu">통계</span></a>
@@ -133,16 +133,17 @@
 								 <i class="mdi mdi-access-point-network"></i> <span class="nav-dropdown-item">방문자 통계</span></a>
 							</li> -->
 							<li>
-								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
-								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
-							</li>
-							<li>
 								<a href="<%=cp%>/admin/chart/book.do" aria-expanded="false">
 								 <i class="mdi mdi-library-books"></i> <span class="nav-dropdown-item">상품 통계</span></a>
 							</li>
 							<li>
 								<a href="<%=cp%>/admin/chart/order.do" aria-expanded="false">
 								 <i class="mdi mdi-credit-card-plus"></i> <span class="nav-dropdown-item">주문 통계</span></a>
+							</li>
+							
+							<li>
+								<a href="<%=cp%>/admin/chart/member.do" aria-expanded="false">
+								 <i class="mdi mdi-human-male-female"></i> <span class="nav-dropdown-item">회원 통계</span></a>
 							</li>
 						</ul>
 					</li>
@@ -154,11 +155,11 @@
 		<!-- Bottom points-->
 		<div class="sidebar-footer">
 			<!-- item-->
-			<a href="" class="link" data-toggle="tooltip" title="Settings"><i
-				class="ti-settings"></i></a>
+			<!-- <a href="" class="link" data-toggle="tooltip" title="Settings"><i
+				class="ti-settings"></i></a> -->
 			<!-- item-->
-			<a href="" class="link" data-toggle="tooltip" title="Email"><i
-				class="mdi mdi-gmail"></i></a>
+			<!-- <a href="" class="link" data-toggle="tooltip" title="Email"><i
+				class="mdi mdi-gmail"></i></a> -->
 			<!-- item-->
 			<a href="" class="link" data-toggle="tooltip" title="Logout"><i
 				class="mdi mdi-power"></i></a>

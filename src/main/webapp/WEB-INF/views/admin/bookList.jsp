@@ -10,17 +10,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 var page = ${currentPage};
+var status = '${status}';
+
 	function deleteCheck(id) {
 		if(confirm("정말 삭제하시겠습니까?")){
 			document.location.href=
-				"<%=cp%>/admin/bookDelete.do?book_num=" + id + "&currentPage=" + page;
+				"<%=cp%>/admin/bookDelete.do?status="+status+"&book_num=" + id + "&currentPage=" + page;
 		}else{
 			return false;
 		}
 	}
 	function update(id){
 		document.location.href=
-			"<%=cp%>/admin/bookDetail.do?book_num=" + id+ "&currentPage=" + page;
+			"<%=cp%>/admin/bookDetail.do?status="+status+"&book_num=" + id+ "&currentPage=" + page;
 	}
 
 	$(function() {
@@ -45,7 +47,6 @@ var page = ${currentPage};
 				<div class="card-block">
 					<div class="table-responsive">
 						<!-- 검색창 영역 -->
-						<c:if test="${status eq 'all' || status eq 'bck'}">
 						<form class="form-inline" method="POST">
 							<table class="table">
 								<tr>
@@ -87,7 +88,6 @@ var page = ${currentPage};
 								</tr>
 							</table>
 						</form>
-						</c:if>
 						<div class="form-group"></div>
 						<table class="list-items table table-hover table-striped">
 							<thead class="list-header">
@@ -100,6 +100,7 @@ var page = ${currentPage};
 									<th>COMPANY</th>
 									<th>가격</th>
 									<th>재고</th>
+									<th>도서상태</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -113,6 +114,7 @@ var page = ${currentPage};
 									<c:otherwise>
 										<c:forEach var="list" items="${booksList}" varStatus="stat">
 											<c:url var="viewURL" value="/admin/bookDetail.do">
+												<c:param name="status" value="${status}"/>
 												<c:param name="book_num" value="${list.book_num}" />
 												<c:param name="currentPage" value="${currentPage}" />
 											</c:url>
@@ -128,9 +130,8 @@ var page = ${currentPage};
 												<td>${list.book_auth}</td>
 												<td>${list.company_id}</td>
 												<td>${list.book_price}</td>
-												<td>
-													<b>${list.book_current_count}</b>/${list.book_base_count}
-												</td>
+												<td><b>${list.book_current_count}</b>/${list.book_base_count}</td>
+												<td>${list.book_use_yn == '1' ? '사용' : '비사용' }</td>
 												<td>
 													<a class="mdi mdi-grease-pencil" title="Modify"
 														href="javascript:update('${list.book_num}')"></a> 
@@ -153,6 +154,5 @@ var page = ${currentPage};
 			</div>
 		</div>
 	</div>
-	<footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
 </body>
 </html>

@@ -27,37 +27,12 @@
 	
 	<!-- 회원 검색 목록 -->
 	<select id="searchMember" parameterType="map" resultType="MemberModel">
-		SELECT * FROM MEMBER
-		<where>
-			<if test="searchNum!=0">
-				<if test="searchNum == 1">AND MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
-				<if test="searchNum == 2">AND MEMBER_NAME like '%'||#{searchKeyword}||'%'</if>
-				<if test="searchNum == 3">AND MEMBER_EMAIL like '%'||#{searchKeyword}||'%'</if>
-				<if test="searchNum == 4">AND MEMBER_PHONE like '%'||#{searchKeyword}||'%' 
-					AND MEMBER_MOBILE like '%'||#{searchKeyword}||'%'</if>
-				<if test="searchNum == 5">AND MEMBER_JUMIN1 like '%'||#{searchKeyword}||'%'
-					AND MEMBER_JUMIN2 like '%'||#{searchKeyword}||'%'</if>
-			</if>
-			<if test="active!=0">
-					<if test="active==1">
-						AND MEMBER_USE_YN = 0
-					</if>
-					<if test="active==2">
-						AND MEMBER_USE_YN = 1
-					</if>
-			</if>
-			<if test="date_min!=null"><![CDATA[AND MEMBER_JOIN_DATE >= #{date_min}]]></if>
-			<if test="date_max!=null"><![CDATA[AND MEMBER_JOIN_DATE <= #{date_max}]]></if>
-		</where>
-		ORDER BY MEMBER_JOIN_DATE DESC
-	</select>
-	
-	<select id="searchMemberRank" parameterType="map" resultType="MemberModel">
-		SELECT * FROM (
-			select a.member_order_count, a.member_moneysum, b.* from (
+		SELECT * FROM 
+		<if test='status!="rank"'>MEMBER</if>
+		<if test='status=="rank"'>(select a.member_order_count, a.member_moneysum, b.* from (
 				select member_id, count(*) member_order_count, sum(order_receive_moneysum) member_moneysum 
 				from order_book where order_use_yn = 1 group by member_id) a
-			inner join member b on a.member_id = b.member_id order by a.member_moneysum desc)
+			inner join member b on a.member_id = b.member_id order by a.member_moneysum desc)</if>
 		<where>
 			<if test="searchNum!=0">
 				<if test="searchNum == 1">AND MEMBER_ID like '%'||#{searchKeyword}||'%'</if>
@@ -81,7 +56,6 @@
 		</where>
 		ORDER BY MEMBER_JOIN_DATE DESC
 	</select>
-	
 	
 	<!-- 회원 정보 조회 -->
 	<select id="memberView" resultType="MemberModel">
@@ -124,6 +98,10 @@
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	
+	<!-- 회원 삭제 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE MEMBER WHERE MEMBER_ID = #{member_id}
+	</delete>
 	
 <!-- //////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -139,6 +117,17 @@
 	<select id="bookListBck" resultType="BooksModel">
 		SELECT * FROM BOOK WHERE BOOK_USE_YN = 0 ORDER BY BOOK_DATE DESC
 	</select>
+	
+	<!-- 재고 관리 -->
+	<select id="stockList" resultType="BooksModel">
+		select * from book order by book_current_count/book_base_count
+	</select>
+	
+	<!-- 품절 상품 관리 -->
+	<select id="soldOutList" resultType="BooksModel">
+		select * from book where book_current_count = 0 order by book_date
+	</select>
+	
 	<!-- 관리자 도서 검색 목록 -->
 	<select id="searchBook" parameterType="map" resultType="BooksModel">
 		SELECT * FROM BOOK
@@ -159,10 +148,13 @@
 			</if>
 			<if test="date_min!=null"><![CDATA[AND BOOK_DATE >= #{date_min}]]></if>
 			<if test="date_max!=null"><![CDATA[AND BOOK_DATE <= #{date_max}]]></if>
-			<if test="price_min!=null"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
-			<if test="price_max!=null"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
+			<if test="price_min!=0"><![CDATA[AND BOOK_PRICE >= #{price_min}]]></if>
+			<if test="price_max!=0"><![CDATA[AND BOOK_PRICE <= #{price_max}]]></if>
+			<if test='status=="stockMgt"'>AND book_current_count != 0</if>
+			<if test='status=="soldOut"'>AND book_current_count = 0</if>
 		</where>
-		ORDER BY BOOK_DATE DESC
+		<if test='status!="stockMgt"'>ORDER BY BOOK_DATE DESC</if>
+		<if test='status=="stockMgt"'>ORDER BY book_current_count/book_base_count</if>
 	</select>
 	
 	<!-- 가장 최근의 도서 정보 조회 -->
@@ -182,22 +174,22 @@
 
 	<!-- 전체 주문 리스트 가져오기 -->
  	<select id="orderListAll" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 결제 미완료 -->
 	<select id="orderListTrade" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01' ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 배송 미완료 -->
 	<select id="orderListTrans" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS !='ST03' ORDER BY ORDER_REGDATE DESC
 	</select>
 	
 	<!-- 취소된 주문 -->
 	<select id="orderListBck" resultType="OrderModel">
-		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE
+		SELECT * FROM ORDER_BOOK WHERE ORDER_USE_YN = 0 ORDER BY ORDER_REGDATE DESC
 	</select>
 
 	<!-- 관리자 주문 검색 목록 -->
@@ -228,6 +220,92 @@
 		</where>
 		ORDER BY ORDER_REGDATE DESC
 	</select>
+	
+	<delete id="deleteOrder" parameterType="String">
+		DELETE ORDER_BOOK WHERE order_trade_num = #{order_trade_num}
+	</delete>
+	
+	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- dashboard -->
+	
+	<!-- 결제 대기중 -->
+	<select id="countTrade" resultType="int">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND PAYMENT_STATUS = 'PS01'
+	</select>
+	<!-- 배송 준비중 -->
+	<select id="countTrans" resultType="int">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST01'
+	</select>
+	<!-- 배송 중 -->
+	<select id="countTrans2" resultType="int">
+		SELECT count(*) FROM ORDER_BOOK WHERE ORDER_USE_YN = 1 AND ORDER_TRANS_STATUS = 'ST02'
+	</select>
+	
+	<!-- 금일 신규 가입 회원 -->
+	<select id="todayMember" resultType="int">
+		select count(*) from member where trunc(member_join_date) = trunc(sysdate) and member_use_yn = 0
+	</select>
+	<!-- 금일 주문 건수 -->
+	<select id="todayOrder" resultType="int">
+		select count(*) from order_book where trunc(order_regdate) = trunc(sysdate) and order_use_yn = 1
+	</select>
+	<!-- 금일 주문 금액 -->
+	<select id="todaySalesM" resultType="int">
+		select nvl(sum(order_receive_moneysum),0) from order_book where trunc(order_regdate) = trunc(sysdate) and order_use_yn = 1
+	</select>
+
+	<!-- 오늘 팔린 도서 순위 -->
+	<select id="todaySalesBook" resultType="BooksModel">
+		<![CDATA[select c.*, b.book_auth, b.book_image, b.book_price, b.company_id from (
+					select book_name, book_num, sum(order_book_count) book_sell_count from (
+  						select o.order_trade_num, o.order_regdate, od.book_num, od.order_book_name book_name, od.order_book_count 
+  						from order_book o inner join order_detail od on o.ORDER_TRADE_NUM = od.ORDER_TRADE_NUM 
+ 						where o.order_use_yn = 1 and trunc(order_regdate)=trunc(sysdate))
+					group by book_name, book_num order by book_sell_count desc) c inner join book b on c.book_num = b.book_num 
+				where rownum>=1 and rownum<=8]]>
+	</select>
+	
+	<!-- 금일 가입 회원 통계-->
+	<select id="todayMemberGender" resultType="ChartModel">
+		<![CDATA[select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from member 
+		where trunc(member_join_date)=trunc(sysdate) group by to_number(substr(to_char(member_jumin2),1,1))]]>
+	</select>
+	
+	<select id="todayMemberAge" resultType="ChartModel">
+		<![CDATA[select to_number(substr(to_char(member_jumin1),1,1)) key, count(*) value from member 
+			where trunc(member_join_date)=trunc(sysdate) group by to_number(substr(to_char(member_jumin1),1,1))]]>
+	</select>
+	
+	<select id="todayMemberRegion" resultType="ChartModel">
+		<![CDATA[select substr(member_addr1,1,2) key, count(*) value from member 
+		where trunc(member_join_date)=trunc(sysdate) group by substr(member_addr1,1,2)]]>
+	</select>
+	
+	<!-- 금일 주문 통계-->
+	<select id="todayOrderGender" resultType="ChartModel">
+		<![CDATA[
+			select to_number(substr(to_char(member_jumin2),1,1)) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by to_number(substr(to_char(member_jumin2),1,1))
+		]]>
+	</select>
+	<select id="todayOrderAge" resultType="ChartModel">
+		<![CDATA[
+			select substr(to_char(member_jumin1),1,1) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by substr(to_char(member_jumin1),1,1)
+		]]>
+	</select>
+	<select id="todayOrderRegion" resultType="ChartModel">
+		<![CDATA[
+			select substr(member_addr1,1,2) key, count(*) value from (
+				select a.order_trade_num, a.order_regdate, a.member_id, b.member_jumin1, b.member_jumin2, b.member_addr1 
+				from order_book a inner join member b on a.member_id=b.member_id where trunc(order_regdate)=trunc(sysdate))
+			group by substr(member_addr1,1,2)]]>
+	</select>
+	
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- chartM으로 종합 통계 구현하기. 아래의 주간 통계의 날짜를 지정 가능 하도록 해서 종합 통계 제공 -->
