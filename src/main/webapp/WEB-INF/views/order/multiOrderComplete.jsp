@@ -32,11 +32,11 @@
       			</p>
             </div>
            </div>
-            <div class="col-md-6" style="margin-top: 100px;float: inherit;display:  block;margin-left:  auto;margin-right:  auto;padding-top: 60px;">
+            <div class="col-md-6" style="float: inherit;display:  block;margin-left:  auto;margin-right:  auto;padding-top: 60px;">
                 <div class="pricing-table">
                     <div class="panel panel-primary" style="border: none;text-align:  unset;float: unset;">
                         <div class="controle-header panel-heading panel-heading-landing">
-                            <h1 class="panel-title panel-title-landing">
+                            <h1 class="panel-title panel-title-landing" style="text-align: center;">
                                 THANK YOU
                             </h1>
                         </div>

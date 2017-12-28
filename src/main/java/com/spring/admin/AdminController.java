@@ -577,8 +577,7 @@ public class AdminController {
 		return mv;
 	}
 
-	public String getFile(HttpServletRequest request, MultipartFile multipartFile)
-			throws IllegalStateException, IOException {
+	public String getFile(HttpServletRequest request, MultipartFile multipartFile) throws IllegalStateException, IOException {
 
 		String imgFileName = multipartFile.getOriginalFilename();
 		String fileType = imgFileName.substring(imgFileName.lastIndexOf('.') + 1, imgFileName.length()).toLowerCase();
@@ -594,7 +593,6 @@ public class AdminController {
 
 		String fileName = "textbook_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + '.' + fileType;
 		String filePath = request.getSession().getServletContext().getRealPath("/")+"upload";
-				/*"C:\\Java\\SpringApp\\SpringNamuduri\\namuduri\\src\\main\\webapp\\upload";*/
 		
 		multipartFile.transferTo(new File(filePath + File.separator + fileName));
 
@@ -640,8 +638,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/bookDetail.do", method = RequestMethod.POST) // 도서 수정하기
-	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage, 
-			@RequestParam(required = true) String status) throws Exception {
+	public ModelAndView bookModify(HttpServletRequest request, @ModelAttribute("view") BooksModel booksModel,int currentPage,@RequestParam(required = true) String status) throws Exception {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();

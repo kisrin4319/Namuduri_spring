@@ -231,7 +231,7 @@ located in SOUTH KOREA for the resolution of any disputes.
 						<br />
 						<div class="subtotal-main-area">
 							<a href="javascript:" onclick="window.location='loginForm.do';">CANCLE</a>
-							<a href="javascript:check();">SIGN UP</a>
+							<a href="javascript:check();" class="signupbtn">SIGN UP</a>
 						</div>
 						<br />
 					</form>
@@ -260,19 +260,22 @@ function checkId() {
              $(".signupbtn").prop("disabled", true);
              $(".signupbtn").css("background-color", "#aaaaaa");
              $("#member_id").css("background-color", "#FFCECE");
+             $(".signupbtn").css("display","none");
              idCheck = 0;
          } else if (data == '0') {
              $("#member_id").css("background-color", "#B0F6AC");
+             $(".signupbtn").css("display","block");
+             $(".signupbtn").css("background-color","#32b5f3");
              idCheck = 1;
              if(idCheck==1 && pwdCheck == 1) {
                  $(".signupbtn").prop("disabled", false);
-                 $(".signupbtn").css("background-color", "#4CAF50");
                  signupCheck();
              } 
          } else if (data == '1') {
              $(".signupbtn").prop("disabled", true);
              $(".signupbtn").css("background-color", "#aaaaaa");
              $("#member_id").css("background-color", "#FFCECE");
+             $(".signupbtn").css("display","none");
              idCheck = 0;
          }
      }
