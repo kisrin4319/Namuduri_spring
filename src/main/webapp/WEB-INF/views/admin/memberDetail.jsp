@@ -11,7 +11,7 @@
 <script>
 var page = ${currentPage};
 var id = ${view.member_id};
-var status = '${status}';
+var stat = '${status}';
 
 function updateCheck(id){
 	if(confirm("정말 수정하시겠습니까?")){
@@ -22,7 +22,7 @@ function updateCheck(id){
 }
 function deleteCheck(path) {
 	if(confirm("정말 삭제하시겠습니까?")==true){
-		document.location.href="<%=cp%>/admin/memberDelete.do?status="+status+"&member_id="+id+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/memberDelete.do?status="+stat+"&member_id="+id+"&currentPage="+page;
 	}else{
 		return false;
 	}

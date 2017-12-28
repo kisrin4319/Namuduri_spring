@@ -10,19 +10,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 var page = ${currentPage};
-var status = '${status}';
+var stat = '${status}';
 
 	function deleteCheck(id) {
 		if(confirm("정말 삭제하시겠습니까?")){
 			document.location.href=
-				"<%=cp%>/admin/bookDelete.do?status="+status+"&book_num=" + id + "&currentPage=" + page;
+				"<%=cp%>/admin/bookDelete.do?status="+stat+"&book_num=" + id + "&currentPage=" + page;
 		}else{
 			return false;
 		}
 	}
 	function update(id){
 		document.location.href=
-			"<%=cp%>/admin/bookDetail.do?status="+status+"&book_num=" + id+ "&currentPage=" + page;
+			"<%=cp%>/admin/bookDetail.do?status="+stat+"&book_num=" + id+ "&currentPage=" + page;
 	}
 
 	$(function() {

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -94,6 +93,7 @@ public class AdminController {
 			pie1.addCell(i, todayMemberGender.get(i).getValue());
 		}
 		String memberGenderPie = gson.toJson(pie1.getResult());
+		System.out.println("//////////////////////////////////////////"+memberGenderPie);
 		mv.addObject("memberGenderPie", memberGenderPie);
 		
 		
@@ -109,6 +109,7 @@ public class AdminController {
 			pie2.addCell(i, todayMemberAge.get(i).getValue());
 		}
 		String memberAgePie = gson.toJson(pie2.getResult());
+		System.out.println("//////////////////////////////////////////"+memberAgePie);
 		mv.addObject("memberAgePie", memberAgePie);
 		
 		
@@ -124,6 +125,7 @@ public class AdminController {
 			pie3.addCell(i, todayMemberRegion.get(i).getValue());
 		}
 		String memberRegionPie = gson.toJson(pie3.getResult());
+		System.out.println("//////////////////////////////////////////"+memberRegionPie);
 		mv.addObject("memberRegionPie", memberRegionPie);
 		
 		
@@ -138,7 +140,8 @@ public class AdminController {
 			pie4.addCell(i, Integer.parseInt(todayOrderGender.get(i).getKey()) == 1 ? "남자" : "여자");
 			pie4.addCell(i, todayOrderGender.get(i).getValue());
 		}
-		String orderGenderPie = gson.toJson(pie1.getResult());
+		String orderGenderPie = gson.toJson(pie4.getResult());
+		System.out.println("//////////////////////////////////////////"+orderGenderPie);
 		mv.addObject("orderGenderPie", orderGenderPie);
 		
 		
@@ -153,7 +156,8 @@ public class AdminController {
 			pie5.addCell(i, todayOrderAge.get(i).getKey() + "0 년대");
 			pie5.addCell(i, todayOrderAge.get(i).getValue());
 		}
-		String orderAgePie = gson.toJson(pie2.getResult());
+		String orderAgePie = gson.toJson(pie5.getResult());
+		System.out.println("//////////////////////////////////////////"+orderAgePie);
 		mv.addObject("orderAgePie", orderAgePie);
 		
 		
@@ -168,7 +172,8 @@ public class AdminController {
 			pie6.addCell(i, todayOrderRegion.get(i).getKey());
 			pie6.addCell(i, todayOrderRegion.get(i).getValue());
 		}
-		String orderRegionPie = gson.toJson(pie3.getResult());
+		String orderRegionPie = gson.toJson(pie6.getResult());
+		System.out.println("//////////////////////////////////////////"+orderRegionPie);
 		mv.addObject("orderRegionPie", orderRegionPie);
 		
 		
@@ -381,10 +386,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		/*adminService.memberDelete(member_id);*/
+		adminService.memberDelete(member_id);
 		// 차단, 블랙리스트 등..? 관리자에서는 회원의 사용 여부만을 변경. 회원이 탈퇴 시 정보 삭제.
 
-		return /*"redirect:/admin/memberList/"+status+".do?currentPage="+currentPage*/"";
+		return "redirect:/admin/memberList/"+status+".do?currentPage="+currentPage;
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -457,8 +462,8 @@ public class AdminController {
 		String searchKeyword = request.getParameter("searchKeyword");
 		String date_min = request.getParameter("date_min");
 		String date_max = request.getParameter("date_max");
-		int price_min = Integer.parseInt(request.getParameter("price_min"));
-		int price_max = Integer.parseInt(request.getParameter("price_max"));
+		int price_min = 0;
+		int price_max = 0;
 		int active = 0;
 
 		if (status.equals("all")) {
@@ -479,6 +484,14 @@ public class AdminController {
 			date_max = null;
 		}
 
+		if(request.getParameter("price_min")==null) {
+			price_min = Integer.parseInt(request.getParameter("price_min"));
+		}
+		
+		if(request.getParameter("price_max")==null) {
+			price_max = Integer.parseInt(request.getParameter("price_max"));
+		}
+		
 		map.put("status", status);
 		map.put("searchNum", searchNum);
 		map.put("searchKeyword", searchKeyword);
@@ -580,8 +593,9 @@ public class AdminController {
 		// !fileType.equals("gif") {Validation 이미지 파일만 업로드 가능합니다}
 
 		String fileName = "textbook_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + '.' + fileType;
-		String filePath = "C:\\Java\\SpringApp\\SpringNamuduri\\namuduri\\src\\main\\webapp\\upload";
-
+		String filePath = request.getSession().getServletContext().getRealPath("/")+"upload";
+				/*"C:\\Java\\SpringApp\\SpringNamuduri\\namuduri\\src\\main\\webapp\\upload";*/
+		
 		multipartFile.transferTo(new File(filePath + File.separator + fileName));
 
 		return fileName;
