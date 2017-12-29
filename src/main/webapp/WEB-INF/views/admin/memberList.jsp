@@ -16,16 +16,14 @@ var stat = '${status}';
 
 function deleteCheck(id) {
 	if(confirm("정말 삭제하시겠습니까?")==true){
-		document.location.href=
-			"<%=cp%>/admin/memberDelete.do?status="+stat+"&member_id="+id+"&currentPage="+page;
+		document.location.href="<%=cp%>/admin/memberDelete.do?status="+stat+"&member_id="+id+"&currentPage="+page;
 	}else{
 		return false;
 	}
 }
 
 function update(id){
-	document.location.href=
-		"<%=cp%>/admin/memberInfo.do?status="+stat+"&member_id="+id+"&currentPage="+page;
+	document.location.href="<%=cp%>/admin/memberInfo.do?status="+stat+"&member_id="+id+"&currentPage="+page;
 	}
 
 	$(function() {

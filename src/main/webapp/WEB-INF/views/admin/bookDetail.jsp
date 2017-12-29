@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -16,7 +15,7 @@ var stat = '${status}';
 function updateCheck(){
 	if(confirm("변경 사항을 저장하시겠습니까?")){
 		var frm = document.bookForm;
-		frm.action = "<%=cp%>/admin/bookDetail.do?currentPage="+page;
+		frm.action = "<%=cp%>/admin/bookDetail.do?currentPage="+page+"&status="+stat;
 		frm.submit();
 	}else{
 		return false;
@@ -71,12 +70,11 @@ function deleteCheck2(id) {
 								<div class="col-lg-4" style="margin: auto; text-align: center;">
 									<c:if test="${view.book_num==0}">
 										<input type="file" class="fileinput" name="book_image"/>
-										<input type="hidden" name="book_image" value="">
 									</c:if>
 									<c:if test="${view.book_num!=0}">
 										<div class="col-sm-10"><img class="img-fluid" src="<%=cp%>/upload/${view.book_image}" /></div>
 										<input type="hidden" name="book_image" value="${view.book_image}">
-										<div class="col-sm-2"><input type="file" class="fileinput" name="book_image"/></div>
+										<div class="col-sm-2"><input type="file" class="fileinput" name="file"/></div>
 									</c:if>
 								</div>
 								<div class="col-lg-8">
