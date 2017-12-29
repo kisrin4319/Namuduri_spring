@@ -142,7 +142,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="icon-user-follow"></i>
 						</div>
-						<div class="h4 mb-0">${todayMember}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/chart/member.do">${todayMember}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">금일 신규 회원</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -158,7 +158,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="icon-basket-loaded"></i>
 						</div>
-						<div class="h4 mb-0">${todayOrder}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/chart/order.do">${todayOrder}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">금일 신규 주문</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -174,7 +174,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="mdi mdi-coin"></i>
 						</div>
-						<div class="h4 mb-0">${todaySalesM}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/chart/order.do">${todaySalesM}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">금일 주문 금액</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -190,7 +190,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="mdi mdi-credit-card"></i>
 						</div>
-						<div class="h4 mb-0">${countTrade}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/orderList/trade.do">${countTrade}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">결제 대기중인 주문</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -206,7 +206,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="mdi mdi-truck"></i>
 						</div>
-						<div class="h4 mb-0">${countTrans}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/orderList/trans.do">${countTrans}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">배송 준비중인 주문</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -222,7 +222,7 @@
 						<div class="h1 text-muted text-right mb-4">
 							<i class="mdi mdi-truck-delivery"></i>
 						</div>
-						<div class="h4 mb-0">${countTrans2}</div>
+						<div class="h4 mb-0"><a href="<%=cp%>/admin/orderList/trans.do">${countTrans2}</a></div>
 						<small class="text-muted text-uppercase font-weight-bold">배송 중인 주문</small>
 						<div class="progress progress-xs mt-3 mb-0">
 							<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -286,7 +286,7 @@
                       		 			<c:forEach var="list" items="${todaySalesBook}" varStatus="stat">
 											<div class="row">
 												<div class="col-lg-3">
-													<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> <img
+													<a href="<%=cp%>/admin/bookDetail.do?status=all&book_num=${list.book_num}"> <img
 														src="<%=cp%>/upload/${list.book_image}" height="50px">
 													</a>
 												</div>

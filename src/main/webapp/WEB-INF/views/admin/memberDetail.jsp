@@ -104,12 +104,12 @@ function deleteCheck(path) {
 										</div>
 									</div>
 									<div class="form-group"></div>
-									<div class="col-md-6">
+									<%-- <div class="col-md-6">
 										<label class="col-md-6">Password</label>
 										<div class="col-md-12">
 											<input type="text" name="member_pw" value="${view.member_pw}" class="form-control form-control-line">
 										</div>
-									</div>
+									</div> --%>
 								</div>
 							</div>
 							<div class="form-group">

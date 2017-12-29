@@ -36,7 +36,7 @@
 									<c:forEach var="list" items="${weekBookSelling}" varStatus="stat">
 										<div class="row">
 											<div class="pl-2 col-lg-3">
-												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<a href="<%=cp%>/admin/bookDetail.do?status=all&book_num=${list.book_num}"> 
 												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
 												</a>
 											</div>
@@ -59,7 +59,7 @@
 									<c:forEach var="list" items="${monthBookSelling}" varStatus="stat">
 										<div class="row">
 											<div class="col-lg-3">
-												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<a href="<%=cp%>/admin/bookDetail.do?status=all&book_num=${list.book_num}"> 
 												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
 												</a>
 											</div>
@@ -82,7 +82,7 @@
 										<c:forEach var="list" items="${bookSelling}" varStatus="stat">
 										<div class="row">
 											<div class="col-lg-3">
-												<a href="<%=cp%>/admin/bookDetail.do?book_num=${list.book_num}"> 
+												<a href="<%=cp%>/admin/bookDetail.do?status=all&book_num=${list.book_num}"> 
 												<img src="<%=cp%>/upload/${list.book_image}" height="50px">
 												</a>
 											</div>
